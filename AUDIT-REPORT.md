@@ -138,6 +138,82 @@ strings).
 
 - `color-contrast` on the bottleneck calculator pages (7 locales) —
   see the axe section above; needs a design decision on the muted
-  text color.
+  text color. The 2026-11-20 checker spot pass also flags the same
+  muted text on the ES homepage (`.tool-card-badge`) and bottleneck
+  breadcrumbs/guide tags — same root cause, same decision owed.
 - Re-run the browser matrix against the deployed URL after the
   Vercel deploy and record the result here.
+
+## Live-site fixes — 2026-11-20 (post-deploy, commit after 258976a)
+
+Two defects found by the live browser check on toolwools-static.vercel.app
+(desktop 1919px), fixed and redeployed the same evening.
+
+**1. Header search box overlapped the primary nav.** At 1280px the
+nav ran under the search box in ES/FR/PT/TR (up to 95px covered); at
+1440px+ in every LTR locale (EN Trailers 50px; ES worst, 311px over
+budget). Root cause: the 80rem header row cannot hold logo + 6 links +
+search + lang + theme in long-label locales; the logo tagline (up to
+360px wide in ES) was the biggest single contributor. Fix (CSS only,
+shared header, all 280 pages): header container widened to 92rem
+(header-scoped, padding-inline 1rem) at ≥1024px; nav gap 2.5→2rem,
+1.5→1.25rem @1280, 2→1rem @1440+; nav letter-spacing 0.18→0.15em;
+search input 12→11rem @1280, 16→13rem @1440+; `.logo-tag` hidden
+below 1440px. Source: `build_c.py` CSS_ADD2 (durable — rebuild
+re-appends it); built tree: `assets/css/main.css` (same block).
+Verified: Playwright measure, 56 checks (7 locales × home +
+bottleneck × 375/1280/1440/1919px) — 0 overlaps, 0 console errors.
+
+**2. Bottleneck "Common pairings" cards contradicted the engine.**
+11 of 12 rows disagreed with `bottleneck-engine.js` at 1440p / GTA
+Online (every fps band wrong; 7 verdicts wrong), e.g. RTX 4070 +
+Ryzen 5 5600X said "6% CPU limited, 65–85 fps" while the calculator
+says 23% / 44–63 fps. Corrected all 12 rows in all 7 locales (84
+cards) to the engine values — script `toolwools-build/fix_pairings.py`
+(exact replacements per card, guarded by old-value assertions,
+verified by re-extraction): 4090+i9-14900K 11% / 80–115,
+4080+7800X3D Balanced / 78–113, 4070Ti+i7-13700K 9% / 64–92,
+4070+7600X Balanced / 60–86, 4070+5600X 23% CPU limited / 44–63,
+4060Ti+13400F Balanced / 52–74, 4060+5600X Balanced / 44–63,
+3080+10600K 28% / 38–55, 3070+3600 25% / 34–48,
+3060+5600X Balanced / 39–56, 2060+9400F Balanced / 30–44,
+7900XT+7700X 9% / 66–94. Tones follow `readinessOf` (ready <8,
+borderline 8–14, upgrade ≥15). Card titles normalised to "Ryzen 5
+5600X" on the 4060 and 3060 rows (were "Ryzen 5 5600", href said
+r5-5600x). **Source owed:** no generator for the pairing grid exists
+in any build script (EN page arrived in the squashed commit 33c0f6a),
+so this fix lives in the built tree only. Dict entries for the new
+percentages added to `locale/dict_es.py` and `locale/dict_pt.py`;
+de/fr/tr/ar have no page-string dict in the build tree, so if the
+bottleneck page is ever regenerated the corrected values must be
+re-applied from this section. Rule going forward: card verdicts and
+fps bands must equal engine output at 1440p / GTA Online.
+
+**3. 375px horizontal overflow on locale homepages** (found while
+verifying fix 1: ES 413px, DE 381, FR 448, PT 436, TR 406, AR 378;
+EN clean). Root cause (three parts): `.trend-row-title` is nowrap
+with ellipsis but an inline span, so ellipsis never engaged;
+its unclassed wrapper span kept `min-width: auto`, setting the
+panel's min-content width; and `.advanced-panel` is a grid item whose
+automatic minimum forced the whole `.advanced-grid` column wide.
+Fix (same CSS block as fix 1, source + built tree):
+`.trend-row > span { min-width: 0 }`, `.advanced-panel { min-width: 0 }`,
+`.trend-row-title { display: block }`. First attempt (wrapper rule
+only) changed nothing — the grid track was the binding constraint;
+second attempt (panel rule) left only FR +5px — the inline title.
+
+**Verification after all three fixes (localhost, Playwright):**
+measure 56/56 pass (0 overlaps, 0 overflow, 0 console errors);
+calculator recompute in-browser: 1440p → "CPU bottleneck 23%",
+~55 fps; 4K → "CPU bottleneck 15%", ~36 fps (band 29–41);
+pairing card renders "RTX 4070 + Ryzen 5 5600X 23% CPU limited
+44–63 fps"; `verify_seo.py` 0 errors / 0 warnings (280 pages);
+senior-frontend checker spot pass (EN/ES home + bottleneck @375/1280):
+0 console errors, 0 overflow, 40 focus stops each, all with visible
+focus, axe clean except the known `color-contrast` (muted text,
+design decision still owed — see Open items).
+
+**Known quirk (not fixed):** `bottleneck.js` `tldrOf` for a balanced
+verdict with readiness "upgrade" (avgFps < 45, e.g. RTX 2060 +
+i5-9400F) renders "shows a 4% bottleneck" with an empty CPU/GPU word
+and a double space. Cosmetic; engine values are correct.

@@ -2018,3 +2018,42 @@ html:not(.dark) .badge-purple { color: oklch(0.42 0.26 305); border-color: color
 html:not(.dark) .badge-pink { color: oklch(0.48 0.28 350); border-color: color-mix(in oklab, oklch(0.48 0.28 350) 45%, transparent); }
 p code, li code, td code { overflow-wrap: anywhere; }
 .byline-note a, .byline-meta a { min-height: 24px; display: inline-flex; align-items: center; }
+
+/* ---------- Header fit + trend-row shrink fixes (2026-11-20) ---------- */
+/* Defect: at 1280px the primary nav ran under the header search box in
+   ES/FR/PT/TR (up to 95px covered), and at 1440px+ in every LTR locale
+   (EN Trailers covered 50px; ES worst, 311px over budget). Root cause: the
+   80rem header row cannot hold logo + 6 links + search + lang + theme in
+   long-label locales. Fix: widen the header row, tighten nav/search
+   spacing, and hide the decorative logo tagline below 1440px. */
+@media (min-width: 1024px) {
+  .site-header .container { max-width: 92rem; padding-inline: 1rem; }
+}
+@media (min-width: 1280px) {
+  .site-header-left { gap: 2rem; }
+  .nav-primary { gap: 1.25rem; }
+  .nav-primary a { letter-spacing: 0.15em; }
+  .header-search-input { width: 11rem; }
+}
+@media (min-width: 1440px) {
+  .nav-primary { gap: 1rem; }
+  .header-search-input { width: 13rem; }
+}
+@media (max-width: 1439px) {
+  .logo-tag { display: none; }
+}
+/* Defect: locale homepages scrolled horizontally at 375px (ES 413px,
+   FR 448px). Root cause (two parts): .trend-row-title is nowrap with
+   ellipsis, but its unclassed wrapper span kept min-width:auto, so the
+   nowrap title set the panel's min-content width; and the panel is a grid
+   item whose automatic minimum size then forced the whole .advanced-grid
+   column to that width. Both rules are needed: the panel must be allowed
+   to shrink below its min-content, and the wrapper must shrink so the
+   title's ellipsis engages once the panel is narrow. */
+.trend-row > span { min-width: 0; }
+.advanced-panel { min-width: 0; }
+/* Third part: .trend-row-title is an inline span, so its overflow:hidden +
+   text-overflow:ellipsis never engaged — long titles (FR "Calculateur de
+   temps de téléchargement", 5px past the viewport) just spilled. Make it a
+   block so the ellipsis clips to the wrapper's width. */
+.trend-row-title { display: block; }
