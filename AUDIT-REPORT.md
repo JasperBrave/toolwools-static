@@ -2,8 +2,8 @@
 
 Tree verified: **2026-11-20** (re-verified fresh; the 2026-11-17 audit is
 superseded by the numbers below). Tree hash at verification:
-`3efe3a72f5886395e6f403c51de98411` (after the clampNum fix and the
-axe fixes below).
+`807ca499687cfe4735172eb2e1fa7992` (after the clampNum fix, the axe
+fixes, and the traffic-readiness fixes below — commit `32902df`).
 
 ## Scope
 
@@ -103,6 +103,36 @@ for an explicit design decision rather than changed silently here.
 - 27 zero-byte `*.new` files + one `*.b64` file in the tree are staging
   debris from interrupted landings; excluded from this repo via
   `.gitignore`, never served as pages.
+
+## Traffic-readiness fixes (2026-11-20, post-launch)
+
+GTA 6 launched 19 Nov 2026; the static HTML still showed the build-time
+countdown (02d 07h 43m 21s, "Release Countdown", "launches in 2 days").
+The live toolwools.com has ~zero Google-indexed pages, so the rebuild
+must be correct with JavaScript disabled as well as enabled.
+
+**Countdown pre-render → released state — 28 pages** (7 homepages,
+7 add-to-calendar, 7 pre-order-tracker, 7 gta-6-tracker). Every
+replacement mirrors exactly what that page's own locale JS renders
+once loaded in the released state, so the no-JS first paint and the
+JS state agree (no flash): numbers 00, localised labels/aria-labels/
+live regions, tracker TL;DRs rewritten to past tense (no new facts).
+Verified by readback on all 28 pages (0 mismatches) and in the browser
+(ES homepage, DE tracker: labels unchanged after JS runs, 0 console
+errors). July dates in the tree are legitimate publication/access
+dates with a "Last reviewed November 17, 2026" line — not presented as
+current. News is current to 17 Nov 2026; nothing post-launch exists
+yet (see Open items).
+
+**Page weight — homepage.** `logo-mark.png` was a 1024×1024, 1.17 MB
+PNG displayed at 36×36 in the header and footer of every page →
+144×144, 26 KB (same image, same path). `og-image.jpg` 1.13 MB →
+110 KB (JPEG q82, same 1376×768). Deleted unreferenced
+`assets/img/apple-touch-icon.png` (1.3 MB; manifests use
+`/favicon-*.png`). Homepage transfer weight fell from ~1.8 MB to ~0.63 MB (22 files). The per-locale `l10n.js` string tables (~720 KB each) are
+dense JSON already loaded only by the locale calculator modules; not
+minifiable by whitespace stripping (the spaces are inside the
+strings).
 
 ## Open items
 
