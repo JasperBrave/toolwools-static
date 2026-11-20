@@ -32,7 +32,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "رقمي وعلى قرص",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "اللعبة كاملة: حملة قصة كاملة ووصول كامل إلى الوضع عبر الإنترنت. كل مستوى أعلى هو مكافآت مضافة فوق هذا الأساس، وليست قصة إضافية أبدا."
   },
@@ -41,7 +41,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "رقمي وعلى قرص",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "المستوى المتوسط. في إصدارات Rockstar الأخيرة، كان يشمل حقنة نقود عبر الإنترنت بالإضافة إلى مركبة بداية وحزمة تجميل، مفيدة في اليوم الأول وبلا قيمة عندما تكسب المال داخل اللعبة."
   },
@@ -50,7 +50,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "رقمي",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "أكبر حزمة رقمية: كل ما في Deluxe بالإضافة إلى منحة عملة أكبر وفتحات إضافية للعقارات أو المركبات ومزايا الوصول الأبكر عندما يقدمها المستوى."
   },
@@ -61,7 +61,7 @@ export const EDITIONS = [
     availability: "طبعة مادية محدودة",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "طبعة في صندوق مع سلع مادية، خريطة وكتاب فن وعلبة steelbook وتذكارات، مع نسخة من اللعبة. لم تؤكد Rockstar واحدة للعبة GTA 6؛ وكان لدى GTA V وRDR2 واحدة، ونفدت كلتاهما قبل الإطلاق."
+    note: "طبعة في صندوق مع سلع مادية، خريطة وكتاب فن وعلبة steelbook وتذكارات، مع نسخة من اللعبة. لا توجد لعبة إصدار جامعٍ معبأ للعبة GTA 6؛ وتبيع Rockstar صندوق بضائع “Goodtime State, Vice City Collection” بسعر 399.99 $ دون لعبة؛ وكان لدى GTA V وRDR2 واحدة، ونفدت كلتاهما قبل الإطلاق."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -217,11 +217,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -313,7 +312,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `مع الملف ${profile.label.toLowerCase()}، لا يضيف أي شيء فوق Standard قيمة مفيدة كافية لتبرير الارتفاع مع سقفك البالغ ${tolerance}%، وStandard يحتوي بالفعل على القصة الكاملة والوضع عبر الإنترنت كاملا.`;
   }
   if (best.edition.id === "collectors") {
-    return `أخبرتنا أن العناصر المادية مهمة، والطبعة في صندوق هي المستوى الوحيد الذي يشملها، لكن Rockstar لم تؤكد إصدار جامع للعبة GTA 6، لذا اعتبر هذا خطة وليس عملية شراء. كان تاريخيا ${PLATFORM_LABEL[platform] === "PC" ? "لأجهزة التحكم فقط" : "طبعة محدودة لأجهزة التحكم"} وينفد قبل الإطلاق.`;
+    return `أخبرتنا أن العناصر المادية مهمة، والطبعة في صندوق هي المستوى الوحيد الذي يشملها، لكن لا توجد لعبة إصدار جامعٍ معبأ للعبة GTA 6 — فقط صندوق بضائع دون لعبة — لذا اعتبر هذا خطة وليس عملية شراء. كان تاريخيا طبعة محدودة لأجهزة التحكم وينفد قبل الإطلاق.`;
   }
   return `يضيف حوالي ${best.utilityDelta} نقطة من الفائدة الموزونة فوق Standard مقابل ارتفاع بنسبة ${best.edition.upliftPercent}%، أي حوالي ${best.utilityPerUpliftPoint} نقطة لكل 10% تنفقها، وهو أفضل عائد من أي مستوى متاح على ${PLATFORM_LABEL[platform]} ضمن سقفك البالغ ${tolerance}%.`;
 }
@@ -329,7 +328,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard الآن والترقية لاحقا",
-      body: "تباع ترقيات المستويات الرقمية على أجهزة التحكم والحاسوب عادة كترقية داخل المتجر بفارق السعر، لذا فإن شراء Standard ثم الترقية لاحقا يكلف عادة نفس الإجمالي، مع تحفظ واحد: أسابيع مكافآت نافذة الإطلاق وأي ميزة وصول مبكر تنتهي، ولا يمكنك المطالبة بها بأثر رجعي."
+      body: "تباع ترقيات المستويات الرقمية على أجهزة التحكم عادة كترقية داخل المتجر بفارق السعر، لذا فإن شراء Standard ثم الترقية لاحقا يكلف عادة نفس الإجمالي، مع تحفظ واحد: أسابيع مكافآت نافذة الإطلاق وأي ميزة وصول مبكر تنتهي، ولا يمكنك المطالبة بها بأثر رجعي."
     },
     {
       title: "شراء العملة بدلا من المستوى",

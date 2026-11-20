@@ -45,7 +45,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "Below Mínimo", tone: "upgrade", blurb: "Tu equipo will struggle. Expect sub-30 fps at 1080p Bajo, or the game won't launch cleanly." },
   min: { label: "Meets Mínimo", tone: "borderline", blurb: "Playable at 1080p Bajo around 30 fps. If you have an upgrade planned, do it before launch." },
-  rec: { label: "Cumple Recomendado", tone: "ready", blurb: "60 fps cómodos a 1080p Alto o 1440p Medio. El punto ideal para el día del lanzamiento." },
+  rec: { label: "Cumple Recomendado", tone: "ready", blurb: "60 fps cómodos a 1080p Alto o 1440p Medio. El punto ideal para el día del lanzamiento. Recomendado empieza en 48 puntos (Mínimo 35 · Ultra 82)." },
   ultra: { label: "Ultra Ready", tone: "ready", blurb: "4K Alto o 1440p Ultra with room for ray tracing. You'll be one of the screenshots people share." },
 };
 
@@ -150,7 +150,7 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " · GTA 6 verdict: " + meta.label + " (" + result.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " · Veredicto de GTA 6: " + meta.label + " (" + result.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + meta.label + " (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
@@ -161,7 +161,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Score " + result.score + " out of 100. " + meta.label + ". " + gpu.label + " plus " + cpu.label + ", " + state.ram + " GB RAM, " + (state.ssd ? "SSD" : "HDD") + ".";
+  if (live) live.textContent = "Puntuación " + result.score + " sobre 100. " + meta.label + ". " + gpu.label + " más " + cpu.label + ", " + state.ram + " GB de RAM, " + (state.ssd ? "SSD" : "HDD") + ".";
   syncUrl();
 }
 
@@ -169,7 +169,7 @@ function shareText() {
   var gpu = findPart(GPUS, state.gpu);
   var cpu = findPart(CPUS, state.cpu);
   var result = computeVerdict(gpu.score, cpu.score, state.ram, state.ssd);
-  return gpu.label + " + " + cpu.label + " · GTA 6 verdict: " + L(TIER_META[result.tier].label) + " (" + result.score + "/100). Check your PC: " + shareUrl();
+  return gpu.label + " + " + cpu.label + " · Veredicto de GTA 6: " + L(TIER_META[result.tier].label) + " (" + result.score + "/100). Comprueba tu PC: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

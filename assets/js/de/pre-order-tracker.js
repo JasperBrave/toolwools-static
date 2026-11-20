@@ -129,7 +129,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA-6-Vorbestellungen sollen voraussichtlich am <time datetime=\"2026-06-25\">25. Juni 2026</time> öffnen (von Rockstar unbestätigt) und das Spiel erscheint am <time datetime=\"2026-11-19\">19. November 2026</time>. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "GTA-6-Vorbestellungen öffneten 2026 und das Spiel erschien am <time datetime=\"2026-11-19\">19. November 2026</time>. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -164,7 +164,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Die Vorbestell-Eröffnung wird für den 25. Juni 2026 erwartet, von Rockstar unbestätigt, also wird sie nicht als bestätigter Meilenstein gezeigt.</p>';
+      html += '<p class="verdict-desc">Vorbestellungen öffneten 2026. Die Eröffnung wird in dieser Timeline nicht als Meilenstein gezeigt.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Bestätigt</span>'

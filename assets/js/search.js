@@ -7,7 +7,7 @@
 (function () {
   var TOOLS = [
     { slug: "system-requirements", title: "GTA 6 System Requirements Checker", desc: "Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage." },
-    { slug: "download-time", title: "GTA 6 Download Time Calculator", desc: "Estimate how long the ~150 GB base install will take on your connection, plus day-one patch math." },
+    { slug: "download-time", title: "GTA 6 Download Time Calculator", desc: "Estimate how long the ~212 GB base install will take on your connection, plus day-one patch math." },
     { slug: "storage-planner", title: "GTA 6 Storage Planner", desc: "Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates." },
     { slug: "add-to-calendar", title: "GTA 6 Release Date Reminder", desc: "Add the GTA 6 launch to your calendar in your timezone." },
     { slug: "readiness-score", title: "GTA 6 Readiness Score", desc: "One score for your whole rig: performance, VRAM, storage and network." },

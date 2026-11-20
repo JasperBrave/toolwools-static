@@ -1,10 +1,10 @@
 // download-time.js — Calculadora de tempo de download do GTA 6 page logic.
 // Math follows the source route (src/routes/tools.download-time.tsx):
 // seconds = totalGB * 8000 / effectiveMbps, effectiveMbps = mbps * eff / 100.
-// AUDIT FIX H2: one install-size constant, 150 GB base. The old default was
-// 165 GB base; the base install is now 150 GB and the day-one patch 15 GB,
-// for a 165 GB total. State lives in the URL (?mbps=&gb=&patch=&eff=).
-var DEFAULTS = { mbps: 100, gb: 150, patch: 15, eff: 80 };
+// AUDIT FIX H2 (pass 2A): one install-size constant, 212 GB base (up to 212 GB
+// game install plus a 1.7-3.8 GB day-one patch). The old default was 150 GB base
+// + 15 GB patch, for a 165 GB total; the new total is 214.8 GB. State lives in the URL (?mbps=&gb=&patch=&eff=).
+var DEFAULTS = { mbps: 100, gb: 212, patch: 2.8, eff: 80 };
 var PRESETS = [
   { label: "5G Início", mbps: 25 },
   { label: "Cabo básico", mbps: 100 },
@@ -120,7 +120,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Tempo estimado de conclusão</p>' +
       '<h3 class="verdict-title">' + r.total.h + '<span class="unit"> h</span> ' + r.total.m + '<span class="unit"> min</span></h3>' +
-      '<p class="verdict-desc">' + r.totalGb + ' GB total at ' + Math.round(r.effMbps) + ' Mbps effective.</p>' +
+      '<p class="verdict-desc">' + r.totalGb + ' GB no total a ' + Math.round(r.effMbps) + ' Mbps efetivos.</p>' +
       '<p class="verdict-desc">Finishes around <strong>' + clock + '</strong> se você começar agora.</p></div></div>' +
       '<dl class="stat-grid">' +
       '<div><dt>Instalação base</dt><dd>' + r.base.text + '</dd></div>' +
@@ -130,8 +130,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 download time: " + r.total.text + " at " + state.mbps + " Mbps for " + r.totalGb + " GB") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 download time: " + r.total.text + " at " + state.mbps + " Mbps") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("Tempo de download do GTA 6: " + r.total.text + " a " + state.mbps + " Mbps para " + r.totalGb + " GB") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Tempo de download do GTA 6: " + r.total.text + " a " + state.mbps + " Mbps") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -149,19 +149,19 @@ function render() {
     }).join("");
   }
   var tableNote = $("[data-speed-note]");
-  if (tableNote) tableNote.textContent = r.totalGb + " GB total (install + patch) at " + state.eff + "% real-world efficiency.";
+  if (tableNote) tableNote.textContent = r.totalGb + " GB no total (instalação + patch) a " + state.eff + "% de eficiência real.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Estimated download time " + r.total.h + " hours " + r.total.m + " minutes for " + r.totalGb + " gigabytes at " + state.mbps + " megabits per second, " + state.eff + " percent efficiency.";
+  if (live) live.textContent = "Tempo de download estimado " + r.total.h + " horas " + r.total.m + " minutos para " + r.totalGb + " gigabytes a " + state.mbps + " megabits por segundo, " + state.eff + " por cento de eficiência.";
   syncUrl();
 }
 
 function shareText() {
   var r = compute();
-  return "GTA 6 download time: " + r.total.text + " at " + state.mbps + " Mbps for " + r.totalGb + " GB. Calcule o seu: " + shareUrl();
+  return "Tempo de download do GTA 6: " + r.total.text + " a " + state.mbps + " Mbps para " + r.totalGb + " GB. Calcule o seu: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

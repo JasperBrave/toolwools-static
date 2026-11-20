@@ -97,7 +97,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "تصدر GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC، بعد " + c.days + " يوم و" + c.hours + " ساعة و" + c.minutes + " دقيقة. ومن المتوقع أن يبدأ التحميل المسبق في 16-17 نوفمبر 2026، قبل الإطلاق بـ 48-72 ساعة، لكن Rockstar لم تؤكد بعد موعد بدء التحميل المسبق.";
+      tldrText.textContent = "صدرت GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. وجرى التحميل المسبق في 16-17 نوفمبر 2026، قبل الإطلاق بـ 48-72 ساعة.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -142,7 +142,7 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("تصدر GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. تابع العد التنازلي ومراحل التحميل المسبق على ToolWools.") +
+      encodeURIComponent("صدرت GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. تابع الإطلاق ومراحل التحميل المسبق على ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
@@ -166,13 +166,6 @@ $all("[data-copy-link]").forEach(function (btn) {
   btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
 });
 
-var notifyBtn = $("[data-notify]");
-if (notifyBtn) {
-  notifyBtn.addEventListener("click", function () {
-    var status = $("[data-notify-status]");
-    if (status) status.textContent = "سيتم تفعيل الإشعارات عندما تؤكد Rockstar نافذة التحميل المسبق.";
-  });
-}
 
 renderLaunchLocal();
 refreshShareLinks();

@@ -129,7 +129,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "Les précommandes de GTA 6 devraient ouvrir le <time datetime=\"2026-06-25\">25 juin 2026</time> (non confirmé par Rockstar) et le jeu sort le <time datetime=\"2026-11-19\">19 novembre 2026</time>. Chaque canal facture le même jeu, donc achetez selon les conditions : le meilleur choix pour vos entrées est <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "Les précommandes de GTA 6 ont ouvert en 2026 et le jeu est sorti le <time datetime=\"2026-11-19\">19 novembre 2026</time>. Chaque canal facture le même jeu, donc achetez selon les conditions : le meilleur choix pour vos entrées est <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -164,7 +164,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Ouverture des précommandes attendue le 25 juin 2026, non confirmée par Rockstar, donc elle ne figure pas parmi les jalons confirmés.</p>';
+      html += '<p class="verdict-desc">Les précommandes ont ouvert en 2026. L'ouverture ne figure pas comme jalon dans cette chronologie.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Confirmé</span>'

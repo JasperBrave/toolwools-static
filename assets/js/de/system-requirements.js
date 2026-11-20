@@ -44,7 +44,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "Unter Minimum", tone: "upgrade", blurb: "Dein PC wird kämpfen. Erwarte unter 30 fps bei 1080p Low, oder das Spiel startet nicht sauber." },
   min: { label: "Erfüllt Minimum", tone: "borderline", blurb: "Spielbar bei 1080p Low mit etwa 30 fps. Wenn du ein Upgrade geplant hast, mach es vor dem Launch." },
-  rec: { label: "Erfüllt Empfohlen", tone: "ready", blurb: "Komfortable 60 fps bei 1080p Hoch oder 1440p Mittel. Der Sweet Spot für den Launch-Tag." },
+  rec: { label: "Erfüllt Empfohlen", tone: "ready", blurb: "Komfortable 60 fps bei 1080p Hoch oder 1440p Mittel. Der Sweet Spot für den Launch-Tag. Empfohlen beginnt bei 48 Punkten (Minimum 35 · Ultra 82)." },
   ultra: { label: "Ultra-bereit", tone: "ready", blurb: "4K Hoch oder 1440p Ultra mit Platz für Raytracing. Du wirst einer der Screenshots sein, die Leute teilen." },
 };
 

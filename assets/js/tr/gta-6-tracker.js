@@ -97,7 +97,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "GTA 6, 19 Kas 2026 saat 05:00 UTC'de çıkıyor; " + c.days + " gün, " + c.hours + " saat ve " + c.minutes + " dakika kaldı. Ön yüklemenin 16-17 Kas 2026'da, çıkıştan 48-72 saat önce başlaması bekleniyor ama Rockstar henüz ön yükleme başlangıcını onaylamadı.";
+      tldrText.textContent = "GTA 6, 19 Kas 2026, 05.00 UTC'de çıktı. Ön yükleme 16-17 Kas 2026'da, lansmandan 48-72 saat önce gerçekleşti.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -142,7 +142,7 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6, 19 Kas 2026 saat 05:00 UTC'de çıkıyor. Geri sayımı ve ön yükleme aşamalarını ToolWools'ta takip edin.") +
+      encodeURIComponent("GTA 6, 19 Kas 2026 saat 05:00 UTC'de çıktı. Lansmanı ve ön yükleme aşamalarını ToolWools'ta takip edin.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
@@ -166,13 +166,6 @@ $all("[data-copy-link]").forEach(function (btn) {
   btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
 });
 
-var notifyBtn = $("[data-notify]");
-if (notifyBtn) {
-  notifyBtn.addEventListener("click", function () {
-    var status = $("[data-notify-status]");
-    if (status) status.textContent = "Rockstar ön yükleme penceresini onayladığında bildirimler etkinleştirilecek.";
-  });
-}
 
 renderLaunchLocal();
 refreshShareLinks();

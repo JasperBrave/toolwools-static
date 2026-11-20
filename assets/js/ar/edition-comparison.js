@@ -7,7 +7,7 @@
 import { EDITIONS, BONUSES, PROFILES, CATEGORY_LABEL, CONFIDENCE_LABEL, PLATFORM_LABEL, evaluateEditions, profileById, platformById } from "../engines/ar/edition-engine.js";
 
 var DEFAULTS = { platform: "ps5", profile: "online-casual", uplift: 30, p: [], view: "verdict" };
-var PLATFORMS = ["ps5", "xbox", "pc"];
+var PLATFORMS = ["ps5", "xbox"];
 var VIEWS = ["verdict", "matrix", "upgrade"];
 var VIEW_LABEL = { verdict: "ماذا تشتري", matrix: "مصفوفة المكافآت", upgrade: "حساب الترقية" };
 var CATEGORIES = Object.keys(CATEGORY_LABEL);

@@ -31,7 +31,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "digital and disc",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "The whole game: full story campaign and full access to the online mode. Every higher tier is bonuses layered on top of this, never extra story."
   },
@@ -40,7 +40,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "digital and disc",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "The mid tier. On every recent Rockstar release this bundled an online cash injection plus a starter vehicle and cosmetic pack — useful on day one, worthless once you have earned money in-game."
   },
@@ -49,7 +49,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "digital",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "The largest digital stack: everything in Deluxe plus a bigger currency grant, extra property or vehicle unlocks and the earliest-access perks when a tier offers them."
   },
@@ -60,7 +60,7 @@ export const EDITIONS = [
     availability: "limited physical run",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "A boxed run with physical goods — map, artbook, steelbook, trinkets — around a copy of the game. Rockstar has not confirmed one for GTA 6; GTA V and RDR2 both had one, and both sold out before launch."
+    note: "A boxed run with physical goods — map, artbook, steelbook, trinkets — around a copy of the game. There is no boxed GTA 6 collector's edition game; Rockstar sells a $399.99 'Goodtime State, Vice City Collection' merchandise box with no game included; GTA V and RDR2 both had one, and both sold out before launch."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -216,11 +216,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -312,7 +311,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `For a ${profile.label.toLowerCase()} buyer, nothing above Standard adds enough usable value to justify the uplift at your ${tolerance}% ceiling — and Standard already contains the entire story and the whole online mode.`;
   }
   if (best.edition.id === "collectors") {
-    return `You told us the physical items matter, and the boxed run is the only tier that includes them — but Rockstar has not confirmed a GTA 6 collector's edition, so treat this as a plan rather than a purchase. It has historically been ${PLATFORM_LABEL[platform] === "PC" ? "console-only" : "a limited console run"} and sells out before launch.`;
+    return `You told us the physical items matter, and the boxed run is the only tier that includes them — but there is no boxed GTA 6 collector's edition game — only a merchandise box with no game — so treat this as a plan rather than a purchase. It has historically been a limited console run and sells out before launch.`;
   }
   return `It adds about ${best.utilityDelta} points of weighted usefulness over Standard for a ${best.edition.upliftPercent}% uplift — roughly ${best.utilityPerUpliftPoint} points per 10% you spend — which is the best return of any tier available on ${PLATFORM_LABEL[platform]} within your ${tolerance}% ceiling.`;
 }
@@ -328,7 +327,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard now, upgrade later",
-      body: "Digital tier upgrades on console and PC are normally sold as an in-store upgrade at the price difference, so buying Standard and stepping up later usually costs the same total — with one caveat: launch-window bonus weeks and any early-access perk expire, and you cannot claim them retroactively."
+      body: "Digital tier upgrades on console are normally sold as an in-store upgrade at the price difference, so buying Standard and stepping up later usually costs the same total — with one caveat: launch-window bonus weeks and any early-access perk expire, and you cannot claim them retroactively."
     },
     {
       title: "Buying currency instead of a tier",

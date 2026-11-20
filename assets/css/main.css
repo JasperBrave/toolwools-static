@@ -2057,3 +2057,54 @@ p code, li code, td code { overflow-wrap: anywhere; }
    temps de téléchargement", 5px past the viewport) just spilled. Make it a
    block so the ellipsis clips to the wrapper's width. */
 .trend-row-title { display: block; }
+.footer-bottom-links { flex-wrap: wrap; }
+
+/* ---------- Fix pass 2B — RTL mirroring, hero-badges mobile grid, consent slimming (2026-11-21) ---------- */
+
+/* L3 (P1): AR language menu clipped 7px past the left edge @1280.
+   In RTL the trigger sits at the far left, so right:0 pushed the 128px
+   menu out of the viewport. Anchor to the trigger's inline-start side. */
+[dir="rtl"] .lang-menu-list { right: auto; left: 0; }
+[dir="rtl"] .lang-menu-list a .lang-note { margin-left: 0; margin-right: auto; }
+
+/* AR RTL sweep (a): header search mirror — icon to the inline-start side,
+   kbd to the inline-end side, paddings swapped; kbd forced LTR so ⌘K
+   does not render as K⌘ under bidi. */
+[dir="rtl"] .header-search-icon { left: auto; right: 0.75rem; }
+[dir="rtl"] .header-search-kbd { right: auto; left: 0.5rem; direction: ltr; unicode-bidi: isolate; }
+[dir="rtl"] .header-search-input { padding-left: 2.5rem; padding-right: 2.25rem; }
+
+/* AR RTL sweep (b): prose lists — markers on the inline-start side. */
+[dir="rtl"] .prose ul, [dir="rtl"] .prose ol { padding-left: 0; padding-right: 1.25rem; }
+
+/* AR RTL sweep (c): select chevron to the inline-end side. */
+[dir="rtl"] select.input { background-position: left 0.75rem center; padding-right: 0.75rem; padding-left: 2.25rem; }
+
+/* AR RTL sweep (d): CTA arrows point left in RTL. */
+[dir="rtl"] .tool-card-cta .icon { margin-left: 0; margin-right: 0.5rem; transform: scaleX(-1); }
+[dir="rtl"] .tool-card:hover .tool-card-cta .icon { transform: translateX(-4px) scaleX(-1); }
+[dir="rtl"] .cat-card-arrow { right: auto; left: 1rem; transform: scaleX(-1); }
+[dir="rtl"] .cat-card:hover .cat-card-arrow { transform: translate(-2px, -2px) scaleX(-1); }
+[dir="rtl"] .guide-card .icon-arrow { margin-left: 0; margin-right: auto; transform: scaleX(-1); }
+[dir="rtl"] .hero-ctas .btn-ultra > svg, [dir="rtl"] .advanced-panel-cta svg, [dir="rtl"] .section-head-action svg, [dir="rtl"] .link-cta svg { transform: scaleX(-1); }
+
+/* F18 (P2): hero-badges is a 4-item meta row; at 375px flex-wrap left the
+   4th item orphaned on its own row (EN FPS: 3+1). Two-column grid ≤480px
+   gives a clean 2×2 on every page (all 70 instances have exactly 4 items). */
+@media (max-width: 480px) {
+  .hero-badges { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 0.75rem; }
+  .hero-badges > div { min-width: 0; }
+}
+
+/* F19 (P2): consent banner was ~241px tall at 375px (~30–36% of the
+   viewport). Slim the mobile banner only: tighter padding, smaller text,
+   both buttons side-by-side at equal width, Privacy link on its own row.
+   All three choices stay visible and tappable; no content hidden. */
+@media (max-width: 767px) {
+  .consent-banner { padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom)); }
+  .consent-inner { gap: 0.5rem; }
+  .consent-inner p { font-size: 0.75rem; line-height: 1.5; }
+  .consent-actions { gap: 0.5rem; }
+  .consent-actions .btn-ultra, .consent-actions .btn-outline { flex: 1 1 0; min-width: 0; height: 2.25rem; padding: 0.5rem 0.5rem; font-size: 0.6875rem; }
+  .consent-actions a { flex: 1 1 100%; font-size: 0.75rem; }
+}

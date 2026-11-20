@@ -46,10 +46,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "Evet, " + gpu.label + " + " + cpu.label + ", " + res + " çözünürlüğünde " + WORKLOAD_META[mode].label + " modunda GTA 6 için hazır. " + v + ", hedef: ~" + result.avgFps + " fps ortalama.";
   if (readinessOf(result) === "borderline")
     return "Sınırda, " + gpu.label + " + " + cpu.label + ", " + res + " çözünürlüğünde " + WORKLOAD_META[mode].label + " modunda GTA 6'yı çalıştırır; %" + result.absPct + " " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " darboğaz (~" + result.avgFps + " fps). Oynanabilir ama kare kaybedersiniz.";
+  if (result.verdict === "balanced")
+    return "Yükseltme önerilir, " + gpu.label + " + " + cpu.label + ", " + res + " çözünürlüğünde " + WORKLOAD_META[mode].label + " modunda dengeli ama yavaş (~" + result.avgFps + " fps). Akıcı kare hızlarına ulaşmak için her iki parçanın da daha fazla güce ihtiyacı var.";
   return "Yükseltme önerilir, " + gpu.label + " + " + cpu.label + ", " + res + " çözünürlüğünde " + WORKLOAD_META[mode].label + " modunda %" + result.absPct + " " + (result.verdict === "cpu" ? "CPU" : "GPU") + " darboğaz gösteriyor (~" + result.avgFps + " fps). Bir parça diğerini geride tutuyor.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

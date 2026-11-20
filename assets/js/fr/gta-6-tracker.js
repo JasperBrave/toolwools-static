@@ -103,7 +103,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "GTA 6 sort le 19 nov. 2026 à 05 h 00 UTC, dans " + c.days + " jours, " + c.hours + " heures et " + c.minutes + " minutes. Le préchargement est attendu les 16-17 nov. 2026, 48 à 72 heures avant le lancement, mais Rockstar n'a pas confirmé de début de préchargement.";
+      tldrText.textContent = "GTA 6 est sorti le 19 nov. 2026 à 05 h 00 UTC. Le préchargement a eu lieu les 16 et 17 nov. 2026, 48 à 72 heures avant le lancement.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -148,7 +148,7 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 sort le 19 nov. 2026 à 05 h 00 UTC. Suivez le compte à rebours et les jalons de préchargement sur ToolWools.") +
+      encodeURIComponent("GTA 6 est sorti le 19 nov. 2026 à 05 h 00 UTC. Suivez le lancement et les jalons de préchargement sur ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
@@ -172,13 +172,6 @@ $all("[data-copy-link]").forEach(function (btn) {
   btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
 });
 
-var notifyBtn = $("[data-notify]");
-if (notifyBtn) {
-  notifyBtn.addEventListener("click", function () {
-    var status = $("[data-notify-status]");
-    if (status) status.textContent = "Les notifications seront activées quand Rockstar confirmera la fenêtre de préchargement.";
-  });
-}
 
 renderLaunchLocal();
 refreshShareLinks();

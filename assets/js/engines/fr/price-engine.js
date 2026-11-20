@@ -4,7 +4,7 @@
 // Do not hand-edit the maths or data tables: re-port from the source file.
 // Source: ~/workspace/toolwools-src/src/lib/tools/price-engine.ts
 
-export const RATES_AS_OF = "2026-08-01";
+export const RATES_AS_OF = "2026-11-20";
 export const EDITIONS = {
   standard: {
     label: "Standard Edition",
@@ -13,20 +13,12 @@ export const EDITIONS = {
     includes: ["Jeu de base", "Mode Histoire", "Accès en ligne"],
     gtaDollars: 0
   },
-  deluxe: {
-    label: "Deluxe Edition",
-    usd: 99.99,
-    confirmed: false,
-    includes: ["Jeu de base", "Pack de véhicule de démarrage", "GTA$ 500,000", "Pack de garde-robe"],
-    gtaDollars: 500000
-  },
   ultimate: {
     label: "Ultimate Edition",
-    usd: 109.99,
-    confirmed: false,
+    usd: 99.99,
+    confirmed: true,
     includes: [
       "Jeu de base",
-      "Tout le contenu Deluxe",
       "GTA$ 1,000,000",
       "Week-end d'accès anticipé",
       "Pass Saison 1"
@@ -36,49 +28,49 @@ export const EDITIONS = {
 };
 export const MARKETS = [
   { code: "US", country: "États-Unis", currency: "USD", symbol: "$", fxPerUsd: 1, taxRate: 0.07, taxLabel: "Taxe de vente (moy.)", taxIncludedInList: false, region: "Amériques" },
-  { code: "CA", country: "Canada", currency: "CAD", symbol: "CA$", fxPerUsd: 1.37, taxRate: 0.13, taxLabel: "HST", taxIncludedInList: false, region: "Amériques" },
-  { code: "MX", country: "Mexique", currency: "MXN", symbol: "MX$", fxPerUsd: 18.6, taxRate: 0.16, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
-  { code: "BR", country: "Brésil", currency: "BRL", symbol: "R$", fxPerUsd: 5.45, taxRate: 0, taxLabel: "Taxe incluse", regionalListLocal: 349.9, taxIncludedInList: true, region: "Amériques" },
-  { code: "AR", country: "Argentine", currency: "ARS", symbol: "AR$", fxPerUsd: 1310, taxRate: 0.21, taxLabel: "IVA + PAIS", regionalListLocal: 74999, taxIncludedInList: false, region: "Amériques" },
-  { code: "CL", country: "Chili", currency: "CLP", symbol: "CLP$", fxPerUsd: 940, taxRate: 0.19, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
-  { code: "CO", country: "Colombie", currency: "COP", symbol: "COP$", fxPerUsd: 4050, taxRate: 0.19, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
-  { code: "PE", country: "Pérou", currency: "PEN", symbol: "S/", fxPerUsd: 3.72, taxRate: 0.18, taxLabel: "IGV", taxIncludedInList: true, region: "Amériques" },
-  { code: "GB", country: "Royaume-Uni", currency: "GBP", symbol: "£", fxPerUsd: 0.78, taxRate: 0.2, taxLabel: "VAT", regionalListLocal: 69.99, taxIncludedInList: true, region: "Europe" },
-  { code: "DE", country: "Allemagne", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.19, taxLabel: "MwSt", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "FR", country: "France", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.2, taxLabel: "TVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "ES", country: "Espagne", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.21, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "IT", country: "Italie", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.22, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "NL", country: "Pays-Bas", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.21, taxLabel: "BTW", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "PL", country: "Pologne", currency: "PLN", symbol: "zł", fxPerUsd: 3.95, taxRate: 0.23, taxLabel: "VAT", regionalListLocal: 349, taxIncludedInList: true, region: "Europe" },
-  { code: "SE", country: "Suède", currency: "SEK", symbol: "kr", fxPerUsd: 10.4, taxRate: 0.25, taxLabel: "Moms", taxIncludedInList: true, region: "Europe" },
-  { code: "NO", country: "Norvège", currency: "NOK", symbol: "kr", fxPerUsd: 10.6, taxRate: 0.25, taxLabel: "MVA", taxIncludedInList: true, region: "Europe" },
-  { code: "DK", country: "Danemark", currency: "DKK", symbol: "kr", fxPerUsd: 6.85, taxRate: 0.25, taxLabel: "Moms", taxIncludedInList: true, region: "Europe" },
-  { code: "CH", country: "Suisse", currency: "CHF", symbol: "CHF", fxPerUsd: 0.88, taxRate: 0.081, taxLabel: "MWST", taxIncludedInList: true, region: "Europe" },
-  { code: "TR", country: "Turquie", currency: "TRY", symbol: "₺", fxPerUsd: 39.5, taxRate: 0.2, taxLabel: "KDV", regionalListLocal: 1899, taxIncludedInList: true, region: "Europe" },
-  { code: "UA", country: "Ukraine", currency: "UAH", symbol: "₴", fxPerUsd: 41.5, taxRate: 0.2, taxLabel: "PDV", regionalListLocal: 1999, taxIncludedInList: true, region: "Europe" },
-  { code: "RO", country: "Roumanie", currency: "RON", symbol: "lei", fxPerUsd: 4.58, taxRate: 0.19, taxLabel: "TVA", taxIncludedInList: true, region: "Europe" },
-  { code: "PT", country: "Portugal", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.23, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "IE", country: "Irlande", currency: "EUR", symbol: "€", fxPerUsd: 0.92, taxRate: 0.23, taxLabel: "VAT", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
-  { code: "IN", country: "Inde", currency: "INR", symbol: "₹", fxPerUsd: 87.2, taxRate: 0.18, taxLabel: "GST", regionalListLocal: 4499, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "PK", country: "Pakistan", currency: "PKR", symbol: "Rs", fxPerUsd: 279, taxRate: 0.18, taxLabel: "Taxe de vente", regionalListLocal: 14999, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "BD", country: "Bangladesh", currency: "BDT", symbol: "৳", fxPerUsd: 122, taxRate: 0.15, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "ID", country: "Indonésie", currency: "IDR", symbol: "Rp", fxPerUsd: 16200, taxRate: 0.11, taxLabel: "PPN", regionalListLocal: 799000, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "PH", country: "Philippines", currency: "PHP", symbol: "₱", fxPerUsd: 57.5, taxRate: 0.12, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "TH", country: "Thaïlande", currency: "THB", symbol: "฿", fxPerUsd: 34.8, taxRate: 0.07, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "VN", country: "Vietnam", currency: "VND", symbol: "₫", fxPerUsd: 25400, taxRate: 0.1, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "MY", country: "Malaisie", currency: "MYR", symbol: "RM", fxPerUsd: 4.28, taxRate: 0.08, taxLabel: "SST", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "SG", country: "Singapour", currency: "SGD", symbol: "S$", fxPerUsd: 1.33, taxRate: 0.09, taxLabel: "GST", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "JP", country: "Japon", currency: "JPY", symbol: "¥", fxPerUsd: 152, taxRate: 0.1, taxLabel: "Taxe de consommation", regionalListLocal: 10800, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "KR", country: "Corée du Sud", currency: "KRW", symbol: "₩", fxPerUsd: 1360, taxRate: 0.1, taxLabel: "VAT", regionalListLocal: 99000, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "CN", country: "Chine", currency: "CNY", symbol: "¥", fxPerUsd: 7.18, taxRate: 0.13, taxLabel: "VAT", regionalListLocal: 449, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "AU", country: "Australie", currency: "AUD", symbol: "A$", fxPerUsd: 1.52, taxRate: 0.1, taxLabel: "GST", regionalListLocal: 124.95, taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "NZ", country: "Nouvelle-Zélande", currency: "NZD", symbol: "NZ$", fxPerUsd: 1.66, taxRate: 0.15, taxLabel: "GST", taxIncludedInList: true, region: "Asie-Pacifique" },
-  { code: "AE", country: "Émirats arabes unis", currency: "AED", symbol: "AED", fxPerUsd: 3.67, taxRate: 0.05, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
-  { code: "SA", country: "Arabie saoudite", currency: "SAR", symbol: "SAR", fxPerUsd: 3.75, taxRate: 0.15, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
-  { code: "EG", country: "Égypte", currency: "EGP", symbol: "E£", fxPerUsd: 48.5, taxRate: 0.14, taxLabel: "VAT", regionalListLocal: 2199, taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
-  { code: "ZA", country: "Afrique du Sud", currency: "ZAR", symbol: "R", fxPerUsd: 18.1, taxRate: 0.15, taxLabel: "VAT", regionalListLocal: 1299, taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
-  { code: "NG", country: "Nigeria", currency: "NGN", symbol: "₦", fxPerUsd: 1550, taxRate: 0.075, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
-  { code: "IL", country: "Israël", currency: "ILS", symbol: "₪", fxPerUsd: 3.62, taxRate: 0.18, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" }
+  { code: "CA", country: "Canada", currency: "CAD", symbol: "CA$", fxPerUsd: 1.43, taxRate: 0.13, taxLabel: "HST", taxIncludedInList: false, region: "Amériques" },
+  { code: "MX", country: "Mexique", currency: "MXN", symbol: "MX$", fxPerUsd: 19.07, taxRate: 0.16, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
+  { code: "BR", country: "Brésil", currency: "BRL", symbol: "R$", fxPerUsd: 5.94, taxRate: 0, taxLabel: "Taxe incluse", regionalListLocal: 349.9, taxIncludedInList: true, region: "Amériques" },
+  { code: "AR", country: "Argentine", currency: "ARS", symbol: "AR$", fxPerUsd: 1435.44, taxRate: 0.21, taxLabel: "IVA + PAIS", regionalListLocal: 74999, taxIncludedInList: false, region: "Amériques" },
+  { code: "CL", country: "Chili", currency: "CLP", symbol: "CLP$", fxPerUsd: 930.17, taxRate: 0.19, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
+  { code: "CO", country: "Colombie", currency: "COP", symbol: "COP$", fxPerUsd: 3177.11, taxRate: 0.19, taxLabel: "IVA", taxIncludedInList: true, region: "Amériques" },
+  { code: "PE", country: "Pérou", currency: "PEN", symbol: "S/", fxPerUsd: 3.42, taxRate: 0.18, taxLabel: "IGV", taxIncludedInList: true, region: "Amériques" },
+  { code: "GB", country: "Royaume-Uni", currency: "GBP", symbol: "£", fxPerUsd: 0.762, taxRate: 0.2, taxLabel: "VAT", regionalListLocal: 69.99, taxIncludedInList: true, region: "Europe" },
+  { code: "DE", country: "Allemagne", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.19, taxLabel: "MwSt", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "FR", country: "France", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.2, taxLabel: "TVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "ES", country: "Espagne", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.21, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "IT", country: "Italie", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.22, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "NL", country: "Pays-Bas", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.21, taxLabel: "BTW", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "PL", country: "Pologne", currency: "PLN", symbol: "zł", fxPerUsd: 4.06, taxRate: 0.23, taxLabel: "VAT", regionalListLocal: 349, taxIncludedInList: true, region: "Europe" },
+  { code: "SE", country: "Suède", currency: "SEK", symbol: "kr", fxPerUsd: 10.2, taxRate: 0.25, taxLabel: "Moms", taxIncludedInList: true, region: "Europe" },
+  { code: "NO", country: "Norvège", currency: "NOK", symbol: "kr", fxPerUsd: 9.75, taxRate: 0.25, taxLabel: "MVA", taxIncludedInList: true, region: "Europe" },
+  { code: "DK", country: "Danemark", currency: "DKK", symbol: "kr", fxPerUsd: 6.8, taxRate: 0.25, taxLabel: "Moms", taxIncludedInList: true, region: "Europe" },
+  { code: "CH", country: "Suisse", currency: "CHF", symbol: "CHF", fxPerUsd: 0.8392, taxRate: 0.081, taxLabel: "MWST", taxIncludedInList: true, region: "Europe" },
+  { code: "TR", country: "Turquie", currency: "TRY", symbol: "₺", fxPerUsd: 50.57, taxRate: 0.2, taxLabel: "KDV", regionalListLocal: 1899, taxIncludedInList: true, region: "Europe" },
+  { code: "UA", country: "Ukraine", currency: "UAH", symbol: "₴", fxPerUsd: 40.84, taxRate: 0.2, taxLabel: "PDV", regionalListLocal: 1999, taxIncludedInList: true, region: "Europe" },
+  { code: "RO", country: "Roumanie", currency: "RON", symbol: "lei", fxPerUsd: 4.87, taxRate: 0.19, taxLabel: "TVA", taxIncludedInList: true, region: "Europe" },
+  { code: "PT", country: "Portugal", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.23, taxLabel: "IVA", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "IE", country: "Irlande", currency: "EUR", symbol: "€", fxPerUsd: 0.9099, taxRate: 0.23, taxLabel: "VAT", regionalListLocal: 79.99, taxIncludedInList: true, region: "Europe" },
+  { code: "IN", country: "Inde", currency: "INR", symbol: "₹", fxPerUsd: 92.68, taxRate: 0.18, taxLabel: "GST", regionalListLocal: 4499, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "PK", country: "Pakistan", currency: "PKR", symbol: "Rs", fxPerUsd: 251.54, taxRate: 0.18, taxLabel: "Taxe de vente", regionalListLocal: 14999, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "BD", country: "Bangladesh", currency: "BDT", symbol: "৳", fxPerUsd: 113.1, taxRate: 0.15, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "ID", country: "Indonésie", currency: "IDR", symbol: "Rp", fxPerUsd: 18263.3, taxRate: 0.11, taxLabel: "PPN", regionalListLocal: 799000, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "PH", country: "Philippines", currency: "PHP", symbol: "₱", fxPerUsd: 63.78, taxRate: 0.12, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "TH", country: "Thaïlande", currency: "THB", symbol: "฿", fxPerUsd: 33.91, taxRate: 0.07, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "VN", country: "Vietnam", currency: "VND", symbol: "₫", fxPerUsd: 25705, taxRate: 0.1, taxLabel: "VAT", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "MY", country: "Malaisie", currency: "MYR", symbol: "RM", fxPerUsd: 4.11, taxRate: 0.08, taxLabel: "SST", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "SG", country: "Singapour", currency: "SGD", symbol: "S$", fxPerUsd: 1.29, taxRate: 0.09, taxLabel: "GST", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "JP", country: "Japon", currency: "JPY", symbol: "¥", fxPerUsd: 158.64, taxRate: 0.1, taxLabel: "Taxe de consommation", regionalListLocal: 10800, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "KR", country: "Corée du Sud", currency: "KRW", symbol: "₩", fxPerUsd: 1339.44, taxRate: 0.1, taxLabel: "VAT", regionalListLocal: 99000, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "CN", country: "Chine", currency: "CNY", symbol: "¥", fxPerUsd: 6.68, taxRate: 0.13, taxLabel: "VAT", regionalListLocal: 449, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "AU", country: "Australie", currency: "AUD", symbol: "A$", fxPerUsd: 1.5, taxRate: 0.1, taxLabel: "GST", regionalListLocal: 124.95, taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "NZ", country: "Nouvelle-Zélande", currency: "NZD", symbol: "NZ$", fxPerUsd: 1.82, taxRate: 0.15, taxLabel: "GST", taxIncludedInList: true, region: "Asie-Pacifique" },
+  { code: "AE", country: "Émirats arabes unis", currency: "AED", symbol: "AED", fxPerUsd: 3.34, taxRate: 0.05, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
+  { code: "SA", country: "Arabie saoudite", currency: "SAR", symbol: "SAR", fxPerUsd: 3.41, taxRate: 0.15, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
+  { code: "EG", country: "Égypte", currency: "EGP", symbol: "E£", fxPerUsd: 48.96, taxRate: 0.14, taxLabel: "VAT", regionalListLocal: 2199, taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
+  { code: "ZA", country: "Afrique du Sud", currency: "ZAR", symbol: "R", fxPerUsd: 17.47, taxRate: 0.15, taxLabel: "VAT", regionalListLocal: 1299, taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
+  { code: "NG", country: "Nigeria", currency: "NGN", symbol: "₦", fxPerUsd: 1231.12, taxRate: 0.075, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" },
+  { code: "IL", country: "Israël", currency: "ILS", symbol: "₪", fxPerUsd: 3.34, taxRate: 0.18, taxLabel: "VAT", taxIncludedInList: true, region: "Moyen-Orient et Afrique" }
 ];
 const round2 = (n) => Math.round(n * 100) / 100;
 const ZERO_DECIMAL = new Set(["JPY", "KRW", "IDR", "VND", "CLP", "COP", "ARS", "NGN", "PKR", "BDT", "PHP", "HUF"]);
@@ -87,11 +79,11 @@ export function decimalsFor(currency) {
 }
 export function formatLocal(amount, market) {
   const d = decimalsFor(market.currency);
-  const n = amount.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const n = amount.toLocaleString("fr-FR", { minimumFractionDigits: d, maximumFractionDigits: d });
   return `${market.symbol}${n}`;
 }
 export function formatUsd(amount) {
-  return `$${amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `$${amount.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 export function convert(usd, market) {
   const raw = usd * market.fxPerUsd;

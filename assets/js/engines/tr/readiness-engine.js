@@ -27,11 +27,11 @@ export const WEIGHTS = {
 };
 const clamp = (n, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, n));
 const round = (n) => Math.round(n);
-// AUDIT FIX H2 (2026-11-17): one install-size constant, 150 GB base, shared
+// AUDIT FIX H2 (2026-11-17): one install-size constant, 212 GB base, shared
 // with the download-time calculator, storage planner and registry copy.
 // The old 100 GB anchor awarded full storage marks for 100 GB free while the
 // storage planner told the same user to keep 200-235 GB free.
-export const REFERENCE_INSTALL_GB = 150;
+export const REFERENCE_INSTALL_GB = 212;
 export const REFERENCE_MBPS = 111;
 export function performanceScore(input) {
   const res = input.res ?? "1080p";
@@ -85,9 +85,9 @@ export function networkScore(input) {
   const score = clamp(mbps / REFERENCE_MBPS * 100);
   // AUDIT FIX (2026-11-17): the source formula multiplied GB by 8, not 8000,
   // so it understated install time by 1000x (it printed "~0 min" for a
-  // 150 GB install at 150 Mbps). 150 GB at 111 Mbps is about 3.0 h.
+  // 212 GB install at 150 Mbps). 212 GB at 111 Mbps is about 4.2 h.
   const hours = mbps > 0 ? REFERENCE_INSTALL_GB * 8000 / mbps / 3600 : 1 / 0;
-  const hoursLabel = !isFinite(hours) || hours > 99 ? "çok uzun" : hours >= 1 ? `${hours.toFixed(1)} sa` : `${Math.round(hours * 60)} dk`;
+  const hoursLabel = !isFinite(hours) || hours > 99 ? "çok uzun" : hours >= 1 ? `${Number(hours.toFixed(1))} sa` : `${Math.round(hours * 60)} dk`;
   return {
     score,
     detail: `${mbps} Mbps indirme, ${REFERENCE_INSTALL_GB} GB yaklaşık ${hoursLabel} içinde kurulur.`,

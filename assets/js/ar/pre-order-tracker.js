@@ -108,7 +108,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "من المتوقع أن تفتح طلبات GTA 6 المسبقة في <time datetime=\"2026-06-25\">25 يونيو 2026</time> (لم تؤكده Rockstar) وتُطلق اللعبة في <time datetime=\"2026-11-19\">19 نوفمبر 2026</time>. كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "فتحت طلبات GTA 6 المسبقة في 2026 وأُطلقت اللعبة في <time datetime=\"2026-11-19\">19 نوفمبر 2026</time>. كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -143,7 +143,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">من المتوقع فتح الطلبات المسبقة في 25 يونيو 2026، ولم تؤكده Rockstar، لذلك لا يظهر كمعلم مؤكد.</p>';
+      html += '<p class="verdict-desc">من المتوقع فتحت الطلبات المسبقة في 2026. ولا يظهر الفتح كمعلم في هذا الخط الزمني.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">مؤكد</span>'

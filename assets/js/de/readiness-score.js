@@ -1,7 +1,7 @@
 // readiness-score.js — GTA 6 Readiness Score page logic.
 // Uses the ported readiness engine (assets/js/engines/readiness-engine.js).
-// AUDIT FIX H2: the install-size reference is 150 GB (was 100 GB); full
-// network marks at 111 Mbps now mean about 3 h for a 150 GB install.
+// AUDIT FIX H2 (pass 2A): the install-size reference is 212 GB (was 150 GB); full
+// network marks at 111 Mbps now mean about 4.2 h for a 212 GB install.
 // AUDIT FIX M15: projected figures are shown rounded, and the
 // "projected, not datamined" label sits next to the results.
 // State lives in the URL (?gpu=&cpu=&ram=&storage=&drive=&mbps=).
@@ -13,8 +13,8 @@ var DRIVE_LABEL = { nvme: "NVMe SSD", ssd: "SATA SSD", hdd: "HDD (mechanisch)" }
 function driveLabel(k) { return DRIVE_LABEL[k] || DRIVE_META[k].label; }
 function mapPerf(d) { var m = d.match(/([\d.]+) avg fps · ([\d.]+) 1% low at (\S+) High native\./); return m ? m[1] + " fps im Schnitt · " + m[2] + " 1 %-Low bei " + m[3] + " Hoch nativ." : d; }
 function mapVram(d) { var m = d.match(/([\d.]+) GB card, needs ([\d.]+) GB — short by ([\d.]+) GB\./); if (m) return m[1] + "-GB-Karte, braucht " + m[2] + " GB, " + m[3] + " GB zu wenig."; m = d.match(/([\d.]+) GB card clears the ([\d.]+) GB estimated need\./); return m ? m[1] + "-GB-Karte reicht für den geschätzten Bedarf von " + m[2] + " GB." : d; }
-function mapStorage(d) { var m = d.match(/([\d.]+) GB free on an HDD — modern open worlds stream from SSD; expect pop-in\./); if (m) return m[1] + " GB frei auf einer HDD, moderne Open Worlds streamen von SSD; erwarte Pop-in."; m = d.match(/([\d.]+) GB free on (.+)\. Target: 150 GB\./); return m ? m[1] + " GB frei auf " + m[2] + ". Ziel: 150 GB." : d; }
-function mapNetwork(d) { var m = d.match(/([\d.]+) Mbps down — installs 150 GB in ~(.+)\./); if (!m) return d; var h = m[2] === "very long" ? "sehr lange" : m[2].replace(" min", " Min.").replace(/([\d.]+) h$/, "$1 Std."); return m[1] + " Mbps down, installiert 150 GB in ~" + h + "."; }
+function mapStorage(d) { var m = d.match(/([\d.]+) GB free on an HDD — modern open worlds stream from SSD; expect pop-in\./); if (m) return m[1] + " GB frei auf einer HDD, moderne Open Worlds streamen von SSD; erwarte Pop-in."; m = d.match(/([\d.]+) GB free on (.+)\. Target: 212 GB\./); return m ? m[1] + " GB frei auf " + m[2] + ". Ziel: 212 GB." : d; }
+function mapNetwork(d) { var m = d.match(/([\d.]+) Mbps down — installs 212 GB in ~(.+)\./); if (!m) return d; var h = m[2] === "very long" ? "sehr lange" : m[2].replace(" min", " Min.").replace(/([\d.]+) h$/, "$1 Std."); return m[1] + " Mbps down, installiert 212 GB in ~" + h + "."; }
 function estimateReadiness(input) { var r = estimateReadinessEn(input); r.gradeLabel = GRADE_LABEL[r.grade] || r.gradeLabel; r.verdict = VERDICT[r.grade] || r.verdict; r.performance.detail = mapPerf(r.performance.detail); r.vram.detail = mapVram(r.vram.detail); r.storage.detail = mapStorage(r.storage.detail); r.network.detail = mapNetwork(r.network.detail); return r; }
 import { GPUS, CPUS } from "../engines/de/fps-engine.js";
 
@@ -136,7 +136,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = gpu.label + " + " + cpu.label + " mit " + state.ram + " GB RAM, " + state.storage + " GB frei auf " + driveLabel(state.drive) + " und " + state.mbps + " Mbps down erreicht " + result.score + "/100 (Note " + result.grade + "). " + result.verdict + " Schwächstes Glied: " + SUB_LABEL[result.weakest] + ".";
+    var tldrText = gpu.label + " + " + cpu.label + " mit " + state.ram + " GB RAM, " + state.storage + " GB frei auf " + driveLabel(state.drive) + " und " + state.mbps + " Mbps im Download erreicht " + result.score + "/100 (Note " + result.grade + "). " + result.verdict + " Schwächstes Glied: " + SUB_LABEL[result.weakest] + ".";
     if (label) label.textContent = "Note " + result.grade + " · " + result.gradeLabel;
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = "Note " + result.grade + " | " + result.score + "/100";

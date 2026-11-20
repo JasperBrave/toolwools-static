@@ -50,10 +50,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "Ja, " + gpu.label + " + " + cpu.label + " ist bereit für GTA 6 bei " + res + " auf " + modeLabel(mode) + ". " + v + ", mit Ziel ~" + result.avgFps + " fps im Schnitt.";
   if (readinessOf(result) === "borderline")
     return "Grenzwertig, " + gpu.label + " + " + cpu.label + " läuft GTA 6 bei " + res + " auf " + modeLabel(mode) + " mit einem " + result.absPct + "%-" + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + "-Bottleneck (~" + result.avgFps + " fps). Spielbar, aber du lässt Frames liegen.";
+  if (result.verdict === "balanced")
+    return "Upgrade empfohlen, " + gpu.label + " + " + cpu.label + " ist ausgewogen, aber langsam bei " + res + " auf " + modeLabel(mode) + " (~" + result.avgFps + " fps). Beide Teile brauchen mehr Leistung für flüssige Bildraten.";
   return "Upgrade empfohlen, " + gpu.label + " + " + cpu.label + " zeigt einen " + result.absPct + "%-" + (result.verdict === "cpu" ? "CPU" : "GPU") + "-Bottleneck bei " + res + " auf " + modeLabel(mode) + " (~" + result.avgFps + " fps). Ein Teil zieht den anderen runter.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

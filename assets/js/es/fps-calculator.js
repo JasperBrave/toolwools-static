@@ -202,7 +202,7 @@ function render() {
   if (ladder) {
     ladder.innerHTML = PRESET_LIST.map(function (p) {
       var r = estimateFps(Object.assign({}, input, { preset: p }));
-      var fgTag = r.fgApplied ? " (interpolated)" : "";
+      var fgTag = r.fgApplied ? " (interpolado)" : "";
       return "<tr><td><strong>" + L(PRESET_META[p].label) + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
   }
@@ -211,14 +211,14 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Estimated " + result.avgFps + " average frames per second, " + result.lowFps + " 1 percent low, at " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ". " + verdictText + "." + fgNote;
+  if (live) live.textContent = "Estimados " + result.avgFps + " fotogramas por segundo de media, " + result.lowFps + " 1% mínimo, en " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ". " + verdictText + "." + fgNote;
   syncUrl();
 }
 
 function shareText() {
   var input = inputFor();
   var result = estimateFps(input);
-  return input.gpu.label + " + " + input.cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps de media (" + result.lowFps + " 1% low). GTA 6 FPS estimate: " + shareUrl();
+  return input.gpu.label + " + " + input.cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps de media (" + result.lowFps + " 1% mínimo). Estimación de FPS de GTA 6: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

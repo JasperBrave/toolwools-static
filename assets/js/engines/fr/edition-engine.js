@@ -32,7 +32,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "numérique et disque",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "Le jeu complet : campagne d'histoire complète et accès complet au mode en ligne. Chaque niveau supérieur ajoute des bonus, jamais d'histoire supplémentaire."
   },
@@ -41,7 +41,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "numérique et disque",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "Le niveau intermédiaire. À chaque sortie récente de Rockstar, il regroupait une injection d'argent en ligne plus un pack de véhicule de démarrage et de cosmétiques, utile le premier jour, sans valeur une fois que vous avez gagné de l'argent dans le jeu."
   },
@@ -50,7 +50,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "numérique",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "Le plus gros pack numérique : tout de Deluxe plus une subvention monétaire plus importante, des déblocages immobiliers ou de véhicules supplémentaires et les avantages d'accès les plus précoces, quand un niveau en propose."
   },
@@ -61,7 +61,7 @@ export const EDITIONS = [
     availability: "tirage physique limité",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "Une version boîte avec des biens physiques, une carte, un artbook, un steelbook, des babioles, autour d'une copie du jeu. Rockstar n'en a confirmé aucune pour GTA 6 ; GTA V et RDR2 en avaient tous les deux une, et les deux étaient épuisées avant le lancement."
+    note: "Une version boîte avec des biens physiques, une carte, un artbook, un steelbook, des babioles, autour d'une copie du jeu. Il n'existe pas de jeu Édition Collector GTA 6 en boîte ; Rockstar vend un coffret de produits dérivés « Goodtime State, Vice City Collection » à 399,99 $ sans jeu inclus ; GTA V et RDR2 en avaient tous les deux une, et les deux étaient épuisées avant le lancement."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -217,11 +217,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -313,7 +312,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `Avec le profil ${profile.label.toLowerCase()}, rien au-dessus de Standard n'apporte assez de valeur utile pour justifier l'augmentation avec ton plafond de ${tolerance} %, et Standard contient déjà toute l'histoire et tout le mode en ligne.`;
   }
   if (best.edition.id === "collectors") {
-    return `Tu nous as dit que les articles physiques comptent, et l'édition en boîte est le seul niveau qui les inclut, mais Rockstar n'a pas confirmé d'édition collector pour GTA 6, alors considère cela comme un plan plutôt que comme un achat. Historiquement, c'était ${PLATFORM_LABEL[platform] === "PC" ? "console uniquement" : "un tirage console limité"} et elle s'épuise avant le lancement.`;
+    return `Tu nous as dit que les articles physiques comptent, et l'édition en boîte est le seul niveau qui les inclut, mais il n'existe pas de jeu Édition Collector GTA 6 en boîte — seulement un coffret de produits dérivés sans jeu — alors considère cela comme un plan plutôt que comme un achat. Historiquement, c'était un tirage console limité et elle s'épuise avant le lancement.`;
   }
   return `Cela ajoute environ ${best.utilityDelta} points d'utilité pondérée par rapport à Standard pour une augmentation de ${best.edition.upliftPercent} %, soit environ ${best.utilityPerUpliftPoint} points par tranche de 10 % dépensée, ce qui est le meilleur retour de tous les niveaux disponibles sur ${PLATFORM_LABEL[platform]} dans ton plafond de ${tolerance} %.`;
 }
@@ -329,7 +328,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard maintenant, améliorer plus tard",
-      body: "Les améliorations de niveau numériques sur console et PC sont normalement vendues comme une amélioration en boutique au prix de la différence, donc acheter Standard et monter ensuite coûte généralement le même total, avec une réserve : les semaines bonus de la fenêtre de lancement et tout avantage d'accès anticipé expirent, et tu ne peux pas les réclamer rétroactivement."
+      body: "Les améliorations de niveau numériques sur console sont normalement vendues comme une amélioration en boutique au prix de la différence, donc acheter Standard et monter ensuite coûte généralement le même total, avec une réserve : les semaines bonus de la fenêtre de lancement et tout avantage d'accès anticipé expirent, et tu ne peux pas les réclamer rétroactivement."
     },
     {
       title: "Acheter de la monnaie plutôt qu'un niveau",

@@ -7,7 +7,7 @@
 (function () {
   var TOOLS = [
     { slug: "system-requirements", title: "GTA 6 Sistem Gereksinimleri Denetleyicisi", desc: "Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama." },
-    { slug: "download-time", title: "GTA 6 İndirme Süresi Hesaplayıcı", desc: "Bağlantınızda yaklaşık 150 GB'lık temel kurulumun ne kadar süreceğini tahmin edin, ayrıca ilk gün yaması hesabı." },
+    { slug: "download-time", title: "GTA 6 İndirme Süresi Hesaplayıcı", desc: "Bağlantınızda yaklaşık 212 GB'lık temel kurulumun ne kadar süreceğini tahmin edin, ayrıca ilk gün yaması hesabı." },
     { slug: "storage-planner", title: "GTA 6 Depolama Planlayıcı", desc: "Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay." },
     { slug: "add-to-calendar", title: "GTA 6 Çıkış Tarihi Hatırlatıcısı", desc: "GTA 6 çıkışını kendi saat diliminizde takviminize ekleyin." },
     { slug: "readiness-score", title: "GTA 6 Hazırlık Puanı", desc: "Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ." },

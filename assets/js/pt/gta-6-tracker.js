@@ -97,7 +97,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "GTA 6 launches 19 de nov de 2026 at 05:00 UTC, in " + c.days + " dias, " + c.hours + " horas e " + c.minutes + " minutes. Pré-carregamento é esperado de 16 a 17 de nov de 2026, de 48 a 72 horas antes do lançamento, mas a Rockstar não confirmou o início do pré-carregamento.";
+      tldrText.textContent = "O GTA 6 lançou em 19 nov 2026 às 05:00 UTC. O pré-carregamento ocorreu em 16-17 nov 2026, 48-72 horas antes do lançamento.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -142,7 +142,7 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 launches 19 de nov de 2026 at 05:00 UTC. Acompanhamento the countdown and preload milestones on ToolWools.") +
+      encodeURIComponent("O GTA 6 lançou em 19 de nov de 2026 às 05:00 UTC. Acompanhe o lançamento e os marcos de pré-carregamento no ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
@@ -166,13 +166,6 @@ $all("[data-copy-link]").forEach(function (btn) {
   btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
 });
 
-var notifyBtn = $("[data-notify]");
-if (notifyBtn) {
-  notifyBtn.addEventListener("click", function () {
-    var status = $("[data-notify-status]");
-    if (status) status.textContent = "As notificações serão ativadas quando a Rockstar confirmar a janela de pré-carregamento.";
-  });
-}
 
 renderLaunchLocal();
 refreshShareLinks();

@@ -109,7 +109,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "Se espera que las reservas de GTA 6 abran el <time datetime=\"2026-06-25\">25 de junio de 2026</time> (sin confirmar por Rockstar) y el juego se lanza el <time datetime=\"2026-11-19\">19 de noviembre de 2026</time>. Cada canal cobra por el mismo juego, así que compra por términos: el mejor ajuste para tus entradas es <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "Las reservas de GTA 6 abrieron en 2026 y el juego se lanzó el <time datetime=\"2026-11-19\">19 de noviembre de 2026</time>. Cada canal cobra por el mismo juego, así que compra por términos: el mejor ajuste para tus entradas es <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -144,7 +144,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Pre-order opening is expected 25 de junio de 2026, unconfirmed by Rockstar, so it is not shown as a confirmed milestone.</p>';
+      html += '<p class="verdict-desc">Las reservas abrieron en 2026. La apertura no se muestra como hito en esta cronología.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Confirmado</span>'

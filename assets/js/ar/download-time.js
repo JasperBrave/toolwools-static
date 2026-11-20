@@ -1,10 +1,10 @@
 // download-time.js — GTA 6 Download Time Calculator page logic.
 // Math follows the source route (src/routes/tools.download-time.tsx):
 // seconds = totalGB * 8000 / effectiveMbps, effectiveMbps = mbps * eff / 100.
-// AUDIT FIX H2: one install-size constant, 150 GB base. The old default was
-// 165 GB base; the base install is now 150 GB and the day-one patch 15 GB,
-// for a 165 GB total. State lives in the URL (?mbps=&gb=&patch=&eff=).
-var DEFAULTS = { mbps: 100, gb: 150, patch: 15, eff: 80 };
+// AUDIT FIX H2 (pass 2A): one install-size constant, 212 GB base (up to 212 GB
+// game install plus a 1.7-3.8 GB day-one patch). The old default was 150 GB base
+// + 15 GB patch, for a 165 GB total; the new total is 214.8 GB. State lives in the URL (?mbps=&gb=&patch=&eff=).
+var DEFAULTS = { mbps: 100, gb: 212, patch: 2.8, eff: 80 };
 var PRESETS = [
   { label: "5G منزلي", mbps: 25 },
   { label: "كابل أساسي", mbps: 100 },

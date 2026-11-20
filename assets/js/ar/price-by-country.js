@@ -1,9 +1,9 @@
 // price-by-country.js — GTA 6 Price by Country page logic.
 // Uses the ported price engine (assets/js/engines/price-engine.js).
 // AUDIT FIX M8: the reference exchange-rate date (RATES_AS_OF,
-// 2026-08-01) is shown prominently on the page, and regional list prices
+// 2026-11-20) is shown prominently on the page, and regional list prices
 // are flagged as reported, not confirmed store prices, wherever they
-// appear. Only the $79.99 US Standard price is confirmed by Rockstar.
+// appear. Standard ($79.99) and Ultimate ($99.99) US prices are confirmed by Rockstar.
 // State lives in the URL (?country=&edition=&tab=) so results are
 // shareable. The country defaults to a guess from the browser language
 // when no ?country= is given, matching the source route.
@@ -12,7 +12,7 @@ import { MARKETS, EDITIONS, RATES_AS_OF, BAND_LABEL, priceFor, allPrices, editio
 var DEFAULTS = { country: "US", edition: "standard", tab: "country" };
 var EDITION_KEYS = Object.keys(EDITIONS);
 var TABS = ["country", "editions", "compare"];
-var RATES_LABEL = "1 أغسطس 2026 (2026-08-01)";
+var RATES_LABEL = "20 نوفمبر 2026 (2026-11-20)";
 
 function $(sel, root) { return (root || document).querySelector(sel); }
 function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
@@ -86,7 +86,7 @@ function copyText(text, btn, labelSel) {
 }
 
 function shortAnswer(price) {
-  var s = "تكلف GTA 6 ما يعادل " + formatUsd(EDITIONS.standard.usd) + " دولار أمريكي للإصدار Standard، وهو السعر الوحيد الذي أكدته Rockstar. "
+  var s = "تكلف GTA 6 ما يعادل " + formatUsd(EDITIONS.standard.usd) + " دولار أمريكي للإصدار Standard، وUltimate 99.99 دولار أمريكي — وكلا السعرين مؤكدان من Rockstar. "
     + "وفي " + price.market.country + " يُقدَّر ذلك بـ " + formatLocal(price.totalLocal, price.market) + " مقابل " + EDITIONS[state.edition].label + "، أي نحو "
     + formatUsd(price.usdEquivalent) + " بعد احتساب " + price.market.taxLabel.toLowerCase() + ". "
     + "وهذا يعني " + BAND_LABEL[price.band].toLowerCase();
@@ -103,7 +103,7 @@ function shareRowHtml(text, title) {
     + "</div>";
 }
 function countryTabHtml(price) {
-  var vs = price.vsUsPercent > 0 ? "+" + price.vsUsPercent : String(price.vsUsPercent);
+  var vs = (price.vsUsPercent > 0 ? "+" : "") + price.vsUsPercent.toLocaleString("ar-EG-u-nu-latn", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
   var note = price.regionallyPriced
     ? "مسعّر إقليميًا: يحدد هذا المتجر سعرًا محليًا أقل بدلًا من تحويل مبلغ الدولار. أسعار القوائم الإقليمية مُبلَّغ عنها، وليست أسعار متاجر مؤكدة."
     : "محوّل من السعر الأمريكي المؤكد بسعر الصرف المرجعي المؤرخ.";
@@ -119,7 +119,7 @@ function countryTabHtml(price) {
     + "<div><dt>ما يعادل بالدولار</dt><dd>" + formatUsd(price.usdEquivalent) + "</dd></div>"
     + "</dl>"
     + '<p class="verdict-desc">' + taxHint + ". " + note + "</p>"
-    + '<p class="verdict-desc">أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ". السعر الوحيد المؤكد هو سعر Standard الأمريكي 79.99$.</p>";
+    + '<p class="verdict-desc">أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ". وسعرا Standard الأمريكي (79.99 دولار) وUltimate (99.99 دولار) مؤكدان.</p>";
 }
 function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
@@ -132,7 +132,7 @@ function editionsTabHtml(price, ladder) {
       + "<p>" + e.includes.join(" · ") + "</p></li>";
   }).join("");
   return '<ul class="rank-list" role="list">' + items + "</ul>"
-    + '<p class="verdict-desc">السعر الوحيد المؤكد هو سعر Standard. يستخدم Deluxe وUltimate فوارق +20$ / +30$ التي استخدمتها Rockstar في GTA 5 وRed Dead Redemption 2. أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ".</p>";
+    + '<p class="verdict-desc">وسعرا Standard (79.99 دولار) وUltimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا. أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ".</p>";
 }
 function compareTabHtml(price, verdict) {
   return '<p class="verdict-desc">' + verdict.headline + "</p>"
@@ -148,7 +148,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   var body = ranked.map(function (p) {
     var hl = p.market.code === country ? ' class="hl-row"' : "";
     var reg = p.regionallyPriced ? ' <span class="flag-badge">إقليمي</span>' : "";
-    var vs = p.vsUsPercent > 0 ? "+" + p.vsUsPercent : String(p.vsUsPercent);
+    var vs = (p.vsUsPercent > 0 ? "+" : "") + p.vsUsPercent.toLocaleString("ar-EG-u-nu-latn", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
     return '<tr id="market-' + p.market.code.toLowerCase() + '"' + hl + "><th scope=\"row\">" + p.market.country + reg + "</th>"
       + "<td class=\"muted\">" + formatLocal(p.listLocal, p.market) + "</td>"
       + "<td class=\"muted\">" + formatLocal(p.taxLocal, p.market) + "</td>"
@@ -170,16 +170,16 @@ function ladderTableHtml(price, ladder) {
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
       + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "الأساس") + "</td>"
-      + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("en-US") : "0") + "</td>"
+      + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("ar-EG-u-nu-latn") : "0") + "</td>"
       + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "n/a") + "</td></tr>";
   }).join("");
-  return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard مقابل Deluxe مقابل Ultimate</h2>\n'
+  return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard مقابل Ultimate</h2>\n'
     + '      <p class="section-dek">سؤال الترقية، مجاب بمعدل قيمة بدلًا من قائمة مزايا. الأسعار بـ ' + price.market.currency + " لـ " + price.market.country + ".</p>\n"
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard مقابل Deluxe مقابل Ultimate، جدول قابل للتمرير">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard مقابل Ultimate، جدول قابل للتمرير">\n'
     + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">سلّم إصدارات GTA 6 مسعّر بـ ' + price.market.currency + " لـ " + price.market.country + "، مع الفرق عن Standard والتكلفة لكل 100,000 GTA$ مضمّنة.</caption>\n"
     + '        <thead><tr><th scope="col">الإصدار</th><th scope="col">الإجمالي المحلي</th><th scope="col">فوق Standard</th><th scope="col">GTA$ المضمّنة</th><th scope="col">لكل 100 ألف GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">السعر الوحيد المؤكد هو سعر Standard. يستخدم Deluxe وUltimate فوارق +20$ / +30$ التي استخدمتها Rockstar في GTA 5 وRed Dead Redemption 2.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">وسعرا Standard (79.99 دولار) وUltimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا.</p>\n    </section>';
 }
 
 var lastShareText = "";

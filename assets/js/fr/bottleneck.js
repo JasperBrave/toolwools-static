@@ -50,10 +50,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "Oui, " + gpu.label + " + " + cpu.label + " est prêt pour GTA 6 en " + res + " en " + modeLabel(mode) + ". " + v + ", cible environ " + result.avgFps + " ips en moyenne.";
   if (readinessOf(result) === "borderline")
     return "Limite, " + gpu.label + " + " + cpu.label + " fera tourner GTA 6 en " + res + " en " + modeLabel(mode) + " avec un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " (~" + result.avgFps + " ips). Jouable, mais vous perdrez des images.";
+  if (result.verdict === "balanced")
+    return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " est équilibré mais lent en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " ips). Les deux composants ont besoin de plus de puissance pour des fréquences d'images fluides.";
   return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " montre un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : "GPU") + " en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " ips). Un composant freine l'autre.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

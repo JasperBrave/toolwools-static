@@ -1,7 +1,7 @@
 // readiness-score.js — GTA 6 Readiness Score page logic.
 // Uses the ported readiness engine (assets/js/engines/readiness-engine.js).
-// AUDIT FIX H2: the install-size reference is 150 GB (was 100 GB); full
-// network marks at 111 Mbps now mean about 3 h for a 150 GB install.
+// AUDIT FIX H2 (pass 2A): the install-size reference is 212 GB (was 150 GB); full
+// network marks at 111 Mbps now mean about 4.2 h for a 212 GB install.
 // AUDIT FIX M15: projected figures are shown rounded, and the
 // "projected, not datamined" label sits next to the results.
 // State lives in the URL (?gpu=&cpu=&ram=&storage=&drive=&mbps=).

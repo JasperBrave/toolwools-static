@@ -46,10 +46,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "Yes, " + gpu.label + " + " + cpu.label + " is ready for GTA 6 at " + res + " on " + WORKLOAD_META[mode].label + ". " + v + ", targeting ~" + result.avgFps + " fps average.";
   if (readinessOf(result) === "borderline")
     return "Borderline, " + gpu.label + " + " + cpu.label + " will run GTA 6 at " + res + " on " + WORKLOAD_META[mode].label + " with a " + result.absPct + "% " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " bottleneck (~" + result.avgFps + " fps). Playable, but you will leave frames on the table.";
+  if (result.verdict === "balanced")
+    return "Upgrade recommended, " + gpu.label + " + " + cpu.label + " is balanced but slow at " + res + " on " + WORKLOAD_META[mode].label + " (~" + result.avgFps + " fps). Both parts need more power to hit smooth frame rates.";
   return "Upgrade recommended, " + gpu.label + " + " + cpu.label + " shows a " + result.absPct + "% " + (result.verdict === "cpu" ? "CPU" : "GPU") + " bottleneck at " + res + " on " + WORKLOAD_META[mode].label + " (~" + result.avgFps + " fps). One part is dragging the other down.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

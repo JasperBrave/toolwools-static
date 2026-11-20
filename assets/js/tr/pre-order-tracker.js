@@ -108,7 +108,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6 ön siparişlerinin <time datetime=\"2026-06-25\">25 Haziran 2026</time> tarihinde açılması bekleniyor (Rockstar doğrulamadı) ve oyun <time datetime=\"2026-11-19\">19 Kasım 2026</time> tarihinde çıkıyor. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdilerinize en uygun seçenek <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "GTA 6 ön siparişleri 2026'da açıldı ve oyun <time datetime=\"2026-11-19\">19 Kasım 2026</time> tarihinde çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdilerinize en uygun seçenek <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -143,7 +143,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Ön sipariş açılışı 25 Haziran 2026 olarak bekleniyor, Rockstar doğrulamadı; bu yüzden doğrulanmış bir kilometre taşı olarak gösterilmiyor.</p>';
+      html += '<p class="verdict-desc">Ön siparişler 2026'da açıldı. Açılış bu zaman çizelgesinde kilometre taşı olarak gösterilmiyor.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Doğrulandı</span>'

@@ -7,7 +7,7 @@
 (function () {
   var TOOLS = [
     { slug: "system-requirements", title: "Vérificateur de configuration requise pour GTA 6", desc: "Verdict instantané par rapport aux niveaux Minimum, Recommandé et Ultra estimés par la communauté. GPU, CPU, RAM et stockage." },
-    { slug: "download-time", title: "Calculateur de temps de téléchargement GTA 6", desc: "Estimez combien de temps prendra l'installation de base d'environ 150 Go sur votre connexion, avec le calcul du patch du premier jour." },
+    { slug: "download-time", title: "Calculateur de temps de téléchargement GTA 6", desc: "Estimez combien de temps prendra l'installation de base d'environ 212 Go sur votre connexion, avec le calcul du patch du premier jour." },
     { slug: "storage-planner", title: "Planificateur de stockage GTA 6", desc: "Prévoyez chaque gigaoctet : installation de base, patch du premier jour, DLC saisonniers et marge de sécurité pour les mises à jour." },
     { slug: "add-to-calendar", title: "Rappel de la date de sortie de GTA 6", desc: "Ajoutez le lancement de GTA 6 à votre calendrier dans votre fuseau horaire." },
     { slug: "readiness-score", title: "Score de préparation GTA 6", desc: "Un score pour tout votre PC : performances, VRAM, stockage et réseau." },

@@ -32,7 +32,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "dijital ve disk",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "Oyunun tamamı: tam hikâye modu ve çevrimiçi moda tam erişim. Daha yüksek her kademe bunun üzerine eklenen bonuslardır, asla ekstra hikâye değildir."
   },
@@ -41,7 +41,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "dijital ve disk",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "Orta kademe. Rockstar'ın son sürümlerinde bu, çevrimiçi para enjeksiyonu ile birlikte başlangıç aracı ve kozmetik paketi içeriyordu; ilk gün faydalı, oyun içinde para kazanmaya başlayınca değersiz."
   },
@@ -50,7 +50,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "dijital",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "En büyük dijital paket: Deluxe'taki her şey artı daha büyük para hibesi, ekstra mülk veya araç kilit açmaları ve kademe sunduğunda en erken erişim avantajları."
   },
@@ -61,7 +61,7 @@ export const EDITIONS = [
     availability: "sınırlı fiziksel baskı",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "Fiziksel ürünlerle kutulu baskı, harita, sanat kitabı, steelbook ve hediyelik eşyalar ile oyunun bir kopyası. Rockstar GTA 6 için bir tane doğrulamadı; GTA V ve RDR2'nin ikisinde de vardı ve ikisi de çıkıştan önce tükendi."
+    note: "Fiziksel ürünlerle kutulu baskı, harita, sanat kitabı, steelbook ve hediyelik eşyalar ile oyunun bir kopyası. Kutulu GTA 6 koleksiyoncu sürümü oyunu yok; Rockstar, oyun içermeyen 399,99 $'lık “Goodtime State, Vice City Collection” ürün kutusu satıyor; GTA V ve RDR2'nin ikisinde de vardı ve ikisi de çıkıştan önce tükendi."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -217,11 +217,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -313,7 +312,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `${profile.label.toLowerCase()} profiliyle, Standard'ın üzerinde hiçbir şey, ${tolerance}% tavanınla artışı haklı çıkaracak kadar kullanılabilir değer katmıyor ve Standard zaten tüm hikâyeyi ve tüm çevrimiçi modu içeriyor.`;
   }
   if (best.edition.id === "collectors") {
-    return `Bize fiziksel ürünlerin önemli olduğunu söyledin ve kutulu baskı bunları içeren tek kademe, ancak Rockstar GTA 6 koleksiyoncu sürümünü doğrulamadı, bu yüzden bunu bir satın alma değil bir plan olarak gör. Tarihsel olarak ${PLATFORM_LABEL[platform] === "PC" ? "yalnızca konsol" : "sınırlı konsol baskısı"} oldu ve çıkıştan önce tükendi.`;
+    return `Bize fiziksel ürünlerin önemli olduğunu söyledin ve kutulu baskı bunları içeren tek kademe, ancak kutulu GTA 6 koleksiyoncu sürümü oyunu yok — yalnızca oyun içermeyen bir ürün kutusu — bu yüzden bunu bir satın alma değil bir plan olarak gör. Tarihsel olarak sınırlı konsol baskısı oldu ve çıkıştan önce tükendi.`;
   }
   return `Standard'a göre yaklaşık ${best.utilityDelta} puan ağırlıklı fayda katıyor, ${best.edition.upliftPercent}% artış karşılığında, harcadığın her %10 için yaklaşık ${best.utilityPerUpliftPoint} puan; bu, ${PLATFORM_LABEL[platform]} üzerinde ${tolerance}% tavanın içinde mevcut kademeler arasında en iyi getiri.`;
 }
@@ -329,7 +328,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Şimdi Standard, sonra yükselt",
-      body: "Konsol ve PC'de dijital kademe yükseltmeleri normalde fiyat farkı karşılığında mağaza içi yükseltme olarak satılır, bu yüzden Standard alıp sonra yükselmek genelde toplamda aynı tutar; bir uyarıyla: çıkış dönemi bonus haftaları ve erken erişim avantajları sona erer ve bunları geriye dönük alamazsın."
+      body: "Konsolda dijital kademe yükseltmeleri normalde fiyat farkı karşılığında mağaza içi yükseltme olarak satılır, bu yüzden Standard alıp sonra yükselmek genelde toplamda aynı tutar; bir uyarıyla: çıkış dönemi bonus haftaları ve erken erişim avantajları sona erer ve bunları geriye dönük alamazsın."
     },
     {
       title: "Kademe yerine para almak",

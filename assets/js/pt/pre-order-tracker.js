@@ -109,7 +109,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "Espera-se que as pré-vendas do GTA 6 abram em <time datetime=\"2026-06-25\">25 de junho de 2026</time> (não confirmado pela Rockstar) e o jogo lança em <time datetime=\"2026-11-19\">19 de novembro de 2026</time>. Cada canal cobra pelo mesmo jogo, então compre por termos: o melhor ajuste para suas entradas é <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "As pré-vendas do GTA 6 abriram em 2026 e o jogo lançou em <time datetime=\"2026-11-19\">19 de novembro de 2026</time>. Cada canal cobra pelo mesmo jogo, então compre por termos: o melhor ajuste para suas entradas é <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
@@ -144,7 +144,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Pre-order opening is expected 25 de junho de 2026, unconfirmed by Rockstar, so it is not shown as a confirmed milestone.</p>';
+      html += '<p class="verdict-desc">As pré-vendas abriram em 2026. A abertura não é mostrada como marco nesta cronologia.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Confirmado</span>'

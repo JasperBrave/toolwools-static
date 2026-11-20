@@ -103,7 +103,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "GTA 6 startet am 19. Nov. 2026 um 05:00 Uhr UTC, in " + c.days + " Tagen, " + c.hours + " Stunden und " + c.minutes + " Minuten. Preload wird am 16.-17. Nov. 2026 erwartet, 48-72 Stunden vor Launch, aber Rockstar hat keinen Preload-Start bestätigt.";
+      tldrText.textContent = "GTA 6 startete am 19. Nov. 2026 um 05:00 Uhr UTC. Der Preload lief am 16.–17. Nov. 2026, 48–72 Stunden vor Launch.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -148,7 +148,7 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 startet am 19. Nov. 2026 um 05:00 Uhr UTC. Verfolge den Countdown und die Preload-Meilensteine auf ToolWools.") +
+      encodeURIComponent("GTA 6 startete am 19. Nov. 2026 um 05:00 Uhr UTC. Verfolge den Launch und die Preload-Meilensteine auf ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
@@ -172,13 +172,6 @@ $all("[data-copy-link]").forEach(function (btn) {
   btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
 });
 
-var notifyBtn = $("[data-notify]");
-if (notifyBtn) {
-  notifyBtn.addEventListener("click", function () {
-    var status = $("[data-notify-status]");
-    if (status) status.textContent = "Benachrichtigungen werden aktiviert, wenn Rockstar das Preload-Fenster bestätigt.";
-  });
-}
 
 renderLaunchLocal();
 refreshShareLinks();

@@ -47,10 +47,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "Sim, " + gpu.label + " + " + cpu.label + " está pronto para GTA 6 em " + res + " em " + L(WORKLOAD_META[mode].label) + ". " + v + ", targeting ~" + result.avgFps + " fps average.";
   if (readinessOf(result) === "borderline")
     return "No limite, " + gpu.label + " + " + cpu.label + " executará GTA 6 em " + res + " em " + L(WORKLOAD_META[mode].label) + " com um " + result.absPct + "% " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " gargalo (~" + result.avgFps + " fps). Jogável, mas você deixará quadros sem usar.";
+  if (result.verdict === "balanced")
+    return "Atualização recomendada, " + gpu.label + " + " + cpu.label + " está equilibrado, mas é lento em " + res + " em " + L(WORKLOAD_META[mode].label) + " (~" + result.avgFps + " fps). Ambas as peças precisam de mais potência para atingir taxas de quadros suaves.";
   return "Atualização recomendada, " + gpu.label + " + " + cpu.label + " mostra um " + result.absPct + "% " + (result.verdict === "cpu" ? "CPU" : "GPU") + " gargalo em " + res + " em " + L(WORKLOAD_META[mode].label) + " (~" + result.avgFps + " fps). Uma peça está puxando a outra para baixo.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

@@ -1,7 +1,7 @@
 // readiness-score.js — GTA 6 Readiness Score page logic.
 // Uses the ported readiness engine (assets/js/engines/readiness-engine.js).
-// AUDIT FIX H2: the install-size reference is 150 GB (was 100 GB); full
-// network marks at 111 Mbps now mean about 3 h for a 150 GB install.
+// AUDIT FIX H2 (pass 2A): the install-size reference is 212 GB (was 150 GB); full
+// network marks at 111 Mbps now mean about 4.2 h for a 212 GB install.
 // AUDIT FIX M15: projected figures are shown rounded, and the
 // "projected, not datamined" label sits next to the results.
 // State lives in the URL (?gpu=&cpu=&ram=&storage=&drive=&mbps=).
@@ -13,8 +13,8 @@ var DRIVE_LABEL = { nvme: "SSD NVMe", ssd: "SSD SATA", hdd: "Disque dur (mécani
 function driveLabel(k) { return DRIVE_LABEL[k] || DRIVE_META[k].label; }
 function mapPerf(d) { var m = d.match(/([\d.]+) avg fps · ([\d.]+) 1% low at (\S+) High native\./); return m ? m[1] + " ips en moyenne · " + m[2] + " 1 % faible en " + m[3] + " Élevé natif." : d; }
 function mapVram(d) { var m = d.match(/([\d.]+) GB card, needs ([\d.]+) GB — short by ([\d.]+) GB\./); if (m) return "Carte de " + m[1] + " Go, besoin de " + m[2] + " Go, il manque " + m[3] + " Go."; m = d.match(/([\d.]+) GB card clears the ([\d.]+) GB estimated need\./); return m ? "Carte de " + m[1] + " Go, couvre le besoin estimé de " + m[2] + " Go." : d; }
-function mapStorage(d) { var m = d.match(/([\d.]+) GB free on an HDD — modern open worlds stream from SSD; expect pop-in\./); if (m) return m[1] + " Go libres sur un disque dur, les mondes ouverts modernes streament depuis un SSD ; attendez-vous à du pop-in."; m = d.match(/([\d.]+) GB free on (.+)\. Target: 150 GB\./); return m ? m[1] + " Go libres sur " + m[2] + ". Objectif : 150 Go." : d; }
-function mapNetwork(d) { var m = d.match(/([\d.]+) Mbps down — installs 150 GB in ~(.+)\./); if (!m) return d; var h = m[2] === "very long" ? "très longtemps" : m[2]; return m[1] + " Mbps en téléchargement, installe 150 Go en ~" + h + "."; }
+function mapStorage(d) { var m = d.match(/([\d.]+) GB free on an HDD — modern open worlds stream from SSD; expect pop-in\./); if (m) return m[1] + " Go libres sur un disque dur, les mondes ouverts modernes streament depuis un SSD ; attendez-vous à du pop-in."; m = d.match(/([\d.]+) GB free on (.+)\. Target: 212 GB\./); return m ? m[1] + " Go libres sur " + m[2] + ". Objectif : 212 Go." : d; }
+function mapNetwork(d) { var m = d.match(/([\d.]+) Mbps down — installs 212 GB in ~(.+)\./); if (!m) return d; var h = m[2] === "very long" ? "très longtemps" : m[2]; return m[1] + " Mbps en téléchargement, installe 212 Go en ~" + h + "."; }
 function estimateReadiness(input) { var r = estimateReadinessEn(input); r.gradeLabel = GRADE_LABEL[r.grade] || r.gradeLabel; r.verdict = VERDICT[r.grade] || r.verdict; r.performance.detail = mapPerf(r.performance.detail); r.vram.detail = mapVram(r.vram.detail); r.storage.detail = mapStorage(r.storage.detail); r.network.detail = mapNetwork(r.network.detail); return r; }
 import { GPUS, CPUS } from "../engines/fr/fps-engine.js";
 

@@ -1,10 +1,10 @@
 // storage-planner.js — GTA 6 Storage Planner page logic.
 // Math follows the source route (src/routes/tools.storage-planner.tsx):
 // subtotal = base + patch + dlc; headroom = round(subtotal * buffer / 100);
-// total = subtotal + headroom. Base install default is 150 GB (AUDIT FIX H2:
+// total = subtotal + headroom. Base install default is 212 GB (AUDIT FIX H2:
 // one install-size constant shared with download-time, readiness and the
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
-var DEFAULTS = { base: 150, patch: 15, dlc: 30, buffer: 20, platform: "pc" };
+var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "pc" };
 var PLATFORMS = {
   pc: { label: "PC", usableGB: 0, note: "Votre disque, vos règles, le nombre ci-dessous est exactement ce dont GTA 6 a besoin." },
   ps5: { label: "PS5", usableGB: 667, note: "Le SSD 825 Go de Sony affiche 667 Go utilisables après la réserve système." },

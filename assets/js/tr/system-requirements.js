@@ -44,7 +44,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "Minimumun altı", tone: "upgrade", blurb: "Sisteminiz zorlanacak. 1080p Düşük ayarda 30 fps'nin altında bekleyin, ya da oyun düzgün başlamayabilir." },
   min: { label: "Minimumu karşılıyor", tone: "borderline", blurb: "1080p Düşük ayarda yaklaşık 30 fps ile oynanabilir. Yükseltme planınız varsa çıkıştan önce yapın." },
-  rec: { label: "Önerileni karşılıyor", tone: "ready", blurb: "1080p Yüksek veya 1440p Orta ayarda rahat 60 fps. Çıkış günü için ideal nokta." },
+  rec: { label: "Önerileni karşılıyor", tone: "ready", blurb: "1080p Yüksek veya 1440p Orta ayarda rahat 60 fps. Çıkış günü için ideal nokta. Önerilen 48 puandan başlar (Minimum 35 · Ultra 82)." },
   ultra: { label: "Ultra Hazır", tone: "ready", blurb: "4K Yüksek veya 1440p Ultra, ışın izleme için de pay var. Paylaşılan ekran görüntülerinden birinin sahibi siz olacaksınız." },
 };
 

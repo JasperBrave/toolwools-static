@@ -116,12 +116,12 @@ function render() {
     var iconSlot = $("[data-tldr-icon]", tldr);
     var name = state.vram !== null ? cardVram + " GB VRAM" : gpu.label + " (" + cardVram + " GB)";
     var tldrText = verdict.status === "comfortable"
-      ? "Sí, " + name + " has comfortable VRAM for GTA 6 at " + state.res + " " + L(PRESET_META[state.preset].label) + ". Needs " + needed.totalGB + " GB total (" + needed.recommendedGB + " GB recommended)."
+      ? "Sí, " + name + " tiene VRAM cómoda para GTA 6 en " + state.res + " " + L(PRESET_META[state.preset].label) + ". Necesita " + needed.totalGB + " GB en total (" + needed.recommendedGB + " GB recomendados)."
       : verdict.status === "adequate"
-        ? "Adecuado, " + name + " meets GTA 6's " + needed.totalGB + " GB total at " + state.res + " " + L(PRESET_META[state.preset].label) + ", but has no reserve for spikes. Recomendado " + needed.recommendedGB + " GB."
+        ? "Adecuado, " + name + " cumple los " + needed.totalGB + " GB en total de GTA 6 en " + state.res + " " + L(PRESET_META[state.preset].label) + ", pero no tiene reserva para picos. Recomendados " + needed.recommendedGB + " GB."
         : verdict.status === "tight"
-          ? "Ajustado, " + name + " is " + Math.abs(verdict.deltaGB) + " GB shy of GTA 6's " + needed.totalGB + " GB pool at " + state.res + " " + L(PRESET_META[state.preset].label) + ". Playable, but the texture streamer will swap visibly."
-          : "Insuficiente, " + name + " is " + Math.abs(verdict.deltaGB) + " GB below GTA 6's " + needed.totalGB + " GB pool at " + state.res + " " + L(PRESET_META[state.preset].label) + ". Expect texture pop and stutter.";
+          ? "Ajustado, " + name + " está " + Math.abs(verdict.deltaGB) + " GB por debajo del pool de " + needed.totalGB + " GB de GTA 6 en " + state.res + " " + L(PRESET_META[state.preset].label) + ". Jugable, pero el streamer de texturas cambiará visiblemente."
+          : "Insuficiente, " + name + " está " + Math.abs(verdict.deltaGB) + " GB por debajo del pool de " + needed.totalGB + " GB de GTA 6 en " + state.res + " " + L(PRESET_META[state.preset].label) + ". Espera pop de texturas y tirones.";
     if (label) label.textContent = verdict.status.charAt(0).toUpperCase() + verdict.status.slice(1) + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = verdict.label;
@@ -185,7 +185,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = verdict.label + ". GTA 6 needs " + needed.totalGB + " gigabytes at " + state.res + " en " + L(PRESET_META[state.preset].label) + ". Tu tarjeta has " + cardVram + " gigabytes.";
+  if (live) live.textContent = verdict.label + ". GTA 6 necesita " + needed.totalGB + " gigabytes a " + state.res + " en " + L(PRESET_META[state.preset].label) + ". Tu tarjeta tiene " + cardVram + " gigabytes.";
   syncUrl();
 }
 

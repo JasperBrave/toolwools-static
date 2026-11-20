@@ -46,10 +46,12 @@ function tldrOf(result, gpu, cpu, res, mode) {
     return "نعم، " + gpu.label + " + " + cpu.label + " جاهز لـ GTA 6 عند " + res + " في " + WORKLOAD_META[mode].label + ". " + v + "، بهدف ~" + result.avgFps + " إطار/ث في المتوسط.";
   if (readinessOf(result) === "borderline")
     return "على الحد، " + gpu.label + " + " + cpu.label + " سيعمل مع GTA 6 عند " + res + " في " + WORKLOAD_META[mode].label + " مع اختناق " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " بنسبة %" + result.absPct + " (~" + result.avgFps + " إطار/ث). قابل للعب، لكنك ستفقد بعض الإطارات.";
+  if (result.verdict === "balanced")
+    return "يُوصى بالترقية، " + gpu.label + " + " + cpu.label + " متوازن لكنه بطيء عند " + res + " في " + WORKLOAD_META[mode].label + " (~" + result.avgFps + " إطار/ث). يحتاج كلا المكوّنين إلى مزيد من القوة للوصول إلى معدلات إطارات سلسة.";
   return "يُوصى بالترقية، " + gpu.label + " + " + cpu.label + " يُظهر اختناقًا بنسبة %" + result.absPct + " " + (result.verdict === "cpu" ? "CPU" : "GPU") + " عند " + res + " في " + WORKLOAD_META[mode].label + " (~" + result.avgFps + " إطار/ث). أحد المكوّنين يُبطئ الآخر.";
 }
 function toneOf(result) {
-  if (result.verdict === "balanced") return "ready";
+  if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function iconFor(tone) {

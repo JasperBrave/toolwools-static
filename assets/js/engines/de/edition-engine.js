@@ -32,7 +32,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "digital und Disc",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "Das ganze Spiel: volle Story-Kampagne und voller Zugang zum Online-Modus. Jede höhere Stufe sind Boni obendrauf, nie extra Story."
   },
@@ -41,7 +41,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "digital und Disc",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "Die mittlere Stufe. Bei jedem jüngeren Rockstar-Release bündelte sie eine Online-Geldspritze plus Starter-Fahrzeug- und Kosmetik-Pack, nützlich am ersten Tag, wertlos, sobald du Ingame-Geld verdient hast."
   },
@@ -50,7 +50,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "digital",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "Der größte digitale Stack: alles aus Deluxe plus eine größere Währungs-Grant, extra Immobilien- oder Fahrzeug-Unlocks und die frühesten Zugangs-Perks, wenn eine Stufe sie bietet."
   },
@@ -61,7 +61,7 @@ export const EDITIONS = [
     availability: "limitierte physische Auflage",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "Eine Boxed-Version mit physischen Gütern, Karte, Artbook, Steelbook, Kleinigkeiten, um eine Kopie des Spiels herum. Rockstar hat keine für GTA 6 bestätigt; GTA V und RDR2 hatten beide eine, und beide waren vor dem Launch ausverkauft."
+    note: "Eine Boxed-Version mit physischen Gütern, Karte, Artbook, Steelbook, Kleinigkeiten, um eine Kopie des Spiels herum. Es gibt kein boxed GTA-6-Collector's-Edition-Spiel; Rockstar verkauft eine “Goodtime State, Vice City Collection”-Merchandise-Box für 399,99 $ ohne Spiel; GTA V und RDR2 hatten beide eine, und beide waren vor dem Launch ausverkauft."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -217,11 +217,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -313,7 +312,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `Für ein ${profile.label.toLowerCase()}-Profil fügt nichts über Standard genug nutzbaren Wert hinzu, um den Aufpreis bei deiner ${tolerance}%-Obergrenze zu rechtfertigen, und Standard enthält bereits die gesamte Story und den ganzen Online-Modus.`;
   }
   if (best.edition.id === "collectors") {
-    return `Du hast uns gesagt, dass die physischen Artikel wichtig sind, und die Boxed-Version ist die einzige Stufe, die sie enthält, aber Rockstar hat keine GTA-6-Collector's-Edition bestätigt, also betrachte das als Plan statt als Kauf. Sie war historisch ${PLATFORM_LABEL[platform] === "PC" ? "nur für Konsole" : "eine limitierte Konsolen-Version"} und ist vor dem Launch ausverkauft.`;
+    return `Du hast uns gesagt, dass die physischen Artikel wichtig sind, und die Boxed-Version ist die einzige Stufe, die sie enthält, aber es gibt kein boxed GTA-6-Collector's-Edition-Spiel — nur eine Merchandise-Box ohne Spiel — also betrachte das als Plan statt als Kauf. Sie war historisch eine limitierte Konsolen-Version und ist vor dem Launch ausverkauft.`;
   }
   return `Sie fügt etwa ${best.utilityDelta} Punkte gewichteten Nutzens über Standard hinzu für einen ${best.edition.upliftPercent}%-Aufpreis, etwa ${best.utilityPerUpliftPoint} Punkte pro 10 %, die du ausgibst, was die beste Rendite aller Stufen ist, die auf ${PLATFORM_LABEL[platform]} innerhalb deiner ${tolerance}%-Obergrenze verfügbar sind.`;
 }
@@ -329,7 +328,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard jetzt, später upgraden",
-      body: "Digitale Stufen-Upgrades auf Konsole und PC werden normalerweise als In-Store-Upgrade zum Preisunterschied verkauft, also kostet Standard kaufen und später aufsteigen meist denselben Gesamtbetrag, mit einem Caveat: Launch-Fenster-Bonuswochen und jeder Early-Access-Perk verfallen, und du kannst sie nicht nachträglich beanspruchen."
+      body: "Digitale Stufen-Upgrades auf Konsole werden normalerweise als In-Store-Upgrade zum Preisunterschied verkauft, also kostet Standard kaufen und später aufsteigen meist denselben Gesamtbetrag, mit einem Caveat: Launch-Fenster-Bonuswochen und jeder Early-Access-Perk verfallen, und du kannst sie nicht nachträglich beanspruchen."
     },
     {
       title: "Währung kaufen statt einer Stufe",

@@ -1,9 +1,9 @@
 // price-by-country.js — GTA 6 Price by Country page logic.
 // Uses the ported price engine (assets/js/engines/price-engine.js).
 // AUDIT FIX M8: the reference exchange-rate date (RATES_AS_OF,
-// 2026-08-01) is shown prominently on the page, and regional list prices
+// 2026-11-20) is shown prominently on the page, and regional list prices
 // are flagged as reported, not confirmed store prices, wherever they
-// appear. Only the $79.99 US Standard price is confirmed by Rockstar.
+// appear. Standard ($79.99) and Ultimate ($99.99) US prices are confirmed by Rockstar.
 // State lives in the URL (?country=&edition=&tab=) so results are
 // shareable. The country defaults to a guess from the browser language
 // when no ?country= is given, matching the source route.
@@ -11,7 +11,7 @@ import { MARKETS, EDITIONS, RATES_AS_OF, BAND_LABEL as BAND_LABEL_EN, priceFor a
 
 var COUNTRY = { US: "Vereinigte Staaten", CA: "Kanada", MX: "Mexiko", BR: "Brasilien", AR: "Argentinien", CL: "Chile", CO: "Kolumbien", PE: "Peru", GB: "Vereinigtes Königreich", DE: "Deutschland", FR: "Frankreich", ES: "Spanien", IT: "Italien", NL: "Niederlande", PL: "Polen", SE: "Schweden", NO: "Norwegen", DK: "Dänemark", CH: "Schweiz", TR: "Türkei", UA: "Ukraine", RO: "Rumänien", PT: "Portugal", IE: "Irland", IN: "Indien", PK: "Pakistan", BD: "Bangladesch", ID: "Indonesien", PH: "Philippinen", TH: "Thailand", VN: "Vietnam", MY: "Malaysia", SG: "Singapur", JP: "Japan", KR: "Südkorea", CN: "China", AU: "Australien", NZ: "Neuseeland", AE: "Vereinigte Arabische Emirate", SA: "Saudi-Arabien", EG: "Ägypten", ZA: "Südafrika", NG: "Nigeria", IL: "Israel" };
 var TAX_LABEL = { "Sales tax (avg)": "Umsatzsteuer (Ø)", "Sales tax": "Umsatzsteuer", "Tax included": "Steuer enthalten", "Consumption tax": "Verbrauchssteuer" };
-var INCLUDES = { "Base game": "Basis-Spiel", "Story mode": "Story-Modus", "Online access": "Online-Zugang", "Starter vehicle pack": "Starter-Fahrzeug-Pack", "Wardrobe pack": "Garderoben-Pack", "All Deluxe content": "Alle Deluxe-Inhalte", "Early-access weekend": "Early-Access-Wochenende", "Season 1 pass": "Season-1-Pass" };
+var INCLUDES = { "Base game": "Basis-Spiel", "Story mode": "Story-Modus", "Online access": "Online-Zugang", "Starter vehicle pack": "Starter-Fahrzeug-Pack", "Wardrobe pack": "Garderoben-Pack", "Early-access weekend": "Early-Access-Wochenende", "Season 1 pass": "Season-1-Pass" };
 var BAND_LABEL = { cheapest: "Unter den günstigsten Märkten", "below-average": "Günstiger als in den USA", typical: "Im Einklang mit dem US-Preis", "above-average": "Teurer als in den USA", "most-expensive": "Unter den teuersten Märkten" };
 function mapMarket(m) { if (!m) return m; var c = Object.assign({}, m); c.country = COUNTRY[m.code] || m.country; c.taxLabel = TAX_LABEL[m.taxLabel] || m.taxLabel; return c; }
 function mapPrice(p) { if (!p) return p; var c = Object.assign({}, p); c.market = mapMarket(p.market); return c; }
@@ -23,7 +23,7 @@ function importVerdict(code, edition) { var v = importVerdictEn(code, edition); 
 var DEFAULTS = { country: "US", edition: "standard", tab: "country" };
 var EDITION_KEYS = Object.keys(EDITIONS);
 var TABS = ["country", "editions", "compare"];
-var RATES_LABEL = "1. August 2026 (2026-08-01)";
+var RATES_LABEL = "20. November 2026 (2026-11-20)";
 
 function $(sel, root) { return (root || document).querySelector(sel); }
 function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
@@ -97,7 +97,7 @@ function copyText(text, btn, labelSel) {
 }
 
 function shortAnswer(price) {
-  var s = "GTA 6 kostet " + formatUsd(EDITIONS.standard.usd) + " USD für die Standard Edition, der einzige Preis, den Rockstar bestätigt hat. "
+  var s = "GTA 6 kostet " + formatUsd(EDITIONS.standard.usd) + " USD für die Standard Edition; Ultimate kostet 99,99 $ — beide von Rockstar bestätigt. "
     + "In " + price.market.country + " ergibt das modelliert " + formatLocal(price.totalLocal, price.market) + " für " + EDITIONS[state.edition].label + ", oder etwa "
     + formatUsd(price.usdEquivalent) + ", sobald " + price.market.taxLabel.toLowerCase() + " eingerechnet ist. "
     + "Das ist " + BAND_LABEL[price.band].toLowerCase();
@@ -114,7 +114,7 @@ function shareRowHtml(text, title) {
     + "</div>";
 }
 function countryTabHtml(price) {
-  var vs = price.vsUsPercent > 0 ? "+" + price.vsUsPercent : String(price.vsUsPercent);
+  var vs = (price.vsUsPercent > 0 ? "+" : "") + price.vsUsPercent.toLocaleString("de-DE", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
   var note = price.regionallyPriced
     ? "Regional bepreist: Dieser Storefront setzt einen niedrigeren lokalen Preis statt den USD-Betrag umzurechnen. Regionale Listenpreise sind gemeldet, keine bestätigten Store-Preise."
     : "Umgerchnet vom bestätigten US-Preis zum datierten Referenzkurs.";
@@ -130,7 +130,7 @@ function countryTabHtml(price) {
     + "<div><dt>USD-Äquivalent</dt><dd>" + formatUsd(price.usdEquivalent) + "</dd></div>"
     + "</dl>"
     + '<p class="verdict-desc">' + taxHint + ". " + note + "</p>"
-    + '<p class="verdict-desc">Referenz-Wechselkurse datiert ' + RATES_LABEL + ". Nur der US-Standard-Preis von 79,99 $ ist bestätigt.</p>";
+    + '<p class="verdict-desc">Referenz-Wechselkurse datiert ' + RATES_LABEL + ". Die US-Preise für Standard (79,99 $) und Ultimate (99,99 $) sind bestätigt.</p>";
 }
 function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
@@ -143,7 +143,7 @@ function editionsTabHtml(price, ladder) {
       + "<p>" + e.includes.join(" · ") + "</p></li>";
   }).join("");
   return '<ul class="rank-list" role="list">' + items + "</ul>"
-    + '<p class="verdict-desc">Nur der Standard-Preis ist bestätigt. Deluxe und Ultimate nutzen den +20-$ / +30-$-Abstand, den Rockstar für GTA 5 und Red Dead Redemption 2 nutzte. Referenz-Wechselkurse datiert ' + RATES_LABEL + ".</p>";
+    + '<p class="verdict-desc">Die Preise für Standard (79,99 $) und Ultimate (99,99 $) sind bestätigt. Die gebündelte GTA$-Zahl von Ultimate ist modelliert, nicht bestätigt. Referenz-Wechselkurse datiert ' + RATES_LABEL + ".</p>";
 }
 function compareTabHtml(price, verdict) {
   return '<p class="verdict-desc">' + verdict.headline + "</p>"
@@ -159,7 +159,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   var body = ranked.map(function (p) {
     var hl = p.market.code === country ? ' class="hl-row"' : "";
     var reg = p.regionallyPriced ? ' <span class="flag-badge">Regional</span>' : "";
-    var vs = p.vsUsPercent > 0 ? "+" + p.vsUsPercent : String(p.vsUsPercent);
+    var vs = (p.vsUsPercent > 0 ? "+" : "") + p.vsUsPercent.toLocaleString("de-DE", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
     return '<tr id="market-' + p.market.code.toLowerCase() + '"' + hl + "><th scope=\"row\">" + p.market.country + reg + "</th>"
       + "<td class=\"muted\">" + formatLocal(p.listLocal, p.market) + "</td>"
       + "<td class=\"muted\">" + formatLocal(p.taxLocal, p.market) + "</td>"
@@ -181,16 +181,16 @@ function ladderTableHtml(price, ladder) {
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
       + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "Basis") + "</td>"
-      + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("en-US") : "0") + "</td>"
+      + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("de-DE") : "0") + "</td>"
       + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "k. A.") + "</td></tr>";
   }).join("");
-  return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Deluxe vs Ultimate</h2>\n'
+  return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">Die Upgrade-Frage, beantwortet mit einer Wertrate statt einer Feature-Liste. Preise in ' + price.market.currency + " für " + price.market.country + ".</p>\n"
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Deluxe vs Ultimate, scrollbare Tabelle">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, scrollbare Tabelle">\n'
     + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">GTA-6-Editions-Leiter, bepreist in ' + price.market.currency + " für " + price.market.country + ", mit Aufpreis über Standard und Kosten pro 100.000 gebündelte GTA$.</caption>\n"
     + '        <thead><tr><th scope="col">Edition</th><th scope="col">Lokaler Gesamtbetrag</th><th scope="col">Über Standard</th><th scope="col">Gebündelte GTA$</th><th scope="col">Pro 100 Tsd. GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">Nur der Standard-Preis ist bestätigt. Deluxe und Ultimate nutzen den +20-$ / +30-$-Abstand, den Rockstar für GTA 5 und Red Dead Redemption 2 nutzte.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">Die Preise für Standard (79,99 $) und Ultimate (99,99 $) sind bestätigt. Die gebündelte GTA$-Zahl von Ultimate ist modelliert, nicht bestätigt.</p>\n    </section>';
 }
 
 var lastShareText = "";

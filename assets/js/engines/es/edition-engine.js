@@ -32,7 +32,7 @@ export const EDITIONS = [
     label: "Standard Edition",
     upliftPercent: 0,
     availability: "digital y en disco",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "confirmed",
     note: "Todo el juego: campaña completa y acceso total al modo en línea. Cada nivel superior son bonificaciones sobre esta base, nunca historia extra."
   },
@@ -41,7 +41,7 @@ export const EDITIONS = [
     label: "Deluxe Edition",
     upliftPercent: 25,
     availability: "digital y en disco",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "El nivel intermedio. En los últimos lanzamientos de Rockstar incluía una inyección de dinero en línea más un vehículo inicial y un paquete cosmético, útil el primer día y sin valor cuando ya ganas dinero en el juego."
   },
@@ -50,7 +50,7 @@ export const EDITIONS = [
     label: "Ultimate Edition",
     upliftPercent: 37.5, // AUDIT H3 (2026-11-17): derived from price table 109.99 / 79.99 = +37.5%, was 42
     availability: "digital",
-    platforms: ["ps5", "xbox", "pc"],
+    platforms: ["ps5", "xbox"],
     confidence: "reported",
     note: "El paquete digital más grande: todo lo de Deluxe más una mayor concesión de moneda, desbloqueos extra de inmuebles o vehículos y las ventajas de acceso más temprano cuando el nivel las ofrece."
   },
@@ -61,7 +61,7 @@ export const EDITIONS = [
     availability: "tirada física limitada",
     platforms: ["ps5", "xbox"],
     confidence: "precedent",
-    note: "Una tirada en caja con artículos físicos, mapa, libro de arte, steelbook y recuerdos, junto a una copia del juego. Rockstar no ha confirmado una para GTA 6; GTA V y RDR2 sí tuvieron una, y ambas se agotaron antes del lanzamiento."
+    note: "Una tirada en caja con artículos físicos, mapa, libro de arte, steelbook y recuerdos, junto a una copia del juego. No existe juego de edición de coleccionista de GTA 6 en caja; Rockstar vende una caja de mercancía “Goodtime State, Vice City Collection” por 399,99 $ sin juego incluido; GTA V y RDR2 sí tuvieron una, y ambas se agotaron antes del lanzamiento."
   }
 ];
 export const editionById = (id) => EDITIONS.find((e) => e.id === id);
@@ -217,11 +217,10 @@ export const PROFILES = [
   }
 ];
 export const profileById = (id) => PROFILES.find((p) => p.id === id);
-export const platformById = (id) => ["ps5", "xbox", "pc"].find((p) => p === id);
+export const platformById = (id) => ["ps5", "xbox"].find((p) => p === id);
 export const PLATFORM_LABEL = {
   ps5: "PlayStation 5",
-  xbox: "Xbox Series X|S",
-  pc: "PC"
+  xbox: "Xbox Series X|S"
 };
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const round1 = (n) => Math.round(n * 10) / 10;
@@ -313,7 +312,7 @@ function buildReason(best, profile, tolerance, platform) {
     return `Con el perfil ${profile.label.toLowerCase()}, nada por encima de Standard aporta suficiente valor útil para justificar el aumento con tu techo del ${tolerance} %, y Standard ya contiene toda la historia y todo el modo en línea.`;
   }
   if (best.edition.id === "collectors") {
-    return `Nos dijiste que los artículos físicos importan, y la tirada en caja es el único nivel que los incluye, pero Rockstar no ha confirmado una edición de coleccionista de GTA 6, así que trátala como un plan y no como una compra. Históricamente ha sido ${PLATFORM_LABEL[platform] === "PC" ? "solo para consola" : "una tirada limitada para consola"} y se agota antes del lanzamiento.`;
+    return `Nos dijiste que los artículos físicos importan, y la tirada en caja es el único nivel que los incluye, pero no existe juego de edición de coleccionista de GTA 6 en caja — solo una caja de mercancía sin juego — así que trátala como un plan y no como una compra. Históricamente ha sido una tirada limitada para consola y se agota antes del lanzamiento.`;
   }
   return `Aporta unos ${best.utilityDelta} puntos de utilidad ponderada sobre Standard por un aumento del ${best.edition.upliftPercent} %, unos ${best.utilityPerUpliftPoint} puntos por cada 10 % que gastas, que es el mejor retorno de cualquier nivel disponible en ${PLATFORM_LABEL[platform]} dentro de tu techo del ${tolerance} %.`;
 }
@@ -329,7 +328,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard ahora, mejorar más tarde",
-      body: "Las mejoras de nivel digitales en consola y PC se venden normalmente como una mejora en la tienda por la diferencia de precio, así que comprar Standard y subir después suele costar lo mismo en total, con una salvedad: las semanas de bonificación de la ventana de lanzamiento y cualquier ventaja de acceso anticipado caducan, y no puedes reclamarlas retroactivamente."
+      body: "Las mejoras de nivel digitales en consola se venden normalmente como una mejora en la tienda por la diferencia de precio, así que comprar Standard y subir después suele costar lo mismo en total, con una salvedad: las semanas de bonificación de la ventana de lanzamiento y cualquier ventaja de acceso anticipado caducan, y no puedes reclamarlas retroactivamente."
     },
     {
       title: "Comprar moneda en vez de un nivel",
