@@ -239,7 +239,7 @@
 <div>
             <label class="field-label" for="vram-input">Or enter your card's VRAM (GB)</label>
             <input class="input" type="number" id="vram-input" data-vram-input min="3" max="32" step="1" value="">
-            <p class="field-hint">Leave empty to use the selected card's VRAM (12 GB for the RTX 4070).</p>
+            <p class="field-hint" data-vram-hint>Leave empty to use the selected card's VRAM (12 GB for the RTX 4070).</p>
           </div>
         </form>
         <div class="output-panel" aria-live="polite">
@@ -288,10 +288,10 @@
       <table class="data-table" id="by-gpu-table">
         <caption class="sr-only">GTA 6 estimated average FPS and 1% low at 1440p High, DLSS / FSR off, DLSS 3 frame generation off, 32 GB DDR5 with a Ryzen 7 7800X3D reference CPU. Model calibrated to RDR2 launch-driver GPU scaling.</caption>
         <thead><tr><th scope="col">GPU</th><th scope="col">Avg FPS</th><th scope="col">1% low</th><th scope="col">Verdict</th></tr></thead>
-        <tbody><tr><td><strong>RTX 4090</strong></td><td class="mono">138 fps</td><td class="mono">99 fps</td><td class="muted">Well past 120 fps</td></tr><tr><td><strong>RTX 4080</strong></td><td class="mono">118 fps</td><td class="mono">85 fps</td><td class="muted">Hits 120 fps</td></tr><tr><td><strong>RTX 4070 Ti</strong></td><td class="mono">104 fps</td><td class="mono">75 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4070</strong></td><td class="mono">88 fps</td><td class="mono">63 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4060 Ti</strong></td><td class="mono">72 fps</td><td class="mono">52 fps</td><td class="muted">Hits 60 fps</td></tr><tr><td><strong>RTX 4060</strong></td><td class="mono">61 fps</td><td class="mono">44 fps</td><td class="muted">Just clears 60 fps</td></tr><tr><td><strong>RTX 3080</strong></td><td class="mono">92 fps</td><td class="mono">66 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 3070</strong></td><td class="mono">74 fps</td><td class="mono">53 fps</td><td class="muted">Hits 60 fps</td></tr><tr><td><strong>RTX 3060</strong></td><td class="mono">54 fps</td><td class="mono">39 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr><tr><td><strong>RX 7900 XTX</strong></td><td class="mono">122 fps</td><td class="mono">88 fps</td><td class="muted">Hits 120 fps</td></tr><tr><td><strong>RX 7800 XT</strong></td><td class="mono">89 fps</td><td class="mono">64 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RX 6700 XT</strong></td><td class="mono">66 fps</td><td class="mono">47 fps</td><td class="muted">Hits 60 fps</td></tr></tbody>
+        <tbody><tr><td><strong>RTX 4090</strong></td><td class="mono">102 fps</td><td class="mono">73 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4080</strong></td><td class="mono">92 fps</td><td class="mono">66 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4070 Ti</strong></td><td class="mono">82 fps</td><td class="mono">59 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4070</strong></td><td class="mono">71 fps</td><td class="mono">51 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4060 Ti</strong></td><td class="mono">59 fps</td><td class="mono">43 fps</td><td class="muted">Just short of 60 fps</td></tr><tr><td><strong>RTX 4060</strong></td><td class="mono">51 fps</td><td class="mono">37 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr><tr><td><strong>RTX 3080</strong></td><td class="mono">69 fps</td><td class="mono">50 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 3070</strong></td><td class="mono">61 fps</td><td class="mono">44 fps</td><td class="muted">Just clears 60 fps</td></tr><tr><td><strong>RTX 3060</strong></td><td class="mono">45 fps</td><td class="mono">32 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr><tr><td><strong>RX 7900 XTX</strong></td><td class="mono">94 fps</td><td class="mono">68 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RX 7800 XT</strong></td><td class="mono">73 fps</td><td class="mono">53 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RX 6700 XT</strong></td><td class="mono">55 fps</td><td class="mono">40 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr></tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Numbers are model estimates with a ±15% band vs launch-day drivers. Enable DLSS Quality for a ~30% uplift, DLSS 3 frame generation for a ~70% uplift on the average (1% low unchanged). This table is copied from the source model; the live calculator above uses the shared ToolWools engine catalog, so its numbers may differ slightly from the table.</p>
+      <p class="field-hint" style="margin-top:0.75rem">Numbers are model estimates with a ±15% band vs launch-day drivers. Enable DLSS Quality for a ~30% uplift, DLSS 3 frame generation for a ~70% uplift on the average (1% low unchanged). This table is computed with the same ToolWools engine as the live calculator above, for the stated scenario.</p>
     </section>
 
     <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
@@ -676,6 +676,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
               <li><a href="/methodology">Methodology</a></li>
               <li><a href="/contact">Contact</a></li>
               <li><a href="/email-preferences">Email Preferences</a></li>
+              <li><a href="/sitemap">Sitemap</a></li>
             </ul>
           </div>
         </div>

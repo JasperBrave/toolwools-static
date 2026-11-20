@@ -2121,3 +2121,37 @@ p code, li code, td code { overflow-wrap: anywhere; }
   .consent-actions .btn-ultra, .consent-actions .btn-outline { flex: 1 1 0; min-width: 0; height: 2rem; padding: 0.5rem 0.5rem; font-size: 0.6875rem; }
   .consent-actions a { flex: 1 1 100%; font-size: 0.75rem; }
 }
+
+/* ---------- Interactive map fixes, forensic audit ITERATION 3 (2026-11-21, Worker D) ----------
+   Fenced block: only Worker D touches this. A rebuild must preserve it.
+   (1) Rail: detail + explore (+ glance) stack in .map-side-col, so the
+       KEEP EXPLORING card sits directly under the detail card instead of
+       in a grid row below the tall canvas (was a ~516px void at 1280px,
+       unscrolled). The sticky detail is off at >=1024px: its ~500px
+       sticky travel room WAS the gap, so the two cannot coexist; the
+       detail now stays at the rail top.
+   (2) .map-wrap gets 12px breathing room: the northern-interior circle
+       tops out 30/1000 units from the SVG edge and the Leonida Keys
+       circle bottoms out at 995/1000, so both read as clipped at a
+       glance; the padding keeps every label/circle visibly inside.
+   (3) .map-glance-card styles for the at-a-glance stats card that fills
+       the rail below KEEP EXPLORING (facts already on the page: 10
+       regions, 12 districts, 6 confirmed regions, 3 confirmed
+       districts, 90-170 km2 estimate, 1.2x-2.27x GTA V). */
+.map-side-col { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.map-explorer-grid .map-wrap { padding: 12px; }
+.map-glance-card { padding: 1.25rem; }
+@media (min-width: 768px) { .map-glance-card { padding: 1.5rem; } }
+.map-glance-list { margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.map-glance-list > div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.map-glance-list > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.map-glance-list dt { font-size: 0.875rem; color: var(--muted-foreground); }
+.map-glance-list dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--foreground); white-space: nowrap; }
+@media (min-width: 1024px) { .map-explorer-grid .map-detail-panel { position: static; } }
+/* (4) RTL: the map labels are Latin-script (AR labels are untranslated
+   proper nouns), but under dir="rtl" SVG text-anchor start/end flip, so
+   "Vice Beach strip" ran left across its circles and "Downtown Vice City"
+   ran right through the Vice City circle. Force LTR inside the map SVG so
+   the anchors behave as in EN. Revisit if labels are ever translated to
+   Arabic script. */
+[dir="rtl"] .map-svg text { direction: ltr; unicode-bidi: isolate; }

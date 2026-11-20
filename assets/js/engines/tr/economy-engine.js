@@ -7,7 +7,7 @@
 export const METHODS = [
   {
     id: "flagship-heist",
-    label: "Amiral gemisi soygun finali (zor)",
+    label: "Amiral gemisi soygun finali (zor) (GTA Online)",
     kind: "heist",
     payout: 2400000,
     minutes: 95,
@@ -18,7 +18,7 @@ export const METHODS = [
   },
   {
     id: "flagship-heist-solo",
-    label: "Amiral gemisi soygun finali (solo, normal)",
+    label: "Amiral gemisi soygun finali (solo, normal) (GTA Online)",
     kind: "heist",
     payout: 1350000,
     minutes: 80,
@@ -40,7 +40,7 @@ export const METHODS = [
   },
   {
     id: "counterfeit-sell",
-    label: "Sahte para laboratuvarı satış turu",
+    label: "Sahte para laboratuvarı satış turu (GTA Online)",
     kind: "sell",
     payout: 420000,
     minutes: 55,
@@ -51,7 +51,7 @@ export const METHODS = [
   },
   {
     id: "vehicle-export",
-    label: "Araç ihracatı (üst sınıf)",
+    label: "Araç ihracatı (üst sınıf) (GTA Online)",
     kind: "business",
     payout: 168000,
     minutes: 26,
@@ -62,7 +62,7 @@ export const METHODS = [
   },
   {
     id: "contract-mission",
-    label: "Sözleşme görev zinciri",
+    label: "Sözleşme görev zinciri (GTA Online)",
     kind: "mission",
     payout: 145000,
     minutes: 24,
@@ -84,7 +84,7 @@ export const METHODS = [
   },
   {
     id: "freeroam-event",
-    label: "Serbest dolaşım etkinliği / bonus haftası",
+    label: "Serbest dolaşım etkinliği / bonus haftası (GTA Online)",
     kind: "freeroam",
     payout: 52000,
     minutes: 14,
@@ -95,7 +95,7 @@ export const METHODS = [
   },
   {
     id: "daily-objectives",
-    label: "Günlük hedefler (3/3)",
+    label: "Günlük hedefler (3/3) (GTA Online)",
     kind: "freeroam",
     payout: 75000,
     minutes: 20,

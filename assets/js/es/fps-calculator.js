@@ -11,6 +11,7 @@ import { GPUS, CPUS, RES_META, PRESET_META, UPSCALER_META, FRAMEGEN_META, estima
 import { L } from "./l10n.js";
 
 var DEFAULTS = { gpu: "rtx-4070", cpu: "r5-7600x", ram: 16, res: "1440p", preset: "high", up: "off", fg: "off", target: 60 };
+var VRAM_HINT_TEMPLATE = "Déjalo vacío para usar la VRAM de la tarjeta seleccionada ({v} GB para la {card}).";
 var RES_LIST = ["1080p", "1440p", "ultrawide-1440p", "4K"];
 var PRESET_LIST = ["low", "medium", "high", "very-high", "ultra"];
 var RAM_LIST = [8, 16, 32, 64];
@@ -81,7 +82,7 @@ if (fgSel) {
   Object.keys(FRAMEGEN_META).forEach(function (k) {
     var opt = document.createElement("option");
     opt.value = k;
-    opt.textContent = L(FRAMEGEN_META[k].label) + (FRAMEGEN_META[k].mult > 1 ? " (x" + FRAMEGEN_META[k].mult + " avg, interpolated)" : "");
+    opt.textContent = L(FRAMEGEN_META[k].label) + (FRAMEGEN_META[k].mult > 1 ? " (x" + FRAMEGEN_META[k].mult + " prom., interpolado)" : "");
     fgSel.appendChild(opt);
   });
   fgSel.value = state.fg;
@@ -124,7 +125,7 @@ function toneOf(result) {
   if (result.hitsTarget) return "ready";
   return result.targetGap >= -20 ? "borderline" : "upgrade";
 }
-var LIMITER_LABEL = { gpu: "Limitado por GPU", cpu: "Limitado por CPU", vram: "VRAM-bound", balanced: "Equilibrado" };
+var LIMITER_LABEL = { gpu: "Limitado por GPU", cpu: "Limitado por CPU", vram: "Limitado por VRAM", balanced: "Equilibrado" };
 
 function shortPartLabel(label) {
   return label.replace(/^GeForce /, "").split(" / ")[0];
@@ -136,6 +137,8 @@ function render() {
   var tone = toneOf(result);
   var gpu = input.gpu;
   var cpu = input.cpu;
+  var vramHint = $("[data-vram-hint]");
+  if (vramHint) vramHint.textContent = VRAM_HINT_TEMPLATE.replace("{v}", String(defaultVramForGpu(state.gpu))).replace("{card}", shortPartLabel(gpu.label));
 
   if (gpuSel) gpuSel.value = state.gpu;
   if (cpuSel) cpuSel.value = state.cpu;
@@ -147,8 +150,8 @@ function render() {
   targetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.targetButton) === state.target)); });
 
   var verdictText = result.hitsTarget
-    ? "Hits " + state.target + " fps"
-    : "Short of " + state.target + " fps by " + Math.abs(result.targetGap) + " fps";
+    ? "Alcanza " + state.target + " fps"
+    : "Por debajo de " + state.target + " fps por " + Math.abs(result.targetGap) + " fps";
   var fgNote = result.fgApplied ? " El promedio con generación de fotogramas son fotogramas interpolados, no medidos." : "";
   var uwNote = state.res === "ultrawide-1440p" ? " La necesidad de VRAM incluye el factor ultraancho de 1,34x." : "";
 
@@ -160,8 +163,8 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = result.hitsTarget
-      ? "Sí, " + gpu.label + " + " + cpu.label + " hits " + state.target + " fps at " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ": about " + result.avgFps + " fps average, " + result.lowFps + " fps 1% low." + fgNote
-      : "Short, " + gpu.label + " + " + cpu.label + " reaches about " + result.avgFps + " fps average (" + result.lowFps + " fps 1% low) at " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ", " + Math.abs(result.targetGap) + " fps por debajo del " + state.target + " fps target." + fgNote;
+      ? "Sí, " + gpu.label + " + " + cpu.label + " alcanza " + state.target + " fps en " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ": unos " + result.avgFps + " fps de media, " + result.lowFps + " fps de 1% mínimo." + fgNote
+      : "Corto, " + gpu.label + " + " + cpu.label + " llega a unos " + result.avgFps + " fps de media (" + result.lowFps + " fps de 1% mínimo) en " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ", " + Math.abs(result.targetGap) + " fps por debajo del objetivo de " + state.target + " fps." + fgNote;
     if (label) label.textContent = verdictText + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = verdictText + " — " + result.avgFps + " fps de media";
@@ -175,13 +178,13 @@ function render() {
       ? '<div class="upgrade-box"><p class="eyebrow-muted">Formas de ganar fotogramas</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%) — " + t.detail + "</li>"; }).join("") + "</ul></div>"
       : "";
     var vramNote = result.vramShortGB > 0
-      ? '<p class="verdict-desc">VRAM-limited: your ' + input.cardVramGB + ' GB card is ' + result.vramShortGB + ' GB short of the ' + result.vramNeededGB + ' GB necesarios, so a stutter penalty is applied.' + uwNote + '</p>'
-      : '<p class="verdict-desc">VRAM clears: ' + result.vramNeededGB + ' GB necesarios con estos ajustes, tu tarjeta tiene ' + input.cardVramGB + ' GB.' + uwNote + '</p>';
+      ? '<p class="verdict-desc">Límite de VRAM: tu tarjeta de ' + input.cardVramGB + ' GB está ' + result.vramShortGB + ' GB por debajo de los ' + result.vramNeededGB + ' GB necesarios, así que se aplica una penalización por tirones.' + uwNote + '</p>'
+      : '<p class="verdict-desc">La VRAM es suficiente: se necesitan ' + result.vramNeededGB + ' GB con estos ajustes y tu tarjeta tiene ' + input.cardVramGB + ' GB.' + uwNote + '</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + verdictText + '</p>' +
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> fps de media</span></h3>' +
-      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps band (±15%), ' + result.lowFps + ' fps 1% low. ' + L(LIMITER_LABEL[result.limiter]) + ' at ' + L(RES_META[state.res].label) + ' ' + L(PRESET_META[state.preset].label) + '.' + fgNote + '</p></div></div>' +
+      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps de banda (±15%), ' + result.lowFps + ' fps de 1% mínimo. ' + L(LIMITER_LABEL[result.limiter]) + ' en ' + L(RES_META[state.res].label) + ' ' + L(PRESET_META[state.preset].label) + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">FPS medios</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">FPS de 1% mínimo</span><span class="val">' + result.lowFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((result.lowFps / 144) * 100)) + '%"></div></div></div>' +
@@ -194,7 +197,7 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps de media (" + result.lowFps + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps de media (" + result.lowFps + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " fps de media (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);

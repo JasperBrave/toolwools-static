@@ -1,10 +1,12 @@
-// pre-order-tracker.js — Mesa de decisión de reserva de GTA 6 page logic.
+// pre-order-tracker.js — Dónde comprar GTA 6 page logic.
 // Uses the ported preorder engine (assets/js/engines/preorder-engine.js),
 // imported by absolute path so the module resolves the same at any depth.
 // State lives in the URL (?platform=&region=&edition=&tab=&preload=&cancel=&resale=)
 // so results are shareable.
-// AUDIT FIX H7: the 25 de junio de 2026 opening is expected, not confirmed by Rockstar.
-// The engine timeline entry for it is never rendered as a confirmed milestone.
+// Iteration 3 (2026-11-21): reframed as a buy-now desk for the released game
+// (launched 19 Nov 2026, PS5 + Xbox only). The engine timeline no longer
+// carries an "open" milestone; the timeline below shows the download window,
+// the cancellation cutoff and the launch. Pre-order framing removed.
 // The launch countdown is rendered by the shared countdown.js from
 // window.TOOLWOOLS_LAUNCH_UTC (19 nov 2026 05:00 UTC); this file does not
 // own the timer.
@@ -109,11 +111,11 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "Las reservas de GTA 6 abrieron en 2026 y el juego se lanzó el <time datetime=\"2026-11-19\">19 de noviembre de 2026</time>. Cada canal cobra por el mismo juego, así que compra por términos: el mejor ajuste para tus entradas es <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "GTA 6 se lanzó el <time datetime=\"2026-11-19\">19 de noviembre de 2026</time> en PlayStation 5 y Xbox Series X|S. Cada canal cobra por el mismo juego, así que compra por términos: el mejor ajuste para tus entradas es Disco, enviado en PlayStation 5. Como nos dijiste que ninguna preferencia fuerte más allá del valor importa, el disco de minorista, enviado puntúa 65,2 de 100 para un pedido Estándar en Estados Unidos, liderando en cancelabilidad y protección contra bajadas de precio, por delante de la recogida en tienda con 63,4.<strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
-  if (outLabel) outLabel.textContent = "Pre-order channels for " + result.platform.label;
+  if (outLabel) outLabel.textContent = "Canales de compra para " + result.platform.label;
   var out = $("[data-output-panel]");
   if (out) {
     var html = "";
@@ -142,9 +144,9 @@ function render() {
         return '<li>' + esc(t) + '</li>';
       }).join("") + '</ul>';
     } else {
-      // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
+      // The engine timeline no longer carries an "open" milestone.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Las reservas abrieron en 2026. La apertura no se muestra como hito en esta cronología.</p>';
+      html += '<p class="verdict-desc">El juego se lanzó el 19 de noviembre de 2026. Estos son los hitos que siguen importando cuando compras.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Confirmado</span>'
@@ -155,7 +157,7 @@ function render() {
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
     }
-    var shareText = "Best GTA 6 pre-order channel on " + result.platform.label + ": " + result.best.channel.short;
+    var shareText = "Mejor lugar para comprar GTA 6 en " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
@@ -185,12 +187,12 @@ function render() {
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
   var shareX = $("[data-share-x]");
-  if (shareX) shareX.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("Best GTA 6 pre-order channel on " + result.platform.label + ": " + result.best.channel.short + " (" + result.best.score + "/100). Mesa de decisión de reserva de GTA 6 on ToolWools.") + "&url=" + encodeURIComponent(shareUrl());
+  if (shareX) shareX.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("Mejor lugar para comprar GTA 6 en " + result.platform.label + ": " + result.best.channel.short + " (" + result.best.score + "/100). Dónde comprar GTA 6: ediciones y canales comparados en ToolWools.") + "&url=" + encodeURIComponent(shareUrl());
   var shareR = $("[data-share-reddit]");
-  if (shareR) shareR.href = "https://www.reddit.com/submit?title=" + encodeURIComponent("Best GTA 6 pre-order channel on " + result.platform.label + ": " + result.best.channel.short + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
+  if (shareR) shareR.href = "https://www.reddit.com/submit?title=" + encodeURIComponent("Mejor lugar para comprar GTA 6 en " + result.platform.label + ": " + result.best.channel.short + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Best pre-order channel: " + result.headline + ", " + result.best.score + " out of 100. " + result.reason;
+  if (live) live.textContent = "Mejor canal de compra: " + result.headline + ", " + result.best.score + " de 100. " + result.reason;
   syncUrl();
 }
 

@@ -1,10 +1,12 @@
-// pre-order-tracker.js — GTA 6 Pre-Order Decision Desk page logic.
+// pre-order-tracker.js — أين تشتري GTA 6 page logic.
 // Uses the ported preorder engine (assets/js/engines/preorder-engine.js),
 // imported by absolute path so the module resolves the same at any depth.
 // State lives in the URL (?platform=&region=&edition=&tab=&preload=&cancel=&resale=)
 // so results are shareable.
-// AUDIT FIX H7: the 25 June 2026 opening is expected, not confirmed by Rockstar.
-// The engine timeline entry for it is never rendered as a confirmed milestone.
+// Iteration 3 (2026-11-21): reframed as a buy-now desk for the released game
+// (launched 19 Nov 2026, PS5 + Xbox only). The engine timeline no longer
+// carries an "open" milestone; the timeline below shows the download window,
+// the cancellation cutoff and the launch. Pre-order framing removed.
 // The launch countdown is rendered by the shared countdown.js from
 // window.TOOLWOOLS_LAUNCH_UTC (Nov 19, 2026 05:00 UTC); this file does not
 // own the timer.
@@ -108,11 +110,11 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "فتحت طلبات GTA 6 المسبقة في 2026 وأُطلقت اللعبة في <time datetime=\"2026-11-19\">19 نوفمبر 2026</time>. كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "صدرت GTA 6 في <time datetime=\"2026-11-19\">19 نوفمبر 2026</time> على PlayStation 5 وXbox Series X|S. كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو قرص مشحون على PlayStation 5. ولأنك أخبرتنا بعدم وجود تفضيل قوي لديك يتجاوز القيمة، فإن قرص بائع التجزئة المشحون يحصل على 65.2 من 100 لطلب قياسي في الولايات المتحدة — متقدما في إمكانية الإلغاء وحماية انخفاض السعر، متقدما على الاستلام من المتجر بـ 63.4.<strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");
-  if (outLabel) outLabel.textContent = "قنوات الطلب المسبق لـ " + result.platform.label;
+  if (outLabel) outLabel.textContent = "قنوات الشراء لـ " + result.platform.label;
   var out = $("[data-output-panel]");
   if (out) {
     var html = "";
@@ -141,9 +143,9 @@ function render() {
         return '<li>' + esc(t) + '</li>';
       }).join("") + '</ul>';
     } else {
-      // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
+      // The engine timeline no longer carries an "open" milestone.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">من المتوقع فتحت الطلبات المسبقة في 2026. ولا يظهر الفتح كمعلم في هذا الخط الزمني.</p>';
+      html += '<p class="verdict-desc">صدرت اللعبة في 19 نوفمبر 2026. هذه هي المعالم التي ما زالت مهمة عند الشراء.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">مؤكد</span>'
@@ -154,7 +156,7 @@ function render() {
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
     }
-    var shareText = "أفضل قناة طلب مسبق لـ GTA 6 على " + result.platform.label + ": " + result.best.channel.short;
+    var shareText = "أفضل مكان لشراء GTA 6 على " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
@@ -184,12 +186,12 @@ function render() {
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
   var shareX = $("[data-share-x]");
-  if (shareX) shareX.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("أفضل قناة طلب مسبق لـ GTA 6 على " + result.platform.label + ": " + result.best.channel.short + " (" + result.best.score + "/100). مكتب قرارات الطلب المسبق لـ GTA 6 على ToolWools.") + "&url=" + encodeURIComponent(shareUrl());
+  if (shareX) shareX.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent("أفضل مكان لشراء GTA 6 على " + result.platform.label + ": " + result.best.channel.short + " (" + result.best.score + "/100). أين تشتري GTA 6: مقارنة الإصدارات والقنوات على ToolWools.") + "&url=" + encodeURIComponent(shareUrl());
   var shareR = $("[data-share-reddit]");
-  if (shareR) shareR.href = "https://www.reddit.com/submit?title=" + encodeURIComponent("أفضل قناة طلب مسبق لـ GTA 6 على " + result.platform.label + ": " + result.best.channel.short + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
+  if (shareR) shareR.href = "https://www.reddit.com/submit?title=" + encodeURIComponent("أفضل مكان لشراء GTA 6 على " + result.platform.label + ": " + result.best.channel.short + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "أفضل قناة طلب مسبق: " + result.headline + "، " + result.best.score + " من 100. " + result.reason;
+  if (live) live.textContent = "أفضل قناة شراء: " + result.headline + "، " + result.best.score + " من 100. " + result.reason;
   syncUrl();
 }
 

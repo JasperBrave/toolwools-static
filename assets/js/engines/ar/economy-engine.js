@@ -7,7 +7,7 @@
 export const METHODS = [
   {
     id: "flagship-heist",
-    label: "نهائي السرقة الرئيسي (صعب)",
+    label: "نهائي السرقة الرئيسي (صعب) (GTA Online)",
     kind: "heist",
     payout: 2400000,
     minutes: 95,
@@ -18,7 +18,7 @@ export const METHODS = [
   },
   {
     id: "flagship-heist-solo",
-    label: "نهائي السرقة الرئيسي (فردي، عادي)",
+    label: "نهائي السرقة الرئيسي (فردي، عادي) (GTA Online)",
     kind: "heist",
     payout: 1350000,
     minutes: 80,
@@ -40,7 +40,7 @@ export const METHODS = [
   },
   {
     id: "counterfeit-sell",
-    label: "جولة بيع مختبر التزييف",
+    label: "جولة بيع مختبر التزييف (GTA Online)",
     kind: "sell",
     payout: 420000,
     minutes: 55,
@@ -51,7 +51,7 @@ export const METHODS = [
   },
   {
     id: "vehicle-export",
-    label: "تصدير المركبات (الفئة العليا)",
+    label: "تصدير المركبات (الفئة العليا) (GTA Online)",
     kind: "business",
     payout: 168000,
     minutes: 26,
@@ -62,7 +62,7 @@ export const METHODS = [
   },
   {
     id: "contract-mission",
-    label: "سلسلة مهام العقود",
+    label: "سلسلة مهام العقود (GTA Online)",
     kind: "mission",
     payout: 145000,
     minutes: 24,
@@ -84,7 +84,7 @@ export const METHODS = [
   },
   {
     id: "freeroam-event",
-    label: "حدث التجوال الحر / أسبوع إضافي",
+    label: "حدث التجوال الحر / أسبوع إضافي (GTA Online)",
     kind: "freeroam",
     payout: 52000,
     minutes: 14,
@@ -95,7 +95,7 @@ export const METHODS = [
   },
   {
     id: "daily-objectives",
-    label: "الأهداف اليومية (3/3)",
+    label: "الأهداف اليومية (3/3) (GTA Online)",
     kind: "freeroam",
     payout: 75000,
     minutes: 20,

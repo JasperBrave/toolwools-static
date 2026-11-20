@@ -16,7 +16,7 @@
     { slug: "fps-calculator", title: "Calculateur de FPS GTA 6", desc: "Estimez la fréquence d'images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra." },
     { slug: "gpu-tier-list", title: "Classement des GPU GTA 6", desc: "Meilleures cartes graphiques pour GTA 6, classées par niveau." },
     { slug: "interactive-map", title: "Carte interactive GTA 6", desc: "Explorateur de Leonida et comparaison de taille pour la carte de GTA 6." },
-    { slug: "pre-order-tracker", title: "Aide à la décision de précommande GTA 6", desc: "Où précommander GTA 6, comparé par canal." },
+    { slug: "pre-order-tracker", title: "Où acheter GTA 6 : éditions et canaux comparés", desc: "Où acheter GTA 6, comparé par canal." },
     { slug: "edition-comparison", title: "Sélecteur d'édition GTA 6", desc: "Chaque édition de GTA 6 comparée : bonus, prix et ce que chacune débloque." },
     { slug: "internet-speed-check", title: "Conseiller de vitesse Internet GTA 6", desc: "Vérifiez si votre connexion est assez rapide pour les téléchargements GTA 6 et Online." },
     { slug: "price-by-country", title: "Prix de GTA 6 par pays", desc: "Prix de GTA 6 par pays en devise locale." },

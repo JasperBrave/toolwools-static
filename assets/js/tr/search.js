@@ -16,7 +16,7 @@
     { slug: "fps-calculator", title: "GTA 6 FPS Hesaplayıcı", desc: "GPU'nuz için 1080p, 1440p ve 4K'da Düşük, Orta, Yüksek ve Ultra ayarlarında kare hızını tahmin edin." },
     { slug: "gpu-tier-list", title: "GTA 6 GPU Katman Listesi", desc: "GTA 6 için en iyi ekran kartları, katmana göre sıralandı." },
     { slug: "interactive-map", title: "GTA 6 İnteraktif Harita", desc: "GTA 6 haritası için Leonida gezgini ve boyut karşılaştırması." },
-    { slug: "pre-order-tracker", title: "GTA 6 Ön Sipariş Karar Masası", desc: "GTA 6'yı nereden ön sipariş verebilirsiniz, kanala göre karşılaştırıldı." },
+    { slug: "pre-order-tracker", title: "GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması", desc: "GTA 6'yı nereden alabilirsiniz, kanala göre karşılaştırıldı." },
     { slug: "edition-comparison", title: "GTA 6 Sürüm Seçici", desc: "Her GTA 6 sürümü karşılaştırıldı: bonuslar, fiyat ve her birinin açtıkları." },
     { slug: "internet-speed-check", title: "GTA 6 İnternet Hızı Danışmanı", desc: "Bağlantınızın GTA 6 indirmeleri ve Online için yeterince hızlı olup olmadığını kontrol edin." },
     { slug: "price-by-country", title: "GTA 6 Ülkelere Göre Fiyat", desc: "GTA 6 fiyatı ülkelere göre yerel para birimiyle." },

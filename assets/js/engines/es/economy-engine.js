@@ -7,7 +7,7 @@
 export const METHODS = [
   {
     id: "flagship-heist",
-    label: "Final de atraco insignia (difícil)",
+    label: "Final de atraco insignia (difícil) (GTA Online)",
     kind: "heist",
     payout: 2400000,
     minutes: 95,
@@ -18,7 +18,7 @@ export const METHODS = [
   },
   {
     id: "flagship-heist-solo",
-    label: "Final de atraco insignia (solo, normal)",
+    label: "Final de atraco insignia (solo, normal) (GTA Online)",
     kind: "heist",
     payout: 1350000,
     minutes: 80,
@@ -40,7 +40,7 @@ export const METHODS = [
   },
   {
     id: "counterfeit-sell",
-    label: "Venta de laboratorio de falsificación",
+    label: "Venta de laboratorio de falsificación (GTA Online)",
     kind: "sell",
     payout: 420000,
     minutes: 55,
@@ -51,7 +51,7 @@ export const METHODS = [
   },
   {
     id: "vehicle-export",
-    label: "Exportación de vehículos (gama alta)",
+    label: "Exportación de vehículos (gama alta) (GTA Online)",
     kind: "business",
     payout: 168000,
     minutes: 26,
@@ -62,7 +62,7 @@ export const METHODS = [
   },
   {
     id: "contract-mission",
-    label: "Cadena de misiones de contrato",
+    label: "Cadena de misiones de contrato (GTA Online)",
     kind: "mission",
     payout: 145000,
     minutes: 24,
@@ -84,7 +84,7 @@ export const METHODS = [
   },
   {
     id: "freeroam-event",
-    label: "Evento de mundo libre / semana extra",
+    label: "Evento de mundo libre / semana extra (GTA Online)",
     kind: "freeroam",
     payout: 52000,
     minutes: 14,
@@ -95,7 +95,7 @@ export const METHODS = [
   },
   {
     id: "daily-objectives",
-    label: "Objetivos diarios (3/3)",
+    label: "Objetivos diarios (3/3) (GTA Online)",
     kind: "freeroam",
     payout: 75000,
     minutes: 20,

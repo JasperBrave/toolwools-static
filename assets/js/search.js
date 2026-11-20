@@ -16,7 +16,7 @@
     { slug: "fps-calculator", title: "GTA 6 FPS Calculator", desc: "Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra." },
     { slug: "gpu-tier-list", title: "GTA 6 GPU Tier List", desc: "Best graphics cards for GTA 6, ranked by tier." },
     { slug: "interactive-map", title: "GTA 6 Interactive Map", desc: "Leonida explorer and size comparison for the GTA 6 map." },
-    { slug: "pre-order-tracker", title: "GTA 6 Pre-Order Decision Desk", desc: "Where to pre-order GTA 6, compared by channel." },
+    { slug: "pre-order-tracker", title: "Where to Buy GTA 6: Editions & Channels Compared", desc: "Where to buy GTA 6, compared by channel." },
     { slug: "edition-comparison", title: "GTA 6 Edition Picker", desc: "Every GTA 6 edition compared: bonuses, price and what each unlocks." },
     { slug: "internet-speed-check", title: "GTA 6 Internet Speed Advisor", desc: "Check whether your connection is fast enough for GTA 6 downloads and Online." },
     { slug: "price-by-country", title: "GTA 6 Price by Country", desc: "GTA 6 price by country in local currency." },

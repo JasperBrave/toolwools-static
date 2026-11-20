@@ -33,6 +33,7 @@ function mapTweak(t) {
 function suggestTweaks(input, result) { return suggestTweaksEn(input, result).map(mapTweak); }
 
 var DEFAULTS = { gpu: "rtx-4070", cpu: "r5-7600x", ram: 16, res: "1440p", preset: "high", up: "off", fg: "off", target: 60 };
+var VRAM_HINT_TEMPLATE = "Laissez vide pour utiliser la VRAM de la carte sélectionnée ({v} Go pour la {card}).";
 var RES_LIST = ["1080p", "1440p", "ultrawide-1440p", "4K"];
 var PRESET_LIST = ["low", "medium", "high", "very-high", "ultra"];
 var RAM_LIST = [8, 16, 32, 64];
@@ -158,6 +159,8 @@ function render() {
   var tone = toneOf(result);
   var gpu = input.gpu;
   var cpu = input.cpu;
+  var vramHint = $("[data-vram-hint]");
+  if (vramHint) vramHint.textContent = VRAM_HINT_TEMPLATE.replace("{v}", String(defaultVramForGpu(state.gpu))).replace("{card}", shortPartLabel(gpu.label));
 
   if (gpuSel) gpuSel.value = state.gpu;
   if (cpuSel) cpuSel.value = state.cpu;
