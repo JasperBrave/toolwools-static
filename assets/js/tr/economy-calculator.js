@@ -124,7 +124,7 @@ function methodTableHtml(rows, activeId) {
       + "<td class=\"mono\">" + money(r.perHourPerPlayer) + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Her GTA 6 para yöntemi, saat başına net GTA$\'a göre sıralı</h2>\n'
-    + '      <p class="section-dek">Net oran, ödemeden giriş ücreti çıkarılarak tam döngü süresine bölünmesiyle bulunur. Ödemeler tahmini olup yuvarlanmış gösterilir.</p>\n'
+    + '      <p class="section-dek">Net oran, ödemeden giriş ücreti çıkarılarak tam döngü süresine bölünmesiyle bulunur. Ödemeler tahmini olup yuvarlanmış gösterilir. Ankesörlü telefon vuruşları ve depo kargo satışları GTA Online yöntemleridir ve mevcut en yakın benzerler olarak gösterilir.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Her GTA 6 para yöntemi, saat başına net GTA$\'a göre sıralı, kaydırılabilir tablo">\n'
     + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Tahmini GTA 6 para yöntemleri, saat başına net GTA dolarına göre sıralı; ödeme, döngü süresi, giriş ücreti ve oyuncu başına oran dahil.</caption>\n'
     + '        <thead><tr><th scope="col">Yöntem</th><th scope="col">Ödeme</th><th scope="col">Net / sa</th><th scope="col">Döngü</th><th scope="col">Giriş ücreti</th><th scope="col">Oyuncu başına</th></tr></thead>\n'

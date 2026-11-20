@@ -29,7 +29,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "بيع شحنة المستودع (حمولة كاملة)",
+    label: "بيع شحنة المستودع (حمولة كاملة) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -73,7 +73,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "ضربة الهاتف العمومي (هدف إضافي)",
+    label: "ضربة الهاتف العمومي (هدف إضافي) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,

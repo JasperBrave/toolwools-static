@@ -148,6 +148,10 @@ function toneOf(result) {
 }
 var LIMITER_LABEL = { gpu: "GPU-limitiert", cpu: "CPU-limitiert", vram: "VRAM-limitiert", balanced: "Ausgewogen" };
 
+function shortPartLabel(label) {
+  return label.replace(/^GeForce /, "").split(" / ")[0];
+}
+
 function render() {
   var input = inputFor();
   var result = estimateFps(input);
@@ -219,7 +223,7 @@ function render() {
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
   }
 
-  // Preset ladder follows the live GPU/CPU/res (static table is 1440p High).
+  // Preset ladder follows the live GPU/CPU/res (heading follows the selected resolution).
   var ladder = $("[data-preset-ladder]");
   if (ladder) {
     ladder.innerHTML = PRESET_LIST.map(function (p) {
@@ -227,6 +231,19 @@ function render() {
       var fgTag = r.fgApplied ? " (interpoliert)" : "";
       return "<tr><td><strong>" + presetLabel(p) + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
+  }
+  // Preset-ladder heading follows the selected rig and resolution: the rows
+  // above re-render per GPU/CPU/res, so rebuild the heading from the live
+  // part labels too. Short labels drop the "GeForce " prefix and any
+  // " / ..." alternate, so the default rig still reads exactly
+  // "RTX 4070 + Ryzen 5 7600X" as in the static heading.
+  var ladderHead = document.getElementById("preset-ladder");
+  if (ladderHead) {
+    if (!ladderHead.dataset.baseHeading) ladderHead.dataset.baseHeading = ladderHead.textContent;
+    var rigLabel = shortPartLabel(gpu.label) + " + " + shortPartLabel(cpu.label);
+    ladderHead.textContent = ladderHead.dataset.baseHeading
+      .replace("RTX 4070 + Ryzen 5 7600X", rigLabel)
+      .replace(/UW 1440p|1080p|1440p|4K/, RES_META[state.res].label);
   }
 
   var linkInput = $("[data-share-link-input]");

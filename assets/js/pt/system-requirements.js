@@ -43,10 +43,10 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 }
 
 var TIER_META = {
-  below: { label: "Below Mínimo", tone: "upgrade", blurb: "Sua máquina will struggle. Expect sub-30 fps at 1080p Baixo, or the game won't launch cleanly." },
-  min: { label: "Meets Mínimo", tone: "borderline", blurb: "Playable at 1080p Baixo around 30 fps. If you have an upgrade planned, do it before launch." },
+  below: { label: "Abaixo do mínimo", tone: "upgrade", blurb: "Sua máquina terá dificuldades. Espere menos de 30 fps em 1080p no Baixo, ou o jogo não vai iniciar direito." },
+  min: { label: "Atende o mínimo", tone: "borderline", blurb: "Jogável em 1080p no Baixo a cerca de 30 fps. Se você tem um upgrade planejado, faça-o antes do lançamento." },
   rec: { label: "Atende o Recomendado", tone: "ready", blurb: "60 fps confortáveis em 1080p Alto ou 1440p Médio. O ponto ideal para o dia do lançamento. Recomendado começa em 48 pontos (Mínimo 35 · Ultra 82)." },
-  ultra: { label: "Ultra Ready", tone: "ready", blurb: "4K Alto ou 1440p Ultra with room for ray tracing. You'll be one of the screenshots people share." },
+  ultra: { label: "Pronto para Ultra", tone: "ready", blurb: "4K no Alto ou 1440p no Ultra com folga para ray tracing. Você vai ser um dos prints que o pessoal compartilha." },
 };
 
 function iconFor(tone) {
@@ -112,12 +112,12 @@ function render() {
     var verdict = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = result.tier === "ultra"
-      ? "Ultra Ready, " + gpu.label + " + " + cpu.label + " with " + state.ram + " GB RAM on " + (state.ssd ? "SSD" : "HDD") + " scores " + result.score + "/100. Clears every tier with headroom."
+      ? "Pronto para Ultra, " + gpu.label + " + " + cpu.label + " com " + state.ram + " GB de RAM em " + (state.ssd ? "SSD" : "HDD") + " obtém " + result.score + "/100. Supera todos os níveis com folga."
       : result.tier === "rec"
-        ? "Sim, " + gpu.label + " + " + cpu.label + " with " + state.ram + " GB RAM on " + (state.ssd ? "SSD" : "HDD") + " scores " + result.score + "/100 and meets the Nível recomendado for GTA 6."
+        ? "Sim, " + gpu.label + " + " + cpu.label + " com " + state.ram + " GB de RAM em " + (state.ssd ? "SSD" : "HDD") + " obtém " + result.score + "/100 e atende o nível recomendado para GTA 6."
         : result.tier === "min"
-          ? "Mínimo only, " + gpu.label + " + " + cpu.label + " with " + state.ram + " GB RAM on " + (state.ssd ? "SSD" : "HDD") + " scores " + result.score + "/100. Playable at 1080p Baixo around 30 fps."
-          : "Below Mínimo, " + gpu.label + " + " + cpu.label + " with " + state.ram + " GB RAM on " + (state.ssd ? "SSD" : "HDD") + " scores " + result.score + "/100. Expect sub-30 fps at 1080p Low.";
+          ? "Somente o mínimo, " + gpu.label + " + " + cpu.label + " com " + state.ram + " GB de RAM em " + (state.ssd ? "SSD" : "HDD") + " obtém " + result.score + "/100. Jogável em 1080p no Baixo a cerca de 30 fps."
+          : "Abaixo do mínimo, " + gpu.label + " + " + cpu.label + " com " + state.ram + " GB de RAM em " + (state.ssd ? "SSD" : "HDD") + " obtém " + result.score + "/100. Espere menos de 30 fps em 1080p no Baixo.";
     if (label) label.textContent = meta.label + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdict) verdict.textContent = meta.label + " — " + result.score + "/100";

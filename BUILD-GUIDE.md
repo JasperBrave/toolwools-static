@@ -89,7 +89,7 @@ Order in `<head>`:
 - Header scripts on every page (defer): `theme.js`, `header.js`,
   `search.js`. The homepage also loads `countdown.js` and `newsletter.js`.
   Tool pages load `faq.js` and their own `<tool>.js` as `type="module"`.
-- The header search index lives in `assets/js/search.js` (19 tools from the
+- The header search index lives in `assets/js/search.js` (22 tools from the
   registry). When a new tool page ships, add it there.
 
 ## 4. Tool page pattern (from `tools/bottleneck-calculator/index.html`)

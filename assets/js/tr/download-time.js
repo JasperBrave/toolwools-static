@@ -97,6 +97,19 @@ function render() {
   if (mbpsValue) mbpsValue.textContent = state.mbps + " Mbps";
   if (effRange) effRange.value = String(state.eff);
   if (effValue) effValue.textContent = state.eff + "%";
+  // Accessible labels follow the live values: the static HTML says
+  // "currently 100 Mbps" forever, so swap only the number in each
+  // slider's stored base label.
+  function syncAria(input, value) {
+    if (!input) return;
+    if (!input.dataset.baseAria) input.dataset.baseAria = input.getAttribute("aria-label") || "";
+    input.setAttribute("aria-label", input.dataset.baseAria.replace(/[\d.]+/, String(value)));
+  }
+  syncAria(gbRange, state.gb);
+  syncAria(patchRange, state.patch);
+  syncAria(mbpsRange, state.mbps);
+  syncAria(effRange, state.eff);
+
   presetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.presetButton) === state.mbps)); });
 
   var clock = r.finish.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
@@ -107,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB, " + state.mbps + " Mbps hızında (%" + state.eff + " verimlilik, " + Math.round(r.effMbps) + " Mbps etkili) yaklaşık " + r.total.text + " içinde biter. 100 Mbps'in altındaysanız ön yükleme açıldığı an başlatın.";
+    var tldrText = r.totalGb + " GB, " + state.mbps + " Mbps hızında (%" + state.eff + " verimlilik, " + Math.round(r.effMbps) + " Mbps etkili) yaklaşık " + r.total.text + " içinde biter. Ön yükleme penceresi kapandı: indirmeyi şimdi başlatın.";
     if (label) label.textContent = "Yaklaşık " + r.total.text + " · Özet";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.totalGb + " GB için " + r.total.text;

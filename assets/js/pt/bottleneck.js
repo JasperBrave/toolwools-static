@@ -44,7 +44,7 @@ function readinessOf(result) {
 function tldrOf(result, gpu, cpu, res, mode) {
   var v = L(verdictLabelOf(result));
   if (readinessOf(result) === "ready")
-    return "Sim, " + gpu.label + " + " + cpu.label + " está pronto para GTA 6 em " + res + " em " + L(WORKLOAD_META[mode].label) + ". " + v + ", targeting ~" + result.avgFps + " fps average.";
+    return "Sim, " + gpu.label + " + " + cpu.label + " está pronto para GTA 6 em " + res + " em " + L(WORKLOAD_META[mode].label) + ". " + v + ", com uma média de ~" + result.avgFps + " fps.";
   if (readinessOf(result) === "borderline")
     return "No limite, " + gpu.label + " + " + cpu.label + " executará GTA 6 em " + res + " em " + L(WORKLOAD_META[mode].label) + " com um " + result.absPct + "% " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " gargalo (~" + result.avgFps + " fps). Jogável, mas você deixará quadros sem usar.";
   if (result.verdict === "balanced")
@@ -150,7 +150,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
-      '<p class="verdict-desc">Estimated <strong>' + result.fpsLow + '–' + result.fpsHigh + ' fps</strong> at ' + state.res + ' em ' + L(WORKLOAD_META[state.mode].label) + '. Frame band assumes Alto preset without ray tracing.</p></div></div>' +
+      '<p class="verdict-desc">Estimados <strong>' + result.fpsLow + '–' + result.fpsHigh + ' fps</strong> a ' + state.res + ' em ' + L(WORKLOAD_META[state.mode].label) + '. A faixa de FPS assume a predefinição Alto sem ray tracing.</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Margem de GPU</span><span class="val">' + Math.round(result.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">Margem de CPU</span><span class="val">' + Math.round(result.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
@@ -194,8 +194,8 @@ function render() {
     }
     var summary = $("[data-compare-summary]", compareSection);
     if (summary) {
-      var winText = winner === "Tie" ? "Tie within 3 fps" : (winner === "A" ? "Máquina A" : "Máquina B") + " wins by " + Math.abs(diff) + " fps";
-      summary.innerHTML = "<strong>" + winText + "</strong> average at " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ". Máquina A shows a " + (result.verdict === "balanced" ? "balanced" : result.absPct + "% " + result.verdict.toUpperCase() + " bottleneck") + "; Máquina B shows a " + (resultB.verdict === "balanced" ? "balanced" : resultB.absPct + "% " + resultB.verdict.toUpperCase() + " bottleneck") + ".";
+      var winText = winner === "Tie" ? "Empate dentro de 3 fps" : (winner === "A" ? "Máquina A" : "Máquina B") + " vence por " + Math.abs(diff) + " fps";
+      summary.innerHTML = "<strong>" + winText + "</strong> em média a " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ". Máquina A mostra um " + (result.verdict === "balanced" ? "equilíbrio" : result.absPct + "% de gargalo " + result.verdict.toUpperCase()) + "; Máquina B mostra um " + (resultB.verdict === "balanced" ? "equilíbrio" : resultB.absPct + "% de gargalo " + resultB.verdict.toUpperCase()) + ".";
     }
   }
 
@@ -207,8 +207,8 @@ function render() {
   var live = $("[data-live-region]");
   if (live) {
     live.textContent = state.compare
-      ? verdictLabel + ". Máquina A " + result.avgFps + " fps average at " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ". Máquina B " + verdictLabelOf(computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode)) + ", " + computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode).avgFps + " fps average."
-      : verdictLabel + ". Estimated " + result.fpsLow + " a " + result.fpsHigh + " frames per second at " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ".";
+      ? verdictLabel + ". Máquina A: " + result.avgFps + " fps em média a " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ". Máquina B: " + verdictLabelOf(computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode)) + ", " + computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode).avgFps + " fps em média."
+      : verdictLabel + ". Estimados " + result.fpsLow + " a " + result.fpsHigh + " fotogramas por segundo a " + state.res + " em " + L(WORKLOAD_META[state.mode].label) + ".";
   }
   syncUrl();
 }
@@ -222,10 +222,10 @@ function shareText() {
     var cpuB = findPart(CPUS, state.cpu2);
     var resultB = computeBalance(gpuB, cpuB, state.res, state.mode);
     var diff = resultB.avgFps - result.avgFps;
-    var winner = Math.abs(diff) <= 3 ? "Tie" : diff > 0 ? "Máquina B" : "Máquina A";
-    return gpu.label + "/" + cpu.label + " vs " + gpuB.label + "/" + cpuB.label + " @ " + state.res + ". GTA 6 comparison: " + shareUrl() + " (" + winner + ")";
+    var winner = Math.abs(diff) <= 3 ? "Empate" : diff > 0 ? "Máquina B" : "Máquina A";
+    return gpu.label + "/" + cpu.label + " vs " + gpuB.label + "/" + cpuB.label + " @ " + state.res + ". Comparação de GTA 6: " + shareUrl() + " (" + winner + ")";
   }
-  return gpu.label + " + " + cpu.label + " @ " + state.res + " · " + L(WORKLOAD_META[state.mode].label) + " → " + L(verdictLabelOf(result)) + ". GTA 6 bottleneck check: " + shareUrl();
+  return gpu.label + " + " + cpu.label + " @ " + state.res + " · " + L(WORKLOAD_META[state.mode].label) + " → " + L(verdictLabelOf(result)) + ". Verificação de gargalo de GTA 6: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

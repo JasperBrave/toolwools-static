@@ -164,7 +164,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Les précommandes ont ouvert en 2026. L'ouverture ne figure pas comme jalon dans cette chronologie.</p>';
+      html += '<p class="verdict-desc">Les précommandes ont ouvert en 2026. L\'ouverture ne figure pas comme jalon dans cette chronologie.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Confirmé</span>'

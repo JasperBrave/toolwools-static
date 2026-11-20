@@ -97,6 +97,19 @@ function render() {
   if (mbpsValue) mbpsValue.textContent = state.mbps + " Mbps";
   if (effRange) effRange.value = String(state.eff);
   if (effValue) effValue.textContent = state.eff + "%";
+  // Accessible labels follow the live values: the static HTML says
+  // "currently 100 Mbps" forever, so swap only the number in each
+  // slider's stored base label.
+  function syncAria(input, value) {
+    if (!input) return;
+    if (!input.dataset.baseAria) input.dataset.baseAria = input.getAttribute("aria-label") || "";
+    input.setAttribute("aria-label", input.dataset.baseAria.replace(/[\d.]+/, String(value)));
+  }
+  syncAria(gbRange, state.gb);
+  syncAria(patchRange, state.patch);
+  syncAria(mbpsRange, state.mbps);
+  syncAria(effRange, state.eff);
+
   presetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.presetButton) === state.mbps)); });
 
   var clock = r.finish.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
@@ -107,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB at " + state.mbps + " Mbps (" + state.eff + "% efficiency, " + Math.round(r.effMbps) + " Mbps effective) finishes in about " + r.total.text + ". Start the pre-load the moment it opens if you are on anything under 100 Mbps.";
+    var tldrText = r.totalGb + " GB at " + state.mbps + " Mbps (" + state.eff + "% efficiency, " + Math.round(r.effMbps) + " Mbps effective) finishes in about " + r.total.text + ". The preload window is over — start the download now.";
     if (label) label.textContent = "About " + r.total.text + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " for " + r.totalGb + " GB";

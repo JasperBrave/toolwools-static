@@ -97,6 +97,19 @@ function render() {
   if (mbpsValue) mbpsValue.textContent = state.mbps + " Mbps";
   if (effRange) effRange.value = String(state.eff);
   if (effValue) effValue.textContent = state.eff + "%";
+  // Accessible labels follow the live values: the static HTML says
+  // "currently 100 Mbps" forever, so swap only the number in each
+  // slider's stored base label.
+  function syncAria(input, value) {
+    if (!input) return;
+    if (!input.dataset.baseAria) input.dataset.baseAria = input.getAttribute("aria-label") || "";
+    input.setAttribute("aria-label", input.dataset.baseAria.replace(/[\d.]+/, String(value)));
+  }
+  syncAria(gbRange, state.gb);
+  syncAria(patchRange, state.patch);
+  syncAria(mbpsRange, state.mbps);
+  syncAria(effRange, state.eff);
+
   presetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.presetButton) === state.mbps)); });
 
   var clock = r.finish.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
@@ -107,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت/ث (كفاءة " + state.eff + "%، " + Math.round(r.effMbps) + " ميغابت/ث فعّالة) تنتهي في نحو " + r.total.text + ". ابدأ التحميل المسبق لحظة فتحه إن كانت سرعتك أقل من 100 ميغابت/ث.";
+    var tldrText = r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت/ث (كفاءة " + state.eff + "%، " + Math.round(r.effMbps) + " ميغابت/ث فعّالة) تنتهي في نحو " + r.total.text + ". انتهت نافذة التحميل المسبق: ابدأ التنزيل الآن.";
     if (label) label.textContent = "نحو " + r.total.text + " · ملخّص";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " مقابل " + r.totalGb + " غيغابايت";

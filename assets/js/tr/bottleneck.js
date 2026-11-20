@@ -221,7 +221,7 @@ function shareText() {
     var cpuB = findPart(CPUS, state.cpu2);
     var resultB = computeBalance(gpuB, cpuB, state.res, state.mode);
     var diff = resultB.avgFps - result.avgFps;
-    var winner = Math.abs(diff) <= 3 ? "Tie" : diff > 0 ? "Sistem B" : "Sistem A";
+    var winner = Math.abs(diff) <= 3 ? "Berabere" : diff > 0 ? "Sistem B" : "Sistem A";
     return gpu.label + "/" + cpu.label + " - " + gpuB.label + "/" + cpuB.label + " @ " + state.res + ". GTA 6 karşılaştırması: " + shareUrl() + " (" + winner + ")";
   }
   return gpu.label + " + " + cpu.label + " @ " + state.res + " · " + WORKLOAD_META[state.mode].label + " → " + verdictLabelOf(result) + ". GTA 6 darboğaz kontrolü: " + shareUrl();

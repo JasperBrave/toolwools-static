@@ -143,7 +143,7 @@ function render() {
     } else {
       // H7: the "open" milestone (25 June 2026) is dropped — expected, not confirmed.
       var entries = result.timeline.filter(function (e) { return e.id !== "open"; });
-      html += '<p class="verdict-desc">Ön siparişler 2026'da açıldı. Açılış bu zaman çizelgesinde kilometre taşı olarak gösterilmiyor.</p>';
+      html += '<p class="verdict-desc">Ön siparişler 2026\'da açıldı. Açılış bu zaman çizelgesinde kilometre taşı olarak gösterilmiyor.</p>';
       html += '<ol class="milestone-list">' + entries.map(function (e) {
         var badge = e.confidence === "confirmed"
           ? '<span class="badge badge-blue">Doğrulandı</span>'

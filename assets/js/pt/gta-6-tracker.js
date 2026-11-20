@@ -1,6 +1,6 @@
 // gta-6-tracker.js — Rastreador de Lançamento do GTA 6 page logic.
-// The countdown ticks from the shared launch instant (19 de nov de 2026 05:00 UTC)
-// via the ported calendar engine. The timezone picker (?tz=) shows the launch
+// The launch instant (19 de nov de 2026 05:00 UTC) has passed, so the countdown
+// renders once in its launched state; there is no ticking timer anymore. The timezone picker (?tz=) shows the launch
 // moment in local time; the choice is stored in the URL so a shared link opens
 // with the same timezone. There is no live feed behind this page: the status
 // card tracks the confirmed milestones listed in the page, and every
@@ -97,7 +97,7 @@ function renderCountdown() {
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");
     if (tldrText && !c.passed) {
-      tldrText.textContent = "O GTA 6 lançou em 19 nov 2026 às 05:00 UTC. O pré-carregamento ocorreu em 16-17 nov 2026, 48-72 horas antes do lançamento.";
+      tldrText.textContent = "O GTA 6 lançou em 19 nov 2026 às 05:00 UTC. O pré-carregamento ocorreu 48-72 horas antes do lançamento.";
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
@@ -170,4 +170,3 @@ $all("[data-copy-link]").forEach(function (btn) {
 renderLaunchLocal();
 refreshShareLinks();
 renderCountdown();
-window.setInterval(renderCountdown, 1000);

@@ -142,7 +142,7 @@
       <h1 id="page-title" class="page-title">GTA 6 Release Date Reminder</h1>
       <p class="page-subtitle">One-click add the Nov 19, 2026 launch to any calendar. Launch status in your timezone, plus a 14-city unlock table showing when GTA 6 went live where you are.</p>
       <ul class="hero-badges" aria-label="At a glance">
-        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Auto-detects your timezone</li><li class="chip">24h + 1h alarms baked in</li>
+        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Auto-detects your timezone</li><li class="chip">14-city unlock table</li>
       </ul>
     </section><div class="tool-intro-callout"><p>Rockstar&#x27;s confirmed window is Nov 19, 2026. This tool anchors the launch at 00:00 America/New_York (05:00 UTC) — the pattern Rockstar has used for every previous GTA and RDR launch — and generates a calendar event with 24-hour and 1-hour reminders. Pick your calendar app or download the .ics; the timing is anchored to the confirmed unlock time.</p></div>
 <div class="byline" aria-label="Author and review byline">
@@ -250,8 +250,8 @@
       <p class="section-dek">Four moments worth a pre-set alarm.</p>
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="use-case-1">
-          <h3 id="use-case-1">Pre-order queue reminder</h3>
-          <p>You&#x27;ve pre-ordered on Steam or PSN and need the pre-load download window pinned to your calendar.</p>
+          <h3 id="use-case-1">Download-day reminder</h3>
+          <p>You bought on PSN or Xbox. A download-day reminder means the console starts pulling the 212 GB install while you are still at work — you play the moment you get home.</p>
           
         </article>
       </li><li>
@@ -277,18 +277,18 @@
       <details class="methodology-details" open>
         <summary><h2 id="methodology">How the calendar event is built</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="methodology-body">
-          <p>Every calendar button generates the exact same underlying event: DTSTART 2026-11-19T05:00:00Z, 60-minute duration, two VALARM reminders (-P1D and -PT1H). Google/Outlook/Yahoo use the vendor&#x27;s URL scheme; Apple and Windows Calendar receive a signed RFC 5545 .ics payload. The launch anchor is a single constant — it flips to the official Rockstar time the instant it&#x27;s published.</p>
+          <p>Every calendar button generates the exact same underlying event: DTSTART 2026-11-19T05:00:00Z, 60-minute duration, two VALARM reminders (-P1D and -PT1H). Google/Outlook/Yahoo use the vendor&#x27;s URL scheme; Apple and Windows Calendar receive a signed RFC 5545 .ics payload. The launch anchor is a single constant — it is set to the confirmed unlock time: Nov 19, 2026, 00:00 America/New_York (05:00 UTC).</p>
           <pre class="methodology-formula">DTSTART = 2026-11-19T05:00:00Z   (00:00 America/New_York, EST UTC-5)
 DTEND   = DTSTART + 60min
 VALARM  = TRIGGER -P1D   (24h before)
 VALARM  = TRIGGER -PT1H  (1h before)</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Launch anchor at 2026-11-19 00:00 America/New_York (05:00 UTC) matches Rockstar&#x27;s GTA V (Sep 17, 2013) and RDR2 (Oct 26, 2018) release-day unlock schedules.</li><li>60-minute event duration is arbitrary; calendars treat the DTSTART as the alarm trigger — end time is only shown as a block on day view.</li><li>Two VALARM reminders (24h and 1h) are the industry-standard reminder cadence — long enough for pre-load prep, short enough to catch the launch.</li><li>Timezone offsets are hard-coded for Nov 19, 2026: Northern hemisphere DST is off (EST, GMT, CET, JST unchanged); Southern hemisphere DST is on (AEDT, NZDT).</li></ul>
+          <ul class="list-disc list-outside space-y-1.5"><li>Launch anchor at 2026-11-19 00:00 America/New_York (05:00 UTC) matches Rockstar&#x27;s GTA V (Sep 17, 2013) and RDR2 (Oct 26, 2018) release-day unlock schedules.</li><li>60-minute event duration is arbitrary; calendars treat the DTSTART as the alarm trigger — end time is only shown as a block on day view.</li><li>Two VALARM reminders (24h and 1h) are the industry-standard reminder cadence — long enough to prepare, short enough to catch the launch.</li><li>Timezone offsets are hard-coded for Nov 19, 2026: Northern hemisphere DST is off (EST, GMT, CET, JST unchanged); Southern hemisphere DST is on (AEDT, NZDT).</li></ul>
         </div>
       </details>
     </section><section aria-labelledby="faq">
       <header class="text-center">
         <h2 id="faq" class="h2-lg">GTA 6 release date reminder questions</h2>
-        <p class="section-dek">Timezones, .ics files and what happens if the date slips.</p>
+        <p class="section-dek">Pre-loads, platform cutoffs, and the launch date.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
         <details>
@@ -337,17 +337,17 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-5" class="faq-answer" role="region">
-            <p>Yes — it already has. The launch anchor is a single constant in the tool, now set to the confirmed unlock time: Nov 19, 2026, 00:00 America/New_York (05:00 UTC). Every calendar button and the countdown use that confirmed value.</p>
+            <p>Yes — it already has. The launch anchor is a single constant in the tool, now set to the confirmed unlock time: Nov 19, 2026, 00:00 America/New_York (05:00 UTC). Every calendar button and the launch status use that confirmed value.</p>
           </div>
         </details>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-6" aria-controls="faq-a-6">
-            <span>Can I get a reminder for the GTA 6 pre-load?</span>
+            <span>Did the tool include a pre-load reminder?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-6" class="faq-answer" role="region">
-            <p>The generated event includes two reminders: 24 hours before and 1 hour before launch. Rockstar typically opens pre-load 48–72 hours before launch — we&#x27;ll add a separate pre-load event once the exact window is announced.</p>
+            <p>Yes — the .ics included one, because the preload window mattered before launch. The preload window is now over: GTA 6 launched on November 19, 2026. The unlock-time and 24-hour alarms in the file are still accurate for the launch moment itself, and the 14-city table on this page shows the local unlock time everywhere.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -383,21 +383,21 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-10" aria-controls="faq-a-10">
-            <span>How big is the pre-load and when should I start it?</span>
+            <span>How big was the pre-load?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-10" class="faq-answer" role="region">
-            <p>Rockstar opens pre-load 48–72 hours out and RDR2 shipped at 99 GB, so budget 212 GB or more. Start the moment it opens: launch-week CDN congestion routinely doubles download times. Our storage planner sizes the free space you need.</p>
+            <p>Up to 212 GB, which is why the download-day reminder matters: the console starts pulling the install while you are still out. The preload window is over — GTA 6 launched on November 19, 2026 — so new buyers download the full install at purchase. Budget the full 212 GB plus a buffer for day-one patches.</p>
           </div>
         </details>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-11" aria-controls="faq-a-11">
-            <span>What happens to my reminder if the date slips?</span>
+            <span>What happens to my reminder now that the game has launched?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-11" class="faq-answer" role="region">
-            <p>The event you exported is a static .ics file — it will not move on its own. If Rockstar changes the date we update the anchor here, so re-export and delete the old entry. The trackers page logs every official date statement with its source.</p>
+            <p>Nothing changes — the game launched on November 19, 2026, and the date no longer moves. The alarms in the .ics were set to the confirmed unlock time, Nov 19, 2026, 00:00 America/New_York (05:00 UTC), so any reminder you already added fired at the right moment. New reminders are no longer needed for the launch itself.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -452,7 +452,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
         <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank" rel="noopener noreferrer">RFC 5545 — Internet Calendaring and Scheduling Core Object Specification (iCalendar)</a>
         <span class="src-meta">IETF · Published Sep 1, 2009 · Accessed Jul 25, 2026 · Spec followed for the .ics payload (VEVENT, VALARM, DTSTAMP).</span>
       </li></ol>
-      <h3 class="related-sub">Calibration notes</h3><ul class="sources-list"><li><p>Launch anchor at 2026-11-19 00:00 America/New_York (05:00 UTC) matches Rockstar&#x27;s GTA V (Sep 17, 2013) and RDR2 (Oct 26, 2018) release-day unlock schedules.</p></li><li><p>60-minute event duration is arbitrary; calendars treat the DTSTART as the alarm trigger — end time is only shown as a block on day view.</p></li><li><p>Two VALARM reminders (24h and 1h) are the industry-standard reminder cadence — long enough for pre-load prep, short enough to catch the launch.</p></li><li><p>Timezone offsets are hard-coded for Nov 19, 2026: Northern hemisphere DST is off (EST, GMT, CET, JST unchanged); Southern hemisphere DST is on (AEDT, NZDT).</p></li></ul>
+      <h3 class="related-sub">Calibration notes</h3><ul class="sources-list"><li><p>Launch anchor at 2026-11-19 00:00 America/New_York (05:00 UTC) matches Rockstar&#x27;s GTA V (Sep 17, 2013) and RDR2 (Oct 26, 2018) release-day unlock schedules.</p></li><li><p>60-minute event duration is arbitrary; calendars treat the DTSTART as the alarm trigger — end time is only shown as a block on day view.</p></li><li><p>Two VALARM reminders (24h and 1h) are the industry-standard reminder cadence — long enough to prepare, short enough to catch the launch.</p></li><li><p>Timezone offsets are hard-coded for Nov 19, 2026: Northern hemisphere DST is off (EST, GMT, CET, JST unchanged); Southern hemisphere DST is on (AEDT, NZDT).</p></li></ul>
     </section><section aria-labelledby="changelog">
       <h2 id="changelog">Changelog</h2>
       <ul class="changelog-list"><li>
@@ -462,7 +462,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       </li><li>
         <span class="ver">v1.0</span>
         <time datetime="2026-07-25">Jul 25, 2026</time>
-        <span class="note">Launch: one-click Google/Apple/Outlook/Yahoo calendar add, timezone auto-detection, live countdown, 14-city unlock table, .ics with 24h + 1h alarms.</span>
+        <span class="note">Launch: one-click Google/Apple/Outlook/Yahoo calendar add, timezone auto-detection, launch countdown, 14-city unlock table, .ics with 24h + 1h alarms.</span>
       </li></ul>
     </section><aside class="disclaimer" role="note" aria-label="Estimate disclaimer">
       <p class="eyebrow-muted">Estimate disclaimer</p>
@@ -710,15 +710,15 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       "name": "Has the unlock time been confirmed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — it already has. The launch anchor is a single constant in the tool, now set to the confirmed unlock time: Nov 19, 2026, 00:00 America/New_York (05:00 UTC). Every calendar button and the countdown use that confirmed value."
+        "text": "Yes — it already has. The launch anchor is a single constant in the tool, now set to the confirmed unlock time: Nov 19, 2026, 00:00 America/New_York (05:00 UTC). Every calendar button and the launch status use that confirmed value."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I get a reminder for the GTA 6 pre-load?",
+      "name": "Did the tool include a pre-load reminder?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The generated event includes two reminders: 24 hours before and 1 hour before launch. Rockstar typically opens pre-load 48–72 hours before launch — we'll add a separate pre-load event once the exact window is announced."
+        "text": "Yes — the .ics included one, because the preload window mattered before launch. The preload window is now over: GTA 6 launched on November 19, 2026. The unlock-time and 24-hour alarms in the file are still accurate for the launch moment itself, and the 14-city table on this page shows the local unlock time everywhere."
       }
     },
     {
@@ -747,18 +747,18 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
     },
     {
       "@type": "Question",
-      "name": "How big is the pre-load and when should I start it?",
+      "name": "How big was the pre-load?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Rockstar opens pre-load 48–72 hours out and RDR2 shipped at 99 GB, so budget 212 GB or more. Start the moment it opens: launch-week CDN congestion routinely doubles download times. Our storage planner sizes the free space you need."
+        "text": "Up to 212 GB, which is why the download-day reminder matters: the console starts pulling the install while you are still out. The preload window is over — GTA 6 launched on November 19, 2026 — so new buyers download the full install at purchase. Budget the full 212 GB plus a buffer for day-one patches."
       }
     },
     {
       "@type": "Question",
-      "name": "What happens to my reminder if the date slips?",
+      "name": "What happens to my reminder now that the game has launched?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The event you exported is a static .ics file — it will not move on its own. If Rockstar changes the date we update the anchor here, so re-export and delete the old entry. The trackers page logs every official date statement with its source."
+        "text": "Nothing changes — the game launched on November 19, 2026, and the date no longer moves. The alarms in the .ics were set to the confirmed unlock time, Nov 19, 2026, 00:00 America/New_York (05:00 UTC), so any reminder you already added fired at the right moment. New reminders are no longer needed for the launch itself."
       }
     },
     {

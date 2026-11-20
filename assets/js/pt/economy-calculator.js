@@ -124,7 +124,7 @@ function methodTableHtml(rows, activeId) {
       + "<td class=\"mono\">" + money(r.perHourPerPlayer) + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Cada método de dinheiro de GTA 6 classificado por GTA$ líquidos por hora</h2>\n'
-    + '      <p class="section-dek">A taxa líquida é pagamento menos entrada, dividido pelo tempo total do ciclo. Os pagamentos são projeções, mostrados arredondados.</p>\n'
+    + '      <p class="section-dek">A taxa líquida é pagamento menos entrada, dividido pelo tempo total do ciclo. Os pagamentos são projeções, mostrados arredondados. Os golpes de orelhão e as vendas de carga de armazém são métodos de GTA Online, mostrados como os análogos disponíveis mais próximos.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Cada método de dinheiro de GTA 6 classificado por GTA$ líquidos por hora, scrollable table">\n'
     + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Métodos de dinheiro projetados de GTA 6 classificados por dólares GTA líquidos por hora, com pagamento, tempo de ciclo, entrada e taxa por jogador.</caption>\n'
     + '        <thead><tr><th scope="col">Método</th><th scope="col">Pagamento</th><th scope="col">Líquido / h</th><th scope="col">Ciclo</th><th scope="col">Entrada</th><th scope="col">Por jogador</th></tr></thead>\n'

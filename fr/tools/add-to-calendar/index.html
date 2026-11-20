@@ -142,7 +142,7 @@
       <h1 id="page-title" class="page-title">Rappel de la date de sortie de GTA 6</h1>
       <p class="page-subtitle">Ajoutez le lancement du 19 nov. 2026 à n'importe quel calendrier en un clic. Statut du lancement dans votre fuseau horaire, plus un tableau de déblocage de 14 villes montrant quand GTA 6 est devenu disponible là où vous êtes.</p>
       <ul class="hero-badges" aria-label="En un coup d&#x27;œil">
-        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Détecte votre fuseau horaire automatiquement</li><li class="chip">Alarmes 24 h + 1 h intégrées</li>
+        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Détecte votre fuseau horaire automatiquement</li><li class="chip">Tableau de déblocage de 14 villes</li>
       </ul>
     </section><div class="tool-intro-callout"><p>La fenêtre confirmée par Rockstar est le 19 nov. 2026. Cet outil ancre le lancement à 00:00 America/New_York (05:00 UTC), le modèle que Rockstar a utilisé pour chaque lancement GTA et RDR précédent, et génère un événement de calendrier avec des rappels 24 heures et 1 heure avant. Choisissez votre application de calendrier ou téléchargez le .ics, le timing est ancré à l'heure de déblocage confirmée.</p></div>
 <div class="byline" aria-label="Ligne d&#x27;auteur et de révision">
@@ -250,8 +250,8 @@
       <p class="section-dek">Quatre moments qui valent une alarme pré-réglée.</p>
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="use-case-1">
-          <h3 id="use-case-1">Rappel de file d'attente de précommande</h3>
-          <p>Vous avez précommandé sur Steam ou PSN et vous avez besoin que la fenêtre de téléchargement du préchargement soit épinglée à votre calendrier.</p>
+          <h3 id="use-case-1">Rappel du jour de téléchargement</h3>
+          <p>Vous avez acheté sur PSN ou Xbox. Un rappel du jour de téléchargement signifie que la console commence à tirer l'installation de 212 Go pendant que vous êtes encore au travail : vous jouez dès votre retour à la maison.</p>
           
         </article>
       </li><li>
@@ -277,18 +277,18 @@
       <details class="methodology-details" open>
         <summary><h2 id="methodology">Comment l'événement de calendrier est construit</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="methodology-body">
-          <p>Chaque bouton de calendrier génère exactement le même événement sous-jacent : DTSTART 2026-11-19T05:00:00Z, durée de 60 minutes, deux rappels VALARM (-P1D et -PT1H). Google/Outlook/Yahoo utilisent le schéma d'URL du fournisseur, Apple et le Calendrier Windows reçoivent une charge .ics RFC 5545 signée. L'ancre de lancement est une constante unique, elle bascule sur l'heure officielle de Rockstar dès qu'elle est publiée.</p>
+          <p>Chaque bouton de calendrier génère exactement le même événement sous-jacent : DTSTART 2026-11-19T05:00:00Z, durée de 60 minutes, deux rappels VALARM (-P1D et -PT1H). Google/Outlook/Yahoo utilisent le schéma d'URL du fournisseur, Apple et le Calendrier Windows reçoivent une charge .ics RFC 5545 signée. L'ancre de lancement est une constante unique, elle est réglée sur l'heure de déblocage confirmée : 19 nov. 2026, 00:00 America/New_York (05:00 UTC).</p>
           <pre class="methodology-formula">DTSTART = 2026-11-19T05:00:00Z   (00:00 America/New_York, EST UTC-5)
 DTEND   = DTSTART + 60min
 VALARM  = TRIGGER -P1D   (24h before)
 VALARM  = TRIGGER -PT1H  (1h before)</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>L'ancre de lancement au 2026-11-19 00:00 America/New_York (05:00 UTC) correspond aux horaires de déblocage du jour de sortie de GTA V (17 sept. 2013) et RDR2 (26 oct. 2018) de Rockstar.</li><li>La durée de 60 minutes de l'événement est arbitraire, les calendriers traitent le DTSTART comme déclencheur d'alarme, l'heure de fin n'est affichée que comme un bloc en vue journalière.</li><li>Deux rappels VALARM (24 h et 1 h) sont la cadence de rappel standard du secteur, assez longue pour la préparation du préchargement, assez courte pour ne pas manquer le lancement.</li><li>Les décalages de fuseau horaire sont codés en dur pour le 19 nov. 2026 : l'heure d'été de l'hémisphère nord est désactivée (EST, GMT, CET, JST inchangés), l'heure d'été de l'hémisphère sud est activée (AEDT, NZDT).</li></ul>
+          <ul class="list-disc list-outside space-y-1.5"><li>L'ancre de lancement au 2026-11-19 00:00 America/New_York (05:00 UTC) correspond aux horaires de déblocage du jour de sortie de GTA V (17 sept. 2013) et RDR2 (26 oct. 2018) de Rockstar.</li><li>La durée de 60 minutes de l'événement est arbitraire, les calendriers traitent le DTSTART comme déclencheur d'alarme, l'heure de fin n'est affichée que comme un bloc en vue journalière.</li><li>Deux rappels VALARM (24 h et 1 h) sont la cadence de rappel standard du secteur, assez longue pour se préparer, assez courte pour ne pas manquer le lancement.</li><li>Les décalages de fuseau horaire sont codés en dur pour le 19 nov. 2026 : l'heure d'été de l'hémisphère nord est désactivée (EST, GMT, CET, JST inchangés), l'heure d'été de l'hémisphère sud est activée (AEDT, NZDT).</li></ul>
         </div>
       </details>
     </section><section aria-labelledby="faq">
       <header class="text-center">
         <h2 id="faq" class="h2-lg">Questions sur le rappel de date de sortie GTA 6</h2>
-        <p class="section-dek">Fuseaux horaires, fichiers .ics et ce qui se passe si la date glisse.</p>
+        <p class="section-dek">Préchargements, délais de plateforme et la date de lancement.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
         <details>
@@ -337,17 +337,17 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-5" class="faq-answer" role="region">
-            <p>Oui, c'est déjà fait. L'ancre de lancement est une constante unique dans l'outil, désormais fixée sur l'heure de déblocage confirmée : 19 nov. 2026, 00:00 America/New_York (05:00 UTC). Chaque bouton de calendrier et le compte à rebours utilisent cette valeur confirmée.</p>
+            <p>Oui, c'est déjà fait. L'ancre de lancement est une constante unique dans l'outil, désormais fixée sur l'heure de déblocage confirmée : 19 nov. 2026, 00:00 America/New_York (05:00 UTC). Chaque bouton de calendrier et le statut de lancement utilisent cette valeur confirmée.</p>
           </div>
         </details>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-6" aria-controls="faq-a-6">
-            <span>Puis-je recevoir un rappel pour le préchargement de GTA 6 ?</span>
+            <span>L'outil incluait-il un rappel de préchargement ?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-6" class="faq-answer" role="region">
-            <p>L'événement généré comprend deux rappels : 24 heures avant et 1 heure avant le lancement. Rockstar ouvre généralement le préchargement 48 à 72 heures avant le lancement, nous ajouterons un événement de préchargement séparé une fois la fenêtre exacte annoncée.</p>
+            <p>Oui, le .ics en incluait un, car la fenêtre de préchargement comptait avant le lancement. La fenêtre de préchargement est maintenant terminée : GTA 6 est sorti le 19 novembre 2026. Les alarmes d'heure de déblocage et de 24 heures du fichier restent exactes pour le moment du lancement lui-même, et le tableau de 14 villes de cette page montre l'heure locale de déblocage partout.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -383,21 +383,21 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-10" aria-controls="faq-a-10">
-            <span>Quelle est la taille du préchargement et quand dois-je le lancer ?</span>
+            <span>Quelle était la taille du préchargement ?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-10" class="faq-answer" role="region">
-            <p>Rockstar ouvre le préchargement 48 à 72 heures avant et RDR2 est sorti à 99 Go, prévoyez donc 212 Go ou plus. Lancez dès l'ouverture : la congestion du CDN la semaine du lancement double couramment les temps de téléchargement. Notre planificateur de stockage dimensionne l'espace libre dont vous avez besoin.</p>
+            <p>Jusqu'à 212 Go, c'est pourquoi le rappel du jour de téléchargement compte : la console commence à tirer l'installation pendant que vous êtes encore dehors. La fenêtre de préchargement est terminée : GTA 6 est sorti le 19 novembre 2026, les nouveaux acheteurs téléchargent donc l'installation complète à l'achat. Prévoyez les 212 Go complets plus une marge pour les correctifs du premier jour.</p>
           </div>
         </details>
       </li><li class="faq-item">
         <details>
           <summary id="faq-q-11" aria-controls="faq-a-11">
-            <span>Que se passe-t-il pour mon rappel si la date glisse ?</span>
+            <span>Que se passe-t-il pour mon rappel maintenant que le jeu est sorti ?</span>
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-11" class="faq-answer" role="region">
-            <p>L'événement que vous avez exporté est un fichier .ics statique, il ne bougera pas tout seul. Si Rockstar change la date, nous mettons l'ancre à jour ici, réexportez et supprimez l'ancienne entrée. La page trackers enregistre chaque déclaration officielle de date avec sa source.</p>
+            <p>Rien ne change : le jeu est sorti le 19 novembre 2026 et la date ne bouge plus. Les alarmes du .ics étaient réglées sur l'heure de déblocage confirmée, 19 nov. 2026, 00:00 America/New_York (05:00 UTC), donc tout rappel déjà ajouté s'est déclenché au bon moment. Les nouveaux rappels ne sont plus nécessaires pour le lancement lui-même.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -452,7 +452,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
         <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank" rel="noopener noreferrer">RFC 5545, Spécification des objets principaux d'Internet Calendaring and Scheduling (iCalendar)</a>
         <span class="src-meta">IETF · Publié le 1er sept. 2009 · Consulté le 25 juil. 2026 · Spécification suivie pour la charge .ics (VEVENT, VALARM, DTSTAMP).</span>
       </li></ol>
-      <h3 class="related-sub">Notes d'étalonnage</h3><ul class="sources-list"><li><p>L'ancre de lancement au 2026-11-19 00:00 America/New_York (05:00 UTC) correspond aux horaires de déblocage du jour de sortie de GTA V (17 sept. 2013) et RDR2 (26 oct. 2018) de Rockstar.</p></li><li><p>La durée de 60 minutes de l'événement est arbitraire, les calendriers traitent le DTSTART comme déclencheur d'alarme, l'heure de fin n'est affichée que comme un bloc en vue journalière.</p></li><li><p>Deux rappels VALARM (24 h et 1 h) sont la cadence de rappel standard du secteur, assez longue pour la préparation du préchargement, assez courte pour ne pas manquer le lancement.</p></li><li><p>Les décalages de fuseau horaire sont codés en dur pour le 19 nov. 2026 : l'heure d'été de l'hémisphère nord est désactivée (EST, GMT, CET, JST inchangés), l'heure d'été de l'hémisphère sud est activée (AEDT, NZDT).</p></li></ul>
+      <h3 class="related-sub">Notes d'étalonnage</h3><ul class="sources-list"><li><p>L'ancre de lancement au 2026-11-19 00:00 America/New_York (05:00 UTC) correspond aux horaires de déblocage du jour de sortie de GTA V (17 sept. 2013) et RDR2 (26 oct. 2018) de Rockstar.</p></li><li><p>La durée de 60 minutes de l'événement est arbitraire, les calendriers traitent le DTSTART comme déclencheur d'alarme, l'heure de fin n'est affichée que comme un bloc en vue journalière.</p></li><li><p>Deux rappels VALARM (24 h et 1 h) sont la cadence de rappel standard du secteur, assez longue pour se préparer, assez courte pour ne pas manquer le lancement.</p></li><li><p>Les décalages de fuseau horaire sont codés en dur pour le 19 nov. 2026 : l'heure d'été de l'hémisphère nord est désactivée (EST, GMT, CET, JST inchangés), l'heure d'été de l'hémisphère sud est activée (AEDT, NZDT).</p></li></ul>
     </section><section aria-labelledby="changelog">
       <h2 id="changelog">Journal des modifications</h2>
       <ul class="changelog-list"><li>
@@ -462,7 +462,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       </li><li>
         <span class="ver">v1.0</span>
         <time datetime="2026-07-25">25 juillet 2026</time>
-        <span class="note">Lancement : ajout au calendrier Google/Apple/Outlook/Yahoo en un clic, détection automatique du fuseau horaire, compte à rebours en direct, tableau de déblocage de 14 villes, .ics avec alarmes 24 h + 1 h.</span>
+        <span class="note">Lancement : ajout au calendrier Google/Apple/Outlook/Yahoo en un clic, détection automatique du fuseau horaire, compte à rebours de lancement, tableau de déblocage de 14 villes, .ics avec alarmes 24 h + 1 h.</span>
       </li></ul>
     </section><aside class="disclaimer" role="note" aria-label="Avertissement sur l&#x27;estimation">
       <p class="eyebrow-muted">Avertissement sur l'estimation</p>
@@ -599,7 +599,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Web browser",
       "url": "https://toolwools.com/fr/tools/add-to-calendar",
-      "description": "Ajoutez le lancement de GTA 6 du 19 nov. 2026 au calendrier Google, Apple, Outlook ou Yahoo en un clic. Compte à rebours en direct et heures de déblocage locales pour 14 villes.",
+      "description": "Ajoutez le lancement de GTA 6 du 19 nov. 2026 au calendrier Google, Apple, Outlook ou Yahoo en un clic. Compte à rebours de lancement et heures de déblocage locales pour 14 villes.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -710,15 +710,15 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       "name": "L'heure de déblocage est-elle confirmée ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, c'est déjà fait. L'ancre de lancement est une constante unique dans l'outil, désormais fixée sur l'heure de déblocage confirmée : 19 nov. 2026, 00:00 America/New_York (05:00 UTC). Chaque bouton de calendrier et le compte à rebours utilisent cette valeur confirmée."
+        "text": "Oui, c'est déjà fait. L'ancre de lancement est une constante unique dans l'outil, désormais fixée sur l'heure de déblocage confirmée : 19 nov. 2026, 00:00 America/New_York (05:00 UTC). Chaque bouton de calendrier et le statut de lancement utilisent cette valeur confirmée."
       }
     },
     {
       "@type": "Question",
-      "name": "Puis-je recevoir un rappel pour le préchargement de GTA 6 ?",
+      "name": "L'outil incluait-il un rappel de préchargement ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'événement généré comprend deux rappels : 24 heures avant et 1 heure avant le lancement. Rockstar ouvre généralement le préchargement 48 à 72 heures avant le lancement, nous ajouterons un événement de préchargement séparé une fois la fenêtre exacte annoncée."
+        "text": "Oui, le .ics en incluait un, car la fenêtre de préchargement comptait avant le lancement. La fenêtre de préchargement est maintenant terminée : GTA 6 est sorti le 19 novembre 2026. Les alarmes d'heure de déblocage et de 24 heures du fichier restent exactes pour le moment du lancement lui-même, et le tableau de 14 villes de cette page montre l'heure locale de déblocage partout."
       }
     },
     {
@@ -747,18 +747,18 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
     },
     {
       "@type": "Question",
-      "name": "Quelle est la taille du préchargement et quand dois-je le lancer ?",
+      "name": "Quelle était la taille du préchargement ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Rockstar ouvre le préchargement 48 à 72 heures avant et RDR2 est sorti à 99 Go, prévoyez donc 212 Go ou plus. Lancez dès l'ouverture : la congestion du CDN la semaine du lancement double couramment les temps de téléchargement. Notre planificateur de stockage dimensionne l'espace libre dont vous avez besoin."
+        "text": "Jusqu'à 212 Go, c'est pourquoi le rappel du jour de téléchargement compte : la console commence à tirer l'installation pendant que vous êtes encore dehors. La fenêtre de préchargement est terminée : GTA 6 est sorti le 19 novembre 2026, les nouveaux acheteurs téléchargent donc l'installation complète à l'achat. Prévoyez les 212 Go complets plus une marge pour les correctifs du premier jour."
       }
     },
     {
       "@type": "Question",
-      "name": "Que se passe-t-il pour mon rappel si la date glisse ?",
+      "name": "Que se passe-t-il pour mon rappel maintenant que le jeu est sorti ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "L'événement que vous avez exporté est un fichier .ics statique, il ne bougera pas tout seul. Si Rockstar change la date, nous mettons l'ancre à jour ici, réexportez et supprimez l'ancienne entrée. La page trackers enregistre chaque déclaration officielle de date avec sa source."
+        "text": "Rien ne change : le jeu est sorti le 19 novembre 2026 et la date ne bouge plus. Les alarmes du .ics étaient réglées sur l'heure de déblocage confirmée, 19 nov. 2026, 00:00 America/New_York (05:00 UTC), donc tout rappel déjà ajouté s'est déclenché au bon moment. Les nouveaux rappels ne sont plus nécessaires pour le lancement lui-même."
       }
     },
     {

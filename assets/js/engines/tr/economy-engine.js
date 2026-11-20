@@ -29,7 +29,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "Depo kargo satışı (tam kasa yükü)",
+    label: "Depo kargo satışı (tam kasa yükü) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -73,7 +73,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "Ankesörlü telefon vuruşu (bonus hedef)",
+    label: "Ankesörlü telefon vuruşu (bonus hedef) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,

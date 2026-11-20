@@ -29,7 +29,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "Vente de cargaison d'entrepôt (chargement complet)",
+    label: "Vente de cargaison d'entrepôt (chargement complet) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -73,7 +73,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "Contrat de cabine téléphonique (cible bonus)",
+    label: "Contrat de cabine téléphonique (cible bonus) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,

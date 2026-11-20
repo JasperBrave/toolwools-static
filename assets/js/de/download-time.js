@@ -97,6 +97,19 @@ function render() {
   if (mbpsValue) mbpsValue.textContent = state.mbps + " Mbps";
   if (effRange) effRange.value = String(state.eff);
   if (effValue) effValue.textContent = state.eff + "%";
+  // Accessible labels follow the live values: the static HTML says
+  // "currently 100 Mbps" forever, so swap only the number in each
+  // slider's stored base label.
+  function syncAria(input, value) {
+    if (!input) return;
+    if (!input.dataset.baseAria) input.dataset.baseAria = input.getAttribute("aria-label") || "";
+    input.setAttribute("aria-label", input.dataset.baseAria.replace(/[\d.]+/, String(value)));
+  }
+  syncAria(gbRange, state.gb);
+  syncAria(patchRange, state.patch);
+  syncAria(mbpsRange, state.mbps);
+  syncAria(effRange, state.eff);
+
   presetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.presetButton) === state.mbps)); });
 
   var clock = r.finish.toLocaleString("de-DE", { weekday: "short", hour: "numeric", minute: "2-digit" });
@@ -107,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB bei " + state.mbps + " Mbps (" + state.eff + " % Effizienz, " + Math.round(r.effMbps) + " Mbps effektiv) dauert etwa " + r.total.text + ". Starte den Pre-Load sofort, wenn er öffnet, falls du unter 100 Mbps bist.";
+    var tldrText = r.totalGb + " GB bei " + state.mbps + " Mbps (" + state.eff + " % Effizienz, " + Math.round(r.effMbps) + " Mbps effektiv) dauert etwa " + r.total.text + " Das Pre-Load-Fenster ist vorbei: starte den Download jetzt.";
     if (label) label.textContent = "Etwa " + r.total.text + " · Kurzfassung";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " für " + r.totalGb + " GB";

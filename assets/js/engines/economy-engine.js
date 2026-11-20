@@ -28,7 +28,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "Warehouse cargo sell (full crate load)",
+    label: "Warehouse cargo sell (full crate load) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -72,7 +72,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "Payphone hit (bonus objective)",
+    label: "Payphone hit (bonus objective) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,

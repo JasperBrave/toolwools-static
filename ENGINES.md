@@ -93,7 +93,7 @@ Notes on the comparison:
 
 - `src/lib/tools/registry.ts` — tool catalogue metadata, not a calculator.
   Page builders should read it directly for titles/descriptions (the header
-  search index in `assets/js/search.js` already embeds its 19 tools).
+  search index in `assets/js/search.js` already embeds its 22 tools).
 - `src/lib/tools/content/*.ts` — page copy (hero, FAQs, methodology). Copied
   by hand into each page's HTML, not as JS.
 - `src/lib/tools/breadcrumbs.ts`, `related-engine.ts`, `guides-registry.ts`,

@@ -26,7 +26,16 @@
   function hide() { var b = banner(); if (b) b.hidden = true; }
   var choice = stored();
   if (choice === "granted") loadGa();
-  else if (!choice) show();
+  else if (!choice) {
+    // Worker C iter2: the fixed banner (181px at 375px) covered the hero
+    // proof strip on first paint. Delay the first show so the hero is
+    // visible on load; first scroll shows it immediately instead.
+    // Re-opening from the footer Cookie settings button stays instant.
+    var shown = false;
+    var showSoon = function () { if (!shown) { shown = true; show(); } };
+    window.setTimeout(showSoon, 1800);
+    window.addEventListener("scroll", showSoon, { once: true, passive: true });
+  }
   document.querySelectorAll("[data-consent-accept]").forEach(function (btn) {
     btn.addEventListener("click", function () { save("granted"); loadGa(); hide(); });
   });

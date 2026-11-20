@@ -29,7 +29,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "Venta de carga de almacén (carga completa)",
+    label: "Venta de carga de almacén (carga completa) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -73,7 +73,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "Golpe de teléfono público (objetivo extra)",
+    label: "Golpe de teléfono público (objetivo extra) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,

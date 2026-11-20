@@ -124,7 +124,7 @@ function methodTableHtml(rows, activeId) {
       + "<td class=\"mono\">" + money(r.perHourPerPlayer) + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Every GTA 6 money method ranked by net GTA$ per hour</h2>\n'
-    + '      <p class="section-dek">Net rate is payout minus buy-in, divided by full cycle time. Payouts are projections, shown rounded.</p>\n'
+    + '      <p class="section-dek">Net rate is payout minus buy-in, divided by full cycle time. Payouts are projections, shown rounded. Payphone hits and warehouse cargo sales are GTA Online methods, shown as the closest available analogues.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Every GTA 6 money method ranked by net GTA$ per hour, scrollable table">\n'
     + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Projected GTA 6 money methods ranked by net GTA dollars per hour, with payout, cycle time, buy-in and per-player rate.</caption>\n'
     + '        <thead><tr><th scope="col">Method</th><th scope="col">Payout</th><th scope="col">Net / hr</th><th scope="col">Cycle</th><th scope="col">Buy-in</th><th scope="col">Per player</th></tr></thead>\n'

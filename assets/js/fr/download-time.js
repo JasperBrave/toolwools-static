@@ -97,6 +97,19 @@ function render() {
   if (mbpsValue) mbpsValue.textContent = state.mbps + " Mbps";
   if (effRange) effRange.value = String(state.eff);
   if (effValue) effValue.textContent = state.eff + "%";
+  // Accessible labels follow the live values: the static HTML says
+  // "currently 100 Mbps" forever, so swap only the number in each
+  // slider's stored base label.
+  function syncAria(input, value) {
+    if (!input) return;
+    if (!input.dataset.baseAria) input.dataset.baseAria = input.getAttribute("aria-label") || "";
+    input.setAttribute("aria-label", input.dataset.baseAria.replace(/[\d.]+/, String(value)));
+  }
+  syncAria(gbRange, state.gb);
+  syncAria(patchRange, state.patch);
+  syncAria(mbpsRange, state.mbps);
+  syncAria(effRange, state.eff);
+
   presetButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.presetButton) === state.mbps)); });
 
   var clock = r.finish.toLocaleString("fr-FR", { weekday: "short", hour: "numeric", minute: "2-digit" });
@@ -107,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " Go à " + state.mbps + " Mbps (" + state.eff + " % d'efficacité, " + Math.round(r.effMbps) + " Mbps effectifs) se termine dans environ " + r.total.text + ". Lancez le préchargement dès son ouverture si vous êtes en dessous de 100 Mbps.";
+    var tldrText = r.totalGb + " Go à " + state.mbps + " Mbps (" + state.eff + " % d'efficacité, " + Math.round(r.effMbps) + " Mbps effectifs) se termine dans environ " + r.total.text + ". La fenêtre de préchargement est terminée : lancez le téléchargement maintenant.";
     if (label) label.textContent = "Environ " + r.total.text + " · En bref";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " pour " + r.totalGb + " Go";

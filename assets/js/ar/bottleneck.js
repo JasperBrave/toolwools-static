@@ -221,7 +221,7 @@ function shareText() {
     var cpuB = findPart(CPUS, state.cpu2);
     var resultB = computeBalance(gpuB, cpuB, state.res, state.mode);
     var diff = resultB.avgFps - result.avgFps;
-    var winner = Math.abs(diff) <= 3 ? "Tie" : diff > 0 ? "الجهاز B" : "الجهاز A";
+    var winner = Math.abs(diff) <= 3 ? "تعادل" : diff > 0 ? "الجهاز B" : "الجهاز A";
     return gpu.label + "/" + cpu.label + " مقابل " + gpuB.label + "/" + cpuB.label + " @ " + state.res + ". مقارنة GTA 6: " + shareUrl() + " (" + winner + ")";
   }
   return gpu.label + " + " + cpu.label + " @ " + state.res + " · " + WORKLOAD_META[state.mode].label + " ← " + verdictLabelOf(result) + ". فحص اختناق GTA 6: " + shareUrl();

@@ -29,7 +29,7 @@ export const METHODS = [
   },
   {
     id: "cargo-sell",
-    label: "Venda de carga de armazém (carga completa)",
+    label: "Venda de carga de armazém (carga completa) (GTA Online)",
     kind: "sell",
     payout: 810000,
     minutes: 70,
@@ -73,7 +73,7 @@ export const METHODS = [
   },
   {
     id: "payphone-hit",
-    label: "Golpe de orelhão (objetivo bônus)",
+    label: "Golpe de orelhão (objetivo bônus) (GTA Online)",
     kind: "mission",
     payout: 96000,
     minutes: 11,
