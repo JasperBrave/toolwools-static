@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodik: Wie jede ToolWools-Zahl gemacht wird | ToolWools</title>
+<meta name="description" content="Keine Black Boxes. Zehn veröffentlichte Modelle, jedes mit benannten Inputs, einem genannten Fehler-Band und einem datierten Changelog. Die Methode hinter jedem Rechner auf dieser Seite.">
+<meta name="author" content="ToolWools">
+<meta property="og:title" content="Methodik: Wie jede ToolWools-Zahl gemacht wird | ToolWools">
+<meta property="og:description" content="Keine Black Boxes. Zehn veröffentlichte Modelle, jedes mit benannten Inputs, einem genannten Fehler-Band und einem datierten Changelog. Die Methode hinter jedem Rechner auf dieser Seite.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolWools">
+<meta property="og:url" content="https://toolwools.com/de/methodology">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:image" content="https://toolwools.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Methodik: Wie jede ToolWools-Zahl gemacht wird | ToolWools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Methodik: Wie jede ToolWools-Zahl gemacht wird | ToolWools">
+<meta name="twitter:description" content="Keine Black Boxes. Zehn veröffentlichte Modelle, jedes mit benannten Inputs, einem genannten Fehler-Band und einem datierten Changelog. Die Methode hinter jedem Rechner auf dieser Seite.">
+<meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
+<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://toolwools.com/de/methodology">
+<link rel="alternate" href="https://toolwools.com/methodology" hreflang="en">
+<link rel="alternate" href="https://toolwools.com/es/methodology" hreflang="es">
+<link rel="alternate" href="https://toolwools.com/pt/methodology" hreflang="pt">
+<link rel="alternate" href="https://toolwools.com/de/methodology" hreflang="de">
+<link rel="alternate" href="https://toolwools.com/fr/methodology" hreflang="fr">
+<link rel="alternate" href="https://toolwools.com/tr/methodology" hreflang="tr">
+<link rel="alternate" href="https://toolwools.com/ar/methodology" hreflang="ar">
+<link rel="alternate" href="https://toolwools.com/methodology" hreflang="x-default">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolwools.com/de/methodology#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://toolwools.com/de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Methodik"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Warum haben manche Zahlen Fehler-Bänder?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Weil sie Schätzungen sind, keine Messungen von GTA 6. Wir schätzen gegen die angekündigten Konsolen-Ziele und gemessenes Verhalten in vergleichbaren RAGE-Engine-Titeln. Das Band sagt dir, wie weit der echte Wert von der Schätzung landen könnte, und es wird aus der Varianz in den Anker-Datensätzen berechnet, nicht gewählt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was macht ihr, wenn Rockstar eine Änderung ankündigt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jedes Modell läuft neu auf einer festen Trigger-Liste: neue Treiber-Releases mit bekanntem Einfluss, Rockstar-System-Updates und der Launch-Tag selbst. Die Änderung ist datiert im Changelog des Tools und der alte Wert wird sichtbar gehalten, sodass du sehen kannst, was sich bewegte und wann."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was ist der Referenz-PC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Der PC, gegen den wir jedes Modell validieren, ist vollständig auf dieser Seite gelistet: ein Core i9-14900K, RTX 4090, 64 GB DDR5-6400 und ein Samsung-990-Pro-NVMe-Laufwerk, auf Windows 11 24H2. Wo die Behauptung eines Modells einen anderen PC braucht, sagt die Modell-Seite es."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie oft testet ihr neu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bei jedem Treiber-Release mit bekanntem GTA-V- oder RDR2-Einfluss, bei jedem Rockstar-System-Update und am Launch-Tag. Zwischen Triggern gilt ein Modell als stabil, es sei denn, ein Korrektur-Bericht reproduziert einen Mismatch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie melde ich einen Mismatch mit meinem eigenen PC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nutze die Korrektur-Adresse auf der Über-Seite: Tool, genaue Inputs, der Wert, den wir gaben, der Wert, den du gemessen hast, und wie du ihn gemessen hast. Reproduktion ist das Tor: Wir führen den Fall auf dem Referenz-PC neu aus, dann liefern wir einen datierten Fix im Changelog des Tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Modelliert ihr geleakte Specs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein. Geleaktes Material darf diskutiert und als unbestätigt gelabelt werden, aber es ändert nie eine Berechnung. Nur Rockstar-Ankündigungen und gemessenes Verhalten in veröffentlichten Spielen bewegen ein Modell."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="site-shell">
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<header class="site-header" aria-label="Website">
+  <div class="site-header-glow" aria-hidden="true"></div>
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
+          <span class="logo-bar" aria-hidden="true"></span>
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Primär">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools">Tools</a>
+          <a href="/de/trackers">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="TOOLS SUCHEN" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/methodology">English</a>
+            <a href="/es/methodology">Español</a>
+            <a href="/pt/methodology">Português</a>
+            <a href="/de/methodology" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deutsch</a>
+            <a href="/fr/methodology">Français</a>
+            <a href="/tr/methodology">Türkçe</a>
+            <a href="/ar/methodology">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Zum dunklen Theme wechseln" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Mobil">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools">Tools</a>
+          <a href="/de/trackers">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+<article aria-labelledby="page-hero-heading">
+  <header class="page-hero">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="page-hero-fade" aria-hidden="true"></div>
+    <div class="container page-hero-inner">
+      <nav aria-label="Brotkrumen" class="breadcrumbs">
+        <a href="/de/">Startseite</a>
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-current="page">Methodik</span>
+      </nav>
+      <span class="page-hero-eyebrow eyebrow-muted">Methodik</span>
+      <h1 id="page-hero-heading">Wie jede Zahl gemacht wird</h1>
+      <p class="page-hero-sub">Keine Black Boxes. Jeder Rechner auf dieser Seite ist gebaut auf einem von zehn veröffentlichten Modellen, jedes mit benannten Inputs, einem genannten Fehler-Band und einem datierten Changelog. Diese Seite ist die Methode hinter allen.</p>
+    </div>
+  </header>
+  <div class="container tool-body">
+    <section aria-labelledby="principles">
+      <h2 id="principles">Unsere Prinzipien</h2>
+      <div class="block" style="margin-top:1.5rem">
+        <p>Jede Zahl auf dieser Seite trägt ein genanntes Fehler-Band und eine datierte Quellen-Liste. Wenn eine Behauptung nicht gesourct werden kann, kommt sie nicht rein. Wenn ein Modell nicht reproduziert werden kann, wird es nicht ausgeliefert.</p>
+        <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+          <li><strong style="color:var(--foreground)">Schätzungen, gelabelt als Schätzungen.</strong> Wo Rockstar keine Zahl veröffentlicht hat, PC-Specs, genaue PC-Leistung, sagt das Tool es auf dem gleichen Bildschirm wie die Schätzung.</li>
+          <li><strong style="color:var(--foreground)">Fehler-Bänder, nicht falsche Präzision.</strong> Framerates sind Bereiche, VRAM ist ein Band, Tiers sind Buchstaben. Eine Einzel-Punkt-FPS-Zahl ist eine Behauptung, ein Band ist ein Modell.</li>
+          <li><strong style="color:var(--foreground)">Öffentliche Quellen.</strong> Jede externe Zahl führt zu einer benannten Quelle zurück, die du selbst prüfen kannst, gelistet pro Modell unten.</li>
+          <li><strong style="color:var(--foreground)">Reproduktion vor Korrektur.</strong> Ein gemeldeter Mismatch wird auf dem Referenz-PC neu ausgeführt, bevor ein Fix ausgeliefert wird. Der Fix wird dann im Changelog datiert.</li>
+        </ul>
+      </div>
+    </section>
+    <section aria-labelledby="reference-rig">
+      <h2 id="reference-rig">Referenz-PC</h2>
+      <p class="tool-dek">Der PC, gegen den jedes Modell validiert wird. Wo eine Behauptung einen anderen PC braucht, sagt die Modell-Seite es.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Referenz-PC-Spezifikation, scrollbares Tabellen-Layout" style="margin-top:1.5rem">
+        <table class="data-table" style="min-width:560px">
+          <caption class="sr-only">Referenz-PC-Komponenten</caption>
+          <thead><tr><th scope="col">Komponente</th><th scope="col">Spec</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">CPU</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Intel Core i9-14900K (24 cores / 32 threads)</td></tr>
+            <tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">GPU</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">NVIDIA GeForce RTX 4090, 24 GB</td></tr>
+            <tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Speicher</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">64 GB DDR5-6400 CL32, dual channel</td></tr>
+            <tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Speicher</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Samsung 990 Pro 2 TB NVMe</td></tr>
+            <tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Betriebssystem</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Windows 11 24H2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section aria-labelledby="models">
+      <h2 id="models">Zehn Modelle, eine Methode</h2>
+      <p class="tool-dek">Jeder Rechner und Planer auf der Seite ist gebaut auf einem von zehn Modellen unten. Jedes listet seine Inputs, seine Output-Form, seinen Anker-Datensatz und sein Fehler-Band.</p>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem"><article id="model-bottleneck" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Bottleneck-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Berechnet CPU-vs.-GPU-Headroom als Funktion von Draw-Call-Durchsatz, Thread-Sättigung und Raster-Grenzen, validiert gegen GTA V und RDR2 bei 4K und 1080p. Volles Detail im Modell-Changelog.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> GPU-Tier, CPU-Tier, Auflösung, Ziel-Framerate</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Bottleneck-Score 0–100 und ein einziger Call, CPU-gebunden, GPU-gebunden oder ausgewogen.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> GTA-V- und RDR2-Benchmarks bei 4K und 1080p</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±8 Punkte auf dem Score</li></ul>
+        </article><article id="model-vram" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">VRAM-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Mappt Textur-Preset und Auflösung auf allokierten Speicher, plus einen festen Headroom für Raytracing und Upscaler. Kalibriert gegen öffentliche VRAM-Captures auf RDR2.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> GPU-Tier, Textur-Qualität, Auflösung, Raytracing-Status, Upscaler</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Erforderliche VRAM in GB, plus die nächste Tier hoch, wenn innerhalb von 1 GB.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> RDR2-VRAM-Zuweisungs-Captures</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±1 GB</li></ul>
+        </article><article id="model-fps" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">FPS-Schätzer</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Schätzt Durchschnitts- und 1 %-Low-Framerates pro GPU-Tier und Auflösung, mit einem CPU-Skalierungs-Faktor. Abgeleitet aus RDR2, Cyberpunk 2077 und GTA V bei äquivalenten Presets.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> GPU-Tier, CPU-Tier, Auflösung, Preset, Ziel-Framerate</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Durchschnitts-FPS und 1 %-Low-FPS als Bereich, nicht als Punkt.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> RDR2, Cyberpunk 2077 und GTA V bei äquivalenten Presets</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±15 % auf dem Mittelwert</li></ul>
+        </article><article id="model-readiness" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Readiness-Score</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Kombiniert Bottleneck-, VRAM-, Speicher- und Internet-Ergebnisse in einen einzigen 0–100-Score und eine Buchstaben-Note. Die schwächste Komponente dominiert den Score, sodass das Ergebnis umsetzbar statt kosmetisch ist.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Bottleneck-Score, VRAM-Marge, Speicher-Headroom, Internet-Note</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Ein 0–100-Score, eine Buchstaben-Note F bis S und das benannte schwächste Glied.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> Aggregiert die Bottleneck-, VRAM-, Speicher- und Internet-Modelle</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> Scores sind diagnostisch, kein einzelnes Band gilt</li></ul>
+        </article><article id="model-tiers" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">GPU-Tier-Ranking</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Rankt Karten in S-, A-, B-, C-, D- und F-Bänder aus gemessener Raster-Leistung, VRAM-Kapazität und Preis-Band. Läuft neu bei jedem Treiber-Release mit bekanntem GTA-V- oder RDR2-Einfluss.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Raster-Leistung, VRAM, Speicher-Bandbreite, Launch-Preis-Band</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Tier-Buchstabe pro Karte, mit Deltas pro Auflösung.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> TechPowerUp- und Hardware-Unboxed-Datensätze</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±1 Tier</li></ul>
+        </article><article id="model-network" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Netzwerk-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Bewertet Latenz, Jitter, Paketverlust und Durchsatz gegen ein realistisches Ziel für deine Region und dein Gerät. Latenz und Jitter dominieren die Note, weil das Launch-Day-Risiko Server-Last ist, nicht rohe Geschwindigkeit.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Ping, Jitter, Paketverlust, Download-Geschwindigkeit</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Eine Latenz-geführte Note (Gut / Grenze / Schlecht) plus eine Preload-Zeit-Schätzung.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> Öffentliche GTA-Online-Latenz-Messungen</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±10 ms</li></ul>
+        </article><article id="model-economy" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Economy-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Rankt Geld-Methoden nach Netto-$/Stunde mit veröffentlichten Auszahlungs-Tabellen und Spawn-Raten. Jede Methode listet ihre Annahmen, sodass eine Rang-Änderung gegen die Quelle geprüft werden kann.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Aktivitäts-Auszahlung, Spawn-Rate, Cooldown, Missions-Zeit</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Netto-$/Stunde pro Methode, gerankt, mit benannten Annahmen.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> Veröffentlichte GTA-Online-Auszahlungs-Tabellen</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> Nur richtungsweisend, keine Garantie</li></ul>
+        </article><article id="model-pricing" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Preis-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Konvertiert den angekündigten US-Preis in lokale Währung mit einem Bankkurs-Lookup. Steuer-Behandlung ist explizit pro Markt, sodass der lokale Preis nicht durch versteckte Steuer aufgebläht wird.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Basis-Preis, Land, lokaler Steuer-Satz, Bankkurs-Datum</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Lokaler Preis, USD-Äquivalent und der Steuer-Split.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> Bankkurs am genannten Datum</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> Exakt am genannten Kurs-Datum</li></ul>
+        </article><article id="model-storage" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Speicher-Modell</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Berechnet den Gesamt-Fußabdruck als Installations-Größe plus Patch-Working-Set plus nutzer-gewählte Add-ons. Der Patch-Working-Set-Term ist der Teil, den andere Planer auslassen.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Installations-Größe, Patch-Größe, DLC-Add-ons, Konsole oder PC</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Gesamt-GB erforderlich, plus Headroom-Anleitung.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> GTA-V- und RDR2-Installations- und Patch-Größen</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> ±15 GB</li></ul>
+        </article><article id="model-preorder" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Vorbestell-Entscheidungs-Desk</h3>
+        <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Bewertet sechs Kauf-Kanäle nach Stornierbarkeit, Preis-Schutz, Preload-Timing, Boni und Wiederverkaufs-Wert. Scoring-Gewichte sind veröffentlicht, nicht versteckt.</p>
+        <ul style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6;display:flex;flex-direction:column;gap:0.375rem">
+        <li><strong style="color:var(--foreground)">Eingaben:</strong> Plattform, Region, Händler-Politik, Edition</li>
+        <li><strong style="color:var(--foreground)">Ausgabe-Form:</strong> Eine gerankte Empfehlung pro Händler, mit gezeigten Gewichten.</li>
+        <li><strong style="color:var(--foreground)">Anker:</strong> Händler-Politik-Seiten</li>
+        <li><strong style="color:var(--foreground)">Fehler-Band:</strong> Nur Ranking, keine Preis-Prognose</li></ul>
+        </article></div>
+    </section>
+    <section aria-labelledby="confidence">
+      <h2 id="confidence">Vertrauen: was jede Zahl ist und wie weit sie sich bewegen kann</h2>
+      <p class="tool-dek">Eine Zahl ohne Fehler-Band ist ein Versprechen. Unsere sind keine Versprechen, also trägt jede ihr Band, ihre Inputs und den Datensatz, an den sie verankert ist.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Vertrauens-Tabelle, scrollbares Tabellen-Layout" style="margin-top:1.5rem">
+        <table class="data-table" style="min-width:680px">
+          <caption class="sr-only">Vertrauens-Bänder für jedes Modell</caption>
+          <thead><tr><th scope="col">Modell</th><th scope="col">Natur</th><th scope="col">Band</th><th scope="col">Hängt ab von</th><th scope="col">Verankert an</th></tr></thead>
+          <tbody><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Download-Zeit</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±3 %</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Netzwerk-Geschwindigkeit, Patch-Größe</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Gemessener anhaltender Durchsatz zur gleichen Tageszeit.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Speicher-Fußabdruck</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±15 GB</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Installations-Größe, Patch-Working-Set, Add-ons</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">GTA-V- und RDR2-Installationen plus Patch-Historie.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">VRAM-Anforderung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±1 GB</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Textur-Preset, Auflösung, RT, Upscaler</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RDR2-VRAM-Zuweisungs-Captures.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Bottleneck-Score</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±8 Punkte</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">GPU-Tier, CPU-Tier, Auflösung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">GTA-V- und RDR2-Benchmarks bei 4K und 1080p.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">GPU-Tier-Ranking</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±1 Tier</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Raster-Leistung, VRAM, Preis-Band</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">TechPowerUp- und Hardware-Unboxed-Datensätze.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">FPS-Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±15 %</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">GPU-Tier, CPU-Tier, Auflösung, Preset</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RDR2, Cyberpunk 2077 und GTA V bei äquivalenten Presets.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Preis nach Land</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Berechnet</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Exakt am genannten Kurs-Datum</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Basis-Preis, Land, lokale Steuer, Kurs-Datum</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Bankkurs am genannten Datum.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Internet-Note</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">±10 ms</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ping, Jitter, Paketverlust, Geschwindigkeit</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Öffentliche GTA-Online-Latenz-Messungen.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Vorbestell-Ranking</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ranking</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Keine Zahl</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Händler-Politik, Plattform, Region</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Händler-Politik-Seiten.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Geld-Methoden-Ranking</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Schätzung</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Nur richtungsweisend</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Auszahlung, Spawn-Rate, Cooldown, Missions-Zeit</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Veröffentlichte GTA-Online-Auszahlungs-Tabellen.</td></tr></tbody>
+        </table>
+      </div>
+      <div class="block" style="margin-top:1.5rem">
+        <h3 style="font-size:1rem;font-weight:700">Was wir nicht behaupten</h3>
+        <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+          <li>Wir behaupten nicht, GTA 6s PC-Systemanforderungen zu kennen. Rockstar hat sie nicht veröffentlicht.</li>
+          <li>Wir behaupten keine Einzel-Punkt-FPS-Zahl für eine Karte. Framerates sind Bereiche mit einem genannten Band.</li>
+          <li>Wir behaupten keine Preis-Prognosen. Preis-Seiten zeigen aktuelle Umrechnung an einem genannten Kurs-Datum.</li>
+          <li>Wir behaupten keinen Insider-Zugang. Unverifiziertes Material wird diskutiert und gelabelt, nie modelliert.</li>
+          <li>Wir behaupten nicht, dass eine Tier permanent ist. Tiers laufen neu bei jedem Treiber-Zyklus mit bekanntem Einfluss.</li>
+          <li>Wir behaupten nicht, dass eine Empfehlung ein Kauf-Auftrag ist. Der Entscheidungs-Desk rankt Kanäle, du kaufst, wo du wählst.</li>
+        </ul>
+      </div>
+    </section>
+    <section aria-labelledby="verification">
+      <h2 id="verification">Wie wir jede Behauptung verifizieren</h2>
+      <p class="tool-dek">Eine kurze Checkliste, angewandt, bevor etwas ausgeliefert wird.</p>
+      <div class="block" style="margin-top:1.5rem">
+        <ul style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+          <li>Jede externe Zahl nennt ihre Quelle in der Modell-Karte oben.</li>
+          <li>Jedes Modell hat eine Reviewer-Abzeichnung von einem unabhängigen Benchmark-Reviewer, bevor es ausgeliefert wird.</li>
+          <li>Jede Behauptung wird auf dem Referenz-PC reproduziert, bevor eine Korrektur veröffentlicht wird.</li>
+          <li>Jedes Modell läuft neu auf der Trigger-Liste unten, und die Änderung ist datiert im Changelog des Tools.</li>
+          <li>Jede veröffentlichte Änderung hält den alten Wert sichtbar, sodass eine Bewegung geprüft werden kann.</li>
+          <li>Jede Seite, die eine Schätzung zeigt, labelt sie als Schätzung auf dem gleichen Bildschirm.</li>
+        </ul>
+      </div>
+      <h3 style="font-size:1.125rem;font-weight:700;margin-top:2rem">Retest-Trigger</h3>
+      <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Die Changelog-Events, die einen Neu-Lauf der betroffenen Modelle erzwingen.</p>
+      <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6"><li><strong style="color:var(--foreground)">2026-01-15</strong> Jedes GPU-Hersteller-Treiber-Release mit bekanntem GTA-V- oder RDR2-Einfluss triggert einen Tier-Neu-Lauf.</li><li><strong style="color:var(--foreground)">2026-03-02</strong> Rockstars März-System-Update änderte das Konsolen-Ziel, alle Tiers wurden neu verankert.</li><li><strong style="color:var(--foreground)">2026-05-20</strong> Der Mai-Engine-Patch änderte Draw-Call-Durchsatz-Annahmen, Bottleneck-Deltas neu geprüft.</li><li><strong style="color:var(--foreground)">2026-11-19</strong> Volle Revalidierung gegen echte GTA-6-Leistung, wenn das Spiel erscheint.</li></ul>
+    </section>
+    <section aria-labelledby="corrections">
+      <h2 id="corrections">Korrektur-Prozess</h2>
+      <div class="block" style="margin-top:1.5rem">
+        <ol style="list-style:decimal;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+          <li>Ein Leser meldet einen Mismatch an corrections@toolwools.com mit dem Tool, genauen Inputs, dem Wert, den wir gaben, dem Wert, den sie maßen, und wie sie ihn maßen.</li>
+          <li>Wir reproduzieren den Fall auf dem Referenz-PC. Reproduktion ist das Tor.</li>
+          <li>Wir liefern einen datierten Fix im Changelog des Tools, halten den alten Wert sichtbar.</li>
+          <li>Wir schreiben den Melder im Changelog-Eintrag gut, es sei denn, sie bitten uns, es nicht zu tun.</li>
+        </ol>
+        <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Basis-Quellen für die Anker-Datensätze: Digital Foundry, TechPowerUp, Hardware Unboxed und die Rockstar-GTA-VI-Seite.</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Launch-Referenz: GTA 6 startet am 19. November 2026 um Mitternacht Eastern. Alle Launch-relativen Daten auf dieser Seite nutzen diesen Zeitpunkt.</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Zuletzt verifiziert <time datetime="2026-11-17">17. November 2026</time>.</p>
+      </div>
+    </section>
+    <section aria-labelledby="faq">
+      <header class="text-center">
+        <h2 id="faq" class="h2-lg">Methodik, beantwortet</h2>
+        <p class="tool-dek">Fehler-Bänder, Retesting, der Referenz-PC und Korrekturen in Kurzform.</p>
+      </header>
+      <ul class="faq-list" role="list">
+        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Warum haben manche Zahlen Fehler-Bänder?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Weil sie Schätzungen sind, keine Messungen von GTA 6. Wir schätzen gegen die angekündigten Konsolen-Ziele und gemessenes Verhalten in vergleichbaren RAGE-Engine-Titeln. Das Band sagt dir, wie weit der echte Wert von der Schätzung landen könnte, und es wird aus der Varianz in den Anker-Datensätzen berechnet, nicht gewählt.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">Was macht ihr, wenn Rockstar eine Änderung ankündigt?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Jedes Modell läuft neu auf einer festen Trigger-Liste: neue Treiber-Releases mit bekanntem Einfluss, Rockstar-System-Updates und der Launch-Tag selbst. Die Änderung ist datiert im Changelog des Tools und der alte Wert wird sichtbar gehalten, sodass du sehen kannst, was sich bewegte und wann.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">Was ist der Referenz-PC?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Der PC, gegen den wir jedes Modell validieren, ist vollständig auf dieser Seite gelistet: ein Core i9-14900K, RTX 4090, 64 GB DDR5-6400 und ein Samsung-990-Pro-NVMe-Laufwerk, auf Windows 11 24H2. Wo die Behauptung eines Modells einen anderen PC braucht, sagt die Modell-Seite es.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Wie oft testet ihr neu?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Bei jedem Treiber-Release mit bekanntem GTA-V- oder RDR2-Einfluss, bei jedem Rockstar-System-Update und am Launch-Tag. Zwischen Triggern gilt ein Modell als stabil, es sei denn, ein Korrektur-Bericht reproduziert einen Mismatch.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Wie melde ich einen Mismatch mit meinem eigenen PC?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">Nutze die Korrektur-Adresse auf der Über-Seite: Tool, genaue Inputs, der Wert, den wir gaben, der Wert, den du gemessen hast, und wie du ihn gemessen hast. Reproduktion ist das Tor: Wir führen den Fall auf dem Referenz-PC neu aus, dann liefern wir einen datierten Fix im Changelog des Tools.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">Modelliert ihr geleakte Specs?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">Nein. Geleaktes Material darf diskutiert und als unbestätigt gelabelt werden, aber es ändert nie eine Berechnung. Nur Rockstar-Ankündigungen und gemessenes Verhalten in veröffentlichten Spielen bewegen ein Modell.</p></div></details></article></li>
+      </ul>
+    </section>
+  </div>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
+      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
+      <div class="footer-glow-line" aria-hidden="true"></div>
+      <a href="/de/#hero-title" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">Live · GTA-6-Launch-Tracking, 19. Nov. 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Countdown ansehen →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
+            <span class="logo-bar" aria-hidden="true"></span>
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+              </span>
+            </span>
+          </a>
+          <p>Das ultimative Ziel für GTA-6-Tools, Rechner, Tracker, Planer und Guides. Alles, was du brauchst, an einem Ort, keine Ads zuerst, kein Ballast.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Top-Tools</h3>
+            <ul>
+              <li><a href="/de/tools/system-requirements">Kann mein PC GTA 6 schaffen?</a></li>
+              <li><a href="/de/tools/fps-calculator">FPS-Rechner</a></li>
+              <li><a href="/de/tools/download-time">Download-Zeit-Rechner</a></li>
+              <li><a href="/de/tools/system-requirements">Systemanforderungen</a></li>
+              <li><a href="/de/tools/settings-optimizer">Einstellungs-Optimierer</a></li>
+              <li><a href="/de/tools/hardware-comparison">Hardware-Vergleich</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Entdecken</h3>
+            <ul>
+              <li><a href="/de/tools">Alle Tools</a></li>
+              <li><a href="/de/trending">Trends</a></li>
+              <li><a href="/de/trackers">Tracker</a></li>
+              <li><a href="/de/generators">Generatoren</a></li>
+              <li><a href="/de/news">News</a></li>
+              <li><a href="/de/trailers">Trailer</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Ressourcen</h3>
+            <ul>
+              <li><a href="/de/tools/interactive-map">Interaktive Karte</a> <span class="footer-col-badge">Neu</span></li>
+              <li><a href="/de/about">Über uns</a></li>
+              <li><a href="/de/methodology">Methodik</a></li>
+              <li><a href="/de/contact">Kontakt</a></li>
+              <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
+              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
+        <div class="footer-bottom-links">
+          <a href="/de/privacy">Datenschutz</a>
+          <a href="/de/terms">Bedingungen</a>
+          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
+          <span class="sep" aria-hidden="true"></span>
+          <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
+  <div class="consent-inner">
+    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
+      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
+      <a href="/de/privacy">Datenschutzerklärung</a>
+    </div>
+  </div>
+</div>
+</div>
+<script src="/assets/js/de/launch.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/de/theme.js" defer></script>
+<script src="/assets/js/de/consent.js" defer></script>
+<script src="/assets/js/de/header.js" defer></script>
+<script src="/assets/js/de/search.js" defer></script>
+<script src="/assets/js/de/faq.js" defer></script>
+<script src="/assets/js/de/newsletter.js" defer></script>
+</body>
+</html>

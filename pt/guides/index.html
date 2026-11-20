@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guias do GTA 6: como o FPS é estimado e o pareamento CPU-GPU | ToolWools</title>
+<meta name="description" content="Dois guias escritos até agora, cada um explicando um modelo ou uma decisão com detalhes suficientes para verificá-lo. Sem enchimento, sem promessas sem data.">
+<meta name="author" content="ToolWools">
+<meta property="og:title" content="Guias do GTA 6: como o FPS é estimado e o pareamento CPU-GPU | ToolWools">
+<meta property="og:description" content="Dois guias escritos até agora, cada um explicando um modelo ou uma decisão com detalhes suficientes para verificá-lo. Sem enchimento, sem promessas sem data.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolWools">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="tr_TR">
+    <meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:url" content="https://toolwools.com/pt/guides">
+<meta property="og:image" content="https://toolwools.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Guias do GTA 6: como o FPS é estimado e o pareamento CPU-GPU | ToolWools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guias do GTA 6: como o FPS é estimado e o pareamento CPU-GPU | ToolWools">
+<meta name="twitter:description" content="Dois guias escritos até agora, cada um explicando um modelo ou uma decisão com detalhes suficientes para verificá-lo. Sem enchimento, sem promessas sem data.">
+<meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
+<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://toolwools.com/pt/guides">
+<link rel="alternate" href="https://toolwools.com/guides" hreflang="en">
+<link rel="alternate" href="https://toolwools.com/es/guides" hreflang="es">
+<link rel="alternate" href="https://toolwools.com/pt/guides" hreflang="pt">
+<link rel="alternate" href="https://toolwools.com/de/guides" hreflang="de">
+<link rel="alternate" href="https://toolwools.com/fr/guides" hreflang="fr">
+<link rel="alternate" href="https://toolwools.com/tr/guides" hreflang="tr">
+<link rel="alternate" href="https://toolwools.com/ar/guides" hreflang="ar">
+<link rel="alternate" href="https://toolwools.com/guides" hreflang="x-default">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolwools.com/pt/guides#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://toolwools.com/pt/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guias"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Estes guias são conteúdo ou marketing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Guias. Cada um explica um modelo ou uma decisão com detalhes suficientes para verificá-lo: o guia de FPS percorre o modelo de seis etapas, o guia de pareamento lista doze pareamentos reais com vereditos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Com que frequência os guias são atualizados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quando o modelo subjacente muda. Um guia que cita uma versão de modelo permanece fixado a ela até que o modelo seja executado novamente, e a mudança tem data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quais guias vêm a seguir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O orçamento de VRAM, alocada vs usada, e quando o engasgo começa, é o próximo na fila. Está em rascunho; nenhuma data é prometida até que o modelo por trás seja validado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso sugerir um tema de guia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim, use o formulário de contato e escolha Feedback sobre ferramentas. Tópicos que correspondem a um modelo que podemos validar entram na lista."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="site-shell">
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<header class="site-header" aria-label="Site">
+  <div class="site-header-glow" aria-hidden="true"></div>
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
+          <span class="logo-bar" aria-hidden="true"></span>
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Principal">
+          <a href="/pt/">Início</a>
+          <a href="/pt/tools">Ferramentas</a>
+          <a href="/pt/trackers">Rastreadores</a>
+          <a href="/pt/generators">Geradores</a>
+          <a href="/pt/news">Notícias</a>
+          <a href="/pt/trailers">Trailers</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR FERRAMENTAS" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary aria-label="Selecionar idioma">PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/guides">English</a>
+            <a href="/es/guides">Español</a>
+            <a href="/pt/guides" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Português</a>
+            <a href="/de/guides">Deutsch</a>
+            <a href="/fr/guides">Français</a>
+            <a href="/tr/guides">Türkçe</a>
+            <a href="/ar/guides">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Mudar para o tema escuro" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Móvel">
+          <a href="/pt/">Início</a>
+          <a href="/pt/tools">Ferramentas</a>
+          <a href="/pt/trackers">Rastreadores</a>
+          <a href="/pt/generators">Geradores</a>
+          <a href="/pt/news">Notícias</a>
+          <a href="/pt/trailers">Trailers</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+<article aria-labelledby="page-hero-heading">
+  <header class="page-hero">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="page-hero-fade" aria-hidden="true"></div>
+    <div class="container page-hero-inner">
+      <nav aria-label="Trilha de navegação" class="breadcrumbs">
+        <a href="/pt/">Início</a>
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-current="page">Guias</span>
+      </nav>
+      <span class="page-hero-eyebrow eyebrow-muted">Guias</span>
+      <h1 id="page-hero-heading">Guias que mostram seu trabalho</h1>
+      <p class="page-hero-sub">Dois guias escritos até agora, cada um explicando um modelo ou uma decisão com detalhes suficientes para verificá-lo. Sem enchimento, sem promessas sem data.</p>
+    </div>
+  </header>
+  <div class="container tool-body">
+    <section aria-labelledby="guides-list">
+      <h2 id="guides-list">Dois guias, escritos para serem verificados</h2>
+      <p class="tool-dek">Leia em ordem: primeiro o guia de FPS, depois o guia de pareamento, e então a calculadora de FPS para testar o que você aprendeu.</p>
+      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/pt/guides/how-fps-is-estimated"><span class="badge badge-blue">Guia</span><h3>Como o FPS é estimado</h3><p class="news-date">Publicado 24 de julho de 2026</p><p>O modelo de seis etapas por trás da calculadora de FPS: o que é a estimativa, a que ela está ancorada e o quanto pode variar.</p><span class="open-link">Leia o guia →</span></a></li><li><a class="guide-card" href="/pt/guides/cpu-gpu-pairing"><span class="badge badge-blue">Guia</span><h3>Pareamento CPU-GPU para o GTA 6</h3><p class="news-date">Publicado 3 de agosto de 2026</p><p>Doze pareamentos reais, rotulados como equilibrados, limitados por CPU ou com GPU subaproveitada, e por que as draw calls, e não a potência bruta, decidem o equilíbrio.</p><span class="open-link">Leia o guia →</span></a></li></ul>
+    </section>
+    <section class="hub-note" aria-labelledby="next-guide">
+      <h2 id="next-guide" style="font-size:0.875rem;font-weight:700">Próximo na fila</h2>
+      <p style="margin-top:0.5rem">O orçamento de VRAM, alocada vs usada, e quando o engasgo começa, está em rascunho. Nenhuma data é prometida até que o modelo por trás seja validado.</p>
+    </section>
+    <section aria-labelledby="faq">
+      <header class="text-center">
+        <h2 id="faq" class="h2-lg">Sobre os guias</h2>
+        <p class="tool-dek">Como os guias são escritos, atualizados e escolhidos.</p>
+      </header>
+      <ul class="faq-list" role="list">
+        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Estes guias são conteúdo ou marketing?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Guias. Cada um explica um modelo ou uma decisão com detalhes suficientes para verificá-lo: o guia de FPS percorre o modelo de seis etapas, o guia de pareamento lista doze pareamentos reais com vereditos.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">Com que frequência os guias são atualizados?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Quando o modelo subjacente muda. Um guia que cita uma versão de modelo permanece fixado a ela até que o modelo seja executado novamente, e a mudança tem data.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">Quais guias vêm a seguir?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">O orçamento de VRAM, alocada vs usada, e quando o engasgo começa, é o próximo na fila. Está em rascunho; nenhuma data é prometida até que o modelo por trás seja validado.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Posso sugerir um tema de guia?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Sim, use o formulário de contato e escolha Feedback sobre ferramentas. Tópicos que correspondem a um modelo que podemos validar entram na lista.</p></div></details></article></li>
+      </ul>
+    </section>
+  </div>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
+      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
+      <div class="footer-glow-line" aria-hidden="true"></div>
+      <a href="/pt/#hero-title" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">Ao vivo · Acompanhamento do lançamento de GTA 6, 19 de novembro de 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Ver a contagem regressiva →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
+            <span class="logo-bar" aria-hidden="true"></span>
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
+              </span>
+            </span>
+          </a>
+          <p>O destino definitivo para ferramentas, calculadoras, rastreadores, planejadores e guias de GTA 6. Tudo o que você precisa em um só lugar, sem publicidade invasiva nem conteúdo desnecessário.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Principais ferramentas</h3>
+            <ul>
+              <li><a href="/pt/tools/system-requirements">Meu PC roda GTA 6?</a></li>
+              <li><a href="/pt/tools/fps-calculator">Calculadora de FPS</a></li>
+              <li><a href="/pt/tools/download-time">Calculadora de tempo de download</a></li>
+              <li><a href="/pt/tools/system-requirements">Requisitos do sistema</a></li>
+              <li><a href="/pt/tools/settings-optimizer">Otimizador de configurações</a></li>
+              <li><a href="/pt/tools/hardware-comparison">Comparação de hardware</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Explorar</h3>
+            <ul>
+              <li><a href="/pt/tools">Todas as Ferramentas</a></li>
+              <li><a href="/pt/trending">Em alta</a></li>
+              <li><a href="/pt/trackers">Rastreadores</a></li>
+              <li><a href="/pt/generators">Geradores</a></li>
+              <li><a href="/pt/news">Notícias</a></li>
+              <li><a href="/pt/trailers">Trailers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="/pt/tools/interactive-map">Mapa interativo</a> <span class="footer-col-badge">Novo</span></li>
+              <li><a href="/pt/about">Sobre</a></li>
+              <li><a href="/pt/methodology">Metodologia</a></li>
+              <li><a href="/pt/contact">Contato</a></li>
+              <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
+              <li><a href="/pt/privacy">Política de privacidade</a></li>
+              <li><a href="/pt/terms">Termos de serviço</a></li>
+              <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <a href="/pt/privacy">Privacidade</a>
+          <a href="/pt/terms">Termos</a>
+          <button type="button" class="footer-link-btn" data-consent-open>Configurações de cookies</button>
+          <span class="sep" aria-hidden="true"></span>
+          <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimento de analytics">
+  <div class="consent-inner">
+    <p><strong>Analytics, somente com a sua permissão.</strong> Usamos o Google Analytics agregado para ver quais ferramentas são usadas. Os dados que você insere nunca saem do seu dispositivo, nenhum perfil é criado e nada é vendido. Aceite para carregá-lo ou recuse e navegue sem ele. Você pode mudar de ideia quando quiser em Configurações de cookies no rodapé.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn-ultra" data-consent-accept>Aceitar analytics</button>
+      <button type="button" class="btn-outline" data-consent-decline>Recusar</button>
+      <a href="/pt/privacy">Política de privacidade</a>
+    </div>
+  </div>
+</div>
+</div>
+<script src="/assets/js/pt/launch.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/pt/theme.js" defer></script>
+<script src="/assets/js/pt/consent.js" defer></script>
+<script src="/assets/js/pt/header.js" defer></script>
+<script src="/assets/js/pt/search.js" defer></script>
+<script src="/assets/js/pt/faq.js" defer></script>
+<script src="/assets/js/pt/newsletter.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+// search.js — header search over a static tool index.
+// The source used a live autocomplete over the full content index; this
+// static build ships the tool catalogue (titles + descriptions from
+// src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
+// Enter opens, Escape closes. Links to /tools/<slug> (live tools) or /tools
+// for coming-soon entries, matching the source behaviour.
+(function () {
+  var TOOLS = [
+    { slug: "system-requirements", title: "GTA 6 System Requirements Checker", desc: "Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage." },
+    { slug: "download-time", title: "GTA 6 Download Time Calculator", desc: "Estimate how long the ~150 GB base install will take on your connection, plus day-one patch math." },
+    { slug: "storage-planner", title: "GTA 6 Storage Planner", desc: "Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates." },
+    { slug: "add-to-calendar", title: "GTA 6 Release Date Reminder", desc: "Add the GTA 6 launch to your calendar in your timezone." },
+    { slug: "readiness-score", title: "GTA 6 Readiness Score", desc: "One score for your whole rig: performance, VRAM, storage and network." },
+    { slug: "bottleneck-calculator", title: "GTA 6 Bottleneck Calculator", desc: "Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig." },
+    { slug: "vram-calculator", title: "GTA 6 VRAM Requirements Checker", desc: "Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards." },
+    { slug: "fps-calculator", title: "GTA 6 FPS Calculator", desc: "Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra." },
+    { slug: "gpu-tier-list", title: "GTA 6 GPU Tier List", desc: "Best graphics cards for GTA 6, ranked by tier." },
+    { slug: "interactive-map", title: "GTA 6 Interactive Map", desc: "Leonida explorer and size comparison for the GTA 6 map." },
+    { slug: "pre-order-tracker", title: "GTA 6 Pre-Order Decision Desk", desc: "Where to pre-order GTA 6, compared by channel." },
+    { slug: "edition-comparison", title: "GTA 6 Edition Picker", desc: "Every GTA 6 edition compared: bonuses, price and what each unlocks." },
+    { slug: "internet-speed-check", title: "GTA 6 Internet Speed Advisor", desc: "Check whether your connection is fast enough for GTA 6 downloads and Online." },
+    { slug: "price-by-country", title: "GTA 6 Price by Country", desc: "GTA 6 price by country in local currency." },
+    { slug: "economy-calculator", title: "GTA 6 Money and Business ROI Calculator", desc: "Work out the fastest way to earn GTA$ and which businesses pay back first." },
+    { slug: "gta-6-tracker", title: "GTA 6 Launch Tracker", desc: "Launch tracker and preload milestones for GTA 6." },
+    { slug: "settings-optimizer", title: "Graphics Settings Optimizer", desc: "Dial in graphics settings for your target FPS and rig." },
+    { slug: "hardware-comparison", title: "Hardware Comparison", desc: "Compare two GPUs or CPUs head to head for GTA 6." },
+    { slug: "server-status", title: "GTA 6 Server Status", desc: "Are the GTA 6 servers down? Live status check." },
+    { slug: "preload-tracker", title: "GTA 6 Preload Tracker", desc: "Countdown to preload and launch in your timezone." },
+    { slug: "vehicle-comparison", title: "GTA 6 Vehicle Comparison", desc: "Compare any two GTA 6 vehicles head to head." },
+    { slug: "weapon-comparison", title: "GTA 6 Weapon Stats Comparison", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." }
+  ];
+
+  function setup(input) {
+    if (!input) return;
+    var box = input.closest(".header-search, .mobile-nav-search");
+    if (!box) return;
+    var list = box.querySelector("[data-search-results]");
+    if (!list) return;
+    var active = -1;
+
+    function close() { list.hidden = true; list.innerHTML = ""; active = -1; input.removeAttribute("aria-expanded"); }
+    function render(q) {
+      var query = q.trim().toLowerCase();
+      list.innerHTML = "";
+      if (query.length < 2) { close(); return; }
+      var hits = TOOLS.filter(function (t) {
+        return (t.title + " " + t.desc).toLowerCase().indexOf(query) !== -1;
+      }).slice(0, 6);
+      if (!hits.length) {
+        var empty = document.createElement("div");
+        empty.className = "search-results-empty";
+        empty.textContent = 'No tools match "' + q.trim() + '". Try "FPS", "VRAM" or "bottleneck".';
+        list.appendChild(empty);
+      } else {
+        hits.forEach(function (t) {
+          var a = document.createElement("a");
+          a.href = "/tools/" + t.slug;
+          a.setAttribute("role", "option");
+          var strong = document.createElement("span");
+          strong.textContent = t.title;
+          var small = document.createElement("span");
+          small.className = "search-result-desc";
+          small.textContent = t.desc;
+          a.appendChild(strong);
+          a.appendChild(small);
+          list.appendChild(a);
+        });
+      }
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      active = -1;
+    }
+    input.addEventListener("input", function () { render(input.value); });
+    input.addEventListener("focus", function () { if (input.value.trim().length >= 2) render(input.value); });
+    input.addEventListener("keydown", function (e) {
+      var links = list.querySelectorAll("a");
+      if (e.key === "Escape") { close(); input.blur(); return; }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        if (!links.length) return;
+        e.preventDefault();
+        active = e.key === "ArrowDown" ? (active + 1) % links.length : (active - 1 + links.length) % links.length;
+        links.forEach(function (l) { l.classList.remove("active"); });
+        links[active].classList.add("active");
+        links[active].focus();
+        return;
+      }
+      if (e.key === "Enter" && active >= 0 && links[active]) {
+        e.preventDefault();
+        window.location.href = links[active].href;
+      }
+    });
+    document.addEventListener("click", function (e) {
+      if (!box.contains(e.target)) close();
+    });
+  }
+
+  document.querySelectorAll("[data-header-search-input]").forEach(setup);
+})();

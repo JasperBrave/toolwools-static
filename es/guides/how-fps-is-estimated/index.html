@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo se estima el FPS de GTA 6: el modelo de seis pasos | ToolWools</title>
+<meta name="description" content="El modelo de seis pasos detrás de la calculadora de FPS: qué es la estimación, a qué está anclada y cuánto puede moverse.">
+<meta name="author" content="ToolWools">
+<meta property="og:title" content="Cómo se estima el FPS de GTA 6: el modelo de seis pasos | ToolWools">
+<meta property="og:description" content="El modelo de seis pasos detrás de la calculadora de FPS: qué es la estimación, a qué está anclada y cuánto puede moverse.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ToolWools">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="pt_BR">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="tr_TR">
+    <meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:url" content="https://toolwools.com/es/guides/how-fps-is-estimated">
+<meta property="og:image" content="https://toolwools.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cómo se estima el FPS de GTA 6: el modelo de seis pasos | ToolWools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cómo se estima el FPS de GTA 6: el modelo de seis pasos | ToolWools">
+<meta name="twitter:description" content="El modelo de seis pasos detrás de la calculadora de FPS: qué es la estimación, a qué está anclada y cuánto puede moverse.">
+<meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
+<meta property="article:published_time" content="2026-07-24T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-07-24T00:00:00+00:00">
+<meta property="article:author" content="Mesa de hardware de ToolWools">
+<meta property="article:section" content="Guías">
+<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://toolwools.com/es/guides/how-fps-is-estimated">
+<link rel="alternate" href="https://toolwools.com/guides/how-fps-is-estimated" hreflang="en">
+<link rel="alternate" href="https://toolwools.com/es/guides/how-fps-is-estimated" hreflang="es">
+<link rel="alternate" href="https://toolwools.com/pt/guides/how-fps-is-estimated" hreflang="pt">
+<link rel="alternate" href="https://toolwools.com/de/guides/how-fps-is-estimated" hreflang="de">
+<link rel="alternate" href="https://toolwools.com/fr/guides/how-fps-is-estimated" hreflang="fr">
+<link rel="alternate" href="https://toolwools.com/tr/guides/how-fps-is-estimated" hreflang="tr">
+<link rel="alternate" href="https://toolwools.com/ar/guides/how-fps-is-estimated" hreflang="ar">
+<link rel="alternate" href="https://toolwools.com/guides/how-fps-is-estimated" hreflang="x-default">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
+<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toolwools.com/es/guides/how-fps-is-estimated#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://toolwools.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías",
+          "item": "https://toolwools.com/es/guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cómo se estima el FPS"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué la estimación es un rango y no un solo número?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque GTA 6 aún no ha salido. La estimación está anclada al comportamiento medido en RDR2, Cyberpunk 2077 y GTA V, y el margen de ±15% es la varianza en esos conjuntos de datos. Un solo número implicaría una precisión que el modelo no tiene."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿A qué juegos está anclada la estimación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RDR2, Cyberpunk 2077 y GTA V, con ajustes equivalentes. Son los análogos publicados más cercanos a la carga de trabajo del motor RAGE que ejecutará GTA 6, y los conjuntos de datos de anclaje se nombran en la página de metodología."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué precisión tendrá esto en el lanzamiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El margen es de ±15% en la media. En el lanzamiento, el modelo se revalida frente al rendimiento real de GTA 6 y el margen se estrecha o el modelo se corrige, con el cambio fechado en el registro de cambios de la calculadora de FPS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tiene en cuenta DLSS o FSR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Los escaladores y el trazado de rayos tienen cada uno un coste o ganancia declarados, calibrados frente a capturas de RDR2. La calculadora muestra el ajuste que asumió, así que una discrepancia entre tu configuración y la suposición es visible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y los mínimos del 1%?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La calculadora reporta un promedio y un mínimo del 1%, cada uno como un rango. El mínimo del 1% es el número que decide si un juego se siente fluido, y es el más difícil de estimar, por eso lleva el mismo margen de ±15%."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="site-shell">
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header" aria-label="Sitio">
+  <div class="site-header-glow" aria-hidden="true"></div>
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
+          <span class="logo-bar" aria-hidden="true"></span>
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Principal">
+          <a href="/es/">Inicio</a>
+          <a href="/es/tools">Herramientas</a>
+          <a href="/es/trackers">Rastreadores</a>
+          <a href="/es/generators">Generadores</a>
+          <a href="/es/news">Noticias</a>
+          <a href="/es/trailers">Tráilers</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR HERRAMIENTAS" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary aria-label="Seleccionar idioma">ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/guides/how-fps-is-estimated">English</a>
+            <a href="/es/guides/how-fps-is-estimated" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
+            <a href="/pt/guides/how-fps-is-estimated">Português</a>
+            <a href="/de/guides/how-fps-is-estimated">Deutsch</a>
+            <a href="/fr/guides/how-fps-is-estimated">Français</a>
+            <a href="/tr/guides/how-fps-is-estimated">Türkçe</a>
+            <a href="/ar/guides/how-fps-is-estimated">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar al tema oscuro" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Móvil">
+          <a href="/es/">Inicio</a>
+          <a href="/es/tools">Herramientas</a>
+          <a href="/es/trackers">Rastreadores</a>
+          <a href="/es/generators">Generadores</a>
+          <a href="/es/news">Noticias</a>
+          <a href="/es/trailers">Tráilers</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<main id="main">
+<article aria-labelledby="page-hero-heading">
+  <header class="page-hero">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="page-hero-fade" aria-hidden="true"></div>
+    <div class="container page-hero-inner">
+      <nav aria-label="Migas de pan" class="breadcrumbs">
+        <a href="/es/">Inicio</a>
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <a href="/es/guides">Guías</a>
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-current="page">Cómo se estima el FPS</span>
+      </nav>
+      <span class="page-hero-eyebrow eyebrow-muted">Guía</span>
+      <h1 id="page-hero-heading">Cómo se estima el FPS</h1>
+      <p class="page-hero-sub">El modelo de seis pasos detrás de la calculadora de FPS: qué es la estimación, a qué está anclada y cuánto puede moverse. Escrito para que puedas comprobarlo.</p>
+    </div>
+  </header>
+  <div class="container tool-body">
+    <section class="tldr-card" aria-labelledby="tldr">
+      <h2 id="tldr">En resumen</h2>
+      <p style="margin-top:0.5rem">La calculadora de FPS estima las velocidades de fotogramas a partir del rendimiento medido en RDR2, Cyberpunk 2077 y GTA V, escalado por nivel de GPU y factor de CPU, ajustado por ajuste y escaladores, y presentado como un margen de ±15%, nunca como un solo número. En el lanzamiento, el modelo se revalida frente al rendimiento real de GTA 6.</p>
+      <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">Publicado 24 de julio de 2026 · Actualizado 24 de julio de 2026 · Última verificación 17 de noviembre de 2026</p>
+    </section>
+    <section aria-labelledby="model">
+      <h2 id="model">El modelo de seis pasos</h2>
+      <ol style="list-style:decimal;padding-left:1.25rem;margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.7"><li><strong style="color:var(--foreground)">1. Anclar a juegos medidos.</strong> Empieza con velocidades de fotogramas medidas en RDR2, Cyberpunk 2077 y GTA V con ajustes equivalentes. Son los análogos publicados más cercanos a la carga de trabajo del motor RAGE de GTA 6, y cada número del modelo se remonta a una prueba publicada.</li><li><strong style="color:var(--foreground)">2. Escalar por nivel de GPU.</strong> Aplica la diferencia de nivel: la relación de rendimiento medida entre la tarjeta que usó la prueba y la tarjeta que se estima. Las diferencias de nivel provienen de conjuntos de datos de TechPowerUp y Hardware Unboxed, no del marketing de los fabricantes.</li><li><strong style="color:var(--foreground)">3. Aplicar el factor de CPU.</strong> A 1080p la CPU suele ser el factor limitante; a 4K rara vez lo es. Un factor de escalado, derivado de las mismas pruebas a diferentes resoluciones, ajusta la estimación para el nivel de CPU y la resolución juntos.</li><li><strong style="color:var(--foreground)">4. Ajustar por ajuste.</strong> Bajo, Medio, Alto y Ultra no son pasos iguales. Cada ajuste lleva un coste medido de los juegos de anclaje, aplicado como multiplicador y no como suposición.</li><li><strong style="color:var(--foreground)">5. Tener en cuenta los escaladores y el trazado de rayos.</strong> DLSS, FSR y el trazado de rayos tienen cada uno un coste o ganancia fijos y declarados, calibrados frente a capturas de RDR2. La estimación muestra el ajuste que asumió, así que una discrepancia es visible.</li><li><strong style="color:var(--foreground)">6. Presentar un margen, no un punto.</strong> El resultado es un FPS medio y un 1% bajo, cada uno como un rango con un margen de ±15%. Un número de un solo punto sería una afirmación; el margen es la forma honesta de la estimación.</li></ol>
+    </section>
+    <section aria-labelledby="calibration">
+      <h2 id="calibration">Calibración: a qué está anclada la estimación</h2>
+      <div class="block" style="margin-top:1.5rem">
+        <p>Los conjuntos de datos de anclaje son RDR2, Cyberpunk 2077 y GTA V con ajustes equivalentes, con diferencias de nivel de TechPowerUp y Hardware Unboxed. Las capturas de asignación de VRAM de RDR2 calibran el lado de memoria de la estimación. Cada entrada que usa el modelo está enumerada en la página de metodología, con su margen de error.</p>
+        <p style="margin-top:0.75rem">Lo que el modelo aún no puede hacer: no puede predecir el comportamiento exacto del motor de GTA 6, su carga de llamadas de dibujo en las partes más densas de Vice City, ni cómo cambiará el rendimiento el parche del primer día de Rockstar. Esas son las razones por las que existe el margen.</p>
+      </div>
+    </section>
+    <section aria-labelledby="limits">
+      <h2 id="limits">Límites de la estimación</h2>
+      <div class="block" style="margin-top:1.5rem">
+        <ul style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+          <li>El margen es de ±15% en la media. Una tarjeta estimada en 60 FPS podría quedar en cualquier punto entre 51 y 69.</li>
+          <li>Los mínimos del 1% son más difíciles de estimar que los promedios y llevan el mismo margen.</li>
+          <li>Los lanzamientos de controladores con impacto conocido en GTA V o RDR2 activan una nueva ejecución de las diferencias de nivel.</li>
+          <li>En el lanzamiento, el modelo se revalida frente al rendimiento real de GTA 6 y el margen se estrecha o el modelo se corrige.</li>
+        </ul>
+      </div>
+    </section>
+    <p style="margin-top:1.5rem"><a href="/es/tools/fps-calculator" class="btn-primary">Prueba la calculadora de FPS →</a></p>
+    <section aria-labelledby="faq">
+      <header class="text-center">
+        <h2 id="faq" class="h2-lg">Estimación de FPS, respondida</h2>
+        <p class="tool-dek">Rangos, juegos de anclaje, escaladores y revalidación en el lanzamiento.</p>
+      </header>
+      <ul class="faq-list" role="list">
+        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">¿Por qué la estimación es un rango y no un solo número?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Porque GTA 6 aún no ha salido. La estimación está anclada al comportamiento medido en RDR2, Cyberpunk 2077 y GTA V, y el margen de ±15% es la varianza en esos conjuntos de datos. Un solo número implicaría una precisión que el modelo no tiene.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">¿A qué juegos está anclada la estimación?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">RDR2, Cyberpunk 2077 y GTA V, con ajustes equivalentes. Son los análogos publicados más cercanos a la carga de trabajo del motor RAGE que ejecutará GTA 6, y los conjuntos de datos de anclaje se nombran en la página de metodología.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">¿Qué precisión tendrá esto en el lanzamiento?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">El margen es de ±15% en la media. En el lanzamiento, el modelo se revalida frente al rendimiento real de GTA 6 y el margen se estrecha o el modelo se corrige, con el cambio fechado en el registro de cambios de la calculadora de FPS.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">¿Tiene en cuenta DLSS o FSR?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Sí. Los escaladores y el trazado de rayos tienen cada uno un coste o ganancia declarados, calibrados frente a capturas de RDR2. La calculadora muestra el ajuste que asumió, así que una discrepancia entre tu configuración y la suposición es visible.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">¿Y los mínimos del 1%?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">La calculadora reporta un promedio y un mínimo del 1%, cada uno como un rango. El mínimo del 1% es el número que decide si un juego se siente fluido, y es el más difícil de estimar, por eso lleva el mismo margen de ±15%.</p></div></details></article></li>
+      </ul>
+    </section>
+  </div>
+</article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
+      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
+      <div class="footer-glow-line" aria-hidden="true"></div>
+      <a href="/es/#hero-title" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">En vivo · Seguimiento del lanzamiento de GTA 6, 19 de noviembre de 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Ver la cuenta atrás →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
+            <span class="logo-bar" aria-hidden="true"></span>
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
+              </span>
+            </span>
+          </a>
+          <p>El destino definitivo para herramientas, calculadoras, rastreadores, planificadores y guías de GTA 6. Todo lo que necesitas en un solo lugar, sin publicidad invasiva ni relleno.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Herramientas principales</h3>
+            <ul>
+              <li><a href="/es/tools/system-requirements">¿Mi PC puede con GTA 6?</a></li>
+              <li><a href="/es/tools/fps-calculator">Calculadora de FPS</a></li>
+              <li><a href="/es/tools/download-time">Calculadora de tiempo de descarga</a></li>
+              <li><a href="/es/tools/system-requirements">Requisitos del sistema</a></li>
+              <li><a href="/es/tools/settings-optimizer">Optimizador de ajustes</a></li>
+              <li><a href="/es/tools/hardware-comparison">Comparación de hardware</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Explorar</h3>
+            <ul>
+              <li><a href="/es/tools">Todas las herramientas</a></li>
+              <li><a href="/es/trending">Tendencias</a></li>
+              <li><a href="/es/trackers">Rastreadores</a></li>
+              <li><a href="/es/generators">Generadores</a></li>
+              <li><a href="/es/news">Noticias</a></li>
+              <li><a href="/es/trailers">Tráilers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="/es/tools/interactive-map">Mapa interactivo</a> <span class="footer-col-badge">Nuevo</span></li>
+              <li><a href="/es/about">Acerca de</a></li>
+              <li><a href="/es/methodology">Metodología</a></li>
+              <li><a href="/es/contact">Contacto</a></li>
+              <li><a href="/es/email-preferences">Preferencias de correo</a></li>
+              <li><a href="/es/privacy">Política de privacidad</a></li>
+              <li><a href="/es/terms">Términos de servicio</a></li>
+              <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <a href="/es/privacy">Privacidad</a>
+          <a href="/es/terms">Términos</a>
+          <button type="button" class="footer-link-btn" data-consent-open>Configuración de cookies</button>
+          <span class="sep" aria-hidden="true"></span>
+          <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimiento de analítica">
+  <div class="consent-inner">
+    <p><strong>Analítica, solo con tu permiso.</strong> Usamos Google Analytics agregado para ver qué herramientas se usan. Los datos que introduces nunca salen de tu dispositivo, no se crea ningún perfil y no se vende nada. Acepta para cargarlo o recházalo y navega sin él. Puedes cambiar de opinión cuando quieras desde Configuración de cookies en el pie de página.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn-ultra" data-consent-accept>Aceptar analítica</button>
+      <button type="button" class="btn-outline" data-consent-decline>Rechazar</button>
+      <a href="/es/privacy">Política de privacidad</a>
+    </div>
+  </div>
+</div>
+</div>
+<script src="/assets/js/es/launch.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/es/theme.js" defer></script>
+<script src="/assets/js/es/consent.js" defer></script>
+<script src="/assets/js/es/header.js" defer></script>
+<script src="/assets/js/es/search.js" defer></script>
+<script src="/assets/js/es/faq.js" defer></script>
+<script src="/assets/js/es/newsletter.js" defer></script>
+</body>
+</html>

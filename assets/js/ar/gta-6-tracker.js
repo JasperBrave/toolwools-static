@@ -1,0 +1,180 @@
+// gta-6-tracker.js — GTA 6 Launch Tracker page logic.
+// The countdown ticks from the shared launch instant (Nov 19, 2026 05:00 UTC)
+// via the ported calendar engine. The timezone picker (?tz=) shows the launch
+// moment in local time; the choice is stored in the URL so a shared link opens
+// with the same timezone. There is no live feed behind this page: the status
+// card tracks the confirmed milestones listed in the page, and every
+// unconfirmed date on the page is labelled expected.
+import { LAUNCH_UTC, REGIONS, computeCountdown, formatInTz } from "../engines/ar/calendar-engine.js";
+
+function $(sel, root) { return (root || document).querySelector(sel); }
+function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+function pad(n) { return String(n).padStart(2, "0"); }
+
+var TZ_VALUES = ["UTC"].concat(REGIONS.map(function (r) { return r.tz; }));
+var DEFAULT_TZ = "UTC";
+
+function guessTz() {
+  try {
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz && TZ_VALUES.indexOf(tz) !== -1) return tz;
+  } catch (e) { /* fall through to UTC */ }
+  return DEFAULT_TZ;
+}
+
+function readTz() {
+  var q = new URLSearchParams(window.location.search);
+  var tz = q.get("tz");
+  if (tz && TZ_VALUES.indexOf(tz) !== -1) return tz;
+  return guessTz();
+}
+
+var tz = readTz();
+var tzSelect = $("[data-tz-select]");
+if (tzSelect) {
+  var utcOpt = document.createElement("option");
+  utcOpt.value = "UTC";
+  utcOpt.textContent = "UTC — التوقيت العالمي المنسق";
+  tzSelect.appendChild(utcOpt);
+  REGIONS.forEach(function (r) {
+    var opt = document.createElement("option");
+    opt.value = r.tz;
+    opt.textContent = r.city + ", " + r.country;
+    tzSelect.appendChild(opt);
+  });
+  tzSelect.value = tz;
+}
+
+function shareUrl() {
+  var base = window.location.origin + window.location.pathname;
+  return tz === DEFAULT_TZ ? base : base + "?tz=" + encodeURIComponent(tz);
+}
+
+function syncUrl() {
+  var qs = tz === DEFAULT_TZ ? "" : "?tz=" + encodeURIComponent(tz);
+  window.history.replaceState(null, "", window.location.pathname + qs);
+}
+
+function regionLabel(value) {
+  if (value === "UTC") return "UTC";
+  var found = null;
+  REGIONS.forEach(function (r) { if (r.tz === value) found = r; });
+  return found ? found.city + ", " + found.country : value;
+}
+
+function renderLaunchLocal() {
+  var el = $("[data-launch-local]");
+  if (!el) return;
+  var local = tz === "UTC"
+    ? "19 نوفمبر 2026، 05:00 UTC"
+    : formatInTz(LAUNCH_UTC, tz);
+  el.textContent = "الإطلاق: 19 نوفمبر 2026، 05:00 UTC — " + local + " (بتوقيت " + regionLabel(tz) + ").";
+}
+
+var lastAnnouncedMinute = null;
+
+function renderCountdown() {
+  var c = computeCountdown(new Date(), LAUNCH_UTC);
+  var daysEl = $("[data-cd-days]");
+  var hoursEl = $("[data-cd-hours]");
+  var minsEl = $("[data-cd-minutes]");
+  var secsEl = $("[data-cd-seconds]");
+  if (daysEl) daysEl.textContent = pad(c.days);
+  if (hoursEl) hoursEl.textContent = pad(c.hours);
+  if (minsEl) minsEl.textContent = pad(c.minutes);
+  if (secsEl) secsEl.textContent = pad(c.seconds);
+
+  var label = $("[data-countdown-label]");
+  if (label) label.textContent = c.passed ? "تم إطلاق GTA 6" : "العد التنازلي للفتح العالمي";
+
+  // Announce only when the minute changes, not every tick.
+  if (lastAnnouncedMinute !== c.minutes || c.passed) {
+    lastAnnouncedMinute = c.minutes;
+    var sentence = c.passed
+      ? "تم إطلاق GTA 6. وقد مرّ موعد 19 نوفمبر 2026 في 05:00 UTC."
+      : "تصدر GTA 6 خلال " + c.days + " يوم و" + c.hours + " ساعة و" + c.minutes + " دقيقة.";
+    var live = $("[data-live-region]");
+    if (live) live.textContent = sentence;
+    var tldrText = $("[data-tldr-text]");
+    if (tldrText && !c.passed) {
+      tldrText.textContent = "تصدر GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC، بعد " + c.days + " يوم و" + c.hours + " ساعة و" + c.minutes + " دقيقة. ومن المتوقع أن يبدأ التحميل المسبق في 16-17 نوفمبر 2026، قبل الإطلاق بـ 48-72 ساعة، لكن Rockstar لم تؤكد بعد موعد بدء التحميل المسبق.";
+    }
+    var tldrLabel = $("[data-tldr-label]");
+    if (tldrLabel) {
+      tldrLabel.textContent = c.passed ? "صدرت · ملخّص" : "الإطلاق بعد " + c.days + " يوم · ملخّص";
+    }
+  }
+}
+
+function copyText(text, btn, labelSel) {
+  function done(label) {
+    if (!btn) return;
+    var labelEl = labelSel ? btn.querySelector(labelSel) : null;
+    if (labelEl) labelEl.textContent = label;
+    window.setTimeout(function () {
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "نسخ";
+    }, 1600);
+  }
+  if (!btn.dataset.defaultLabel && labelSel) {
+    var l = btn.querySelector(labelSel);
+    if (l) btn.dataset.defaultLabel = l.textContent;
+  }
+  function fallback() {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); done("تم النسخ!"); } catch (e) { done("فشل النسخ"); }
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { done("تم النسخ!"); }, fallback);
+  } else {
+    fallback();
+  }
+}
+
+function refreshShareLinks() {
+  var url = shareUrl();
+  var linkInput = $("[data-share-link-input]");
+  if (linkInput) linkInput.value = url;
+  var xLink = $("[data-share-x]");
+  if (xLink) {
+    xLink.href = "https://twitter.com/intent/tweet?text=" +
+      encodeURIComponent("تصدر GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. تابع العد التنازلي ومراحل التحميل المسبق على ToolWools.") +
+      "&url=" + encodeURIComponent(url);
+  }
+  var redditLink = $("[data-share-reddit]");
+  if (redditLink) {
+    redditLink.href = "https://www.reddit.com/submit?title=" +
+      encodeURIComponent("متتبع إطلاق GTA 6 — 19 نوفمبر 2026") +
+      "&url=" + encodeURIComponent(url);
+  }
+}
+
+if (tzSelect) {
+  tzSelect.addEventListener("change", function () {
+    tz = tzSelect.value;
+    renderLaunchLocal();
+    refreshShareLinks();
+    syncUrl();
+  });
+}
+
+$all("[data-copy-link]").forEach(function (btn) {
+  btn.addEventListener("click", function () { copyText(shareUrl(), btn, "[data-copy-link-label]"); });
+});
+
+var notifyBtn = $("[data-notify]");
+if (notifyBtn) {
+  notifyBtn.addEventListener("click", function () {
+    var status = $("[data-notify-status]");
+    if (status) status.textContent = "سيتم تفعيل الإشعارات عندما تؤكد Rockstar نافذة التحميل المسبق.";
+  });
+}
+
+renderLaunchLocal();
+refreshShareLinks();
+renderCountdown();
+window.setInterval(renderCountdown, 1000);

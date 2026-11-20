@@ -1,0 +1,98 @@
+// search.js — header search over a static tool index.
+// The source used a live autocomplete over the full content index; this
+// static build ships the tool catalogue (titles + descriptions from
+// src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
+// Enter opens, Escape closes. Links to /tools/<slug> (live tools) or /tools
+// for coming-soon entries, matching the source behaviour.
+(function () {
+  var TOOLS = [
+    { slug: "system-requirements", title: "Comprobador de requisitos del sistema de GTA 6", desc: "Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento." },
+    { slug: "download-time", title: "Calculadora de tiempo de descarga de GTA 6", desc: "Estima cuánto tardará la instalación base de ~150 GB en tu conexión, más el cálculo del parche del primer día." },
+    { slug: "storage-planner", title: "Planificador de almacenamiento de GTA 6", desc: "Presupuesta cada gigabyte: instalación base, parche del primer día, DLC de temporada y margen seguro para actualizaciones." },
+    { slug: "add-to-calendar", title: "Recordatorio de fecha de lanzamiento de GTA 6", desc: "Añade el lanzamiento de GTA 6 a tu calendario en tu zona horaria." },
+    { slug: "readiness-score", title: "Puntuación de preparación de GTA 6", desc: "Una puntuación para todo tu equipo: rendimiento, VRAM, almacenamiento y red." },
+    { slug: "bottleneck-calculator", title: "Calculadora de cuellos de botella de GTA 6", desc: "Comprueba el equilibrio CPU vs GPU para GTA 6 a 1080p, 1440p y 4K. Porcentaje de cuello de botella en vivo, banda de FPS y la mejora más pequeña que reequilibra tu equipo." },
+    { slug: "vram-calculator", title: "Comprobador de requisitos de VRAM de GTA 6", desc: "Comprueba la VRAM mínima que necesitas para GTA 6 a 1080p, 1440p y 4K. Veredicto para tarjetas de 6 GB, 8 GB, 12 GB y 16 GB." },
+    { slug: "fps-calculator", title: "Calculadora de FPS de GTA 6", desc: "Estima la tasa de fotogramas para tu GPU a 1080p, 1440p y 4K en Bajo, Medio, Alto y Ultra." },
+    { slug: "gpu-tier-list", title: "Lista de niveles de GPU de GTA 6", desc: "Best graphics cards for GTA 6, ranked by tier." },
+    { slug: "interactive-map", title: "Mapa interactivo de GTA 6", desc: "Leonida explorer and size comparison for the GTA 6 map." },
+    { slug: "pre-order-tracker", title: "Mesa de decisión de reserva de GTA 6", desc: "Where to pre-order GTA 6, compared by channel." },
+    { slug: "edition-comparison", title: "Selector de ediciones de GTA 6", desc: "Every GTA 6 edition compared: bonuses, price and what each unlocks." },
+    { slug: "internet-speed-check", title: "Asesor de velocidad de internet de GTA 6", desc: "Check whether your connection is fast enough for GTA 6 downloads and Online." },
+    { slug: "price-by-country", title: "Precio de GTA 6 por país", desc: "GTA 6 price by country in local currency." },
+    { slug: "economy-calculator", title: "GTA 6 Money and ROI de negocio Calculadora", desc: "Work out the fastest way to earn GTA$ and which businesses pay back first." },
+    { slug: "gta-6-tracker", title: "Rastreador de lanzamiento de GTA 6", desc: "Launch tracker and preload milestones for GTA 6." },
+    { slug: "settings-optimizer", title: "Graphics Optimizador de ajustes", desc: "Ajusta la configuración de gráficos para tu FPS objetivo y tu equipo." },
+    { slug: "hardware-comparison", title: "Comparación de hardware", desc: "Compara dos GPUs o CPUs cara a cara para GTA 6." },
+    { slug: "server-status", title: "Estado del servidor de GTA 6", desc: "Are the GTA 6 servers down? Live status check." },
+    { slug: "preload-tracker", title: "Rastreador de precarga de GTA 6", desc: "Countdown to preload and launch in your timezone." },
+    { slug: "vehicle-comparison", title: "Comparación de vehículos de GTA 6", desc: "Compare any two GTA 6 vehicles head to head." },
+    { slug: "weapon-comparison", title: "Comparación de estadísticas de armas de GTA 6", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." }
+  ];
+
+  function setup(input) {
+    if (!input) return;
+    var box = input.closest(".header-search, .mobile-nav-search");
+    if (!box) return;
+    var list = box.querySelector("[data-search-results]");
+    if (!list) return;
+    var active = -1;
+
+    function close() { list.hidden = true; list.innerHTML = ""; active = -1; input.removeAttribute("aria-expanded"); }
+    function render(q) {
+      var query = q.trim().toLowerCase();
+      list.innerHTML = "";
+      if (query.length < 2) { close(); return; }
+      var hits = TOOLS.filter(function (t) {
+        return (t.title + " " + t.desc).toLowerCase().indexOf(query) !== -1;
+      }).slice(0, 6);
+      if (!hits.length) {
+        var empty = document.createElement("div");
+        empty.className = "search-results-empty";
+        empty.textContent = 'No tools match "' + q.trim() + '". Try "FPS", "VRAM" or "bottleneck".';
+        list.appendChild(empty);
+      } else {
+        hits.forEach(function (t) {
+          var a = document.createElement("a");
+          a.href = "/tools/" + t.slug;
+          a.setAttribute("role", "option");
+          var strong = document.createElement("span");
+          strong.textContent = t.title;
+          var small = document.createElement("span");
+          small.className = "search-result-desc";
+          small.textContent = t.desc;
+          a.appendChild(strong);
+          a.appendChild(small);
+          list.appendChild(a);
+        });
+      }
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      active = -1;
+    }
+    input.addEventListener("input", function () { render(input.value); });
+    input.addEventListener("focus", function () { if (input.value.trim().length >= 2) render(input.value); });
+    input.addEventListener("keydown", function (e) {
+      var links = list.querySelectorAll("a");
+      if (e.key === "Escape") { close(); input.blur(); return; }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        if (!links.length) return;
+        e.preventDefault();
+        active = e.key === "ArrowDown" ? (active + 1) % links.length : (active - 1 + links.length) % links.length;
+        links.forEach(function (l) { l.classList.remove("active"); });
+        links[active].classList.add("active");
+        links[active].focus();
+        return;
+      }
+      if (e.key === "Enter" && active >= 0 && links[active]) {
+        e.preventDefault();
+        window.location.href = links[active].href;
+      }
+    });
+    document.addEventListener("click", function (e) {
+      if (!box.contains(e.target)) close();
+    });
+  }
+
+  document.querySelectorAll("[data-header-search-input]").forEach(setup);
+})();

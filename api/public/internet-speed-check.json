@@ -1,0 +1,234 @@
+{
+  "tool": "GTA 6 Internet Speed Advisor",
+  "page": "https://toolwools.com/tools/internet-speed-check",
+  "disclaimer": "Rockstar has not published GTA 6 online requirements. Thresholds are derived from GTA Online guidance, comparable session-based titles and standard networking practice. Regional figures are typical wired best-case round trips, not guarantees. Nothing here is measured — the grade applies to numbers the caller supplies.",
+  "requirements": {
+    "down": {
+      "min": 10,
+      "recommended": 25,
+      "unit": "Mbps"
+    },
+    "up": {
+      "min": 1.5,
+      "recommended": 5,
+      "unit": "Mbps"
+    },
+    "jitter": {
+      "recommended": 10,
+      "max": 25,
+      "unit": "ms"
+    },
+    "loss": {
+      "recommended": 0.5,
+      "max": 2,
+      "unit": "%"
+    }
+  },
+  "weights": {
+    "ping": 30,
+    "jitter": 20,
+    "loss": 20,
+    "down": 20,
+    "up": 10
+  },
+  "grading": {
+    "pingPass": "<= regional target x 1.25",
+    "pingMarginal": "<= regional target x 1.8",
+    "gradeBands": {
+      "A": ">= 90",
+      "B": ">= 78",
+      "C": ">= 62",
+      "D": ">= 45",
+      "F": "< 45"
+    },
+    "note": "Any failing axis caps the grade at C."
+  },
+  "regions": [
+    {
+      "id": "na-east",
+      "label": "North America — East",
+      "edge": "Ashburn / New York",
+      "wiredLatencyTargetMs": 20,
+      "playableCeilingMs": 36,
+      "note": "Densest peering on the continent. Wired fibre players routinely see sub-20 ms to Rockstar services."
+    },
+    {
+      "id": "na-west",
+      "label": "North America — West",
+      "edge": "Los Angeles / Seattle",
+      "wiredLatencyTargetMs": 24,
+      "playableCeilingMs": 43,
+      "note": "Good local edges, but cross-country lobbies add 50–70 ms when matchmaking sends you east."
+    },
+    {
+      "id": "eu-west",
+      "label": "Europe — West",
+      "edge": "Amsterdam / Paris",
+      "wiredLatencyTargetMs": 18,
+      "playableCeilingMs": 32,
+      "note": "The best-connected region in this table. Anything above 40 ms here is your own line, not distance."
+    },
+    {
+      "id": "eu-central",
+      "label": "Europe — Central & East",
+      "edge": "Frankfurt / Warsaw",
+      "wiredLatencyTargetMs": 26,
+      "playableCeilingMs": 47,
+      "note": "Frankfurt carries most traffic; eastern ISPs sometimes route through it rather than peering locally."
+    },
+    {
+      "id": "uk",
+      "label": "United Kingdom & Ireland",
+      "edge": "London",
+      "wiredLatencyTargetMs": 20,
+      "playableCeilingMs": 36,
+      "note": "Short hop to London, but older FTTC lines add interleaving delay that looks like distance."
+    },
+    {
+      "id": "latam",
+      "label": "Latin America",
+      "edge": "São Paulo / Santiago",
+      "wiredLatencyTargetMs": 44,
+      "playableCeilingMs": 79,
+      "note": "São Paulo is the regional hub. Traffic from Mexico and the Andes often exits to Miami first."
+    },
+    {
+      "id": "mena",
+      "label": "Middle East & North Africa",
+      "edge": "Dubai / Bahrain",
+      "wiredLatencyTargetMs": 50,
+      "playableCeilingMs": 90,
+      "note": "Gulf peering is strong; North African routes still transit Marseille, which costs 30–50 ms."
+    },
+    {
+      "id": "india",
+      "label": "India & South Asia",
+      "edge": "Mumbai / Chennai",
+      "wiredLatencyTargetMs": 42,
+      "playableCeilingMs": 76,
+      "note": "Mumbai edges are excellent. Games without a local lobby push you to Singapore for ~65 ms."
+    },
+    {
+      "id": "sea",
+      "label": "Southeast Asia",
+      "edge": "Singapore",
+      "wiredLatencyTargetMs": 36,
+      "playableCeilingMs": 65,
+      "note": "Singapore serves the whole region, so Manila and Jakarta pay a submarine-cable tax of 20–40 ms."
+    },
+    {
+      "id": "anz",
+      "label": "Australia & New Zealand",
+      "edge": "Sydney",
+      "wiredLatencyTargetMs": 32,
+      "playableCeilingMs": 58,
+      "note": "Sydney is fine domestically; any US-hosted lobby is a hard 150 ms floor no router can fix."
+    },
+    {
+      "id": "japan",
+      "label": "Japan & Korea",
+      "edge": "Tokyo / Seoul",
+      "wiredLatencyTargetMs": 22,
+      "playableCeilingMs": 40,
+      "note": "Best-in-class domestic fibre. If your ping is high here, suspect the last hop inside your home."
+    }
+  ],
+  "connectionTypes": [
+    {
+      "id": "fibre",
+      "label": "Fibre to the home (FTTP)",
+      "addedPing": 2,
+      "typicalJitter": 2,
+      "typicalLoss": 0.02,
+      "note": "The reference case. Latency is dominated by distance, not the access line."
+    },
+    {
+      "id": "cable",
+      "label": "Cable / coax (DOCSIS)",
+      "addedPing": 10,
+      "typicalJitter": 6,
+      "typicalLoss": 0.1,
+      "note": "Shared upstream. Evenings in a busy node are where cable jitter shows up."
+    },
+    {
+      "id": "dsl",
+      "label": "DSL / VDSL / FTTC",
+      "addedPing": 18,
+      "typicalJitter": 8,
+      "typicalLoss": 0.3,
+      "note": "Interleaving adds a fixed penalty. Ask your ISP for fast-path or low-latency interleave."
+    },
+    {
+      "id": "fixed-5g",
+      "label": "5G home broadband",
+      "addedPing": 25,
+      "typicalJitter": 14,
+      "typicalLoss": 0.4,
+      "note": "Bandwidth is rarely the problem; the radio scheduler makes jitter the problem."
+    },
+    {
+      "id": "hotspot",
+      "label": "Phone hotspot / mobile data",
+      "addedPing": 45,
+      "typicalJitter": 28,
+      "typicalLoss": 1.2,
+      "note": "Workable for downloads, hostile for lobbies. Expect NAT problems on top of jitter."
+    },
+    {
+      "id": "satellite",
+      "label": "Satellite (LEO or geostationary)",
+      "addedPing": 55,
+      "typicalJitter": 22,
+      "typicalLoss": 0.9,
+      "note": "LEO is playable at ~50 ms added; geostationary is not, at roughly 600 ms round trip."
+    }
+  ],
+  "devices": [
+    {
+      "id": "pc",
+      "label": "PC (Windows)",
+      "howToMeasure": [
+        "Plug into Ethernet if you can, then close Steam, Rockstar Launcher, browsers and anything syncing.",
+        "Run a browser speed test on a server in your own region and write down download, upload and ping.",
+        "Open Command Prompt and run ping -n 50 1.1.1.1 — read the average for latency and the max-minus-min spread as your jitter.",
+        "In the same output, read the loss percentage. Anything above 0% on a wired line is a fault, not noise.",
+        "Repeat once in the evening peak. The peak number is the one that decides whether GTA Online feels good."
+      ],
+      "caveat": "Windows reports the path to a public DNS resolver, not to a Rockstar lobby, so treat the figure as a floor rather than an exact match."
+    },
+    {
+      "id": "ps5",
+      "label": "PlayStation 5",
+      "howToMeasure": [
+        "Settings → Network → Connection Status → Test Internet Connection.",
+        "Record download, upload and NAT type. NAT Type 1 or 2 is fine; Type 3 will cause matchmaking failures.",
+        "The console does not report jitter or loss — take those from a PC or phone on the same network.",
+        "If you are on Wi-Fi, note the band: 5 GHz or 6 GHz only, never 2.4 GHz for online play."
+      ],
+      "caveat": "The PS5 test measures against Sony's servers and consistently reads lower than real-world game throughput."
+    },
+    {
+      "id": "xbox",
+      "label": "Xbox Series X|S",
+      "howToMeasure": [
+        "Settings → General → Network settings → Test network speed & statistics.",
+        "Read download, upload, latency, packet loss and wireless strength — Xbox reports all of them.",
+        "Check the NAT line on the same screen: Open is what you want, Strict will break invites.",
+        "Re-run it once with a cable if the wireless figure disappoints. That single test settles most lag arguments."
+      ],
+      "caveat": "Xbox is the only platform that reports loss and latency natively, which makes it the best measuring device in the house."
+    },
+    {
+      "id": "cloud",
+      "label": "Cloud / handheld streaming",
+      "howToMeasure": [
+        "Test on the exact device and network you will stream from, not on the desktop next to it.",
+        "Record ping and jitter first — streaming fails on latency long before it fails on bandwidth.",
+        "Confirm sustained download of at least 25 Mbps for 1080p60 and 40 Mbps for 4K.",
+        "Watch for a rising jitter number over a five-minute stream; that is a Wi-Fi problem, not an ISP problem."
+      ],
+      "caveat": "Streaming adds encode and decode latency on top of network latency, so a good network score is necessary but not sufficient."
+    }
+  ],
+  "regionCount": 11
+}

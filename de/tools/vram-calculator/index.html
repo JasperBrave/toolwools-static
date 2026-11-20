@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA-6-VRAM-Anforderungs-Checker</title>
+    <meta name="description" content="Rechne das VRAM aus, das GTA 6 bei 1080p, 1440p und 4K, Niedrig bis Ultra, braucht, inklusive Raytracing- und HD-Textur-Overhead, mit einem Urteil für 6- bis 24-GB-Karten.">
+    <meta name="keywords" content="gta 6 vram anforderungen, gta 6 vram rechner, wie viel vram für gta 6, gta 6 vram 6gb, gta 6 vram 8gb genug, gta 6 vram 12gb, gta 6 vram 16gb, gta 6 4k vram, gta 6 ray tracing vram, gta 6 hd texture pack vram, sind 8gb vram genug für gta 6">
+    <meta name="author" content="ToolWools">
+    <meta property="og:title" content="GTA-6-VRAM-Anforderungs-Checker">
+    <meta property="og:description" content="Rechne das VRAM aus, das GTA 6 bei 1080p, 1440p und 4K, Niedrig bis Ultra, braucht, inklusive Raytracing- und HD-Textur-Overhead, mit einem Urteil für 6- bis 24-GB-Karten.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolwools.com/de/tools/vram-calculator">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:image" content="https://toolwools.com/og/vram-calculator.jpg">
+    <meta property="og:image:alt" content="GTA-6-VRAM-Anforderungs-Checker: Auflösungs- mal Preset-VRAM-Aufschlüsselung auf ToolWools">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ToolWools">
+        <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GTA-6-VRAM-Anforderungs-Checker">
+    <meta name="twitter:description" content="Rechne das VRAM aus, das GTA 6 bei 1080p, 1440p und 4K, Niedrig bis Ultra, braucht, inklusive Raytracing- und HD-Textur-Overhead, mit einem Urteil für 6- bis 24-GB-Karten.">
+    <meta name="twitter:image" content="https://toolwools.com/og/vram-calculator.jpg">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="canonical" href="https://toolwools.com/de/tools/vram-calculator">
+<link rel="alternate" href="https://toolwools.com/tools/vram-calculator" hreflang="en">
+<link rel="alternate" href="https://toolwools.com/es/tools/vram-calculator" hreflang="es">
+<link rel="alternate" href="https://toolwools.com/pt/tools/vram-calculator" hreflang="pt">
+<link rel="alternate" href="https://toolwools.com/de/tools/vram-calculator" hreflang="de">
+<link rel="alternate" href="https://toolwools.com/fr/tools/vram-calculator" hreflang="fr">
+<link rel="alternate" href="https://toolwools.com/tr/tools/vram-calculator" hreflang="tr">
+<link rel="alternate" href="https://toolwools.com/ar/tools/vram-calculator" hreflang="ar">
+<link rel="alternate" href="https://toolwools.com/tools/vram-calculator" hreflang="x-default">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print">
+    <script>
+      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+    </script>
+  </head>
+<body>
+  <div class="site-shell">
+<!-- _partials/header.html — shared site header.
+     Copy this block into every page. Move aria-current="page" to the nav link
+     of the current page (Home is marked here as the example). Paths are
+     root-relative, so the same markup works at any depth.
+     Scripts: assets/js/theme.js (toggle), assets/js/header.js (mobile nav,
+     Ctrl/Cmd+K), assets/js/search.js (autocomplete). -->
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<header class="site-header" aria-label="Website">
+  <div class="site-header-glow" aria-hidden="true"></div>
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
+          <span class="logo-bar" aria-hidden="true"></span>
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Primär">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools" aria-current="page">Tools</a>
+          <a href="/de/trackers">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="TOOLS SUCHEN" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/tools/vram-calculator">English</a>
+            <a href="/es/tools/vram-calculator">Español</a>
+            <a href="/pt/tools/vram-calculator">Português</a>
+            <a href="/de/tools/vram-calculator" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deutsch</a>
+            <a href="/fr/tools/vram-calculator">Français</a>
+            <a href="/tr/tools/vram-calculator">Türkçe</a>
+            <a href="/ar/tools/vram-calculator">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Zum dunklen Theme wechseln" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Mobil">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools" aria-current="page">Tools</a>
+          <a href="/de/trackers">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="tool-main">
+      <div class="tool-body">
+        <article aria-labelledby="page-title">
+<section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Brotkrumen">
+        <a href="/de/">Startseite</a>
+        <span aria-hidden="true">/</span>
+        <a href="/de/tools">Tools</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">VRAM-Rechner</span>
+      </div>
+      <div class="page-eyebrow">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg>
+        <span>Leistung</span>
+      </div>
+      <h1 id="page-title" class="page-title">GTA-6-VRAM-Anforderungs-Checker</h1>
+      <p class="page-subtitle">Der VRAM-Rechner, gebaut für GTA 6. Wähle eine Auflösung, ein Qualitäts-Preset und eine Karte, erhalte die genaue VRAM-Aufschlüsselung (Textur-Pool, Framebuffer, Raytracing-Overhead, HD-Textur-Pack) und ein Urteil, das sagt, ob 6, 8, 12, 16 oder 24 GB reichen.</p>
+      <dl class="hero-badges">
+        <div><dt>Engine</dt><dd>VRAM-Modell</dd></div>
+        <div><dt>Laufzeit</dt><dd>Sofort, im Browser</dd></div>
+        <div><dt>Plattformen</dt><dd>PC</dd></div>
+        <div><dt>Aktualisiert</dt><dd><time datetime="2026-11-17">17. Nov. 2026</time></dd></div>
+      </dl>
+    </section>
+          <div class="tool-intro-callout">
+            <p>Wie viel VRAM du für GTA 6 brauchst, ist nicht eine Zahl, es hängt von Auflösung, Preset, Raytracing, DLSS-3-/FSR-3-Frame-Generierung und davon ab, ob du das HD-Textur-Pack installierst. Dieser GTA-6-VRAM-Rechner addiert diese Overheads getrennt, sodass eine 8-GB-Karte bei 1080p Hoch sauber besteht, aber ein ehrliches „unzureichend“ bei 4K Ultra + RT + HD-Texturen bekommt. Wenn du nach „sind 8GB VRAM genug für GTA 6“ oder „GTA 6 4K VRAM Anforderungen“ gesucht hast, beantwortet das Urteil oben das in einer Zeile.</p>
+          </div>
+<section class="byline" aria-label="Über diese Seite">
+      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, Gründer von ToolWools" width="60" height="60" loading="lazy">
+      <div>
+        <p class="byline-meta">Von <a href="/de/about">Jasper Bravo</a> · <a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a> · Gründer, ToolWools · PC-Leistungs-Analyse</p>
+        <p class="byline-note">Modell: <a href="/de/methodology">GTA-6-VRAM-Modell</a></p>
+      </div>
+      <p class="byline-dates">Veröffentlicht <time datetime="2026-07-23">23. Juli 2026</time> · Zuletzt geprüft <time datetime="2026-11-17">17. November 2026</time></p>
+    </section>
+<div class="sr-only" data-live-region aria-live="polite">Ausreichend · erfüllt Gesamt, 1,5 GB unter empfohlen. GTA 6 braucht 12 Gigabyte bei 1440p auf Ultra. Deine Karte hat 12 Gigabyte.</div>
+<section class="tldr-card" data-tldr-card data-tone="borderline" data-speakable="tldr" aria-labelledby="tldr-label">
+      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+      <div>
+        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Ausreichend · Kurzfassung</span></p>
+        <p class="tldr-text"><span data-tldr-text>Ausreichend, GeForce RTX 4070 (12 GB) erfüllt GTAs 12-GB-Gesamt bei 1440p Ultra, hat aber keine Reserve für Spitzen. Empfohlen 13,5 GB.</span></p>
+      </div>
+      <p class="tldr-verdict" data-tldr-verdict>Ausreichend · erfüllt Gesamt, 1,5 GB unter empfohlen</p>
+    </section>
+<section aria-labelledby="tool-workspace">
+      <h2 id="tool-workspace" class="sr-only">Rechner</h2>
+      <div class="workspace-grid">
+        <form class="input-panel" aria-label="Deine Karte" id="vram-form">
+          <div class="input-panel-head"><h3 class="eyebrow-muted">Deine Karte</h3></div>
+          <div class="input-notice" data-input-notice role="alert"></div>
+<div>
+            <label class="field-label" for="gpu-select"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg>Grafikkarte (GPU)</label>
+            <select class="input" id="gpu-select" data-gpu-select aria-label="Grafikkarte"></select>
+          </div>
+<div>
+            <label class="field-label" for="vram-input">Oder gib das VRAM deiner Karte ein (GB)</label>
+            <input class="input" type="number" id="vram-input" data-vram-input min="3" max="32" step="1" value="">
+            <p class="field-hint">Leer lassen, um das VRAM der gewählten Karte zu nutzen.</p>
+          </div>
+<div>
+            <span class="field-label" id="res-label"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>Auflösung</span>
+            <div class="segmented cols-3" role="group" aria-labelledby="res-label">
+              <button type="button" data-res-button="1080p" aria-pressed="false">1080p</button>
+              <button type="button" data-res-button="1440p" aria-pressed="true">1440p</button>
+              <button type="button" data-res-button="4K" aria-pressed="false">4K</button>
+            </div>
+          </div>
+<div>
+            <span class="field-label" id="preset-label"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>Preset</span>
+            <div class="segmented cols-5" role="group" aria-labelledby="preset-label">
+              <button type="button" data-preset-button="low" aria-pressed="false">Niedrig</button>
+              <button type="button" data-preset-button="medium" aria-pressed="false">Mittel</button>
+              <button type="button" data-preset-button="high" aria-pressed="false">Hoch</button>
+              <button type="button" data-preset-button="very-high" aria-pressed="false">Sehr hoch</button>
+              <button type="button" data-preset-button="ultra" aria-pressed="true">Ultra</button>
+            </div>
+          </div>
+<div class="check-row">
+            <input type="checkbox" id="rt-toggle" data-rt-toggle>
+            <label for="rt-toggle"><span class="check-title">Raytracing</span><span class="check-hint">Addiert 1,2 GB bei 1440p (0,8 GB bei 1080p, 1,9 GB bei 4K).</span></label>
+          </div>
+<div class="check-row">
+            <input type="checkbox" id="fg-toggle" data-fg-toggle>
+            <label for="fg-toggle"><span class="check-title">Frame-Generierung</span><span class="check-hint">Addiert 0,7 GB bei 1440p (0,4 GB bei 1080p, 1,1 GB bei 4K).</span></label>
+          </div>
+<div class="check-row">
+            <input type="checkbox" id="hd-toggle" data-hd-toggle>
+            <label for="hd-toggle"><span class="check-title">HD-Textur-Pack</span><span class="check-hint">Addiert <span data-hd-hint>+2,2 GB bei Ultra</span>.</span></label>
+          </div>
+        </form>
+        <div class="output-panel" aria-live="polite">
+          <div class="output-panel-label eyebrow-muted">Urteil</div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><div><p class="verdict-kicker tone-borderline">Ausreichend · erfüllt Gesamt, 1,5 GB unter empfohlen</p><h3 class="verdict-title">12.0<span class="unit"> GB nötig</span></h3><p class="verdict-desc">Deine Karte erfüllt den Pool genau, hat aber keine Reserve für Spitzen, erwarte gelegentliche 1-%-Low-Einbrüche. Empfohlen 13,5 GB für einen Stotter-Puffer.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">Textur-Pool</span><span class="val">10.3 GB</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:76%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">Framebuffer + G-Buffer</span><span class="val">1.7 GB</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:13%"></div></div></div></div><div class="upgrade-box"><p class="eyebrow-muted">Tuning-Tipps</p><ul><li>Senke Preset von Ultra auf Sehr hoch (Textur-Pool schrumpft ca. 2,3 GB).</li><li>Aktiviere DLSS-/FSR-Quality-Modus, der interne Render schrumpft und senkt Framebuffer-Nutzung.</li></ul></div><dl class="stat-grid"><div><dt>Gesamt nötig</dt><dd>12.0 GB</dd></div><div><dt>Empfohlen</dt><dd>13.5 GB</dd></div><div><dt>Deine Karte</dt><dd>12 GB</dd></div><div><dt>Headroom</dt><dd>0.0 GB</dd></div></dl><div class="share-row">
+      <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20(12%20GB)%20%40%201440p%20Ultra%20%C2%B7%20GTA%206%20VRAM%3A%20Adequate%20%C2%B7%20meets%20total%2C%201.5%20GB%20shy%20of%20recommended&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fvram-calculator%3Fgpu%3Drtx-4070%26res%3D1440p%26preset%3Dultra">Auf X teilen</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20(12%20GB)%20%E2%80%94%20Adequate%20%C2%B7%20meets%20total%2C%201.5%20GB%20shy%20of%20recommended%20(GTA%206%20VRAM)&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fvram-calculator%3Fgpu%3Drtx-4070%26res%3D1440p%26preset%3Dultra">Reddit</a>
+    </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="share-panel" aria-labelledby="share-heading">
+      <div>
+        <h2 id="share-heading">Dieses Ergebnis teilen</h2>
+        <p class="sub">Sende deine genauen Eingaben an einen Freund oder behalte den Link für später. Der Link trägt das vollständige Setup, keine falschen Share-Tokens.</p>
+      </div>
+      <div class="share-link-row">
+        <label class="sr-only" for="share-link">Teilbarer Link für dieses Ergebnis</label>
+        <input id="share-link" class="share-link-input" data-share-link-input type="text" value="https://toolwools.com/tools/vram-calculator?gpu=rtx-4070&amp;res=1440p&amp;preset=ultra" readonly>
+        <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Link kopieren</span></button>
+      </div>
+      <div class="share-row">
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf X teilen" href="https://twitter.com/intent/tweet?text=GTA%206%20VRAM%3A%20GeForce%20RTX%204070%20(12%20GB)%20%40%201440p%20Ultra%20%E2%80%94%20Adequate%20%C2%B7%20meets%20total%2C%201.5%20GB%20shy%20of%20recommended.%20Check%20your%20card%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fvram-calculator%3Fgpu%3Drtx-4070%26res%3D1440p%26preset%3Dultra">Auf X teilen</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf Reddit teilen" href="https://www.reddit.com/submit?title=GTA%206%20VRAM%3A%20GeForce%20RTX%204070%20(12%20GB)%20%40%201440p%20Ultra%20%E2%80%94%20Adequate%20%C2%B7%20meets%20total%2C%201.5%20GB%20shy%20of%20recommended.%20Check%20your%20card%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fvram-calculator%3Fgpu%3Drtx-4070%26res%3D1440p%26preset%3Dultra">Reddit</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="vram-breakdown">
+      <h2 id="vram-breakdown">Wohin die Gigabytes gehen</h2>
+      <p class="section-dek">Textur-Pool, Framebuffer und Extras für deine aktuellen Einstellungen, live, sodass es jeder Änderung oben folgt.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="VRAM-Aufschlüsselung, scrollbares Tabellen-Layout">
+      <table class="data-table" id="breakdown-table">
+        <caption class="sr-only">VRAM-Aufschlüsselung nach Komponente für die aktuellen Einstellungen.</caption>
+        <thead><tr><th scope="col">Komponente</th><th scope="col">GB</th><th scope="col">Hinweis</th></tr></thead>
+        <tbody data-breakdown-table><tr><td>Textur-Pool</td><td class="mono">10.3</td><td class="muted">Ultra-Preset</td></tr><tr><td>Framebuffer + G-Buffer</td><td class="mono">1.7</td><td class="muted">1440p</td></tr><tr><td>Raytracing</td><td class="mono">0.0</td><td class="muted">aus</td></tr><tr><td>Frame-Generierung</td><td class="mono">0.0</td><td class="muted">aus</td></tr><tr><td>HD-Textur-Pack</td><td class="mono">0.0</td><td class="muted">aus</td></tr><tr><td><strong>Gesamt nötig</strong></td><td class="mono"><strong>12.0</strong></td><td class="muted">roher Pool + Overhead</td></tr><tr><td><strong>Empfohlen</strong></td><td class="mono"><strong>13.5</strong></td><td class="muted">Gesamt + 1440p-Stotter-Headroom</td></tr></tbody>
+      </table>
+    </div>
+    </section>
+
+    <section aria-labelledby="vram-matrix">
+      <h2 id="vram-matrix">VRAM nötig nach Preset und Auflösung</h2>
+      <p class="section-dek">Gesamt-Pool in GB, keine Extras. Raytracing, Frame-Generierung und das HD-Pack addieren oben drauf.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="VRAM nötig nach Preset und Auflösung, scrollbares Tabellen-Layout">
+      <table class="data-table" id="matrix-table">
+        <caption class="sr-only">VRAM nötig in GB nach Preset und Auflösung, keine Extras.</caption>
+        <thead><tr><th scope="col">Preset</th><th scope="col">1080p</th><th scope="col">1440p</th><th scope="col">4K</th></tr></thead>
+        <tbody><tr><th scope="row">Niedrig</th><td class="mono">3.2</td><td class="mono">4.1</td><td class="mono">5.5</td></tr><tr><th scope="row">Mittel</th><td class="mono">4.4</td><td class="mono">5.6</td><td class="mono">7.6</td></tr><tr><th scope="row">Hoch</th><td class="mono">6.1</td><td class="mono">7.8</td><td class="mono">10.5</td></tr><tr><th scope="row">Sehr hoch</th><td class="mono">7.6</td><td class="mono">9.7</td><td class="mono">13.1</td></tr><tr><th scope="row">Ultra</th><td class="mono">9.4</td><td class="mono">12.0</td><td class="mono">16.2</td></tr></tbody>
+      </table>
+    </div>
+    </section>
+
+    <section aria-labelledby="gb-guide">
+      <h2 id="gb-guide">Reichen 6 / 8 / 12 / 16 / 24 GB für GTA 6?</h2>
+      <p class="section-dek">Schnelle Suche nach Karten-VRAM. Matche den Speicher deiner GPU mit der Stufe unten, um die höchste Auflösungs- plus Preset-Kombo zu sehen, die sie bequem schafft.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="GB-Stufen-Guide, scrollbares Tabellen-Layout">
+      <table class="data-table" id="gb-table">
+        <caption class="sr-only">VRAM-Stufen-Guide nach Karten-Speicher.</caption>
+        <thead><tr><th scope="col">VRAM</th><th scope="col">Sweet Spot</th><th scope="col">Karten</th><th scope="col">Bequem</th><th scope="col">Achtung</th></tr></thead>
+        <tbody><tr><td class="mono">6 GB</td><td>Nur 1080p Niedrig–Mittel</td><td class="muted">GTX 1660 Super, RTX 2060, RX 5600 XT</td><td class="muted">1080p Mittel ohne HD-Pack</td><td class="muted">Unzureichend bei Hoch und darüber</td></tr><tr><td class="mono">8 GB</td><td>1080p Hoch / 1440p Hoch</td><td class="muted">RTX 3070, RTX 4060, RX 7600, Arc A750</td><td class="muted">1080p Ultra, 1440p Hoch ohne HD-Pack</td><td class="muted">Knapp bei 1440p Ultra + RT</td></tr><tr><td class="mono">10 GB</td><td>1440p Sehr hoch</td><td class="muted">RTX 3080 10GB</td><td class="muted">1440p Sehr hoch + RT, 4K Hoch ohne HD</td><td class="muted">Ausreichend bei 4K Ultra</td></tr><tr><td class="mono">12 GB</td><td>1440p Ultra + RT</td><td class="muted">RTX 4070 / 4070 Super, RTX 5070, RX 6700 XT, RX 7700 XT</td><td class="muted">1440p Ultra + RT + HD-Pack</td><td class="muted">Ausreichend bei 4K Ultra ohne HD</td></tr><tr><td class="mono">16 GB</td><td>4K Ultra + RT</td><td class="muted">RTX 4080, RX 7800 XT, RX 6800 XT, Arc A770</td><td class="muted">4K Ultra + RT + HD-Pack</td><td class="muted">Knapp bei 4K Ultra + RT + HD + FG</td></tr><tr><td class="mono">20 GB</td><td>4K Ultra + RT + HD + FG</td><td class="muted">RX 7900 XT</td><td class="muted">Alles an bei 4K</td><td class="muted">Kein praktisches Limit</td></tr><tr><td class="mono">24 GB</td><td>Null VRAM-Angst</td><td class="muted">RTX 4090, RTX 3090, RX 7900 XTX</td><td class="muted">Path-Tracing-Headroom</td><td class="muted">·</td></tr></tbody>
+      </table>
+    </div>
+    </section>
+
+    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+      <h2 id="related-tools-inline">Plane dein GTA-6-Rig weiter</h2>
+      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Vollständige <a href="/de/tools/system-requirements">GTA-6-PC-Anforderungs-Checker</a> Minimum-, Recommended- und Ultra-Ziele.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe CPU-GPU-Balance mit dem <a href="/de/tools/bottleneck-calculator">GTA-6-Bottleneck-Rechner</a>.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Plane deine Installation mit dem <a href="/de/tools/storage-planner">Speicher-Planer</a> und <a href="/de/tools/download-time">Download-Zeit-Rechner</a>.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Bewerbe das ganze Rig mit dem <a href="/de/tools/readiness-score">GTA-6-Readiness-Score</a>.</span></li></ul>
+    </section>
+
+    <aside class="assumptions-strip" aria-label="Annahmen">
+      <p><strong>Annahmen</strong> <span>VRAM-Modell abgeleitet aus RDR2- und Cyberpunk-2077-Textur-Pool-Telemetrie, gemoddeter GTA-V-High-Res-Pack-Allokation und DLSS-3-/FSR-3-Frame-Generierungs-Puffer-Messungen. Referenz-Ziel ist RTX 4090 bei 4K Ultra + RT. Unsicherheits-Band ±10 % gegenüber Launch-Day-Treibern.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
+      <p class="updated-line">Aktualisiert <time datetime="2026-11-17">17. November 2026</time></p>
+    </aside>
+
+    <section aria-labelledby="how-it-works">
+      <h2 id="how-it-works">Wie viel VRAM GTA 6 braucht, Einstellung für Einstellung</h2>
+      <p class="section-dek">Jeder Schalter unten hat messbare Speicherkosten.</p>
+      <ol class="steps-grid cols-3"><li>
+        <span class="step-number">01</span>
+        <h3 class="step-title">Wähle deine Auflösung</h3>
+        <p class="step-text">1080p, 1440p oder 4K. Framebuffer, G-Buffer und Post-Processing-Ketten skalieren mit Pixeln, 4K braucht ca. 1,8 GB mehr nur um einen Frame zu rendern.</p>
+      </li>
+<li>
+        <span class="step-number">02</span>
+        <h3 class="step-title">Wähle ein Qualitäts-Preset</h3>
+        <p class="step-text">Niedrig bis Ultra entspricht einer Textur-Pool-Größe. Ultra nutzt unkomprimiertes Streaming und ist der eine größte VRAM-Hebel.</p>
+      </li>
+<li>
+        <span class="step-number">03</span>
+        <h3 class="step-title">Schalte Raytracing, Frame-Gen und HD-Texturen um</h3>
+        <p class="step-text">Jedes addiert einen eigenen Overhead. Raytracing kostet 0,8–1,9 GB je nach Auflösung. Frame-Generierung addiert 0,4–1,1 GB. Das HD-Pack kann bis zu 2,2 GB addieren.</p>
+      </li>
+<li>
+        <span class="step-number">04</span>
+        <h3 class="step-title">Sieh, ob deine Karte den Stotter-Puffer schafft</h3>
+        <p class="step-text">Wähle deine GPU oder tippe eine eigene VRAM-Zahl ein. Das Panel zeigt Delta gegenüber Bedarf, ob du den empfohlenen Stotter-Puffer schaffst, und deterministische Tuning-Tipps, wenn du knapp bist.</p>
+      </li></ol>
+    </section>
+
+    <section aria-labelledby="use-cases">
+      <h2 id="use-cases">VRAM-Urteile für 6-, 8-, 12- und 16-GB-Karten</h2>
+      <p class="section-dek">Die vier Fälle, die den größten Teil der Steam-Umfrage abdecken.</p>
+      <ul class="usecases-grid"><li>
+        <article class="usecase-card" aria-labelledby="use-case-1">
+          <h3 id="use-case-1">6-GB-Karte bei 1080p: GTX 1660 Super</h3>
+          <p>Knapp bei 1080p Hoch, unzureichend bei Sehr hoch und darüber. Senke Texturen auf Mittel und deaktiviere HD-Pack für ein sauberes Ausreichend-Urteil.</p>
+          <a href="/de/tools/vram-calculator?gpu=gtx-1660-super&amp;res=1080p&amp;preset=high" aria-label="Preset laden: 6-GB-Karte bei 1080p: GTX 1660 Super">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </li>
+<li>
+        <article class="usecase-card" aria-labelledby="use-case-2">
+          <h3 id="use-case-2">8-GB-Karte bei 1440p: RTX 3070 / RX 6650 XT</h3>
+          <p>Ausreichend bei 1440p Hoch (7,8 GB von 8 GB). Unzureichend bei 1440p Sehr hoch und Ultra, senke auf Hoch oder aktiviere DLSS Quality für ein sauberes Bestehen.</p>
+          <a href="/de/tools/vram-calculator?gpu=rtx-3070&amp;res=1440p&amp;preset=high" aria-label="Preset laden: 8-GB-Karte bei 1440p: RTX 3070 / RX 6650 XT">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </li>
+<li>
+        <article class="usecase-card" aria-labelledby="use-case-3">
+          <h3 id="use-case-3">12-GB-Karte bei 1440p Ultra: RTX 4070 / RX 6700 XT</h3>
+          <p>Ausreichend bei 1440p Ultra (12,0 GB von 12 GB) und bei 4K High ohne HD-Pack. Füge Raytracing bei 1440p Ultra hinzu und es fällt auf Knapp, die Sweet-Spot-2026-Stufe, ohne Raum für das HD-Pack.</p>
+          <a href="/de/tools/vram-calculator?gpu=rtx-4070&amp;res=1440p&amp;preset=ultra" aria-label="Preset laden: 12-GB-Karte bei 1440p Ultra: RTX 4070 / RX 6700 XT">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </li>
+<li>
+        <article class="usecase-card" aria-labelledby="use-case-4">
+          <h3 id="use-case-4">16-GB-Karte bei 4K: RX 7800 XT</h3>
+          <p>Knapp bei 4K Ultra (16,2 GB nötig von 16 GB), senke auf Sehr hoch für ein bequemes Bestehen. Raytracing bei 4K Ultra schiebt es auf Unzureichend. Null VRAM-Angst bei 1440p und darunter.</p>
+          <a href="/de/tools/vram-calculator?gpu=rx-7800-xt&amp;res=4K&amp;preset=ultra" aria-label="Preset laden: 16-GB-Karte bei 4K: RX 7800 XT">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+      </li></ul>
+    </section>
+
+    <section aria-labelledby="methodology">
+      <details class="methodology-details" open>
+        <summary><h2 id="methodology">Das VRAM-Budget-Modell, Zeile für Zeile</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="methodology-body">
+          <p>Jedes Preset trägt eine Basis-Textur-Pool-Größe in GB. Basis skaliert mit Auflösung (1080p × 1,0, 1440p × 1,28, 4K × 1,72), um Framebuffer und G-Buffer zu berücksichtigen. Raytracing, Frame-Generierung und das HD-Textur-Pack sind separate additive Overheads. Empfohlenes VRAM = rohes Gesamt + ein Pro-Auflösungs-Headroom-Band (1,0 / 1,5 / 2,0 GB), das auf die Driver-Spillover-Schwelle in RDR2-/Cyberpunk-2077-Messungen abbildet.</p>
+          <pre class="methodology-formula">base          = BASE[preset] × RES_MULT[res]          // GB
+overhead      = rt ? RT[res] : 0
+              + frameGen ? FG[res] : 0
+              + hdTextures ? HDT[preset] : 0
+
+totalGB       = round1(base + overhead)
+recommendedGB = roundHalf(totalGB + HEADROOM[res])
+
+verdict:
+  card ≥ recommendedGB → Comfortable
+  card ≥ totalGB       → Adequate (no reserve)
+  card ≥ totalGB − H   → Tight   (driver fallback zone)
+  otherwise            → Insufficient (spillover to system RAM)</pre>
+          <ul class="list-disc list-outside space-y-1.5"><li>Basis-Textur-Pool-Größen sind kalibriert aus RDR2- und Cyberpunk-2077-Telemetrie bei jedem Preset.</li>
+<li>Auflösungs-Multiplikatoren (1080p × 1,00, 1440p × 1,28, 4K × 1,72) entsprechen pixel-skalierten Framebuffer- und G-Buffer-Messungen.</li>
+<li>Raytracing-Overhead ist abgeleitet aus Cyberpunk-2077-RT-an-vs.-aus-VRAM-Deltas bei gleichen Einstellungen.</li>
+<li>HD-Textur-Pack-Overhead skaliert mit Preset, weil höhere Presets schon größere Mip-Level nutzen und weniger zum Einwechseln übrig bleibt.</li>
+<li>Empfohlenes VRAM addiert ein Pro-Auflösungs-Headroom-Band (1,0 / 1,5 / 2,0 GB), das auf die Driver-Spillover-Schwelle abbildet, bevor Textur-Pop beginnt.</li>
+<li>Jede Karte im Picker nutzt ihr Hersteller-Spec-VRAM in GB. VRAM-Varianten-Karten (3060 12/8 GB, 4060 Ti 16/8 GB, 5060 Ti 16/8 GB) sind separate Einträge.</li></ul>
+        </div>
+      </details>
+    </section>
+
+    <section aria-labelledby="faq">
+      <header class="text-center">
+        <h2 id="faq" class="h2-lg">GTA-6-VRAM-Fragen</h2>
+        <p class="section-dek">Reichen 8 GB, kostet RT Speicher, was passiert, wenn du ausgehst.</p>
+      </header>
+      <ul class="faq-list" role="list"><li class="faq-item">
+        <button id="faq-q-1" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-1">
+          <span>Wie viel VRAM brauche ich für GTA 6?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-1" class="faq-answer" data-faq-answer hidden>
+          <p>Bei 1080p Hoch sind 8 GB bequem. Bei 1440p Ultra sind 12 GB die saubere Untergrenze. Bei 4K Ultra mit Raytracing plane 18 GB ein. Das HD-Textur-Pack addiert weitere 1–2 GB auf jedes Preset. Wähle oben deine Auflösung und dein Preset für die genaue Zahl.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-2" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-2">
+          <span>Reichen 8 GB VRAM für GTA 6?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-2" class="faq-answer" data-faq-answer hidden>
+          <p>Ja für 1080p Hoch und 1440p Hoch. Unzureichend bei 1440p Sehr hoch. Nicht genug für 1440p Ultra mit Raytracing, 4K Ultra oder das HD-Textur-Pack bei Hoch und darüber. Bleib bei 1080p und überspringe das HD-Pack, und eine 8-GB-RTX-4060 / RX 7600 landet in der Bequem-Zone.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-3" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-3">
+          <span>Reichen 6 GB VRAM für GTA 6?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-3" class="faq-answer" data-faq-answer hidden>
+          <p>Nur bei 1080p Niedrig oder Mittel ohne HD-Textur-Pack. 6 GB (GTX 1660 Super, RTX 2060, RX 5600 XT) liegt unter dem empfohlenen 1080p-Hoch-Puffer, und jede andere Auflösungs-/Preset-Kombination fällt in die Knapp- oder Unzureichend-Zone.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-4" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-4">
+          <span>Reichen 12 GB VRAM für GTA 6?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-4" class="faq-answer" data-faq-answer hidden>
+          <p>Ja bei 1440p Ultra und bei 4K Hoch ohne HD-Pack. Füge Raytracing bei 1440p Ultra hinzu und 12 GB fallen auf Knapp. 12 GB (RTX 4070 / 4070 Super / RTX 3060 12GB / RX 6700 XT) ist das empfohlene Launch-Fenster-Minimum, wenn du bei 1440p spielst.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-5" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-5">
+          <span>Reichen 16 GB VRAM für GTA 6 bei 4K?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-5" class="faq-answer" data-faq-answer hidden>
+          <p>Knapp bei 4K Ultra (16,2 GB nötig von 16 GB) und Unzureichend bei 4K Ultra mit Raytracing (18,1 GB). Füge das HD-Textur-Pack und Frame-Generierung hinzu und es bleibt Unzureichend, eine 24-GB-4090 ist die einzige Karte, die in diesem Stack Bequem bleibt.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-6" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-6">
+          <span>Wie viel VRAM nutzt GTA-6-Raytracing?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-6" class="faq-answer" data-faq-answer hidden>
+          <p>Raytracing addiert ca. 0,8 GB bei 1080p, ca. 1,2 GB bei 1440p und ca. 1,9 GB bei 4K auf das Basis-Preset. Path-Tracing (falls Rockstar es liefert) addiert grob das 2-Fache. Wenn deine Karte ohne RT schon Knapp ist, schiebt RT-Aktivieren sie auf Unzureichend.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-7" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-7">
+          <span>Reduzieren DLSS oder FSR GTA-6-VRAM-Nutzung?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-7" class="faq-answer" data-faq-answer hidden>
+          <p>Upscaling schrumpft die interne Render-Auflösung, was Framebuffer- und G-Buffer-VRAM um 0,4–1,8 GB reduziert, je nach Modus und Ziel-Auflösung. Frame-Generierung (DLSS 3 FG, FSR 3 FG) addiert ihren eigenen Puffer, 0,4 GB bei 1080p, 1,1 GB bei 4K, sodass sie die Ersparnis teilweise ausgleicht.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-8" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-8">
+          <span>Wie viel VRAM braucht das GTA-6-HD-Textur-Pack?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-8" class="faq-answer" data-faq-answer hidden>
+          <p>Das HD-Pack addiert eine unkomprimierte Textur-Schicht auf den Basis-Pool des Presets. Overhead skaliert mit Preset: 0 GB bei Niedrig, ca. 0,4 GB bei Mittel, ca. 0,8 GB bei Hoch, ca. 1,4 GB bei Sehr hoch und ca. 2,2 GB bei Ultra. Überspringe das HD-Pack, wenn deine Karte unter 12 GB liegt.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-9" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-9">
+          <span>Nutzt GTA 6 mehr VRAM als GTA V?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-9" class="faq-answer" data-faq-answer hidden>
+          <p>Ja, deutlich. GTA-V-Ultra-Preset passt in 4 GB bei 1080p, GTA-6-Ziel-Hardware-Pass zeigt auf das 6-Fache dieses Budgets beim gleichen Preset. Rockstars Vice-City-Neubau wird mit 4K-Asset-Auflösung und dichterem Streaming erstellt, sodass VRAM-Druck bei Ultra mit Textur-Dichte skaliert, nicht nur mit Pixeln.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-10" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-10">
+          <span>Welches VRAM brauche ich für GTA 6 bei 4K?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-10" class="faq-answer" data-faq-answer hidden>
+          <p>4K Hoch ist ausreichend auf 12 GB, knapp auf 10 GB. 4K Ultra braucht 16,2 GB, sodass 16 GB knapp und 20 GB bequem sind. 4K Ultra + Raytracing braucht 18,1 GB. 4K Ultra + RT + HD-Pack + Frame-Generierung braucht 20+ GB, das ist 4090-/7900-XTX-Territorium.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-11" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-11">
+          <span>RTX 3060 12 GB vs. RTX 3070 8 GB für GTA 6, welche ist besser?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-11" class="faq-answer" data-faq-answer hidden>
+          <p>Für rohe Rasterisierung ist die 3070 schneller. Für VRAM-Headroom bei 1440p Ultra oder mit HD-Textur-Pack erfüllt die 3060 12 GB den Gesamt-Pool, während die 3070 8 GB in der Unzureichend-Zone landet. Wenn du 1440p mit Texturen auf Max spielst, ist die 3060 12 GB der sicherere Pick.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-12" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-12">
+          <span>Wie genau ist dieser VRAM-Rechner vor dem GTA-6-Launch?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-12" class="faq-answer" data-faq-answer hidden>
+          <p>Nah genug, um einen Kauf zu planen, nicht nah genug, um zu zitieren. Basis-Pool-Größen sind kalibriert aus RDR2 (gleiche RAGE-Engine), Cyberpunk-2077-Textur-Pool-Telemetrie und gemoddeter GTA-V-HD-Pack-Allokation. Raytracing-Overheads entsprechen gemessenen Cyberpunk-RT-/Path-Tracing-Deltas. Erwarte ±10 % gegenüber Launch-Day-Treibern. Wir aktualisieren innerhalb von Stunden nach Rockstars offiziellem Spec-Drop.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-13" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-13">
+          <span>Verursacht niedriges VRAM Stottern in GTA 6?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-13" class="faq-answer" data-faq-answer hidden>
+          <p>Ja, das ist genau der Fehlermodus des Unzureichend-Urteils. Wenn VRAM überläuft, streamt der Treiber Texturen aus System-RAM über PCIe, und du bekommst Pop-in, Textur-LOD-Flackern und 1-%-Low-Frame-Zeit-Spitzen. Durchschnittliche FPS sehen oft gut aus, das gefühlte Erlebnis ist stotternd. Senke Preset oder Auflösung, um VRAM in den Pool zu bringen.</p>
+        </div>
+      </li>
+<li class="faq-item">
+        <button id="faq-q-14" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-14">
+          <span>Braucht Textur-Streaming mehr VRAM als statische Texturen?</span>
+          <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div id="faq-a-14" class="faq-answer" data-faq-answer hidden>
+          <p>Streaming nutzt weniger VRAM, aber mehr Disk-I/O. GTA 6 zielt auf NVMe mit DirectStorage, eine langsame SATA-SSD (oder schlimmer, eine HDD) zwingt die Engine, einen größeren residenten Pool in VRAM zu halten, um Lade-Stalls zu verbergen. Auf DirectStorage-freundlichen NVMe-Laufwerken halten die Zahlen des Rechners, auf SATA-SSDs plane 10–15 % mehr Headroom ein.</p>
+        </div>
+      </li></ul>
+    </section>
+
+    <section aria-labelledby="glossary">
+      <h2 id="glossary">VRAM- und Textur-Streaming-Begriffe</h2>
+      <dl class="glossary-grid"><div id="term-vram">
+        <dt>VRAM</dt>
+        <dd>Video-RAM: dedizierter Speicher auf deiner GPU, der Texturen, Framebuffer und Render-Ziele hält. Anders als System-RAM.</dd>
+      </div>
+<div id="term-texture-pool">
+        <dt>Textur-Pool</dt>
+        <dd>Die vorallokierte VRAM-Region, die die Engine für Textur-Streaming reserviert. Preset skaliert diesen Pool direkt, Ultra verdoppelt Niedrig grob.</dd>
+      </div>
+<div id="term-framebuffer">
+        <dt>Framebuffer</dt>
+        <dd>Das Bild, das gerendert wird, plus Tiefen- und G-Buffer-Ziele. Skaliert mit Pixeln: ca. 1 GB bei 1080p, ca. 1,7 GB bei 1440p, ca. 3,5 GB bei 4K.</dd>
+      </div>
+<div id="term-ray-tracing-overhead">
+        <dt>Raytracing-Overhead</dt>
+        <dd>Extra-VRAM, genutzt von BVH-Strukturen, Ray-Payloads und Denoiser-Zielen. Addiert 0,8–1,9 GB je nach Auflösung.</dd>
+      </div>
+<div id="term-frame-generation">
+        <dt>Frame-Generierung</dt>
+        <dd>DLSS 3 FG und FSR 3 FG fügen einen synthetischen Frame zwischen echte ein und puffern Optical-Flow-Daten in VRAM. Addiert 0,4–1,1 GB.</dd>
+      </div>
+<div id="term-directstorage">
+        <dt>DirectStorage</dt>
+        <dd>GPU-dekomprimiertes Asset-Streaming von NVMe. Reduziert benötigten residenten Textur-Pool durch Just-in-Time-Streaming.</dd>
+      </div></dl>
+    </section>
+
+    <section aria-labelledby="related-content">
+      <h2 id="related-content">Paare das mit deiner Bildraten-Schätzung</h2>
+      <h3 class="related-sub">Verwandte Tools</h3>
+      <ul class="related-tools-grid"><li><a href="/de/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA-6-Systemanforderungs-Checker: Sofort-Urteil gegen Community-geschätzte Minimum-, Recommended- und Ultra-Stufen. GPU, CPU, RAM und Speicher."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA-6-Systemanforderungs-Checker</h3><p>Sofort-Urteil gegen Community-geschätzte Minimum-, Recommended- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/bottleneck-calculator" class="tool-card" data-accent="blue" aria-label="GTA-6-Bottleneck-Rechner: Prüfe CPU-vs.-GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das dein Rig neu ausbalanciert."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Bottleneck-Rechner</h3><p>Prüfe CPU-vs.-GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das dein Rig neu ausbalanciert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/download-time" class="tool-card" data-accent="pink" aria-label="GTA-6-Download-Zeit-Rechner: Schätze, wie lange die etwa 150-GB-Basis-Installation bei deiner Verbindung dauert, plus Day-One-Patch-Rechnung."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA-6-Download-Zeit-Rechner</h3><p>Schätze, wie lange die etwa 150-GB-Basis-Installation bei deiner Verbindung dauert, plus Day-One-Patch-Rechnung.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/storage-planner" class="tool-card" data-accent="purple" aria-label="GTA-6-Speicher-Planer: Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <h3 class="related-sub">Begleit-Guides</h3>
+      <ul class="guide-cards"><li><a href="/de/guides/how-fps-is-estimated" class="tool-card" data-accent="blue" aria-label="Wie wir GTA-6-FPS vor dem Launch schätzen: Das genaue Modell hinter dem FPS-Rechner, GPU-Scores, Upscaler-Multiplikatoren, Frame-Gen-Caps und die VRAM-Stotter-Strafe."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Leistung</span><h3>Wie wir GTA-6-FPS vor dem Launch schätzen</h3><p>Das genaue Modell hinter dem FPS-Rechner, GPU-Punktzahlen, Upscaler-Multiplikatoren, Frame-Gen-Caps und die VRAM-Stotter-Strafe.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink" aria-label="CPU-GPU-Paarung für GTA 6: 12 gängige CPU- plus GPU-Paarungen mit dem ehrlichen Urteil, ausgewogen, GPU-ausgehungert oder CPU-limitiert, und warum 1-%-Lows zuerst abfallen."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>CPU-GPU-Paarung für GTA 6</h3><p>12 gängige CPU- plus GPU-Paarungen mit dem ehrlichen Urteil, ausgewogen, GPU-ausgehungert oder CPU-limitiert, und warum 1 %-Lows zuerst abfallen.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+    </section>
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Quellen und Methodik-Referenzen</h2>
+      <ol class="sources-list"><li>
+        <a href="https://www.eurogamer.net/digitalfoundry-2019-red-dead-redemption-2-pc-tech-review-vulkan-dx12-benchmarks-1080p-1440p-4k" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 PC: VRAM- und Preset-Skalierung im DF-Tech-Review</a>
+        <span class="src-meta">Digital Foundry · Eurogamer · Veröffentlicht 5. Nov. 2019 · Zugegriffen 24. Juli 2026 · RAGE-Engine-(RDR2-)VRAM-Allokation bei jedem Preset, Anker für Basis-Pool-Bemessung.</span>
+      </li>
+<li>
+        <a href="https://www.techpowerup.com/review/cyberpunk-2077-benchmark-test-performance-analysis/" target="_blank" rel="noopener noreferrer">Cyberpunk 2077: Path-Tracing-Benchmark und VRAM-Verhalten</a>
+        <span class="src-meta">TechPowerUp · Veröffentlicht 11. Apr. 2023 · Zugegriffen 24. Juli 2026 · RT- und Path-Tracing-VRAM-Overhead über 1080p / 1440p / 4K.</span>
+      </li>
+<li>
+        <a href="https://www.youtube.com/@hardwareunboxed/videos" target="_blank" rel="noopener noreferrer">DLSS-3- und FSR-3-Frame-Generierung: VRAM-Puffer-Messung</a>
+        <span class="src-meta">Hardware Unboxed · Veröffentlicht 1. Okt. 2023 · Zugegriffen 24. Juli 2026 · Frame-Gen-Puffer-Größen über Auflösungen zur Bemessung von FG-Overhead.</span>
+      </li>
+<li>
+        <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">GTA VI, offizielle Ziel-Hardware-Seite</a>
+        <span class="src-meta">Rockstar Games · Veröffentlicht 1. Mai 2025 · Zugegriffen 24. Juli 2026 · Offizieller Ziel-Spec-Pass, Anker für Basis-Pool-Neukalibrierung beim Launch.</span>
+      </li></ol>
+    </section>
+
+    <section aria-labelledby="changelog">
+      <h2 id="changelog">Changelog</h2>
+      <ul class="changelog-list"><li>
+        <p class="changelog-version">v1.1</p>
+        <time datetime="2026-11-17">17. Nov. 2026</time>
+        <p>Als statische Seite neu aufgebaut. Tuning-Tipps berechnen jetzt die gesparten Gigabytes pro Auflösung aus den gleichen Konstanten wie die VRAM-Schätzung (Ultra auf Sehr hoch spart 1,8 GB bei 1080p, aber 3,1 GB bei 4K), sodass der Rat bei jeder Auflösung zur Rechnung passt. Use-Case-Urteile auf Engine-berechnete Werte korrigiert.</p>
+      </li>
+<li>
+        <p class="changelog-version">v1.0</p>
+        <time datetime="2026-07-23">23. Juli 2026</time>
+        <p>Launch: 60-Karten-VRAM-Datenbank, Auflösungs- mal Preset-Rechnung, Raytracing-/Frame-Gen-/HD-Pack-Overheads, Gespeicherte-Ergebnisse-Panel, dynamisches OG-Bild, gestapeltes JSON-LD (SoftwareApplication + HowTo + FAQ + Article + Breadcrumb).</p>
+      </li></ul>
+    </section>
+
+    <aside class="disclaimer" role="note" aria-label="Schätzungs-Haftungsausschluss">
+      <p class="eyebrow-muted">Schätzungs-Haftungsausschluss</p>
+      <p>GTA 6 ist auf PC noch nicht erschienen. VRAM-Zahlen sind Schätzungen, modelliert nach RDR2- und Cyberpunk-2077-Textur-Pool-Telemetrie, mit einem Pro-Auflösungs-Headroom-Band gegenüber Launch-Day-Treibern. Nutze sie, um einen Kauf zu planen, nicht um eine Spec zu zitieren.</p>
+    </aside>
+        </article>
+      </div>
+    </main>
+<!-- _partials/footer.html — shared site footer.
+     Copy this block into every page. The year is set by hand each January
+     (no build step); keep it in sync with the copyright line. -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
+      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
+      <div class="footer-glow-line" aria-hidden="true"></div>
+      <a href="/de/#hero-title" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">Live · GTA-6-Launch-Tracking, 19. Nov. 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Countdown ansehen →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
+            <span class="logo-bar" aria-hidden="true"></span>
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+              </span>
+            </span>
+          </a>
+          <p>Das ultimative Ziel für GTA-6-Tools, Rechner, Tracker, Planer und Guides. Alles, was du brauchst, an einem Ort, keine Ads zuerst, kein Ballast.</p>
+          <div class="footer-socials">
+            <a href="https://x.com/toolwools" aria-label="Twitter" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://youtube.com/@toolwools" aria-label="YouTube" data-social="pink" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+            <a href="https://instagram.com/toolwools" aria-label="Instagram" data-social="pink" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Top-Tools</h3>
+            <ul>
+              <li><a href="/de/tools/system-requirements">Kann mein PC GTA 6 schaffen?</a></li>
+              <li><a href="/de/tools/fps-calculator">FPS-Rechner</a></li>
+              <li><a href="/de/tools/download-time">Download-Zeit-Rechner</a></li>
+              <li><a href="/de/tools/system-requirements">Systemanforderungen</a></li>
+              <li><a href="/de/tools/settings-optimizer">Einstellungs-Optimierer</a></li>
+              <li><a href="/de/tools/hardware-comparison">Hardware-Vergleich</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Entdecken</h3>
+            <ul>
+              <li><a href="/de/tools">Alle Tools</a></li>
+              <li><a href="/de/trending">Trends</a></li>
+              <li><a href="/de/trackers">Tracker</a></li>
+              <li><a href="/de/generators">Generatoren</a></li>
+              <li><a href="/de/news">News</a></li>
+              <li><a href="/de/trailers">Trailer</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Ressourcen</h3>
+            <ul>
+              <li><a href="/de/tools/interactive-map">Interaktive Karte</a> <span class="footer-col-badge">Neu</span></li>
+              <li><a href="/de/about">Über uns</a></li>
+              <li><a href="/de/methodology">Methodik</a></li>
+              <li><a href="/de/contact">Kontakt</a></li>
+              <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
+        <div class="footer-bottom-links">
+          <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <script src="/assets/js/de/theme.js" defer></script>
+  <script src="/assets/js/de/header.js" defer></script>
+  <script src="/assets/js/de/search.js" defer></script>
+  <script src="/assets/js/de/faq.js" defer></script>
+  <script type="module" src="/assets/js/de/vram-calculator.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://toolwools.com/de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolwools.com/de/tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "GTA-6-VRAM-Anforderungs-Checker",
+          "item": "https://toolwools.com/de/tools/vram-calculator"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "GTA-6-VRAM-Anforderungs-Checker",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web browser",
+      "url": "https://toolwools.com/de/tools/vram-calculator",
+      "description": "Rechne das VRAM aus, das GTA 6 bei 1080p, 1440p und 4K, Niedrig bis Ultra, braucht, inklusive Raytracing- und HD-Textur-Overhead, mit einem Urteil für 6- bis 24-GB-Karten.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "ToolWools",
+        "url": "https://toolwools.com"
+      },
+      "datePublished": "2026-07-23",
+      "dateModified": "2026-11-17",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "HowTo",
+      "name": "Wie viel VRAM GTA 6 braucht, Einstellung für Einstellung",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Wähle deine Auflösung",
+          "text": "1080p, 1440p oder 4K. Framebuffer, G-Buffer und Post-Processing-Ketten skalieren mit Pixeln, 4K braucht ca. 1,8 GB mehr nur um einen Frame zu rendern."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Wähle ein Qualitäts-Preset",
+          "text": "Niedrig bis Ultra entspricht einer Textur-Pool-Größe. Ultra nutzt unkomprimiertes Streaming und ist der eine größte VRAM-Hebel."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Schalte Raytracing, Frame-Gen und HD-Texturen um",
+          "text": "Jedes addiert einen eigenen Overhead. Raytracing kostet 0,8–1,9 GB je nach Auflösung. Frame-Generierung addiert 0,4–1,1 GB. Das HD-Pack kann bis zu 2,2 GB addieren."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Sieh, ob deine Karte den Stotter-Puffer schafft",
+          "text": "Wähle deine GPU oder tippe eine eigene VRAM-Zahl ein. Das Panel zeigt Delta gegenüber Bedarf, ob du den empfohlenen Stotter-Puffer schaffst, und deterministische Tuning-Tipps, wenn du knapp bist."
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Wie viel VRAM brauche ich für GTA 6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bei 1080p Hoch sind 8 GB bequem. Bei 1440p Ultra sind 12 GB die saubere Untergrenze. Bei 4K Ultra mit Raytracing plane 18 GB ein. Das HD-Textur-Pack addiert weitere 1–2 GB auf jedes Preset. Wähle oben deine Auflösung und dein Preset für die genaue Zahl."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Reichen 8 GB VRAM für GTA 6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja für 1080p Hoch und 1440p Hoch. Unzureichend bei 1440p Sehr hoch. Nicht genug für 1440p Ultra mit Raytracing, 4K Ultra oder das HD-Textur-Pack bei Hoch und darüber. Bleib bei 1080p und überspringe das HD-Pack, und eine 8-GB-RTX-4060 / RX 7600 landet in der Bequem-Zone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Reichen 6 GB VRAM für GTA 6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nur bei 1080p Niedrig oder Mittel ohne HD-Textur-Pack. 6 GB (GTX 1660 Super, RTX 2060, RX 5600 XT) liegt unter dem empfohlenen 1080p-Hoch-Puffer, und jede andere Auflösungs-/Preset-Kombination fällt in die Knapp- oder Unzureichend-Zone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Reichen 12 GB VRAM für GTA 6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja bei 1440p Ultra und bei 4K Hoch ohne HD-Pack. Füge Raytracing bei 1440p Ultra hinzu und 12 GB fallen auf Knapp. 12 GB (RTX 4070 / 4070 Super / RTX 3060 12GB / RX 6700 XT) ist das empfohlene Launch-Fenster-Minimum, wenn du bei 1440p spielst."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Reichen 16 GB VRAM für GTA 6 bei 4K?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Knapp bei 4K Ultra (16,2 GB nötig von 16 GB) und Unzureichend bei 4K Ultra mit Raytracing (18,1 GB). Füge das HD-Textur-Pack und Frame-Generierung hinzu und es bleibt Unzureichend, eine 24-GB-4090 ist die einzige Karte, die in diesem Stack Bequem bleibt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viel VRAM nutzt GTA-6-Raytracing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Raytracing addiert ca. 0,8 GB bei 1080p, ca. 1,2 GB bei 1440p und ca. 1,9 GB bei 4K auf das Basis-Preset. Path-Tracing (falls Rockstar es liefert) addiert grob das 2-Fache. Wenn deine Karte ohne RT schon Knapp ist, schiebt RT-Aktivieren sie auf Unzureichend."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Reduzieren DLSS oder FSR GTA-6-VRAM-Nutzung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Upscaling schrumpft die interne Render-Auflösung, was Framebuffer- und G-Buffer-VRAM um 0,4–1,8 GB reduziert, je nach Modus und Ziel-Auflösung. Frame-Generierung (DLSS 3 FG, FSR 3 FG) addiert ihren eigenen Puffer, 0,4 GB bei 1080p, 1,1 GB bei 4K, sodass sie die Ersparnis teilweise ausgleicht."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viel VRAM braucht das GTA-6-HD-Textur-Pack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Das HD-Pack addiert eine unkomprimierte Textur-Schicht auf den Basis-Pool des Presets. Overhead skaliert mit Preset: 0 GB bei Niedrig, ca. 0,4 GB bei Mittel, ca. 0,8 GB bei Hoch, ca. 1,4 GB bei Sehr hoch und ca. 2,2 GB bei Ultra. Überspringe das HD-Pack, wenn deine Karte unter 12 GB liegt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nutzt GTA 6 mehr VRAM als GTA V?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, deutlich. GTA-V-Ultra-Preset passt in 4 GB bei 1080p, GTA-6-Ziel-Hardware-Pass zeigt auf das 6-Fache dieses Budgets beim gleichen Preset. Rockstars Vice-City-Neubau wird mit 4K-Asset-Auflösung und dichterem Streaming erstellt, sodass VRAM-Druck bei Ultra mit Textur-Dichte skaliert, nicht nur mit Pixeln."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Welches VRAM brauche ich für GTA 6 bei 4K?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "4K Hoch ist ausreichend auf 12 GB, knapp auf 10 GB. 4K Ultra braucht 16,2 GB, sodass 16 GB knapp und 20 GB bequem sind. 4K Ultra + Raytracing braucht 18,1 GB. 4K Ultra + RT + HD-Pack + Frame-Generierung braucht 20+ GB, das ist 4090-/7900-XTX-Territorium."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "RTX 3060 12 GB vs. RTX 3070 8 GB für GTA 6, welche ist besser?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Für rohe Rasterisierung ist die 3070 schneller. Für VRAM-Headroom bei 1440p Ultra oder mit HD-Textur-Pack erfüllt die 3060 12 GB den Gesamt-Pool, während die 3070 8 GB in der Unzureichend-Zone landet. Wenn du 1440p mit Texturen auf Max spielst, ist die 3060 12 GB der sicherere Pick."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie genau ist dieser VRAM-Rechner vor dem GTA-6-Launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nah genug, um einen Kauf zu planen, nicht nah genug, um zu zitieren. Basis-Pool-Größen sind kalibriert aus RDR2 (gleiche RAGE-Engine), Cyberpunk-2077-Textur-Pool-Telemetrie und gemoddeter GTA-V-HD-Pack-Allokation. Raytracing-Overheads entsprechen gemessenen Cyberpunk-RT-/Path-Tracing-Deltas. Erwarte ±10 % gegenüber Launch-Day-Treibern. Wir aktualisieren innerhalb von Stunden nach Rockstars offiziellem Spec-Drop."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Verursacht niedriges VRAM Stottern in GTA 6?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, das ist genau der Fehlermodus des Unzureichend-Urteils. Wenn VRAM überläuft, streamt der Treiber Texturen aus System-RAM über PCIe, und du bekommst Pop-in, Textur-LOD-Flackern und 1-%-Low-Frame-Zeit-Spitzen. Durchschnittliche FPS sehen oft gut aus, das gefühlte Erlebnis ist stotternd. Senke Preset oder Auflösung, um VRAM in den Pool zu bringen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Braucht Textur-Streaming mehr VRAM als statische Texturen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Streaming nutzt weniger VRAM, aber mehr Disk-I/O. GTA 6 zielt auf NVMe mit DirectStorage, eine langsame SATA-SSD (oder schlimmer, eine HDD) zwingt die Engine, einen größeren residenten Pool in VRAM zu halten, um Lade-Stalls zu verbergen. Auf DirectStorage-freundlichen NVMe-Laufwerken halten die Zahlen des Rechners, auf SATA-SSDs plane 10–15 % mehr Headroom ein."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>
