@@ -91,7 +91,6 @@ function render() {
   if (bufferValue) bufferValue.textContent = state.buffer + "%";
   platformButtons.forEach(function (b) {
     b.setAttribute("aria-pressed", String(b.dataset.platformButton === state.platform));
-    b.setAttribute("aria-selected", String(b.dataset.platformButton === state.platform));
   });
 
   var tldr = $("[data-tldr-card]");

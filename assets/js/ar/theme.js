@@ -25,4 +25,10 @@
       apply(current);
     });
   });
+  // AXE FIX (2026-11-20): <pre> formula blocks scroll horizontally at
+  // phone width; make them keyboard-focusable so the scrollable region
+  // has keyboard access (axe scrollable-region-focusable).
+  document.querySelectorAll("pre").forEach(function (p) {
+    if (!p.hasAttribute("tabindex")) p.setAttribute("tabindex", "0");
+  });
 })();

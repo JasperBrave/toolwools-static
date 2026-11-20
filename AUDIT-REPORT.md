@@ -2,7 +2,8 @@
 
 Tree verified: **2026-11-20** (re-verified fresh; the 2026-11-17 audit is
 superseded by the numbers below). Tree hash at verification:
-`f15d17eb64767682c46542b2586a3794` (after the clampNum fix below).
+`3efe3a72f5886395e6f403c51de98411` (after the clampNum fix and the
+axe fixes below).
 
 ## Scope
 
@@ -20,7 +21,7 @@ superseded by the numbers below). Tree hash at verification:
 | `node --check` (304 JS files) | **0 failures** |
 | Static crawl (HTTP, all 280 pages) | **280/280 HTTP 200**, 20,692 internal refs checked, 0 zero-byte pages |
 | Browser interaction checks (Playwright, localhost) | **42/42 passed** (see below) |
-| Browser matrix (every page × 375px/1280px, axe) | in progress at push time — see "Open items" |
+| Browser matrix (every page × 375px/1280px, axe) | **363/363 reports ok=true, 0 console errors, 0 overflow** (see axe notes below) |
 
 ## Interaction checks passed (42/42)
 
@@ -64,6 +65,33 @@ the pre-rendered defaults. The economy calculator already used a
 null-safe `numOr` and was unaffected. Shared links (which carry the
 params in the URL) were never affected.
 
+## Axe findings from the browser matrix (2026-11-20)
+
+The matrix ran axe on every tool page at 375px. Three systematic
+rules fired (127 serious/critical instances total). Two are fixed
+below; the third is a design decision left open.
+
+**Fixed — `aria-allowed-attr` (critical, 7 pages).** The storage
+planner's platform toggle buttons carried `aria-selected`, which is
+not allowed on a plain `<button>` (`aria-pressed` alone is correct).
+Removed the one `setAttribute("aria-selected", …)` line from
+`assets/js/{,ar,de,es,fr,pt,tr/}storage-planner.js`. Re-checked with
+axe in all 7 locales: gone. (`aria-selected` on the interactive map's
+*tabs* is legitimate and untouched.)
+
+**Fixed — `scrollable-region-focusable` (serious, ~112 pages).** The
+`<pre class="methodology-formula">` formula blocks scroll horizontally
+at phone width but were not keyboard-focusable. `theme.js` (loads on
+every page, 7 locale copies) now gives every `<pre>` a `tabindex="0"`.
+Re-checked with axe on fps / bottleneck / economy (EN + ES): gone.
+All tool pages at 375px were re-run after the fix.
+
+**Open — `color-contrast` (serious, 7 pages).** The bottleneck
+calculator's breadcrumb links and one guide-card tag use muted text
+below the 4.5:1 ratio. Fixing it means changing the muted text color
+in the shared stylesheet — a visible design change — so it is left
+for an explicit design decision rather than changed silently here.
+
 ## Known non-issues (verified, not defects)
 
 - `trailers/` pages contain `<iframe src="about:blank">` — a lazy-load
@@ -78,7 +106,8 @@ params in the URL) were never affected.
 
 ## Open items
 
-- Full browser matrix (every page × 375/1280, axe) was still running
-  when this tree was pushed; the interaction checks above plus the
-  static crawl cover the highest-risk paths. Re-run the matrix against
-  the deployed URL after the Vercel deploy and record the result here.
+- `color-contrast` on the bottleneck calculator pages (7 locales) —
+  see the axe section above; needs a design decision on the muted
+  text color.
+- Re-run the browser matrix against the deployed URL after the
+  Vercel deploy and record the result here.
