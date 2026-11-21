@@ -161,10 +161,12 @@ export function importVerdict(code, edition = "standard") {
 }
 export function editionValues(code) {
   const standardUsd = priceFor(code, "standard").usdEquivalent;
+  const standardLocal = priceFor(code, "standard").totalLocal;
   return Object.keys(EDITIONS).map((edition) => {
     const p = priceFor(code, edition);
     const meta = EDITIONS[edition];
     const premium = round2(p.usdEquivalent - standardUsd);
+    const premiumLocal = round2(p.totalLocal - standardLocal);
     return {
       edition,
       label: meta.label,
@@ -172,8 +174,10 @@ export function editionValues(code) {
       totalLocal: p.totalLocal,
       usdEquivalent: p.usdEquivalent,
       premiumOverStandardUsd: premium,
+      premiumOverStandardLocal: premiumLocal,
       gtaDollars: meta.gtaDollars,
       usdPer100kGta: meta.gtaDollars > 0 ? round2(premium / meta.gtaDollars * 1e5) : null,
+      localPer100kGta: meta.gtaDollars > 0 ? round2(premiumLocal / meta.gtaDollars * 1e5) : null,
       includes: meta.includes
     };
   });

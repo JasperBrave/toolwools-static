@@ -130,9 +130,27 @@ function shortPartLabel(label) {
   return label.replace(/^GeForce /, "").split(" / ")[0];
 }
 
+// Monotonicity clamp for the preset ladder's 1% low (iter14 B6a): the
+// engine's 1% low factor switches at the +-7% limiter band, so with DLSS
+// Quality the CPU-capped Low row can print a lower 1% low than the Medium
+// row at the same average. A lower preset cannot have a worse 1% low than
+// a higher preset, so walk from Ultra down and floor each row at the
+// next-higher preset's 1% low.
+function presetLadderResults(input) {
+  var results = PRESET_LIST.map(function (p) { return estimateFps(Object.assign({}, input, { preset: p })); });
+  var floor = 0;
+  for (var i = results.length - 1; i >= 0; i--) {
+    if (results[i].lowFps < floor) results[i].lowFps = floor;
+    floor = results[i].lowFps;
+  }
+  return results;
+}
+
 function render() {
   var input = inputFor();
   var result = estimateFps(input);
+  var ladderResults = presetLadderResults(input);
+  var displayLow = ladderResults[PRESET_LIST.indexOf(state.preset)].lowFps;
   var tone = toneOf(result);
   var gpu = input.gpu;
   var cpu = input.cpu;
@@ -162,8 +180,8 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = result.hitsTarget
-      ? "Yes, " + gpu.label + " + " + cpu.label + " hits " + state.target + " fps at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ": about " + result.avgFps + " fps average, " + result.lowFps + " fps 1% low." + fgNote
-      : "Short, " + gpu.label + " + " + cpu.label + " reaches about " + result.avgFps + " fps average (" + result.lowFps + " fps 1% low) at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ", " + Math.abs(result.targetGap) + " fps under the " + state.target + " fps target." + fgNote;
+      ? "Yes, " + gpu.label + " + " + cpu.label + " hits " + state.target + " fps at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ": about " + result.avgFps + " fps average, " + displayLow + " fps 1% low." + fgNote
+      : "Short, " + gpu.label + " + " + cpu.label + " reaches about " + result.avgFps + " fps average (" + displayLow + " fps 1% low) at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ", " + Math.abs(result.targetGap) + " fps under the " + state.target + " fps target." + fgNote;
     if (label) label.textContent = verdictText + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = verdictText + " — " + result.avgFps + " avg fps";
@@ -183,10 +201,10 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + verdictText + '</p>' +
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> avg fps</span></h3>' +
-      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps band (±15%), ' + result.lowFps + ' fps 1% low. ' + LIMITER_LABEL[result.limiter] + ' at ' + RES_META[state.res].label + ' ' + PRESET_META[state.preset].label + '.' + fgNote + '</p></div></div>' +
+      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps band (±15%), ' + displayLow + ' fps 1% low. ' + LIMITER_LABEL[result.limiter] + ' at ' + RES_META[state.res].label + ' ' + PRESET_META[state.preset].label + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Average FPS</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">' + result.lowFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((result.lowFps / 144) * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">' + displayLow + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((displayLow / 144) * 100)) + '%"></div></div></div>' +
       '</div>' + vramNote + tweaksHtml +
       '<dl class="stat-grid">' +
       '<div><dt>GPU-bound FPS</dt><dd>' + result.gpuFps + '</dd></div>' +
@@ -196,7 +214,7 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + result.lowFps + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + displayLow + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " avg fps (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
@@ -206,8 +224,8 @@ function render() {
   // Preset ladder follows the live GPU/CPU/res (heading follows the selected resolution).
   var ladder = $("[data-preset-ladder]");
   if (ladder) {
-    ladder.innerHTML = PRESET_LIST.map(function (p) {
-      var r = estimateFps(Object.assign({}, input, { preset: p }));
+    ladder.innerHTML = PRESET_LIST.map(function (p, i) {
+      var r = ladderResults[i];
       var fgTag = r.fgApplied ? " (interpolated)" : "";
       return "<tr><td><strong>" + PRESET_META[p].label + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
@@ -230,14 +248,16 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Estimated " + result.avgFps + " average frames per second, " + result.lowFps + " 1 percent low, at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ". " + verdictText + "." + fgNote;
+  if (live) live.textContent = "Estimated " + result.avgFps + " average frames per second, " + displayLow + " 1 percent low, at " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + ". " + verdictText + "." + fgNote;
   syncUrl();
 }
 
 function shareText() {
   var input = inputFor();
   var result = estimateFps(input);
-  return input.gpu.label + " + " + input.cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + result.lowFps + " 1% low). GTA 6 FPS estimate: " + shareUrl();
+  var ladderResults = presetLadderResults(input);
+  var displayLow = ladderResults[PRESET_LIST.indexOf(state.preset)].lowFps;
+  return input.gpu.label + " + " + input.cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + displayLow + " 1% low). GTA 6 FPS estimate: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

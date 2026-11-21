@@ -38,7 +38,7 @@
     });
     if (countEl) countEl.textContent = shown + " sur 23 outils \u00b7 " + liveShown + " live";
     if (emptyEl) emptyEl.hidden = shown !== 0;
-    if (headingEl) headingEl.textContent = q ? 'Résultats pour "' + q + '"' : "Outils en direct";
+    if (headingEl) headingEl.textContent = q ? 'Résultats pour "' + q + '"' : platform === "coming-soon" ? "Bientôt disponible" : platform === "live" ? "Outils en direct" : "Tous les outils";
     var url = new URL(window.location.href);
     if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
     if (category) url.searchParams.set("category", category); else url.searchParams.delete("category");

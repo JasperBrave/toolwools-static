@@ -104,6 +104,8 @@ function render() {
   }
   var resHead = $("[data-res-head]");
   if (resHead) resHead.textContent = state.res + " Ultra";
+  var cap = tbody ? tbody.closest("table").querySelector("caption") : null;
+  if (cap) cap.textContent = cap.textContent.replace(/1080p|1440p|4K/, state.res);
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();

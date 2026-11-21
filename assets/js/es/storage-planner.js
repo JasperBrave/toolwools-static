@@ -4,7 +4,7 @@
 // total = subtotal + headroom. Instalación base default is 212 GB (AUDIT FIX H2:
 // one install-size constant shared with download-time, readiness and the
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
-var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "pc" };
+var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
   pc: { label: "PC", usableGB: 0, note: "Tu unidad, tus reglas, el número de abajo es exactamente lo que necesita GTA 6." },
   ps5: { label: "PS5", usableGB: 667, note: "El SSD de 825 GB de Sony reporta 667 GB utilizables tras la reserva del sistema." },
@@ -148,8 +148,8 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "Keep " + fmt1(r.total) + " GB libres para GTA 6 en " + meta.label + ": " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB headroom.";
-    if (label) label.textContent = "Keep " + fmt1(r.total) + " GB libres · TL;DR";
+    var tldrText = "Mantén " + fmt1(r.total) + " GB libres para GTA 6 en " + meta.label + ": " + state.base + " GB de instalación + " + state.patch + " GB de parche + " + state.dlc + " GB de DLC + " + r.headroom + " GB de margen.";
+    if (label) label.textContent = "Mantén " + fmt1(r.total) + " GB libres · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = fmt1(r.total) + " GB de espacio libre recomendado";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
@@ -164,7 +164,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Espacio libre recomendado</p>' +
       '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' GB of content + ' + r.headroom + ' GB de margen seguro para futuros parches.</p>' +
+      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' GB de contenido + ' + r.headroom + ' GB de margen seguro para futuros parches.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Composition: Instalación base ' + state.base + ' GB, Parche del primer día ' + state.patch + ' GB, DLC y contenido de temporada ' + state.dlc + ' GB, Margen para actualizaciones ' + r.headroom + ' GB">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -191,7 +191,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Depende de la unidad" : fmt1(Math.max(0, row.usable - r.total)) + " GB libres";
+      var after = row.usable === 0 ? "Depende de la unidad" : fmt1(Math.max(0, row.usable - r.total)) + " GB libres" + (r.total > row.usable ? " (faltan " + fmt1(r.total - row.usable) + " GB)" : "");
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
@@ -209,7 +209,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Espacio libre recomendado " + fmt1(r.total) + " gigabytes: " + state.base + " gigabyte install, " + state.patch + " gigabyte patch, " + state.dlc + " gigabytes DLC, " + r.headroom + " gigabytes headroom.";
+  if (live) live.textContent = "Espacio libre recomendado de " + fmt1(r.total) + " gigabytes: instalación de " + state.base + " gigabytes, parche de " + state.patch + " gigabytes, " + state.dlc + " gigabytes de DLC, " + r.headroom + " gigabytes de margen.";
   syncUrl();
 }
 

@@ -155,8 +155,8 @@ function render() {
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">Estimé <strong>' + result.fpsLow + '–' + result.fpsHigh + ' ips</strong> en ' + state.res + ' en ' + modeLabel(state.mode) + '. La plage d\'images suppose le préréglage Élevé sans ray tracing.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + Math.round(result.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + Math.round(result.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
       '</div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>Niveau GPU</dt><dd>' + gpu.score + '/100</dd></div>' +

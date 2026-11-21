@@ -25,7 +25,7 @@ var MODES = ["grind", "business", "cards"];
 var MODE_META = {
   grind: { label: "Argent par heure", hint: "Classer les méthodes et planifier un objectif d'épargne" },
   business: { label: "ROI d'entreprise", hint: "Heures de remboursement et horizon de profit" },
-  cards: { label: "Valeur des cartes Shark", hint: "GTA$ par dollar contre heures de farming" }
+  cards: { label: "Valeur des cartes Shark", hint: "GTA$ par dollar contre heures de collecte" }
 };
 var PROJ_BADGE = '<span class="proj-badge">Projeté, pas dataminé</span>';
 
@@ -175,10 +175,10 @@ function cardsTableHtml(rows) {
   return '<section aria-labelledby="cards-table">\n      <h2 id="cards-table">Valeur des cartes Shark par dollar réel, et les heures gagnées grâce à elles</h2>\n'
     + '      <p class="section-dek">Les packs plus gros achètent toujours plus de GTA$ par dollar. La colonne du salaire implicite transforme cela en une décision que vous pouvez vraiment prendre.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Valeur des cartes Shark par dollar réel, tableau défilant">\n'
-    + '      <table class="data-table" id="cards-table">\n        <caption class="sr-only">Packs de cartes Shark avec dollars GTA par dollar US, heures de farming remplacées, et salaire horaire implicite dans le monde réel.</caption>\n'
+    + '      <table class="data-table" id="cards-table">\n        <caption class="sr-only">Packs de cartes Shark avec dollars GTA par dollar US, heures de collecte remplacées, et salaire horaire implicite dans le monde réel.</caption>\n'
     + '        <thead><tr><th scope="col">Pack</th><th scope="col">GTA$</th><th scope="col">US$</th><th scope="col">GTA$ / 1 $</th><th scope="col">Heures gagnées</th><th scope="col">Salaire implicite</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Les prix des cartes suivent la boutique américaine actuelle. Les heures gagnées dépendent de votre taux de farming ci-dessus.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Les prix des cartes suivent la boutique américaine actuelle. Les heures gagnées dépendent de votre taux de collecte ci-dessus.</p>\n    </section>';
 }
 
 var lastShareText = "";
@@ -239,18 +239,18 @@ function render() {
     tableHtml = businessTableHtml(bizRanked, state.horizon);
   } else if (state.mode === "cards") {
     var maxPerUsd = Math.max.apply(null, cards.map(function (c) { return c.perUsd; }));
-    tldr = "Le pack au meilleur rapport achète " + money(maxPerUsd) + " GTA$ par dollar réel, soit environ " + bestCard.hoursSaved + " heures de farming en moins à votre taux actuel de " + money(rate.perHour) + "/heure.";
+    tldr = "Le pack au meilleur rapport achète " + money(maxPerUsd) + " GTA$ par dollar réel, soit environ " + bestCard.hoursSaved + " heures de collecte en moins à votre taux actuel de " + money(rate.perHour) + "/heure.";
     verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ par 1 $";
-    lastShareText = "Meilleure valeur de carte Shark : " + money(maxPerUsd) + " GTA$ par 1 $, environ " + bestCard.hoursSaved + " heures de farming en moins.";
+    lastShareText = "Meilleure valeur de carte Shark : " + money(maxPerUsd) + " GTA$ par 1 $, environ " + bestCard.hoursSaved + " heures de collecte en moins.";
     lastShareTitle = "Meilleure valeur de carte Shark : " + bestCard.card.label;
     if (outputLabel) outputLabel.textContent = MODE_META.cards.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>Pack au meilleur rapport</dt><dd>" + bestCard.card.label + "</dd></div>"
       + "<div><dt>GTA$ par 1 US$</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>Votre taux de farming</dt><dd>" + money(rate.perHour) + "/h</dd></div>"
+      + "<div><dt>Votre taux de collecte</dt><dd>" + money(rate.perHour) + "/h</dd></div>"
       + "<div><dt>Salaire implicite</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/h</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Les prix des cartes suivent la boutique américaine actuelle. Les heures gagnées dépendent de votre taux de farming ci-dessus.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' Les prix des cartes suivent la boutique américaine actuelle. Les heures gagnées dépendent de votre taux de collecte ci-dessus.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = cardsTableHtml(cards);
   } else {
@@ -267,7 +267,7 @@ function render() {
       + "<div><dt>Sessions</dt><dd>" + plan.sessionsNeeded + " x " + state.session + " h</dd></div>"
       + "<div><dt>Par joueur</dt><dd>" + money(rate.perHourPerPlayer) + "/h</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Payouts are projections, not datamined values.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' Les gains sont des projections, pas des valeurs dataminées.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = methodTableHtml(ranked, state.method);
   }

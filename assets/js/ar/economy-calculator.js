@@ -117,7 +117,7 @@ function methodTableHtml(rows, activeId) {
   var body = rows.map(function (r) {
     var hl = r.method.id === activeId ? ' class="hl-row"' : "";
     return "<tr" + hl + "><th scope=\"row\">" + r.method.label + "</th>"
-      + "<td class=\"mono\">about " + compactMoney(r.method.payout) + "</td>"
+      + "<td class=\"mono\">نحو " + compactMoney(r.method.payout) + "</td>"
       + "<td class=\"mono\">" + money(r.perHour) + "</td>"
       + "<td class=\"muted\">" + r.method.minutes + " د</td>"
       + "<td class=\"muted\">" + compactMoney(r.method.cost) + "</td>"
@@ -151,7 +151,7 @@ function businessTableHtml(rows, horizon) {
 function cardsTableHtml(rows) {
   var body = rows.map(function (r) {
     var best = r.best ? ' class="hl-row"' : "";
-    var tag = r.best ? ' <span class="proj-badge">أفضل قيمة</span>' : "";
+    var tag = r.best ? '\u00A0<span class="proj-badge">أفضل قيمة</span>' : "";
     return "<tr" + best + "><th scope=\"row\">" + r.card.label + tag + "</th>"
       + "<td class=\"muted\">" + compactMoney(r.card.gtaDollars) + "</td>"
       + "<td class=\"muted\">$" + r.card.usd.toFixed(2) + "</td>"
@@ -226,16 +226,16 @@ function render() {
     tableHtml = businessTableHtml(bizRanked, state.horizon);
   } else if (state.mode === "cards") {
     var maxPerUsd = Math.max.apply(null, cards.map(function (c) { return c.perUsd; }));
-    tldr = "أفضل حزمة قيمة تشتري " + money(maxPerUsd) + " GTA$ لكل دولار حقيقي، أي نحو " + bestCard.hoursSaved + " ساعات طحن تختفي بمعدلك الحالي " + money(rate.perHour) + " في الساعة.";
-    verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ لكل 1$";
-    lastShareText = "أفضل قيمة لبطاقة Shark: " + money(maxPerUsd) + " GTA$ لكل 1$، أي نحو " + bestCard.hoursSaved + " ساعات طحن تختفي.";
+    tldr = "أفضل حزمة قيمة تشتري " + "\u2066" + money(maxPerUsd) + " GTA$\u2069" + " لكل دولار حقيقي، أي نحو " + bestCard.hoursSaved + " ساعات طحن تختفي بمعدلك الحالي " + money(rate.perHour) + " في الساعة.";
+    verdictLine = bestCard.card.label + " · " + "\u2066" + money(maxPerUsd) + " GTA$\u2069" + " لكل 1$";
+    lastShareText = "أفضل قيمة لبطاقة Shark: " + "\u2066" + money(maxPerUsd) + " GTA$\u2069" + " لكل 1$، أي نحو " + bestCard.hoursSaved + " ساعات طحن تختفي.";
     lastShareTitle = "أفضل قيمة لبطاقة Shark: " + bestCard.card.label;
     if (outputLabel) outputLabel.textContent = MODE_META.cards.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>أفضل حزمة قيمة</dt><dd>" + bestCard.card.label + "</dd></div>"
       + "<div><dt>GTA$ لكل 1 دولار أمريكي</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>معدل الطحن لديك</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
-      + "<div><dt>الأجر الضمني</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/hr</dd></div>"
+      + "<div><dt>معدل الطحن لديك</dt><dd><span dir=\"ltr\">" + money(rate.perHour) + "/hr</span></dd></div>"
+      + "<div><dt>الأجر الضمني</dt><dd><span dir=\"ltr\">$" + bestCard.impliedWage.toFixed(2) + "/hr</span></dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' أسعار البطاقات تتبع المتجر الأمريكي الحالي. الساعات الموفرة تعتمد على معدل الطحن أعلاه.</p>'
       + shareLinks(lastShareText, lastShareTitle);
@@ -252,7 +252,7 @@ function render() {
       + "<div><dt>الدورات حتى الهدف</dt><dd>" + plan.cycles + "</dd></div>"
       + "<div><dt>الساعات حتى الهدف</dt><dd>" + plan.hours + "س</dd></div>"
       + "<div><dt>الجلسات</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "س</dd></div>"
-      + "<div><dt>لكل لاعب</dt><dd>" + money(rate.perHourPerPlayer) + "/hr</dd></div>"
+      + "<div><dt>لكل لاعب</dt><dd><span dir=\"ltr\">" + money(rate.perHourPerPlayer) + "/hr</span></dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' العوائد تقديرية وليست مستخرجة من البيانات.</p>'
       + shareLinks(lastShareText, lastShareTitle);

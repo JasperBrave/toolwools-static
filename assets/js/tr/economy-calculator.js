@@ -117,7 +117,7 @@ function methodTableHtml(rows, activeId) {
   var body = rows.map(function (r) {
     var hl = r.method.id === activeId ? ' class="hl-row"' : "";
     return "<tr" + hl + "><th scope=\"row\">" + r.method.label + "</th>"
-      + "<td class=\"mono\">about " + compactMoney(r.method.payout) + "</td>"
+      + "<td class=\"mono\">yaklaşık " + compactMoney(r.method.payout) + "</td>"
       + "<td class=\"mono\">" + money(r.perHour) + "</td>"
       + "<td class=\"muted\">" + r.method.minutes + " dk</td>"
       + "<td class=\"muted\">" + compactMoney(r.method.cost) + "</td>"
@@ -234,8 +234,8 @@ function render() {
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>En iyi değer paketi</dt><dd>" + bestCard.card.label + "</dd></div>"
       + "<div><dt>1 ABD$ başına GTA$</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>Grind oranınız</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
-      + "<div><dt>Tahmini ücret</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/hr</dd></div>"
+      + "<div><dt>Grind oranınız</dt><dd>" + money(rate.perHour) + "/saatte</dd></div>"
+      + "<div><dt>Tahmini ücret</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/saatte</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Kart fiyatları güncel ABD mağazasını takip eder. Kazanılan saatler yukarıdaki grind oranınıza bağlıdır.</p>'
       + shareLinks(lastShareText, lastShareTitle);
@@ -252,7 +252,7 @@ function render() {
       + "<div><dt>Hedefe kalan döngü</dt><dd>" + plan.cycles + "</dd></div>"
       + "<div><dt>Hedefe kalan saat</dt><dd>" + plan.hours + "sa</dd></div>"
       + "<div><dt>Oturumlar</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "sa</dd></div>"
-      + "<div><dt>Oyuncu başına</dt><dd>" + money(rate.perHourPerPlayer) + "/hr</dd></div>"
+      + "<div><dt>Oyuncu başına</dt><dd>" + money(rate.perHourPerPlayer) + "/saatte</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Ödemeler tahmini olup veri madenciliğiyle elde edilmemiştir.</p>'
       + shareLinks(lastShareText, lastShareTitle);

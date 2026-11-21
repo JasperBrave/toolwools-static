@@ -136,8 +136,8 @@ function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modélisé</span>';
     var line = formatUsd(e.usdEquivalent) + " équivalent USD"
-      + (e.premiumOverStandardUsd > 0 ? " · " + formatUsd(e.premiumOverStandardUsd) + " au-dessus de Standard" : " · base")
-      + (e.usdPer100kGta !== null ? " · " + formatUsd(e.usdPer100kGta) + " pour 100 000 GTA$" : "");
+      + (e.premiumOverStandardLocal > 0 ? " · " + formatLocal(e.premiumOverStandardLocal, price.market) + " au-dessus de Standard" : " · base")
+      + (e.localPer100kGta !== null ? " · " + formatLocal(e.localPer100kGta, price.market) + " pour 100 000 GTA$" : "");
     return '<li class="rank-item"><div class="rank-head"><h3>' + e.label + badge + "</h3><p>" + formatLocal(e.totalLocal, price.market) + "</p></div>"
       + "<p>" + line + "</p>"
       + "<p>" + e.includes.join(" · ") + "</p></li>";
@@ -180,9 +180,9 @@ function ladderTableHtml(price, ladder) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modélisé</span>';
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
-      + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "Base") + "</td>"
+      + "<td class=\"muted\">" + (e.premiumOverStandardLocal > 0 ? formatLocal(e.premiumOverStandardLocal, price.market) : "Base") + "</td>"
       + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("fr-FR") : "0") + "</td>"
-      + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "n/d") + "</td></tr>";
+      + "<td class=\"muted\">" + (e.localPer100kGta !== null ? formatLocal(e.localPer100kGta, price.market) : "n/d") + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">La question de la mise à niveau, répondue par un taux de valeur et non par une liste de fonctionnalités. Prix en ' + price.market.currency + " pour " + price.market.country + ".</p>\n"

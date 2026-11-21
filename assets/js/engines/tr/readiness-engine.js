@@ -12,7 +12,7 @@ export const DRIVE_META = {
   hdd: { label: "HDD (mekanik)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Çıkış günü kusursuz" },
+  { grade: "S", min: 92, label: "Çıkış günü hazır, yaklaşık 60 fps ile rahat 1080p Yüksek" },
   { grade: "A", min: 82, label: "Ultra hazır" },
   { grade: "B", min: 70, label: "Rahatça hazır" },
   { grade: "C", min: 55, label: "Oynanabilir, ayarları planla" },
@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Her şey fazlasıyla geçiyor. GTA 6 PC'ye geldiğinde maksimum ayarlarda oynayabilirsin.",
+    S: "En üst bant: yaklaşık 60 fps ile rahat 1080p Yüksek, fazlasıyla yeterli.",
     A: "Bugün hazır, sadece bir iki ayar yapacaksın.",
     B: "Hazır. Bir alt puan geride ama akıcı bir oyunu engelleyen bir şey yok.",
     C: "Oynanabilir ama en zayıf halkana uyan bir çözünürlük / hazır ayar merdiveni seç.",

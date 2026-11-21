@@ -6,6 +6,9 @@
 // PC platform, Deluxe edition and the two PC-only channels removed;
 // timeline and risk flags past-tense; preload-schedule values softened
 // to platform norms. TS source needs the same change on next re-port.
+// Iteration 14 (2026-11-22): no disc exists — physical is a code-in-a-box
+// (Standard only; Ultimate digital-only). Disc channels removed, a
+// "Retailer code-in-a-box" channel added, resale preference removed.
 
 export const LAUNCH_UTC = "2026-11-19T05:00:00Z";
 export const PLATFORMS = [
@@ -14,14 +17,14 @@ export const PLATFORMS = [
     label: "PlayStation 5",
     preloadLeadDays: 2,
     preloadNote: "PlayStation normally staged the download about 48 hours before launch, and a digital order becomes non-refundable the moment that download starts.",
-    discAvailable: true
+    discAvailable: false
   },
   {
     id: "xbox",
     label: "Xbox Series X|S",
     preloadLeadDays: 10,
     preloadNote: "Xbox staged downloads early — often a week or more before launch — and keeps its self-service refund flow available for unplayed orders until release day.",
-    discAvailable: true
+    discAvailable: false
   }
 ];
 export const REGIONS = [
@@ -71,37 +74,22 @@ export const CHANNELS = [
     ]
   },
   {
-    id: "retailer-disc",
-    label: "Retailer disc, shipped",
-    short: "Disc, shipped",
+    id: "retailer-code-in-box",
+    label: "Retailer code-in-a-box (Standard only)",
+    short: "Code-in-a-box",
     platforms: ["ps5", "xbox"],
+    editions: ["standard"],
     physical: true,
-    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 9 },
+    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 0 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Cancel until it ships, keep the price guarantee, and sell or lend it afterwards. You wait for delivery and still install from the disc.",
+    note: "A boxed Standard copy with a download code inside — no disc. Cancel until it ships and keep the price guarantee, then redeem the code and download the full game.",
     terms: [
       "Cancellable without penalty until the parcel ships.",
-      "Disc installs still download a day-one patch, so budget the bandwidth anyway.",
-      "Delivery slipping past launch day is the real risk, not the money."
+      "The box holds a download code, not a disc — redeem it, then download the full game.",
+      "Delivery slipping past the day you want to play is the real risk, not the money."
     ]
   },
-  {
-    id: "bigbox-disc",
-    label: "Big-box store pickup",
-    short: "In-store pickup",
-    platforms: ["ps5", "xbox"],
-    physical: true,
-    axes: { cancel: 10, priceProtection: 7, preload: 0, bonus: 7, resale: 9 },
-    confidence: "platform-norm",
-    sourceType: "retailer-policy",
-    note: "The safest cancellation position of all — you have not paid until collection at many chains — plus launch-day access and full resale value.",
-    terms: [
-      "Reservations are typically deposit-only or free, and walk-away cancellation is the norm.",
-      "You install from disc on launch day, so nothing downloads in advance.",
-      "Store-exclusive steelbooks or bonus items are the usual reason to pick this channel."
-    ]
-  }
 ];
 export const AXIS_LABELS = {
   cancel: "Cancellability",
@@ -111,8 +99,8 @@ export const AXIS_LABELS = {
   resale: "Resale value"
 };
 export const AXIS_DETAIL = {
-  cancel: "How easily you can back out before release without losing money.",
-  priceProtection: "Whether a pre-release price cut is refunded or matched to you.",
+  cancel: "How easily you can back out of an order without losing money.",
+  priceProtection: "Whether a price cut after you order is refunded or matched to you.",
   preload: "How soon you can start playing after buying.",
   bonus: "How reliably pre-order and edition rewards land on your account.",
   resale: "Whether you can lend, trade or sell the copy after launch."
@@ -134,8 +122,6 @@ export function weightsFor(prefs) {
     w.preload += 26;
   if (prefs.wantsCancel)
     w.cancel += 26;
-  if (prefs.wantsResale)
-    w.resale += 26;
   const total = Object.values(w).reduce((a, b) => a + b, 0);
   return Object.fromEntries(Object.keys(w).map((k) => [k, Math.round(w[k] / total * 1000) / 10]));
 }
@@ -183,7 +169,7 @@ function timeline(platform, region) {
       label: "Release",
       when: "November 19, 2026, midnight ET",
       iso: "2026-11-19",
-      detail: "Unlock was simultaneous worldwide at 00:00 ET, so a downloaded copy played hours before a disc collected on launch morning in most of Europe and Asia.",
+      detail: "Unlock was simultaneous worldwide at 00:00 ET.",
       confidence: "confirmed"
     }
   ];
@@ -201,13 +187,6 @@ function riskFlags(best, platform, region, edition, prefs) {
     flags.push({
       title: "A late code can cost you the instant download",
       body: "Retailer digital codes are commonly delivered close to launch. That can leave too little time to download before you want to play, so you may be downloading on launch day.",
-      severity: "medium"
-    });
-  }
-  if (best.channel.physical) {
-    flags.push({
-      title: "Discs still download a day-one patch",
-      body: "A disc removes the base download but not the launch patch. Plan bandwidth anyway, and expect to install for a while before playing.",
       severity: "medium"
     });
   }
@@ -233,7 +212,7 @@ export function rankChannels(input) {
   const edition = editionById(input.edition) ?? EDITIONS[0];
   const prefs = input.prefs;
   const weights = weightsFor(prefs);
-  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id)).map((channel) => {
+  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id) && (!c.editions || c.editions.includes(edition.id))).map((channel) => {
     const adj = adjustedAxes(channel, platform, region, edition);
     const axes = Object.keys(AXIS_LABELS).map((id) => ({
       id,
@@ -257,8 +236,7 @@ export function rankChannels(input) {
   const runnerUp = ranked[1];
   const wanted = [
     prefs.wantsPreload ? "playing the moment it unlocks" : null,
-    prefs.wantsCancel ? "keeping the option to cancel" : null,
-    prefs.wantsResale ? "resale or lending value" : null
+    prefs.wantsCancel ? "keeping the option to cancel" : null
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "no strong preference beyond value" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} and ${wanted.at(-1)}`;
   const headline = `${best.channel.short} on ${platform.label}`;

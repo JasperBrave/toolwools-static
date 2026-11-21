@@ -1,5 +1,5 @@
 // /search: client-side search over the static index (23 tools, 2 guides,
-// 8 reference pages). Same scoring shape as the source search lib: title
+// 7 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
 (function () {
@@ -53,8 +53,9 @@
     var results = scored.map(function (r) { return r.item; });
     var kinds = ["tool", "guide", "resource"];
     var kindLabel = { tool: "Tools", guide: "Guides", resource: "Referenz-Seiten" };
+    var LIVE_WORD = " live";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Die Suche deckt 19 live Rechner und Planer, 2 geschriebene Guides und unsere Referenz-Seiten ab. Wähle unten einen Startpunkt oder tippe, was dein PC wissen muss.";
+      if (!trimmed) summaryEl.textContent = "Die Suche deckt 23 Tools ab — 19 live und 4 bald verfügbar — sowie 2 geschriebene Guides und 7 Referenz-Seiten. Wähle unten einen Startpunkt oder tippe, was dein PC wissen muss.";
       else if (!results.length) summaryEl.textContent = "Nichts auf der Site passt zu \"" + trimmed + "\" bisher. Hardware-Begriffe wie \"rtx 4070\", \"vram\" oder \"download time\" finden am meisten.";
       else {
         var best = results[0];
@@ -65,10 +66,16 @@
     if (countsEl) {
       countsEl.innerHTML = "";
       kinds.forEach(function (k) {
-        var n = results.filter(function (r) { return r.kind === k; }).length;
+        var items = results.filter(function (r) { return r.kind === k; });
+        var n = items.length;
         if (!n) return;
         var li = document.createElement("li");
-        li.textContent = kindLabel[k] + " " + n;
+        var label = kindLabel[k] + " " + n;
+        if (k === "tool") {
+          var liveN = items.filter(function (r) { return r.status === "live"; }).length;
+          label += " (" + liveN + LIVE_WORD + ")";
+        }
+        li.textContent = label;
         countsEl.appendChild(li);
       });
     }
@@ -139,7 +146,17 @@
       links[0].focus();
     }
   });
-  if (form) form.addEventListener("submit", function (e) { e.preventDefault(); applyFromUrl(true); });
+  if (form) form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    // The old handler re-read the query from the URL, so clicking SEARCH
+    // (or pressing Enter) discarded the typed query and re-rendered the
+    // empty state. Sync the input into the URL first, then render from it.
+    var q = input.value.trim();
+    var url = new URL(window.location.href);
+    if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
+    history.replaceState(null, "", url.toString());
+    applyFromUrl(false);
+  });
   document.addEventListener("click", function (e) {
     if (listbox && !e.target.closest("[data-search-form]")) { listbox.hidden = true; input.setAttribute("aria-expanded", "false"); }
   });

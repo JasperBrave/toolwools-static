@@ -151,8 +151,8 @@ function render() {
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">تقديريًا <strong>' + result.fpsLow + '–' + result.fpsHigh + ' إطار/ث</strong> عند ' + state.res + ' في ' + WORKLOAD_META[state.mode].label + '. يفترض نطاق الإطارات الإعداد المرتفع دون تتبع الأشعة.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة معالجة الرسومات</span><span class="val">' + Math.round(result.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة المعالجة المركزية</span><span class="val">' + Math.round(result.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة معالجة الرسومات</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة المعالجة المركزية</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
       '</div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>مستوى GPU</dt><dd>' + gpu.score + '/100</dd></div>' +

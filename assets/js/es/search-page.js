@@ -1,5 +1,5 @@
 // /search: client-side search over the static index (23 tools, 2 guides,
-// 8 reference pages). Same scoring shape as the source search lib: title
+// 7 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
 (function () {
@@ -53,8 +53,9 @@
     var results = scored.map(function (r) { return r.item; });
     var kinds = ["tool", "guide", "resource"];
     var kindLabel = { tool: "Herramientas", guide: "Guías", resource: "Reference pages" };
+    var LIVE_WORD = " en vivo";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "La búsqueda cubre 19 calculadoras y planificadores en vivo, 2 guías escritas y nuestras páginas de referencia. Elige un punto de partida abajo o escribe lo que tu PC necesita saber.";
+      if (!trimmed) summaryEl.textContent = "La búsqueda cubre 23 herramientas — 19 en vivo y 4 próximamente — además de 2 guías escritas y 7 páginas de referencia. Elige un punto de partida abajo o escribe lo que tu PC necesita saber.";
       else if (!results.length) summaryEl.textContent = "Nada en el sitio coincide con \"" + trimmed + "\" todavía. Términos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encuentran más.";
       else {
         var best = results[0];
@@ -65,10 +66,16 @@
     if (countsEl) {
       countsEl.innerHTML = "";
       kinds.forEach(function (k) {
-        var n = results.filter(function (r) { return r.kind === k; }).length;
+        var items = results.filter(function (r) { return r.kind === k; });
+        var n = items.length;
         if (!n) return;
         var li = document.createElement("li");
-        li.textContent = kindLabel[k] + " " + n;
+        var label = kindLabel[k] + " " + n;
+        if (k === "tool") {
+          var liveN = items.filter(function (r) { return r.status === "live"; }).length;
+          label += " (" + liveN + LIVE_WORD + ")";
+        }
+        li.textContent = label;
         countsEl.appendChild(li);
       });
     }
@@ -139,7 +146,17 @@
       links[0].focus();
     }
   });
-  if (form) form.addEventListener("submit", function (e) { e.preventDefault(); applyFromUrl(true); });
+  if (form) form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    // The old handler re-read the query from the URL, so clicking SEARCH
+    // (or pressing Enter) discarded the typed query and re-rendered the
+    // empty state. Sync the input into the URL first, then render from it.
+    var q = input.value.trim();
+    var url = new URL(window.location.href);
+    if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
+    history.replaceState(null, "", url.toString());
+    applyFromUrl(false);
+  });
   document.addEventListener("click", function (e) {
     if (listbox && !e.target.closest("[data-search-form]")) { listbox.hidden = true; input.setAttribute("aria-expanded", "false"); }
   });

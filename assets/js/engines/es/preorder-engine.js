@@ -7,6 +7,9 @@
 // PC platform, Deluxe edition and the two PC-only channels removed;
 // timeline and risk flags past-tense; preload-schedule values softened
 // to platform norms. TS source needs the same change on next re-port.
+// Iteration 14 (2026-11-22): no disc exists — physical is a code-in-a-box
+// (Standard only; Ultimate digital-only). Disc channels removed, a
+// "Retailer code-in-a-box" channel added, resale preference removed.
 
 export const LAUNCH_UTC = "2026-11-19T05:00:00Z";
 export const PLATFORMS = [
@@ -15,14 +18,14 @@ export const PLATFORMS = [
     label: "PlayStation 5",
     preloadLeadDays: 2,
     preloadNote: "PlayStation normalmente preparaba la descarga unas 48 horas antes del lanzamiento, y un pedido digital deja de ser reembolsable en el momento en que empieza esa descarga.",
-    discAvailable: true
+    discAvailable: false
   },
   {
     id: "xbox",
     label: "Xbox Series X|S",
     preloadLeadDays: 10,
     preloadNote: "Xbox preparaba las descargas pronto, a menudo una semana o más antes del lanzamiento, y mantiene su flujo de reembolso de autoservicio disponible para pedidos sin jugar hasta el día del lanzamiento.",
-    discAvailable: true
+    discAvailable: false
   }
 ];
 export const REGIONS = [
@@ -48,9 +51,9 @@ export const CHANNELS = [
     axes: { cancel: 5, priceProtection: 3, preload: 10, bonus: 9, resale: 0 },
     confidence: "platform-norm",
     sourceType: "platform-policy",
-    note: "La ruta por defecto. La forma más rápida de empezar a jugar, cero valor de reventa, y la ventana de reembolso se cierra en el instante en que comienza la descarga.",
+    note: "La ruta por defecto. La forma más rápida de empezar a jugar, cero valor de reventa, y la ventana de reembolso se cierra en el instante en que empieza la descarga.",
     terms: [
-      "El derecho a reembolso termina cuando empieza la descarga, no el día del lanzamiento.",
+      "El derecho a reembolso termina cuando la descarga empieza, no el día del lanzamiento.",
       "Las bonificaciones de edición llegan a la cuenta que hizo el pedido y no se pueden mover.",
       "Las bajadas de precio en tienda antes del lanzamiento no se te reembolsan automáticamente."
     ]
@@ -64,45 +67,30 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "El mejor equilibrio entre protección de precio y cancelación; comprueba cuándo llega el código, los tiempos de entrega varían.",
+    note: "El mejor equilibrio entre protección de precio y cancelación; comprueba cuándo llega el código, los plazos de entrega varían.",
     terms: [
-      "Los códigos se emiten con frecuencia cerca del lanzamiento, lo que puede dejar poco tiempo para descargar antes de querer jugar.",
+      "Los códigos se emiten con frecuencia cerca del lanzamiento, lo que puede dejar muy poco tiempo para descargar antes de querer jugar.",
       "La mayoría de los grandes minoristas aplican garantías de precio: pagas el precio más bajo visto antes del lanzamiento.",
       "Las bonificaciones exclusivas de minorista son independientes de las bonificaciones de plataforma y pueden no acumularse."
     ]
   },
   {
-    id: "retailer-disc",
-    label: "Disco de minorista, enviado",
-    short: "Disco, enviado",
+    id: "retailer-code-in-box",
+    label: "Código en caja de minorista (solo Standard)",
+    short: "Código en caja",
     platforms: ["ps5", "xbox"],
+    editions: ["standard"],
     physical: true,
-    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 9 },
+    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 0 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Cancela hasta que se envíe, conserva la garantía de precio y véndelo o préstalo después. Esperas la entrega e instalas desde el disco.",
+    note: "Una copia Standard en caja con un código de descarga dentro, sin disco. Cancela hasta que se envíe y conserva la garantía de precio, luego canjea el código y descarga el juego completo.",
     terms: [
       "Se puede cancelar sin penalización hasta que se envíe el paquete.",
-      "Las instalaciones desde disco aún descargan un parche del primer día, así que calcula el ancho de banda de todos modos.",
-      "Que la entrega se retrase más allá del día del lanzamiento es el riesgo real, no el dinero."
+      "La caja contiene un código de descarga, no un disco: canjéalo y descarga el juego completo.",
+      "Que la entrega se retrase más allá del día en que quieres jugar es el riesgo real, no el dinero.",
     ]
   },
-  {
-    id: "bigbox-disc",
-    label: "Recogida en tienda",
-    short: "Recogida en tienda",
-    platforms: ["ps5", "xbox"],
-    physical: true,
-    axes: { cancel: 10, priceProtection: 7, preload: 0, bonus: 7, resale: 9 },
-    confidence: "platform-norm",
-    sourceType: "retailer-policy",
-    note: "La posición de cancelación más segura de todas: en muchas cadenas no has pagado hasta la recogida, además de acceso el día del lanzamiento y valor total de reventa.",
-    terms: [
-      "Las reservas suelen ser solo con depósito o gratuitas, y la cancelación sin más es lo normal.",
-      "Instalas desde el disco el día del lanzamiento, así que nada se descarga por adelantado.",
-      "Los steelbooks exclusivos de tienda o los artículos extra son la razón habitual para elegir este canal."
-    ]
-  }
 ];
 export const AXIS_LABELS = {
   cancel: "Cancelación",
@@ -112,8 +100,8 @@ export const AXIS_LABELS = {
   resale: "Valor de reventa"
 };
 export const AXIS_DETAIL = {
-  cancel: "Lo fácil que es echarse atrás antes del lanzamiento sin perder dinero.",
-  priceProtection: "Si una bajada de precio antes del lanzamiento se te reembolsa o se te iguala.",
+  cancel: "Lo fácil que es echarse atrás de un pedido sin perder dinero.",
+  priceProtection: "Si una bajada de precio después de pedir se te reembolsa o se te iguala.",
   preload: "Lo pronto que puedes empezar a jugar después de comprar.",
   bonus: "Lo fiable que es que las recompensas de reserva y edición lleguen a tu cuenta.",
   resale: "Si puedes prestar, intercambiar o vender la copia después del lanzamiento."
@@ -135,8 +123,6 @@ export function weightsFor(prefs) {
     w.preload += 26;
   if (prefs.wantsCancel)
     w.cancel += 26;
-  if (prefs.wantsResale)
-    w.resale += 26;
   const total = Object.values(w).reduce((a, b) => a + b, 0);
   return Object.fromEntries(Object.keys(w).map((k) => [k, Math.round(w[k] / total * 1000) / 10]));
 }
@@ -165,8 +151,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `Precarga de ${platform.label}, completada antes del lanzamiento`,
-      when: `Preparada unos ${platform.preloadLeadDays} días antes del lanzamiento (norma de plataforma)`,
+      label: `${platform.label} preload — completed before launch`,
+      when: `Staged about ${platform.preloadLeadDays} days before launch (platform norm)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"
@@ -174,7 +160,7 @@ function timeline(platform, region) {
     {
       id: "cancel-cutoff",
       label: "Fecha límite práctica de cancelación",
-      when: "Inicio de descarga para digital, fecha de envío para físico",
+      when: "Download start for digital, ship date for physical",
       iso: null,
       detail: `Los pedidos digitales dejaron de ser reembolsables cuando empezó la descarga. ${region.note}`,
       confidence: "estimated"
@@ -184,7 +170,7 @@ function timeline(platform, region) {
       label: "Lanzamiento",
       when: "19 de noviembre de 2026, medianoche ET",
       iso: "2026-11-19",
-      detail: "El desbloqueo fue simultáneo en todo el mundo a las 00:00 ET, así que una copia descargada se jugó horas antes que un disco recogido la mañana del lanzamiento en la mayor parte de Europa y Asia.",
+      detail: "El desbloqueo es simultáneo en todo el mundo a las 00:00 ET.",
       confidence: "confirmed"
     }
   ];
@@ -194,21 +180,14 @@ function riskFlags(best, platform, region, edition, prefs) {
   if (!best.channel.physical && prefs.wantsCancel) {
     flags.push({
       title: "Tu ventana de reembolso se cierra cuando empieza la descarga",
-      body: `En ${platform.label}, un pedido digital deja de ser reembolsable en el momento en que empieza la descarga. Si conservar la opción de echarte atrás importa más que jugar enseguida, no inicies la descarga.`,
+      body: `En ${platform.label}, un pedido digital deja de ser reembolsable en el momento en que empieza la descarga. Si conservar la opción de echarte atrás importa más que jugar de inmediato, no empieces la descarga.`,
       severity: "high"
     });
   }
   if (best.channel.id === "retailer-code" && prefs.wantsPreload) {
     flags.push({
-      title: "Un código tardío puede costarte la descarga inmediata",
-      body: "Los códigos digitales de minorista suelen entregarse cerca del lanzamiento. Eso puede dejar poco tiempo para descargar antes de querer jugar, así que quizá estés descargando el día del lanzamiento.",
-      severity: "medium"
-    });
-  }
-  if (best.channel.physical) {
-    flags.push({
-      title: "Los discos también descargan un parche del primer día",
-      body: "Un disco elimina la descarga base pero no el parche del lanzamiento. Calcula el ancho de banda de todos modos y espera instalar un rato antes de jugar.",
+      title: "Un código tardío puede costarte la descarga instantánea",
+      body: "Los códigos digitales de minorista suelen entregarse cerca del lanzamiento. Eso puede dejar muy poco tiempo para descargar antes de querer jugar, así que quizá estés descargando el día del lanzamiento.",
       severity: "medium"
     });
   }
@@ -234,7 +213,7 @@ export function rankChannels(input) {
   const edition = editionById(input.edition) ?? EDITIONS[0];
   const prefs = input.prefs;
   const weights = weightsFor(prefs);
-  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id)).map((channel) => {
+  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id) && (!c.editions || c.editions.includes(edition.id))).map((channel) => {
     const adj = adjustedAxes(channel, platform, region, edition);
     const axes = Object.keys(AXIS_LABELS).map((id) => ({
       id,
@@ -258,8 +237,7 @@ export function rankChannels(input) {
   const runnerUp = ranked[1];
   const wanted = [
     prefs.wantsPreload ? "jugar en el momento del desbloqueo" : null,
-    prefs.wantsCancel ? "conservar la opción de cancelar" : null,
-    prefs.wantsResale ? "valor de reventa o préstamo" : null
+    prefs.wantsCancel ? "keeping the option to cancel" : null
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "sin una preferencia fuerte más allá del valor" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} y ${wanted.at(-1)}`;
   const headline = `${best.channel.short} en ${platform.label}`;

@@ -12,7 +12,7 @@ export const DRIVE_META = {
   hdd: { label: "HDD (mechanisch)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Am Launch-Tag fehlerfrei" },
+  { grade: "S", min: 92, label: "Launch-Day-bereit: komfortables 1080p Hoch bei rund 60 fps" },
   { grade: "A", min: 82, label: "Ultra-bereit" },
   { grade: "B", min: 70, label: "Komfortabel bereit" },
   { grade: "C", min: 55, label: "Spielbar, Tweaks planen" },
@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Alles reicht mit Reserve. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint.",
+    S: "Oberstes Band: komfortables 1080p Hoch bei rund 60 fps, mit Reserve.",
     A: "Heute bereit, du wirst nur ein oder zwei Einstellungen tweaken.",
     B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert geschmeidiges Spielen.",
     C: "Spielbar, aber wähle eine Auflösungs-/Preset-Leiter, die zu deinem schwächsten Glied passt.",

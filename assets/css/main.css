@@ -2221,3 +2221,29 @@ p code, li code, td code { overflow-wrap: anywhere; }
 @media (min-width: 640px) { .gen-batch-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .gen-card-field { grid-template-columns: 5rem minmax(0, 1fr) auto; } .gen-filters { padding: 0.75rem; } }
 [dir="rtl"] .gen-select { padding-right: 0.75rem; padding-left: 0.75rem; }
+
+/* ---------- Iteration 14 — Worker D (2026-11-21) ---------- */
+/* F1: button-based FAQ items (.faq-item > button.faq-question) had NO padding
+   at all — the ".faq-list details" padding rule never applied to them — so
+   every question and answer sat flush against the card edge (first letter
+   touching the border when expanded). The <details>-in-.faq-item variant
+   (gpu-tier-list, add-to-calendar, pre-order-tracker) already gets its
+   padding from .faq-list details, so scope this to the button variant with
+   :has() to avoid double padding. Matches the details variant's spacing. */
+.faq-list .faq-item:has(> .faq-question) { padding: 1rem 1.25rem; }
+@media (min-width: 768px) { .faq-list .faq-item:has(> .faq-question) { padding: 1rem 1.5rem; } }
+.faq-list .faq-item:has(> .faq-question[aria-expanded="true"]) { padding-bottom: 1.25rem; }
+/* F2: .tool-card p was clamped to 2 lines at >=640px; five EN descriptions
+   need 3 lines, so they were cut mid-word / mid-sentence at 1920px. A 3-line
+   clamp would still cut the longest FR description (209 chars vs EN's 162),
+   so drop the clamp entirely: full text in every locale and width, grid
+   rows equalise via the existing flex: 1. */
+.tool-card p { -webkit-line-clamp: none; line-clamp: none; }
+/* F3: .tool-body's 3.5rem section gap stretched the sitemap (single-item
+   sections ~79px tall with 56px gaps). Tighten the gap on the sitemap page
+   only; every other .tool-body page keeps its rhythm. */
+.tool-body:has(> section[aria-labelledby="sitemap-tools"]) { gap: 1.5rem; }
+/* F4: .hero-badges flex gap was 0.5rem, so the long FR value ran into the
+   next badge ("...dans le navigateur PC · PS5 · Xbox"). Widen the gap above
+   the 480px 2x2-grid breakpoint (that rule keeps its own gap). */
+@media (min-width: 481px) { .hero-badges { gap: 1rem; } }

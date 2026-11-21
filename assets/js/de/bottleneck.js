@@ -155,8 +155,8 @@ function render() {
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">Geschätzt <strong>' + result.fpsLow + '–' + result.fpsHigh + ' fps</strong> bei ' + state.res + ' auf ' + modeLabel(state.mode) + '. Frame-Band nimmt High-Preset ohne Raytracing an.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">GPU-Headroom</span><span class="val">' + Math.round(result.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">CPU-Headroom</span><span class="val">' + Math.round(result.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">GPU-Headroom</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">CPU-Headroom</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
       '</div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>GPU-Tier</dt><dd>' + gpu.score + '/100</dd></div>' +

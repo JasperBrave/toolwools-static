@@ -12,7 +12,7 @@ var MODES = ["grind", "business", "cards"];
 var MODE_META = {
   grind: { label: "Dinero por hora", hint: "Clasifica métodos y calcula el tiempo de una meta de ahorro" },
   business: { label: "ROI de negocio", hint: "Payback horas y horizonte de beneficio" },
-  cards: { label: "Valor de Shark Card", hint: "GTA$ per dollar vs grind hours" }
+  cards: { label: "Valor de Shark Card", hint: "GTA$ por dólar frente a horas de farmeo" }
 };
 var PROJ_BADGE = '<span class="proj-badge">Proyectado, no extraído de datos</span>';
 
@@ -117,7 +117,7 @@ function methodTableHtml(rows, activeId) {
   var body = rows.map(function (r) {
     var hl = r.method.id === activeId ? ' class="hl-row"' : "";
     return "<tr" + hl + "><th scope=\"row\">" + r.method.label + "</th>"
-      + "<td class=\"mono\">about " + compactMoney(r.method.payout) + "</td>"
+      + "<td class=\"mono\">unos " + compactMoney(r.method.payout) + "</td>"
       + "<td class=\"mono\">" + money(r.perHour) + "</td>"
       + "<td class=\"muted\">" + r.method.minutes + " min</td>"
       + "<td class=\"muted\">" + compactMoney(r.method.cost) + "</td>"
@@ -159,9 +159,9 @@ function cardsTableHtml(rows) {
       + "<td class=\"mono\">" + r.hoursSaved + "h</td>"
       + "<td class=\"mono\">$" + r.impliedWage.toFixed(2) + "</td></tr>";
   }).join("");
-  return '<section aria-labelledby="cards-table">\n      <h2 id="cards-table">Valor de Shark Card per real dollar, and the hours it buys back</h2>\n'
+  return '<section aria-labelledby="cards-table">\n      <h2 id="cards-table">Valor de Shark Card por dólar real, y las horas que te devuelve</h2>\n'
     + '      <p class="section-dek">Los paquetes más grandes siempre compran más GTA$ por dólar. La columna de salario implícito convierte eso en una decisión que realmente puedes tomar.</p>\n'
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Valor de Shark Card per real dollar, scrollable table">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Valor de Shark Card por dólar real, tabla desplazable">\n'
     + '      <table class="data-table" id="cards-table">\n        <caption class="sr-only">Paquetes de Shark Card con dólares GTA por dólar estadounidense, horas de farmeo reemplazadas, y salario por hora implícito en el mundo real.</caption>\n'
     + '        <thead><tr><th scope="col">Pack</th><th scope="col">GTA$</th><th scope="col">US$</th><th scope="col">GTA$ / $1</th><th scope="col">Horas ahorradas</th><th scope="col">Salario implícito</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
@@ -188,7 +188,7 @@ function render() {
   if (goalInput && document.activeElement !== goalInput) goalInput.value = String(state.goal);
   if (balanceInput && document.activeElement !== balanceInput) balanceInput.value = String(state.balance);
   if (sessionInput) sessionInput.value = String(state.session);
-  if (sessionLabel) sessionLabel.textContent = "Typical session length: " + state.session + "h";
+  if (sessionLabel) sessionLabel.textContent = "Duración típica de sesión: " + state.session + " h";
   if (horizonInput) horizonInput.value = String(state.horizon);
   if (horizonLabel) horizonLabel.textContent = "Horizonte de juego: " + state.horizon + " horas";
   if (grindRateEl) grindRateEl.textContent = money(rate.perHour);
@@ -208,9 +208,9 @@ function render() {
   var outputLabel = $(".output-panel-label");
   if (state.mode === "business") {
     var top = bizRanked[0];
-    tldr = "Fastest payback: " + top.business.label + " repays " + money(top.business.price) + " in about " + top.paybackHours + " horas de juego, y luego genera " + money(top.netPerHour) + " por hora.";
+    tldr = "Retorno más rápido: " + top.business.label + " devuelve " + money(top.business.price) + " en unas " + top.paybackHours + " horas de juego, y luego genera " + money(top.netPerHour) + " por hora.";
     verdictLine = top.business.label + " · " + top.paybackHours + "h payback";
-    lastShareText = "Retorno más rápido de negocio de GTA 6: " + top.business.label + " repays " + money(top.business.price) + " in about " + top.paybackHours + " horas, y luego genera " + money(top.netPerHour) + "/hr.";
+    lastShareText = "Retorno más rápido de negocio de GTA 6: " + top.business.label + " devuelve " + money(top.business.price) + " en unas " + top.paybackHours + " horas, y luego genera " + money(top.netPerHour) + "/hr.";
     lastShareTitle = "Retorno más rápido de negocio de GTA 6: " + top.business.label;
     if (outputLabel) outputLabel.textContent = MODE_META.business.label;
     outHtml = '<dl class="stat-grid">'
@@ -226,32 +226,32 @@ function render() {
     tableHtml = businessTableHtml(bizRanked, state.horizon);
   } else if (state.mode === "cards") {
     var maxPerUsd = Math.max.apply(null, cards.map(function (c) { return c.perUsd; }));
-    tldr = "Best value pack buys " + money(maxPerUsd) + " GTA$ per real dollar, roughly " + bestCard.hoursSaved + " horas de farmeo eliminadas a tu ritmo actual de " + money(rate.perHour) + "/hour rate.";
+    tldr = "El pack de mejor valor compra " + money(maxPerUsd) + " GTA$ por dólar real, unas " + bestCard.hoursSaved + " horas de farmeo eliminadas a tu ritmo actual de " + money(rate.perHour) + "/hora.";
     verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ per $1";
-    lastShareText = "Best Shark Card value: " + money(maxPerUsd) + " GTA$ per $1, about " + bestCard.hoursSaved + " horas de farmeo eliminadas.";
+    lastShareText = "Mejor valor de Shark Card: " + money(maxPerUsd) + " GTA$ por 1 $, unas " + bestCard.hoursSaved + " horas de farmeo eliminadas.";
     lastShareTitle = "Best Shark Card value: " + bestCard.card.label;
     if (outputLabel) outputLabel.textContent = MODE_META.cards.label;
     outHtml = '<dl class="stat-grid">'
-      + "<div><dt>Best value pack</dt><dd>" + bestCard.card.label + "</dd></div>"
-      + "<div><dt>GTA$ per US$1</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>Your grind rate</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
+      + "<div><dt>Pack de mejor valor</dt><dd>" + bestCard.card.label + "</dd></div>"
+      + "<div><dt>GTA$ por 1 US$</dt><dd>" + money(maxPerUsd) + "</dd></div>"
+      + "<div><dt>Tu ritmo de farmeo</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
       + "<div><dt>Salario implícito</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/hr</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Los precios de las tarjetas siguen la tienda de EE. UU. actual. Las horas ahorradas dependen de tu ritmo de farmeo de arriba.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = cardsTableHtml(cards);
   } else {
-    tldr = method.label + " nets " + money(rate.perHour) + " por hora. Reaching " + compactMoney(state.goal) + " from " + compactMoney(state.balance) + " takes " + plan.cycles + " cycles, about " + plan.hours + " horas, or " + plan.sessionsNeeded + " sessions of " + state.session + "h.";
+    tldr = method.label + " rinde " + money(rate.perHour) + " netos por hora. Llegar a " + compactMoney(state.goal) + " desde " + compactMoney(state.balance) + " toma " + plan.cycles + " ciclos, unas " + plan.hours + " horas, o " + plan.sessionsNeeded + " sesiones de " + state.session + " h.";
     verdictLine = method.label + " · " + money(rate.perHour) + " per hour";
     lastShareText = method.label + " nets " + money(rate.perHour) + "/hr in GTA 6. " + plan.cycles + " cycles to " + compactMoney(state.goal) + ", about " + plan.hours + " hours. GTA 6 money plan on ToolWools.";
     lastShareTitle = method.label + " nets " + money(rate.perHour) + "/hr (GTA 6)";
     if (outputLabel) outputLabel.textContent = MODE_META.grind.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>Neto por hora</dt><dd>" + money(rate.perHour) + "</dd></div>"
-      + "<div><dt>Per cycle</dt><dd>" + money(rate.netPerCycle) + "</dd></div>"
-      + "<div><dt>Cycles to goal</dt><dd>" + plan.cycles + "</dd></div>"
-      + "<div><dt>Hours to goal</dt><dd>" + plan.hours + "h</dd></div>"
-      + "<div><dt>Sessions</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "h</dd></div>"
+      + "<div><dt>Por ciclo</dt><dd>" + money(rate.netPerCycle) + "</dd></div>"
+      + "<div><dt>Ciclos hasta la meta</dt><dd>" + plan.cycles + "</dd></div>"
+      + "<div><dt>Horas hasta la meta</dt><dd>" + plan.hours + "h</dd></div>"
+      + "<div><dt>Sesiones</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "h</dd></div>"
       + "<div><dt>Por jugador</dt><dd>" + money(rate.perHourPerPlayer) + "/hr</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Los pagos son proyecciones, no valores extraídos de datos.</p>'
@@ -281,7 +281,7 @@ function render() {
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
   var xLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado on X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado on Reddit"]');
+  var rLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado en Reddit"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());
 

@@ -1,7 +1,7 @@
 // pre-order-tracker.js — Where to Buy GTA 6 page logic.
 // Uses the ported preorder engine (assets/js/engines/preorder-engine.js),
 // imported by absolute path so the module resolves the same at any depth.
-// State lives in the URL (?platform=&region=&edition=&tab=&preload=&cancel=&resale=)
+// State lives in the URL (?platform=&region=&edition=&tab=&preload=&cancel=)
 // so results are shareable.
 // Iteration 3 (2026-11-21): reframed as a buy-now desk for the released game
 // (launched 19 Nov 2026, PS5 + Xbox only). The engine timeline no longer
@@ -12,7 +12,7 @@
 // own the timer.
 import { PLATFORMS, REGIONS, EDITIONS, CHANNELS, AXIS_LABELS, AXIS_DETAIL, CONFIDENCE_LABEL, rankChannels, platformById, regionById, editionById } from "/assets/js/engines/preorder-engine.js";
 
-var DEFAULTS = { platform: "ps5", region: "us", edition: "standard", tab: "ranking", preload: false, cancel: false, resale: false };
+var DEFAULTS = { platform: "ps5", region: "us", edition: "standard", tab: "ranking", preload: false, cancel: false };
 var TABS = ["ranking", "terms", "timeline"];
 
 function $(sel, root) { return (root || document).querySelector(sel); }
@@ -28,8 +28,7 @@ function readState() {
     edition: q.get("edition") || DEFAULTS.edition,
     tab: q.get("tab") || DEFAULTS.tab,
     preload: q.get("preload") === "1",
-    cancel: q.get("cancel") === "1",
-    resale: q.get("resale") === "1"
+    cancel: q.get("cancel") === "1"
   };
   if (!platformById(state.platform)) { bad.push("platform"); state.platform = DEFAULTS.platform; }
   if (!regionById(state.region)) { bad.push("region"); state.region = DEFAULTS.region; }
@@ -64,7 +63,7 @@ function fillSelect(select, items, value) {
 fillSelect(platformSel, PLATFORMS, state.platform);
 fillSelect(regionSel, REGIONS, state.region);
 fillSelect(editionSel, EDITIONS, state.edition);
-["preload", "cancel", "resale"].forEach(function (k) {
+["preload", "cancel"].forEach(function (k) {
   var cb = document.getElementById("po-" + k);
   if (cb) cb.checked = state[k];
 });
@@ -73,27 +72,25 @@ function shareUrl() {
   var p = new URLSearchParams({ platform: state.platform, region: state.region, edition: state.edition, tab: state.tab });
   if (state.preload) p.set("preload", "1");
   if (state.cancel) p.set("cancel", "1");
-  if (state.resale) p.set("resale", "1");
   return window.location.origin + window.location.pathname + "?" + p.toString();
 }
 function syncUrl() {
   var p = new URLSearchParams({ platform: state.platform, region: state.region, edition: state.edition, tab: state.tab });
   if (state.preload) p.set("preload", "1");
   if (state.cancel) p.set("cancel", "1");
-  if (state.resale) p.set("resale", "1");
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
 
 function render() {
   var result = rankChannels({
     platform: state.platform, region: state.region, edition: state.edition,
-    prefs: { wantsPreload: state.preload, wantsCancel: state.cancel, wantsResale: state.resale }
+    prefs: { wantsPreload: state.preload, wantsCancel: state.cancel }
   });
   if (platformSel) platformSel.value = state.platform;
   if (regionSel) regionSel.value = state.region;
   if (editionSel) editionSel.value = state.edition;
   tabButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tabButton === state.tab)); });
-  ["preload", "cancel", "resale"].forEach(function (k) {
+  ["preload", "cancel"].forEach(function (k) {
     var cb = document.getElementById("po-" + k);
     if (cb) cb.checked = state[k];
   });
@@ -229,7 +226,7 @@ if (platformSel) platformSel.addEventListener("change", function () { state.plat
 if (regionSel) regionSel.addEventListener("change", function () { state.region = regionSel.value; render(); });
 if (editionSel) editionSel.addEventListener("change", function () { state.edition = editionSel.value; render(); });
 tabButtons.forEach(function (b) { b.addEventListener("click", function () { state.tab = b.dataset.tabButton; render(); }); });
-["preload", "cancel", "resale"].forEach(function (k) {
+["preload", "cancel"].forEach(function (k) {
   var cb = document.getElementById("po-" + k);
   if (cb) cb.addEventListener("change", function () { state[k] = cb.checked; render(); });
 });

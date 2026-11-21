@@ -7,8 +7,8 @@
 // State lives in the URL (?gpu=&cpu=&ram=&storage=&drive=&mbps=).
 import { estimateReadiness as estimateReadinessEn, DRIVE_META } from "../engines/de/readiness-engine.js";
 
-var GRADE_LABEL = { S: "Am Launch-Tag fehlerfrei", A: "Ultra-bereit", B: "Komfortabel bereit", C: "Spielbar, Tweaks planen", D: "Unter Spec, zuerst upgraden", F: "Nicht bereit" };
-var VERDICT = { S: "Alles reicht mit Reserve. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint.", A: "Heute bereit, du wirst am Launch-Tag nur ein oder zwei Einstellungen tweaken.", B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert einen reibungslosen Launch.", C: "Spielbar, aber wähle eine Auflösungs-/Preset-Leiter, die zu deinem schwächsten Glied passt.", D: "Unter der praktischen Untergrenze. Fixe deinen schwächsten Score vor dem Pre-Load.", F: "Nicht bereit. Du wirst keinen reibungslosen Launch haben, bis du upgradest." };
+var GRADE_LABEL = { S: "Launch-Day-bereit: komfortables 1080p Hoch bei rund 60 fps", A: "Ultra-bereit", B: "Komfortabel bereit", C: "Spielbar, Tweaks planen", D: "Unter Spec, zuerst upgraden", F: "Nicht bereit" };
+var VERDICT = { S: "Oberstes Band: komfortables 1080p Hoch bei rund 60 fps, mit Reserve.", A: "Heute bereit, du wirst am Launch-Tag nur ein oder zwei Einstellungen tweaken.", B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert einen reibungslosen Launch.", C: "Spielbar, aber wähle eine Auflösungs-/Preset-Leiter, die zu deinem schwächsten Glied passt.", D: "Unter der praktischen Untergrenze. Fixe deinen schwächsten Score vor dem Pre-Load.", F: "Nicht bereit. Du wirst keinen reibungslosen Launch haben, bis du upgradest." };
 var DRIVE_LABEL = { nvme: "NVMe SSD", ssd: "SATA SSD", hdd: "HDD (mechanisch)" };
 function driveLabel(k) { return DRIVE_LABEL[k] || DRIVE_META[k].label; }
 function mapPerf(d) { var m = d.match(/([\d.]+) avg fps · ([\d.]+) 1% low at (\S+) High native\./); return m ? m[1] + " fps im Schnitt · " + m[2] + " 1 %-Low bei " + m[3] + " Hoch nativ." : d; }

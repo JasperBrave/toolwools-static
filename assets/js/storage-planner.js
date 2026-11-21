@@ -4,7 +4,7 @@
 // total = subtotal + headroom. Base install default is 212 GB (AUDIT FIX H2:
 // one install-size constant shared with download-time, readiness and the
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
-var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "pc" };
+var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
   pc: { label: "PC", usableGB: 0, note: "Your drive, your rules — the number below is exactly what GTA 6 needs." },
   ps5: { label: "PS5", usableGB: 667, note: "Sony's 825 GB SSD reports 667 GB usable after the system reserve." },
@@ -191,7 +191,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Depends on drive" : fmt1(Math.max(0, row.usable - r.total)) + " GB free";
+      var after = row.usable === 0 ? "Depends on drive" : fmt1(Math.max(0, row.usable - r.total)) + " GB free" + (r.total > row.usable ? " (short by " + fmt1(r.total - row.usable) + " GB)" : "");
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }

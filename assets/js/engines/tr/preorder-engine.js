@@ -7,6 +7,9 @@
 // PC platform, Deluxe edition and the two PC-only channels removed;
 // timeline and risk flags past-tense; preload-schedule values softened
 // to platform norms. TS source needs the same change on next re-port.
+// Iteration 14 (2026-11-22): no disc exists — physical is a code-in-a-box
+// (Standard only; Ultimate digital-only). Disc channels removed, a
+// "Retailer code-in-a-box" channel added, resale preference removed.
 
 export const LAUNCH_UTC = "2026-11-19T05:00:00Z";
 export const PLATFORMS = [
@@ -15,14 +18,14 @@ export const PLATFORMS = [
     label: "PlayStation 5",
     preloadLeadDays: 2,
     preloadNote: "PlayStation, indirmeyi genellikle çıkıştan yaklaşık 48 saat önce hazırlardı ve dijital sipariş, indirme başladığı anda iade edilemez hale gelir.",
-    discAvailable: true
+    discAvailable: false
   },
   {
     id: "xbox",
     label: "Xbox Series X|S",
     preloadLeadDays: 10,
     preloadNote: "Xbox indirmeleri erken hazırlardı, genellikle çıkıştan bir hafta veya daha önce, ve oynanmamış siparişler için self servis iade akışını çıkış gününe kadar açık tutar.",
-    discAvailable: true
+    discAvailable: false
   }
 ];
 export const REGIONS = [
@@ -51,7 +54,7 @@ export const CHANNELS = [
     note: "Varsayılan yol. Oynamaya başlamanın en hızlı yolu, sıfır yeniden satış değeri ve iade penceresi indirme başladığı anda kapanır.",
     terms: [
       "İade hakkı, çıkış gününde değil, indirme başladığında sona erer.",
-      "Sürüm bonusları, siparişi veren hesaba gelir ve taşınamaz.",
+      "Edisyon bonusları, siparişi veren hesaba gelir ve taşınamaz.",
       "Çıkıştan önce mağaza fiyat düşüşleri sana otomatik olarak iade edilmez."
     ]
   },
@@ -64,7 +67,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol edin — teslimat süreleri değişir.",
+    note: "Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol et — teslimat süresi değişir.",
     terms: [
       "Kodlar sıklıkla çıkışa yakın verilir, bu da oynamak istemeden önce indirmek için çok az zaman bırakabilir.",
       "Çoğu büyük perakendeci fiyat garantisi uygular: çıkıştan önce görülen en düşük fiyatı ödersin.",
@@ -72,37 +75,22 @@ export const CHANNELS = [
     ]
   },
   {
-    id: "retailer-disc",
-    label: "Kargoyla perakendeci diski",
-    short: "Disk, kargoyla",
+    id: "retailer-code-in-box",
+    label: "Perakendeci kutulu kod (yalnızca Standard)",
+    short: "Kutulu kod",
     platforms: ["ps5", "xbox"],
+    editions: ["standard"],
     physical: true,
-    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 9 },
+    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 0 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Kargoya verilene kadar iptal et, fiyat garantisini koru ve sonrasında sat veya ödünç ver. Teslimatı beklersin ve diskten kurarsın.",
+    note: "İçinde indirme kodu olan kutulu bir Standard kopyası — disk yok. Kargoya verilene kadar iptal et ve fiyat garantisini koru, sonra kodu kullan ve oyunun tamamını indir.",
     terms: [
       "Paket kargoya verilene kadar cezasız iptal edilebilir.",
-      "Disk kurulumları yine de ilk gün yamasını indirir, bu yüzden bant genişliğini yine de hesaba kat.",
-      "Teslimatın çıkış gününü geçmesi gerçek risktir, para değil."
+      "Kutu bir indirme kodu içerir, disk değil — kodu kullan, sonra oyunun tamamını indir.",
+      "Teslimatın oynamak istediğin günün ötesine sarkması asıl risktir, para değil.",
     ]
   },
-  {
-    id: "bigbox-disc",
-    label: "Mağazadan teslim alma",
-    short: "Mağazadan teslim",
-    platforms: ["ps5", "xbox"],
-    physical: true,
-    axes: { cancel: 10, priceProtection: 7, preload: 0, bonus: 7, resale: 9 },
-    confidence: "platform-norm",
-    sourceType: "retailer-policy",
-    note: "En güvenli iptal konumu: birçok zincirde teslim alana kadar ödeme yapmamışsındır, ayrıca çıkış günü erişimi ve tam yeniden satış değeri.",
-    terms: [
-      "Rezervasyonlar genellikle yalnızca depozito ile veya ücretsizdir ve vazgeçme iptali normdur.",
-      "Çıkış günü diskten kurarsın, bu yüzden önceden hiçbir şey indirilmez.",
-      "Mağazaya özel steelbook veya bonus ürünler genellikle bu kanalı seçme nedenidir."
-    ]
-  }
 ];
 export const AXIS_LABELS = {
   cancel: "İptal edilebilirlik",
@@ -112,8 +100,8 @@ export const AXIS_LABELS = {
   resale: "Yeniden satış değeri"
 };
 export const AXIS_DETAIL = {
-  cancel: "Çıkıştan önce para kaybetmeden ne kadar kolay vazgeçebilirsin.",
-  priceProtection: "Çıkış öncesi fiyat düşüşünün sana iade edilip edilmeyeceği veya eşitlenip eşitlenmeyeceği.",
+  cancel: "Bir siparişten para kaybetmeden ne kadar kolay vazgeçebilirsin.",
+  priceProtection: "Sipariş verdikten sonra fiyat düşüşünün sana iade edilip edilmeyeceği veya eşitlenip eşitlenmeyeceği.",
   preload: "Satın aldıktan sonra ne kadar çabuk oynamaya başlayabilirsin.",
   bonus: "Ön sipariş ve sürüm ödüllerinin hesabına ne kadar güvenilir şekilde ulaştığı.",
   resale: "Kopyayı çıkıştan sonra ödünç verip veremeyeceğin, takas edip edemeyeceğin veya satıp satamayacağın."
@@ -135,8 +123,6 @@ export function weightsFor(prefs) {
     w.preload += 26;
   if (prefs.wantsCancel)
     w.cancel += 26;
-  if (prefs.wantsResale)
-    w.resale += 26;
   const total = Object.values(w).reduce((a, b) => a + b, 0);
   return Object.fromEntries(Object.keys(w).map((k) => [k, Math.round(w[k] / total * 1000) / 10]));
 }
@@ -165,8 +151,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `${platform.label} ön yüklemesi, çıkıştan önce tamamlandı`,
-      when: `Çıkıştan yaklaşık ${platform.preloadLeadDays} gün önce hazırlandı (platform normu)`,
+      label: `${platform.label} preload — completed before launch`,
+      when: `Staged about ${platform.preloadLeadDays} days before launch (platform norm)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"
@@ -174,9 +160,9 @@ function timeline(platform, region) {
     {
       id: "cancel-cutoff",
       label: "Pratik iptal son tarihi",
-      when: "Dijital için indirme başlangıcı, fiziksel için kargo tarihi",
+      when: "Download start for digital, ship date for physical",
       iso: null,
-      detail: `Dijital siparişler, indirme başladığında iade edilemez hale geldi. ${region.note}`,
+      detail: `Dijital siparişler, indirme başladıktan sonra iade edilemez hale geldi. ${region.note}`,
       confidence: "estimated"
     },
     {
@@ -184,7 +170,7 @@ function timeline(platform, region) {
       label: "Çıkış",
       when: "19 Kasım 2026, gece yarısı ET",
       iso: "2026-11-19",
-      detail: "Kilit açma dünya genelinde 00:00 ET'de eş zamanlıydı, bu yüzden indirilmiş bir kopya, Avrupa ve Asya'nın çoğunda çıkış sabahı alınan bir diskten saatler önce oynandı.",
+      detail: "Kilit açma dünya genelinde 00:00 ET'de eş zamanlıdır.",
       confidence: "confirmed"
     }
   ];
@@ -194,7 +180,7 @@ function riskFlags(best, platform, region, edition, prefs) {
   if (!best.channel.physical && prefs.wantsCancel) {
     flags.push({
       title: "İade penceren indirme başladığında kapanır",
-      body: `${platform.label} üzerinde dijital sipariş, indirme başladığı anda iade edilemez hale gelir. Hemen oynamaktansa vazgeçme seçeneğini korumak daha önemliyse indirmeyi başlatma.`,
+      body: `${platform.label} üzerinde dijital sipariş, indirme başladığı anda iade edilemez hale gelir. Vazgeçme seçeneğini korumak, hemen oynamaktan daha önemliyse indirmeyi başlatma.`,
       severity: "high"
     });
   }
@@ -202,13 +188,6 @@ function riskFlags(best, platform, region, edition, prefs) {
     flags.push({
       title: "Geç bir kod anında indirmene mal olabilir",
       body: "Perakendeci dijital kodları genellikle çıkışa yakın teslim edilir. Bu, oynamak istemeden önce indirmek için çok az zaman bırakabilir, bu yüzden çıkış günü indiriyor olabilirsin.",
-      severity: "medium"
-    });
-  }
-  if (best.channel.physical) {
-    flags.push({
-      title: "Diskler yine de ilk gün yaması indirir",
-      body: "Disk temel indirmeyi kaldırır ama çıkış yamasını kaldırmaz. Bant genişliğini yine de planla ve oynamadan önce bir süre kurulum bekle.",
       severity: "medium"
     });
   }
@@ -234,7 +213,7 @@ export function rankChannels(input) {
   const edition = editionById(input.edition) ?? EDITIONS[0];
   const prefs = input.prefs;
   const weights = weightsFor(prefs);
-  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id)).map((channel) => {
+  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id) && (!c.editions || c.editions.includes(edition.id))).map((channel) => {
     const adj = adjustedAxes(channel, platform, region, edition);
     const axes = Object.keys(AXIS_LABELS).map((id) => ({
       id,
@@ -258,8 +237,7 @@ export function rankChannels(input) {
   const runnerUp = ranked[1];
   const wanted = [
     prefs.wantsPreload ? "kilidi açıldığı anda oynamak" : null,
-    prefs.wantsCancel ? "iptal seçeneğini korumak" : null,
-    prefs.wantsResale ? "yeniden satış veya ödünç değeri" : null
+    prefs.wantsCancel ? "keeping the option to cancel" : null
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "değerin ötesinde güçlü bir tercih yok" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} ve ${wanted.at(-1)}`;
   const headline = `${platform.label} üzerinde ${best.channel.short}`;

@@ -7,6 +7,9 @@
 // PC platform, Deluxe edition and the two PC-only channels removed;
 // timeline and risk flags past-tense; preload-schedule values softened
 // to platform norms. TS source needs the same change on next re-port.
+// Iteration 14 (2026-11-22): no disc exists — physical is a code-in-a-box
+// (Standard only; Ultimate digital-only). Disc channels removed, a
+// "Retailer code-in-a-box" channel added, resale preference removed.
 
 export const LAUNCH_UTC = "2026-11-19T05:00:00Z";
 export const PLATFORMS = [
@@ -15,14 +18,14 @@ export const PLATFORMS = [
     label: "PlayStation 5",
     preloadLeadDays: 2,
     preloadNote: "A PlayStation normalmente preparava o download cerca de 48 horas antes do lançamento, e um pedido digital deixa de ser reembolsável no momento em que o download começa.",
-    discAvailable: true
+    discAvailable: false
   },
   {
     id: "xbox",
     label: "Xbox Series X|S",
     preloadLeadDays: 10,
     preloadNote: "O Xbox preparava downloads cedo, muitas vezes uma semana ou mais antes do lançamento, e mantém seu fluxo de reembolso de autoatendimento disponível para pedidos não jogados até o dia do lançamento.",
-    discAvailable: true
+    discAvailable: false
   }
 ];
 export const REGIONS = [
@@ -64,7 +67,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "O melhor equilíbrio entre proteção de preço e cancelamento; confira quando o código chega, os tempos de entrega variam.",
+    note: "O melhor equilíbrio entre proteção de preço e cancelamento; verifique quando o código chega — o prazo de entrega varia.",
     terms: [
       "Os códigos são emitidos com frequência perto do lançamento, o que pode deixar pouco tempo para baixar antes de você querer jogar.",
       "A maioria dos grandes varejistas aplica garantias de preço: você paga o menor preço visto antes do lançamento.",
@@ -72,48 +75,33 @@ export const CHANNELS = [
     ]
   },
   {
-    id: "retailer-disc",
-    label: "Disco de varejista, enviado",
-    short: "Disco, enviado",
+    id: "retailer-code-in-box",
+    label: "Código em caixa de varejista (só Standard)",
+    short: "Código em caixa",
     platforms: ["ps5", "xbox"],
+    editions: ["standard"],
     physical: true,
-    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 9 },
+    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 0 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Cancele até o envio, mantenha a garantia de preço e venda ou empreste depois. Você espera a entrega e ainda instala pelo disco.",
+    note: "Uma cópia Standard em caixa com um código de download dentro — sem disco. Cancele até o envio e mantenha a garantia de preço, depois resgate o código e baixe o jogo completo.",
     terms: [
       "Pode ser cancelado sem penalidade até o envio do pacote.",
-      "Instalações por disco ainda baixam um patch do primeiro dia, então reserve a largura de banda de qualquer forma.",
-      "A entrega passar do dia do lançamento é o risco real, não o dinheiro."
+      "A caixa contém um código de download, não um disco — resgate-o e baixe o jogo completo.",
+      "A entrega atrasar para depois do dia em que você quer jogar é o risco real, não o dinheiro.",
     ]
   },
-  {
-    id: "bigbox-disc",
-    label: "Retirada na loja",
-    short: "Retirada na loja",
-    platforms: ["ps5", "xbox"],
-    physical: true,
-    axes: { cancel: 10, priceProtection: 7, preload: 0, bonus: 7, resale: 9 },
-    confidence: "platform-norm",
-    sourceType: "retailer-policy",
-    note: "A posição de cancelamento mais segura de todas: em muitas redes você não pagou até a retirada, além de acesso no dia do lançamento e valor total de revenda.",
-    terms: [
-      "As reservas costumam ser só com depósito ou gratuitas, e o cancelamento sem mais é a norma.",
-      "Você instala pelo disco no dia do lançamento, então nada é baixado com antecedência.",
-      "Steelbooks exclusivos de loja ou itens bônus são o motivo usual para escolher este canal."
-    ]
-  }
 ];
 export const AXIS_LABELS = {
   cancel: "Cancelamento",
   priceProtection: "Proteção contra queda de preço",
-  preload: "Prontidão de download",
+  preload: "Preparo do download",
   bonus: "Retenção de bônus",
   resale: "Valor de revenda"
 };
 export const AXIS_DETAIL = {
-  cancel: "Como é fácil desistir antes do lançamento sem perder dinheiro.",
-  priceProtection: "Se uma queda de preço pré-lançamento é reembolsada ou igualada para você.",
+  cancel: "Como é fácil desistir de um pedido sem perder dinheiro.",
+  priceProtection: "Se uma queda de preço depois do pedido é reembolsada ou igualada para você.",
   preload: "Quão cedo você pode começar a jogar depois de comprar.",
   bonus: "Quão confiável é que as recompensas de pré-venda e edição cheguem à sua conta.",
   resale: "Se você pode emprestar, trocar ou vender a cópia depois do lançamento."
@@ -135,8 +123,6 @@ export function weightsFor(prefs) {
     w.preload += 26;
   if (prefs.wantsCancel)
     w.cancel += 26;
-  if (prefs.wantsResale)
-    w.resale += 26;
   const total = Object.values(w).reduce((a, b) => a + b, 0);
   return Object.fromEntries(Object.keys(w).map((k) => [k, Math.round(w[k] / total * 1000) / 10]));
 }
@@ -165,8 +151,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `Pré-carregamento de ${platform.label}, concluído antes do lançamento`,
-      when: `Preparado cerca de ${platform.preloadLeadDays} dias antes do lançamento (norma de plataforma)`,
+      label: `${platform.label} preload — completed before launch`,
+      when: `Staged about ${platform.preloadLeadDays} days before launch (platform norm)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"
@@ -174,7 +160,7 @@ function timeline(platform, region) {
     {
       id: "cancel-cutoff",
       label: "Prazo prático de cancelamento",
-      when: "Início do download para digital, data de envio para físico",
+      when: "Download start for digital, ship date for physical",
       iso: null,
       detail: `Pedidos digitais deixaram de ser reembolsáveis quando o download começou. ${region.note}`,
       confidence: "estimated"
@@ -184,7 +170,7 @@ function timeline(platform, region) {
       label: "Lançamento",
       when: "19 de novembro de 2026, meia-noite ET",
       iso: "2026-11-19",
-      detail: "O desbloqueio foi simultâneo no mundo todo às 00:00 ET, então uma cópia baixada foi jogada horas antes de um disco retirado na manhã do lançamento na maior parte da Europa e da Ásia.",
+      detail: "O desbloqueio é simultâneo no mundo todo às 00:00 ET.",
       confidence: "confirmed"
     }
   ];
@@ -194,21 +180,14 @@ function riskFlags(best, platform, region, edition, prefs) {
   if (!best.channel.physical && prefs.wantsCancel) {
     flags.push({
       title: "Sua janela de reembolso fecha quando o download começa",
-      body: `Em ${platform.label}, um pedido digital deixa de ser reembolsável no momento em que o download começa. Se manter a opção de desistir importa mais que jogar imediatamente, não comece o download.`,
+      body: `Em ${platform.label}, um pedido digital deixa de ser reembolsável no momento em que o download começa. Se manter a opção de desistir importa mais do que jogar imediatamente, não comece o download.`,
       severity: "high"
     });
   }
   if (best.channel.id === "retailer-code" && prefs.wantsPreload) {
     flags.push({
-      title: "Um código tardio pode custar seu download imediato",
+      title: "Um código tardio pode custar seu download instantâneo",
       body: "Códigos digitais de varejista costumam ser entregues perto do lançamento. Isso pode deixar pouco tempo para baixar antes de você querer jogar, então você pode estar baixando no dia do lançamento.",
-      severity: "medium"
-    });
-  }
-  if (best.channel.physical) {
-    flags.push({
-      title: "Discos ainda baixam um patch do primeiro dia",
-      body: "Um disco remove o download base, mas não o patch de lançamento. Reserve largura de banda de qualquer forma e espere instalar por um tempo antes de jogar.",
       severity: "medium"
     });
   }
@@ -234,7 +213,7 @@ export function rankChannels(input) {
   const edition = editionById(input.edition) ?? EDITIONS[0];
   const prefs = input.prefs;
   const weights = weightsFor(prefs);
-  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id)).map((channel) => {
+  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id) && (!c.editions || c.editions.includes(edition.id))).map((channel) => {
     const adj = adjustedAxes(channel, platform, region, edition);
     const axes = Object.keys(AXIS_LABELS).map((id) => ({
       id,
@@ -258,8 +237,7 @@ export function rankChannels(input) {
   const runnerUp = ranked[1];
   const wanted = [
     prefs.wantsPreload ? "jogar no momento do desbloqueio" : null,
-    prefs.wantsCancel ? "manter a opção de cancelar" : null,
-    prefs.wantsResale ? "valor de revenda ou empréstimo" : null
+    prefs.wantsCancel ? "keeping the option to cancel" : null
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "sem uma preferência forte além do valor" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} e ${wanted.at(-1)}`;
   const headline = `${best.channel.short} em ${platform.label}`;

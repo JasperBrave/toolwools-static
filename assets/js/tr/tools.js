@@ -43,7 +43,7 @@
     });
     if (countEl) countEl.textContent = shown + " / 23 araç · " + liveShown + " yayında";
     if (emptyEl) emptyEl.hidden = shown !== 0;
-    if (headingEl) headingEl.textContent = q ? 'Sonuçlar: "' + q + '"' : "Canlı araçlar";
+    if (headingEl) headingEl.textContent = q ? 'Sonuçlar: "' + q + '"' : platform === "coming-soon" ? "Çok yakında" : platform === "live" ? "Canlı araçlar" : "Tüm araçlar";
     var url = new URL(window.location.href);
     if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
     if (category) url.searchParams.set("category", category); else url.searchParams.delete("category");

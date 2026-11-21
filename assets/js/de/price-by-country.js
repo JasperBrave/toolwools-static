@@ -136,8 +136,8 @@ function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modelliert</span>';
     var line = formatUsd(e.usdEquivalent) + " USD-Äquivalent"
-      + (e.premiumOverStandardUsd > 0 ? " · " + formatUsd(e.premiumOverStandardUsd) + " über Standard" : " · Basis")
-      + (e.usdPer100kGta !== null ? " · " + formatUsd(e.usdPer100kGta) + " pro 100.000 GTA$" : "");
+      + (e.premiumOverStandardLocal > 0 ? " · " + formatLocal(e.premiumOverStandardLocal, price.market) + " über Standard" : " · Basis")
+      + (e.localPer100kGta !== null ? " · " + formatLocal(e.localPer100kGta, price.market) + " pro 100.000 GTA$" : "");
     return '<li class="rank-item"><div class="rank-head"><h3>' + e.label + badge + "</h3><p>" + formatLocal(e.totalLocal, price.market) + "</p></div>"
       + "<p>" + line + "</p>"
       + "<p>" + e.includes.join(" · ") + "</p></li>";
@@ -180,9 +180,9 @@ function ladderTableHtml(price, ladder) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modelliert</span>';
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
-      + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "Basis") + "</td>"
+      + "<td class=\"muted\">" + (e.premiumOverStandardLocal > 0 ? formatLocal(e.premiumOverStandardLocal, price.market) : "Basis") + "</td>"
       + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("de-DE") : "0") + "</td>"
-      + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "k. A.") + "</td></tr>";
+      + "<td class=\"muted\">" + (e.localPer100kGta !== null ? formatLocal(e.localPer100kGta, price.market) : "k. A.") + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">Die Upgrade-Frage, beantwortet mit einer Wertrate statt einer Feature-Liste. Preise in ' + price.market.currency + " für " + price.market.country + ".</p>\n"

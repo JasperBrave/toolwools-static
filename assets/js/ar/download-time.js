@@ -168,7 +168,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "وقت التنزيل التقديري " + r.total.h + " ساعات و" + r.total.m + " دقائق مقابل " + r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت في الثانية، وكفاءة " + state.eff + "%.";
+  if (live) live.textContent = "وقت التنزيل التقديري " + r.total.h + " ساعات و\u2002" + r.total.m + " دقائق مقابل " + r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت في الثانية، وكفاءة " + state.eff + "%.";
   syncUrl();
 }
 

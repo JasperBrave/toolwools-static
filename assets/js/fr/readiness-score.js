@@ -7,8 +7,8 @@
 // State lives in the URL (?gpu=&cpu=&ram=&storage=&drive=&mbps=).
 import { estimateReadiness as estimateReadinessEn, DRIVE_META } from "../engines/fr/readiness-engine.js";
 
-var GRADE_LABEL = { S: "Sans accroc le jour du lancement", A: "Prêt Ultra", B: "Prêt confortablement", C: "Jouable, prévoyez des ajustements", D: "Sous les specs, mettez à niveau d'abord", F: "Pas prêt" };
-var VERDICT = { S: "Tout suffit avec de la marge. Vous pourriez jouer avec les réglages maximum quand GTA 6 arrivera sur PC.", A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages le jour du lancement.", B: "Prêt. Un sous-score est en retard, mais rien ne bloque un lancement sans accroc.", C: "Jouable, mais choisissez une échelle résolution/préréglage adaptée à votre maillon le plus faible.", D: "Sous la limite inférieure pratique. Corrigez votre score le plus faible avant le préchargement.", F: "Pas prêt. Vous n'aurez pas un lancement sans accroc tant que vous n'aurez pas mis à niveau." };
+var GRADE_LABEL = { S: "Prêt le jour du lancement : 1080p Élevé confortable à environ 60 ips", A: "Prêt Ultra", B: "Prêt confortablement", C: "Jouable, prévoyez des ajustements", D: "Sous les specs, mettez à niveau d'abord", F: "Pas prêt" };
+var VERDICT = { S: "Tranche supérieure : 1080p Élevé confortable à environ 60 ips, avec de la marge.", A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages le jour du lancement.", B: "Prêt. Un sous-score est en retard, mais rien ne bloque un lancement sans accroc.", C: "Jouable, mais choisissez une échelle résolution/préréglage adaptée à votre maillon le plus faible.", D: "Sous la limite inférieure pratique. Corrigez votre score le plus faible avant le préchargement.", F: "Pas prêt. Vous n'aurez pas un lancement sans accroc tant que vous n'aurez pas mis à niveau." };
 var DRIVE_LABEL = { nvme: "SSD NVMe", ssd: "SSD SATA", hdd: "Disque dur (mécanique)" };
 function driveLabel(k) { return DRIVE_LABEL[k] || DRIVE_META[k].label; }
 function mapPerf(d) { var m = d.match(/([\d.]+) avg fps · ([\d.]+) 1% low at (\S+) High native\./); return m ? m[1] + " ips en moyenne · " + m[2] + " 1 % faible en " + m[3] + " Élevé natif." : d; }

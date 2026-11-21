@@ -267,7 +267,7 @@ function render() {
       + "<div><dt>Sessions</dt><dd>" + plan.sessionsNeeded + " x " + state.session + " Std.</dd></div>"
       + "<div><dt>Pro Spieler</dt><dd>" + money(rate.perHourPerPlayer) + "/Std.</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Payouts are projections, not datamined values.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' Auszahlungen sind Projektionen, keine datamined Werte.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = methodTableHtml(ranked, state.method);
   }

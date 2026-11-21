@@ -38,7 +38,7 @@
     });
     if (countEl) countEl.textContent = shown + " من أصل 23 أداة · " + liveShown + " مباشرة";
     if (emptyEl) emptyEl.hidden = shown !== 0;
-    if (headingEl) headingEl.textContent = q ? 'نتائج لـ "' + q + '"' : "الأدوات المباشرة";
+    if (headingEl) headingEl.textContent = q ? 'نتائج لـ "' + q + '"' : platform === "coming-soon" ? "قريبًا" : platform === "live" ? "الأدوات المباشرة" : "كل الأدوات";
     var url = new URL(window.location.href);
     if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
     if (category) url.searchParams.set("category", category); else url.searchParams.delete("category");

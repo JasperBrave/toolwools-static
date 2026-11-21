@@ -7,6 +7,9 @@
 // PC platform, Deluxe edition and the two PC-only channels removed;
 // timeline and risk flags past-tense; preload-schedule values softened
 // to platform norms. TS source needs the same change on next re-port.
+// Iteration 14 (2026-11-22): no disc exists — physical is a code-in-a-box
+// (Standard only; Ultimate digital-only). Disc channels removed, a
+// "Retailer code-in-a-box" channel added, resale preference removed.
 
 export const LAUNCH_UTC = "2026-11-19T05:00:00Z";
 export const PLATFORMS = [
@@ -15,14 +18,14 @@ export const PLATFORMS = [
     label: "PlayStation 5",
     preloadLeadDays: 2,
     preloadNote: "كانت PlayStation تجهز التنزيل عادة قبل 48 ساعة تقريبا من الإصدار، ويصبح الطلب الرقمي غير قابل للاسترداد لحظة بدء التنزيل.",
-    discAvailable: true
+    discAvailable: false
   },
   {
     id: "xbox",
     label: "Xbox Series X|S",
     preloadLeadDays: 10,
     preloadNote: "كان Xbox يجهز التنزيلات مبكرا، غالبا قبل أسبوع أو أكثر من الإصدار، ويبقي تدفق الاسترداد الذاتي متاحا للطلبات غير الملعوبة حتى يوم الإصدار.",
-    discAvailable: true
+    discAvailable: false
   }
 ];
 export const REGIONS = [
@@ -48,7 +51,7 @@ export const CHANNELS = [
     axes: { cancel: 5, priceProtection: 3, preload: 10, bonus: 9, resale: 0 },
     confidence: "platform-norm",
     sourceType: "platform-policy",
-    note: "المسار الافتراضي. أسرع طريق لبدء اللعب، وقيمة إعادة بيع صفر، ونافذة الاسترداد تُغلق لحظة بدء التنزيل.",
+    note: "المسار الافتراضي. أسرع طريقة لبدء اللعب، وقيمة إعادة بيع صفر، ونافذة الاسترداد تغلق لحظة بدء التنزيل.",
     terms: [
       "تنتهي أهلية الاسترداد عندما يبدأ التنزيل، وليس في يوم الإصدار.",
       "تصل مكافآت الإصدار إلى الحساب الذي قدم الطلب ولا يمكن نقلها.",
@@ -64,7 +67,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "أفضل توازن بين حماية السعر وإمكانية الإلغاء؛ تحقق من موعد وصول الرمز — فأوقات التسليم تختلف.",
+    note: "أفضل توازن بين حماية السعر وإمكانية الإلغاء؛ تحقق من موعد وصول الرمز — يختلف وقت التسليم.",
     terms: [
       "تصدر الرموز غالبا قرب الإطلاق، مما قد يترك وقتا قليلا جدا للتنزيل قبل أن تريد اللعب.",
       "تطبق معظم كبار بائعي التجزئة ضمانات الأسعار: تدفع أقل سعر شوهد قبل الإصدار.",
@@ -72,37 +75,22 @@ export const CHANNELS = [
     ]
   },
   {
-    id: "retailer-disc",
-    label: "قرص بائع تجزئة، مشحون",
-    short: "قرص، مشحون",
+    id: "retailer-code-in-box",
+    label: "رمز في صندوق من بائع تجزئة (Standard فقط)",
+    short: "رمز في صندوق",
     platforms: ["ps5", "xbox"],
+    editions: ["standard"],
     physical: true,
-    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 9 },
+    axes: { cancel: 9, priceProtection: 9, preload: 1, bonus: 5, resale: 0 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "ألغ حتى الشحن، واحتفظ بضمان السعر، وبع أو أعر بعد ذلك. تنتظر التسليم وما زلت تثبت من القرص.",
+    note: "نسخة Standard في صندوق مع رمز تنزيل بداخله — بدون قرص. ألغ حتى الشحن واحتفظ بضمان السعر، ثم استخدم الرمز ونزل اللعبة الكاملة.",
     terms: [
       "يمكن الإلغاء دون عقوبة حتى شحن الطرد.",
-      "ما زالت عمليات التثبيت من القرص تنزل ترقيع اليوم الأول، لذا ضع سعة النطاق في الحسبان على أي حال.",
-      "تأخر التسليم إلى ما بعد يوم الإطلاق هو الخطر الحقيقي، وليس المال."
+      "يحتوي الصندوق على رمز تنزيل، وليس قرصا — استخدمه، ثم نزل اللعبة الكاملة.",
+      "تأخر التسليم إلى ما بعد اليوم الذي تريد اللعب فيه هو الخطر الحقيقي، وليس المال.",
     ]
   },
-  {
-    id: "bigbox-disc",
-    label: "استلام من المتجر",
-    short: "استلام من المتجر",
-    platforms: ["ps5", "xbox"],
-    physical: true,
-    axes: { cancel: 10, priceProtection: 7, preload: 0, bonus: 7, resale: 9 },
-    confidence: "platform-norm",
-    sourceType: "retailer-policy",
-    note: "أأمن موقف إلغاء على الإطلاق: لم تدفع حتى الاستلام في العديد من السلاسل، بالإضافة إلى الوصول في يوم الإطلاق وقيمة إعادة البيع الكاملة.",
-    terms: [
-      "الحجوزات عادة بإيداع فقط أو مجانية، والإلغاء بالانسحاب هو القاعدة.",
-      "تثبت من القرص في يوم الإطلاق، لذا لا يتم تنزيل أي شيء مسبقا.",
-      "علب steelbook الحصرية للمتجر أو عناصر المكافآت هي السبب المعتاد لاختيار هذه القناة."
-    ]
-  }
 ];
 export const AXIS_LABELS = {
   cancel: "قابلية الإلغاء",
@@ -112,8 +100,8 @@ export const AXIS_LABELS = {
   resale: "قيمة إعادة البيع"
 };
 export const AXIS_DETAIL = {
-  cancel: "ما مدى سهولة التراجع قبل الإصدار دون خسارة المال.",
-  priceProtection: "ما إذا كان انخفاض السعر قبل الإصدار يسترد لك أو يطابق لك.",
+  cancel: "ما مدى سهولة التراجع عن طلب دون خسارة المال.",
+  priceProtection: "ما إذا كان انخفاض السعر بعد طلبك يسترد لك أو يطابق لك.",
   preload: "ما مدى سرعة بدء اللعب بعد الشراء.",
   bonus: "ما مدى موثوقية وصول مكافآت الطلب المسبق والإصدار إلى حسابك.",
   resale: "ما إذا كان يمكنك إعارة النسخة أو مبادلتها أو بيعها بعد الإطلاق."
@@ -135,8 +123,6 @@ export function weightsFor(prefs) {
     w.preload += 26;
   if (prefs.wantsCancel)
     w.cancel += 26;
-  if (prefs.wantsResale)
-    w.resale += 26;
   const total = Object.values(w).reduce((a, b) => a + b, 0);
   return Object.fromEntries(Object.keys(w).map((k) => [k, Math.round(w[k] / total * 1000) / 10]));
 }
@@ -165,8 +151,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `التحميل المسبق لـ ${platform.label}، اكتمل قبل الإصدار`,
-      when: `جُهّز قبل الإصدار بنحو ${platform.preloadLeadDays} أيام (معيار المنصة)`,
+      label: `${platform.label} preload — completed before launch`,
+      when: `Staged about ${platform.preloadLeadDays} days before launch (platform norm)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"
@@ -174,7 +160,7 @@ function timeline(platform, region) {
     {
       id: "cancel-cutoff",
       label: "الموعد النهائي العملي للإلغاء",
-      when: "بدء التنزيل للرقمي، وتاريخ الشحن للمادي",
+      when: "Download start for digital, ship date for physical",
       iso: null,
       detail: `توقفت الطلبات الرقمية عن كونها قابلة للاسترداد بمجرد بدء التنزيل. ${region.note}`,
       confidence: "estimated"
@@ -184,7 +170,7 @@ function timeline(platform, region) {
       label: "الإصدار",
       when: "19 نوفمبر 2026، منتصف الليل ET",
       iso: "2026-11-19",
-      detail: "كان الفتح متزامنا في جميع أنحاء العالم في الساعة 00:00 ET، لذا فإن نسخة منزلة لعبت قبل ساعات من قرص تم استلامه صباح الإطلاق في معظم أوروبا وآسيا.",
+      detail: "الفتح متزامن في جميع أنحاء العالم في الساعة 00:00 ET.",
       confidence: "confirmed"
     }
   ];
@@ -201,14 +187,7 @@ function riskFlags(best, platform, region, edition, prefs) {
   if (best.channel.id === "retailer-code" && prefs.wantsPreload) {
     flags.push({
       title: "رمز متأخر قد يكلفك التنزيل الفوري",
-      body: "تسلم رموز بائعي التجزئة الرقمية عادة قرب الإصدار. وقد يترك ذلك وقتا قليلا جدا للتنزيل قبل أن تريد اللعب، لذا قد تكون بصدد التنزيل في يوم الإطلاق.",
-      severity: "medium"
-    });
-  }
-  if (best.channel.physical) {
-    flags.push({
-      title: "الأقراص ما زالت تنزل ترقيع اليوم الأول",
-      body: "يزيل القرص التنزيل الأساسي لكن ليس ترقيع الإطلاق. خطط لسعة النطاق على أي حال، وتوقع التثبيت لفترة قبل اللعب.",
+      body: "تسلم رموز بائعي التجزئة الرقمية عادة قرب الإصدار. وهذا قد يترك وقتا قليلا جدا للتنزيل قبل أن تريد اللعب، لذا قد تكون بصدد التنزيل في يوم الإطلاق.",
       severity: "medium"
     });
   }
@@ -234,7 +213,7 @@ export function rankChannels(input) {
   const edition = editionById(input.edition) ?? EDITIONS[0];
   const prefs = input.prefs;
   const weights = weightsFor(prefs);
-  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id)).map((channel) => {
+  const ranked = CHANNELS.filter((c) => c.platforms.includes(platform.id) && (!c.editions || c.editions.includes(edition.id))).map((channel) => {
     const adj = adjustedAxes(channel, platform, region, edition);
     const axes = Object.keys(AXIS_LABELS).map((id) => ({
       id,
@@ -258,8 +237,7 @@ export function rankChannels(input) {
   const runnerUp = ranked[1];
   const wanted = [
     prefs.wantsPreload ? "اللعب لحظة الفتح" : null,
-    prefs.wantsCancel ? "الاحتفاظ بخيار الإلغاء" : null,
-    prefs.wantsResale ? "قيمة إعادة البيع أو الإعارة" : null
+    prefs.wantsCancel ? "keeping the option to cancel" : null
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "لا تفضيل قوي يتجاوز القيمة" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} و ${wanted.at(-1)}`;
   const headline = `${best.channel.short} على ${platform.label}`;

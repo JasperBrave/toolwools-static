@@ -125,8 +125,8 @@ function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modellendi</span>';
     var line = formatUsd(e.usdEquivalent) + " USD karşılığı"
-      + (e.premiumOverStandardUsd > 0 ? " · " + formatUsd(e.premiumOverStandardUsd) + " Standard'ın üzerinde" : " · temel")
-      + (e.usdPer100kGta !== null ? " · 100.000 GTA$ başına " + formatUsd(e.usdPer100kGta) : "");
+      + (e.premiumOverStandardLocal > 0 ? " · " + formatLocal(e.premiumOverStandardLocal, price.market) + " Standard'ın üzerinde" : " · temel")
+      + (e.localPer100kGta !== null ? " · 100.000 GTA$ başına " + formatLocal(e.localPer100kGta, price.market) : "");
     return '<li class="rank-item"><div class="rank-head"><h3>' + e.label + badge + "</h3><p>" + formatLocal(e.totalLocal, price.market) + "</p></div>"
       + "<p>" + line + "</p>"
       + "<p>" + e.includes.join(" · ") + "</p></li>";
@@ -169,9 +169,9 @@ function ladderTableHtml(price, ladder) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modellendi</span>';
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
-      + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "Temel") + "</td>"
+      + "<td class=\"muted\">" + (e.premiumOverStandardLocal > 0 ? formatLocal(e.premiumOverStandardLocal, price.market) : "Temel") + "</td>"
       + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("tr-TR") : "0") + "</td>"
-      + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "n/a") + "</td></tr>";
+      + "<td class=\"muted\">" + (e.localPer100kGta !== null ? formatLocal(e.localPer100kGta, price.market) : "n/a") + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard ve Ultimate karşılaştırması</h2>\n'
     + '      <p class="section-dek">Yükseltme sorusu, özellik listesi yerine bir değer oranıyla yanıtlandı. Fiyatlar ' + price.market.country + " için " + price.market.currency + " cinsinden.</p>\n"

@@ -88,7 +88,11 @@ export function estimateFps(input) {
   const cpuCapFps = CPU_CAP_100[res] * (cpu.score / 100);
   let avg = Math.min(gpuFps, cpuCapFps);
   let limiter = Math.abs(gpuFps - cpuCapFps) / Math.max(gpuFps, cpuCapFps) < 0.07 ? "balanced" : gpuFps < cpuCapFps ? "gpu" : "cpu";
-  let low = avg * (limiter === "cpu" ? 0.62 : 0.72);
+  // 1% low ratio keys off the NATIVE (pre-upscaler) bottleneck (iter14):
+  // the upscaler only shrinks GPU shading work, so it must not flip the
+  // low/avg ratio while the average stays CPU-capped.
+  let nativeLimiter = Math.abs(baseGpu - cpuCapFps) / Math.max(baseGpu, cpuCapFps) < 0.07 ? "balanced" : baseGpu < cpuCapFps ? "gpu" : "cpu";
+  let low = avg * (nativeLimiter === "cpu" ? 0.62 : 0.72);
   const ramPen = RAM_PENALTY[ram];
   avg *= ramPen.avg;
   low *= ramPen.low;

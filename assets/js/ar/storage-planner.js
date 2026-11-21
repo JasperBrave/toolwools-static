@@ -4,7 +4,7 @@
 // total = subtotal + headroom. Base install default is 212 GB (AUDIT FIX H2:
 // one install-size constant shared with download-time, readiness and the
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
-var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "pc" };
+var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
   pc: { label: "PC", usableGB: 0, note: "محركك وقواعدك، الرقم أدناه هو بالضبط ما تحتاجه GTA 6." },
   ps5: { label: "PS5", usableGB: 667, note: "يُظهر قرص Sony SSD بسعة 825 غيغابايت 667 غيغابايت قابلة للاستخدام بعد احتياطي النظام." },
@@ -191,7 +191,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(Math.max(0, row.usable - r.total)) + " غيغابايت حرة";
+      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(Math.max(0, row.usable - r.total)) + " غيغابايت حرة" + (r.total > row.usable ? " (ينقص " + fmt1(r.total - row.usable) + " غيغابايت)" : "");
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
@@ -209,7 +209,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "المساحة الحرة الموصى بها " + fmt1(r.total) + " غيغابايت: " + state.base + " غيغابايت تثبيت، و" + state.patch + " غيغابايت تصحيح، و" + state.dlc + " غيغابايت محتوى إضافي، و" + r.headroom + " غيغابايت هامش.";
+  if (live) live.textContent = "المساحة الحرة الموصى بها " + fmt1(r.total) + " غيغابايت: " + state.base + " غيغابايت تثبيت، و\u2002" + state.patch + " غيغابايت تصحيح، و\u2002" + state.dlc + " غيغابايت محتوى إضافي، و\u2002" + r.headroom + " غيغابايت هامش.";
   syncUrl();
 }
 

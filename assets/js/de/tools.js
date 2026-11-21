@@ -38,7 +38,7 @@
     });
     if (countEl) countEl.textContent = shown + " von 23 Tools \u00b7 " + liveShown + " live";
     if (emptyEl) emptyEl.hidden = shown !== 0;
-    if (headingEl) headingEl.textContent = q ? 'Ergebnisse für "' + q + '"' : "Live-Tools";
+    if (headingEl) headingEl.textContent = q ? 'Ergebnisse für "' + q + '"' : platform === "coming-soon" ? "Bald verfügbar" : platform === "live" ? "Live-Tools" : "Alle Tools";
     var url = new URL(window.location.href);
     if (q) url.searchParams.set("q", q); else url.searchParams.delete("q");
     if (category) url.searchParams.set("category", category); else url.searchParams.delete("category");

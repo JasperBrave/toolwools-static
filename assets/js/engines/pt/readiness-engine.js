@@ -12,7 +12,7 @@ export const DRIVE_META = {
   hdd: { label: "HDD (mecânico)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Impecável no dia do lançamento" },
+  { grade: "S", min: 92, label: "Pronto no dia do lançamento, 1080p Alto confortável a cerca de 60 fps" },
   { grade: "A", min: 82, label: "Ultra pronto" },
   { grade: "B", min: 70, label: "Pronto com conforto" },
   { grade: "C", min: 55, label: "Jogável, planeje ajustes" },
@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Tudo passa com margem. Você poderia jogar com configurações no máximo quando GTA 6 chegar ao PC.",
+    S: "Faixa superior: 1080p Alto confortável a cerca de 60 fps, com margem de sobra.",
     A: "Pronto hoje, você só vai ajustar uma ou duas configurações.",
     B: "Pronto. Uma subpontuação está atrás, mas nada bloqueia um jogo tranquilo.",
     C: "Jogável, mas escolha uma escala de resolução / preset adequada ao seu elo mais fraco.",

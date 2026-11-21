@@ -126,8 +126,8 @@ function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modelado</span>';
     var line = formatUsd(e.usdEquivalent) + " Equivalente em USD"
-      + (e.premiumOverStandardUsd > 0 ? " · " + formatUsd(e.premiumOverStandardUsd) + " over Standard" : " · baseline")
-      + (e.usdPer100kGta !== null ? " · " + formatUsd(e.usdPer100kGta) + " per 100,000 GTA$" : "");
+      + (e.premiumOverStandardLocal > 0 ? " · " + formatLocal(e.premiumOverStandardLocal, price.market) + " over Standard" : " · baseline")
+      + (e.localPer100kGta !== null ? " · " + formatLocal(e.localPer100kGta, price.market) + " per 100,000 GTA$" : "");
     return '<li class="rank-item"><div class="rank-head"><h3>' + e.label + badge + "</h3><p>" + formatLocal(e.totalLocal, price.market) + "</p></div>"
       + "<p>" + line + "</p>"
       + "<p>" + e.includes.join(" · ") + "</p></li>";
@@ -170,9 +170,9 @@ function ladderTableHtml(price, ladder) {
     var badge = e.confirmed ? "" : ' <span class="flag-badge">Modelado</span>';
     return "<tr><th scope=\"row\">" + e.label + badge + "</th>"
       + "<td class=\"mono\">" + formatLocal(e.totalLocal, price.market) + "</td>"
-      + "<td class=\"muted\">" + (e.premiumOverStandardUsd > 0 ? formatUsd(e.premiumOverStandardUsd) : "Base") + "</td>"
+      + "<td class=\"muted\">" + (e.premiumOverStandardLocal > 0 ? formatLocal(e.premiumOverStandardLocal, price.market) : "Base") + "</td>"
       + "<td class=\"muted\">" + (e.gtaDollars > 0 ? e.gtaDollars.toLocaleString("pt-BR") : "0") + "</td>"
-      + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "n/a") + "</td></tr>";
+      + "<td class=\"muted\">" + (e.localPer100kGta !== null ? formatLocal(e.localPer100kGta, price.market) : "n/a") + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">A pergunta do upgrade, respondida com uma taxa de valor em vez de uma lista de recursos. Preços em ' + price.market.currency + " for " + price.market.country + ".</p>\n"

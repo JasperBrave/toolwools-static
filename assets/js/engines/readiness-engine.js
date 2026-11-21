@@ -11,7 +11,7 @@ export const DRIVE_META = {
   hdd: { label: "HDD (mechanical)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Launch-day flawless" },
+  { grade: "S", min: 92, label: "Launch-day ready — comfortable 1080p High at around 60 fps" },
   { grade: "A", min: 82, label: "Ultra ready" },
   { grade: "B", min: 70, label: "Comfortably ready" },
   { grade: "C", min: 55, label: "Playable, plan tweaks" },
@@ -116,7 +116,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Everything clears with headroom. You could run max settings once GTA 6 reaches PC.",
+    S: "Top band — comfortable 1080p High at around 60 fps, with headroom to spare.",
     A: "Ready today — you will only tweak one or two settings.",
     B: "Ready. One sub-score is behind but nothing blocks smooth play.",
     C: "Playable, but pick a resolution / preset ladder that matches your weakest link.",
