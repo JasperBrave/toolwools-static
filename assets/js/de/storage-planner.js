@@ -55,6 +55,10 @@ function compute() {
   var headroom = Math.round(subtotal * (state.buffer / 100));
   return { subtotal: subtotal, headroom: headroom, total: subtotal + headroom };
 }
+// Display convention: 1 decimal. Binary floating point makes e.g.
+// 364 - 293.8 print as 70.1999... instead of 70.2, so every computed GB
+// value is rounded to 1 decimal at the point it is rendered.
+function fmt1(v) { return String(Math.round(v * 10) / 10); }
 function shareUrl() {
   var p = new URLSearchParams({ base: String(state.base), patch: String(state.patch), dlc: String(state.dlc), buffer: String(state.buffer), platform: state.platform });
   return window.location.origin + window.location.pathname + "?" + p.toString();
@@ -100,23 +104,23 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "Halte " + r.total + " GB frei für GTA 6 auf " + meta.label + ": " + state.base + " GB Installation + " + state.patch + " GB Patch + " + state.dlc + " GB DLC + " + r.headroom + " GB Reserve.";
-    if (label) label.textContent = "Halte " + r.total + " GB frei · Kurzfassung";
+    var tldrText = "Halte " + fmt1(r.total) + " GB frei für GTA 6 auf " + meta.label + ": " + state.base + " GB Installation + " + state.patch + " GB Patch + " + state.dlc + " GB DLC + " + r.headroom + " GB Reserve.";
+    if (label) label.textContent = "Halte " + fmt1(r.total) + " GB frei · Kurzfassung";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = r.total + " GB empfohlener freier Speicher";
+    if (verdictEl) verdictEl.textContent = fmt1(r.total) + " GB empfohlener freier Speicher";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
   var out = $("[data-output-panel]");
   if (out) {
-    var pct = function (v) { return Math.max(0, Math.min(100, (v / r.total) * 100)); };
+    var pct = function (v) { return Math.round(Math.max(0, Math.min(100, (v / r.total) * 100)) * 10) / 10; };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' Damit bleiben dir <strong>' + Math.max(0, meta.usableGB - r.total) + ' GB</strong> für andere Spiele nach GTA 6.</p>';
+      '<p class="verdict-desc">' + meta.note + ' Damit bleiben dir <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' GB</strong> für andere Spiele nach GTA 6.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Empfohlener freier Speicher</p>' +
-      '<h3 class="verdict-title">' + r.total + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + r.subtotal + ' GB Inhalt + ' + r.headroom + ' GB sicherer Puffer für künftige Patches.</p>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' GB Inhalt + ' + r.headroom + ' GB sicherer Puffer für künftige Patches.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Zusammensetzung: Basis-Installation ' + state.base + ' GB, Day-One-Patch ' + state.patch + ' GB, DLC und saisonale Inhalte ' + state.dlc + ' GB, Update-Reserve ' + r.headroom + ' GB">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -132,8 +136,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 braucht etwa " + r.total + " GB frei") + '&url=' + encodeURIComponent(shareUrl()) + '">Auf X teilen</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 braucht etwa " + r.total + " GB frei") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 braucht etwa " + fmt1(r.total) + " GB frei") + '&url=' + encodeURIComponent(shareUrl()) + '">Auf X teilen</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 braucht etwa " + fmt1(r.total) + " GB frei") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -143,24 +147,24 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Hängt vom Laufwerk ab" : (row.usable - r.total) + " GB frei";
+      var after = row.usable === 0 ? "Hängt vom Laufwerk ab" : fmt1(row.usable - r.total) + " GB frei";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "Wie viel Platz GTA 6 dir für andere Spiele lässt, mit deinem aktuellen " + r.total + "-GB-Plan.";
+  if (tableNote) tableNote.textContent = "Wie viel Platz GTA 6 dir für andere Spiele lässt, mit deinem aktuellen " + fmt1(r.total) + "-GB-Plan.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Empfohlener freier Speicher " + r.total + " Gigabyte: " + state.base + " Gigabyte Installation, " + state.patch + " Gigabyte Patch, " + state.dlc + " Gigabyte DLC, " + r.headroom + " Gigabyte Reserve.";
+  if (live) live.textContent = "Empfohlener freier Speicher " + fmt1(r.total) + " Gigabyte: " + state.base + " Gigabyte Installation, " + state.patch + " Gigabyte Patch, " + state.dlc + " Gigabyte DLC, " + r.headroom + " Gigabyte Reserve.";
   syncUrl();
 }
 
 function shareText() {
   var r = compute();
-  return "GTA 6 braucht etwa " + r.total + " GB frei: " + state.base + " GB Installation + " + state.patch + " GB Patch + " + state.dlc + " GB DLC + " + r.headroom + " GB Reserve. Plane deinen Speicher: " + shareUrl();
+  return "GTA 6 braucht etwa " + fmt1(r.total) + " GB frei: " + state.base + " GB Installation + " + state.patch + " GB Patch + " + state.dlc + " GB DLC + " + r.headroom + " GB Reserve. Plane deinen Speicher: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

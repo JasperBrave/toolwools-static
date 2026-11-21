@@ -55,6 +55,10 @@ function compute() {
   var headroom = Math.round(subtotal * (state.buffer / 100));
   return { subtotal: subtotal, headroom: headroom, total: subtotal + headroom };
 }
+// Display convention: 1 decimal. Binary floating point makes e.g.
+// 364 - 293.8 print as 70.1999... instead of 70.2, so every computed GB
+// value is rounded to 1 decimal at the point it is rendered.
+function fmt1(v) { return String(Math.round(v * 10) / 10); }
 function shareUrl() {
   var p = new URLSearchParams({ base: String(state.base), patch: String(state.patch), dlc: String(state.dlc), buffer: String(state.buffer), platform: state.platform });
   return window.location.origin + window.location.pathname + "?" + p.toString();
@@ -100,23 +104,23 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = meta.label + " üzerinde GTA 6 için " + r.total + " GB boş bırakın: " + state.base + " GB kurulum + " + state.patch + " GB yama + " + state.dlc + " GB DLC + " + r.headroom + " GB pay.";
-    if (label) label.textContent = r.total + " GB boş bırakın · Özet";
+    var tldrText = meta.label + " üzerinde GTA 6 için " + fmt1(r.total) + " GB boş bırakın: " + state.base + " GB kurulum + " + state.patch + " GB yama + " + state.dlc + " GB DLC + " + r.headroom + " GB pay.";
+    if (label) label.textContent = fmt1(r.total) + " GB boş bırakın · Özet";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = r.total + " GB önerilen boş alan";
+    if (verdictEl) verdictEl.textContent = fmt1(r.total) + " GB önerilen boş alan";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
   var out = $("[data-output-panel]");
   if (out) {
-    var pct = function (v) { return Math.max(0, Math.min(100, (v / r.total) * 100)); };
+    var pct = function (v) { return Math.round(Math.max(0, Math.min(100, (v / r.total) * 100)) * 10) / 10; };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' GTA 6 sonrası diğer oyunlar için <strong>' + Math.max(0, meta.usableGB - r.total) + ' GB</strong> kalıyor.</p>';
+      '<p class="verdict-desc">' + meta.note + ' GTA 6 sonrası diğer oyunlar için <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' GB</strong> kalıyor.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Önerilen boş alan</p>' +
-      '<h3 class="verdict-title">' + r.total + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + r.subtotal + ' GB içerik + gelecek yamalar için ' + r.headroom + ' GB güvenli pay.</p>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' GB içerik + gelecek yamalar için ' + r.headroom + ' GB güvenli pay.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Dağılım: Temel kurulum ' + state.base + ' GB, İlk gün yaması ' + state.patch + ' GB, DLC ve sezonluk içerik ' + state.dlc + ' GB, Güncelleme payı ' + r.headroom + ' GB">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -132,8 +136,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 yaklaşık " + r.total + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 yaklaşık " + r.total + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -143,24 +147,24 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Sürücüye bağlı" : (row.usable - r.total) + " GB boş alan";
+      var after = row.usable === 0 ? "Sürücüye bağlı" : fmt1(row.usable - r.total) + " GB boş alan";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "Mevcut " + r.total + " GB planınızla GTA 6'nın diğer oyunlara ne kadar yer bıraktığı.";
+  if (tableNote) tableNote.textContent = "Mevcut " + fmt1(r.total) + " GB planınızla GTA 6'nın diğer oyunlara ne kadar yer bıraktığı.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Önerilen boş alan " + r.total + " gigabayt: " + state.base + " gigabayt kurulum, " + state.patch + " gigabayt yama, " + state.dlc + " gigabayt DLC, " + r.headroom + " gigabayt pay.";
+  if (live) live.textContent = "Önerilen boş alan " + fmt1(r.total) + " gigabayt: " + state.base + " gigabayt kurulum, " + state.patch + " gigabayt yama, " + state.dlc + " gigabayt DLC, " + r.headroom + " gigabayt pay.";
   syncUrl();
 }
 
 function shareText() {
   var r = compute();
-  return "GTA 6 yaklaşık " + r.total + " GB boş alan istiyor: " + state.base + " GB kurulum + " + state.patch + " GB yama + " + state.dlc + " GB DLC + " + r.headroom + " GB pay. Alanınızı planlayın: " + shareUrl();
+  return "GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan istiyor: " + state.base + " GB kurulum + " + state.patch + " GB yama + " + state.dlc + " GB DLC + " + r.headroom + " GB pay. Alanınızı planlayın: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

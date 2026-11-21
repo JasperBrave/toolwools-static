@@ -55,6 +55,10 @@ function compute() {
   var headroom = Math.round(subtotal * (state.buffer / 100));
   return { subtotal: subtotal, headroom: headroom, total: subtotal + headroom };
 }
+// Display convention: 1 decimal. Binary floating point makes e.g.
+// 364 - 293.8 print as 70.1999... instead of 70.2, so every computed GB
+// value is rounded to 1 decimal at the point it is rendered.
+function fmt1(v) { return String(Math.round(v * 10) / 10); }
 function shareUrl() {
   var p = new URLSearchParams({ base: String(state.base), patch: String(state.patch), dlc: String(state.dlc), buffer: String(state.buffer), platform: state.platform });
   return window.location.origin + window.location.pathname + "?" + p.toString();
@@ -100,23 +104,23 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "Gardez " + r.total + " Go libres pour GTA 6 sur " + meta.label + " : " + state.base + " Go d'installation + " + state.patch + " Go de correctif + " + state.dlc + " Go de DLC + " + r.headroom + " Go de marge.";
-    if (label) label.textContent = "Gardez " + r.total + " Go libres · En bref";
+    var tldrText = "Gardez " + fmt1(r.total) + " Go libres pour GTA 6 sur " + meta.label + " : " + state.base + " Go d'installation + " + state.patch + " Go de correctif + " + state.dlc + " Go de DLC + " + r.headroom + " Go de marge.";
+    if (label) label.textContent = "Gardez " + fmt1(r.total) + " Go libres · En bref";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = r.total + " Go d'espace libre recommandé";
+    if (verdictEl) verdictEl.textContent = fmt1(r.total) + " Go d'espace libre recommandé";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
   var out = $("[data-output-panel]");
   if (out) {
-    var pct = function (v) { return Math.max(0, Math.min(100, (v / r.total) * 100)); };
+    var pct = function (v) { return Math.round(Math.max(0, Math.min(100, (v / r.total) * 100)) * 10) / 10; };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' Cela vous laisse <strong>' + Math.max(0, meta.usableGB - r.total) + ' Go</strong> pour les autres jeux après GTA 6.</p>';
+      '<p class="verdict-desc">' + meta.note + ' Cela vous laisse <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' Go</strong> pour les autres jeux après GTA 6.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Espace libre recommandé</p>' +
-      '<h3 class="verdict-title">' + r.total + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + r.subtotal + ' Go de contenu + ' + r.headroom + ' Go de tampon de sécurité pour les futurs correctifs.</p>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' Go de contenu + ' + r.headroom + ' Go de tampon de sécurité pour les futurs correctifs.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Composition : installation de base ' + state.base + ' Go, correctif du premier jour ' + state.patch + ' Go, DLC et contenu saisonnier ' + state.dlc + ' Go, marge de mise à jour ' + r.headroom + ' Go">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -132,8 +136,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 a besoin d'environ " + r.total + " Go libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 a besoin d'environ " + r.total + " Go libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 a besoin d'environ " + fmt1(r.total) + " Go libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 a besoin d'environ " + fmt1(r.total) + " Go libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -143,24 +147,24 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Dépend du disque" : (row.usable - r.total) + " Go libres";
+      var after = row.usable === 0 ? "Dépend du disque" : fmt1(row.usable - r.total) + " Go libres";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "Combien de place GTA 6 vous laisse pour les autres jeux, avec votre plan actuel de " + r.total + " Go.";
+  if (tableNote) tableNote.textContent = "Combien de place GTA 6 vous laisse pour les autres jeux, avec votre plan actuel de " + fmt1(r.total) + " Go.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Espace libre recommandé " + r.total + " gigaoctets : " + state.base + " gigaoctet d'installation, " + state.patch + " gigaoctet de correctif, " + state.dlc + " gigaoctets de DLC, " + r.headroom + " gigaoctets de marge.";
+  if (live) live.textContent = "Espace libre recommandé " + fmt1(r.total) + " gigaoctets : " + state.base + " gigaoctet d'installation, " + state.patch + " gigaoctet de correctif, " + state.dlc + " gigaoctets de DLC, " + r.headroom + " gigaoctets de marge.";
   syncUrl();
 }
 
 function shareText() {
   var r = compute();
-  return "GTA 6 a besoin d'environ " + r.total + " Go libres : " + state.base + " Go d'installation + " + state.patch + " Go de correctif + " + state.dlc + " Go de DLC + " + r.headroom + " Go de marge. Planifiez votre espace : " + shareUrl();
+  return "GTA 6 a besoin d'environ " + fmt1(r.total) + " Go libres : " + state.base + " Go d'installation + " + state.patch + " Go de correctif + " + state.dlc + " Go de DLC + " + r.headroom + " Go de marge. Planifiez votre espace : " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

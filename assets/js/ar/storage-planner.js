@@ -55,6 +55,10 @@ function compute() {
   var headroom = Math.round(subtotal * (state.buffer / 100));
   return { subtotal: subtotal, headroom: headroom, total: subtotal + headroom };
 }
+// Display convention: 1 decimal. Binary floating point makes e.g.
+// 364 - 293.8 print as 70.1999... instead of 70.2, so every computed GB
+// value is rounded to 1 decimal at the point it is rendered.
+function fmt1(v) { return String(Math.round(v * 10) / 10); }
 function shareUrl() {
   var p = new URLSearchParams({ base: String(state.base), patch: String(state.patch), dlc: String(state.dlc), buffer: String(state.buffer), platform: state.platform });
   return window.location.origin + window.location.pathname + "?" + p.toString();
@@ -100,23 +104,23 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "احتفظ بـ " + r.total + " غيغابايت فارغة لـ GTA 6 على " + meta.label + ": " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش.";
-    if (label) label.textContent = "احتفظ بـ " + r.total + " غيغابايت فارغة · ملخّص";
+    var tldrText = "احتفظ بـ " + fmt1(r.total) + " غيغابايت فارغة لـ GTA 6 على " + meta.label + ": " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش.";
+    if (label) label.textContent = "احتفظ بـ " + fmt1(r.total) + " غيغابايت فارغة · ملخّص";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = r.total + " غيغابايت مساحة حرة موصى بها";
+    if (verdictEl) verdictEl.textContent = fmt1(r.total) + " غيغابايت مساحة حرة موصى بها";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
   var out = $("[data-output-panel]");
   if (out) {
-    var pct = function (v) { return Math.max(0, Math.min(100, (v / r.total) * 100)); };
+    var pct = function (v) { return Math.round(Math.max(0, Math.min(100, (v / r.total) * 100)) * 10) / 10; };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' هذا يترك لك <strong>' + Math.max(0, meta.usableGB - r.total) + ' GB</strong> لألعاب أخرى بعد GTA 6.</p>';
+      '<p class="verdict-desc">' + meta.note + ' هذا يترك لك <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' GB</strong> لألعاب أخرى بعد GTA 6.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">المساحة الحرة الموصى بها</p>' +
-      '<h3 class="verdict-title">' + r.total + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + r.subtotal + ' غيغابايت من المحتوى + ' + r.headroom + ' غيغابايت هامش آمن للتصحيحات المستقبلية.</p>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<p class="verdict-desc">' + fmt1(r.subtotal) + ' غيغابايت من المحتوى + ' + r.headroom + ' غيغابايت هامش آمن للتصحيحات المستقبلية.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="التكوين: التثبيت الأساسي ' + state.base + ' غيغابايت، تصحيح اليوم الأول ' + state.patch + ' غيغابايت، المحتوى الإضافي والموسمي ' + state.dlc + ' غيغابايت، هامش التحديث ' + r.headroom + ' غيغابايت">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -132,8 +136,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + r.total + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + r.total + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -143,24 +147,24 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "يعتمد على القرص" : (row.usable - r.total) + " غيغابايت فارغة";
+      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(row.usable - r.total) + " غيغابايت فارغة";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "كم المساحة التي تتركها GTA 6 لألعابك الأخرى، مع خطتك الحالية البالغة " + r.total + " غيغابايت.";
+  if (tableNote) tableNote.textContent = "كم المساحة التي تتركها GTA 6 لألعابك الأخرى، مع خطتك الحالية البالغة " + fmt1(r.total) + " غيغابايت.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "المساحة الحرة الموصى بها " + r.total + " غيغابايت: " + state.base + " غيغابايت تثبيت، و" + state.patch + " غيغابايت تصحيح، و" + state.dlc + " غيغابايت محتوى إضافي، و" + r.headroom + " غيغابايت هامش.";
+  if (live) live.textContent = "المساحة الحرة الموصى بها " + fmt1(r.total) + " غيغابايت: " + state.base + " غيغابايت تثبيت، و" + state.patch + " غيغابايت تصحيح، و" + state.dlc + " غيغابايت محتوى إضافي، و" + r.headroom + " غيغابايت هامش.";
   syncUrl();
 }
 
 function shareText() {
   var r = compute();
-  return "تحتاج GTA 6 إلى نحو " + r.total + " غيغابايت فارغة: " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش. خطط لمساحتك: " + shareUrl();
+  return "تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة: " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش. خطط لمساحتك: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {
