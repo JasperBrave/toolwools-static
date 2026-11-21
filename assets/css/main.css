@@ -2107,6 +2107,14 @@ p code, li code, td code { overflow-wrap: anywhere; }
 [dir="rtl"] .guide-card .icon-arrow { margin-left: 0; margin-right: auto; transform: scaleX(-1); }
 [dir="rtl"] .hero-ctas .btn-ultra > svg, [dir="rtl"] .advanced-panel-cta svg, [dir="rtl"] .section-head-action svg, [dir="rtl"] .link-cta svg { transform: scaleX(-1); }
 
+/* Iteration 6 (Worker B): breadcrumb chevron points left in RTL.
+   The separator is an inline SVG chevron (path "m9 18 6-6-6-6", right-pointing)
+   emitted by breadcrumbs_html(); flip it under dir="rtl" so the AR trail reads
+   "الرئيسية ‹ المولّدات" in RTL order. Covers all 24 AR pages using
+   <nav class="breadcrumbs">. The 16 AR tool pages using <div class="page-breadcrumbs">
+   use a "/" text separator, which is direction-neutral and needs no change. */
+[dir="rtl"] .breadcrumbs svg { transform: scaleX(-1); }
+
 /* F18 (P2): hero-badges is a 4-item meta row; at 375px flex-wrap left the
    4th item orphaned on its own row (EN FPS: 3+1). Two-column grid ≤480px
    gives a clean 2×2 on every page (all 70 instances have exactly 4 items). */

@@ -1,8 +1,8 @@
 // generators.js — GTA 6 name generators page logic.
 // Five styles, each with the limits the game and the platforms enforce:
 // character names (first + surname), crew names (<=30 chars) + 4-char tag,
-// license plates (exactly 8 alphanumeric), radio callsigns (W/K + 3-4
-// letters), gamertags (12-16 chars). Names are proper nouns and are shared
+// license plates (exactly 8 alphanumeric), radio callsigns (W/K + 3 letters
+// = 4 total), gamertags (12-16 chars). Names are proper nouns and are shared
 // unchanged across locales; only the UI strings in STR are translated.
 // State lives in the URL (?style=&name=) for sharing; favorites persist in
 // localStorage under tw-gen-favorites. Plain ES5, no dependencies.
@@ -71,11 +71,14 @@
     "ONIX", "REY", "SOL"
   ];
   var CALL_BODIES = [
-    "VICE", "WAVE", "NEON", "HEAT", "BAY", "SUN", "PALM", "COOL", "JAZZ",
-    "ROCK", "BASS", "FUNK", "DISC", "LATN", "SALS", "CUMB", "MAMB",
-    "RUMB", "GULF", "KEYS", "REEF", "SURF", "TIDE", "DUSK", "DAWN",
-    "NOVA", "ONYX", "AZUL", "ROJO", "CALE", "PLAY", "STAR", "MOON",
-    "LUNA", "SOL", "MAR", "RIO", "ORO", "REY"
+    // 3 letters only: W/K + body is always exactly 4 letters, matching the
+    // "3-4 letters" rule on the generators page (real broadcast callsigns
+    // are 4 letters). 39 bodies x 2 prefixes = 78 distinct callsigns.
+    "BAY", "SUN", "SOL", "MAR", "RIO", "ORO", "REY", "GTA", "VIC",
+    "LEO", "MIA", "SKY", "SEA", "FOX", "JET", "ICE", "RED", "GEM",
+    "TOP", "POP", "RAP", "RUM", "KEY", "ACE", "GOL", "KIN", "WAV",
+    "NEO", "PAL", "JAZ", "ROC", "FUN", "LAT", "SAL", "GUL", "SUR",
+    "TID", "DUS", "DAW"
   ];
   var TAG_A = [
     "Neon", "Vice", "Shadow", "Silent", "Savage", "Golden", "Crimson",
