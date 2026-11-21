@@ -50,6 +50,36 @@ var bufferRange = $("[data-buffer-range]");
 var bufferValue = $("[data-buffer-value]");
 var platformButtons = $all("[data-platform-button]");
 
+// Iter 10: live-text templates, captured once from the server-rendered
+// defaults before render() rewrites anything. fmtLike swaps only the
+// first number in a template, so each locale keeps its own wording,
+// spacing, unit and % placement while the value follows the sliders.
+function fmtLike(template, value) {
+  if (!template) return null;
+  if (!/[\d]/.test(template)) return null;
+  return template.replace(/[\d]+(?:\.[\d]+)?/, String(value));
+}
+function captureText(sel) {
+  var el = $(sel);
+  return el ? el.textContent : null;
+}
+function captureAttr(sel, attr) {
+  var el = $(sel);
+  return el ? el.getAttribute(attr) : null;
+}
+function setSliderText(range, labelTemplate, value, valueEl) {
+  if (!range) return;
+  var name = fmtLike(labelTemplate, value);
+  if (name) range.setAttribute("aria-label", name);
+  if (valueEl) range.setAttribute("aria-valuetext", valueEl.textContent);
+}
+var freeSpaceTotalTemplate = captureText("[data-free-space-total]");
+var bufferPctTemplate = captureText("[data-buffer-pct]");
+var baseLabelTemplate = captureAttr("[data-base-range]", "aria-label");
+var patchLabelTemplate = captureAttr("[data-patch-range]", "aria-label");
+var dlcLabelTemplate = captureAttr("[data-dlc-range]", "aria-label");
+var bufferLabelTemplate = captureAttr("[data-buffer-range]", "aria-label");
+
 function compute() {
   var subtotal = state.base + state.patch + state.dlc;
   var headroom = Math.round(subtotal * (state.buffer / 100));
@@ -93,11 +123,19 @@ function render() {
   if (baseValue) baseValue.textContent = state.base + " GB";
   if (patchRange) patchRange.value = String(state.patch);
   if (patchValue) patchValue.textContent = state.patch + " GB";
-  if (patchRange) patchRange.setAttribute("aria-valuetext", fmt1(state.patch) + " GB");
   if (dlcRange) dlcRange.value = String(state.dlc);
   if (dlcValue) dlcValue.textContent = state.dlc + " GB";
   if (bufferRange) bufferRange.value = String(state.buffer);
   if (bufferValue) bufferValue.textContent = state.buffer + "%";
+  // Iter 10: slider accessible names and value text follow the live value.
+  // Chrome ignores aria-valuetext on native range inputs, so the name
+  // (aria-label) is the effective fix; aria-valuetext is set as well for
+  // assistive tech that honours it. The value text reuses the visible
+  // label span, so it already carries the locale unit.
+  setSliderText(baseRange, baseLabelTemplate, state.base, baseValue);
+  setSliderText(patchRange, patchLabelTemplate, fmt1(state.patch), patchValue);
+  setSliderText(dlcRange, dlcLabelTemplate, state.dlc, dlcValue);
+  setSliderText(bufferRange, bufferLabelTemplate, state.buffer, bufferValue);
   platformButtons.forEach(function (b) {
     b.setAttribute("aria-pressed", String(b.dataset.platformButton === state.platform));
   });
@@ -158,6 +196,11 @@ function render() {
   }
   var tableNote = $("[data-platform-note]");
   if (tableNote) tableNote.textContent = "How much room GTA 6 leaves you for other games — with your current " + fmt1(r.total) + " GB plan.";
+  // Iter 10: free-space subtitle and buffer helper follow the live total / %.
+  var dekTotal = $("[data-free-space-total]");
+  if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }
+  var bufPct = $("[data-buffer-pct]");
+  if (bufPct) { var bufText = fmtLike(bufferPctTemplate, state.buffer); if (bufText) bufPct.textContent = bufText; }
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();

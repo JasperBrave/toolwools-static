@@ -50,6 +50,36 @@ var bufferRange = $("[data-buffer-range]");
 var bufferValue = $("[data-buffer-value]");
 var platformButtons = $all("[data-platform-button]");
 
+// Iter 10: live-text templates, captured once from the server-rendered
+// defaults before render() rewrites anything. fmtLike swaps only the
+// first number in a template, so each locale keeps its own wording,
+// spacing, unit and % placement while the value follows the sliders.
+function fmtLike(template, value) {
+  if (!template) return null;
+  if (!/[\d]/.test(template)) return null;
+  return template.replace(/[\d]+(?:\.[\d]+)?/, String(value));
+}
+function captureText(sel) {
+  var el = $(sel);
+  return el ? el.textContent : null;
+}
+function captureAttr(sel, attr) {
+  var el = $(sel);
+  return el ? el.getAttribute(attr) : null;
+}
+function setSliderText(range, labelTemplate, value, valueEl) {
+  if (!range) return;
+  var name = fmtLike(labelTemplate, value);
+  if (name) range.setAttribute("aria-label", name);
+  if (valueEl) range.setAttribute("aria-valuetext", valueEl.textContent);
+}
+var freeSpaceTotalTemplate = captureText("[data-free-space-total]");
+var bufferPctTemplate = captureText("[data-buffer-pct]");
+var baseLabelTemplate = captureAttr("[data-base-range]", "aria-label");
+var patchLabelTemplate = captureAttr("[data-patch-range]", "aria-label");
+var dlcLabelTemplate = captureAttr("[data-dlc-range]", "aria-label");
+var bufferLabelTemplate = captureAttr("[data-buffer-range]", "aria-label");
+
 function compute() {
   var subtotal = state.base + state.patch + state.dlc;
   var headroom = Math.round(subtotal * (state.buffer / 100));
@@ -93,11 +123,19 @@ function render() {
   if (baseValue) baseValue.textContent = state.base + " غيغابايت";
   if (patchRange) patchRange.value = String(state.patch);
   if (patchValue) patchValue.textContent = state.patch + " غيغابايت";
-  if (patchRange) patchRange.setAttribute("aria-valuetext", fmt1(state.patch) + " غيغابايت");
   if (dlcRange) dlcRange.value = String(state.dlc);
   if (dlcValue) dlcValue.textContent = state.dlc + " غيغابايت";
   if (bufferRange) bufferRange.value = String(state.buffer);
   if (bufferValue) bufferValue.textContent = state.buffer + "%";
+  // Iter 10: slider accessible names and value text follow the live value.
+  // Chrome ignores aria-valuetext on native range inputs, so the name
+  // (aria-label) is the effective fix; aria-valuetext is set as well for
+  // assistive tech that honours it. The value text reuses the visible
+  // label span, so it already carries the locale unit.
+  setSliderText(baseRange, baseLabelTemplate, state.base, baseValue);
+  setSliderText(patchRange, patchLabelTemplate, fmt1(state.patch), patchValue);
+  setSliderText(dlcRange, dlcLabelTemplate, state.dlc, dlcValue);
+  setSliderText(bufferRange, bufferLabelTemplate, state.buffer, bufferValue);
   platformButtons.forEach(function (b) {
     b.setAttribute("aria-pressed", String(b.dataset.platformButton === state.platform));
   });
@@ -109,8 +147,8 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "احتفظ بـ " + fmt1(r.total) + " غيغابايت فارغة لـ GTA 6 على " + meta.label + ": " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش.";
-    if (label) label.textContent = "احتفظ بـ " + fmt1(r.total) + " غيغابايت فارغة · ملخّص";
+    var tldrText = "احتفظ بـ " + fmt1(r.total) + " غيغابايت حرة لـ GTA 6 على " + meta.label + ": " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش.";
+    if (label) label.textContent = "احتفظ بـ " + fmt1(r.total) + " غيغابايت حرة · ملخّص";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = fmt1(r.total) + " غيغابايت مساحة حرة موصى بها";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
@@ -141,8 +179,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت حرة") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت حرة") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -152,12 +190,17 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(Math.max(0, row.usable - r.total)) + " غيغابايت فارغة";
+      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(Math.max(0, row.usable - r.total)) + " غيغابايت حرة";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
   if (tableNote) tableNote.textContent = "كم المساحة التي تتركها GTA 6 لألعابك الأخرى، مع خطتك الحالية البالغة " + fmt1(r.total) + " غيغابايت.";
+  // Iter 10: free-space subtitle and buffer helper follow the live total / %.
+  var dekTotal = $("[data-free-space-total]");
+  if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }
+  var bufPct = $("[data-buffer-pct]");
+  if (bufPct) { var bufText = fmtLike(bufferPctTemplate, state.buffer); if (bufText) bufPct.textContent = bufText; }
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
@@ -169,7 +212,7 @@ function render() {
 
 function shareText() {
   var r = compute();
-  return "تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت فارغة: " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش. خطط لمساحتك: " + shareUrl();
+  return "تحتاج GTA 6 إلى نحو " + fmt1(r.total) + " غيغابايت حرة: " + state.base + " غيغابايت تثبيت + " + state.patch + " غيغابايت تصحيح + " + state.dlc + " غيغابايت محتوى إضافي + " + r.headroom + " غيغابايت هامش. خطط لمساحتك: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {
