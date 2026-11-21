@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Tout suffit avec de la marge. Vous pouvez jouer avec les réglages maximum maintenant que GTA 6 est sorti.",
+    S: "Tout suffit avec de la marge. Vous pourriez jouer avec les réglages maximum quand GTA 6 arrivera sur PC.",
     A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages.",
     B: "Prêt. Un sous-score est en retard, mais rien ne bloque un jeu fluide.",
     C: "Jouable, mais choisissez une échelle résolution/préréglage adaptée à votre maillon le plus faible.",

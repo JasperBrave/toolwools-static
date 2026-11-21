@@ -81,6 +81,10 @@ function iconFor(tone) {
 }
 
 function render() {
+  // The patch slider only expresses 0.1 GB steps: normalise state to that
+  // resolution so the slider value, label, total and announced value agree
+  // (a ?patch= URL can otherwise carry a long float into the slider).
+  state.patch = Math.round(state.patch * 10) / 10;
   var r = compute();
   var tone = toneOf(r.total);
   var meta = PLATFORMS[state.platform];
@@ -89,6 +93,7 @@ function render() {
   if (baseValue) baseValue.textContent = state.base + " GB";
   if (patchRange) patchRange.value = String(state.patch);
   if (patchValue) patchValue.textContent = state.patch + " GB";
+  if (patchRange) patchRange.setAttribute("aria-valuetext", fmt1(state.patch) + " GB");
   if (dlcRange) dlcRange.value = String(state.dlc);
   if (dlcValue) dlcValue.textContent = state.dlc + " GB";
   if (bufferRange) bufferRange.value = String(state.buffer);
@@ -147,7 +152,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Depende do drive" : fmt1(row.usable - r.total) + " GB free";
+      var after = row.usable === 0 ? "Depende do drive" : fmt1(Math.max(0, row.usable - r.total)) + " GB free";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
@@ -197,7 +202,7 @@ function copyText(text, btn, labelSel) {
 }
 
 if (baseRange) baseRange.addEventListener("input", function () { state.base = Number(baseRange.value); render(); });
-if (patchRange) patchRange.addEventListener("input", function () { state.patch = Number(patchRange.value); render(); });
+if (patchRange) patchRange.addEventListener("input", function () { state.patch = Math.round(Number(patchRange.value) * 10) / 10; render(); });
 if (dlcRange) dlcRange.addEventListener("input", function () { state.dlc = Number(dlcRange.value); render(); });
 if (bufferRange) bufferRange.addEventListener("input", function () { state.buffer = Number(bufferRange.value); render(); });
 platformButtons.forEach(function (b) { b.addEventListener("click", function () { state.platform = b.dataset.platformButton; render(); }); });

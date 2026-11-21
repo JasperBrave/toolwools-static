@@ -116,7 +116,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Everything clears with headroom. You can run max settings now that GTA 6 is out.",
+    S: "Everything clears with headroom. You could run max settings once GTA 6 reaches PC.",
     A: "Ready today — you will only tweak one or two settings.",
     B: "Ready. One sub-score is behind but nothing blocks smooth play.",
     C: "Playable, but pick a resolution / preset ladder that matches your weakest link.",

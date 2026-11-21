@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Alles reicht mit Reserve. Du kannst jetzt mit Max-Einstellungen spielen.",
+    S: "Alles reicht mit Reserve. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint.",
     A: "Heute bereit, du wirst nur ein oder zwei Einstellungen tweaken.",
     B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert geschmeidiges Spielen.",
     C: "Spielbar, aber wähle eine Auflösungs-/Preset-Leiter, die zu deinem schwächsten Glied passt.",

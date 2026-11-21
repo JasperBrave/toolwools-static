@@ -12,10 +12,10 @@ var PLATFORMS = {
 };
 var PLATFORM_ROWS = [
   { p: "PC", drive: "قرص NVMe / SATA SSD الخاص بك", reserve: "—", usable: 0 },
-  { p: "PS5 (825 GB)", drive: "قرص SSD مخصص من Sony", reserve: "158 غيغابايت للنظام", usable: 667 },
-  { p: "PS5 Slim (1 TB)", drive: "قرص SSD مخصص من Sony", reserve: "158 غيغابايت للنظام", usable: 842 },
-  { p: "Xbox Series X (1 TB)", drive: "بطاقة توسعة NVMe", reserve: "198 غيغابايت للنظام", usable: 802 },
-  { p: "Xbox Series S (512 GB)", drive: "بطاقة توسعة NVMe", reserve: "148 غيغابايت للنظام", usable: 364 },
+  { p: "PS5 (825 غيغابايت)", drive: "قرص SSD مخصص من Sony", reserve: "158 غيغابايت للنظام", usable: 667 },
+  { p: "PS5 Slim (1 تيرابايت)", drive: "قرص SSD مخصص من Sony", reserve: "158 غيغابايت للنظام", usable: 842 },
+  { p: "Xbox Series X (1 تيرابايت)", drive: "بطاقة توسعة NVMe", reserve: "198 غيغابايت للنظام", usable: 802 },
+  { p: "Xbox Series S (512 غيغابايت)", drive: "بطاقة توسعة NVMe", reserve: "148 غيغابايت للنظام", usable: 364 },
 ];
 
 function $(sel, root) { return (root || document).querySelector(sel); }
@@ -81,16 +81,21 @@ function iconFor(tone) {
 }
 
 function render() {
+  // The patch slider only expresses 0.1 GB steps: normalise state to that
+  // resolution so the slider value, label, total and announced value agree
+  // (a ?patch= URL can otherwise carry a long float into the slider).
+  state.patch = Math.round(state.patch * 10) / 10;
   var r = compute();
   var tone = toneOf(r.total);
   var meta = PLATFORMS[state.platform];
 
   if (baseRange) baseRange.value = String(state.base);
-  if (baseValue) baseValue.textContent = state.base + " GB";
+  if (baseValue) baseValue.textContent = state.base + " غيغابايت";
   if (patchRange) patchRange.value = String(state.patch);
-  if (patchValue) patchValue.textContent = state.patch + " GB";
+  if (patchValue) patchValue.textContent = state.patch + " غيغابايت";
+  if (patchRange) patchRange.setAttribute("aria-valuetext", fmt1(state.patch) + " غيغابايت");
   if (dlcRange) dlcRange.value = String(state.dlc);
-  if (dlcValue) dlcValue.textContent = state.dlc + " GB";
+  if (dlcValue) dlcValue.textContent = state.dlc + " غيغابايت";
   if (bufferRange) bufferRange.value = String(state.buffer);
   if (bufferValue) bufferValue.textContent = state.buffer + "%";
   platformButtons.forEach(function (b) {
@@ -115,11 +120,11 @@ function render() {
   if (out) {
     var pct = function (v) { return Math.round(Math.max(0, Math.min(100, (v / r.total) * 100)) * 10) / 10; };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' هذا يترك لك <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' GB</strong> لألعاب أخرى بعد GTA 6.</p>';
+      '<p class="verdict-desc">' + meta.note + ' هذا يترك لك <strong>' + fmt1(Math.max(0, meta.usableGB - r.total)) + ' غيغابايت</strong> لألعاب أخرى بعد GTA 6.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">المساحة الحرة الموصى بها</p>' +
-      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> غيغابايت</span></h3>' +
       '<p class="verdict-desc">' + fmt1(r.subtotal) + ' غيغابايت من المحتوى + ' + r.headroom + ' غيغابايت هامش آمن للتصحيحات المستقبلية.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="التكوين: التثبيت الأساسي ' + state.base + ' غيغابايت، تصحيح اليوم الأول ' + state.patch + ' غيغابايت، المحتوى الإضافي والموسمي ' + state.dlc + ' غيغابايت، هامش التحديث ' + r.headroom + ' غيغابايت">' +
@@ -129,10 +134,10 @@ function render() {
       '<span class="seg-muted" style="width:' + pct(r.headroom) + '%"></span>' +
       '</div></div>' +
       '<dl class="stat-grid">' +
-      '<div><dt>التثبيت الأساسي</dt><dd>' + state.base + ' GB</dd></div>' +
-      '<div><dt>تصحيح اليوم الأول</dt><dd>' + state.patch + ' GB</dd></div>' +
-      '<div><dt>المحتوى الإضافي والموسمي</dt><dd>' + state.dlc + ' GB</dd></div>' +
-      '<div><dt>هامش التحديث</dt><dd>' + r.headroom + ' GB</dd></div>' +
+      '<div><dt>التثبيت الأساسي</dt><dd>' + state.base + ' غيغابايت</dd></div>' +
+      '<div><dt>تصحيح اليوم الأول</dt><dd>' + state.patch + ' غيغابايت</dd></div>' +
+      '<div><dt>المحتوى الإضافي والموسمي</dt><dd>' + state.dlc + ' غيغابايت</dd></div>' +
+      '<div><dt>هامش التحديث</dt><dd>' + r.headroom + ' غيغابايت</dd></div>' +
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
@@ -147,7 +152,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(row.usable - r.total) + " غيغابايت فارغة";
+      var after = row.usable === 0 ? "يعتمد على القرص" : fmt1(Math.max(0, row.usable - r.total)) + " غيغابايت فارغة";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
@@ -197,7 +202,7 @@ function copyText(text, btn, labelSel) {
 }
 
 if (baseRange) baseRange.addEventListener("input", function () { state.base = Number(baseRange.value); render(); });
-if (patchRange) patchRange.addEventListener("input", function () { state.patch = Number(patchRange.value); render(); });
+if (patchRange) patchRange.addEventListener("input", function () { state.patch = Math.round(Number(patchRange.value) * 10) / 10; render(); });
 if (dlcRange) dlcRange.addEventListener("input", function () { state.dlc = Number(dlcRange.value); render(); });
 if (bufferRange) bufferRange.addEventListener("input", function () { state.buffer = Number(bufferRange.value); render(); });
 platformButtons.forEach(function (b) { b.addEventListener("click", function () { state.platform = b.dataset.platformButton; render(); }); });

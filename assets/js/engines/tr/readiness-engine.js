@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Her şey fazlasıyla geçiyor. GTA 6 çıktığına göre maksimum ayarlarda oynayabilirsin.",
+    S: "Her şey fazlasıyla geçiyor. GTA 6 PC'ye geldiğinde maksimum ayarlarda oynayabilirsin.",
     A: "Bugün hazır, sadece bir iki ayar yapacaksın.",
     B: "Hazır. Bir alt puan geride ama akıcı bir oyunu engelleyen bir şey yok.",
     C: "Oynanabilir ama en zayıf halkana uyan bir çözünürlük / hazır ayar merdiveni seç.",

@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Todo supera con margen. Puedes jugar con ajustes al máximo ahora que GTA 6 ya salió.",
+    S: "Todo supera con margen. Podrías jugar con ajustes al máximo cuando GTA 6 llegue a PC.",
     A: "Listo hoy, solo ajustarás uno o dos ajustes.",
     B: "Listo. Un subpuntaje va por detrás, pero nada bloquea un juego fluido.",
     C: "Jugable, pero elige una escala de resolución / preset que se ajuste a tu eslabón más débil.",

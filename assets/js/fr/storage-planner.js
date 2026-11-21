@@ -81,16 +81,21 @@ function iconFor(tone) {
 }
 
 function render() {
+  // The patch slider only expresses 0.1 GB steps: normalise state to that
+  // resolution so the slider value, label, total and announced value agree
+  // (a ?patch= URL can otherwise carry a long float into the slider).
+  state.patch = Math.round(state.patch * 10) / 10;
   var r = compute();
   var tone = toneOf(r.total);
   var meta = PLATFORMS[state.platform];
 
   if (baseRange) baseRange.value = String(state.base);
-  if (baseValue) baseValue.textContent = state.base + " GB";
+  if (baseValue) baseValue.textContent = state.base + " Go";
   if (patchRange) patchRange.value = String(state.patch);
-  if (patchValue) patchValue.textContent = state.patch + " GB";
+  if (patchValue) patchValue.textContent = state.patch + " Go";
+  if (patchRange) patchRange.setAttribute("aria-valuetext", fmt1(state.patch) + " Go");
   if (dlcRange) dlcRange.value = String(state.dlc);
-  if (dlcValue) dlcValue.textContent = state.dlc + " GB";
+  if (dlcValue) dlcValue.textContent = state.dlc + " Go";
   if (bufferRange) bufferRange.value = String(state.buffer);
   if (bufferValue) bufferValue.textContent = state.buffer + "%";
   platformButtons.forEach(function (b) {
@@ -119,7 +124,7 @@ function render() {
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Espace libre recommandé</p>' +
-      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> GB</span></h3>' +
+      '<h3 class="verdict-title">' + fmt1(r.total) + '<span class="unit"> Go</span></h3>' +
       '<p class="verdict-desc">' + fmt1(r.subtotal) + ' Go de contenu + ' + r.headroom + ' Go de tampon de sécurité pour les futurs correctifs.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Composition : installation de base ' + state.base + ' Go, correctif du premier jour ' + state.patch + ' Go, DLC et contenu saisonnier ' + state.dlc + ' Go, marge de mise à jour ' + r.headroom + ' Go">' +
@@ -129,10 +134,10 @@ function render() {
       '<span class="seg-muted" style="width:' + pct(r.headroom) + '%"></span>' +
       '</div></div>' +
       '<dl class="stat-grid">' +
-      '<div><dt>Installation de base</dt><dd>' + state.base + ' GB</dd></div>' +
-      '<div><dt>Correctif du premier jour</dt><dd>' + state.patch + ' GB</dd></div>' +
-      '<div><dt>DLC + saisonnier</dt><dd>' + state.dlc + ' GB</dd></div>' +
-      '<div><dt>Marge de mise à jour</dt><dd>' + r.headroom + ' GB</dd></div>' +
+      '<div><dt>Installation de base</dt><dd>' + state.base + ' Go</dd></div>' +
+      '<div><dt>Correctif du premier jour</dt><dd>' + state.patch + ' Go</dd></div>' +
+      '<div><dt>DLC + saisonnier</dt><dd>' + state.dlc + ' Go</dd></div>' +
+      '<div><dt>Marge de mise à jour</dt><dd>' + r.headroom + ' Go</dd></div>' +
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
@@ -147,7 +152,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Dépend du disque" : fmt1(row.usable - r.total) + " Go libres";
+      var after = row.usable === 0 ? "Dépend du disque" : fmt1(Math.max(0, row.usable - r.total)) + " Go libres";
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }
@@ -158,7 +163,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Espace libre recommandé " + fmt1(r.total) + " gigaoctets : " + state.base + " gigaoctet d'installation, " + state.patch + " gigaoctet de correctif, " + state.dlc + " gigaoctets de DLC, " + r.headroom + " gigaoctets de marge.";
+  if (live) live.textContent = "Espace libre recommandé " + fmt1(r.total) + " gigaoctets : " + state.base + " gigaoctets d'installation, " + state.patch + " gigaoctets de correctif, " + state.dlc + " gigaoctets de DLC, " + r.headroom + " gigaoctets de marge.";
   syncUrl();
 }
 
@@ -197,7 +202,7 @@ function copyText(text, btn, labelSel) {
 }
 
 if (baseRange) baseRange.addEventListener("input", function () { state.base = Number(baseRange.value); render(); });
-if (patchRange) patchRange.addEventListener("input", function () { state.patch = Number(patchRange.value); render(); });
+if (patchRange) patchRange.addEventListener("input", function () { state.patch = Math.round(Number(patchRange.value) * 10) / 10; render(); });
 if (dlcRange) dlcRange.addEventListener("input", function () { state.dlc = Number(dlcRange.value); render(); });
 if (bufferRange) bufferRange.addEventListener("input", function () { state.buffer = Number(bufferRange.value); render(); });
 platformButtons.forEach(function (b) { b.addEventListener("click", function () { state.platform = b.dataset.platformButton; render(); }); });
