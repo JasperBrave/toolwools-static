@@ -120,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB a " + state.mbps + " Mbps (" + state.eff + "% de eficiencia, " + Math.round(r.effMbps) + " Mbps efectivos) termina en aproximadamente " + r.total.text + ". La ventana de precarga terminó: inicia la descarga ahora.";
+    var tldrText = r.totalGb + " GB a " + state.mbps + " Mbps (" + state.eff + "% de eficiencia, " + Math.round(r.effMbps) + " Mbps efectivos) termina en aproximadamente " + r.total.text + ". GTA 6 ya está disponible: descarga el juego completo hoy.";
     if (label) label.textContent = "Acerca de " + r.total.text + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " for " + r.totalGb + " GB";

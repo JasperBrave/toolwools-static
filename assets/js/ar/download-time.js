@@ -120,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت/ث (كفاءة " + state.eff + "%، " + Math.round(r.effMbps) + " ميغابت/ث فعّالة) تنتهي في نحو " + r.total.text + ". انتهت نافذة التحميل المسبق: ابدأ التنزيل الآن.";
+    var tldrText = r.totalGb + " غيغابايت بسرعة " + state.mbps + " ميغابت/ث (كفاءة " + state.eff + "%، " + Math.round(r.effMbps) + " ميغابت/ث فعّالة) تنتهي في نحو " + r.total.text + ". GTA 6 متوفرة الآن: نزّل اللعبة الكاملة اليوم.";
     if (label) label.textContent = "نحو " + r.total.text + " · ملخّص";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " مقابل " + r.totalGb + " غيغابايت";

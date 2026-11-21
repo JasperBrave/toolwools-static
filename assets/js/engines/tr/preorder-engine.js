@@ -165,8 +165,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `${platform.label} indirmesi çıkıştan önce`,
-      when: "Çıkıştan önce (platform normu)",
+      label: `${platform.label} ön yüklemesi, çıkıştan önce tamamlandı`,
+      when: `Çıkıştan yaklaşık ${platform.preloadLeadDays} gün önce hazırlandı (platform normu)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"

@@ -28,7 +28,7 @@ const SHARE_INPUT = document.querySelector("[data-share-link-input]");
 
 // Source data (ported verbatim from src/lib/map) contains em-dashes; the
 // static build carries no long dashes, so clean data text at render time.
-const clean = (v) => String(v).replace(/\u2014/g, ", ");
+const clean = (v) => String(v).replace(/\s*\u2014\s*/g, ", ");
 function announce(text) {
   if (LIVE) LIVE.textContent = text;
 }

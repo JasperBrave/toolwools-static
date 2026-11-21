@@ -165,8 +165,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `تنزيل ${platform.label} قبل الإصدار`,
-      when: "قبل الإصدار (معيار المنصة)",
+      label: `التحميل المسبق لـ ${platform.label}، اكتمل قبل الإصدار`,
+      when: `جُهّز قبل الإصدار بنحو ${platform.preloadLeadDays} أيام (معيار المنصة)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"

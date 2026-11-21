@@ -120,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB at " + state.mbps + " Mbps (" + state.eff + "% efficiency, " + Math.round(r.effMbps) + " Mbps effective) finishes in about " + r.total.text + ". The preload window is over — start the download now.";
+    var tldrText = r.totalGb + " GB at " + state.mbps + " Mbps (" + state.eff + "% efficiency, " + Math.round(r.effMbps) + " Mbps effective) finishes in about " + r.total.text + ". GTA 6 is out now — download the full game today.";
     if (label) label.textContent = "About " + r.total.text + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " for " + r.totalGb + " GB";

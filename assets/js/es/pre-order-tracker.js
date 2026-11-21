@@ -156,6 +156,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
+      html += '<p class="verdict-desc"><strong>Todos los hitos completados.</strong> Las reservas abrieron el 25 de junio de 2026, las precargas se prepararon en los días previos al lanzamiento — unas 48 horas antes en PlayStation 5, unos 10 días antes en Xbox — y GTA 6 se lanzó el 19 de noviembre de 2026. No queda nada que esperar: comprar ahora significa descargar el juego completo, hasta 212 GB más el parche del primer día, así que consulta primero la <a href="/es/tools/download-time">calculadora de tiempo de descarga</a>.</p>';
     }
     var shareText = "Mejor lugar para comprar GTA 6 en " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +

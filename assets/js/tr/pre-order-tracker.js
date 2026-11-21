@@ -155,6 +155,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
+      html += '<p class="verdict-desc"><strong>Tüm kilometre taşları tamamlandı.</strong> Ön siparişler 25 Haziran 2026\'da açıldı, ön yüklemeler çıkıştan önceki günlerde hazırlandı — PlayStation 5\'te yaklaşık 48 saat önce, Xbox\'ta yaklaşık 10 gün önce — ve GTA 6, 19 Kasım 2026\'da çıktı. Beklenecek bir şey kalmadı: şimdi satın almak, tam oyunu indirmek demek — 212 GB\'a kadar artı ilk gün yaması — bu yüzden önce <a href="/tr/tools/download-time">indirme süresi hesaplayıcısına</a> bakın.</p>';
     }
     var shareText = result.platform.label + " üzerinde GTA 6 satın almak için en iyi yer: " + result.best.channel.short;
     html += '<div class="share-row">' +

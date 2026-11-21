@@ -165,8 +165,8 @@ function timeline(platform, region) {
   return [
     {
       id: "preload",
-      label: `${platform.label}-Download vor dem Launch`,
-      when: "Vor dem Launch (Plattform-Norm)",
+      label: `${platform.label}-Pre-Load, vor dem Launch abgeschlossen`,
+      when: `Etwa ${platform.preloadLeadDays} Tage vor dem Launch bereitgestellt (Plattform-Norm)`,
       iso: null,
       detail: platform.preloadNote,
       confidence: "platform-norm"

@@ -28,7 +28,7 @@ const SHARE_INPUT = document.querySelector("[data-share-link-input]");
 
 // Source data (ported verbatim from src/lib/map) contains em-dashes; the
 // static build carries no long dashes, so clean data text at render time.
-const clean = (v) => String(v).replace(/\u2014/g, ", ");
+const clean = (v) => String(v).replace(/\s*\u2014\s*/g, ", ");
 function announce(text) {
   if (LIVE) LIVE.textContent = text;
 }
@@ -56,8 +56,8 @@ function compareMaps(baseId, targetId = "gta-6") {
   const ratioRange = [roundTo(tLo / bHi), roundTo(tHi / bLo)];
   const label =
     base.range || target.range
-      ? `roughly ${fmtRatio(ratioRange[0])}× to ${fmtRatio(ratioRange[1])}× the size of ${base.name}`
-      : `about ${ratio}× the size of ${base.name}`;
+      ? `aproximadamente ${fmtRatio(ratioRange[0])}× a ${fmtRatio(ratioRange[1])}× o tamanho de ${base.name}`
+      : `cerca de ${ratio}× o tamanho de ${base.name}`;
   return { base, target, ratio, ratioRange, label };
 }
 const scaleFraction = (e) => {
@@ -68,7 +68,7 @@ function sizeAnswer(baseId = "gta-v") {
   const gta6 = mapById("gta-6");
   const [lo, hi] = bandFor(gta6);
   const rr = compareMaps(baseId).ratioRange;
-  return `Rockstar has not published a size for the GTA 6 map. Baseado em the named regions and the state-scale setting, a reasonable estimate is ${lo}–${hi} km² of playable land, ${fmtRatio(rr[0])}× to ${fmtRatio(rr[1])}× GTA V.`;
+  return `A Rockstar não publicou um tamanho para o mapa do GTA 6. Com base nas regiões nomeadas e na escala do estado, uma estimativa razoável é de ${lo}–${hi} km² de terra jogável, de ${fmtRatio(rr[0])}× a ${fmtRatio(rr[1])}× GTA V.`;
 }
 
 // ---- district compare (ported from district-compare.ts) ----
@@ -93,7 +93,7 @@ function compareDistricts(aId, bId) {
   const top = biggest[0];
   let verdict;
   if (top.gap === 0) {
-    verdict = `${a.name} and ${b.name} score alike across every metric, pick between them on character rather than layout.`;
+    verdict = `${a.name} e ${b.name} pontuam igual em todas as métricas, escolha entre eles pelo caráter e não pelo layout.`;
   } else {
     const leader = top.winner === "a" ? a : b;
     const trailer = top.winner === "a" ? b : a;
@@ -103,7 +103,7 @@ function compareDistricts(aId, bId) {
       lp.traversal === tp.traversal
         ? "similarly"
         : `${lp.traversal} against ${tp.traversal}`;
-    verdict = `The clearest split is ${top.metric.label.toLowerCase()}: ${leader.name} leads ${trailer.name} by ${top.gap} points, and it moves ${move}.`;
+    verdict = `A diferença mais clara é ${top.metric.label.toLowerCase()}: ${leader.name} lidera ${trailer.name} por ${top.gap} pontos, e move ${move}.`;
   }
   return { a, b, pa, pb, rows, biggest, shared, verdict };
 }
@@ -177,15 +177,15 @@ function detailHtml(item) {
   const conf = CONFIDENCE_META[item.confidence];
   return `<p class="eyebrow-muted">${item.kind} · ${conf.label}</p>
       <h3 class="mt-1 text-2xl font-bold text-foreground">${item.name}</h3>
-      <p class="mt-1 text-sm text-muted-foreground">Modelado on ${item.inspiration}</p>
+      <p class="mt-1 text-sm text-muted-foreground">Modelado com base em ${item.inspiration}</p>
       <p class="mt-4 text-sm md:text-base leading-relaxed text-muted-foreground">${clean(item.summary)}</p>
       <dl class="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-foreground/10 bg-foreground/10 text-sm">
         <div class="bg-card p-3"><dt class="eyebrow-muted">Tipo de região</dt><dd class="mt-1 font-semibold capitalize text-foreground">${item.kind}</dd></div>
         <div class="bg-card p-3"><dt class="eyebrow-muted">Nível de evidência</dt><dd class="mt-1 flex items-center gap-1.5 font-semibold text-foreground"><span aria-hidden="true" class="inline-block size-2 rounded-full" style="background:${CONF_COLOR[item.confidence]}"></span>${conf.label}</dd></div>
       </dl>
       <dl class="mt-5 space-y-3 border-t border-foreground/10 pt-5 text-sm">
-        <div><dt class="font-semibold text-foreground">Evidence</dt><dd class="mt-1 text-muted-foreground">${clean(item.evidence)}</dd></div>
-        <div><dt class="font-semibold text-foreground">What ${conf.label.toLowerCase()} means</dt><dd class="mt-1 text-muted-foreground">${clean(conf.note)}</dd></div>
+        <div><dt class="font-semibold text-foreground">Evidência</dt><dd class="mt-1 text-muted-foreground">${clean(item.evidence)}</dd></div>
+        <div><dt class="font-semibold text-foreground">O que significa ${conf.label.toLowerCase()}</dt><dd class="mt-1 text-muted-foreground">${clean(conf.note)}</dd></div>
       </dl>`;
 }
 
@@ -261,7 +261,7 @@ function selectItem(view, id, opts = {}) {
   syncUrl();
   if (opts.announce) {
     announce(
-      `${item.name} selected. ${CONFIDENCE_META[item.confidence].label} ${item.kind}, modelled on ${item.inspiration}.`,
+      `${item.name} selecionado. ${CONFIDENCE_META[item.confidence].label} ${item.kind}, modelado com base em ${item.inspiration}.`,
     );
   }
 }
@@ -282,7 +282,7 @@ document.querySelectorAll("[data-map-tab]").forEach((tab) => {
     announce(
       state.view === "regions"
         ? "Regiões de Leonida view. Ten named regions."
-        : "Distritos de Vice City view. Twelve districts.",
+        : "Visualização de distritos de Vice City. Doze distritos.",
     );
   });
 });
@@ -343,7 +343,7 @@ function renderSize() {
   if (labelEl) labelEl.textContent = cmp.label;
   const [lo, hi] = bandFor(cmp.target);
   if (estEl) {
-    estEl.innerHTML = `Estimativa do GTA 6: <strong class="text-foreground">${lo}–${hi} km²</strong> of playable land. ${cmp.target.source}`;
+    estEl.innerHTML = `Estimativa do GTA 6: <strong class="text-foreground">${lo}–${hi} km²</strong> de terra jogável. ${cmp.target.source}`;
   }
 }
 if (BASE_SELECT) {
@@ -372,7 +372,7 @@ function renderCompare() {
     const d = side === "a" ? cmp.a : cmp.b;
     const p = side === "a" ? cmp.pa : cmp.pb;
     const model = card.querySelector("[data-vs-model]");
-    if (model) model.textContent = `Modelado on ${d.inspiration} · ${CONFIDENCE_META[d.confidence].label}`;
+    if (model) model.textContent = `Modelado com base em ${d.inspiration} · ${CONFIDENCE_META[d.confidence].label}`;
     const edge = card.querySelector("[data-vs-edge]");
     if (edge) edge.textContent = clean(p.edge);
     const trav = card.querySelector("[data-vs-traversal]");
@@ -392,7 +392,7 @@ function renderCompare() {
   if (verdict) verdict.textContent = cmp.verdict;
   const rowsEl = document.querySelector("[data-vs-rows]");
   if (rowsEl) {
-    rowsEl.setAttribute("aria-label", `Metric comparison between ${cmp.a.name} and ${cmp.b.name}`);
+    rowsEl.setAttribute("aria-label", `Comparação de métricas entre ${cmp.a.name} e ${cmp.b.name}`);
     rowsEl.innerHTML = cmp.rows
       .map((row) => {
         const mid =
@@ -414,7 +414,7 @@ function renderCompare() {
         ? cmp.shared
             .map((c) => `<li class="rounded-full border border-[var(--accent-purple)]/40 bg-[var(--accent-purple)]/10 px-2.5 py-1 text-xs font-medium text-foreground">${collName(c)}</li>`)
             .join("")
-        : `<p class="mt-2 text-sm text-muted-foreground">No overlap, these two districts are forecast to hold completely different collectible formats.</p>`;
+        : `<p class="mt-2 text-sm text-muted-foreground">Sem sobreposição, prevê-se que esses dois distritos tenham formatos de colecionáveis completamente diferentes.</p>`;
   }
   const biggestEl = document.querySelector("[data-vs-biggest]");
   if (biggestEl) {
@@ -432,7 +432,7 @@ document.querySelectorAll("[data-vs-select]").forEach((sel) => {
     renderCompare();
     syncUrl();
     announce(
-      `Comparing ${compareDistricts(state.vs, state.vsb).a.name} with ${compareDistricts(state.vs, state.vsb).b.name}.`,
+      `Comparando ${compareDistricts(state.vs, state.vsb).a.name} com ${compareDistricts(state.vs, state.vsb).b.name}.`,
     );
   });
 });
@@ -465,7 +465,7 @@ if (invalid.length > 0) {
   const notice = document.createElement("div");
   notice.className = "input-notice";
   notice.setAttribute("role", "alert");
-  notice.textContent = `We could not find ${invalid.map((n) => `"${n}"`).join(", ")} in the URL, so the map is showing its default view.`;
+  notice.textContent = `Não conseguimos encontrar ${invalid.map((n) => `"${n}"`).join(", ")} na URL, então o mapa está mostrando sua visualização padrão.`;
   const explorer = document.getElementById("explorer");
   if (explorer) explorer.insertBefore(notice, explorer.querySelector(".map-tabs"));
 }

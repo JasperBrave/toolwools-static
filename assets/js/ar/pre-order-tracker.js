@@ -155,6 +155,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
+      html += '<p class="verdict-desc"><strong>اكتملت جميع المعالم.</strong> فُتح الطلب المسبق في 25 يونيو 2026، وجُهّزت التحميلات المسبقة في الأيام السابقة للإطلاق — قبل نحو 48 ساعة على PlayStation 5، وقبل نحو 10 أيام على Xbox — وصدرت GTA 6 في 19 نوفمبر 2026. لم يبق شيء لانتظاره: الشراء الآن يعني تنزيل اللعبة الكاملة، ما يصل إلى 212 غيغابايت إضافة إلى تصحيح اليوم الأول، لذا تحقق أولا من <a href="/ar/tools/download-time">حاسبة وقت التنزيل</a>.</p>';
     }
     var shareText = "أفضل مكان لشراء GTA 6 على " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +

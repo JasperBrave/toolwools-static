@@ -120,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " Go à " + state.mbps + " Mbps (" + state.eff + " % d'efficacité, " + Math.round(r.effMbps) + " Mbps effectifs) se termine dans environ " + r.total.text + ". La fenêtre de préchargement est terminée : lancez le téléchargement maintenant.";
+    var tldrText = r.totalGb + " Go à " + state.mbps + " Mbps (" + state.eff + " % d'efficacité, " + Math.round(r.effMbps) + " Mbps effectifs) se termine dans environ " + r.total.text + ". GTA 6 est sorti : téléchargez le jeu complet dès maintenant.";
     if (label) label.textContent = "Environ " + r.total.text + " · En bref";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.total.text + " pour " + r.totalGb + " Go";

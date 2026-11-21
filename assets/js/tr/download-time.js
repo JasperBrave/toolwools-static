@@ -120,7 +120,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = r.totalGb + " GB, " + state.mbps + " Mbps hızında (%" + state.eff + " verimlilik, " + Math.round(r.effMbps) + " Mbps etkili) yaklaşık " + r.total.text + " içinde biter. Ön yükleme penceresi kapandı: indirmeyi şimdi başlatın.";
+    var tldrText = r.totalGb + " GB, " + state.mbps + " Mbps hızında (%" + state.eff + " verimlilik, " + Math.round(r.effMbps) + " Mbps etkili) yaklaşık " + r.total.text + " içinde biter. GTA 6 çıktı: tam oyunu bugün indirin.";
     if (label) label.textContent = "Yaklaşık " + r.total.text + " · Özet";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = r.totalGb + " GB için " + r.total.text;
