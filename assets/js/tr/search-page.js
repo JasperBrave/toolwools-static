@@ -1,4 +1,4 @@
-// /search: client-side search over the static index (22 tools, 2 guides,
+// /search: client-side search over the static index (23 tools, 2 guides,
 // 8 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
@@ -13,8 +13,12 @@
   var countsEl = document.querySelector("[data-search-counts]");
   if (!input || !resultsEl) return;
   var STOP = new Set(["gta", "6", "the", "a", "an", "and", "or", "of", "for", "to", "in", "on", "is", "how", "my", "with", "vs"]);
+  // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.
+  // Plain toLowerCase() turns "İ" into "i" + U+0307 combining dot, so "İsim"
+  // never matches "isim"; folding first fixes every İ-word query in all locales.
+  function norm(s) { return s.replace(/[İI]/g, "i").replace(/ı/g, "i").toLowerCase(); }
   function tokens(s) {
-    return s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/)
+    return norm(s).replace(/[^a-z0-9\s]/g, " ").split(/\s+/)
       .filter(function (t) { return t.length > 1 && !STOP.has(t); });
   }
   function score(item, toks) {
@@ -22,7 +26,7 @@
     var s = 0;
     var parts = [[item.title, 6], [item.desc, 2], [(item.tags || []).join(" "), 3]];
     parts.forEach(function (p) {
-      var lower = p[0].toLowerCase();
+      var lower = norm(p[0]);
       toks.forEach(function (t) {
         if (lower === t) s += p[1] * 3;
         else if (lower.indexOf(t) === 0) s += p[1] * 2;
@@ -50,7 +54,7 @@
     var kinds = ["tool", "guide", "resource"];
     var kindLabel = { tool: "Araçlar", guide: "Rehberler", resource: "Referans sayfaları" };
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Arama, 18 canlı hesaplayıcı ve planlayıcı, 2 yazılı rehber ve referans sayfalarımızı kapsar. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
+      if (!trimmed) summaryEl.textContent = "Arama, 19 canlı hesaplayıcı ve planlayıcı, 2 yazılı rehber ve referans sayfalarımızı kapsar. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
       else if (!results.length) summaryEl.textContent = "Sitede \"" + trimmed + "\" ile eşleşen bir şey yok. \"rtx 4070\", \"vram\" veya \"download time\" gibi donanım terimleri en çok sonuç verir.";
       else {
         var best = results[0];

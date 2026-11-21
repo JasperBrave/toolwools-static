@@ -1,5 +1,5 @@
-// Tools index: client-side filter over the full catalogue (22 tools:
-// 18 live + 4 coming-soon). The full list is rendered in the HTML, so the
+// Tools index: client-side filter over the full catalogue (23 tools:
+// 19 live + 4 coming-soon). The full list is rendered in the HTML, so the
 // page works with JavaScript off; this script only filters it. Stagger is
 // rendered inline at build time (L7), never gated on hydration.
 (function () {
@@ -36,7 +36,7 @@
       card.hidden = !show;
       if (show) { shown++; if (card.getAttribute("data-status") === "live") liveShown++; }
     });
-    if (countEl) countEl.textContent = shown + " / 22 araç · " + liveShown + " yayında";
+    if (countEl) countEl.textContent = shown + " / 23 araç · " + liveShown + " yayında";
     if (emptyEl) emptyEl.hidden = shown !== 0;
     if (headingEl) headingEl.textContent = q ? 'Sonuçlar: "' + q + '"' : "Canlı araçlar";
     var url = new URL(window.location.href);

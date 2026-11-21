@@ -2,7 +2,8 @@
 // The source used a live autocomplete over the full content index; this
 // static build ships the tool catalogue (titles + descriptions from
 // src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
-// Enter opens, Escape closes. Links to /tools/<slug> (live tools) or /tools
+// Enter opens, Escape closes. Links to /tools/<slug> (live tools), t.url when set
+// (e.g. /generators, which lives outside /tools), or /tools
 // for coming-soon entries, matching the source behaviour.
 (function () {
   var TOOLS = [
@@ -27,8 +28,14 @@
     { slug: "server-status", title: "Estado del servidor de GTA 6", desc: "¿Están caídos los servidores de GTA 6? Comprobación de estado en vivo." },
     { slug: "preload-tracker", title: "Ventanas de precarga de GTA 6", desc: "La precarga del lanzamiento terminó. Esta herramienta sigue en desarrollo." },
     { slug: "vehicle-comparison", title: "Comparación de vehículos de GTA 6", desc: "Compare any two GTA 6 vehicles head to head." },
-    { slug: "weapon-comparison", title: "Comparación de estadísticas de armas de GTA 6", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." }
+    { slug: "weapon-comparison", title: "Comparación de estadísticas de armas de GTA 6", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." },
+    { slug: "generators", title: "Generador de nombres de GTA 6", desc: "Nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags — generados al instante.", url: "/es/generators", tags: "name generator generador de nombres gta 6" }
   ];
+
+  // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.
+  // Plain toLowerCase() turns "İ" into "i" + U+0307 combining dot, so "İsim"
+  // never matches "isim"; folding first fixes every İ-word query in all locales.
+  function norm(s) { return s.replace(/[İI]/g, "i").replace(/ı/g, "i").toLowerCase(); }
 
   function setup(input) {
     if (!input) return;
@@ -40,11 +47,11 @@
 
     function close() { list.hidden = true; list.innerHTML = ""; active = -1; input.removeAttribute("aria-expanded"); }
     function render(q) {
-      var query = q.trim().toLowerCase();
+      var query = norm(q.trim());
       list.innerHTML = "";
       if (query.length < 2) { close(); return; }
       var hits = TOOLS.filter(function (t) {
-        return (t.title + " " + t.desc).toLowerCase().indexOf(query) !== -1;
+        return norm(t.title + " " + t.desc + " " + (t.tags || "")).indexOf(query) !== -1;
       }).slice(0, 6);
       if (!hits.length) {
         var empty = document.createElement("div");
@@ -54,7 +61,7 @@
       } else {
         hits.forEach(function (t) {
           var a = document.createElement("a");
-          a.href = "/tools/" + t.slug;
+          a.href = t.url || "/tools/" + t.slug;
           a.setAttribute("role", "option");
           var strong = document.createElement("span");
           strong.textContent = t.title;

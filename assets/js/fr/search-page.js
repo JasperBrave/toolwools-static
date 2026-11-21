@@ -1,4 +1,4 @@
-// /search: client-side search over the static index (22 tools, 2 guides,
+// /search: client-side search over the static index (23 tools, 2 guides,
 // 8 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
@@ -13,8 +13,12 @@
   var countsEl = document.querySelector("[data-search-counts]");
   if (!input || !resultsEl) return;
   var STOP = new Set(["gta", "6", "le", "la", "les", "un", "une", "et", "ou", "de", "pour", "à", "dans", "sur", "est", "comment", "mon", "avec", "vs"]);
+  // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.
+  // Plain toLowerCase() turns "İ" into "i" + U+0307 combining dot, so "İsim"
+  // never matches "isim"; folding first fixes every İ-word query in all locales.
+  function norm(s) { return s.replace(/[İI]/g, "i").replace(/ı/g, "i").toLowerCase(); }
   function tokens(s) {
-    return s.toLowerCase().replace(/[^a-z0-9àâäéèêëîïôöùûüç\s]/g, " ").split(/\s+/)
+    return norm(s).replace(/[^a-z0-9àâäéèêëîïôöùûüç\s]/g, " ").split(/\s+/)
       .filter(function (t) { return t.length > 1 && !STOP.has(t); });
   }
   function score(item, toks) {
@@ -22,7 +26,7 @@
     var s = 0;
     var parts = [[item.title, 6], [item.desc, 2], [(item.tags || []).join(" "), 3]];
     parts.forEach(function (p) {
-      var lower = p[0].toLowerCase();
+      var lower = norm(p[0]);
       toks.forEach(function (t) {
         if (lower === t) s += p[1] * 3;
         else if (lower.indexOf(t) === 0) s += p[1] * 2;
@@ -50,7 +54,7 @@
     var kinds = ["tool", "guide", "resource"];
     var kindLabel = { tool: "Outils", guide: "Guides", resource: "Pages de référence" };
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "La recherche couvre 18 calculateurs et planificateurs en direct, 2 guides écrits et nos pages de référence. Choisissez un point de départ ci-dessous ou tapez ce que votre PC doit savoir.";
+      if (!trimmed) summaryEl.textContent = "La recherche couvre 19 calculateurs et planificateurs en direct, 2 guides écrits et nos pages de référence. Choisissez un point de départ ci-dessous ou tapez ce que votre PC doit savoir.";
       else if (!results.length) summaryEl.textContent = "Rien sur le site ne correspond à \"" + trimmed + "\" pour le moment. Des termes matériels comme \"rtx 4070\", \"vram\" ou \"download time\" trouvent le plus.";
       else {
         var best = results[0];
