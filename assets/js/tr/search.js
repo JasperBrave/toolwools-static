@@ -21,11 +21,11 @@
     { slug: "internet-speed-check", title: "GTA 6 İnternet Hızı Danışmanı", desc: "Bağlantınızın GTA 6 indirmeleri ve Online için yeterince hızlı olup olmadığını kontrol edin." },
     { slug: "price-by-country", title: "GTA 6 Ülkelere Göre Fiyat", desc: "GTA 6 fiyatı ülkelere göre yerel para birimiyle." },
     { slug: "economy-calculator", title: "GTA 6 Para ve İşletme Getiri Hesaplayıcı", desc: "GTA$ kazanmanın en hızlı yolunu ve hangi işletmelerin önce kendini amorti ettiğini bulun." },
-    { slug: "gta-6-tracker", title: "GTA 6 Çıkış Takipçisi", desc: "GTA 6 için çıkış takipçisi ve ön yükleme aşamaları." },
+    { slug: "gta-6-tracker", title: "GTA 6 Lansman Kilometre Taşları", desc: "GTA 6 için lansman kilometre taşları ve tamamlanan ön yükleme pencereleri." },
     { slug: "settings-optimizer", title: "Grafik Ayarları Optimize Edici", desc: "Hedef FPS'iniz ve donanımınız için grafik ayarlarını ayarlayın." },
     { slug: "hardware-comparison", title: "Donanım Karşılaştırması", desc: "GTA 6 için iki GPU veya CPU'yu başa baş karşılaştırın." },
     { slug: "server-status", title: "GTA 6 Sunucu Durumu", desc: "GTA 6 sunucuları kapalı mı? Canlı durum kontrolü." },
-    { slug: "preload-tracker", title: "GTA 6 Ön Yükleme Takipçisi", desc: "Kendi saat diliminizde ön yükleme ve çıkış için geri sayım." },
+    { slug: "preload-tracker", title: "GTA 6 Ön Yükleme Pencereleri", desc: "Lansman ön yüklemesi bitti. Bu araç hâlâ geliştirme aşamasında." },
     { slug: "vehicle-comparison", title: "GTA 6 Araç Karşılaştırması", desc: "Herhangi iki GTA 6 aracını karşı karşıya karşılaştırın." },
     { slug: "weapon-comparison", title: "GTA 6 Silah İstatistikleri Karşılaştırması", desc: "Karşı karşıya GTA 6 silah istatistikleri: hasar, atış hızı, menzil, isabet." }
   ];

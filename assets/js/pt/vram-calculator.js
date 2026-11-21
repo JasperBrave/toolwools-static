@@ -35,7 +35,7 @@ var parsed = readState();
 var state = parsed.state;
 var notice = $("[data-input-notice]");
 if (notice && parsed.bad.length) {
-  notice.textContent = "Desconhecido GPU in the link, so this page reset to the default card. Pick your card below.";
+  notice.textContent = "GPU desconhecida no link, então esta página foi redefinida para a placa padrão. Escolha sua placa abaixo.";
   notice.classList.add("show");
 }
 
@@ -141,7 +141,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + verdict.label + '</p>' +
       '<h3 class="verdict-title">' + needed.totalGB.toFixed(1) + '<span class="unit"> GB necessários</span></h3>' +
-      '<p class="verdict-desc">' + verdict.message + ' Recomendado ' + needed.recommendedGB.toFixed(1) + ' GB for a stutter buffer.</p></div></div>' +
+      '<p class="verdict-desc">' + verdict.message + ' Recomendado ' + needed.recommendedGB.toFixed(1) + ' GB para uma margem contra engasgos.</p></div></div>' +
       '<div class="balance-bars">' +
       bar("Pool de texturas", needed.breakdown.texturePool, needed.recommendedGB, "purple") +
       bar("Framebuffer + G-buffer", needed.breakdown.framebuffer, needed.recommendedGB, "blue") +

@@ -515,7 +515,7 @@ export const TIER_META = {
   },
   F: {
     label: "Inviável",
-    verdict: "Não vai cumprir o mínimo de GTA 6 em nenhum ajuste. Planeje um upgrade de GPU antes do lançamento.",
+    verdict: "Não vai cumprir o mínimo de GTA 6 em nenhum ajuste. Planeje um upgrade de GPU para jogar agora.",
     recommendedRes: "1080p",
     accent: "var(--accent-pink)"
   }

@@ -142,13 +142,13 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 launched Nov 19, 2026 at 05:00 UTC. Tracking the launch and preload milestones on ToolWools.") +
+      encodeURIComponent("GTA 6 launched Nov 19, 2026 at 05:00 UTC. Launch milestones and completed preload windows on ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
   if (redditLink) {
     redditLink.href = "https://www.reddit.com/submit?title=" +
-      encodeURIComponent("GTA 6 Launch Tracker — Nov 19, 2026") +
+      encodeURIComponent("GTA 6 Launch Milestones — Nov 19, 2026") +
       "&url=" + encodeURIComponent(url);
   }
 }

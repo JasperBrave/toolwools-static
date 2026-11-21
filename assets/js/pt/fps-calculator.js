@@ -204,7 +204,7 @@ function render() {
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
   }
 
-  // Preset ladder follows the live GPU/CPU/res (heading follows the selected resolution).
+  // Predefinição ladder follows the live GPU/CPU/res (heading follows the selected resolution).
   var ladder = $("[data-preset-ladder]");
   if (ladder) {
     ladder.innerHTML = PRESET_LIST.map(function (p) {
@@ -215,7 +215,7 @@ function render() {
   }
   // Preset-ladder heading follows the selected rig and resolution: the rows
   // above re-render per GPU/CPU/res, so rebuild the heading from the live
-  // part labels too. Short labels drop the "GeForce " prefix and any
+  // part labels também. Short labels drop the "GeForce " prefix and any
   // " / ..." alternate, so the default rig still reads exactly
   // "RTX 4070 + Ryzen 5 7600X" as in the static heading.
   var ladderHead = document.getElementById("preset-ladder");
@@ -224,7 +224,7 @@ function render() {
     var rigLabel = shortPartLabel(gpu.label) + " + " + shortPartLabel(cpu.label);
     ladderHead.textContent = ladderHead.dataset.baseHeading
       .replace("RTX 4070 + Ryzen 5 7600X", rigLabel)
-      .replace(/UW 1440p|1080p|1440p|4K/, RES_META[state.res].label);
+      .replace(/UW 1440p|1080p|1440p|4K/, L(RES_META[state.res].label));
   }
 
   var linkInput = $("[data-share-link-input]");

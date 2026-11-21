@@ -515,7 +515,7 @@ export const TIER_META = {
   },
   F: {
     label: "Nicht brauchbar",
-    verdict: "Erfüllt das GTA-6-Minimum in keinem Preset. Plane ein GPU-Upgrade vor dem Launch.",
+    verdict: "Erfüllt das GTA-6-Minimum in keinem Preset. Plane ein GPU-Upgrade, um jetzt zu spielen.",
     recommendedRes: "1080p",
     accent: "var(--accent-pink)"
   }

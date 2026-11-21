@@ -142,13 +142,13 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("صدرت GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. تابع الإطلاق ومراحل التحميل المسبق على ToolWools.") +
+      encodeURIComponent("صدرت GTA 6 في 19 نوفمبر 2026 الساعة 05:00 UTC. معالم الإطلاق ونوافذ التحميل المسبق المكتملة على ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
   if (redditLink) {
     redditLink.href = "https://www.reddit.com/submit?title=" +
-      encodeURIComponent("متتبع إطلاق GTA 6 — 19 نوفمبر 2026") +
+      encodeURIComponent("معالم إطلاق GTA 6 — 19 نوفمبر 2026") +
       "&url=" + encodeURIComponent(url);
   }
 }

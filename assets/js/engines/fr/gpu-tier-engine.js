@@ -515,7 +515,7 @@ export const TIER_META = {
   },
   F: {
     label: "Non viable",
-    verdict: "Ne respectera pas le minimum de GTA 6 sur aucun préréglage. Prévoyez une mise à niveau du GPU avant le lancement.",
+    verdict: "Ne respectera pas le minimum de GTA 6 sur aucun préréglage. Prévoyez une mise à niveau du GPU pour jouer dès maintenant.",
     recommendedRes: "1080p",
     accent: "var(--accent-pink)"
   }

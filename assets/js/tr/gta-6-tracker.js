@@ -142,13 +142,13 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6, 19 Kas 2026 saat 05:00 UTC'de çıktı. Lansmanı ve ön yükleme aşamalarını ToolWools'ta takip edin.") +
+      encodeURIComponent("GTA 6, 19 Kas 2026 saat 05:00 UTC'de çıktı. Lansman kilometre taşları ve tamamlanan ön yükleme pencereleri ToolWools'ta.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
   if (redditLink) {
     redditLink.href = "https://www.reddit.com/submit?title=" +
-      encodeURIComponent("GTA 6 Çıkış Takipçisi — 19 Kas 2026") +
+      encodeURIComponent("GTA 6 Lansman Kilometre Taşları — 19 Kas 2026") +
       "&url=" + encodeURIComponent(url);
   }
 }

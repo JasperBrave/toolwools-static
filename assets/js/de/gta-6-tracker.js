@@ -148,13 +148,13 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 startete am 19. Nov. 2026 um 05:00 Uhr UTC. Verfolge den Launch und die Preload-Meilensteine auf ToolWools.") +
+      encodeURIComponent("GTA 6 startete am 19. Nov. 2026 um 05:00 Uhr UTC. Launch-Meilensteine und abgeschlossene Preload-Fenster auf ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
   if (redditLink) {
     redditLink.href = "https://www.reddit.com/submit?title=" +
-      encodeURIComponent("GTA-6-Launch-Tracker, 19. Nov. 2026") +
+      encodeURIComponent("GTA-6-Launch-Meilensteine, 19. Nov. 2026") +
       "&url=" + encodeURIComponent(url);
   }
 }

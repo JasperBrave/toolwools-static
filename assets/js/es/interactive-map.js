@@ -101,8 +101,8 @@ function compareDistricts(aId, bId) {
     const tp = top.winner === "a" ? pb : pa;
     const move =
       lp.traversal === tp.traversal
-        ? "similarly"
-        : `${lp.traversal} against ${tp.traversal}`;
+        ? "de forma similar"
+        : `${lp.traversal} frente a ${tp.traversal}`;
     verdict = `La diferencia más clara es ${top.metric.label.toLowerCase()}: ${leader.name} lidera a ${trailer.name} por ${top.gap} puntos, y mueve ${move}.`;
   }
   return { a, b, pa, pb, rows, biggest, shared, verdict };
@@ -281,7 +281,7 @@ document.querySelectorAll("[data-map-tab]").forEach((tab) => {
     syncUrl();
     announce(
       state.view === "regions"
-        ? "Regiones de Leonida view. Ten named regions."
+        ? "Vista de Regiones de Leonida. Diez regiones nombradas."
         : "Vista de distritos de Vice City. Doce distritos.",
     );
   });
@@ -353,7 +353,7 @@ if (BASE_SELECT) {
     renderSize();
     syncUrl();
     const cmp = compareMaps(state.base);
-    announce(`GTA 6 is ${cmp.label}.`);
+    announce(`GTA 6 es ${cmp.label}.`);
   });
 }
 
@@ -397,8 +397,8 @@ function renderCompare() {
       .map((row) => {
         const mid =
           row.gap === 0
-            ? "Level"
-            : `${row.gap} pt gap · ${row.winner === "a" ? cmp.a.name : cmp.b.name}`;
+            ? "Empate"
+            : `${row.gap} pt · ${row.winner === "a" ? cmp.a.name : cmp.b.name}`;
         return `<li class="vs-row">
         <div class="vs-side-a"><div class="vs-num-row"><span class="vs-name-a">${cmp.a.name}</span><span class="${row.winner === "a" ? "font-bold tabular-nums text-foreground" : "tabular-nums text-muted-foreground"}">${row.a}</span></div><div class="vs-bar"><div class="vs-bar-fill-a" style="width:${row.a}%"></div></div></div>
         <div class="vs-mid"><p class="text-sm font-semibold text-foreground">${row.metric.label}</p><p class="mt-0.5 text-[11px] leading-snug text-muted-foreground">${mid}</p></div>

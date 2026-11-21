@@ -141,12 +141,12 @@ function businessTableHtml(rows, horizon) {
       + "<td class=\"muted\">" + r.activeShare + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="business-table">\n      <h2 id="business-table">Which GTA 6 business pays for itself first</h2>\n'
-    + '      <p class="section-dek">Horas de retorno at each business\u2019s own net rate, plus profit after ' + horizon + ' hours of play once the purchase price is repaid.</p>\n'
+    + '      <p class="section-dek">Horas de retorno à taxa líquida própria de cada negócio, mais lucro depois de ' + horizon + ' horas de jogo depois que o preço de compra for pago.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Which GTA 6 business pays for itself first, scrollable table">\n'
-    + '      <table class="data-table" id="business-table">\n        <caption class="sr-only">Projected GTA 6 business purchase prices, net hourly production, payback horas e profit at the selected horizon.</caption>\n'
+    + '      <table class="data-table" id="business-table">\n        <caption class="sr-only">Preços de compra projetados de negócios do GTA 6, produção líquida por hora, retorno horas e lucro no horizonte selecionado.</caption>\n'
     + '        <thead><tr><th scope="col">Business</th><th scope="col">Preço</th><th scope="col">Líquido / h</th><th scope="col">Payback</th><th scope="col">Profit @ ' + horizon + 'h</th><th scope="col">Active</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Business rates are projections, not datamined values.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' As taxas de negócios são projeções, não valores extraídos de dados.</p>\n    </section>';
 }
 function cardsTableHtml(rows) {
   var body = rows.map(function (r) {
@@ -160,12 +160,12 @@ function cardsTableHtml(rows) {
       + "<td class=\"mono\">$" + r.impliedWage.toFixed(2) + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="cards-table">\n      <h2 id="cards-table">Valor do Shark Card per real dollar, and the hours it buys back</h2>\n'
-    + '      <p class="section-dek">Larger packs always buy more GTA$ per dollar. The implied-wage column turns that into a decision you can actually make.</p>\n'
+    + '      <p class="section-dek">Pacotes maiores sempre compram mais GTA$ por dólar. A coluna de salário implícito transforma isso em uma decisão que você realmente pode tomar.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Valor do Shark Card per real dollar, scrollable table">\n'
-    + '      <table class="data-table" id="cards-table">\n        <caption class="sr-only">Shark Card packs with GTA dollars per US dollar, hours of grinding replaced, and implied real-world hourly wage.</caption>\n'
-    + '        <thead><tr><th scope="col">Pack</th><th scope="col">GTA$</th><th scope="col">US$</th><th scope="col">GTA$ / $1</th><th scope="col">Hours saved</th><th scope="col">Salário implícito</th></tr></thead>\n'
+    + '      <table class="data-table" id="cards-table">\n        <caption class="sr-only">Pacotes de Shark Card com dólares GTA por dólar americano, horas de grind substituídas, e salário por hora implícito no mundo real.</caption>\n'
+    + '        <thead><tr><th scope="col">Pack</th><th scope="col">GTA$</th><th scope="col">US$</th><th scope="col">GTA$ / $1</th><th scope="col">Horas economizadas</th><th scope="col">Salário implícito</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Card prices track the standing US storefront. Hours saved depend on your grind rate above.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Os preços dos cartões seguem a loja atual dos EUA. As horas economizadas dependem da sua taxa de grind acima.</p>\n    </section>';
 }
 
 var lastShareText = "";
@@ -221,7 +221,7 @@ function render() {
       + "<div><dt>Participação ativa</dt><dd>" + top.activeShare + "%</dd></div>"
       + "<div><dt>Preço</dt><dd>" + compactMoney(top.business.price) + "</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Business rates are projections, not datamined values.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' As taxas de negócios são projeções, não valores extraídos de dados.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = businessTableHtml(bizRanked, state.horizon);
   } else if (state.mode === "cards") {
@@ -237,7 +237,7 @@ function render() {
       + "<div><dt>Your grind rate</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
       + "<div><dt>Salário implícito</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/hr</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Card prices track the standing US storefront. Hours saved depend on your grind rate above.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' Os preços dos cartões seguem a loja atual dos EUA. As horas economizadas dependem da sua taxa de grind acima.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = cardsTableHtml(cards);
   } else {
@@ -254,7 +254,7 @@ function render() {
       + "<div><dt>Sessions</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "h</dd></div>"
       + "<div><dt>Por jogador</dt><dd>" + money(rate.perHourPerPlayer) + "/hr</dd></div>"
       + "</dl>"
-      + '<p class="verdict-desc">' + PROJ_BADGE + ' Payouts are projections, not datamined values.</p>'
+      + '<p class="verdict-desc">' + PROJ_BADGE + ' Os pagamentos são projeções, não valores extraídos de dados.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = methodTableHtml(ranked, state.method);
   }

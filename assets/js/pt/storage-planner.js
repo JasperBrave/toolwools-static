@@ -6,9 +6,9 @@
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
 var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "pc" };
 var PLATFORMS = {
-  pc: { label: "PC", usableGB: 0, note: "Your drive, your rules — the number below is exactly what GTA 6 needs." },
-  ps5: { label: "PS5", usableGB: 667, note: "Sony's 825 GB SSD reports 667 GB usable after the system reserve." },
-  xsx: { label: "Xbox Series X", usableGB: 802, note: "Xbox's 1 TB SSD reports 802 GB usable after the system reserve." },
+  pc: { label: "PC", usableGB: 0, note: "Sua unidade, suas regras, o número abaixo é exatamente o que o GTA 6 precisa." },
+  ps5: { label: "PS5", usableGB: 667, note: "O SSD de 825 GB da Sony reporta 667 GB utilizáveis após a reserva do sistema." },
+  xsx: { label: "Xbox Series X", usableGB: 802, note: "O SSD de 1 TB do Xbox reporta 802 GB utilizáveis após a reserva do sistema." },
 };
 var PLATFORM_ROWS = [
   { p: "PC", drive: "Seu SSD NVMe / SATA", reserve: "—", usable: 0 },
@@ -100,10 +100,10 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = "Keep " + r.total + " GB free for GTA 6 on " + meta.label + ": " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB headroom.";
+    var tldrText = "Keep " + r.total + " GB livres para GTA 6 em " + meta.label + ": " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB headroom.";
     if (label) label.textContent = "Keep " + r.total + " GB free · TL;DR";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = r.total + " GB recommended free space";
+    if (verdictEl) verdictEl.textContent = r.total + " GB de espaço livre recomendado";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -111,12 +111,12 @@ function render() {
   if (out) {
     var pct = function (v) { return Math.max(0, Math.min(100, (v / r.total) * 100)); };
     var consoleLine = state.platform === "pc" ? "" :
-      '<p class="verdict-desc">' + meta.note + ' That leaves you <strong>' + Math.max(0, meta.usableGB - r.total) + ' GB</strong> for other games after GTA 6.</p>';
+      '<p class="verdict-desc">' + meta.note + ' Isso deixa você com <strong>' + Math.max(0, meta.usableGB - r.total) + ' GB</strong> para outros jogos depois do GTA 6.</p>';
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">Espaço livre recomendado</p>' +
       '<h3 class="verdict-title">' + r.total + '<span class="unit"> GB</span></h3>' +
-      '<p class="verdict-desc">' + r.subtotal + ' GB of content + ' + r.headroom + ' GB safe buffer for future patches.</p>' +
+      '<p class="verdict-desc">' + r.subtotal + ' GB of content + ' + r.headroom + ' GB de margem segura para futuros patches.</p>' +
       consoleLine + '</div></div>' +
       '<div><div class="stack-bar" role="img" aria-label="Composition: Instalação base ' + state.base + ' GB, Patch do primeiro dia ' + state.patch + ' GB, DLC e conteúdo de temporada ' + state.dlc + ' GB, Margem para atualizações ' + r.headroom + ' GB">' +
       '<span class="seg-purple" style="width:' + pct(state.base) + '%"></span>' +
@@ -148,7 +148,7 @@ function render() {
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "How much room GTA 6 leaves you for other games — with your current " + r.total + " GB plan.";
+  if (tableNote) tableNote.textContent = "Quanto espaço o GTA 6 deixa para outros jogos, com seu atual " + r.total + " GB plan.";
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
@@ -160,7 +160,7 @@ function render() {
 
 function shareText() {
   var r = compute();
-  return "GTA 6 needs about " + r.total + " GB free: " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB headroom. Plan your space: " + shareUrl();
+  return "GTA 6 needs about " + r.total + " GB free: " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB de folga. Planeje seu espaço: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

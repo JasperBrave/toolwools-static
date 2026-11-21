@@ -43,7 +43,7 @@ var parsed = readState();
 var state = parsed.state;
 var notice = $("[data-input-notice]");
 if (notice && parsed.bad.length) {
-  notice.textContent = "Desconhecido " + parsed.bad.join(", ") + " in the link, so this page reset to the defaults. Pick your purchase below.";
+  notice.textContent = "Desconhecido " + parsed.bad.join(", ") + " no link, então esta página foi redefinida para os valores padrão. Escolha sua compra abaixo.";
   notice.classList.add("show");
 }
 
@@ -105,13 +105,13 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     if (label) label.textContent = "Melhor canal \u00b7 TL;DR";
-    if (text) text.textContent = result.headline + " scores " + result.best.score + " of 100 for a " + result.edition.label + " order in " + result.region.label + ", leading on " + (result.best.strengths.join(" e ").toLowerCase() || "overall balance") + ".";
+    if (text) text.textContent = result.headline + " obtém " + result.best.score + " of 100 for a " + result.edition.label + " order in " + result.region.label + ", leading on " + (result.best.strengths.join(" e ").toLowerCase() || "overall balance") + ".";
     if (verdictEl) verdictEl.textContent = "Best: " + result.best.channel.short + " \u2014 " + result.best.score + "/100";
   }
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "O GTA 6 foi lançado em <time datetime=\"2026-11-19\">19 de novembro de 2026</time> para PlayStation 5 e Xbox Series X|S. Todos os canais cobram pelo mesmo jogo, então compre por termos: o melhor ajuste para suas entradas é Disco, enviado no PlayStation 5. Como você nos disse que nenhuma preferência forte além do valor importa, o disco de varejista, enviado pontua 65,2 de 100 para um pedido Padrão nos Estados Unidos, liderando em cancelamento e proteção contra queda de preço, à frente da retirada na loja com 63,4.<strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "O GTA 6 foi lançado em <time datetime=\"2026-11-19\">19 de novembro de 2026</time> para PlayStation 5 e Xbox Series X|S. Todos os canais cobram pelo mesmo jogo, então compre por termos: o melhor ajuste para suas entradas é <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");

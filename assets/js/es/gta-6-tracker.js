@@ -142,13 +142,13 @@ function refreshShareLinks() {
   var xLink = $("[data-share-x]");
   if (xLink) {
     xLink.href = "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("GTA 6 se lanzó el 19 nov 2026 a las 05:00 UTC. Sigue el lanzamiento y los hitos de precarga en ToolWools.") +
+      encodeURIComponent("GTA 6 se lanzó el 19 nov 2026 a las 05:00 UTC. Hitos de lanzamiento y ventanas de precarga completadas en ToolWools.") +
       "&url=" + encodeURIComponent(url);
   }
   var redditLink = $("[data-share-reddit]");
   if (redditLink) {
     redditLink.href = "https://www.reddit.com/submit?title=" +
-      encodeURIComponent("Rastreador de lanzamiento de GTA 6 — 19 nov 2026") +
+      encodeURIComponent("Hitos del lanzamiento de GTA 6 — 19 nov 2026") +
       "&url=" + encodeURIComponent(url);
   }
 }

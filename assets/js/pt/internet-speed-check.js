@@ -235,7 +235,7 @@ function render() {
   if (redditLink) redditLink.href = redditUrl(result);
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Grade " + result.grade + ", " + result.score + " out of 100. " + result.headline + ". " + result.verdict;
+  if (live) live.textContent = "Grade " + result.grade + ", " + result.score + " de 100. " + result.headline + ". " + result.verdict;
   syncUrl();
 }
 

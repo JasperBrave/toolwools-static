@@ -16,7 +16,7 @@ var WEAKEST_LINK = {
   performance: { label: "Open calculadora de FPS", href: "/tools/fps-calculator" },
   vram: { label: "Open calculadora de VRAM", href: "/tools/vram-calculator" },
   storage: { label: "Open planejador de armazenamento", href: "/tools/storage-planner" },
-  network: { label: "Open download-time calculator", href: "/tools/download-time" },
+  network: { label: "Abrir a calculadora de tempo de download", href: "/tools/download-time" },
 };
 var SUB_LABEL = { performance: "Desempenho", vram: "VRAM", storage: "Storage", network: "Network" };
 
@@ -127,7 +127,7 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    var tldrText = gpu.label + " + " + cpu.label + " with " + state.ram + " GB RAM, " + state.storage + " GB free on " + L(DRIVE_META[state.drive].label) + " e " + state.mbps + " Mbps down scores " + result.score + "/100 (grade " + result.grade + "). " + result.verdict + " Weakest link: " + SUB_LABEL[result.weakest] + ".";
+    var tldrText = gpu.label + " + " + cpu.label + " com " + state.ram + " GB de RAM, " + state.storage + " GB free on " + L(DRIVE_META[state.drive].label) + " e " + state.mbps + " Mbps down scores " + result.score + "/100 (grade " + result.grade + "). " + result.verdict + " Weakest link: " + SUB_LABEL[result.weakest] + ".";
     if (label) label.textContent = "Grade " + result.grade + " · " + result.gradeLabel;
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = "Grade " + result.grade + " — " + result.score + "/100";
@@ -147,7 +147,7 @@ function render() {
     var weakest = WEAKEST_LINK[result.weakest];
     var fixBox = result.score >= 100
       ? '<div class="upgrade-box"><p class="eyebrow-muted">Corrija isto primeiro</p><p>No weak link. Every sub-score is at full marks.</p></div>'
-      : '<div class="upgrade-box"><p class="eyebrow-muted">Corrija isto primeiro</p><p>Sua subpontuação mais fraca é <strong>' + SUB_LABEL[result.weakest] + '</strong> (' + Math.round(result[result.weakest].score) + '/100). Drill into it with the dedicated calculator.</p><p><a href="' + weakest.href + '">' + weakest.label + ' →</a></p></div>';
+      : '<div class="upgrade-box"><p class="eyebrow-muted">Corrija isto primeiro</p><p>Sua subpontuação mais fraca é <strong>' + SUB_LABEL[result.weakest] + '</strong> (' + Math.round(result[result.weakest].score) + '/100). Aprofunde-se com a calculadora dedicada.</p><p><a href="' + weakest.href + '">' + weakest.label + ' →</a></p></div>';
     out.innerHTML =
       '<div style="text-align:center">' +
       '<div class="score-dial" role="img" aria-label="Pontuação de prontidão ' + result.score + ' de 100, grade ' + result.grade + '">' +

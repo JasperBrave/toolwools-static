@@ -161,7 +161,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Puntuación " + result.score + " sobre 100. " + meta.label + ". " + gpu.label + " más " + cpu.label + ", " + state.ram + " GB de RAM, " + (state.ssd ? "SSD" : "HDD") + ".";
+  if (live) live.textContent = "Puntuación " + result.score + " de 100. " + meta.label + ". " + gpu.label + " más " + cpu.label + ", " + state.ram + " GB de RAM, " + (state.ssd ? "SSD" : "HDD") + ".";
   syncUrl();
 }
 

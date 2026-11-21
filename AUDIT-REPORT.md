@@ -1,3 +1,5 @@
+> **Note — 2026-11-21 (forensic audit iteration 5, Worker G):** this report is a historical snapshot (tree verified 2026-11-20, hash `807ca499…`, commit `32902df`); its numbers are superseded by iteration-5 work. It is not linked from any page. Any `staging-b/` copies it mentions live only under `toolwools-build/staging-b/` (build intermediates, never deployed); nothing in the deploy references them.
+
 # ToolWools — audit & fix report
 
 Tree verified: **2026-11-20** (re-verified fresh; the 2026-11-17 audit is

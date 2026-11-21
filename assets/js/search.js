@@ -21,11 +21,11 @@
     { slug: "internet-speed-check", title: "GTA 6 Internet Speed Advisor", desc: "Check whether your connection is fast enough for GTA 6 downloads and Online." },
     { slug: "price-by-country", title: "GTA 6 Price by Country", desc: "GTA 6 price by country in local currency." },
     { slug: "economy-calculator", title: "GTA 6 Money and Business ROI Calculator", desc: "Work out the fastest way to earn GTA$ and which businesses pay back first." },
-    { slug: "gta-6-tracker", title: "GTA 6 Launch Tracker", desc: "Launch tracker and preload milestones for GTA 6." },
+    { slug: "gta-6-tracker", title: "GTA 6 Launch Milestones", desc: "Launch milestones and completed preload windows for GTA 6." },
     { slug: "settings-optimizer", title: "Graphics Settings Optimizer", desc: "Dial in graphics settings for your target FPS and rig." },
     { slug: "hardware-comparison", title: "Hardware Comparison", desc: "Compare two GPUs or CPUs head to head for GTA 6." },
     { slug: "server-status", title: "GTA 6 Server Status", desc: "Are the GTA 6 servers down? Live status check." },
-    { slug: "preload-tracker", title: "GTA 6 Preload Tracker", desc: "Countdown to preload and launch in your timezone." },
+    { slug: "preload-tracker", title: "GTA 6 Preload Windows", desc: "The launch preload is over. This tool is still in development." },
     { slug: "vehicle-comparison", title: "GTA 6 Vehicle Comparison", desc: "Compare any two GTA 6 vehicles head to head." },
     { slug: "weapon-comparison", title: "GTA 6 Weapon Stats Comparison", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." }
   ];

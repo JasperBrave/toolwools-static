@@ -515,7 +515,7 @@ export const TIER_META = {
   },
   F: {
     label: "Uygun değil",
-    verdict: "Hiçbir ayarda GTA 6 minimumunu karşılamayacak. Çıkıştan önce bir GPU yükseltmesi planlayın.",
+    verdict: "Hiçbir ayarda GTA 6 minimumunu karşılamayacak. Şimdi oynamak için bir GPU yükseltmesi planlayın.",
     recommendedRes: "1080p",
     accent: "var(--accent-pink)"
   }

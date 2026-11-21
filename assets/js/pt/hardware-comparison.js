@@ -118,7 +118,7 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = ra.verdict === "balanced"
-      ? "Sim, " + gpuA.label + " + " + cpuA.label + " is balanced at " + state.res + " in " + workload + ", about " + ra.avgFps + " fps average (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)."
+      ? "Sim, " + gpuA.label + " + " + cpuA.label + " is balanced at " + state.res + " in " + workload + ", about " + ra.avgFps + " fps médios (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)."
       : gpuA.label + " + " + cpuA.label + " mostra um " + ra.absPct + "% " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " gargalo em " + state.res + " in " + workload + ", about " + ra.avgFps + " fps average." + (upgrade ? " The smallest fix is a " + upgrade.part.label + ", o que reduz o gargalo para " + upgrade.toPct + "%." : "");
     if (label) label.textContent = labelA + " · TL;DR";
     if (text) text.textContent = tldrText;
@@ -193,7 +193,7 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = labelA + ". Estimated " + ra.fpsLow + " a " + ra.fpsHigh + " frames per second at " + state.res + " in " + workload + ". Rig B: " + labelB + ", " + rb.avgFps + " fps average.";
+  if (live) live.textContent = labelA + ". Estimados " + ra.fpsLow + " a " + ra.fpsHigh + " fotogramas por segundo a " + state.res + " in " + workload + ". Rig B: " + labelB + ", " + rb.avgFps + " fps average.";
   syncUrl();
 }
 

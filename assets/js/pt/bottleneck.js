@@ -222,7 +222,7 @@ function shareText() {
     var cpuB = findPart(CPUS, state.cpu2);
     var resultB = computeBalance(gpuB, cpuB, state.res, state.mode);
     var diff = resultB.avgFps - result.avgFps;
-    var winner = Math.abs(diff) <= 3 ? "Empate" : diff > 0 ? "Máquina B" : "Máquina A";
+    var winner = Math.abs(diff) <= 3 ? "Tie" : diff > 0 ? "Máquina B" : "Máquina A";
     return gpu.label + "/" + cpu.label + " vs " + gpuB.label + "/" + cpuB.label + " @ " + state.res + ". Comparação de GTA 6: " + shareUrl() + " (" + winner + ")";
   }
   return gpu.label + " + " + cpu.label + " @ " + state.res + " · " + L(WORKLOAD_META[state.mode].label) + " → " + L(verdictLabelOf(result)) + ". Verificação de gargalo de GTA 6: " + shareUrl();

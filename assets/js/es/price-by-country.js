@@ -41,7 +41,7 @@ var parsed = readState();
 var state = parsed.state;
 var notice = $("[data-input-notice]");
 if (notice && parsed.bad.length) {
-  notice.textContent = "Desconocido country in the link, so this page reset to the United States. Elige tu país below.";
+  notice.textContent = "País desconocido en el enlace, así que esta página se restableció a Estados Unidos. Elige tu país abajo.";
   notice.classList.add("show");
 }
 
@@ -91,8 +91,8 @@ function shortAnswer(price) {
     + "In " + price.market.country + " that models out to " + formatLocal(price.totalLocal, price.market) + " for " + EDITIONS[state.edition].label + ", or about "
     + formatUsd(price.usdEquivalent) + " once " + price.market.taxLabel.toLowerCase() + " is counted. "
     + "That is " + L(BAND_LABEL[price.band]).toLowerCase();
-  if (price.regionallyPriced) s += ", and this market is regionally priced rather than converted.";
-  else s += ", converted at the reference rate below.";
+  if (price.regionallyPriced) s += ", y este mercado tiene precio regional en lugar de convertido.";
+  else s += ", convertido a la tasa de referencia de abajo.";
   return s;
 }
 function shareRowHtml(text, title) {
@@ -106,9 +106,9 @@ function shareRowHtml(text, title) {
 function countryTabHtml(price) {
   var vs = (price.vsUsPercent > 0 ? "+" : "") + price.vsUsPercent.toLocaleString("es-ES", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
   var note = price.regionallyPriced
-    ? "Regionally priced: this storefront sets a lower local price instead of converting the USD figure. Regional list prices are reported, not confirmed store prices."
-    : "Converted from the confirmed US price at the dated reference rate.";
-  if (price.unconfirmed) note += " " + EDITIONS[state.edition].label + " pricing is modelled, not confirmed by Rockstar.";
+    ? "Precio regional: esta tienda fija un precio local más bajo en lugar de convertir la cifra en USD. Los precios de lista regionales son reportados, no precios confirmados de tienda."
+    : "Convertido desde el precio confirmado de EE. UU. a la tasa de referencia fechada.";
+  if (price.unconfirmed) note += " " + EDITIONS[state.edition].label + " el precio es modelado, no confirmado por Rockstar.";
   var taxHint = price.market.taxIncludedInList ? price.market.taxLabel + " already included" : "Before " + price.market.taxLabel;
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">' + L(BAND_LABEL[price.band]) + "</p>"
     + '<h3 class="verdict-title">' + formatLocal(price.totalLocal, price.market) + "</h3>"
@@ -160,10 +160,10 @@ function priceTableHtml(ranked, country, editionLabel) {
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
     + '      <p class="section-dek">Clasificado por total del recibo equivalente en USD, el más barato primero. El impuesto está dentro del total, la columna de estantería muestra el precio listado.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 price in every country, scrollable table">\n'
-    + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " price for 44 markets, cheapest Equivalente en USD first, rates dated " + RATES_AS_OF + ".</caption>\n"
+    + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " precio para 44 mercados, equivalente en USD más barato primero, tasas fechadas " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Precio de estantería</th><th scope="col">Impuesto</th><th scope="col">Total del recibo</th><th scope="col">USD</th><th scope="col">vs EE. UU.</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">Regional list prices are reported, not confirmed store prices. Tipos de cambio de referencia fechados ' + RATES_LABEL + ".</p>\n    </section>";
+    + '      <p class="field-hint" style="margin-top:0.75rem">Los precios de lista regionales son reportados, no precios confirmados de tienda. Tasas de cambio de referencia fechadas ' + RATES_LABEL + ".</p>\n    </section>";
 }
 function ladderTableHtml(price, ladder) {
   var body = ladder.map(function (e) {
@@ -175,9 +175,9 @@ function ladderTableHtml(price, ladder) {
       + "<td class=\"muted\">" + (e.usdPer100kGta !== null ? formatUsd(e.usdPer100kGta) : "n/a") + "</td></tr>";
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
-    + '      <p class="section-dek">The upgrade question, answered with a value rate instead of a feature list. Prices in ' + price.market.currency + " for " + price.market.country + ".</p>\n"
+    + '      <p class="section-dek">La pregunta de la actualización, respondida con una tasa de valor en lugar de una lista de funciones. Precios en ' + price.market.currency + " for " + price.market.country + ".</p>\n"
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, scrollable table">\n'
-    + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">GTA 6 edition ladder priced in ' + price.market.currency + " for " + price.market.country + ", with premium over Standard and cost per 100,000 bundled GTA$.</caption>\n"
+    + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">Escalera de ediciones de GTA 6 con precios en ' + price.market.currency + " for " + price.market.country + ", con prima sobre Estándar y coste por cada 100.000 GTA$ incluidos.</caption>\n"
     + '        <thead><tr><th scope="col">Edición</th><th scope="col">Total local</th><th scope="col">Sobre Standard</th><th scope="col">GTA$ incluidos</th><th scope="col">Por cada 100.000 GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">Los precios Standard (79,99 $) y Ultimate (99,99 $) están confirmados. La cifra de GTA$ incluidos de Ultimate es modelada, no confirmada.</p>\n    </section>';

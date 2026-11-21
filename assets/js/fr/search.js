@@ -21,11 +21,11 @@
     { slug: "internet-speed-check", title: "Conseiller de vitesse Internet GTA 6", desc: "Vérifiez si votre connexion est assez rapide pour les téléchargements GTA 6 et Online." },
     { slug: "price-by-country", title: "Prix de GTA 6 par pays", desc: "Prix de GTA 6 par pays en devise locale." },
     { slug: "economy-calculator", title: "Calculateur de ROI argent et business GTA 6", desc: "Trouvez le moyen le plus rapide de gagner des GTA$ et quelles entreprises rapportent en premier." },
-    { slug: "gta-6-tracker", title: "Suivi du lancement de GTA 6", desc: "Suivi du lancement et jalons de préchargement pour GTA 6." },
+    { slug: "gta-6-tracker", title: "Jalons du lancement de GTA 6", desc: "Jalons de lancement et fenêtres de préchargement terminées pour GTA 6." },
     { slug: "settings-optimizer", title: "Optimiseur de réglages graphiques", desc: "Réglez les paramètres graphiques pour vos ips cibles et votre configuration." },
     { slug: "hardware-comparison", title: "Comparateur de matériel", desc: "Comparez deux GPU ou CPU en face à face pour GTA 6." },
     { slug: "server-status", title: "Statut du serveur GTA 6", desc: "Les serveurs GTA 6 sont-ils en panne ? Vérification de statut en direct." },
-    { slug: "preload-tracker", title: "Suivi de préchargement GTA 6", desc: "Compte à rebours du préchargement et du lancement dans votre fuseau horaire." },
+    { slug: "preload-tracker", title: "Fenêtres de préchargement de GTA 6", desc: "Le préchargement du lancement est terminé. Cet outil est toujours en développement." },
     { slug: "vehicle-comparison", title: "Comparaison de véhicules GTA 6", desc: "Comparez deux véhicules GTA 6 en face à face." },
     { slug: "weapon-comparison", title: "Comparaison de statistiques d'armes GTA 6", desc: "Statistiques d'armes GTA 6 en face à face : dégâts, cadence de tir, portée, précision." }
   ];

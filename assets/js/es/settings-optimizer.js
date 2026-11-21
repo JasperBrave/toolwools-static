@@ -141,9 +141,9 @@ function render() {
     : plan.method === "upscaler"
       ? "highest preset that hits " + state.target + " fps with " + L(UPSCALER_META[plan.upscaler].label) + "."
       : plan.method === "framegen"
-        ? "hits " + state.target + " fps only with " + L(UPSCALER_META[plan.upscaler].label) + " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (interpolated frames, not measured)."
-        : "still short of " + state.target + " fps even at Bajo + " + L(UPSCALER_META[plan.upscaler].label) + " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (interpolated). Lower the target or upgrade the GPU.";
-  var verdictText = result.hitsTarget ? "Hits " + state.target + " fps" : "Short of " + state.target + " fps by " + Math.abs(result.targetGap) + " fps";
+        ? "hits " + state.target + " fps solo con " + L(UPSCALER_META[plan.upscaler].label) + " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (fotogramas interpolados, no medidos)."
+        : "still short of " + state.target + " fps even at Bajo + " + L(UPSCALER_META[plan.upscaler].label) + " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (interpolado). Baja el objetivo o actualiza la GPU.";
+  var verdictText = result.hitsTarget ? "Alcanza " + state.target + " fps" : "Por debajo de " + state.target + " fps por " + Math.abs(result.targetGap) + " fps";
   var fgNote = result.fgApplied ? " El promedio con generación de fotogramas son fotogramas interpolados, no medidos." : "";
 
   var tldr = $("[data-tldr-card]");
@@ -154,8 +154,8 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = result.hitsTarget
-      ? "Sí, " + gpu.label + " + " + cpu.label + " hits " + state.target + " fps at " + L(RES_META[state.res].short) + " en " + presetLabel + ": about " + result.avgFps + " fps average, " + result.lowFps + " fps 1% low." + (plan.method === "native" ? " Ultra native reaches " + ultra.avgFps + " fps." : "") + fgNote
-      : "Short, " + gpu.label + " + " + cpu.label + " reaches about " + result.avgFps + " fps average (" + result.lowFps + " fps 1% low) at " + L(RES_META[state.res].short) + " en " + presetLabel + ", " + Math.abs(result.targetGap) + " fps por debajo del " + state.target + " fps target." + fgNote;
+      ? "Sí, " + gpu.label + " + " + cpu.label + " alcanza " + state.target + " fps en " + L(RES_META[state.res].short) + " en " + presetLabel + ": unos " + result.avgFps + " fps de media, " + result.lowFps + " fps de 1% mínimo." + (plan.method === "native" ? " Ultra native reaches " + ultra.avgFps + " fps." : "") + fgNote
+      : "Corto, " + gpu.label + " + " + cpu.label + " llega a unos " + result.avgFps + " fps de media (" + result.lowFps + " fps de 1% mínimo) en " + L(RES_META[state.res].short) + " en " + presetLabel + ", " + Math.abs(result.targetGap) + " fps por debajo del objetivo de " + state.target + " fps." + fgNote;
     if (label) label.textContent = verdictText + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = verdictText + ", " + result.avgFps + " fps de media";
@@ -165,10 +165,10 @@ function render() {
   var out = $("[data-output-panel]");
   if (out) {
     var vramLine = result.vramShortGB > 0
-      ? "<li><strong>Textures: drop one tier</strong>, your card is " + result.vramShortGB + " GB short of the " + result.vramNeededGB + " GB pool at " + presetLabel + ", so 1% mínimos will stutter.</li>"
-      : "<li><strong>Texturas: Máx, AF 16x, AO activado</strong>, nearly free. " + result.vramNeededGB + " GB necesarios, your card has " + inputFor(plan.preset, plan.upscaler, plan.frameGen).cardVramGB + " GB.</li>";
+      ? "<li><strong>Texturas: baja un nivel</strong>, tu tarjeta es " + result.vramShortGB + " GB short of the " + result.vramNeededGB + " GB de GTA 6 en " + presetLabel + ", así que los mínimos del 1% tendrán tirones.</li>"
+      : "<li><strong>Texturas: Máx, AF 16x, AO activado</strong>, casi gratis. " + result.vramNeededGB + " GB necesarios, tu tarjeta tiene " + inputFor(plan.preset, plan.upscaler, plan.frameGen).cardVramGB + " GB.</li>";
     var cutLine = plan.preset === "ultra" && plan.method === "native"
-      ? "<li><strong>Reflejos con trazado de rayos: desactivados</strong>, 18–30%, the most expensive single option, if you want headroom.</li>"
+      ? "<li><strong>Reflejos con trazado de rayos: desactivados</strong>, 18–30%, la opción individual más cara, si quieres margen.</li>"
       : "<li><strong>Reflejos con trazado de rayos: desactivados</strong>, 18–30%, la opción individual más cara.</li><li><strong>Volumétricos: Medio, Sombras: Alto</strong>, los siguientes dos recortes, 8–14% y 7–12%.</li>";
     var tweaks = suggestTweaks(inputFor(plan.preset, plan.upscaler, plan.frameGen), result);
     var tweaksHtml = tweaks.length
@@ -181,7 +181,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + verdictText + '</p>' +
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> fps de media</span></h3>' +
-      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps band (±15%), ' + result.lowFps + ' fps 1% low. ' + presetLabel + ' preset' + (plan.upscaler !== "off" ? " + " + L(UPSCALER_META[plan.upscaler].label) : "") + (plan.frameGen !== "off" ? " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (interpolated)" : "") + ', at ' + L(RES_META[state.res].label) + '.' + fgNote + '</p></div></div>' +
+      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps de banda (±15%), ' + result.lowFps + ' fps de 1% mínimo. ' + presetLabel + ' preset' + (plan.upscaler !== "off" ? " + " + L(UPSCALER_META[plan.upscaler].label) : "") + (plan.frameGen !== "off" ? " + " + L(FRAMEGEN_META[plan.frameGen].label) + " (interpolado)" : "") + ', at ' + L(RES_META[state.res].label) + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">FPS medios</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">FPS de 1% mínimo</span><span class="val">' + result.lowFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((result.lowFps / 144) * 100)) + '%"></div></div></div>' +
@@ -196,8 +196,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " fps de media (" + result.lowFps + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 settings for " + gpu.label + " + " + cpu.label + " at " + L(RES_META[state.res].short) + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " fps de media (" + result.lowFps + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Ajustes de GTA 6 para " + gpu.label + " + " + cpu.label + " at " + L(RES_META[state.res].short) + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -215,13 +215,13 @@ function render() {
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = verdictText + ". Estimated " + result.avgFps + " average frames per second, " + result.lowFps + " 1 percent low, at " + L(RES_META[state.res].short) + " " + presetLabel + "." + fgNote;
+  if (live) live.textContent = verdictText + ". Estimados " + result.avgFps + " fotogramas por segundo de media, " + result.lowFps + " 1% mínimo, en " + L(RES_META[state.res].short) + " " + presetLabel + "." + fgNote;
   syncUrl();
 }
 
 function shareText() {
   var plan = optimize();
-  return findGpuById(state.gpu).label + " + " + findCpuById(state.cpu).label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + L(PRESET_META[plan.preset].label) + " · " + plan.result.avgFps + " fps de media (" + plan.result.lowFps + " 1% low). GTA 6 settings optimizer: " + shareUrl();
+  return findGpuById(state.gpu).label + " + " + findCpuById(state.cpu).label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + L(PRESET_META[plan.preset].label) + " · " + plan.result.avgFps + " fps de media (" + plan.result.lowFps + " mínimo del 1%). Optimizador de ajustes de GTA 6: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

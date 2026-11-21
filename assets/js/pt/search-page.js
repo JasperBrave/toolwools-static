@@ -51,10 +51,10 @@
     var kindLabel = { tool: "Ferramentas", guide: "Guias", resource: "Reference pages" };
     if (summaryEl) {
       if (!trimmed) summaryEl.textContent = "A busca cobre 18 calculadoras e planejadores ativos, 2 guias escritos e nossas páginas de referência. Escolha um ponto de partida abaixo ou digite o que seu PC precisa saber.";
-      else if (!results.length) summaryEl.textContent = "Nothing on the site matches \"" + trimmed + "\" yet. Hardware termos like \"rtx 4070\", \"vram\" or \"download time\" find the most.";
+      else if (!results.length) summaryEl.textContent = "Nada no site corresponde a \"" + trimmed + "\" ainda. Termos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encontram mais.";
       else {
         var best = results[0];
-        summaryEl.textContent = "\"" + trimmed + "\" matches " + results.length + " result" + (results.length === 1 ? "" : "s") + " across the site. The closest match is " + best.title + ".";
+        summaryEl.textContent = "\"" + trimmed + "\" matches " + results.length + " result" + (results.length === 1 ? "" : "s") + " em todo o site. A correspondência mais próxima é " + best.title + ".";
       }
     }
     if (status) status.textContent = results.length + " match" + (results.length === 1 ? "" : "es") + (trimmed ? ' for "' + trimmed + '"' : "");
@@ -72,7 +72,7 @@
     if (!results.length) {
       var empty = document.createElement("div");
       empty.className = "empty-state";
-      empty.innerHTML = "<p>Nothing matches \"" + esc(trimmed) + "\" yet. Try a broader term like <em>vram</em>, <em>fps</em>, or <em>download</em>.</p><p style=\"margin-top:0.75rem\"><a href=\"/search\">Limpar busca</a></p>";
+      empty.innerHTML = "<p>Nothing matches \"" + esc(trimmed) + "\" ainda. Tente um termo mais amplo como <em>vram</em>, <em>fps</em>, ou <em>download</em>.</p><p style=\"margin-top:0.75rem\"><a href=\"/search\">Limpar busca</a></p>";
       resultsEl.appendChild(empty);
       if (listbox) { listbox.innerHTML = ""; listbox.hidden = true; }
       return;

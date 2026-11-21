@@ -43,36 +43,36 @@
           var parts = row.email.split("@");
           masked.textContent = parts[0].slice(0, 1) + "\u2022\u2022@" + (parts[1] || "");
         }
-        showNotice(true, "Settings loaded for your address. As mudanças são salvas quando você pressiona Salvar preferências; se uma gravação falhar, use a opção de cancelamento por e-mail abaixo.");
+        showNotice(true, "Configurações carregadas para o seu endereço. As alterações são salvas quando você pressiona Salvar preferências; se uma gravação falhar, use a opção de cancelamento por e-mail abaixo.");
       } else {
         if (cardEl) cardEl.hidden = false;
-        showNotice(false, "That manage link is no longer valid. Use the one-click opt-out below instead.");
+        showNotice(false, "Esse link de gerenciamento não é mais válido. Use o cancelamento em um clique abaixo.");
       }
     }).catch(function () {
       if (loadingEl) loadingEl.hidden = true;
       if (cardEl) cardEl.hidden = false;
-      showNotice(false, "We could not verify that manage link from this page, so your saved settings are not shown here. Use the one-click opt-out below, or email hello@toolwools.com and we will update your preferences by hand.");
+      showNotice(false, "Não conseguimos verificar esse link de gerenciamento a partir desta página, então suas configurações salvas não são mostradas aqui. Use o cancelamento em um clique abaixo, ou envie um e-mail para hello@toolwools.com e atualizaremos suas preferências manualmente.");
     });
   } else {
     if (loadingEl) loadingEl.hidden = true;
     if (cardEl) cardEl.hidden = false;
-    showNotice(false, "We could not verify that manage link from this page. Use the one-click opt-out below, or email hello@toolwools.com.");
+    showNotice(false, "Não conseguimos verificar esse link de gerenciamento a partir desta página. Use o cancelamento em um clique abaixo, ou envie um e-mail para hello@toolwools.com.");
   }
   if (emailForm) emailForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var value = emailInput ? emailInput.value.trim() : "";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      if (emailStatus) { emailStatus.hidden = false; emailStatus.textContent = "Enter the email address you subscribed with."; }
+      if (emailStatus) { emailStatus.hidden = false; emailStatus.textContent = "Digite o endereço de e-mail com o qual você se inscreveu."; }
       if (emailInput) emailInput.setAttribute("aria-invalid", "true");
       return;
     }
     var btn = emailForm.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = "Opting out\u2026"; }
+    if (btn) { btn.disabled = true; btn.textContent = "Cancelando inscrição…"; }
     function fallback() {
       if (btn) { btn.disabled = false; btn.textContent = "Cancelar inscrição"; }
       if (emailStatus) {
         emailStatus.hidden = false;
-        emailStatus.innerHTML = "We could not record that automatically. Please email <a href=\"mailto:hello@toolwools.com?subject=" + encodeURIComponent("Cancelar inscrição " + value) + "\">hello@toolwools.com</a> with the subject \"Cancelar inscrição " + value + "\" and we will opt you out by hand.";
+        emailStatus.innerHTML = "Não conseguimos registrar isso automaticamente. Envie um e-mail para <a href=\"mailto:hello@toolwools.com?subject=" + encodeURIComponent("Cancelar inscrição " + value) + "\">hello@toolwools.com</a> com o assunto \"Cancelar inscrição " + value + "\" e cancelaremos sua inscrição manualmente.";
       }
     }
     if (!cfg.url || !cfg.key) { fallback(); return; }
@@ -88,6 +88,6 @@
   });
   if (formEl) formEl.addEventListener("submit", function (e) {
     e.preventDefault();
-    showNotice(false, "Saving from this page is not available: preference changes need the manage link verified on the server. Use the email opt-out below, or email hello@toolwools.com with the frequency and topics you want.");
+    showNotice(false, "Salvar a partir desta página não está disponível: as alterações de preferência precisam do link de gerenciamento verificado no servidor. Use o cancelamento por e-mail abaixo, ou envie um e-mail para hello@toolwools.com com a frequência e os tópicos que você quer.");
   });
 })();

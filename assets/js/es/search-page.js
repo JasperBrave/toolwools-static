@@ -51,10 +51,10 @@
     var kindLabel = { tool: "Herramientas", guide: "Guías", resource: "Reference pages" };
     if (summaryEl) {
       if (!trimmed) summaryEl.textContent = "La búsqueda cubre 18 calculadoras y planificadores en vivo, 2 guías escritas y nuestras páginas de referencia. Elige un punto de partida abajo o escribe lo que tu PC necesita saber.";
-      else if (!results.length) summaryEl.textContent = "Nothing on the site matches \"" + trimmed + "\" yet. Hardware términos like \"rtx 4070\", \"vram\" or \"download time\" find the most.";
+      else if (!results.length) summaryEl.textContent = "Nada en el sitio coincide con \"" + trimmed + "\" todavía. Términos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encuentran más.";
       else {
         var best = results[0];
-        summaryEl.textContent = "\"" + trimmed + "\" matches " + results.length + " result" + (results.length === 1 ? "" : "s") + " across the site. The closest match is " + best.title + ".";
+        summaryEl.textContent = "\"" + trimmed + "\" matches " + results.length + " result" + (results.length === 1 ? "" : "s") + " en todo el sitio. La coincidencia más cercana es " + best.title + ".";
       }
     }
     if (status) status.textContent = results.length + " match" + (results.length === 1 ? "" : "es") + (trimmed ? ' for "' + trimmed + '"' : "");
@@ -72,7 +72,7 @@
     if (!results.length) {
       var empty = document.createElement("div");
       empty.className = "empty-state";
-      empty.innerHTML = "<p>Nothing matches \"" + esc(trimmed) + "\" yet. Try a broader term like <em>vram</em>, <em>fps</em>, or <em>download</em>.</p><p style=\"margin-top:0.75rem\"><a href=\"/search\">Limpiar búsqueda</a></p>";
+      empty.innerHTML = "<p>Nothing matches \"" + esc(trimmed) + "\" todavía. Prueba un término más amplio como <em>vram</em>, <em>fps</em>, o <em>download</em>.</p><p style=\"margin-top:0.75rem\"><a href=\"/search\">Limpiar búsqueda</a></p>";
       resultsEl.appendChild(empty);
       if (listbox) { listbox.innerHTML = ""; listbox.hidden = true; }
       return;

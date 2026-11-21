@@ -43,36 +43,36 @@
           var parts = row.email.split("@");
           masked.textContent = parts[0].slice(0, 1) + "\u2022\u2022@" + (parts[1] || "");
         }
-        showNotice(true, "Settings loaded for your address. Los cambios se guardan cuando pulsas Guardar preferencias; si falla un guardado, usa la opción de baja por correo de abajo.");
+        showNotice(true, "Ajustes cargados para tu dirección. Los cambios se guardan cuando pulsas Guardar preferencias; si falla un guardado, usa la opción de baja por correo de abajo.");
       } else {
         if (cardEl) cardEl.hidden = false;
-        showNotice(false, "That manage link is no longer valid. Use the one-click opt-out below instead.");
+        showNotice(false, "Ese enlace de gestión ya no es válido. Usa la baja en un clic de abajo.");
       }
     }).catch(function () {
       if (loadingEl) loadingEl.hidden = true;
       if (cardEl) cardEl.hidden = false;
-      showNotice(false, "We could not verify that manage link from this page, so your saved settings are not shown here. Use the one-click opt-out below, or email hello@toolwools.com and we will update your preferences by hand.");
+      showNotice(false, "No pudimos verificar ese enlace de gestión desde esta página, así que tus ajustes guardados no se muestran aquí. Usa la baja en un clic de abajo, o escribe a hello@toolwools.com y actualizaremos tus preferencias a mano.");
     });
   } else {
     if (loadingEl) loadingEl.hidden = true;
     if (cardEl) cardEl.hidden = false;
-    showNotice(false, "We could not verify that manage link from this page. Use the one-click opt-out below, or email hello@toolwools.com.");
+    showNotice(false, "No pudimos verificar ese enlace de gestión desde esta página. Usa la baja en un clic de abajo, o escribe a hello@toolwools.com.");
   }
   if (emailForm) emailForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var value = emailInput ? emailInput.value.trim() : "";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      if (emailStatus) { emailStatus.hidden = false; emailStatus.textContent = "Enter the email address you subscribed with."; }
+      if (emailStatus) { emailStatus.hidden = false; emailStatus.textContent = "Introduce la dirección de correo con la que te suscribiste."; }
       if (emailInput) emailInput.setAttribute("aria-invalid", "true");
       return;
     }
     var btn = emailForm.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = "Opting out\u2026"; }
+    if (btn) { btn.disabled = true; btn.textContent = "Dándote de baja…"; }
     function fallback() {
       if (btn) { btn.disabled = false; btn.textContent = "Cancelar suscripción"; }
       if (emailStatus) {
         emailStatus.hidden = false;
-        emailStatus.innerHTML = "We could not record that automatically. Please email <a href=\"mailto:hello@toolwools.com?subject=" + encodeURIComponent("Cancelar suscripción " + value) + "\">hello@toolwools.com</a> with the subject \"Cancelar suscripción " + value + "\" and we will opt you out by hand.";
+        emailStatus.innerHTML = "No pudimos registrarlo automáticamente. Envía un correo a <a href=\"mailto:hello@toolwools.com?subject=" + encodeURIComponent("Cancelar suscripción " + value) + "\">hello@toolwools.com</a> con el asunto \"Cancelar suscripción " + value + "\" y te daremos de baja a mano.";
       }
     }
     if (!cfg.url || !cfg.key) { fallback(); return; }
@@ -88,6 +88,6 @@
   });
   if (formEl) formEl.addEventListener("submit", function (e) {
     e.preventDefault();
-    showNotice(false, "Saving from this page is not available: preference changes need the manage link verified on the server. Use the email opt-out below, or email hello@toolwools.com with the frequency and topics you want.");
+    showNotice(false, "Guardar desde esta página no está disponible: los cambios de preferencias necesitan el enlace de gestión verificado en el servidor. Usa la baja por correo de abajo, o escribe a hello@toolwools.com con la frecuencia y los temas que quieres.");
   });
 })();
