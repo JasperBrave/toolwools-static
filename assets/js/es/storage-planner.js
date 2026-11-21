@@ -75,6 +75,7 @@ function setSliderText(range, labelTemplate, value, valueEl) {
 }
 var freeSpaceTotalTemplate = captureText("[data-free-space-total]");
 var bufferPctTemplate = captureText("[data-buffer-pct]");
+var methodBufferPctTemplate = captureText("[data-method-buffer-pct]");
 var baseLabelTemplate = captureAttr("[data-base-range]", "aria-label");
 var patchLabelTemplate = captureAttr("[data-patch-range]", "aria-label");
 var dlcLabelTemplate = captureAttr("[data-dlc-range]", "aria-label");
@@ -201,6 +202,8 @@ function render() {
   if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }
   var bufPct = $("[data-buffer-pct]");
   if (bufPct) { var bufText = fmtLike(bufferPctTemplate, state.buffer); if (bufText) bufPct.textContent = bufText; }
+  var methodBufPct = $("[data-method-buffer-pct]");
+  if (methodBufPct) { var methodBufText = fmtLike(methodBufferPctTemplate, state.buffer); if (methodBufText) methodBufPct.textContent = methodBufText; }
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
