@@ -3,7 +3,7 @@
 // static build ships the tool catalogue (titles + descriptions from
 // src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
 // Enter opens, Escape closes. Links to /tools/<slug> (live tools), t.url when set
-// (e.g. /generators, which lives outside /tools), or /tools
+// (e.g. /pt/generators, which lives outside /tools), or /tools
 // for coming-soon entries, matching the source behaviour.
 (function () {
   var TOOLS = [
@@ -17,7 +17,7 @@
     { slug: "fps-calculator", title: "Calculadora de FPS do GTA 6", desc: "Estime a taxa de quadros para sua GPU em 1080p, 1440p e 4K em Baixo, Médio, Alto e Ultra." },
     { slug: "gpu-tier-list", title: "Lista de níveis de GPU do GTA 6", desc: "As melhores placas de vídeo para GTA 6, classificadas por nível." },
     { slug: "interactive-map", title: "Mapa Interativo do GTA 6", desc: "Explorador de Leonida e comparação de tamanho para o mapa do GTA 6." },
-    { slug: "pre-order-tracker", title: "Onde comprar GTA 6: Edições & Channels Compared", desc: "Onde comprar GTA 6, comparado por canal." },
+    { slug: "pre-order-tracker", title: "Onde comprar GTA 6: edições e canais comparados", desc: "Onde comprar GTA 6, comparado por canal." },
     { slug: "edition-comparison", title: "Seletor de Edições do GTA 6", desc: "Todas as edições do GTA 6 comparadas: bônus, preço e o que cada uma desbloqueia." },
     { slug: "internet-speed-check", title: "Consultor de Velocidade de Internet do GTA 6", desc: "Verifique se sua conexão é rápida o suficiente para downloads do GTA 6 e Online." },
     { slug: "price-by-country", title: "Preço do GTA 6 por País", desc: "GTA 6 price by country in local currency." },

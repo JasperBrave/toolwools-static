@@ -116,12 +116,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Everything clears with headroom. You will be running max settings on launch day.",
-    A: "Ready today — you will only tweak one or two settings on launch day.",
-    B: "Ready. One sub-score is behind but nothing blocks a smooth launch.",
+    S: "Everything clears with headroom. You can run max settings now that GTA 6 is out.",
+    A: "Ready today — you will only tweak one or two settings.",
+    B: "Ready. One sub-score is behind but nothing blocks smooth play.",
     C: "Playable, but pick a resolution / preset ladder that matches your weakest link.",
-    D: "Below the practical floor. Fix your weakest score before pre-loading.",
-    F: "Not ready. You will not have a smooth launch until you upgrade."
+    D: "Below the practical floor. Fix your weakest score before downloading.",
+    F: "Not ready. You will not have smooth play until you upgrade."
   };
   return {
     score,

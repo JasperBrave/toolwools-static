@@ -491,25 +491,25 @@ export const TIER_META = {
   },
   A: {
     label: "المتحمس",
-    verdict: "1440p Ultra أصلي بأكثر من 60 إطارا في الثانية. 4K High مع DLSS/FSR Quality واقعي.",
+    verdict: "1440p Ultra أصلي بأكثر من 60 إطارا في الثانية. 4K عالٍ مع DLSS/FSR Quality واقعي.",
     recommendedRes: "1440p",
     accent: "var(--accent-blue)"
   },
   B: {
     label: "الخيار الشائع",
-    verdict: "1080p Ultra أو 1440p High بأكثر من 60 إطارا في الثانية. الأساس لإطلاق سلس للعبة GTA 6.",
+    verdict: "1080p Ultra أو 1440p عالٍ بأكثر من 60 إطارا في الثانية. الأساس لإطلاق سلس للعبة GTA 6.",
     recommendedRes: "1440p",
     accent: "var(--accent-purple)"
   },
   C: {
     label: "المستوى المبتدئ",
-    verdict: "1080p High/Medium بمعدل 60 إطارا في الثانية. اخفض الإعدادات أو اعتمد على التحسين، فذاكرة VRAM غالبا ما تكون محدودة.",
+    verdict: "1080p عالٍ/متوسطة بمعدل 60 إطارا في الثانية. اخفض الإعدادات أو اعتمد على التحسين، فذاكرة VRAM غالبا ما تكون محدودة.",
     recommendedRes: "1080p",
     accent: "var(--accent-purple)"
   },
   D: {
     label: "دون الحد الأدنى",
-    verdict: "1080p Low بمعدل 30-45 إطارا في الثانية. دون الحد الأدنى المحتمل من Rockstar، والترقية مطروحة.",
+    verdict: "1080p منخفضة بمعدل 30-45 إطارا في الثانية. دون الحد الأدنى المحتمل من Rockstar، والترقية مطروحة.",
     recommendedRes: "1080p",
     accent: "#f59e0b"
   },

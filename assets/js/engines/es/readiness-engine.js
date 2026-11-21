@@ -117,12 +117,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Todo supera con margen. Jugarás con ajustes al máximo el día del lanzamiento.",
-    A: "Listo hoy, solo ajustarás uno o dos ajustes el día del lanzamiento.",
-    B: "Listo. Un subpuntaje va por detrás, pero nada bloquea un lanzamiento sin problemas.",
+    S: "Todo supera con margen. Puedes jugar con ajustes al máximo ahora que GTA 6 ya salió.",
+    A: "Listo hoy, solo ajustarás uno o dos ajustes.",
+    B: "Listo. Un subpuntaje va por detrás, pero nada bloquea un juego fluido.",
     C: "Jugable, pero elige una escala de resolución / preset que se ajuste a tu eslabón más débil.",
-    D: "Por debajo del mínimo práctico. Corrige tu puntaje más débil antes de la precarga.",
-    F: "No listo. No tendrás un lanzamiento sin problemas hasta que actualices."
+    D: "Por debajo del mínimo práctico. Corrige tu puntaje más débil antes de descargar.",
+    F: "No listo. No tendrás un juego fluido hasta que actualices."
   };
   return {
     score,

@@ -1,6 +1,6 @@
 // edition-comparison.js — Selector de ediciones de GTA 6 page logic.
 // Uses the ported edition engine (assets/js/engines/edition-engine.js).
-// AUDIT FIX H3: Ultimate uplift is 37.5% (109.99 / 79.99), never 42%.
+// AUDIT FIX H3: Ultimate uplift is 25.0% (99.99 / 79.99), never 42%.
 // State lives in the URL (?platform=&profile=&uplift=&p=&view=) so results
 // are shareable. Defaults match the source route loaderDeps:
 // PlayStation 5, story plus casual online, 30% uplift ceiling.

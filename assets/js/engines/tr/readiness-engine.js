@@ -117,12 +117,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Her şey fazlasıyla geçiyor. Çıkış günü maksimum ayarlarda oynayacaksın.",
-    A: "Bugün hazır, çıkış günü sadece bir iki ayar yapacaksın.",
-    B: "Hazır. Bir alt puan geride ama sorunsuz bir çıkışı engelleyen bir şey yok.",
+    S: "Her şey fazlasıyla geçiyor. GTA 6 çıktığına göre maksimum ayarlarda oynayabilirsin.",
+    A: "Bugün hazır, sadece bir iki ayar yapacaksın.",
+    B: "Hazır. Bir alt puan geride ama akıcı bir oyunu engelleyen bir şey yok.",
     C: "Oynanabilir ama en zayıf halkana uyan bir çözünürlük / hazır ayar merdiveni seç.",
-    D: "Pratik tabanın altında. Ön yüklemeden önce en zayıf puanını düzelt.",
-    F: "Hazır değil. Yükseltme yapana kadar sorunsuz bir çıkış olmayacak."
+    D: "Pratik tabanın altında. İndirmeden önce en zayıf puanını düzelt.",
+    F: "Hazır değil. Yükseltme yapana kadar akıcı bir oyun olmayacak."
   };
   return {
     score,

@@ -45,7 +45,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "Abaixo do mínimo", tone: "upgrade", blurb: "Sua máquina terá dificuldades. Espere menos de 30 fps em 1080p no Baixo, ou o jogo não vai iniciar direito." },
   min: { label: "Atende o mínimo", tone: "borderline", blurb: "Jogável em 1080p no Baixo a cerca de 30 fps. Se você tem um upgrade planejado, faça-o antes do lançamento." },
-  rec: { label: "Atende o Recomendado", tone: "ready", blurb: "60 fps confortáveis em 1080p Alto ou 1440p Médio. O ponto ideal para o dia do lançamento. Recomendado começa em 48 pontos (Mínimo 35 · Ultra 82)." },
+  rec: { label: "Atende o Recomendado", tone: "ready", blurb: "60 fps confortáveis em 1080p Alto ou 1440p Médio. O ponto ideal para jogar com fluidez. Recomendado começa em 48 pontos (Mínimo 35 · Ultra 82)." },
   ultra: { label: "Pronto para Ultra", tone: "ready", blurb: "4K no Alto ou 1440p no Ultra com folga para ray tracing. Você vai ser um dos prints que o pessoal compartilha." },
 };
 

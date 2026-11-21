@@ -117,12 +117,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Tudo passa com margem. Você vai jogar com configurações no máximo no dia do lançamento.",
-    A: "Pronto hoje, você só vai ajustar uma ou duas configurações no dia do lançamento.",
-    B: "Pronto. Um sub-pontuação está atrás, mas nada bloqueia um lançamento tranquilo.",
+    S: "Tudo passa com margem. Você pode jogar com configurações no máximo agora que o GTA 6 já foi lançado.",
+    A: "Pronto hoje, você só vai ajustar uma ou duas configurações.",
+    B: "Pronto. Uma subpontuação está atrás, mas nada bloqueia um jogo tranquilo.",
     C: "Jogável, mas escolha uma escala de resolução / preset adequada ao seu elo mais fraco.",
-    D: "Abaixo do mínimo prático. Corrija sua pontuação mais fraca antes do pré-carregamento.",
-    F: "Não pronto. Você não terá um lançamento tranquilo até atualizar."
+    D: "Abaixo do mínimo prático. Corrija sua pontuação mais fraca antes de baixar.",
+    F: "Não pronto. Você não terá um jogo tranquilo até atualizar."
   };
   return {
     score,

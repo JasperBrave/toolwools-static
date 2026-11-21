@@ -44,7 +44,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "Below Minimum", tone: "upgrade", blurb: "Your rig will struggle. Expect sub-30 fps at 1080p Low, or the game won't launch cleanly." },
   min: { label: "Meets Minimum", tone: "borderline", blurb: "Playable at 1080p Low around 30 fps. If you have an upgrade planned, do it before launch." },
-  rec: { label: "Meets Recommended", tone: "ready", blurb: "Comfortable 60 fps at 1080p High or 1440p Medium. The sweet spot for launch day. Recommended starts at 48 points (Minimum 35 · Ultra 82)." },
+  rec: { label: "Meets Recommended", tone: "ready", blurb: "Comfortable 60 fps at 1080p High or 1440p Medium. The sweet spot for smooth play. Recommended starts at 48 points (Minimum 35 · Ultra 82)." },
   ultra: { label: "Ultra Ready", tone: "ready", blurb: "4K High or 1440p Ultra with room for ray tracing. You'll be one of the screenshots people share." },
 };
 

@@ -24,11 +24,16 @@
       b.setAttribute("aria-pressed", String(v === platform || (v === "" && !platform)));
     });
   }
+  // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.
+  // Plain toLowerCase() turns "İ" into "i" + U+0307 combining dot, so "İsim"
+  // never matches "isim"; folding first fixes every İ-word query in all locales.
+  function norm(s) { return s.replace(/[İI]/g, "i").replace(/ı/g, "i").toLowerCase(); }
+
   function apply() {
-    var needle = q.trim().toLowerCase();
+    var needle = norm(q.trim());
     var shown = 0, liveShown = 0;
     cards.forEach(function (card) {
-      var hay = (card.getAttribute("data-search-text") || "").toLowerCase();
+      var hay = norm(card.getAttribute("data-search-text") || "");
       var okSearch = !needle || hay.indexOf(needle) !== -1;
       var okCat = !category || card.getAttribute("data-category") === category;
       var okStatus = !platform || card.getAttribute("data-status") === platform;

@@ -44,7 +44,7 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 var TIER_META = {
   below: { label: "En dessous du minimum", tone: "upgrade", blurb: "Votre PC aura du mal. Attendez-vous à moins de 30 ips en 1080p Faible, ou le jeu ne se lancera pas proprement." },
   min: { label: "Atteint le minimum", tone: "borderline", blurb: "Jouable en 1080p Faible autour de 30 ips. Si vous avez une mise à niveau prévue, faites-la avant le lancement." },
-  rec: { label: "Atteint le recommandé", tone: "ready", blurb: "60 ips confortables en 1080p Élevé ou 1440p Moyen. Le point idéal pour le jour du lancement. Recommandé commence à 48 points (Minimum 35 · Ultra 82)." },
+  rec: { label: "Atteint le recommandé", tone: "ready", blurb: "60 ips confortables en 1080p Élevé ou 1440p Moyen. Le point idéal pour jouer sereinement. Recommandé commence à 48 points (Minimum 35 · Ultra 82)." },
   ultra: { label: "Prêt Ultra", tone: "ready", blurb: "4K Élevé ou 1440p Ultra avec de la place pour le ray tracing. Vous serez l'une des captures d'écran que les gens partagent." },
 };
 

@@ -117,12 +117,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Tout suffit avec de la marge. Vous jouerez le jour du lancement avec les réglages maximum.",
-    A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages le jour du lancement.",
-    B: "Prêt. Un sous-score est en retard, mais rien ne bloque un lancement sans accroc.",
+    S: "Tout suffit avec de la marge. Vous pouvez jouer avec les réglages maximum maintenant que GTA 6 est sorti.",
+    A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages.",
+    B: "Prêt. Un sous-score est en retard, mais rien ne bloque un jeu fluide.",
     C: "Jouable, mais choisissez une échelle résolution/préréglage adaptée à votre maillon le plus faible.",
-    D: "Sous la limite inférieure pratique. Corrigez votre score le plus faible avant le préchargement.",
-    F: "Pas prêt. Vous n'aurez pas un lancement sans accroc tant que vous n'aurez pas mis à niveau."
+    D: "Sous la limite inférieure pratique. Corrigez votre score le plus faible avant le téléchargement.",
+    F: "Pas prêt. Vous n'aurez pas un jeu fluide tant que vous n'aurez pas mis à niveau."
   };
   return {
     score,

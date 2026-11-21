@@ -491,25 +491,25 @@ export const TIER_META = {
   },
   A: {
     label: "Meraklı",
-    verdict: "1440p Ultra'da 60+ fps yerel. DLSS/FSR Quality ile 4K High gerçekçi.",
+    verdict: "1440p Ultra'da 60+ fps yerel. DLSS/FSR Quality ile 4K Yüksek gerçekçi.",
     recommendedRes: "1440p",
     accent: "var(--accent-blue)"
   },
   B: {
     label: "En ideal ana akım",
-    verdict: "1080p Ultra veya 1440p High ile 60+ fps. Sorunsuz bir GTA 6 çıkışı için temel seviye.",
+    verdict: "1080p Ultra veya 1440p Yüksek ile 60+ fps. Sorunsuz bir GTA 6 çıkışı için temel seviye.",
     recommendedRes: "1440p",
     accent: "var(--accent-purple)"
   },
   C: {
     label: "Giriş seviyesi",
-    verdict: "1080p High/Medium ile 60 fps. Ayarları düşürün veya yükseltmeye güvenin, VRAM genelde dardır.",
+    verdict: "1080p Yüksek/Orta ile 60 fps. Ayarları düşürün veya yükseltmeye güvenin, VRAM genelde dardır.",
     recommendedRes: "1080p",
     accent: "var(--accent-purple)"
   },
   D: {
     label: "Minimum altı",
-    verdict: "1080p Low ile 30-45 fps. Rockstar'ın olası minimum seviyesinin altında, yükseltme gündemde.",
+    verdict: "1080p Düşük ile 30-45 fps. Rockstar'ın olası minimum seviyesinin altında, yükseltme gündemde.",
     recommendedRes: "1080p",
     accent: "#f59e0b"
   },

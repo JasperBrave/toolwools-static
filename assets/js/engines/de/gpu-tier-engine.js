@@ -491,25 +491,25 @@ export const TIER_META = {
   },
   A: {
     label: "Enthusiast",
-    verdict: "1440p Ultra nativ mit 60+ fps. 4K High mit DLSS/FSR Quality ist realistisch.",
+    verdict: "1440p Ultra nativ mit 60+ fps. 4K Hoch mit DLSS/FSR Quality ist realistisch.",
     recommendedRes: "1440p",
     accent: "var(--accent-blue)"
   },
   B: {
     label: "Mainstream-Sweet-Spot",
-    verdict: "1080p Ultra oder 1440p High mit 60+ fps. Die Basis für einen reibungslosen GTA-6-Launch.",
+    verdict: "1080p Ultra oder 1440p Hoch mit 60+ fps. Die Basis für einen reibungslosen GTA-6-Launch.",
     recommendedRes: "1440p",
     accent: "var(--accent-purple)"
   },
   C: {
     label: "Einstiegsklasse",
-    verdict: "1080p High/Medium mit 60 fps. Senke die Einstellungen oder nutze Upscaling, der VRAM ist oft knapp.",
+    verdict: "1080p Hoch/Mittel mit 60 fps. Senke die Einstellungen oder nutze Upscaling, der VRAM ist oft knapp.",
     recommendedRes: "1080p",
     accent: "var(--accent-purple)"
   },
   D: {
     label: "Unter dem Minimum",
-    verdict: "1080p Low mit 30-45 fps. Unter dem wahrscheinlichen Minimum von Rockstar, ein Upgrade steht an.",
+    verdict: "1080p Niedrig mit 30-45 fps. Unter dem wahrscheinlichen Minimum von Rockstar, ein Upgrade steht an.",
     recommendedRes: "1080p",
     accent: "#f59e0b"
   },

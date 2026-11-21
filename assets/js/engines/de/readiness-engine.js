@@ -117,12 +117,12 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Alles reicht mit Reserve. Du wirst am Launch-Tag mit Max-Einstellungen spielen.",
-    A: "Heute bereit, du wirst am Launch-Tag nur ein oder zwei Einstellungen tweaken.",
-    B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert einen reibungslosen Launch.",
+    S: "Alles reicht mit Reserve. Du kannst jetzt mit Max-Einstellungen spielen.",
+    A: "Heute bereit, du wirst nur ein oder zwei Einstellungen tweaken.",
+    B: "Bereit. Ein Sub-Score liegt zurück, aber nichts blockiert geschmeidiges Spielen.",
     C: "Spielbar, aber wähle eine Auflösungs-/Preset-Leiter, die zu deinem schwächsten Glied passt.",
-    D: "Unter der praktischen Untergrenze. Fixe deinen schwächsten Score vor dem Pre-Load.",
-    F: "Nicht bereit. Du wirst keinen reibungslosen Launch haben, bis du upgradest."
+    D: "Unter der praktischen Untergrenze. Fixe deinen schwächsten Score vor dem Download.",
+    F: "Nicht bereit. Du wirst kein geschmeidiges Spiel haben, bis du upgradest."
   };
   return {
     score,
