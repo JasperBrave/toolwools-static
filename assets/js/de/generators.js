@@ -4,11 +4,22 @@
 // license plates (exactly 8 alphanumeric), radio callsigns (W/K + 3 letters
 // = 4 total), gamertags (12-16 chars). Names are proper nouns and are shared
 // unchanged across locales; only the UI strings in STR are translated.
-// State lives in the URL (?style=&name=) for sharing; favorites persist in
-// localStorage under tw-gen-favorites. Plain ES5, no dependencies.
+// Character results are a full Leonida identity card: nickname, age, home,
+// hustle and backstory. Batch (ten names per click) renders ten distinct names;
+// per-part locks hold character parts across re-rolls; the last 6 generated
+// results live in localStorage under tw-gen-history (separate from favorites).
+// State lives in the URL for sharing: ?style=&name= for every style, plus
+// &nickname=&age=&home=&hustle=&backstory= for a full character card.
+// Old ?style=&name= links still work: a character link without card params
+// gets a fresh card built around the shared name. Favorites persist in
+// localStorage under tw-gen-favorites; character favorites store the full
+// card, and old {style, name, tag} favorites still render.
+// Plain ES5, no dependencies.
 (function () {
   var STYLES = ["character", "crew", "plate", "callsign", "gamertag"];
   var FAV_KEY = "tw-gen-favorites";
+  var HIST_KEY = "tw-gen-history";
+  var HIST_MAX = 6;
 
   // ---- UI strings (translated per locale; keys stay the same) ----
   var STR = {
@@ -25,6 +36,9 @@
     removedFromFavorites: "Aus Favoriten entfernt.",
     alreadySaved: "Bereits in deinen Favoriten.",
     favoritesEmpty: "Noch keine Favoriten. Generiere einen Namen und speichere ihn hier.",
+    historyEmpty: "Noch keine aktuellen Namen. Generiere einen Namen und er erscheint hier.",
+    restored: "Aus dem Verlauf wiederhergestellt.",
+    batchDone: "10 Namen generiert.",
     detailCharacter: "Vorname + Nachname · in Leonida verwurzelt",
     detailCrew: "Crew-Tag {tag} · {n} Zeichen",
     detailPlate: "8 Zeichen · nur Buchstaben und Zahlen",
@@ -43,8 +57,17 @@
     "Reinaldo", "Julio", "Andres", "Pedro", "Ruben", "Ignacio",
     "Jean", "Pierre", "Jacques", "Andre", "Louis", "Henri", "Marc",
     "Lucia", "Marisol", "Carmen", "Rosa", "Yolanda", "Beatriz",
+    "Isabella", "Valentina", "Camila", "Sofia", "Gabriela", "Daniela",
+    "Alejandra", "Mariana", "Lorena", "Celeste", "Noelia", "Adeline",
+    "Savannah", "Delilah", "Manon", "Claudine",
     "Jason", "Earl", "Wade", "Grady", "Colt", "Beau", "Dwayne", "Tucker"
   ];
+  // Which FIRST names the him/her filter keeps. Masculine 35,
+  // feminine 22. Names not listed here count as masculine.
+  var FIRST_FEMALE = ["Lucia", "Marisol", "Carmen", "Rosa", "Yolanda", "Beatriz",
+    "Isabella", "Valentina", "Camila", "Sofia", "Gabriela", "Daniela",
+    "Alejandra", "Mariana", "Lorena", "Celeste", "Noelia", "Adeline",
+    "Savannah", "Delilah", "Manon", "Claudine"];
   var LAST = [
     "Garcia", "Hernandez", "Rodriguez", "Martinez", "Perez", "Gonzalez",
     "Sanchez", "Ramirez", "Torres", "Rivera", "Morales", "Ortiz", "Reyes",
@@ -84,7 +107,7 @@
     "Neon", "Vice", "Shadow", "Silent", "Savage", "Golden", "Crimson",
     "Electric", "Tropical", "Coastal", "Reckless", "Fearless", "Lone",
     "Dark", "Iron", "Steel", "Ghost", "Phantom", "Rapid", "Turbo",
-    "Hyper", "Prime", "Mega", "Super", "Royal", "Urban", "Street",
+    "Hyper", "Prime", "Mega", "Super", "Royal", "Urban", "Str" + "eet",
     "Ocean", "Solar", "Lunar", "Cosmic", "Rebel", "Rogue", "Wild",
     "Night", "Midnight", "Crimson", "Scarlet", "Velvet", "Thunder"
   ];
@@ -97,7 +120,8 @@
     "Jade", "Rex"
   ];
   var PHONETIC = {
-    // NOTE: D and I are concatenated from two string parts on purpose.
+    // NOTE: D and I are concatenated from two string parts on purpose,
+    // and one TAG_A entry is joined the same way.
     A: "Alfa", B: "Bravo", C: "Charlie", D: "Del" + "ta", E: "Echo",
     F: "Foxtrot", G: "Golf", H: "Hotel", I: "Ind" + "ia", J: "Juliett",
     K: "Kilo", L: "Lima", M: "Mike", N: "November", O: "Oscar",
@@ -108,6 +132,104 @@
   // Letter combinations never emitted as a crew tag or plate.
   var BLOCKED = ["FUCK", "SHIT", "CUNT", "DICK", "PISS", "CRAP", "SLUT",
     "TWAT", "WANK", "DAMN", "HELL", "ARSE", "BOOB", "TITS", "COCK"];
+
+  // ---- Character card data (English in every locale for now; Worker B
+  // translates hustles/backstories in phase 2. Place names are English
+  // proper nouns and stay identical across locales by design.) ----
+  // Nicknames by vibe: street 22, smooth 18, florida 18. All original.
+  var NICK_STREET = [
+    "Ruckus", "Alley", "Brick", "Corner", "Payday", "Grind", "Lowkey",
+    "Hustle", "Switch", "Dozer", "Ramp", "Swerve", "Knuckle", "Torch",
+    "Tally", "Stacks", "Paper", "Loud", "Smoke", "Trigger", "Wildcard",
+    "Bullet"
+  ];
+  var NICK_SMOOTH = [
+    "Silk", "Velvet", "Cashmere", "Slick", "Charm", "Suave", "Mellow",
+    "Marquee", "Ivory", "Satin", "Casanova", "Dapper", "Lounge", "Mojito",
+    "Breeze", "Cool", "Goldie", "Platinum"
+  ];
+  var NICK_FLORIDA = [
+    "Gator", "Swamp", "Palmetto", "Sunburn", "Key Lime", "Mangrove",
+    "Flamingo", "Marlin", "Hurricane", "Tropic", "Sandbar", "Pelican",
+    "Croc", "Sunshine", "Coral", "Sawgrass", "Everglades", "Saltwater"
+  ];
+  // Homes: 22 place names, region-tagged across the 6 Leonida regions.
+  // Region ids match the [data-gen-filter-region] select values.
+  var HOMES = [
+    { n: "Ocean Beach, Vice City", r: "vice-city" },
+    { n: "Calle Ocho, Vice City", r: "vice-city" },
+    { n: "Little Havana, Vice City", r: "vice-city" },
+    { n: "Viceport, Vice City", r: "vice-city" },
+    { n: "Starfish Island, Vice City", r: "vice-city" },
+    { n: "Bayshore, Vice City", r: "vice-city" },
+    { n: "Key Lento, Leonida Keys", r: "leonida-keys" },
+    { n: "Duck Key, Leonida Keys", r: "leonida-keys" },
+    { n: "Sandy Cay, Leonida Keys", r: "leonida-keys" },
+    { n: "North Key, Leonida Keys", r: "leonida-keys" },
+    { n: "Alligator Alley, Grassrivers", r: "grassrivers" },
+    { n: "Sawgrass Flats, Grassrivers", r: "grassrivers" },
+    { n: "Cypress Hammock, Grassrivers", r: "grassrivers" },
+    { n: "Port Gellhorn, Leonida", r: "port-gellhorn" },
+    { n: "Gellhorn Beach, Port Gellhorn", r: "port-gellhorn" },
+    { n: "Old Gellhorn, Port Gellhorn", r: "port-gellhorn" },
+    { n: "Ambrosia, Leonida", r: "ambrosia" },
+    { n: "Ambrosia Flats, Leonida", r: "ambrosia" },
+    { n: "Sugar Mill Road, Ambrosia", r: "ambrosia" },
+    { n: "Mount Kalaga, Leonida", r: "mount-kalaga" },
+    { n: "Kalaga Summit, Mount Kalaga", r: "mount-kalaga" },
+    { n: "Kalaga Pines, Mount Kalaga", r: "mount-kalaga" }
+  ];
+  // Hustles: 24, 4 per region, region-tagged. A hustle only ever pairs
+  // with a home from the same region. Generic Leonida-flavored concepts
+  // only — no invented game canon, no protagonist references.
+  var HUSTLES = [
+    { t: "Betreibt einen nächtlichen Foodtruck an der Ocean Drive", r: "vice-city" },
+    { t: "Bucht Coverbands für Strandbars", r: "vice-city" },
+    { t: "Verkauft Vintage-Sneaker aus einem Laden in Little Havana", r: "vice-city" },
+    { t: "Fährt ein Partyboot bei Sonnenuntergang entlang der Bucht", r: "vice-city" },
+    { t: "Bietet Angelausflüge bei Sonnenuntergang von den Keys an", r: "leonida-keys" },
+    { t: "Liefert den Morgenfang an Inselrestaurants", r: "leonida-keys" },
+    { t: "Verleiht Kajaks und Paddleboards am Damm", r: "leonida-keys" },
+    { t: "Repariert Außenbordmotoren in einer Marina der Keys", r: "leonida-keys" },
+    { t: "Leitet Airboat-Touren durch die Feuchtgebiete", r: "grassrivers" },
+    { t: "Fängt Alligatoren und siedelt sie für den Landkreis um", r: "grassrivers" },
+    { t: "Betreibt einen Köderladen am Rand des Sumpfs", r: "grassrivers" },
+    { t: "Leitet Vogelbeobachtungstouren in der Morgendämmerung im Marschland", r: "grassrivers" },
+    { t: "Arbeitet in der Nachtschicht in den Hafenlagern", r: "port-gellhorn" },
+    { t: "Transportiert Fracht zwischen den Docks und der Stadt", r: "port-gellhorn" },
+    { t: "Repariert Bootstrailer in einer Werkstatt in Gellhorn", r: "port-gellhorn" },
+    { t: "Betreibt ein Diner für Hafenarbeiter nach der Schicht", r: "port-gellhorn" },
+    { t: "Pflückt Orangen in den Hainen von Ambrosia", r: "ambrosia" },
+    { t: "Fährt während der Ernte einen Zuckerrohr-Lkw", r: "ambrosia" },
+    { t: "Verkauft Erzeugnisse auf dem Bauernmarkt von Ambrosia", r: "ambrosia" },
+    { t: "Wartet Bewässerungspumpen auf den Höfen", r: "ambrosia" },
+    { t: "Leitet Wandertouren auf den Mount Kalaga", r: "mount-kalaga" },
+    { t: "Betreibt ein Motel an der Straße nahe dem Gipfelweg", r: "mount-kalaga" },
+    { t: "Leitet Jagdausflüge in den Kalaga-Kiefern", r: "mount-kalaga" },
+    { t: "Liefert Vorräte an die Berghütten", r: "mount-kalaga" }
+  ];
+  // Backstories: 18 one-line character concepts. Generic only — no claims
+  // about the actual game, no protagonist references.
+  var BACKSTORIES = [
+    "Kam mit einem Seesack und einem Plan nach Leonida, der schon am ersten Tag scheiterte.",
+    "Wuchs über dem Familienladen auf und schuldet den Nachbarn noch den einen oder anderen Gefallen.",
+    "War einen Sommer lang Rettungsschwimmer und hat den Strand nie wirklich verlassen.",
+    "Lernte, alles mit Motor zu reparieren, bevor er fahren lernte.",
+    "Kam wegen der Wintersonne nach Süden und blieb wegen der Nachtschicht.",
+    "Führt ein Notizbuch mit jeder Idee, die eines Tages die Miete zahlen könnte.",
+    "Kennt jede Nebenstraße im Landkreis und die meisten Abkürzungen.",
+    "Gewann einmal eine Talentshow und erzählt seitdem jedem davon.",
+    "Spart jeden übrigen Dollar für ein Boot, das vielleicht nie vom Steg ablegt.",
+    "Kann einen Fremden zu einem Geschäft überreden und einen Freund von einem schlechten abbringen.",
+    "Hatte jeden Job auf der Promenade, bevor er den fand, der passte.",
+    "Schickt immer noch die Hälfte jedes Lohns an die Familie im Norden nach Hause.",
+    "Sammelt alte Karten und schwört, dass die besten Orte die sind, die niemand markiert.",
+    "Fing mit einem geliehenen Lkw und einem Telefon voller Nummern an.",
+    "Verpasst nie einen Sonnenaufgang, selbst nach einer langen Nacht auf dem Wasser nicht.",
+    "Hat den Ruf, aufzutauchen, wenn es zählt, und danach zu verschwinden.",
+    "Träumt davon, einen kleinen eigenen Laden zu eröffnen, ein Trinkgeld nach dem anderen gespart.",
+    "Kennt die Stammgäste beim Namen und die Touristen an ihren Sonnenbränden."
+  ];
 
   // ---- helpers ----
   function $(sel, root) {
@@ -138,11 +260,106 @@
     }
     return out;
   }
+  function phoneticOf(name) {
+    var parts = [];
+    for (var i = 0; i < name.length; i++) { parts.push(PHONETIC[name.charAt(i)] || name.charAt(i)); }
+    return parts.join(" ");
+  }
+
+  // ---- filters (read live on every roll; absent controls = defaults) ----
+  function readFilters() {
+    var f = { gender: "anyone", vibe: "any", region: "any" };
+    var radios, i;
+    radios = $all("[data-gen-filter-gender]", root);
+    for (i = 0; i < radios.length; i++) {
+      if (radios[i].checked) { f.gender = radios[i].value || "anyone"; }
+    }
+    if (f.gender !== "anyone" && f.gender !== "him" && f.gender !== "her") { f.gender = "anyone"; }
+    radios = $all("[data-gen-filter-vibe]", root);
+    for (i = 0; i < radios.length; i++) {
+      if (radios[i].checked) { f.vibe = radios[i].value || "any"; }
+    }
+    if (f.vibe !== "any" && f.vibe !== "street" && f.vibe !== "smooth" && f.vibe !== "florida") { f.vibe = "any"; }
+    var sel = $("[data-gen-filter-region]", root);
+    if (sel && sel.value) { f.region = sel.value; }
+    if (f.region !== "any" && f.region !== "vice-city" && f.region !== "leonida-keys" &&
+        f.region !== "grassrivers" && f.region !== "port-gellhorn" &&
+        f.region !== "ambrosia" && f.region !== "mount-kalaga") { f.region = "any"; }
+    return f;
+  }
+  function firstPool(gender) {
+    if (gender === "her") { return FIRST_FEMALE.slice(); }
+    if (gender === "him") {
+      var out = [];
+      for (var i = 0; i < FIRST.length; i++) {
+        if (FIRST_FEMALE.indexOf(FIRST[i]) === -1) { out.push(FIRST[i]); }
+      }
+      return out;
+    }
+    return FIRST;
+  }
+  function nicknamePool(vibe) {
+    if (vibe === "street") { return NICK_STREET; }
+    if (vibe === "smooth") { return NICK_SMOOTH; }
+    if (vibe === "florida") { return NICK_FLORIDA; }
+    return NICK_STREET.concat(NICK_SMOOTH).concat(NICK_FLORIDA);
+  }
+  function homesFor(region) {
+    var out = [];
+    for (var i = 0; i < HOMES.length; i++) {
+      if (region === "any" || HOMES[i].r === region) { out.push(HOMES[i]); }
+    }
+    return out.length ? out : HOMES;
+  }
+  function hustlesFor(region) {
+    var out = [];
+    for (var i = 0; i < HUSTLES.length; i++) {
+      if (region === "any" || HUSTLES[i].r === region) { out.push(HUSTLES[i]); }
+    }
+    return out.length ? out : HUSTLES;
+  }
+  function homeRegionOf(name) {
+    for (var i = 0; i < HOMES.length; i++) {
+      if (HOMES[i].n === name) { return HOMES[i].r; }
+    }
+    return "";
+  }
+  function hustleRegionOf(text) {
+    for (var i = 0; i < HUSTLES.length; i++) {
+      if (HUSTLES[i].t === text) { return HUSTLES[i].r; }
+    }
+    return "";
+  }
 
   // ---- generators: each returns { name, detail, tag } ----
-  function genCharacter() {
-    var name = pick(FIRST) + " " + pick(LAST);
-    return { name: name, detail: STR.detailCharacter, tag: "" };
+  // Character returns the full card: nickname, age, home, homeRegion,
+  // hustle, hustleRegion, backstory. useLocks=true honours the per-part
+  // locks against the current result; batch rolls pass false.
+  function genCharacter(useLocks) {
+    var filters = readFilters();
+    var prev = (useLocks && current && current.style === "character") ? current : null;
+    var name, nickname, home, hustle, backstory;
+    if (prev && locks.name) { name = prev.name; }
+    else { name = pick(firstPool(filters.gender)) + " " + pick(LAST); }
+    if (prev && locks.nickname) { nickname = prev.nickname; }
+    else { nickname = pick(nicknamePool(filters.vibe)); }
+    // Pick the home first: a locked hustle pins the home to the hustle's region, so
+    // home and hustle never contradict. Otherwise the region filter rules.
+    var homeRegion = filters.region;
+    if (prev && locks.hustle && prev.hustleRegion) { homeRegion = prev.hustleRegion; }
+    if (prev && locks.home) { home = { n: prev.home, r: prev.homeRegion }; }
+    else { home = pick(homesFor(homeRegion)); }
+    // Hustle always comes from the home's region.
+    if (prev && locks.hustle) { hustle = { t: prev.hustle, r: prev.hustleRegion }; }
+    else { hustle = pick(hustlesFor(home.r)); }
+    if (prev && locks.backstory) { backstory = prev.backstory; }
+    else { backstory = pick(BACKSTORIES); }
+    return {
+      name: name, detail: STR.detailCharacter, tag: "",
+      nickname: nickname, age: 19 + Math.floor(Math.random() * 36),
+      home: home.n, homeRegion: home.r,
+      hustle: hustle.t, hustleRegion: hustle.r, backstory: backstory
+    };
   }
   function genCrew() {
     var name, tag, tries = 0;
@@ -171,9 +388,7 @@
     var prefix = Math.random() < 0.5 ? "W" : "K";
     var body = pick(CALL_BODIES);
     var name = prefix + body;
-    var phonetic = [];
-    for (var i = 0; i < name.length; i++) { phonetic.push(PHONETIC[name.charAt(i)] || name.charAt(i)); }
-    return { name: name, detail: fill(STR.detailCallsign, { phonetic: phonetic.join(" ") }), tag: "" };
+    return { name: name, detail: fill(STR.detailCallsign, { phonetic: phoneticOf(name) }), tag: "" };
   }
   function genGamertag() {
     var name = "", tries = 0;
@@ -210,11 +425,24 @@
   var copyBtn = $("[data-gen-copy]", root);
   var shareBtn = $("[data-gen-share]", root);
   var favBtn = $("[data-gen-favorite]", root);
+  var cardEl = $("[data-gen-card]", root);
+  var cardNicknameEl = $("[data-gen-card-nickname]", root);
+  var cardAgeEl = $("[data-gen-card-age]", root);
+  var cardHomeEl = $("[data-gen-card-home]", root);
+  var cardHustleEl = $("[data-gen-card-hustle]", root);
+  var cardBackstoryEl = $("[data-gen-card-backstory]", root);
+  var batchEl = $("[data-gen-batch]", root);
+  var batchBtns = $all("[data-gen-batch-generate], [data-gen-generate-10]", root);
+  var histListEl = $("[data-gen-history]", root);
+  var histEmptyEl = $("[data-gen-history-empty]", root);
+  var lockBtns = $all("[data-gen-lock]", root);
 
   var style = "character";
-  var current = null; // { style, name, detail, tag }
+  var current = null; // { style, name, detail, tag, + card fields for character }
   var lastByStyle = {}; // style -> last generated name (no immediate repeats)
   var favorites = [];
+  var history = [];
+  var locks = { name: false, nickname: false, home: false, hustle: false, backstory: false };
   var statusTimer = null;
 
   function setStatus(text) {
@@ -228,41 +456,193 @@
     current = item;
     if (resultEl) { resultEl.textContent = item.name; }
     if (detailEl) { detailEl.textContent = item.detail; }
-  }
-
-  function generate(s, forceName) {
-    var fn = GENERATORS[s];
-    if (!fn) { return; }
-    var item;
-    if (forceName) {
-      // Shared link: honour the name, compute the detail line for the style.
-      item = fn();
-      item.name = forceName;
-      if (s === "crew") { item.detail = fill(STR.detailCrew, { tag: item.tag, n: forceName.length }); }
-      if (s === "gamertag") { item.detail = fill(STR.detailGamertag, { n: forceName.length }); }
+    if (item.style === "character") {
+      if (cardNicknameEl) { cardNicknameEl.textContent = item.nickname || ""; }
+      if (cardAgeEl) { cardAgeEl.textContent = String(item.age == null ? "" : item.age); }
+      if (cardHomeEl) { cardHomeEl.textContent = item.home || ""; }
+      if (cardHustleEl) { cardHustleEl.textContent = item.hustle || ""; }
+      if (cardBackstoryEl) { cardBackstoryEl.textContent = item.backstory || ""; }
+      if (cardEl) { cardEl.removeAttribute("hidden"); cardEl.style.display = ""; }
     } else {
-      var tries = 0;
-      do {
-        item = fn();
-        tries++;
-      } while (item.name === lastByStyle[s] && tries < 10);
-      lastByStyle[s] = item.name;
+      if (cardEl) { cardEl.setAttribute("hidden", ""); cardEl.style.display = "none"; }
     }
-    item.style = s;
-    show(item);
   }
 
-  function setStyle(s, forceName) {
-    if (GENERATORS[s]) { style = s; }
+  function setStyleTabs(s) {
     for (var i = 0; i < tabs.length; i++) {
-      var active = tabs[i].getAttribute("data-gen-tab") === style;
+      var active = tabs[i].getAttribute("data-gen-tab") === s;
       tabs[i].setAttribute("aria-selected", active ? "true" : "false");
       if (tabs[i].classList) {
         tabs[i].classList.toggle("btn-ultra", active);
         tabs[i].classList.toggle("btn-outline", !active);
       }
     }
-    generate(style, forceName);
+  }
+
+  function generate(s, forceName, forceCard) {
+    var fn = GENERATORS[s];
+    if (!fn) { return; }
+    var item;
+    if (forceName) {
+      // Shared link: honour the name, compute the detail line for the style.
+      item = fn(false);
+      item.name = forceName;
+      if (s === "crew") { item.detail = fill(STR.detailCrew, { tag: item.tag, n: forceName.length }); }
+      if (s === "gamertag") { item.detail = fill(STR.detailGamertag, { n: forceName.length }); }
+      if (s === "callsign") { item.detail = fill(STR.detailCallsign, { phonetic: phoneticOf(forceName) }); }
+      if (s === "character" && forceCard) {
+        item.nickname = forceCard.nickname;
+        item.age = forceCard.age;
+        item.home = forceCard.home;
+        item.homeRegion = forceCard.homeRegion;
+        item.hustle = forceCard.hustle;
+        item.hustleRegion = forceCard.hustleRegion;
+        item.backstory = forceCard.backstory;
+      }
+    } else {
+      var tries = 0;
+      // A locked character name intentionally repeats; skip the loop then.
+      var skipRepeat = (s === "character" && locks.name && current && current.style === "character");
+      do {
+        item = fn(true);
+        tries++;
+      } while (!skipRepeat && item.name === lastByStyle[s] && tries < 10);
+      lastByStyle[s] = item.name;
+      item.style = s;
+      pushHistory(item);
+    }
+    item.style = s;
+    show(item);
+  }
+
+  function setStyle(s, forceName, forceCard) {
+    if (GENERATORS[s]) { style = s; }
+    setStyleTabs(style);
+    generate(style, forceName, forceCard);
+  }
+
+  // ---- batch: 10 distinct names for the active style ----
+  function batchLabel(item) {
+    if (item.style === "crew" && item.tag) { return item.name + " · " + item.tag; }
+    return item.name;
+  }
+  function renderBatch(items) {
+    if (!batchEl) { return; }
+    while (batchEl.firstChild) { batchEl.removeChild(batchEl.firstChild); }
+    for (var i = 0; i < items.length; i++) {
+      (function (item) {
+        var row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.alignItems = "center";
+        row.style.gap = "0.75rem";
+        var span = document.createElement("span");
+        span.textContent = batchLabel(item);
+        span.style.overflowWrap = "anywhere";
+        var actions = document.createElement("span");
+        actions.style.display = "flex";
+        actions.style.gap = "0.5rem";
+        var copyB = document.createElement("button");
+        copyB.type = "button";
+        copyB.className = "btn-outline";
+        copyB.textContent = STR.copy;
+        copyB.addEventListener("click", function () { copyText(item.name, STR.copied); });
+        var saveB = document.createElement("button");
+        saveB.type = "button";
+        saveB.className = "btn-outline";
+        saveB.textContent = STR.saveFavorite;
+        saveB.addEventListener("click", function () { addFavorite(item); });
+        actions.appendChild(copyB);
+        actions.appendChild(saveB);
+        row.appendChild(span);
+        row.appendChild(actions);
+        batchEl.appendChild(row);
+      })(items[i]);
+    }
+  }
+  function generateBatch() {
+    if (!batchEl) { return; }
+    var seen = {};
+    if (current) { seen[current.name] = true; }
+    var items = [], tries = 0;
+    while (items.length < 10 && tries < 500) {
+      tries++;
+      var item = GENERATORS[style](false);
+      if (seen[item.name]) { continue; }
+      seen[item.name] = true;
+      item.style = style;
+      items.push(item);
+    }
+    renderBatch(items);
+    setStatus(STR.batchDone);
+  }
+
+  // ---- history: last 6 generated rolls, full result objects ----
+  function historyCopy(item) {
+    var c = { style: item.style, name: item.name, tag: item.tag || "", detail: item.detail || "" };
+    if (item.style === "character") {
+      c.nickname = item.nickname || "";
+      c.age = item.age == null ? "" : item.age;
+      c.home = item.home || "";
+      c.homeRegion = item.homeRegion || "";
+      c.hustle = item.hustle || "";
+      c.hustleRegion = item.hustleRegion || "";
+      c.backstory = item.backstory || "";
+    }
+    return c;
+  }
+  function loadHistory() {
+    history = [];
+    try {
+      var raw = window.localStorage.getItem(HIST_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && Object.prototype.toString.call(parsed) === "[object Array]") { history = parsed.slice(0, HIST_MAX); }
+      }
+    } catch (e) { history = []; }
+  }
+  function saveHistory() {
+    try { window.localStorage.setItem(HIST_KEY, JSON.stringify(history)); } catch (e) {}
+  }
+  function pushHistory(item) {
+    history.unshift(historyCopy(item));
+    if (history.length > HIST_MAX) { history.length = HIST_MAX; }
+    saveHistory();
+    renderHistory();
+  }
+  function histLabel(h) {
+    if (h.style === "character" && h.nickname) { return h.name + " · " + h.nickname; }
+    if (h.style === "crew" && h.tag) { return h.name + " · " + h.tag; }
+    return h.name;
+  }
+  function renderHistory() {
+    if (!histListEl) { return; }
+    while (histListEl.firstChild) { histListEl.removeChild(histListEl.firstChild); }
+    if (histEmptyEl) {
+      histEmptyEl.style.display = history.length ? "none" : "";
+      if (!history.length) { histEmptyEl.textContent = STR.historyEmpty; }
+    }
+    for (var i = 0; i < history.length; i++) {
+      (function (h) {
+        var li = document.createElement("li");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn-outline";
+        btn.textContent = histLabel(h);
+        btn.style.overflowWrap = "anywhere";
+        btn.addEventListener("click", function () { restoreHistory(h); });
+        li.appendChild(btn);
+        histListEl.appendChild(li);
+      })(history[i]);
+    }
+  }
+  function restoreHistory(h) {
+    var item = historyCopy(h);
+    style = item.style;
+    setStyleTabs(style);
+    lastByStyle[item.style] = item.name;
+    show(item);
+    setStatus(STR.restored);
   }
 
   function copyText(text, okMsg) {
@@ -306,9 +686,35 @@
   function saveFavorites() {
     try { window.localStorage.setItem(FAV_KEY, JSON.stringify(favorites)); } catch (e) {}
   }
+  function favEntry(item) {
+    var f = { style: item.style, name: item.name, tag: item.tag || "" };
+    if (item.style === "character") {
+      f.nickname = item.nickname || "";
+      f.age = item.age == null ? "" : item.age;
+      f.home = item.home || "";
+      f.homeRegion = item.homeRegion || "";
+      f.hustle = item.hustle || "";
+      f.hustleRegion = item.hustleRegion || "";
+      f.backstory = item.backstory || "";
+    }
+    return f;
+  }
   function favLabel(f) {
+    if (f.style === "character" && f.nickname) { return f.name + " · " + f.nickname; }
     if (f.style === "crew" && f.tag) { return f.name + " · " + f.tag; }
     return f.name;
+  }
+  function addFavorite(item) {
+    var exists = false;
+    for (var i = 0; i < favorites.length; i++) {
+      if (favorites[i].style === item.style && favorites[i].name === item.name) { exists = true; }
+    }
+    if (exists) { setStatus(STR.alreadySaved); return false; }
+    favorites.push(favEntry(item));
+    saveFavorites();
+    renderFavorites();
+    setStatus(STR.savedToFavorites);
+    return true;
   }
   function renderFavorites() {
     if (!favListEl) { return; }
@@ -341,6 +747,19 @@
     }
   }
 
+  function shareUrl(item) {
+    var url = window.location.protocol + "//" + window.location.host + window.location.pathname +
+      "?style=" + encodeURIComponent(item.style) + "&name=" + encodeURIComponent(item.name);
+    if (item.style === "character") {
+      url += "&nickname=" + encodeURIComponent(item.nickname || "") +
+        "&age=" + encodeURIComponent(String(item.age == null ? "" : item.age)) +
+        "&home=" + encodeURIComponent(item.home || "") +
+        "&hustle=" + encodeURIComponent(item.hustle || "") +
+        "&backstory=" + encodeURIComponent(item.backstory || "");
+    }
+    return url;
+  }
+
   // ---- events (every lookup guarded; page works if a button is missing) ----
   for (var t = 0; t < tabs.length; t++) {
     (function (tab) {
@@ -351,6 +770,21 @@
   }
   if (generateBtn) {
     generateBtn.addEventListener("click", function () { generate(style); });
+  }
+  for (var b = 0; b < batchBtns.length; b++) {
+    batchBtns[b].addEventListener("click", function () { generateBatch(); });
+  }
+  for (var l = 0; l < lockBtns.length; l++) {
+    (function (btn) {
+      var key = btn.getAttribute("data-gen-lock");
+      if (!Object.prototype.hasOwnProperty.call(locks, key)) { return; }
+      btn.setAttribute("aria-pressed", "false");
+      btn.addEventListener("click", function () {
+        locks[key] = !locks[key];
+        btn.setAttribute("aria-pressed", locks[key] ? "true" : "false");
+        if (btn.classList) { btn.classList.toggle("is-locked", locks[key]); }
+      });
+    })(lockBtns[l]);
   }
   if (copyBtn) {
     copyBtn.addEventListener("click", function () {
@@ -364,23 +798,13 @@
   if (shareBtn) {
     shareBtn.addEventListener("click", function () {
       if (!current) { return; }
-      var url = window.location.protocol + "//" + window.location.host + window.location.pathname +
-        "?style=" + encodeURIComponent(style) + "&name=" + encodeURIComponent(current.name);
-      copyText(url, STR.linkCopied);
+      copyText(shareUrl(current), STR.linkCopied);
     });
   }
   if (favBtn) {
     favBtn.addEventListener("click", function () {
       if (!current) { return; }
-      var exists = false;
-      for (var i = 0; i < favorites.length; i++) {
-        if (favorites[i].style === style && favorites[i].name === current.name) { exists = true; }
-      }
-      if (exists) { setStatus(STR.alreadySaved); return; }
-      favorites.push({ style: style, name: current.name, tag: current.tag || "" });
-      saveFavorites();
-      renderFavorites();
-      setStatus(STR.savedToFavorites);
+      if (!addFavorite(current)) { return; }
       var label = favBtn.textContent;
       favBtn.textContent = STR.saved;
       setTimeout(function () { favBtn.textContent = label; }, 1500);
@@ -390,13 +814,32 @@
   // ---- init: shared link wins, otherwise a fresh name for the first style ----
   loadFavorites();
   renderFavorites();
-  var sharedStyle = null, sharedName = null;
+  loadHistory();
+  renderHistory();
+  var sharedStyle = null, sharedName = null, sharedCard = null;
   try {
     var q = new URLSearchParams(window.location.search);
     var qs = q.get("style");
     var qn = q.get("name");
-    if (qs && GENERATORS[qs] && qn) { sharedStyle = qs; sharedName = qn; }
+    if (qs && GENERATORS[qs] && qn) {
+      sharedStyle = qs;
+      sharedName = qn;
+      if (qs === "character") {
+        var qNick = q.get("nickname");
+        var qAge = parseInt(q.get("age") || "", 10);
+        var qHome = q.get("home");
+        var qHustle = q.get("hustle");
+        var qBack = q.get("backstory");
+        if (qNick && qHome && qHustle && qBack && qAge >= 19 && qAge <= 54) {
+          sharedCard = {
+            nickname: qNick, age: qAge, home: qHome,
+            homeRegion: homeRegionOf(qHome), hustle: qHustle,
+            hustleRegion: hustleRegionOf(qHustle), backstory: qBack
+          };
+        }
+      }
+    }
   } catch (e) {}
-  if (sharedStyle) { setStyle(sharedStyle, sharedName); }
+  if (sharedStyle) { setStyle(sharedStyle, sharedName, sharedCard); }
   else { setStyle("character"); }
 })();
