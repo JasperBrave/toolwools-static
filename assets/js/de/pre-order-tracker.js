@@ -176,7 +176,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>Alle Meilensteine abgeschlossen.</strong> Vorbestellungen öffneten am 25. Juni 2026, Pre-Loads wurden in den Tagen vor dem Launch bereitgestellt — etwa 48 Stunden vorher auf PlayStation 5, etwa 10 Tage vorher auf Xbox — und GTA 6 erschien am 19. November 2026. Es gibt nichts mehr abzuwarten: Wer jetzt kauft, lädt das vollständige Spiel herunter, bis zu 212 GB plus Day-One-Patch, also prüfe zuerst den <a href="/de/tools/download-time">Download-Zeit-Rechner</a>.</p>';
+      html += '<p class="verdict-desc"><strong>Alle Meilensteine abgeschlossen.</strong> Vorbestellungen öffneten am 25. Juni 2026, Pre-Loads wurden in den Tagen vor dem Launch bereitgestellt — etwa 48 Stunden vorher auf PlayStation 5, etwa 10 Tage vorher auf Xbox — und GTA 6 erschien am 19. November 2026. Es gibt nichts mehr abzuwarten: Wer jetzt kauft, lädt das vollständige Spiel herunter, 212 GB plus Day-One-Patch, also prüfe zuerst den <a href="/de/tools/download-time">Download-Zeit-Rechner</a>.</p>';
     }
     var shareText = "Beste Kaufmöglichkeit für GTA 6 auf " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +

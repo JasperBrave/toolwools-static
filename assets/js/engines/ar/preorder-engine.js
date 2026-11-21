@@ -57,7 +57,7 @@ export const CHANNELS = [
   },
   {
     id: "retailer-code",
-    label: "رمز رقمي من بائع تجزئة (Amazon وGameStop وBest Buy)",
+    label: "رمز رقمي من بائع تجزئة (Amazon و GameStop و Best Buy)",
     short: "رمز بائع تجزئة",
     platforms: ["ps5", "xbox"],
     physical: false,

@@ -120,7 +120,7 @@ export const DEVICES = [
     id: "pc",
     label: "حاسوب شخصي (Windows)",
     steps: [
-      "اتصل عبر Ethernet إن أمكن، ثم أغلق Steam وRockstar Launcher والمتصفحات وأي شيء يقوم بالمزامنة.",
+      "اتصل عبر Ethernet إن أمكن، ثم أغلق Steam و Rockstar Launcher والمتصفحات وأي شيء يقوم بالمزامنة.",
       "أجر اختبار سرعة في المتصفح على خادم في منطقتك ودوّن التنزيل والتحميل والبينغ.",
       "افتح موجه الأوامر وشغل ping -n 50 1.1.1.1، واقرأ المتوسط كزمن استجابة والفرق بين الأقصى والأدنى كاهتزازك.",
       "في المخرجات نفسها، اقرأ نسبة الفقد. أي شيء فوق 0% على خط سلكي هو عطل، وليس ضجيجا.",
@@ -266,7 +266,7 @@ export function gradeConnection(input) {
   const grade = gradeFor(score, blocking);
   const worst = axes.find((a) => a.status === "fail") ?? axes.find((a) => a.status === "marginal") ?? null;
   const verdict = !worst ? `اتصالك يتجاوز كل هدف لـ ${region.label}. لا شيء هنا سيعيق GTA 6.` : blocking ? `${worst.label} هو العائق. أصلحه أولا، فالأرقام الأخرى لا تكاد تهم حتى يتم حله.` : `قابل للعب في كل مكان، مع ${worst.label.toLowerCase()} خارج النطاق المريح بقليل.`;
-  const headline = !worst ? "جاهز للعبة GTA 6 وGTA Online" : blocking ? "يحتاج إلى عمل قبل الإطلاق" : "جيد بما يكفي، مع محور ضعيف واحد";
+  const headline = !worst ? "جاهز للعبة GTA 6 و GTA Online" : blocking ? "يحتاج إلى عمل قبل الإطلاق" : "جيد بما يكفي، مع محور ضعيف واحد";
   return {
     region,
     connection,

@@ -156,7 +156,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>Todos os marcos concluídos.</strong> As pré-vendas abriram em 25 de junho de 2026, os pré-carregamentos foram preparados nos dias antes do lançamento — cerca de 48 horas antes no PlayStation 5, cerca de 10 dias antes no Xbox — e o GTA 6 foi lançado em 19 de novembro de 2026. Não há mais nada para esperar: comprar agora significa baixar o jogo completo, até 212 GB mais o patch do primeiro dia, então confira primeiro a <a href="/pt/tools/download-time">calculadora de tempo de download</a>.</p>';
+      html += '<p class="verdict-desc"><strong>Todos os marcos concluídos.</strong> As pré-vendas abriram em 25 de junho de 2026, os pré-carregamentos foram preparados nos dias antes do lançamento — cerca de 48 horas antes no PlayStation 5, cerca de 10 dias antes no Xbox — e o GTA 6 foi lançado em 19 de novembro de 2026. Não há mais nada para esperar: comprar agora significa baixar o jogo completo, 212 GB mais o patch do primeiro dia, então confira primeiro a <a href="/pt/tools/download-time">calculadora de tempo de download</a>.</p>';
     }
     var shareText = "Melhor lugar para comprar GTA 6 no " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +

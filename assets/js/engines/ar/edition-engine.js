@@ -12,7 +12,7 @@ export const LAST_VERIFIED_ISO = "2026-08-05";
 export const CONFIDENCE_LABEL = {
   confirmed: "مؤكد من Rockstar",
   reported: "مذكور / مدرج، دون تفصيل كامل",
-  precedent: "سابقة من إصدارات GTA V وRDR2"
+  precedent: "سابقة من إصدارات GTA V و RDR2"
 };
 export const CONFIDENCE_WEIGHT = {
   confirmed: 1,
@@ -91,7 +91,7 @@ export const BONUSES = [
     editions: ["ultimate"],
     value: 6,
     confidence: "precedent",
-    detail: "سيارة أو سيارتان تمنحان لمرآب الإنترنت عند أول تسجيل دخول. فعلت GTA V وRDR2 ذلك. مفيدة حقا في أول عشر ساعات من اللعب عبر الإنترنت، وتجميلية بعد ذلك."
+    detail: "سيارة أو سيارتان تمنحان لمرآب الإنترنت عند أول تسجيل دخول. فعلت GTA V و RDR2 ذلك. مفيدة حقا في أول عشر ساعات من اللعب عبر الإنترنت، وتجميلية بعد ذلك."
   },
   {
     id: "property-unlock",
@@ -258,7 +258,7 @@ export function evaluateEditions(input) {
 }
 function buildReason(best, profile, tolerance, platform) {
   if (best.edition.id === "standard") {
-    return `مع الملف ${profile.label.toLowerCase()}، لا يضيف أي شيء فوق Standard قيمة مفيدة كافية لتبرير الارتفاع مع سقفك البالغ ${tolerance}%، وStandard يحتوي بالفعل على القصة الكاملة والوضع عبر الإنترنت كاملا.`;
+    return `مع الملف ${profile.label.toLowerCase()}، لا يضيف أي شيء فوق Standard قيمة مفيدة كافية لتبرير الارتفاع مع سقفك البالغ ${tolerance}%، و Standard يحتوي بالفعل على القصة الكاملة والوضع عبر الإنترنت كاملا.`;
   }
   return `يضيف حوالي ${best.utilityDelta} نقطة من الفائدة الموزونة فوق Standard مقابل ارتفاع بنسبة ${best.edition.upliftPercent}%، أي حوالي ${best.utilityPerUpliftPoint} نقطة لكل 10% تنفقها، وهو أفضل عائد من أي مستوى متاح على ${PLATFORM_LABEL[platform]} ضمن سقفك البالغ ${tolerance}%.`;
 }

@@ -86,7 +86,7 @@ function copyText(text, btn, labelSel) {
 }
 
 function shortAnswer(price) {
-  var s = "تكلف GTA 6 ما يعادل " + formatUsd(EDITIONS.standard.usd) + " دولار أمريكي للإصدار Standard، وUltimate 99.99 دولار أمريكي — وكلا السعرين مؤكدان من Rockstar. "
+  var s = "تكلف GTA 6 ما يعادل " + formatUsd(EDITIONS.standard.usd) + " دولار أمريكي للإصدار Standard، و Ultimate 99.99 دولار أمريكي — وكلا السعرين مؤكدان من Rockstar. "
     + "وفي " + price.market.country + " يُقدَّر ذلك بـ " + formatLocal(price.totalLocal, price.market) + " مقابل " + EDITIONS[state.edition].label + "، أي نحو "
     + formatUsd(price.usdEquivalent) + " بعد احتساب " + price.market.taxLabel.toLowerCase() + ". "
     + "وهذا يعني " + BAND_LABEL[price.band].toLowerCase();
@@ -119,7 +119,7 @@ function countryTabHtml(price) {
     + "<div><dt>ما يعادل بالدولار</dt><dd>" + formatUsd(price.usdEquivalent) + "</dd></div>"
     + "</dl>"
     + '<p class="verdict-desc">' + taxHint + ". " + note + "</p>"
-    + '<p class="verdict-desc">أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ". وسعرا Standard الأمريكي (79.99 دولار) وUltimate (99.99 دولار) مؤكدان.</p>";
+    + '<p class="verdict-desc">أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ". وسعرا Standard الأمريكي (79.99 دولار) و Ultimate (99.99 دولار) مؤكدان.</p>";
 }
 function editionsTabHtml(price, ladder) {
   var items = ladder.map(function (e) {
@@ -132,7 +132,7 @@ function editionsTabHtml(price, ladder) {
       + "<p>" + e.includes.join(" · ") + "</p></li>";
   }).join("");
   return '<ul class="rank-list" role="list">' + items + "</ul>"
-    + '<p class="verdict-desc">وسعرا Standard (79.99 دولار) وUltimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا. أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ".</p>";
+    + '<p class="verdict-desc">وسعرا Standard (79.99 دولار) و Ultimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا. أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ".</p>";
 }
 function compareTabHtml(price, verdict) {
   return '<p class="verdict-desc">' + verdict.headline + "</p>"
@@ -179,7 +179,7 @@ function ladderTableHtml(price, ladder) {
     + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">سلّم إصدارات GTA 6 مسعّر بـ ' + price.market.currency + " لـ " + price.market.country + "، مع الفرق عن Standard والتكلفة لكل 100,000 GTA$ مضمّنة.</caption>\n"
     + '        <thead><tr><th scope="col">الإصدار</th><th scope="col">الإجمالي المحلي</th><th scope="col">فوق Standard</th><th scope="col">GTA$ المضمّنة</th><th scope="col">لكل 100 ألف GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
-    + '      <p class="field-hint" style="margin-top:0.75rem">وسعرا Standard (79.99 دولار) وUltimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا.</p>\n    </section>';
+    + '      <p class="field-hint" style="margin-top:0.75rem">وسعرا Standard (79.99 دولار) و Ultimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا.</p>\n    </section>';
 }
 
 var lastShareText = "";

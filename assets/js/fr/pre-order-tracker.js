@@ -176,7 +176,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>Tous les jalons sont terminés.</strong> Les précommandes ont ouvert le 25 juin 2026, les préchargements ont été préparés dans les jours précédant la sortie — environ 48 heures avant sur PlayStation 5, environ 10 jours avant sur Xbox — et GTA 6 est sorti le 19 novembre 2026. Il ne reste rien à attendre : acheter maintenant signifie télécharger le jeu complet, jusqu\'à 212 Go plus le correctif du premier jour, alors consultez d\'abord le <a href="/fr/tools/download-time">calculateur de temps de téléchargement</a>.</p>';
+      html += '<p class="verdict-desc"><strong>Tous les jalons sont terminés.</strong> Les précommandes ont ouvert le 25 juin 2026, les préchargements ont été préparés dans les jours précédant la sortie — environ 48 heures avant sur PlayStation 5, environ 10 jours avant sur Xbox — et GTA 6 est sorti le 19 novembre 2026. Il ne reste rien à attendre : acheter maintenant signifie télécharger le jeu complet, 212 Go plus le correctif du premier jour, alors consultez d\'abord le <a href="/fr/tools/download-time">calculateur de temps de téléchargement</a>.</p>';
     }
     var shareText = "Meilleur endroit pour acheter GTA 6 sur " + result.platform.label + " : " + result.best.channel.short;
     html += '<div class="share-row">' +

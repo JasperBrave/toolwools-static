@@ -155,7 +155,7 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>All milestones complete.</strong> Pre-orders opened 25 June 2026, preloads staged in the days before launch — about 48 hours out on PlayStation 5, about 10 days out on Xbox — and GTA 6 launched 19 November 2026. Nothing is left to wait for: buying now means downloading the full game, up to 212 GB plus the day-one patch, so check the <a href="/tools/download-time">download-time planner</a> first.</p>';
+      html += '<p class="verdict-desc"><strong>All milestones complete.</strong> Pre-orders opened 25 June 2026, preloads staged in the days before launch — about 48 hours out on PlayStation 5, about 10 days out on Xbox — and GTA 6 launched 19 November 2026. Nothing is left to wait for: buying now means downloading the full game, 212 GB plus the day-one patch, so check the <a href="/tools/download-time">download-time planner</a> first.</p>';
     }
     var shareText = "Best place to buy GTA 6 on " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +
