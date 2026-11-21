@@ -180,7 +180,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Cada edição do GTA 6 inclui a campanha completa e o modo online completo, o jogo lança em 19 de novembro de 2026 às 05:00 UTC e nenhum nível vende história extra. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " com um " + result.upliftTolerance + "% de teto sobre Standard, a melhor opção é <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Cada edição do GTA 6 inclui a campanha completa e o modo online completo, o jogo foi lançado em 19 de novembro de 2026 às 05:00 UTC e nenhum nível vende história extra. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " com um " + result.upliftTolerance + "% de teto sobre Standard, a melhor opção é <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");
@@ -211,7 +211,7 @@ function copyText(text, btn, labelSel) {
     var labelEl = labelSel ? btn.querySelector(labelSel) : null;
     if (labelEl) labelEl.textContent = label;
     window.setTimeout(function () {
-      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copy";
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copiar";
     }, 1600);
   }
   if (!btn.dataset.defaultLabel && labelSel) {

@@ -6,12 +6,12 @@
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
 var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
-  pc: { label: "PC", usableGB: 0, note: "Sua unidade, suas regras, o número abaixo é exatamente o que o GTA 6 precisa." },
+  pc: { label: "PC", usableGB: 0, note: "Planejamento para PC (nenhuma versão para PC anunciada): sua unidade, suas regras; o número abaixo é exatamente o que o GTA 6 precisaria." },
   ps5: { label: "PS5", usableGB: 667, note: "O SSD de 825 GB da Sony reporta 667 GB utilizáveis após a reserva do sistema." },
   xsx: { label: "Xbox Series X", usableGB: 802, note: "O SSD de 1 TB do Xbox reporta 802 GB utilizáveis após a reserva do sistema." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "Seu SSD NVMe / SATA", reserve: "—", usable: 0 },
+  { p: "PC (planejamento)", drive: "Seu SSD NVMe / SATA", reserve: "—", usable: 0 },
   { p: "PS5 (825 GB)", drive: "SSD personalizado da Sony", reserve: "158 GB de sistema", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "SSD personalizado da Sony", reserve: "158 GB de sistema", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "Cartão de expansão NVMe", reserve: "198 GB de sistema", usable: 802 },
@@ -180,8 +180,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -196,7 +196,7 @@ function render() {
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "Quanto espaço o GTA 6 deixa para outros jogos, com seu atual " + fmt1(r.total) + " GB plan.";
+  if (tableNote) tableNote.textContent = "Quanto espaço o GTA 6 deixa para outros jogos, com seu plano atual de " + fmt1(r.total) + " GB.";
   // Iter 10: free-space subtitle and buffer helper follow the live total / %.
   var dekTotal = $("[data-free-space-total]");
   if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }
@@ -215,7 +215,7 @@ function render() {
 
 function shareText() {
   var r = compute();
-  return "GTA 6 needs about " + fmt1(r.total) + " GB livres: " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB de folga. Planeje seu espaço: " + shareUrl();
+  return "GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres: " + state.base + " GB de instalação + " + state.patch + " GB de patch + " + state.dlc + " GB de DLC + " + r.headroom + " GB de margem. Planeje seu espaço: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {
@@ -224,7 +224,7 @@ function copyText(text, btn, labelSel) {
     var labelEl = labelSel ? btn.querySelector(labelSel) : null;
     if (labelEl) labelEl.textContent = label;
     window.setTimeout(function () {
-      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copy";
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copiar";
     }, 1600);
   }
   if (!btn.dataset.defaultLabel && labelSel) {

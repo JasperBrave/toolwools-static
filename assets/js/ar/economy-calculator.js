@@ -234,8 +234,8 @@ function render() {
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>أفضل حزمة قيمة</dt><dd>" + bestCard.card.label + "</dd></div>"
       + "<div><dt>GTA$ لكل 1 دولار أمريكي</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>معدل الطحن لديك</dt><dd><span dir=\"ltr\">" + money(rate.perHour) + "/hr</span></dd></div>"
-      + "<div><dt>الأجر الضمني</dt><dd><span dir=\"ltr\">$" + bestCard.impliedWage.toFixed(2) + "/hr</span></dd></div>"
+      + "<div><dt>معدل الطحن لديك</dt><dd><span dir=\"ltr\">" + money(rate.perHour) + "</span> في الساعة</dd></div>"
+      + "<div><dt>الأجر الضمني</dt><dd><span dir=\"ltr\">$" + bestCard.impliedWage.toFixed(2) + "</span> في الساعة</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' أسعار البطاقات تتبع المتجر الأمريكي الحالي. الساعات الموفرة تعتمد على معدل الطحن أعلاه.</p>'
       + shareLinks(lastShareText, lastShareTitle);
@@ -252,7 +252,7 @@ function render() {
       + "<div><dt>الدورات حتى الهدف</dt><dd>" + plan.cycles + "</dd></div>"
       + "<div><dt>الساعات حتى الهدف</dt><dd>" + plan.hours + "س</dd></div>"
       + "<div><dt>الجلسات</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "س</dd></div>"
-      + "<div><dt>لكل لاعب</dt><dd><span dir=\"ltr\">" + money(rate.perHourPerPlayer) + "/hr</span></dd></div>"
+      + "<div><dt>لكل لاعب</dt><dd><span dir=\"ltr\">" + money(rate.perHourPerPlayer) + "</span> في الساعة</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' العوائد تقديرية وليست مستخرجة من البيانات.</p>'
       + shareLinks(lastShareText, lastShareTitle);

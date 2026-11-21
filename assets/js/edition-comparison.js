@@ -179,7 +179,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode \u2014 the game launches 19 November 2026 at 05:00 UTC and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode \u2014 the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

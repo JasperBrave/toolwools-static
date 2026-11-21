@@ -6,12 +6,12 @@
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
 var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
-  pc: { label: "PC", usableGB: 0, note: "Tu unidad, tus reglas, el número de abajo es exactamente lo que necesita GTA 6." },
+  pc: { label: "PC", usableGB: 0, note: "Planificación para PC (no hay versión para PC anunciada): tu unidad, tus reglas; el número de abajo es exactamente lo que necesitaría GTA 6." },
   ps5: { label: "PS5", usableGB: 667, note: "El SSD de 825 GB de Sony reporta 667 GB utilizables tras la reserva del sistema." },
   xsx: { label: "Xbox Series X", usableGB: 802, note: "El SSD de 1 TB de Xbox reporta 802 GB utilizables tras la reserva del sistema." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "Tu SSD NVMe / SATA", reserve: "—", usable: 0 },
+  { p: "PC (planificación)", drive: "Tu SSD NVMe / SATA", reserve: "—", usable: 0 },
   { p: "PS5 (825 GB)", drive: "SSD personalizado de Sony", reserve: "158 GB de sistema", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "SSD personalizado de Sony", reserve: "158 GB de sistema", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "Tarjeta de expansión NVMe", reserve: "198 GB de sistema", usable: 802 },
@@ -180,8 +180,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 necesita unos " + fmt1(r.total) + " GB libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 necesita unos " + fmt1(r.total) + " GB libres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -196,7 +196,7 @@ function render() {
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "Cuánto espacio te deja GTA 6 para otros juegos, con tu actual " + fmt1(r.total) + " GB plan.";
+  if (tableNote) tableNote.textContent = "Cuánto espacio te deja GTA 6 para otros juegos, con tu plan actual de " + fmt1(r.total) + " GB.";
   // Iter 10: free-space subtitle and buffer helper follow the live total / %.
   var dekTotal = $("[data-free-space-total]");
   if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }
@@ -215,7 +215,7 @@ function render() {
 
 function shareText() {
   var r = compute();
-  return "GTA 6 needs about " + fmt1(r.total) + " GB libres: " + state.base + " GB install + " + state.patch + " GB patch + " + state.dlc + " GB DLC + " + r.headroom + " GB de margen. Planifica tu espacio: " + shareUrl();
+  return "GTA 6 necesita unos " + fmt1(r.total) + " GB libres: " + state.base + " GB de instalación + " + state.patch + " GB de parche + " + state.dlc + " GB de DLC + " + r.headroom + " GB de margen. Planifica tu espacio: " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {
@@ -224,7 +224,7 @@ function copyText(text, btn, labelSel) {
     var labelEl = labelSel ? btn.querySelector(labelSel) : null;
     if (labelEl) labelEl.textContent = label;
     window.setTimeout(function () {
-      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copy";
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copiar";
     }, 1600);
   }
   if (!btn.dataset.defaultLabel && labelSel) {

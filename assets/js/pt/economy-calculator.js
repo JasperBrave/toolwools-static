@@ -90,7 +90,7 @@ function copyText(text, btn, labelSel) {
     var labelEl = labelSel ? btn.querySelector(labelSel) : null;
     if (labelEl) labelEl.textContent = label;
     window.setTimeout(function () {
-      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copy";
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copiar";
     }, 1600);
   }
   if (!btn.dataset.defaultLabel && labelSel) {
@@ -151,7 +151,7 @@ function businessTableHtml(rows, horizon) {
 function cardsTableHtml(rows) {
   var body = rows.map(function (r) {
     var best = r.best ? ' class="hl-row"' : "";
-    var tag = r.best ? ' <span class="proj-badge">Best value</span>' : "";
+    var tag = r.best ? ' <span class="proj-badge">Melhor valor</span>' : "";
     return "<tr" + best + "><th scope=\"row\">" + r.card.label + tag + "</th>"
       + "<td class=\"muted\">" + compactMoney(r.card.gtaDollars) + "</td>"
       + "<td class=\"muted\">$" + r.card.usd.toFixed(2) + "</td>"
@@ -210,7 +210,7 @@ function render() {
     var top = bizRanked[0];
     tldr = "Retorno mais rápido: " + top.business.label + " devolve " + money(top.business.price) + " em cerca de " + top.paybackHours + " horas de jogo, e então gera " + money(top.netPerHour) + " por hora.";
     verdictLine = top.business.label + " · " + top.paybackHours + "h payback";
-    lastShareText = "Retorno mais rápido de negócio do GTA 6: " + top.business.label + " devolve " + money(top.business.price) + " em cerca de " + top.paybackHours + " horas, e então gera " + money(top.netPerHour) + "/hr.";
+    lastShareText = "Retorno mais rápido de negócio do GTA 6: " + top.business.label + " devolve " + money(top.business.price) + " em cerca de " + top.paybackHours + " horas, e então gera " + money(top.netPerHour) + "/h.";
     lastShareTitle = "Retorno mais rápido de negócio do GTA 6: " + top.business.label;
     if (outputLabel) outputLabel.textContent = MODE_META.business.label;
     outHtml = '<dl class="stat-grid">'
@@ -227,24 +227,24 @@ function render() {
   } else if (state.mode === "cards") {
     var maxPerUsd = Math.max.apply(null, cards.map(function (c) { return c.perUsd; }));
     tldr = "O pack de melhor valor compra " + money(maxPerUsd) + " GTA$ por dólar real, cerca de " + bestCard.hoursSaved + " horas de grind removidas na sua taxa atual de " + money(rate.perHour) + "/hora.";
-    verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ per $1";
+    verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ por US$ 1";
     lastShareText = "Melhor valor de Shark Card: " + money(maxPerUsd) + " GTA$ por US$ 1, cerca de " + bestCard.hoursSaved + " horas de grind removidas.";
     lastShareTitle = "Best Shark Card value: " + bestCard.card.label;
     if (outputLabel) outputLabel.textContent = MODE_META.cards.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>Pack de melhor valor</dt><dd>" + bestCard.card.label + "</dd></div>"
       + "<div><dt>GTA$ por US$ 1</dt><dd>" + money(maxPerUsd) + "</dd></div>"
-      + "<div><dt>Sua taxa de grind</dt><dd>" + money(rate.perHour) + "/hr</dd></div>"
-      + "<div><dt>Salário implícito</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/hr</dd></div>"
+      + "<div><dt>Sua taxa de grind</dt><dd>" + money(rate.perHour) + "/h</dd></div>"
+      + "<div><dt>Salário implícito</dt><dd>$" + bestCard.impliedWage.toFixed(2) + "/h</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Os preços dos cartões seguem a loja atual dos EUA. As horas economizadas dependem da sua taxa de grind acima.</p>'
       + shareLinks(lastShareText, lastShareTitle);
     tableHtml = cardsTableHtml(cards);
   } else {
     tldr = method.label + " rende " + money(rate.perHour) + " líquidos por hora. Chegar a " + compactMoney(state.goal) + " de " + compactMoney(state.balance) + " leva " + plan.cycles + " ciclos, cerca de " + plan.hours + " horas, ou " + plan.sessionsNeeded + " sessões de " + state.session + " h.";
-    verdictLine = method.label + " · " + money(rate.perHour) + " per hour";
-    lastShareText = method.label + " nets " + money(rate.perHour) + "/hr in GTA 6. " + plan.cycles + " cycles to " + compactMoney(state.goal) + ", about " + plan.hours + " hours. GTA 6 money plan on ToolWools.";
-    lastShareTitle = method.label + " nets " + money(rate.perHour) + "/hr (GTA 6)";
+    verdictLine = method.label + " · " + money(rate.perHour) + " por hora";
+    lastShareText = method.label + " rende " + money(rate.perHour) + "/hora no GTA 6. " + plan.cycles + " ciclos até " + compactMoney(state.goal) + ", cerca de " + plan.hours + " horas. Plano de dinheiro do GTA 6 no ToolWools.";
+    lastShareTitle = method.label + " rende " + money(rate.perHour) + "/hora (GTA 6)";
     if (outputLabel) outputLabel.textContent = MODE_META.grind.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>Líquido por hora</dt><dd>" + money(rate.perHour) + "</dd></div>"
@@ -252,7 +252,7 @@ function render() {
       + "<div><dt>Ciclos até a meta</dt><dd>" + plan.cycles + "</dd></div>"
       + "<div><dt>Horas até a meta</dt><dd>" + plan.hours + "h</dd></div>"
       + "<div><dt>Sessões</dt><dd>" + plan.sessionsNeeded + " x " + state.session + "h</dd></div>"
-      + "<div><dt>Por jogador</dt><dd>" + money(rate.perHourPerPlayer) + "/hr</dd></div>"
+      + "<div><dt>Por jogador</dt><dd>" + money(rate.perHourPerPlayer) + "/h</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + PROJ_BADGE + ' Os pagamentos são projeções, não valores extraídos de dados.</p>'
       + shareLinks(lastShareText, lastShareTitle);
@@ -280,7 +280,7 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado on X"]');
+  var xLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado no X"]');
   var rLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado no Reddit"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());

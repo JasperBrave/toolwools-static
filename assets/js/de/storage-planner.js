@@ -11,7 +11,7 @@ var PLATFORMS = {
   xsx: { label: "Xbox Series X", usableGB: 802, note: "Xbox' 1-TB-SSD meldet 802 GB nutzbar nach der System-Reserve." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "Deine NVMe-/SATA-SSD", reserve: "—", usable: 0 },
+  { p: "PC (Planung)", drive: "Deine NVMe-/SATA-SSD", reserve: "—", usable: 0 },
   { p: "PS5 (825 GB)", drive: "Custom-Sony-SSD", reserve: "158 GB System", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "Custom-Sony-SSD", reserve: "158 GB System", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "NVMe-Erweiterungskarte", reserve: "198 GB System", usable: 802 },
@@ -191,7 +191,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Hängt vom Laufwerk ab" : fmt1(Math.max(0, row.usable - r.total)) + " GB frei" + (r.total > row.usable ? " (" + fmt1(r.total - row.usable) + " GB zu wenig)" : "");
+      var after = row.usable === 0 ? "Hängt vom Laufwerk ab — nur Planung" : fmt1(Math.max(0, row.usable - r.total)) + " GB frei" + (r.total > row.usable ? " (" + fmt1(r.total - row.usable) + " GB zu wenig)" : "");
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }

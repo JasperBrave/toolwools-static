@@ -192,7 +192,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Jede GTA-6-Edition enthält die volle Story-Kampagne und den vollen Online-Modus, das Spiel startet am 19. November 2026 um 05:00 UTC und keine Stufe verkauft extra Story. Auf " + esc(result.platformLabel) + ", für einen " + esc(buyerPhrase(result.profile)) + " mit einer " + result.upliftTolerance + "%-Obergrenze über Standard, ist der beste Wert <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Jede GTA-6-Edition enthält die volle Story-Kampagne und den vollen Online-Modus, das Spiel ist am 19. November 2026 um 05:00 UTC erschienen und keine Stufe verkauft extra Story. Auf " + esc(result.platformLabel) + ", für einen " + esc(buyerPhrase(result.profile)) + " mit einer " + result.upliftTolerance + "%-Obergrenze über Standard, ist der beste Wert <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

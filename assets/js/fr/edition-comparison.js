@@ -192,7 +192,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Chaque édition de GTA 6 inclut la campagne d'histoire complète et le mode en ligne complet, le jeu sort le 19 novembre 2026 à 05:00 UTC et aucun niveau ne vend d'histoire supplémentaire. Sur " + esc(result.platformLabel) + ", pour un " + esc(buyerPhrase(result.profile)) + " avec un plafond de " + result.upliftTolerance + " % au-dessus de Standard, le meilleur rapport est <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Chaque édition de GTA 6 inclut la campagne d'histoire complète et le mode en ligne complet, le jeu est sorti le 19 novembre 2026 à 05:00 UTC et aucun niveau ne vend d'histoire supplémentaire. Sur " + esc(result.platformLabel) + ", pour un " + esc(buyerPhrase(result.profile)) + " avec un plafond de " + result.upliftTolerance + " % au-dessus de Standard, le meilleur rapport est <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

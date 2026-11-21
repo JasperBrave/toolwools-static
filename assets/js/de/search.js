@@ -7,10 +7,10 @@
 // for coming-soon entries, matching the source behaviour.
 (function () {
   var TOOLS = [
-    { slug: "system-requirements", title: "GTA-6-Systemanforderungen-Prüfer", desc: "Sofort-Urteil gegen Community-geschätzte Minimum-, Recommended- und Ultra-Tiers. GPU, CPU, RAM und Speicher." },
+    { slug: "system-requirements", title: "GTA-6-Systemanforderungen-Prüfer", desc: "Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Tiers. GPU, CPU, RAM und Speicher." },
     { slug: "download-time", title: "GTA-6-Download-Zeit-Rechner", desc: "Schätze, wie lange die ~212-GB-Basis-Installation auf deiner Verbindung dauert, plus Day-One-Patch-Mathe." },
     { slug: "storage-planner", title: "GTA-6-Speicher-Planer", desc: "Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLC und sicheren Headroom für Updates." },
-    { slug: "add-to-calendar", title: "GTA-6-Release-Date-Erinnerung", desc: "Füge den GTA-6-Launch zu deinem Kalender in deiner Zeitzone hinzu." },
+    { slug: "add-to-calendar", title: "GTA-6-Release-Date-Erinnerung", desc: "Füge Patch- und DLC-Erinnerungen für GTA 6 zu deinem Kalender in deiner Zeitzone hinzu." },
     { slug: "readiness-score", title: "GTA-6-Readiness-Score", desc: "Ein Score für deinen ganzen PC: Performance, VRAM, Speicher und Netzwerk." },
     { slug: "bottleneck-calculator", title: "GTA-6-Bottleneck-Rechner", desc: "Prüfe CPU- vs. GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das deinen PC neu ausbalanciert." },
     { slug: "vram-calculator", title: "GTA-6-VRAM-Anforderungs-Prüfer", desc: "Prüfe die Minimum-VRAM, die du für GTA 6 bei 1080p, 1440p und 4K brauchst. Urteil für 6-GB-, 8-GB-, 12-GB- und 16-GB-Karten." },

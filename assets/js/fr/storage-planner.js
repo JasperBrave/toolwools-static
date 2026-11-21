@@ -11,7 +11,7 @@ var PLATFORMS = {
   xsx: { label: "Xbox Series X", usableGB: 802, note: "Le SSD 1 To de Xbox affiche 802 Go utilisables après la réserve système." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "Votre SSD NVMe / SATA", reserve: "—", usable: 0 },
+  { p: "PC (planification)", drive: "Votre SSD NVMe / SATA", reserve: "—", usable: 0 },
   { p: "PS5 (825 Go)", drive: "SSD Sony personnalisé", reserve: "158 Go système", usable: 667 },
   { p: "PS5 Slim (1 To)", drive: "SSD Sony personnalisé", reserve: "158 Go système", usable: 842 },
   { p: "Xbox Series X (1 To)", drive: "Carte d'extension NVMe", reserve: "198 Go système", usable: 802 },
@@ -191,7 +191,7 @@ function render() {
   var table = $("[data-platform-table]");
   if (table) {
     table.innerHTML = PLATFORM_ROWS.map(function (row) {
-      var after = row.usable === 0 ? "Dépend du disque" : fmt1(Math.max(0, row.usable - r.total)) + " Go libres" + (r.total > row.usable ? " (il manque " + fmt1(r.total - row.usable) + " Go)" : "");
+      var after = row.usable === 0 ? "Dépend du disque — planification uniquement" : fmt1(Math.max(0, row.usable - r.total)) + " Go libres" + (r.total > row.usable ? " (il manque " + fmt1(r.total - row.usable) + " Go)" : "");
       return "<tr><th scope=\"row\" class=\"mono\">" + row.p + "</th><td>" + row.drive + "</td><td>" + row.reserve + "</td><td class=\"mono\">" + after + "</td></tr>";
     }).join("");
   }

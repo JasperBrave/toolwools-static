@@ -6,12 +6,12 @@
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
 var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
-  pc: { label: "PC", usableGB: 0, note: "Sürücünüz, kurallarınız: aşağıdaki sayı GTA 6'nın tam olarak ihtiyacı olan miktar." },
+  pc: { label: "PC (planlama)", usableGB: 0, note: "Sürücünüz, kurallarınız: aşağıdaki sayı, PC sürümü çıktığında GTA 6'nın tam olarak ihtiyaç duyacağı miktar (planlama)." },
   ps5: { label: "PS5", usableGB: 667, note: "Sony'nin 825 GB SSD'si, sistem ayrımından sonra 667 GB kullanılabilir gösteriyor." },
   xsx: { label: "Xbox Series X", usableGB: 802, note: "Xbox'ın 1 TB SSD'si, sistem ayrımından sonra 802 GB kullanılabilir gösteriyor." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "NVMe / SATA SSD'niz", reserve: "—", usable: 0 },
+  { p: "PC (planlama)", drive: "NVMe / SATA SSD'niz", reserve: "—", usable: 0 },
   { p: "PS5 (825 GB)", drive: "Özel Sony SSD", reserve: "158 GB sistem", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "Özel Sony SSD", reserve: "158 GB sistem", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "NVMe genişletme kartı", reserve: "198 GB sistem", usable: 802 },
