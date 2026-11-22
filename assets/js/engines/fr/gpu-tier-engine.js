@@ -440,7 +440,7 @@ export const GPU_CATALOG = [
   },
   {
     id: "gtx-1050-ti",
-    label: "GeForce GTX 1050 Ti or older",
+    label: "GeForce GTX 1050 Ti ou plus ancienne",
     short: "GTX 1050 Ti",
     vendor: "nvidia",
     generation: "Pascal",
@@ -485,31 +485,31 @@ export function tierFor(raw) {
 export const TIER_META = {
   S: {
     label: "Vaisseau amiral",
-    verdict: "4K Ultra avec ray tracing à portée. 1440p Ultra confortable à plus de 100 ips natifs.",
+    verdict: "4K Ultra avec ray tracing à portée. 1440p Ultra confortable à plus de 100 FPS natifs.",
     recommendedRes: "4K",
     accent: "var(--accent-blue)"
   },
   A: {
     label: "Passionné",
-    verdict: "1440p Ultra natif à plus de 60 ips. 4K Élevé avec DLSS/FSR Quality est réaliste.",
+    verdict: "1440p Ultra natif à plus de 60 FPS. 4K Élevé avec DLSS/FSR Quality est réaliste.",
     recommendedRes: "1440p",
     accent: "var(--accent-blue)"
   },
   B: {
     label: "Bon rapport qualité-prix",
-    verdict: "1080p Ultra ou 1440p Élevé à plus de 60 ips. La base pour un lancement de GTA 6 sans accroc.",
+    verdict: "1080p Ultra ou 1440p Élevé à plus de 60 FPS. La base pour un lancement de GTA 6 sans accroc.",
     recommendedRes: "1440p",
     accent: "var(--accent-purple)"
   },
   C: {
     label: "Entrée de gamme",
-    verdict: "1080p Élevé/Moyen à 60 ips. Baissez les réglages ou misez sur l'upscaling, la VRAM est souvent juste.",
+    verdict: "1080p Élevé/Moyen à 60 FPS. Baissez les réglages ou misez sur l'upscaling, la VRAM est souvent juste.",
     recommendedRes: "1080p",
     accent: "var(--accent-purple)"
   },
   D: {
     label: "Sous le minimum",
-    verdict: "1080p Faible à 30-45 ips. Sous le minimum probable de Rockstar, une mise à niveau s'impose.",
+    verdict: "1080p Faible à 30-45 FPS. Sous le minimum probable de Rockstar, une mise à niveau s'impose.",
     recommendedRes: "1080p",
     accent: "#f59e0b"
   },

@@ -97,7 +97,7 @@ function render() {
           '<div class="gpu-sub">' + esc(r.vendor) + ' \u00b7 ' + esc(r.generation) + '</div></td>' +
           '<td class="num">' + r.vramGB + ' GB</td>' +
           '<td class="num muted">$' + r.msrpUsd + '</td>' +
-          '<td class="num"><strong>' + fpsForRes(r, state.res) + ' fps</strong></td>' +
+          '<td class="num"><strong>' + fpsForRes(r, state.res) + ' FPS</strong></td>' +
           '<td class="num"><a href="/fr/tools/fps-calculator?gpu=' + encodeURIComponent(r.id) + '" aria-label="Ouvrir le calculateur de FPS avec ' + esc(r.label) + ' présélectionné">FPS \u2192</a></td></tr>';
       }).join("");
     }

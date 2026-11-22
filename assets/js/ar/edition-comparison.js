@@ -65,9 +65,14 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "القصة فقط",
+  "online-casual": "القصة مع لعب غير رسمي عبر الإنترنت",
+  "online-grinder": "عبر الإنترنت من اليوم الأول",
+  "undecided": "الذي لم يحسم قراره بعد"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /buyer$/.test(l) ? l : l + " مشترٍ";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
   return "أفضل إصدار من GTA 6 للاعبي " + result.profile.label.toLowerCase() + ": " + result.best.edition.label + " (" + result.best.score + "/100). منتقي إصدارات GTA 6 على ToolWools.";

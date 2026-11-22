@@ -12,7 +12,7 @@ export const DRIVE_META = {
   hdd: { label: "Disque dur (mécanique)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Prêt le jour du lancement : 1080p Élevé confortable à environ 60 ips" },
+  { grade: "S", min: 92, label: "Prêt le jour du lancement : 1080p Élevé confortable à environ 60 FPS" },
   { grade: "A", min: 82, label: "Prêt Ultra" },
   { grade: "B", min: 70, label: "Prêt confortablement" },
   { grade: "C", min: 55, label: "Jouable, prévoyez des ajustements" },
@@ -51,8 +51,8 @@ export function performanceScore(input) {
   const score = clamp(r.avgFps / 60 * 100);
   return {
     score,
-    detail: `${r.avgFps} ips en moyenne · ${r.lowFps} 1 % faible en ${res} Élevé natif.`,
-    metric: `${r.avgFps} fps`
+    detail: `${r.avgFps} FPS en moyenne · ${r.lowFps} 1 % faible en ${res} Élevé natif.`,
+    metric: `${r.avgFps} FPS`
   };
 }
 export function vramScore(input) {
@@ -117,7 +117,7 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Tranche supérieure : 1080p Élevé confortable à environ 60 ips, avec de la marge.",
+    S: "Tranche supérieure : 1080p Élevé confortable à environ 60 FPS, avec de la marge.",
     A: "Prêt aujourd'hui, vous n'ajusterez qu'un ou deux réglages.",
     B: "Prêt. Un sous-score est en retard, mais rien ne bloque un jeu fluide.",
     C: "Jouable, mais choisissez une échelle résolution/préréglage adaptée à votre maillon le plus faible.",

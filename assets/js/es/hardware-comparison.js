@@ -119,7 +119,7 @@ function render() {
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = ra.verdict === "balanced"
       ? "Sí, " + gpuA.label + " + " + cpuA.label + " está equilibrado en " + state.res + " en " + workload + ", unos " + ra.avgFps + " fps de media (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)."
-      : gpuA.label + " + " + cpuA.label + " muestra un " + ra.absPct + "% " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " cuello de botella en " + state.res + " en " + workload + ", unos " + ra.avgFps + " fps de media." + (upgrade ? " La solución más pequeña es una " + upgrade.part.label + ", lo que reduce el cuello de botella a " + upgrade.toPct + "%." : "");
+      : gpuA.label + " + " + cpuA.label + " muestra un cuello de botella de " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " del " + ra.absPct + "% a " + state.res + " en " + workload + ", unos " + ra.avgFps + " fps de media." + (upgrade ? " La solución más pequeña es un " + upgrade.part.label + ", que baja el cuello de botella al " + upgrade.toPct + "%." : "");
     if (label) label.textContent = labelA + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = labelA + ", " + ra.avgFps + " fps de media";
@@ -129,14 +129,14 @@ function render() {
   var out = $("[data-output-panel]");
   if (out) {
     var upgradeHtml = upgrade
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li><strong>' + upgrade.part.label + '</strong>, ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' cuello de botella del ' + upgrade.fromPct + '% al ' + upgrade.toPct + '% en ' + state.res + ' en ' + workload + '.</li></ul></div>'
+      ? '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li><strong>' + upgrade.part.label + '</strong>, cuello de botella de ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' del ' + upgrade.fromPct + '% al ' + upgrade.toPct + '% a ' + state.res + ' en ' + workload + '.</li></ul></div>'
       : '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li>No hace falta mejorar nada, este equipo está equilibrado en ' + state.res + ' en ' + workload + '.</li></ul></div>';
     var gap = rb.avgFps - ra.avgFps;
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + labelA + '</p>' +
       '<h3 class="verdict-title">' + ra.avgFps + '<span class="unit"> fps de media</span></h3>' +
-      '<p class="verdict-desc">' + ra.fpsLow + '–' + ra.fpsHigh + ' banda de fps en ' + state.res + ' en ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
+      '<p class="verdict-desc">Banda de ' + ra.fpsLow + '–' + ra.fpsHigh + ' fps a ' + state.res + ' en ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Margen de GPU</span><span class="val">' + Math.round(ra.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(ra.headGpu * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">Margen de CPU</span><span class="val">' + Math.round(ra.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(ra.headCpu * 100)) + '%"></div></div></div>' +

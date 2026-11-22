@@ -440,7 +440,7 @@ export const GPU_CATALOG = [
   },
   {
     id: "gtx-1050-ti",
-    label: "GeForce GTX 1050 Ti or older",
+    label: "GeForce GTX 1050 Ti o más antigua",
     short: "GTX 1050 Ti",
     vendor: "nvidia",
     generation: "Pascal",

@@ -65,9 +65,14 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "yalnızca hikâye oyuncusu",
+  "online-casual": "hikâye ağırlıklı rahat çevrimiçi oyuncu",
+  "online-grinder": "ilk günden çevrimiçi oyuncu",
+  "undecided": "henüz karar vermemiş alıcı"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /buyer$/.test(l) ? l : l + " alıcısı";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
   return result.profile.label.toLowerCase() + " oyuncular için en iyi GTA 6 sürümü: " + result.best.edition.label + " (" + result.best.score + "/100). ToolWools'ta GTA 6 sürüm seçici.";

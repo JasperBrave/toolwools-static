@@ -146,7 +146,7 @@ export function suggestTweaks(input, result) {
       tips.push({
         action: `Baisser le préréglage à ${PRESET_META[nextPreset].label}`,
         gainPct: Math.round((test.avgFps - baseline) / baseline * 100),
-        detail: `Estimé ${test.avgFps} ips (était ${baseline}).`
+        detail: `Estimé ${test.avgFps} FPS (était ${baseline}).`
       });
     }
   }
@@ -156,7 +156,7 @@ export function suggestTweaks(input, result) {
       tips.push({
         action: "Activer DLSS / FSR Qualité",
         gainPct: Math.round((test.avgFps - baseline) / baseline * 100),
-        detail: `Estimé ${test.avgFps} ips (était ${baseline}).`
+        detail: `Estimé ${test.avgFps} FPS (était ${baseline}).`
       });
     }
   } else if (input.upscaler === "dlss-quality" || input.upscaler === "fsr-quality") {
@@ -166,7 +166,7 @@ export function suggestTweaks(input, result) {
       tips.push({
         action: "Passer l'upscaler à Équilibré",
         gainPct: Math.round((test.avgFps - baseline) / baseline * 100),
-        detail: `Estimé ${test.avgFps} ips (était ${baseline}).`
+        detail: `Estimé ${test.avgFps} FPS (était ${baseline}).`
       });
     }
   }
@@ -187,7 +187,7 @@ export function suggestTweaks(input, result) {
       tips.push({
         action: "Rendre en 1440p",
         gainPct: Math.round((test.avgFps - baseline) / baseline * 100),
-        detail: `Estimé ${test.avgFps} ips à 1440p ${PRESET_META[input.preset].label}.`
+        detail: `Estimé ${test.avgFps} FPS à 1440p ${PRESET_META[input.preset].label}.`
       });
     }
   }

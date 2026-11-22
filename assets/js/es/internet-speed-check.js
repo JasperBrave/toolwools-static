@@ -116,7 +116,7 @@ function targetsHtml(result) {
     var pct = Math.min(100, Math.round((t.wiredTarget / 60) * 100));
     var current = t.region.id === result.region.id ? " <strong>(your region)</strong>" : "";
     return '<div><div class="axis-row"><span class="axis-label">' + esc(t.region.label) + '</span><span class="axis-track"><span class="axis-fill" style="width:' + pct + '%"></span></span><span class="axis-score">' + t.wiredTarget + " ms</span></div>" +
-      '<p class="verdict-desc">' + esc(t.region.edge) + " · playable to about " + t.playableCeiling + " ms" + current + "</p></div>";
+      '<p class="verdict-desc">' + esc(t.region.edge) + " · jugable hasta unos " + t.playableCeiling + " ms" + current + "</p></div>";
   }).join("");
 }
 function fixesHtml(result) {
@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "El juego en línea de GTA 6 necesita aproximadamente <strong>25 Mbps de bajada y 5 Mbps de subida</strong> para ser cómodo, y funcionará con <strong>10 Mbps de bajada</strong>. Lo que realmente decide si se siente bien es la latencia: en <strong>" + esc(result.region.label) + "</strong> una línea cableada de <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> debería alcanzar aproximadamente <strong>" + result.pingTarget + " ms</strong> to <strong>" + esc(result.region.edge) + "</strong>, con jitter por debajo de <strong>10 ms</strong> y pérdida de paquetes por debajo de <strong>0,5%</strong>. Califica tus propios cinco números abajo.";
+    shortAnswer.innerHTML = "El juego en línea de GTA 6 necesita aproximadamente <strong>25 Mbps de bajada y 5 Mbps de subida</strong> para ser cómodo, y funcionará con <strong>10 Mbps de bajada</strong>. Lo que realmente decide si se siente bien es la latencia: en <strong>" + esc(result.region.label) + "</strong> una línea cableada de <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> debería alcanzar aproximadamente <strong>" + result.pingTarget + " ms</strong> hasta <strong>" + esc(result.region.edge) + "</strong>, con jitter por debajo de <strong>10 ms</strong> y pérdida de paquetes por debajo de <strong>0,5%</strong>. Califica tus propios cinco números abajo.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

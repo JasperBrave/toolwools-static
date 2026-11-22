@@ -233,7 +233,7 @@ function render() {
       '<div><dt>FPS limités par le GPU</dt><dd>' + result.gpuFps + '</dd></div>' +
       '<div><dt>Plafond CPU</dt><dd>' + result.cpuCapFps + '</dd></div>' +
       '<div><dt>VRAM nécessaire</dt><dd>' + result.vramNeededGB + ' GB</dd></div>' +
-      '<div><dt>Écart à l\'objectif</dt><dd>' + (result.targetGap >= 0 ? "+" : "") + result.targetGap + ' fps</dd></div>' +
+      '<div><dt>Écart à l\'objectif</dt><dd>' + (result.targetGap >= 0 ? "+" : "") + result.targetGap + ' FPS</dd></div>' +
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
