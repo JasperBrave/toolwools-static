@@ -118,8 +118,8 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = ra.verdict === "balanced"
-      ? "Sí, " + gpuA.label + " + " + cpuA.label + " is balanced at " + state.res + " in " + workload + ", about " + ra.avgFps + " fps de media (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)."
-      : gpuA.label + " + " + cpuA.label + " muestra un " + ra.absPct + "% " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " cuello de botella en " + state.res + " in " + workload + ", about " + ra.avgFps + " fps average." + (upgrade ? " The smallest fix is a " + upgrade.part.label + ", lo que reduce el cuello de botella a " + upgrade.toPct + "%." : "");
+      ? "Sí, " + gpuA.label + " + " + cpuA.label + " está equilibrado en " + state.res + " en " + workload + ", unos " + ra.avgFps + " fps de media (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)."
+      : gpuA.label + " + " + cpuA.label + " muestra un " + ra.absPct + "% " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " cuello de botella en " + state.res + " en " + workload + ", unos " + ra.avgFps + " fps de media." + (upgrade ? " La solución más pequeña es una " + upgrade.part.label + ", lo que reduce el cuello de botella a " + upgrade.toPct + "%." : "");
     if (label) label.textContent = labelA + " · TL;DR";
     if (text) text.textContent = tldrText;
     if (verdictEl) verdictEl.textContent = labelA + ", " + ra.avgFps + " fps de media";
@@ -129,14 +129,14 @@ function render() {
   var out = $("[data-output-panel]");
   if (out) {
     var upgradeHtml = upgrade
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li><strong>' + upgrade.part.label + '</strong>, ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' bottleneck ' + upgrade.fromPct + '% to ' + upgrade.toPct + '% at ' + state.res + ' in ' + workload + '.</li></ul></div>'
-      : '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li>No upgrade needed, this rig is balanced at ' + state.res + ' in ' + workload + '.</li></ul></div>';
+      ? '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li><strong>' + upgrade.part.label + '</strong>, ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' cuello de botella del ' + upgrade.fromPct + '% al ' + upgrade.toPct + '% en ' + state.res + ' en ' + workload + '.</li></ul></div>'
+      : '<div class="upgrade-box"><p class="eyebrow-muted">Mejora más pequeña</p><ul><li>No hace falta mejorar nada, este equipo está equilibrado en ' + state.res + ' en ' + workload + '.</li></ul></div>';
     var gap = rb.avgFps - ra.avgFps;
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + labelA + '</p>' +
       '<h3 class="verdict-title">' + ra.avgFps + '<span class="unit"> fps de media</span></h3>' +
-      '<p class="verdict-desc">' + ra.fpsLow + '–' + ra.fpsHigh + ' fps band at ' + state.res + ' in ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
+      '<p class="verdict-desc">' + ra.fpsLow + '–' + ra.fpsHigh + ' banda de fps en ' + state.res + ' en ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Margen de GPU</span><span class="val">' + Math.round(ra.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(ra.headGpu * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">Margen de CPU</span><span class="val">' + Math.round(ra.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(ra.headCpu * 100)) + '%"></div></div></div>' +
@@ -145,7 +145,7 @@ function render() {
       '<div><dt>FPS medios del equipo A</dt><dd>' + ra.avgFps + '</dd></div>' +
       '<div><dt>FPS medios del equipo B</dt><dd>' + rb.avgFps + '</dd></div>' +
       '<div><dt>Brecha de FPS</dt><dd>' + (gap >= 0 ? "+" : "") + gap + ' (' + (gap >= 0 ? "Equipo B" : "Equipo A") + ')</dd></div>' +
-      '<div><dt>Cuello de botella del equipo B</dt><dd>' + rb.absPct + '% ' + (rb.verdict === "balanced" ? "balanced" : rb.verdict === "cpu" ? "CPU" : "GPU") + '</dd></div>' +
+      '<div><dt>Cuello de botella del equipo B</dt><dd>' + rb.absPct + '% ' + (rb.verdict === "balanced" ? "equilibrado" : rb.verdict === "cpu" ? "CPU" : "GPU") + '</dd></div>' +
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
@@ -167,7 +167,7 @@ function render() {
     var p = $("[data-compare-pill]", cardA);
     if (t) t.textContent = "Equipo A";
     if (v) v.textContent = gpuA.label + " + " + cpuA.label + ", " + labelA;
-    if (f) f.textContent = ra.fpsLow + "–" + ra.fpsHigh + " fps, " + ra.avgFps + " avg at " + state.res + " in " + workload;
+    if (f) f.textContent = ra.fpsLow + "–" + ra.fpsHigh + " fps, " + ra.avgFps + " de media a " + state.res + " en " + workload;
     if (p) p.hidden = winner !== "a";
   }
   if (cardB) {
@@ -178,22 +178,22 @@ function render() {
     var p2 = $("[data-compare-pill]", cardB);
     if (t2) t2.textContent = "Equipo B";
     if (v2) v2.textContent = gpuB.label + " + " + cpuB.label + ", " + labelB;
-    if (f2) f2.textContent = rb.fpsLow + "–" + rb.fpsHigh + " fps, " + rb.avgFps + " avg at " + state.res + " in " + workload;
+    if (f2) f2.textContent = rb.fpsLow + "–" + rb.fpsHigh + " fps, " + rb.avgFps + " de media a " + state.res + " en " + workload;
     if (p2) p2.hidden = winner !== "b";
   }
   var summary = $("[data-compare-summary]");
   if (summary) {
     var gapAbs = Math.abs(rb.avgFps - ra.avgFps);
     summary.textContent = winner === null
-      ? "Both rigs land on " + ra.avgFps + " fps average at " + state.res + " in " + workload + ", a dead heat."
-      : "Rig " + winner.toUpperCase() + " leads by " + gapAbs + " fps on average (" + Math.max(ra.avgFps, rb.avgFps) + " vs " + Math.min(ra.avgFps, rb.avgFps) + ") and bottlenecks " + (winner === "b" ? "less" : "less") + " (" + (winner === "b" ? rb.absPct : ra.absPct) + "% vs " + (winner === "b" ? ra.absPct : rb.absPct) + "%)." + (upgrade && winner === "b" ? " La solución más pequeña para el Equipo A es una " + upgrade.part.label + "." : "");
+      ? "Ambos equipos alcanzan " + ra.avgFps + " fps de media a " + state.res + " en " + workload + ", empate total."
+      : "Equipo " + winner.toUpperCase() + " lidera por " + gapAbs + " fps de media (" + Math.max(ra.avgFps, rb.avgFps) + " vs " + Math.min(ra.avgFps, rb.avgFps) + ") y tiene menos cuello de botella (" + (winner === "b" ? rb.absPct : ra.absPct) + "% vs " + (winner === "b" ? ra.absPct : rb.absPct) + "%)." + (upgrade && winner === "b" ? " La solución más pequeña para el Equipo A es una " + upgrade.part.label + "." : "");
   }
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = labelA + ". Estimados " + ra.fpsLow + " a " + ra.fpsHigh + " fotogramas por segundo a " + state.res + " in " + workload + ". Rig B: " + labelB + ", " + rb.avgFps + " fps average.";
+  if (live) live.textContent = labelA + ". Estimados " + ra.fpsLow + " a " + ra.fpsHigh + " fotogramas por segundo a " + state.res + " en " + workload + ". Equipo B: " + labelB + ", " + rb.avgFps + " fps de media.";
   syncUrl();
 }
 

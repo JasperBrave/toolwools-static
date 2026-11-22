@@ -90,7 +90,7 @@ function toneOf(result) {
   return result.absPct >= 15 ? "upgrade" : "borderline";
 }
 function shareText(a, b, ra, rb) {
-  return a.label + " + " + b.label + " @ " + state.res + " " + modeLabel(state.mode) + " · " + verdictLabelOf(ra) + " (" + ra.fpsLow + "–" + ra.fpsHigh + " ips) vs " + verdictLabelOf(rb) + " (" + rb.fpsLow + "–" + rb.fpsHigh + " ips). Comparaison matérielle GTA 6 : " + shareUrl();
+  return a.label + " + " + b.label + " @ " + state.res + " " + modeLabel(state.mode) + " · " + verdictLabelOf(ra) + " (" + ra.fpsLow + "–" + ra.fpsHigh + " FPS) vs " + verdictLabelOf(rb) + " (" + rb.fpsLow + "–" + rb.fpsHigh + " FPS). Comparaison matérielle GTA 6 : " + shareUrl();
 }
 
 function render() {
@@ -121,11 +121,11 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = ra.verdict === "balanced"
-      ? "Oui, " + gpuA.label + " + " + cpuA.label + " est équilibré à " + state.res + " en " + workload + ", environ " + ra.avgFps + " ips en moyenne (" + ra.fpsLow + "–" + ra.fpsHigh + " ips)."
-      : gpuA.label + " + " + cpuA.label + " montre un goulot d'étranglement de " + ra.absPct + " % " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " à " + state.res + " en " + workload + ", environ " + ra.avgFps + " ips en moyenne." + (upgrade ? " La plus petite correction est " + upgrade.part.label + ", qui réduit le goulot à " + upgrade.toPct + " %." : "");
+      ? "Oui, " + gpuA.label + " + " + cpuA.label + " est équilibré à " + state.res + " en " + workload + ", environ " + ra.avgFps + " FPS en moyenne (" + ra.fpsLow + "–" + ra.fpsHigh + " FPS)."
+      : gpuA.label + " + " + cpuA.label + " montre un goulot d'étranglement de " + ra.absPct + " % " + (ra.verdict === "cpu" ? "CPU" : "GPU") + " à " + state.res + " en " + workload + ", environ " + ra.avgFps + " FPS en moyenne." + (upgrade ? " La plus petite correction est " + upgrade.part.label + ", qui réduit le goulot à " + upgrade.toPct + " %." : "");
     if (label) label.textContent = labelA + " · En bref";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = labelA + ", " + ra.avgFps + " ips en moyenne";
+    if (verdictEl) verdictEl.textContent = labelA + ", " + ra.avgFps + " FPS en moyenne";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -139,7 +139,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + labelA + '</p>' +
       '<h3 class="verdict-title">' + ra.avgFps + '<span class="unit"> FPS moyens</span></h3>' +
-      '<p class="verdict-desc">' + ra.fpsLow + '–' + ra.fpsHigh + ' ips à ' + state.res + ' en ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
+      '<p class="verdict-desc">' + ra.fpsLow + '–' + ra.fpsHigh + ' FPS à ' + state.res + ' en ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + Math.round(ra.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(ra.headGpu * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + Math.round(ra.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(ra.headCpu * 100)) + '%"></div></div></div>' +
@@ -170,7 +170,7 @@ function render() {
     var p = $("[data-compare-pill]", cardA);
     if (t) t.textContent = "PC A";
     if (v) v.textContent = gpuA.label + " + " + cpuA.label + ", " + labelA;
-    if (f) f.textContent = ra.fpsLow + "–" + ra.fpsHigh + " ips, " + ra.avgFps + " en moyenne à " + state.res + " en " + workload;
+    if (f) f.textContent = ra.fpsLow + "–" + ra.fpsHigh + " FPS, " + ra.avgFps + " en moyenne à " + state.res + " en " + workload;
     if (p) p.hidden = winner !== "a";
   }
   if (cardB) {
@@ -181,22 +181,22 @@ function render() {
     var p2 = $("[data-compare-pill]", cardB);
     if (t2) t2.textContent = "PC B";
     if (v2) v2.textContent = gpuB.label + " + " + cpuB.label + ", " + labelB;
-    if (f2) f2.textContent = rb.fpsLow + "–" + rb.fpsHigh + " ips, " + rb.avgFps + " en moyenne à " + state.res + " en " + workload;
+    if (f2) f2.textContent = rb.fpsLow + "–" + rb.fpsHigh + " FPS, " + rb.avgFps + " en moyenne à " + state.res + " en " + workload;
     if (p2) p2.hidden = winner !== "b";
   }
   var summary = $("[data-compare-summary]");
   if (summary) {
     var gapAbs = Math.abs(rb.avgFps - ra.avgFps);
     summary.textContent = winner === null
-      ? "Les deux PC atteignent " + ra.avgFps + " ips en moyenne à " + state.res + " en " + workload + ", égalité parfaite."
-      : "Le PC " + winner.toUpperCase() + " mène de " + gapAbs + " ips en moyenne (" + Math.max(ra.avgFps, rb.avgFps) + " vs " + Math.min(ra.avgFps, rb.avgFps) + ") et a moins de goulot (" + (winner === "b" ? rb.absPct : ra.absPct) + " % contre " + (winner === "b" ? ra.absPct : rb.absPct) + " %)." + (upgrade && winner === "b" ? " La plus petite correction pour le PC A est " + upgrade.part.label + "." : "");
+      ? "Les deux PC atteignent " + ra.avgFps + " FPS en moyenne à " + state.res + " en " + workload + ", égalité parfaite."
+      : "Le PC " + winner.toUpperCase() + " mène de " + gapAbs + " FPS en moyenne (" + Math.max(ra.avgFps, rb.avgFps) + " vs " + Math.min(ra.avgFps, rb.avgFps) + ") et a moins de goulot (" + (winner === "b" ? rb.absPct : ra.absPct) + " % contre " + (winner === "b" ? ra.absPct : rb.absPct) + " %)." + (upgrade && winner === "b" ? " La plus petite correction pour le PC A est " + upgrade.part.label + "." : "");
   }
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = labelA + ". Estimé de " + ra.fpsLow + " à " + ra.fpsHigh + " images par seconde à " + state.res + " en " + workload + ". PC B : " + labelB + ", " + rb.avgFps + " ips en moyenne.";
+  if (live) live.textContent = labelA + ". Estimé de " + ra.fpsLow + " à " + ra.fpsHigh + " images par seconde à " + state.res + " en " + workload + ". PC B : " + labelB + ", " + rb.avgFps + " FPS en moyenne.";
   syncUrl();
 }
 

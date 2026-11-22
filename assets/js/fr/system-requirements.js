@@ -42,9 +42,9 @@ function computeVerdict(gpuScore, cpuScore, ram, ssd) {
 }
 
 var TIER_META = {
-  below: { label: "En dessous du minimum", tone: "upgrade", blurb: "Votre PC aura du mal. Attendez-vous à moins de 30 ips en 1080p Faible, ou le jeu ne se lancera pas proprement." },
-  min: { label: "Atteint le minimum", tone: "borderline", blurb: "Jouable en 1080p Faible autour de 30 ips. Si vous avez une mise à niveau prévue, faites-la avant le lancement." },
-  rec: { label: "Atteint le recommandé", tone: "ready", blurb: "60 ips confortables en 1080p Élevé ou 1440p Moyen. Le point idéal pour jouer sereinement. Recommandé commence à 48 points (Minimum 35 · Ultra 82)." },
+  below: { label: "En dessous du minimum", tone: "upgrade", blurb: "Votre PC aura du mal. Attendez-vous à moins de 30 FPS en 1080p Faible, ou le jeu ne se lancera pas proprement." },
+  min: { label: "Atteint le minimum", tone: "borderline", blurb: "Jouable en 1080p Faible autour de 30 FPS. Si vous avez une mise à niveau prévue, faites-la avant le lancement." },
+  rec: { label: "Atteint le recommandé", tone: "ready", blurb: "60 FPS confortables en 1080p Élevé ou 1440p Moyen. Le point idéal pour jouer sereinement. Recommandé commence à 48 points (Minimum 35 · Ultra 82)." },
   ultra: { label: "Prêt Ultra", tone: "ready", blurb: "4K Élevé ou 1440p Ultra avec de la place pour le ray tracing. Vous serez l'une des captures d'écran que les gens partagent." },
 };
 
@@ -115,8 +115,8 @@ function render() {
       : result.tier === "rec"
         ? "Oui, " + gpu.label + " + " + cpu.label + " avec " + state.ram + " Go de RAM sur " + (state.ssd ? "SSD" : "HDD") + " obtient " + result.score + "/100 et atteint le niveau Recommandé pour GTA 6."
         : result.tier === "min"
-          ? "Seulement le minimum, " + gpu.label + " + " + cpu.label + " avec " + state.ram + " Go de RAM sur " + (state.ssd ? "SSD" : "HDD") + " obtient " + result.score + "/100. Jouable en 1080p Faible autour de 30 ips."
-          : "En dessous du minimum, " + gpu.label + " + " + cpu.label + " avec " + state.ram + " Go de RAM sur " + (state.ssd ? "SSD" : "HDD") + " obtient " + result.score + "/100. Attendez-vous à moins de 30 ips en 1080p Faible.";
+          ? "Seulement le minimum, " + gpu.label + " + " + cpu.label + " avec " + state.ram + " Go de RAM sur " + (state.ssd ? "SSD" : "HDD") + " obtient " + result.score + "/100. Jouable en 1080p Faible autour de 30 FPS."
+          : "En dessous du minimum, " + gpu.label + " + " + cpu.label + " avec " + state.ram + " Go de RAM sur " + (state.ssd ? "SSD" : "HDD") + " obtient " + result.score + "/100. Attendez-vous à moins de 30 FPS en 1080p Faible.";
     if (label) label.textContent = meta.label + " · En bref";
     if (text) text.textContent = tldrText;
     if (verdict) verdict.textContent = meta.label + " | " + result.score + "/100";

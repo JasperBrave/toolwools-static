@@ -31,8 +31,8 @@ function mapTweak(t) {
   else if (a.indexOf("Enable ") === 0) a = "Activer " + a.slice(7);
   else if (a === "Render at 1440p") a = "Rendre en 1440p";
   if (d === "Doubles perceived smoothness — 1% low unchanged.") d = "Double la fluidité perçue, 1 % faible inchangé.";
-  else if (d.indexOf("Estimated ") === 0 && d.indexOf("(was ") !== -1) { m = d.match(/Estimated ([\d.]+) fps \(was ([\d.]+)\)/); if (m) d = "Estimé " + m[1] + " ips (était " + m[2] + ")."; }
-  else if (d.indexOf("Estimated ") === 0) { m = d.match(/Estimated ([\d.]+) fps at 1440p (.+)\./); if (m) d = "Estimé " + m[1] + " ips en 1440p " + presetLabelOf(m[2] === "Low" ? "low" : m[2] === "Medium" ? "medium" : m[2] === "High" ? "high" : m[2] === "Very High" ? "very-high" : "ultra") + "."; }
+  else if (d.indexOf("Estimated ") === 0 && d.indexOf("(was ") !== -1) { m = d.match(/Estimated ([\d.]+) fps \(was ([\d.]+)\)/); if (m) d = "Estimé " + m[1] + " FPS (était " + m[2] + ")."; }
+  else if (d.indexOf("Estimated ") === 0) { m = d.match(/Estimated ([\d.]+) fps at 1440p (.+)\./); if (m) d = "Estimé " + m[1] + " FPS en 1440p " + presetLabelOf(m[2] === "Low" ? "low" : m[2] === "Medium" ? "medium" : m[2] === "High" ? "high" : m[2] === "Very High" ? "very-high" : "ultra") + "."; }
   return { action: a, gainPct: t.gainPct, detail: d };
 }
 function suggestTweaks(input, result) { return suggestTweaksEn(input, result).map(mapTweak); }
@@ -159,13 +159,13 @@ function render() {
 
   var presetLabel = presetLabelOf(plan.preset);
   var methodNote = plan.method === "native"
-    ? "préréglage le plus élevé qui atteint " + state.target + " ips sur ce PC."
+    ? "préréglage le plus élevé qui atteint " + state.target + " FPS sur ce PC."
     : plan.method === "upscaler"
-      ? "préréglage le plus élevé qui atteint " + state.target + " ips avec " + upscalerLabelOf(plan.upscaler) + "."
+      ? "préréglage le plus élevé qui atteint " + state.target + " FPS avec " + upscalerLabelOf(plan.upscaler) + "."
       : plan.method === "framegen"
-        ? "atteint " + state.target + " ips seulement avec " + upscalerLabelOf(plan.upscaler) + " + " + framegenLabelOf(plan.frameGen) + " (images interpolées, non mesurées)."
-        : "toujours en dessous de " + state.target + " ips même en Faible + " + upscalerLabelOf(plan.upscaler) + " + " + framegenLabelOf(plan.frameGen) + " (interpolé). Baissez l'objectif ou mettez à niveau la GPU.";
-  var verdictText = result.hitsTarget ? "Atteint " + state.target + " ips" : "En dessous de " + state.target + " ips de " + Math.abs(result.targetGap) + " ips";
+        ? "atteint " + state.target + " FPS seulement avec " + upscalerLabelOf(plan.upscaler) + " + " + framegenLabelOf(plan.frameGen) + " (images interpolées, non mesurées)."
+        : "toujours en dessous de " + state.target + " FPS même en Faible + " + upscalerLabelOf(plan.upscaler) + " + " + framegenLabelOf(plan.frameGen) + " (interpolé). Baissez l'objectif ou mettez à niveau la GPU.";
+  var verdictText = result.hitsTarget ? "Atteint " + state.target + " FPS" : "En dessous de " + state.target + " FPS de " + Math.abs(result.targetGap) + " FPS";
   var fgNote = result.fgApplied ? " La moyenne de génération d'images est constituée d'images interpolées, non mesurées." : "";
 
   var tldr = $("[data-tldr-card]");
@@ -176,11 +176,11 @@ function render() {
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
     var tldrText = result.hitsTarget
-      ? "Oui, " + gpu.label + " + " + cpu.label + " atteint " + state.target + " ips à " + resShort(state.res) + " sur " + presetLabel + " : environ " + result.avgFps + " ips en moyenne, " + result.lowFps + " ips 1 % faible." + (plan.method === "native" ? " Ultra natif atteint " + ultra.avgFps + " ips." : "") + fgNote
-      : "Court, " + gpu.label + " + " + cpu.label + " atteint environ " + result.avgFps + " ips en moyenne (" + result.lowFps + " ips 1 % faible) à " + resShort(state.res) + " sur " + presetLabel + ", " + Math.abs(result.targetGap) + " ips sous l'objectif de " + state.target + " ips." + fgNote;
+      ? "Oui, " + gpu.label + " + " + cpu.label + " atteint " + state.target + " FPS à " + resShort(state.res) + " sur " + presetLabel + " : environ " + result.avgFps + " FPS en moyenne, " + result.lowFps + " FPS 1 % faible." + (plan.method === "native" ? " Ultra natif atteint " + ultra.avgFps + " FPS." : "") + fgNote
+      : "Court, " + gpu.label + " + " + cpu.label + " atteint environ " + result.avgFps + " FPS en moyenne (" + result.lowFps + " FPS 1 % faible) à " + resShort(state.res) + " sur " + presetLabel + ", " + Math.abs(result.targetGap) + " FPS sous l'objectif de " + state.target + " FPS." + fgNote;
     if (label) label.textContent = verdictText + " · En bref";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = verdictText + ", " + result.avgFps + " ips en moyenne";
+    if (verdictEl) verdictEl.textContent = verdictText + ", " + result.avgFps + " FPS en moyenne";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -203,7 +203,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + verdictText + '</p>' +
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> FPS moyens</span></h3>' +
-      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' ips (±15 %), ' + result.lowFps + ' ips 1 % faible. Préréglage ' + presetLabel + (plan.upscaler !== "off" ? " + " + upscalerLabelOf(plan.upscaler) : "") + (plan.frameGen !== "off" ? " + " + framegenLabelOf(plan.frameGen) + " (interpolé)" : "") + ', à ' + resLabel(state.res) + '.' + fgNote + '</p></div></div>' +
+      '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' FPS (±15 %), ' + result.lowFps + ' FPS 1 % faible. Préréglage ' + presetLabel + (plan.upscaler !== "off" ? " + " + upscalerLabelOf(plan.upscaler) : "") + (plan.frameGen !== "off" ? " + " + framegenLabelOf(plan.frameGen) + " (interpolé)" : "") + ', à ' + resLabel(state.res) + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">FPS moyens</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">1 % faible FPS</span><span class="val">' + result.lowFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((result.lowFps / 144) * 100)) + '%"></div></div></div>' +
@@ -218,8 +218,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + resShort(state.res) + ", objectif " + state.target + " ips : " + presetLabel + " · " + result.avgFps + " ips en moyenne (" + result.lowFps + " 1 % faible)") + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Réglages GTA 6 pour " + gpu.label + " + " + cpu.label + " à " + resShort(state.res) + ", objectif " + state.target + " ips") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + resShort(state.res) + ", objectif " + state.target + " FPS : " + presetLabel + " · " + result.avgFps + " FPS en moyenne (" + result.lowFps + " 1 % faible)") + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Réglages GTA 6 pour " + gpu.label + " + " + cpu.label + " à " + resShort(state.res) + ", objectif " + state.target + " FPS") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -229,7 +229,7 @@ function render() {
   if (ladder) {
     ladder.innerHTML = ["low", "medium", "high", "very-high", "ultra"].map(function (p) {
       var r = estimateFps(inputFor(p, "off", "off"));
-      return "<tr><td><strong>" + presetLabelOf(p) + "</strong></td><td class=\"mono\">" + r.avgFps + " ips</td><td class=\"mono\">" + r.lowFps + " ips</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
+      return "<tr><td><strong>" + presetLabelOf(p) + "</strong></td><td class=\"mono\">" + r.avgFps + " FPS</td><td class=\"mono\">" + r.lowFps + " FPS</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
   }
 
@@ -243,7 +243,7 @@ function render() {
 
 function shareText() {
   var plan = optimize();
-  return findGpuById(state.gpu).label + " + " + findCpuById(state.cpu).label + " @ " + resShort(state.res) + ", objectif " + state.target + " ips : " + presetLabelOf(plan.preset) + " · " + plan.result.avgFps + " ips en moyenne (" + plan.result.lowFps + " 1 % faible). Optimiseur de réglages GTA 6 : " + shareUrl();
+  return findGpuById(state.gpu).label + " + " + findCpuById(state.cpu).label + " @ " + resShort(state.res) + ", objectif " + state.target + " FPS : " + presetLabelOf(plan.preset) + " · " + plan.result.avgFps + " FPS en moyenne (" + plan.result.lowFps + " 1 % faible). Optimiseur de réglages GTA 6 : " + shareUrl();
 }
 
 function copyText(text, btn, labelSel) {

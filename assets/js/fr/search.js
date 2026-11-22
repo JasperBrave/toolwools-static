@@ -23,7 +23,7 @@
     { slug: "price-by-country", title: "Prix de GTA 6 par pays", desc: "Prix de GTA 6 par pays en devise locale." },
     { slug: "economy-calculator", title: "Calculateur de ROI argent et business GTA 6", desc: "Trouvez le moyen le plus rapide de gagner des GTA$ et quelles entreprises rapportent en premier." },
     { slug: "gta-6-tracker", title: "Jalons du lancement de GTA 6", desc: "Jalons de lancement et fenêtres de préchargement terminées pour GTA 6." },
-    { slug: "settings-optimizer", title: "Optimiseur de réglages graphiques", desc: "Réglez les paramètres graphiques pour vos ips cibles et votre configuration." },
+    { slug: "settings-optimizer", title: "Optimiseur de réglages graphiques", desc: "Réglez les paramètres graphiques pour vos FPS cibles et votre configuration." },
     { slug: "hardware-comparison", title: "Comparateur de matériel", desc: "Comparez deux GPU ou CPU en face à face pour GTA 6." },
     { slug: "server-status", title: "Statut du serveur GTA 6", desc: "Les serveurs GTA 6 sont-ils en panne ? Vérification de statut en direct." },
     { slug: "preload-tracker", title: "Fenêtres de préchargement de GTA 6", desc: "Le préchargement du lancement est terminé. Cet outil est toujours en développement." },
@@ -57,7 +57,7 @@
       if (!hits.length) {
         var empty = document.createElement("div");
         empty.className = "search-results-empty";
-        empty.textContent = 'Aucun outil ne correspond à "' + q.trim() + '". Essayez "ips", "VRAM" ou "goulot d\'étranglement".';
+        empty.textContent = 'Aucun outil ne correspond à "' + q.trim() + '". Essayez "FPS", "VRAM" ou "goulot d\'étranglement".';
         list.appendChild(empty);
       } else {
         hits.forEach(function (t) {

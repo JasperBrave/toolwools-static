@@ -144,7 +144,7 @@ function render() {
     var kicker = result.verdict === "balanced" ? "Equilibrado ±7%" : result.verdict === "cpu" ? "Limitado por la CPU" : "Limitado por la GPU";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">La solución más pequeña</p><p>Swap your ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' to <strong>' + upgrade.part.label + '</strong> — drops bottleneck from <span class="mono">' + upgrade.fromPct + '%</span> to <span class="mono">' + upgrade.toPct + '%</span>.</p></div>'
+      ? '<div class="upgrade-box"><p class="eyebrow-muted">La solución más pequeña</p><p>Cambia tu ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' por <strong>' + upgrade.part.label + '</strong>, lo que baja el cuello de botella del <span class="mono">' + upgrade.fromPct + '%</span> al <span class="mono">' + upgrade.toPct + '%</span>.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +

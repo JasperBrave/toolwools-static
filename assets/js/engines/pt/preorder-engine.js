@@ -95,7 +95,7 @@ export const CHANNELS = [
 export const AXIS_LABELS = {
   cancel: "Cancelamento",
   priceProtection: "Proteção contra queda de preço",
-  preload: "Preparo do download",
+  preload: "Prontidão do download",
   bonus: "Retenção de bônus",
   resale: "Valor de revenda"
 };

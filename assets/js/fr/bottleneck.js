@@ -47,12 +47,12 @@ function readinessOf(result) {
 function tldrOf(result, gpu, cpu, res, mode) {
   var v = verdictLabelOf(result);
   if (readinessOf(result) === "ready")
-    return "Oui, " + gpu.label + " + " + cpu.label + " est prêt pour GTA 6 en " + res + " en " + modeLabel(mode) + ". " + v + ", cible environ " + result.avgFps + " ips en moyenne.";
+    return "Oui, " + gpu.label + " + " + cpu.label + " est prêt pour GTA 6 en " + res + " en " + modeLabel(mode) + ". " + v + ", cible environ " + result.avgFps + " FPS en moyenne.";
   if (readinessOf(result) === "borderline")
-    return "Limite, " + gpu.label + " + " + cpu.label + " fera tourner GTA 6 en " + res + " en " + modeLabel(mode) + " avec un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " (~" + result.avgFps + " ips). Jouable, mais vous perdrez des images.";
+    return "Limite, " + gpu.label + " + " + cpu.label + " fera tourner GTA 6 en " + res + " en " + modeLabel(mode) + " avec un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : result.verdict === "gpu" ? "GPU" : "") + " (~" + result.avgFps + " FPS). Jouable, mais vous perdrez des images.";
   if (result.verdict === "balanced")
-    return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " est équilibré mais lent en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " ips). Les deux composants ont besoin de plus de puissance pour des fréquences d'images fluides.";
-  return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " montre un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : "GPU") + " en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " ips). Un composant freine l'autre.";
+    return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " est équilibré mais lent en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " FPS). Les deux composants ont besoin de plus de puissance pour des fréquences d'images fluides.";
+  return "Mise à niveau recommandée, " + gpu.label + " + " + cpu.label + " montre un goulot d'étranglement de " + result.absPct + " % " + (result.verdict === "cpu" ? "CPU" : "GPU") + " en " + res + " en " + modeLabel(mode) + " (~" + result.avgFps + " FPS). Un composant freine l'autre.";
 }
 function toneOf(result) {
   if (result.verdict === "balanced") return result.avgFps < 45 ? "upgrade" : "ready";
@@ -153,7 +153,7 @@ function render() {
       '<div class="verdict-body">' + iconFor(tone) +
       '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
-      '<p class="verdict-desc">Estimé <strong>' + result.fpsLow + '–' + result.fpsHigh + ' ips</strong> en ' + state.res + ' en ' + modeLabel(state.mode) + '. La plage d\'images suppose le préréglage Élevé sans ray tracing.</p></div></div>' +
+      '<p class="verdict-desc">Estimé <strong>' + result.fpsLow + '–' + result.fpsHigh + ' FPS</strong> en ' + state.res + ' en ' + modeLabel(state.mode) + '. La plage d\'images suppose le préréglage Élevé sans ray tracing.</p></div></div>' +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
       '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
@@ -185,19 +185,19 @@ function render() {
       cardA.classList.toggle("winner", winner === "A");
       $("[data-compare-title]", cardA).textContent = "PC A, " + gpu.label + " + " + cpu.label;
       $("[data-compare-verdict]", cardA).textContent = verdictLabelOf(result);
-      $("[data-compare-fps]", cardA).innerHTML = "~" + result.fpsLow + "–" + result.fpsHigh + " ips · moy. <strong>" + result.avgFps + "</strong>";
+      $("[data-compare-fps]", cardA).innerHTML = "~" + result.fpsLow + "–" + result.fpsHigh + " FPS · moy. <strong>" + result.avgFps + "</strong>";
       $("[data-compare-pill]", cardA).hidden = winner !== "A";
     }
     if (cardB) {
       cardB.classList.toggle("winner", winner === "B");
       $("[data-compare-title]", cardB).textContent = "PC B, " + gpuB.label + " + " + cpuB.label;
       $("[data-compare-verdict]", cardB).textContent = verdictLabelOf(resultB);
-      $("[data-compare-fps]", cardB).innerHTML = "~" + resultB.fpsLow + "–" + resultB.fpsHigh + " ips · moy. <strong>" + resultB.avgFps + "</strong>";
+      $("[data-compare-fps]", cardB).innerHTML = "~" + resultB.fpsLow + "–" + resultB.fpsHigh + " FPS · moy. <strong>" + resultB.avgFps + "</strong>";
       $("[data-compare-pill]", cardB).hidden = winner !== "B";
     }
     var summary = $("[data-compare-summary]", compareSection);
     if (summary) {
-      var winText = winner === "Tie" ? "Égalité à 3 ips près" : (winner === "A" ? "PC A" : "PC B") + " gagne de " + Math.abs(diff) + " ips";
+      var winText = winner === "Tie" ? "Égalité à 3 FPS près" : (winner === "A" ? "PC A" : "PC B") + " gagne de " + Math.abs(diff) + " FPS";
       summary.innerHTML = "<strong>" + winText + "</strong> en moyenne en " + state.res + " en " + modeLabel(state.mode) + ". PC A : " + (result.verdict === "balanced" ? "équilibre" : result.absPct + " % de goulot " + result.verdict.toUpperCase()) + " ; PC B : " + (resultB.verdict === "balanced" ? "équilibre" : resultB.absPct + " % de goulot " + resultB.verdict.toUpperCase()) + ".";
     }
   }
@@ -210,7 +210,7 @@ function render() {
   var live = $("[data-live-region]");
   if (live) {
     live.textContent = state.compare
-      ? verdictLabel + ". PC A " + result.avgFps + " ips en moyenne en " + state.res + " en " + modeLabel(state.mode) + ". PC B " + verdictLabelOf(computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode)) + ", " + computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode).avgFps + " ips en moyenne."
+      ? verdictLabel + ". PC A " + result.avgFps + " FPS en moyenne en " + state.res + " en " + modeLabel(state.mode) + ". PC B " + verdictLabelOf(computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode)) + ", " + computeBalance(findPart(GPUS, state.gpu2), findPart(CPUS, state.cpu2), state.res, state.mode).avgFps + " FPS en moyenne."
       : verdictLabel + ". Estimé de " + result.fpsLow + " à " + result.fpsHigh + " images par seconde en " + state.res + " en " + modeLabel(state.mode) + ".";
   }
   syncUrl();

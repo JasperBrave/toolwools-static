@@ -43,7 +43,7 @@ export const GPUS = [
   { id: "rx-5600-xt", label: "Radeon RX 5600 XT", score: 30, brand: "amd" },
   { id: "gtx-1070", label: "GeForce GTX 1070 / Ti", score: 26, brand: "nvidia" },
   { id: "gtx-1060", label: "GeForce GTX 1060 6GB / RX 580", score: 20, brand: "nvidia" },
-  { id: "gtx-1050-ti", label: "GeForce GTX 1050 Ti or older", score: 10, brand: "nvidia" }
+  { id: "gtx-1050-ti", label: "GeForce GTX 1050 Ti ou mais antiga", score: 10, brand: "nvidia" }
 ];
 export const CPUS = [
   { id: "i9-14900k", label: "Core i9-14900K", score: 100, brand: "intel" },
@@ -66,7 +66,7 @@ export const CPUS = [
   { id: "i5-9400", label: "Core i5-9400F / 9600K", score: 38, brand: "intel" },
   { id: "i5-8400", label: "Core i5-8400 / i7-8700", score: 35, brand: "intel" },
   { id: "r5-2600", label: "Ryzen 5 2600 / 2600X", score: 30, brand: "amd" },
-  { id: "older", label: "Core i5-7500 or older", score: 18, brand: "intel" }
+  { id: "older", label: "Core i5-7500 ou mais antigo", score: 18, brand: "intel" }
 ];
 export const RES_FACTOR = { "1080p": 0.75, "1440p": 0.9, "4K": 1 };
 export const WORKLOAD_FACTOR = {
