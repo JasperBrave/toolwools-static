@@ -29,7 +29,7 @@ export const REGIONS = [
   {
     id: "eu-central",
     label: "Avrupa, Orta ve Doğu",
-    edge: "Frankfurt / Warsaw",
+    edge: "Frankfurt / Varşova",
     baselinePing: 24,
     note: "Trafiğin çoğunu Frankfurt taşır; doğudaki ISS'ler bazen yerel eşleşme yerine buradan yönlendirir."
   },
@@ -44,7 +44,7 @@ export const REGIONS = [
   {
     id: "mena",
     label: "Orta Doğu ve Kuzey Afrika",
-    edge: "Dubai / Bahrain",
+    edge: "Dubai / Bahreyn",
     baselinePing: 48,
     note: "Körfez eşleşmesi güçlüdür; Kuzey Afrika rotaları hâlâ Marsilya üzerinden geçer, bu da 30-50 ms'ye mal olur."
   },
@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapur tüm bölgeye hizmet eder, bu yüzden Manila ve Cakarta 20-40 ms denizaltı kablosu vergisi öder."
   },
   { id: "anz", label: "Avustralya ve Yeni Zelanda", edge: "Sydney", baselinePing: 30, note: "Sidney yurt içinde iyidir; ABD'de barındırılan herhangi bir lobi, hiçbir yönlendiricinin düzeltemeyeceği 150 ms tabandır." },
-  { id: "japan", label: "Japonya ve Kore", edge: "Tokyo / Seoul", baselinePing: 20, note: "Sınıfının en iyisi yurt içi fiber. Pingin burada yüksekse evin içindeki son atlamadan şüphelen." }
+  { id: "japan", label: "Japonya ve Kore", edge: "Tokyo / Seul", baselinePing: 20, note: "Sınıfının en iyisi yurt içi fiber. Pingin burada yüksekse evin içindeki son atlamadan şüphelen." }
 ];
 export const CONNECTION_TYPES = [
   {

@@ -44,7 +44,7 @@ export const REGIONS = [
   {
     id: "mena",
     label: "Moyen-Orient et Afrique du Nord",
-    edge: "Dubai / Bahrain",
+    edge: "Dubaï / Bahreïn",
     baselinePing: 48,
     note: "Le peering du Golfe est solide ; les routes d'Afrique du Nord transitent encore par Marseille, ce qui coûte 30-50 ms."
   },

@@ -80,13 +80,13 @@ function syncUrl() {
   window.history.replaceState(null, "", shareUrl().replace(window.location.origin, ""));
 }
 function shareText(result) {
-  return "GTA 6 connection grade " + result.grade + " in " + result.region.label + ": " + result.pingTarget + " ms wired latency target, " + result.score + "/100. Grade your connection on ToolWools.";
+  return "Nota de conexión GTA 6 " + result.grade + " en " + result.region.label + ": " + result.pingTarget + " ms de objetivo de latencia por cable, " + result.score + "/100. Califica tu conexión en ToolWools.";
 }
 function xUrl(result) {
   return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText(result)) + "&url=" + encodeURIComponent(shareUrl());
 }
 function redditUrl(result) {
-  return "https://www.reddit.com/submit?title=" + encodeURIComponent("GTA 6 connection grade " + result.grade + " in " + result.region.label + " (" + result.score + "/100)") + "&url=" + encodeURIComponent(shareUrl());
+  return "https://www.reddit.com/submit?title=" + encodeURIComponent("Nota de conexión GTA 6 " + result.grade + " en " + result.region.label + " (" + result.score + "/100)") + "&url=" + encodeURIComponent(shareUrl());
 }
 
 function iconFor(tone) {
@@ -165,9 +165,9 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     var iconSlot = $("[data-tldr-icon]", tldr);
-    if (label) label.textContent = result.headline + " · TL;DR";
-    if (text) text.textContent = "Grade " + result.grade + " (" + result.score + "/100) in " + result.region.label + " on a " + result.connection.label.toLowerCase() + " line: ping " + state.ping + " ms against a " + result.pingTarget + " ms target, with jitter " + state.jitter + " ms, loss " + state.loss + "%, " + state.down + " Mbps down and " + state.up + " Mbps up. " + result.verdict;
-    if (verdictEl) verdictEl.textContent = "Grade " + result.grade + " — " + result.score + "/100";
+    if (label) label.textContent = result.headline + " · Resumen";
+    if (text) text.textContent = "Nota " + result.grade + " (" + result.score + "/100) en " + result.region.label + " con una línea de " + result.connection.label.toLowerCase() + ": ping de " + state.ping + " ms contra un objetivo de " + result.pingTarget + " ms, con jitter de " + state.jitter + " ms, pérdida de " + state.loss + "%, " + state.down + " Mbps de bajada y " + state.up + " Mbps de subida. " + result.verdict;
+    if (verdictEl) verdictEl.textContent = "Nota " + result.grade + " — " + result.score + "/100";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -192,7 +192,7 @@ function render() {
       "</div>" +
       '<div data-axes-list>' + axesHtml(result) + "</div>" +
       '<dl class="stat-grid">' +
-      "<div><dt>Grade</dt><dd>" + esc(result.grade) + "</dd></div>" +
+      "<div><dt>Nota</dt><dd>" + esc(result.grade) + "</dd></div>" +
       "<div><dt>Score</dt><dd>" + result.score + "/100</dd></div>" +
       "<div><dt>Objetivo de ping cableado</dt><dd>" + result.pingTarget + " ms</dd></div>" +
       "<div><dt>Eje más débil</dt><dd>" + esc(worstText) + "</dd></div>" +
@@ -235,7 +235,7 @@ function render() {
   if (redditLink) redditLink.href = redditUrl(result);
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Grade " + result.grade + ", " + result.score + " de 100. " + result.headline + ". " + result.verdict;
+  if (live) live.textContent = "Nota " + result.grade + ", " + result.score + " de 100. " + result.headline + ". " + result.verdict;
   syncUrl();
 }
 
