@@ -78,18 +78,23 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "joueur concentré uniquement sur l'histoire",
+  "online-casual": "joueur histoire et en ligne occasionnel",
+  "online-grinder": "joueur en ligne dès le premier jour",
+  "undecided": "acheteur indécis"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /joueur$/.test(l) ? l : l + " joueur";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
-  return "Meilleure édition GTA 6 pour un joueur " + result.profile.label.toLowerCase() + " : " + result.best.edition.label + " (" + result.best.score + "/100). Sélecteur d'édition GTA 6 sur ToolWools.";
+  return "Meilleure édition GTA 6 pour un " + buyerPhrase(result.profile) + " : " + result.best.edition.label + " (" + result.best.score + "/100). Sélecteur d'édition GTA 6 sur ToolWools.";
 }
 function xUrl(result) {
   return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareTitle(result)) + "&url=" + encodeURIComponent(shareUrl());
 }
 function redditUrl(result) {
-  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - meilleure édition GTA 6 pour un joueur " + result.profile.label.toLowerCase() + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
+  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - meilleure édition GTA 6 pour un " + buyerPhrase(result.profile) + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
 }
 
 function iconFor(tone) {
@@ -141,7 +146,7 @@ function matrixHtml(result) {
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">Nouveau dans ce niveau : ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
     : "";
-  return '<p class="verdict-desc">Ce que ' + esc(result.best.edition.label) + " offre, classé selon sa valeur pour un joueur " + esc(result.profile.label.toLowerCase()) + ". La confiance est indiquée sur chaque bonus.</p>"
+  return '<p class="verdict-desc">Ce que ' + esc(result.best.edition.label) + " offre, classé selon sa valeur pour un " + esc(buyerPhrase(result.profile)) + ". La confiance est indiquée sur chaque bonus.</p>"
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonus</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>'

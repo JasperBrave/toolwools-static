@@ -17,7 +17,7 @@ var PROFILE_NOTE = { "story-only": "Du willst die Kampagne und wirst Online wahr
 function mapEdition(e) { var c = Object.assign({}, e); c.label = EDITION_LABEL[e.id] || e.label; c.note = EDITION_NOTE[e.id] || e.note; return c; }
 function mapBonus(b) { var c = Object.assign({}, b); c.label = BONUS_LABEL[b.id] || b.label; c.detail = BONUS_DETAIL[b.id] || b.detail; return c; }
 function mapProfile(p) { var c = Object.assign({}, p); c.label = PROFILE_LABEL[p.id] || p.label; c.note = PROFILE_NOTE[p.id] || p.note; return c; }
-function evaluateEditions(input) { var r = evaluateEditionsEn(input); r.profile = mapProfile(r.profile); r.ranked = r.ranked.map(function (s) { var c = Object.assign({}, s); c.edition = mapEdition(s.edition); c.bonuses = s.bonuses.map(mapBonus); c.addedOverPrevious = s.addedOverPrevious.map(mapBonus); return c; }); r.best = r.ranked[0]; if (r.best.edition.id === "standard") r.reason = "Für einen " + buyerPhrase(r.profile) + " fügt nichts über Standard genug nutzbaren Wert hinzu, um den Aufpreis bei deiner " + r.upliftTolerance + "%-Obergrenze zu rechtfertigen, und Standard enthält bereits die gesamte Story und den ganzen Online-Modus."; else r.reason = "Sie fügt etwa " + r.best.utilityDelta + " Punkte gewichteten Nutzens über Standard hinzu für einen " + r.best.edition.upliftPercent + "%-Aufpreis, etwa " + r.best.utilityPerUpliftPoint + " Punkte pro 10 %, die du ausgibst, was die beste Rendite aller Stufen ist, die auf " + r.platformLabel + " innerhalb deiner " + r.upliftTolerance + "%-Obergrenze verfügbar sind."; r.upgradeMath = r.upgradeMath.map(function (m) { var mm, tm; if (m.title === "Buying up from Standard to Ultimate") { mm = m.body.match(/costs about ([\d.]+)% more than Standard and adds roughly ([\d.]+) points/); return { title: "Von Standard auf Ultimate hochkaufen", body: mm ? "Ultimate kostet etwa " + mm[1] + " % mehr als Standard und fügt etwa " + mm[2] + " Punkte gewichteten Nutzens hinzu für deine Spielweise. Wenn diese Zahl unter 3 liegt, ist der Schritt für dich kosmetisch; über 6 ist er der günstigste Nutzen auf der Seite." : m.body }; } if (m.title === "Standard now, upgrade later") return { title: "Standard jetzt, später upgraden", body: "Digitale Stufen-Upgrades auf Konsole werden normalerweise als In-Store-Upgrade zum Preisunterschied verkauft, also kostet Standard kaufen und später aufsteigen meist denselben Gesamtbetrag, mit einem Caveat: Launch-Fenster-Bonuswochen und jeder Early-Access-Perk verfallen, und du kannst sie nicht nachträglich beanspruchen." }; if (m.title === "Buying currency instead of a tier") return { title: "Währung kaufen statt einer Stufe", body: "Der ehrliche Vergleich für einen Grinder ist nicht ein Stufen-Aufpreis versus Standard, sondern ein Stufen-Aufpreis versus der Kauf derselben Menge Ingame-Währung nach dem Launch, sobald du die tatsächlichen Ingame-Preise kennst. Wenn Währung der einzige Grund für dein Upgrade ist, warte." }; if (m.title === "Your stated ceiling") { tm = m.body.match(/go to ([\d.]+)% over Standard/); return { title: "Deine genannte Obergrenze", body: tm ? "Du hast gesagt, du würdest bis zu " + tm[1] + " % über Standard gehen. Alles darüber ist in der Tabelle markiert statt versteckt, damit du sehen kannst, was du nicht kaufen willst." : m.body }; } return m; }); return r; }
+function evaluateEditions(input) { var r = evaluateEditionsEn(input); r.profile = mapProfile(r.profile); r.ranked = r.ranked.map(function (s) { var c = Object.assign({}, s); c.edition = mapEdition(s.edition); c.bonuses = s.bonuses.map(mapBonus); c.addedOverPrevious = s.addedOverPrevious.map(mapBonus); return c; }); r.best = r.ranked[0]; if (r.best.edition.id === "standard") r.reason = "Für einen " + buyerPhrase(r.profile) + ", fügt nichts über Standard genug nutzbaren Wert hinzu, um den Aufpreis bei deiner " + r.upliftTolerance + "%-Obergrenze zu rechtfertigen, und Standard enthält bereits die gesamte Story und den ganzen Online-Modus."; else r.reason = "Sie fügt etwa " + r.best.utilityDelta + " Punkte gewichteten Nutzens über Standard hinzu für einen " + r.best.edition.upliftPercent + "%-Aufpreis, etwa " + r.best.utilityPerUpliftPoint + " Punkte pro 10 %, die du ausgibst, was die beste Rendite aller Stufen ist, die auf " + r.platformLabel + " innerhalb deiner " + r.upliftTolerance + "%-Obergrenze verfügbar sind."; r.upgradeMath = r.upgradeMath.map(function (m) { var mm, tm; if (m.title === "Buying up from Standard to Ultimate") { mm = m.body.match(/costs about ([\d.]+)% more than Standard and adds roughly ([\d.]+) points/); return { title: "Von Standard auf Ultimate hochkaufen", body: mm ? "Ultimate kostet etwa " + mm[1] + " % mehr als Standard und fügt etwa " + mm[2] + " Punkte gewichteten Nutzens hinzu für deine Spielweise. Wenn diese Zahl unter 3 liegt, ist der Schritt für dich kosmetisch; über 6 ist er der günstigste Nutzen auf der Seite." : m.body }; } if (m.title === "Standard now, upgrade later") return { title: "Standard jetzt, später upgraden", body: "Digitale Stufen-Upgrades auf Konsole werden normalerweise als In-Store-Upgrade zum Preisunterschied verkauft, also kostet Standard kaufen und später aufsteigen meist denselben Gesamtbetrag, mit einem Caveat: Launch-Fenster-Bonuswochen und jeder Early-Access-Perk verfallen, und du kannst sie nicht nachträglich beanspruchen." }; if (m.title === "Buying currency instead of a tier") return { title: "Währung kaufen statt einer Stufe", body: "Der ehrliche Vergleich für einen Grinder ist nicht ein Stufen-Aufpreis versus Standard, sondern ein Stufen-Aufpreis versus der Kauf derselben Menge Ingame-Währung nach dem Launch, sobald du die tatsächlichen Ingame-Preise kennst. Wenn Währung der einzige Grund für dein Upgrade ist, warte." }; if (m.title === "Your stated ceiling") { tm = m.body.match(/go to ([\d.]+)% over Standard/); return { title: "Deine genannte Obergrenze", body: tm ? "Du hast gesagt, du würdest bis zu " + tm[1] + " % über Standard gehen. Alles darüber ist in der Tabelle markiert statt versteckt, damit du sehen kannst, was du nicht kaufen willst." : m.body }; } return m; }); return r; }
 
 var DEFAULTS = { platform: "ps5", profile: "online-casual", uplift: 30, p: [], view: "verdict" };
 var PLATFORMS = ["ps5", "xbox"];
@@ -78,18 +78,23 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "Spieler, der nur die Story spielt",
+  "online-casual": "Spieler, der Story und gelegentlich online spielt",
+  "online-grinder": "Spieler, der ab Tag eins online grindet",
+  "undecided": "Käufer, der sich noch nicht sicher ist"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /käufer$/.test(l) ? l : l + " käufer";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
-  return "Beste GTA-6-Edition für " + result.profile.label.toLowerCase() + "-Spieler: " + result.best.edition.label + " (" + result.best.score + "/100). GTA-6-Editions-Picker auf ToolWools.";
+  return "Beste GTA-6-Edition für einen " + buyerPhrase(result.profile) + ": " + result.best.edition.label + " (" + result.best.score + "/100). GTA-6-Editions-Picker auf ToolWools.";
 }
 function xUrl(result) {
   return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareTitle(result)) + "&url=" + encodeURIComponent(shareUrl());
 }
 function redditUrl(result) {
-  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - beste GTA-6-Edition für " + result.profile.label.toLowerCase() + "-Spieler (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
+  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - beste GTA-6-Edition für einen " + buyerPhrase(result.profile) + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
 }
 
 function iconFor(tone) {
@@ -141,7 +146,7 @@ function matrixHtml(result) {
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">Neu in dieser Stufe: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
     : "";
-  return '<p class="verdict-desc">Was ' + esc(result.best.edition.label) + " gewährt, geordnet danach, wie viel es für einen " + esc(result.profile.label.toLowerCase()) + "-Spieler wert ist. Konfidenz ist bei jedem Bonus gelabelt.</p>"
+  return '<p class="verdict-desc">Was ' + esc(result.best.edition.label) + " gewährt, geordnet danach, wie viel es für einen " + esc(buyerPhrase(result.profile)) + ", wert ist. Konfidenz ist bei jedem Bonus gelabelt.</p>"
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " Boni</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button>'
@@ -185,14 +190,14 @@ function render() {
     var tVerdict = $("[data-tldr-verdict]", tldr);
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " · Kurzfassung";
-    if (tText) tText.textContent = result.best.edition.label + " ist der beste Wert für einen " + buyerPhrase(result.profile) + " auf " + result.platformLabel + " bei einer " + result.upliftTolerance + "%-Obergrenze: " + result.best.score + "/100, fügt " + result.best.utilityDelta + " gewichtete Punkte über Standard hinzu für einen " + result.best.edition.upliftPercent + "%-Aufpreis.";
+    if (tText) tText.textContent = result.best.edition.label + " ist der beste Wert für einen " + buyerPhrase(result.profile) + ", auf " + result.platformLabel + " bei einer " + result.upliftTolerance + "%-Obergrenze: " + result.best.score + "/100, fügt " + result.best.utilityDelta + " gewichtete Punkte über Standard hinzu für einen " + result.best.edition.upliftPercent + "%-Aufpreis.";
     if (tVerdict) tVerdict.textContent = result.best.edition.label + " | " + result.best.score + "/100 Wert für Aufpreis";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Jede GTA-6-Edition enthält die volle Story-Kampagne und den vollen Online-Modus, das Spiel ist am 19. November 2026 um 05:00 UTC erschienen und keine Stufe verkauft extra Story. Auf " + esc(result.platformLabel) + ", für einen " + esc(buyerPhrase(result.profile)) + " mit einer " + result.upliftTolerance + "%-Obergrenze über Standard, ist der beste Wert <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Jede GTA-6-Edition enthält die volle Story-Kampagne und den vollen Online-Modus, das Spiel ist am 19. November 2026 um 05:00 UTC erschienen und keine Stufe verkauft extra Story. Auf " + esc(result.platformLabel) + ", für einen " + esc(buyerPhrase(result.profile)) + ", mit einer " + result.upliftTolerance + "%-Obergrenze über Standard, ist der beste Wert <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");
@@ -209,7 +214,7 @@ function render() {
   if (shareLinks[1]) shareLinks[1].href = redditUrl(result);
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Bester Wert: " + result.best.edition.label + ", " + result.best.score + " von 100, für einen " + buyerPhrase(result.profile) + " auf " + result.platformLabel + " bei einer " + result.upliftTolerance + "-prozentigen Obergrenze über Standard.";
+  if (live) live.textContent = "Bester Wert: " + result.best.edition.label + ", " + result.best.score + " von 100, für einen " + buyerPhrase(result.profile) + ", auf " + result.platformLabel + " bei einer " + result.upliftTolerance + "-prozentigen Obergrenze über Standard.";
   syncUrl();
 }
 

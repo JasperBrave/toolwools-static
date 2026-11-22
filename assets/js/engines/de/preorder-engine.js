@@ -76,8 +76,8 @@ export const CHANNELS = [
   },
   {
     id: "retailer-code-in-box",
-    label: "Retailer-Code-in-a-Box (nur Standard)",
-    short: "Code-in-a-Box",
+    label: "Händler-Code in einer Box (nur Standard)",
+    short: "Code in einer Box",
     platforms: ["ps5", "xbox"],
     editions: ["standard"],
     physical: true,
