@@ -157,7 +157,7 @@ function priceTableHtml(ranked, country, editionLabel) {
       + "<td class=\"mono\">" + vs + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
-    + '      <p class="section-dek">Ranked by USD-equivalent receipt total, cheapest first. Tax is inside the total, the shelf column shows the listed price.</p>\n'
+    + '      <p class="section-dek">Ranked by USD-equivalent receipt total, cheapest first. The receipt total includes tax; the shelf column shows the listed price, which excludes tax in the US, Canada and Argentina (added at checkout).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 price in every country, scrollable table">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelled GTA 6 ' + editionLabel + " price for 44 markets, cheapest USD equivalent first, rates dated " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Shelf price</th><th scope="col">Tax</th><th scope="col">Receipt total</th><th scope="col">USD</th><th scope="col">vs US</th></tr></thead>\n'

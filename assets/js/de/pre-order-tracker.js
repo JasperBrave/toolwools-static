@@ -128,7 +128,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6 erschien am <time datetime=\"2026-11-19\">19. November 2026</time> für PlayStation 5 und Xbox Series X|S. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist Disc, versandt auf PlayStation 5. Weil du uns gesagt hast, dass keine starke Präferenz außer Wert zählt, erzielt Händler-Disc, versandt 65,2 von 100 für eine Standard-Bestellung in den Vereinigten Staaten — führend bei Stornierbarkeit und Preis-Senkungs-Schutz, vor Abholung im Laden mit 63,4.<strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "GTA 6 erschien am <time datetime=\"2026-11-19\">19. November 2026</time> für PlayStation 5 und Xbox Series X|S. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");

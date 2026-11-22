@@ -107,7 +107,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6, <time datetime=\"2026-11-19\">19 Kasım 2026</time> tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan PlayStation 5'te Disk, kargoda. Bize değerden başka güçlü bir tercihiniz olmadığını söylediğiniz için, perakendeci diski, kargoda, ABD'de bir Standart sipariş için 100 üzerinden 65,2 puan alıyor; iptal edilebilirlik ve fiyat düşüşü koruması açısından önde, mağazadan teslim alma 63,4 ile geride.<strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "GTA 6, <time datetime=\"2026-11-19\">19 Kasım 2026</time> tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
   }
 
   var outLabel = $("[data-output-label]");

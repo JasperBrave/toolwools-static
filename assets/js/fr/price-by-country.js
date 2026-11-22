@@ -168,7 +168,7 @@ function priceTableHtml(ranked, country, editionLabel) {
       + "<td class=\"mono\">" + vs + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">Prix de GTA 6 dans chaque pays : ' + editionLabel + "</h2>\n"
-    + '      <p class="section-dek">Classé par total de reçu équivalent en USD, le moins cher en premier. La taxe est incluse dans le total, la colonne du rayon montre le prix affiché.</p>\n'
+    + '      <p class="section-dek">Classé par total de reçu équivalent en USD, le moins cher en premier. Le total de reçu inclut la taxe ; la colonne du rayon montre le prix affiché, qui exclut la taxe aux États-Unis, au Canada et en Argentine (ajoutée en caisse).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Prix de GTA 6 dans chaque pays, tableau défilant">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Prix GTA 6 modélisé ' + editionLabel + " pour 44 marchés, équivalent USD le moins cher en premier, taux datés du " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Pays</th><th scope="col">Prix en rayon</th><th scope="col">Taxe</th><th scope="col">Total du reçu</th><th scope="col">USD</th><th scope="col">vs É.-U.</th></tr></thead>\n'

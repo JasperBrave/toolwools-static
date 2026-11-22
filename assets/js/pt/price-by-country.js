@@ -158,7 +158,7 @@ function priceTableHtml(ranked, country, editionLabel) {
       + "<td class=\"mono\">" + vs + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
-    + '      <p class="section-dek">Classificado por total do recibo equivalente em USD, o mais barato primeiro. O imposto está dentro do total, a coluna de prateleira mostra o preço listado.</p>\n'
+    + '      <p class="section-dek">Classificado por total do recibo equivalente em USD, o mais barato primeiro. O total do recibo inclui o imposto; a coluna de prateleira mostra o preço listado, que exclui o imposto nos Estados Unidos, no Canadá e na Argentina (adicionado no checkout).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 price in every country, scrollable table">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " preço para 44 mercados, equivalente em USD mais barato primeiro, taxas datadas " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Preço de prateleira</th><th scope="col">Imposto</th><th scope="col">Total do recibo</th><th scope="col">USD</th><th scope="col">vs EUA</th></tr></thead>\n'
@@ -230,7 +230,7 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado on X"]');
+  var xLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado no X"]');
   var rLink = document.querySelector('.share-panel a[aria-label="Compartilhe este resultado on Reddit"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());

@@ -168,7 +168,7 @@ function priceTableHtml(ranked, country, editionLabel) {
       + "<td class=\"mono\">" + vs + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA-6-Preis in jedem Land: ' + editionLabel + "</h2>\n"
-    + '      <p class="section-dek">Gerankt nach USD-äquivalentem Kassenbon-Gesamtbetrag, günstigste zuerst. Steuer ist im Gesamtbetrag enthalten, die Regal-Spalte zeigt den Listenpreis.</p>\n'
+    + '      <p class="section-dek">Gerankt nach USD-äquivalentem Kassenbon-Gesamtbetrag, günstigste zuerst. Der Kassenbon-Gesamtbetrag enthält die Steuer; die Regal-Spalte zeigt den Listenpreis, der in den USA, Kanada und Argentinien keine Steuer enthält (wird an der Kasse hinzugefügt).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA-6-Preis in jedem Land, scrollbare Tabelle">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modellierter GTA-6-' + editionLabel + "-Preis für 44 Märkte, günstigstes USD-Äquivalent zuerst, Kurse vom " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Land</th><th scope="col">Regalpreis</th><th scope="col">Steuer</th><th scope="col">Kassenbon-Gesamtbetrag</th><th scope="col">USD</th><th scope="col">vs USA</th></tr></thead>\n'

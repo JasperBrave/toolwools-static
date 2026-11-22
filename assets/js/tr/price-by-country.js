@@ -157,7 +157,7 @@ function priceTableHtml(ranked, country, editionLabel) {
       + "<td class=\"mono\">" + vs + "%</td></tr>";
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">Her ülkede GTA 6 fiyatı: ' + editionLabel + "</h2>\n"
-    + '      <p class="section-dek">USD karşılığı fiş toplamına göre sıralı, en ucuz önce. Vergi toplamın içindedir; raf sütunu liste fiyatını gösterir.</p>\n'
+    + '      <p class="section-dek">USD karşılığı fiş toplamına göre sıralı, en ucuz önce. Fiş toplamı vergiyi içerir; raf sütunu, ABD, Kanada ve Arjantin\'de vergiyi hariç tutan liste fiyatını gösterir (kasada eklenir).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Her ülkede GTA 6 fiyatı, kaydırılabilir tablo">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modellenmiş GTA 6 ' + editionLabel + " fiyatı, 44 pazar için, en ucuz USD karşılığı önce, kurlar " + RATES_AS_OF + " tarihli.</caption>\n"
     + '        <thead><tr><th scope="col">Ülke</th><th scope="col">Raf fiyatı</th><th scope="col">Vergi</th><th scope="col">Fiş toplamı</th><th scope="col">USD</th><th scope="col">ABD\'ye göre</th></tr></thead>\n'

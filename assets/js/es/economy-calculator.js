@@ -11,7 +11,7 @@ var DEFAULTS = { mode: "grind", method: "contract-mission", goal: 5000000, balan
 var MODES = ["grind", "business", "cards"];
 var MODE_META = {
   grind: { label: "Dinero por hora", hint: "Clasifica métodos y calcula el tiempo de una meta de ahorro" },
-  business: { label: "ROI de negocio", hint: "Payback horas y horizonte de beneficio" },
+  business: { label: "ROI de negocio", hint: "Retorno horas y horizonte de beneficio" },
   cards: { label: "Valor de Shark Card", hint: "GTA$ por dólar frente a horas de farmeo" }
 };
 var PROJ_BADGE = '<span class="proj-badge">Proyectado, no extraído de datos</span>';
@@ -125,7 +125,7 @@ function methodTableHtml(rows, activeId) {
   }).join("");
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Cada método de dinero de GTA 6 clasificado por GTA$ netos por hora</h2>\n'
     + '      <p class="section-dek">La tasa neta es pago menos entrada, dividido por el tiempo total del ciclo. Los pagos son proyecciones, mostrados redondeados. Los nueve métodos son métodos de GTA Online, mostrados como los análogos disponibles más cercanos.</p>\n'
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Cada método de dinero de GTA 6 clasificado por GTA$ netos por hora, scrollable table">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Cada método de dinero de GTA 6 clasificado por GTA$ netos por hora, tabla desplazable">\n'
     + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Métodos de dinero proyectados de GTA 6 clasificados por dólares GTA netos por hora, con pago, tiempo de ciclo, entrada y tasa por jugador.</caption>\n'
     + '        <thead><tr><th scope="col">Método</th><th scope="col">Pago</th><th scope="col">Neto / h</th><th scope="col">Ciclo</th><th scope="col">Entrada</th><th scope="col">Por jugador</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
@@ -140,11 +140,11 @@ function businessTableHtml(rows, horizon) {
       + "<td class=\"mono\">" + compactMoney(r.profitAtHorizon) + "</td>"
       + "<td class=\"muted\">" + r.activeShare + "%</td></tr>";
   }).join("");
-  return '<section aria-labelledby="business-table">\n      <h2 id="business-table">Which GTA 6 business pays for itself first</h2>\n'
+  return '<section aria-labelledby="business-table">\n      <h2 id="business-table">Qué negocio de GTA 6 se amortiza primero</h2>\n'
     + '      <p class="section-dek">Horas de retorno a la tasa neta propia de cada negocio, más beneficio después de ' + horizon + ' horas de juego una vez amortizado el precio de compra.</p>\n'
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Which GTA 6 business pays for itself first, scrollable table">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Qué negocio de GTA 6 se amortiza primero, tabla desplazable">\n'
     + '      <table class="data-table" id="business-table">\n        <caption class="sr-only">Precios de compra proyectados de negocios de GTA 6, producción neta por hora, retorno horas y beneficio en el horizonte seleccionado.</caption>\n'
-    + '        <thead><tr><th scope="col">Business</th><th scope="col">Precio</th><th scope="col">Neto / h</th><th scope="col">Payback</th><th scope="col">Profit @ ' + horizon + 'h</th><th scope="col">Active</th></tr></thead>\n'
+    + '        <thead><tr><th scope="col">Negocio</th><th scope="col">Precio</th><th scope="col">Neto / h</th><th scope="col">Retorno</th><th scope="col">Beneficio a las ' + horizon + ' h</th><th scope="col">Activo</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Las tarifas de negocios son proyecciones, no valores extraídos de datos.</p>\n    </section>';
 }
@@ -209,15 +209,15 @@ function render() {
   if (state.mode === "business") {
     var top = bizRanked[0];
     tldr = "Retorno más rápido: " + top.business.label + " devuelve " + money(top.business.price) + " en unas " + top.paybackHours + " horas de juego, y luego genera " + money(top.netPerHour) + " por hora.";
-    verdictLine = top.business.label + " · " + top.paybackHours + "h payback";
+    verdictLine = top.business.label + " · " + top.paybackHours + " h de retorno";
     lastShareText = "Retorno más rápido de negocio de GTA 6: " + top.business.label + " devuelve " + money(top.business.price) + " en unas " + top.paybackHours + " horas, y luego genera " + money(top.netPerHour) + "/h.";
     lastShareTitle = "Retorno más rápido de negocio de GTA 6: " + top.business.label;
     if (outputLabel) outputLabel.textContent = MODE_META.business.label;
     outHtml = '<dl class="stat-grid">'
-      + "<div><dt>Fastest payback</dt><dd>" + top.business.label + "</dd></div>"
-      + "<div><dt>Payback</dt><dd>" + top.paybackHours + "h</dd></div>"
+      + "<div><dt>Retorno más rápido</dt><dd>" + top.business.label + "</dd></div>"
+      + "<div><dt>Retorno</dt><dd>" + top.paybackHours + "h</dd></div>"
       + "<div><dt>Neto por hora</dt><dd>" + money(top.netPerHour) + "</dd></div>"
-      + "<div><dt>Profit at " + state.horizon + "h</dt><dd>" + compactMoney(top.profitAtHorizon) + "</dd></div>"
+      + "<div><dt>Beneficio a las " + state.horizon + " h</dt><dd>" + compactMoney(top.profitAtHorizon) + "</dd></div>"
       + "<div><dt>Parte activa</dt><dd>" + top.activeShare + "%</dd></div>"
       + "<div><dt>Precio</dt><dd>" + compactMoney(top.business.price) + "</dd></div>"
       + "</dl>"
@@ -229,7 +229,7 @@ function render() {
     tldr = "El pack de mejor valor compra " + money(maxPerUsd) + " GTA$ por dólar real, unas " + bestCard.hoursSaved + " horas de farmeo eliminadas a tu ritmo actual de " + money(rate.perHour) + "/hora.";
     verdictLine = bestCard.card.label + " · " + money(maxPerUsd) + " GTA$ por $1";
     lastShareText = "Mejor valor de Shark Card: " + money(maxPerUsd) + " GTA$ por 1 $, unas " + bestCard.hoursSaved + " horas de farmeo eliminadas.";
-    lastShareTitle = "Best Shark Card value: " + bestCard.card.label;
+    lastShareTitle = "Mejor valor de Shark Card: " + bestCard.card.label;
     if (outputLabel) outputLabel.textContent = MODE_META.cards.label;
     outHtml = '<dl class="stat-grid">'
       + "<div><dt>Pack de mejor valor</dt><dd>" + bestCard.card.label + "</dd></div>"

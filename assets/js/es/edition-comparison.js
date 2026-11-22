@@ -68,16 +68,16 @@ function syncUrl() {
 }
 function buyerPhrase(profile) {
   var l = profile.label.toLowerCase();
-  return /buyer$/.test(l) ? l : l + " buyer";
+  return /comprador$/.test(l) ? l : l + " comprador";
 }
 function shareTitle(result) {
-  return "Best GTA 6 edition for " + result.profile.label.toLowerCase() + " players: " + result.best.edition.label + " (" + result.best.score + "/100). GTA 6 edition picker on ToolWools.";
+  return "Mejor edición de GTA 6 para un jugador " + result.profile.label.toLowerCase() + ": " + result.best.edition.label + " (" + result.best.score + "/100). Selector de edición de GTA 6 en ToolWools.";
 }
 function xUrl(result) {
   return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareTitle(result)) + "&url=" + encodeURIComponent(shareUrl());
 }
 function redditUrl(result) {
-  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - best GTA 6 edition for " + result.profile.label.toLowerCase() + " players (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
+  return "https://www.reddit.com/submit?title=" + encodeURIComponent(result.best.edition.label + " - mejor edición de GTA 6 para jugadores " + result.profile.label.toLowerCase() + " (GTA 6)") + "&url=" + encodeURIComponent(shareUrl());
 }
 
 function iconFor(tone) {
@@ -97,16 +97,16 @@ function verdictHtml(result) {
   var items = result.ranked.map(function (e, i) {
     var desc;
     if (e.edition.upliftPercent === 0) {
-      desc = "Base price. Juego completo.";
+      desc = "Precio base. Juego completo.";
     } else {
-      desc = "+" + e.edition.upliftPercent + "% over Standard \u00b7 adds " + e.utilityDelta + " weighted points (" + e.utilityPerUpliftPoint + " per 10% spent).";
+      desc = "+" + e.edition.upliftPercent + "% sobre Standard \u00b7 añade " + e.utilityDelta + " puntos ponderados (" + e.utilityPerUpliftPoint + " por cada 10% gastado).";
     }
-    if (!e.available) desc += " Not sold on " + result.platformLabel + ".";
+    if (!e.available) desc += " No se vende en " + result.platformLabel + ".";
     else if (e.overBudget) desc += " Por encima del techo que fijaste.";
-    desc += " Confidence: " + L(CONFIDENCE_LABEL[e.confidence]) + ".";
+    desc += " Confianza: " + L(CONFIDENCE_LABEL[e.confidence]) + ".";
     return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
   }).join("");
-  return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">Best value \u00b7 ' + result.best.score + "/100</p>"
+  return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">Mejor valor \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
     + '<p class="verdict-desc">' + esc(result.best.edition.note) + "</p></div></div>"
     + '<div class="upgrade-box"><p class="eyebrow-muted">Ediciones clasificadas</p><ul>' + items + "</ul></div>"
@@ -127,10 +127,10 @@ function matrixHtml(result) {
     return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(L(CATEGORY_LABEL[b.category])) + " \u00b7 " + esc(L(CONFIDENCE_LABEL[b.confidence])) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
-    ? '<p class="verdict-desc">Nuevo in this tier: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
+    ? '<p class="verdict-desc">Nuevo en este nivel: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
     : "";
-  return '<p class="verdict-desc">What ' + esc(result.best.edition.label) + " grants, ordered by how much it is worth to a " + esc(result.profile.label.toLowerCase()) + " player. Confianza is labelled on every bonus.</p>"
-    + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonuses</p><ul>" + items + "</ul></div>" + added
+  return '<p class="verdict-desc">Lo que ' + esc(result.best.edition.label) + " otorga, ordenado por lo que vale para un jugador " + esc(result.profile.label.toLowerCase()) + ". La confianza está etiquetada en cada bonificación.</p>"
+    + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonificaciones</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>'
     + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="' + xUrl(result) + '">Compartir en X</a>'
@@ -173,14 +173,14 @@ function render() {
     var tVerdict = $("[data-tldr-verdict]", tldr);
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 TL;DR";
-    if (tText) tText.textContent = result.best.edition.label + " es la mejor opción por un " + buyerPhrase(result.profile) + " en " + result.platformLabel + " at a " + result.upliftTolerance + "% ceiling: " + result.best.score + "/100, adding " + result.best.utilityDelta + " puntos ponderados sobre Estándar por un " + result.best.edition.upliftPercent + "% uplift.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 value for uplift";
+    if (tText) tText.textContent = result.best.edition.label + " es la mejor opción para un " + buyerPhrase(result.profile) + " en " + result.platformLabel + " con un techo del " + result.upliftTolerance + "%: " + result.best.score + "/100, añadiendo " + result.best.utilityDelta + " puntos ponderados sobre Estándar por un " + result.best.edition.upliftPercent + "% de sobreprecio.";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 valor por sobreprecio";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Cada edición de GTA 6 incluye la campaña completa y el modo online completo, el juego se lanzó el 19 de noviembre de 2026 a las 05:00 UTC y ningún nivel vende historia extra. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " con un " + result.upliftTolerance + "% de techo sobre Estándar, la mejor opción es <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Cada edición de GTA 6 incluye la campaña completa y el modo online completo, el juego se lanzó el 19 de noviembre de 2026 a las 05:00 UTC y ningún nivel vende historia extra. En " + esc(result.platformLabel) + ", para un " + esc(buyerPhrase(result.profile)) + " con un " + result.upliftTolerance + "% de techo sobre Estándar, la mejor opción es <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");
@@ -197,7 +197,7 @@ function render() {
   if (shareLinks[1]) shareLinks[1].href = redditUrl(result);
 
   var live = $("[data-live-region]");
-  if (live) live.textContent = "Best value: " + result.best.edition.label + ", " + result.best.score + " de 100, for a " + buyerPhrase(result.profile) + " en " + result.platformLabel + " at a " + result.upliftTolerance + " percent ceiling over Standard.";
+  if (live) live.textContent = "Mejor valor: " + result.best.edition.label + ", " + result.best.score + " de 100, para un " + buyerPhrase(result.profile) + " en " + result.platformLabel + " con un techo de " + result.upliftTolerance + " por ciento sobre Standard.";
   syncUrl();
 }
 
