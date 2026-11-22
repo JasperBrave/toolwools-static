@@ -29,7 +29,8 @@
     { slug: "preload-tracker", title: "Fenêtres de préchargement de GTA 6", desc: "Le préchargement du lancement est terminé. Cet outil est toujours en développement." },
     { slug: "vehicle-comparison", title: "Comparaison de véhicules GTA 6", desc: "Comparez deux véhicules GTA 6 en face à face." },
     { slug: "weapon-comparison", title: "Comparaison de statistiques d'armes GTA 6", desc: "Statistiques d'armes GTA 6 en face à face : dégâts, cadence de tir, portée, précision." },
-    { slug: "generators", title: "Générateur de noms GTA 6", desc: "Noms de personnage, tags d'équipe, plaques d'immatriculation, indicatifs radio et gamertags — générés instantanément.", url: "/fr/generators", tags: "name generator générateur de noms gta 6" }
+    { slug: "generators", title: "Générateur de noms GTA 6", desc: "Noms de personnage, tags d'équipe, plaques d'immatriculation, indicatifs radio et gamertags — générés instantanément.", url: "/fr/generators", tags: "name generator générateur de noms gta 6" },
+    { slug: "business-tracker", title: "Suivi des entreprises GTA 6", desc: "Calculateur et suivi business GTA 6 : aucune entreprise ne peut encore être achetée — suivez les 12 entreprises de Leonida, simulez le retour sur investissement avec vos propres chiffres et comparez les méthodes d'argent du mode histoire." },
   ];
 
   // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.

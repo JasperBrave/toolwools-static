@@ -1,5 +1,5 @@
-// Ferramentas index: client-side filter over the full catalogue (23 tools:
-// 19 live + 4 coming-soon). The full list is rendered in the HTML, so the
+// Ferramentas index: client-side filter over the full catalogue (24 tools:
+// 20 live + 4 coming-soon). The full list is rendered in the HTML, so the
 // page works with JavaScript off; this script only filters it. Stagger is
 // rendered inline at build time (L7), never gated on hydration.
 (function () {
@@ -36,7 +36,7 @@
       card.hidden = !show;
       if (show) { shown++; if (card.getAttribute("data-status") === "live") liveShown++; }
     });
-    if (countEl) countEl.textContent = shown + " of 23 tools \u00b7 " + liveShown + " live";
+    if (countEl) countEl.textContent = shown + " of 24 tools \u00b7 " + liveShown + " live";
     if (emptyEl) emptyEl.hidden = shown !== 0;
     if (headingEl) headingEl.textContent = q ? 'Resultados for "' + q + '"' : platform === "coming-soon" ? "Em breve" : platform === "live" ? "Ferramentas ao vivo" : "Todas as ferramentas";
     var url = new URL(window.location.href);

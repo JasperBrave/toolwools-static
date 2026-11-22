@@ -1,4 +1,4 @@
-// /search: client-side search over the static index (23 tools, 2 guides,
+// /search: client-side search over the static index (24 tools, 2 guides,
 // 7 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Tools", guide: "Guides", resource: "Reference pages" };
     var LIVE_WORD = " live";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Search covers 23 tools — 19 live and 4 coming soon — plus 2 written guides and 7 reference pages. Pick a starting point below or type what your PC needs to know.";
+      if (!trimmed) summaryEl.textContent = "Search covers 24 tools — 20 live and 4 coming soon — plus 2 written guides and 7 reference pages. Pick a starting point below or type what your PC needs to know.";
       else if (!results.length) summaryEl.textContent = "Nothing on the site matches \"" + trimmed + "\" yet. Hardware terms like \"rtx 4070\", \"vram\" or \"download time\" find the most.";
       else {
         var best = results[0];

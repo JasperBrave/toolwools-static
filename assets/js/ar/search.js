@@ -29,7 +29,8 @@
     { slug: "preload-tracker", title: "نوافذ التحميل المسبق للعبة GTA 6", desc: "انتهى التحميل المسبق للإطلاق. هذه الأداة ما زالت قيد التطوير." },
     { slug: "vehicle-comparison", title: "مقارنة مركبات GTA 6", desc: "قارن بين أي مركبتين من GTA 6." },
     { slug: "weapon-comparison", title: "مقارنة إحصاءات أسلحة GTA 6", desc: "مقارنة مباشرة لإحصاءات أسلحة GTA 6: الضرر ومعدل إطلاق النار والمدى والدقة." },
-    { slug: "generators", title: "مولد أسماء GTA 6", desc: "أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين — تُنشأ فورًا.", url: "/ar/generators", tags: "name generator مولد الأسماء gta 6" }
+    { slug: "generators", title: "مولد أسماء GTA 6", desc: "أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين — تُنشأ فورًا.", url: "/ar/generators", tags: "name generator مولد الأسماء gta 6" },
+    { slug: "business-tracker", title: "متتبع أعمال GTA 6", desc: "حاسبة ومتتبع أعمال GTA 6: لا يمكن شراء أي عمل بعد، لذا تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة." },
   ];
 
   // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.

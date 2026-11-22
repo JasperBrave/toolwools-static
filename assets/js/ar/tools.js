@@ -1,5 +1,5 @@
-// Tools index: client-side filter over the full catalogue (23 tools:
-// 19 live + 4 coming-soon). The full list is rendered in the HTML, so the
+// Tools index: client-side filter over the full catalogue (24 tools:
+// 20 live + 4 coming-soon). The full list is rendered in the HTML, so the
 // page works with JavaScript off; this script only filters it. Stagger is
 // rendered inline at build time (L7), never gated on hydration.
 (function () {
@@ -36,7 +36,7 @@
       card.hidden = !show;
       if (show) { shown++; if (card.getAttribute("data-status") === "live") liveShown++; }
     });
-    if (countEl) countEl.textContent = shown + " من أصل 23 أداة · " + liveShown + " مباشرة";
+    if (countEl) countEl.textContent = shown + " من أصل 24 أداة · " + liveShown + " مباشرة";
     if (emptyEl) emptyEl.hidden = shown !== 0;
     if (headingEl) headingEl.textContent = q ? 'نتائج لـ "' + q + '"' : platform === "coming-soon" ? "قريبًا" : platform === "live" ? "الأدوات المباشرة" : "كل الأدوات";
     var url = new URL(window.location.href);

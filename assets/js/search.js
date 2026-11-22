@@ -29,7 +29,8 @@
     { slug: "preload-tracker", title: "GTA 6 Preload Windows", desc: "The launch preload is over. This tool is still in development." },
     { slug: "vehicle-comparison", title: "GTA 6 Vehicle Comparison", desc: "Compare any two GTA 6 vehicles head to head." },
     { slug: "weapon-comparison", title: "GTA 6 Weapon Stats Comparison", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." },
-    { slug: "generators", title: "GTA 6 Name Generator", desc: "Character names, crew tags, license plates, radio callsigns and gamertags — generated instantly.", url: "/generators", tags: "name generator gta 6" }
+    { slug: "generators", title: "GTA 6 Name Generator", desc: "Character names, crew tags, license plates, radio callsigns and gamertags — generated instantly.", url: "/generators", tags: "name generator gta 6" },
+    { slug: "business-tracker", title: "GTA 6 Business Tracker", desc: "GTA 6 business calculator and tracker: no business can be bought yet, so track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods."},
   ];
 
   // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.

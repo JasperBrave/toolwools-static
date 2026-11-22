@@ -29,7 +29,8 @@
     { slug: "preload-tracker", title: "GTA 6 Ön Yükleme Pencereleri", desc: "Lansman ön yüklemesi bitti. Bu araç hâlâ geliştirme aşamasında." },
     { slug: "vehicle-comparison", title: "GTA 6 Araç Karşılaştırması", desc: "Herhangi iki GTA 6 aracını karşı karşıya karşılaştırın." },
     { slug: "weapon-comparison", title: "GTA 6 Silah İstatistikleri Karşılaştırması", desc: "Karşı karşıya GTA 6 silah istatistikleri: hasar, atış hızı, menzil, isabet." },
-    { slug: "generators", title: "GTA 6 İsim Oluşturucu", desc: "Karakter adları, ekip etiketleri, plakalar, radyo çağrı işaretleri ve oyuncu etiketleri — anında oluşturulur.", url: "/tr/generators", tags: "name generator isim oluşturucu gta 6" }
+    { slug: "generators", title: "GTA 6 İsim Oluşturucu", desc: "Karakter adları, ekip etiketleri, plakalar, radyo çağrı işaretleri ve oyuncu etiketleri — anında oluşturulur.", url: "/tr/generators", tags: "name generator isim oluşturucu gta 6" },
+    { slug: "business-tracker", title: "GTA 6 İşletme Takipçisi", desc: "GTA 6 işletme hesaplayıcı ve takipçisi: henüz hiçbir işletme satın alınamıyor; 12 Leonida işletmesini takip edin, kendi rakamlarınızla geri ödemeyi simüle edin ve hikâye para yöntemlerini karşılaştırın." },
   ];
 
   // Normalize for matching: fold Turkish dotted/dotless I before lowercasing.

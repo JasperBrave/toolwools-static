@@ -1,4 +1,4 @@
-// /search: client-side search over the static index (23 tools, 2 guides,
+// /search: client-side search over the static index (24 tools, 2 guides,
 // 7 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Araçlar", guide: "Rehberler", resource: "Referans sayfaları" };
     var LIVE_WORD = " yayında";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Arama, 23 aracı kapsar — 19 yayında ve 4 çok yakında — ayrıca 2 yazılı rehber ve 7 referans sayfası. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
+      if (!trimmed) summaryEl.textContent = "Arama, 24 aracı kapsar — 20 yayında ve 4 çok yakında — ayrıca 2 yazılı rehber ve 7 referans sayfası. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
       else if (!results.length) summaryEl.textContent = "Sitede \"" + trimmed + "\" ile eşleşen bir şey yok. \"rtx 4070\", \"vram\" veya \"download time\" gibi donanım terimleri en çok sonuç verir.";
       else {
         var best = results[0];

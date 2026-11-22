@@ -1,4 +1,4 @@
-// /search: client-side search over the static index (23 tools, 2 guides,
+// /search: client-side search over the static index (24 tools, 2 guides,
 // 7 reference pages). Same scoring shape as the source search lib: title
 // hits weigh most, then description, then tags. Combobox with listbox,
 // options, and an aria-live status region, as the source has.
@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Ferramentas", guide: "Guias", resource: "Reference pages" };
     var LIVE_WORD = " ativas";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "A busca cobre 23 ferramentas — 19 ativas e 4 em breve — além de 2 guias escritos e 7 páginas de referência. Escolha um ponto de partida abaixo ou digite o que seu PC precisa saber.";
+      if (!trimmed) summaryEl.textContent = "A busca cobre 24 ferramentas — 20 ativas e 4 em breve — além de 2 guias escritos e 7 páginas de referência. Escolha um ponto de partida abaixo ou digite o que seu PC precisa saber.";
       else if (!results.length) summaryEl.textContent = "Nada no site corresponde a \"" + trimmed + "\" ainda. Termos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encontram mais.";
       else {
         var best = results[0];
