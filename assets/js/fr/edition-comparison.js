@@ -80,7 +80,7 @@ function syncUrl() {
 }
 var BUYER_PHRASE = {
   "story-only": "joueur concentré uniquement sur l'histoire",
-  "online-casual": "joueur histoire et en ligne occasionnel",
+  "online-casual": "joueur d'histoire et de jeu en ligne occasionnel",
   "online-grinder": "joueur en ligne dès le premier jour",
   "undecided": "acheteur indécis"
 };

@@ -179,7 +179,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir \u2014 oyun 19 Kasım 2026'da 05:00 UTC'de çıkar ve hiçbir kademe ekstra hikâye satmaz. " + esc(result.platformLabel) + " üzerinde, Standard'a göre %" + result.upliftTolerance + " tavanı olan bir " + esc(buyerPhrase(result.profile)) + " için en iyi değer <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir \u2014 oyun 19 Kasım 2026'da 05:00 UTC'de çıktı ve hiçbir kademe ekstra hikâye satmaz. " + esc(result.platformLabel) + " üzerinde, Standard'a göre %" + result.upliftTolerance + " tavanı olan bir " + esc(buyerPhrase(result.profile)) + " için en iyi değer <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

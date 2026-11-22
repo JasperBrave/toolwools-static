@@ -179,7 +179,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "كل إصدار من GTA 6 يشمل حملة القصة الكاملة والوضع الأونلاين الكامل \u2014 تُطلق اللعبة في 19 نوفمبر 2026 الساعة 05:00 UTC ولا يبيع أي مستوى قصة إضافية. على " + esc(result.platformLabel) + "، للاعب " + esc(buyerPhrase(result.profile)) + " بسقف " + result.upliftTolerance + "% فوق Standard، أفضل قيمة هي <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "كل إصدار من GTA 6 يشمل حملة القصة الكاملة والوضع الأونلاين الكامل \u2014 صدرت اللعبة في 19 نوفمبر 2026 الساعة 05:00 UTC ولا يبيع أي مستوى قصة إضافية. على " + esc(result.platformLabel) + "، للاعب " + esc(buyerPhrase(result.profile)) + " بسقف " + result.upliftTolerance + "% فوق Standard، أفضل قيمة هي <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

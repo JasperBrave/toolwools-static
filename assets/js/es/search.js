@@ -23,7 +23,7 @@
     { slug: "price-by-country", title: "Precio de GTA 6 por país", desc: "GTA 6 price by country in local currency." },
     { slug: "economy-calculator", title: "GTA 6 Money and ROI de negocio Calculadora", desc: "Descubre la forma más rápida de ganar GTA$ y qué negocios se amortizan antes." },
     { slug: "gta-6-tracker", title: "Hitos del lanzamiento de GTA 6", desc: "Hitos de lanzamiento y ventanas de precarga completadas para GTA 6." },
-    { slug: "settings-optimizer", title: "Graphics Optimizador de ajustes", desc: "Ajusta la configuración de gráficos para tu FPS objetivo y tu equipo." },
+    { slug: "settings-optimizer", title: "Optimizador de ajustes", desc: "Ajusta la configuración de gráficos para tu FPS objetivo y tu equipo." },
     { slug: "hardware-comparison", title: "Comparación de hardware", desc: "Compara dos GPUs o CPUs cara a cara para GTA 6." },
     { slug: "server-status", title: "Estado del servidor de GTA 6", desc: "¿Están caídos los servidores de GTA 6? Comprobación de estado en vivo." },
     { slug: "preload-tracker", title: "Ventanas de precarga de GTA 6", desc: "La precarga del lanzamiento terminó. Esta herramienta sigue en desarrollo." },
