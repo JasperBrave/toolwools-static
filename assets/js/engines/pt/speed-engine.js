@@ -8,7 +8,7 @@ export const REGIONS = [
   {
     id: "na-east",
     label: "América do Norte, Leste",
-    edge: "Ashburn / New York",
+    edge: "Ashburn / Nova York",
     baselinePing: 18,
     note: "O peering mais denso do continente. Jogadores com fibra cabeada costumam ver menos de 20 ms para os serviços da Rockstar."
   },
@@ -22,18 +22,18 @@ export const REGIONS = [
   {
     id: "eu-west",
     label: "Europa, Oeste",
-    edge: "Amsterdam / Paris",
+    edge: "Amsterdã / Paris",
     baselinePing: 16,
     note: "A região mais bem conectada desta tabela. Qualquer valor acima de 40 ms aqui é a sua própria linha, não a distância."
   },
   {
     id: "eu-central",
     label: "Europa, Central e Leste",
-    edge: "Frankfurt / Warsaw",
+    edge: "Frankfurt / Varsóvia",
     baselinePing: 24,
     note: "Frankfurt concentra a maior parte do tráfego; ISPs do leste às vezes roteiam por ele em vez de fazer peering local."
   },
-  { id: "uk", label: "Reino Unido e Irlanda", edge: "London", baselinePing: 18, note: "Salto curto para Londres, mas linhas FTTC antigas somam atraso de intercalação que parece distância." },
+  { id: "uk", label: "Reino Unido e Irlanda", edge: "Londres", baselinePing: 18, note: "Salto curto para Londres, mas linhas FTTC antigas somam atraso de intercalação que parece distância." },
   {
     id: "latam",
     label: "América Latina",
@@ -44,7 +44,7 @@ export const REGIONS = [
   {
     id: "mena",
     label: "Oriente Médio e Norte da África",
-    edge: "Dubai / Bahrain",
+    edge: "Dubai / Bahrein",
     baselinePing: 48,
     note: "O peering do Golfo é forte; as rotas do norte da África ainda passam por Marselha, o que custa 30-50 ms."
   },
@@ -58,12 +58,12 @@ export const REGIONS = [
   {
     id: "sea",
     label: "Sudeste Asiático",
-    edge: "Singapore",
+    edge: "Singapura",
     baselinePing: 34,
     note: "Singapura atende toda a região, então Manila e Jacarta pagam uma taxa de cabo submarino de 20-40 ms."
   },
   { id: "anz", label: "Austrália e Nova Zelândia", edge: "Sydney", baselinePing: 30, note: "Sydney vai bem no país; qualquer sala hospedada nos EUA é um piso de 150 ms que nenhum roteador resolve." },
-  { id: "japan", label: "Japão e Coreia", edge: "Tokyo / Seoul", baselinePing: 20, note: "Fibra doméstica de primeira classe. Se seu ping está alto aqui, suspeite do último trecho dentro da sua casa." }
+  { id: "japan", label: "Japão e Coreia", edge: "Tóquio / Seul", baselinePing: 20, note: "Fibra doméstica de primeira classe. Se seu ping está alto aqui, suspeite do último trecho dentro da sua casa." }
 ];
 export const CONNECTION_TYPES = [
   {

@@ -8,32 +8,32 @@ export const REGIONS = [
   {
     id: "na-east",
     label: "Norteamérica, Este",
-    edge: "Ashburn / New York",
+    edge: "Ashburn / Nueva York",
     baselinePing: 18,
     note: "El peering más denso del continente. Los jugadores con fibra cableada suelen ver menos de 20 ms hacia los servicios de Rockstar."
   },
   {
     id: "na-west",
     label: "Norteamérica, Oeste",
-    edge: "Los Angeles / Seattle",
+    edge: "Los Ángeles / Seattle",
     baselinePing: 22,
     note: "Buenos bordes locales, pero las salas entre costas añaden 50-70 ms cuando el emparejamiento te envía al este."
   },
   {
     id: "eu-west",
     label: "Europa, Oeste",
-    edge: "Amsterdam / Paris",
+    edge: "Ámsterdam / París",
     baselinePing: 16,
     note: "La región mejor conectada de esta tabla. Cualquier valor por encima de 40 ms aquí es tu propia línea, no la distancia."
   },
   {
     id: "eu-central",
     label: "Europa, Central y Este",
-    edge: "Frankfurt / Warsaw",
+    edge: "Fráncfort / Varsovia",
     baselinePing: 24,
     note: "Fráncfort concentra la mayor parte del tráfico; los ISP del este a veces enrutan a través de él en vez de hacer peering local."
   },
-  { id: "uk", label: "Reino Unido e Irlanda", edge: "London", baselinePing: 18, note: "Salto corto a Londres, pero las líneas FTTC antiguas añaden retardo de intercalado que parece distancia." },
+  { id: "uk", label: "Reino Unido e Irlanda", edge: "Londres", baselinePing: 18, note: "Salto corto a Londres, pero las líneas FTTC antiguas añaden retardo de intercalado que parece distancia." },
   {
     id: "latam",
     label: "Latinoamérica",
@@ -44,26 +44,26 @@ export const REGIONS = [
   {
     id: "mena",
     label: "Oriente Medio y Norte de África",
-    edge: "Dubai / Bahrain",
+    edge: "Dubái / Baréin",
     baselinePing: 48,
     note: "El peering del Golfo es fuerte; las rutas del norte de África aún transitan por Marsella, lo que cuesta 30-50 ms."
   },
   {
     id: "india",
     label: "India y Asia del Sur",
-    edge: "Mumbai / Chennai",
+    edge: "Bombay / Chennai",
     baselinePing: 40,
     note: "Los bordes de Bombay son excelentes. Los juegos sin sala local te empujan a Singapur, unos 65 ms."
   },
   {
     id: "sea",
     label: "Sudeste asiático",
-    edge: "Singapore",
+    edge: "Singapur",
     baselinePing: 34,
     note: "Singapur sirve a toda la región, así que Manila y Yakarta pagan un peaje de cable submarino de 20-40 ms."
   },
-  { id: "anz", label: "Australia y Nueva Zelanda", edge: "Sydney", baselinePing: 30, note: "Sídney va bien en el país; cualquier sala alojada en EE. UU. es un suelo de 150 ms que ningún router puede arreglar." },
-  { id: "japan", label: "Japón y Corea", edge: "Tokyo / Seoul", baselinePing: 20, note: "Fibra doméstica de primera clase. Si tu ping es alto aquí, sospecha del último tramo dentro de tu casa." }
+  { id: "anz", label: "Australia y Nueva Zelanda", edge: "Sídney", baselinePing: 30, note: "Sídney va bien en el país; cualquier sala alojada en EE. UU. es un suelo de 150 ms que ningún router puede arreglar." },
+  { id: "japan", label: "Japón y Corea", edge: "Tokio / Seúl", baselinePing: 20, note: "Fibra doméstica de primera clase. Si tu ping es alto aquí, sospecha del último tramo dentro de tu casa." }
 ];
 export const CONNECTION_TYPES = [
   {

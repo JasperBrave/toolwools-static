@@ -29,7 +29,7 @@ export const REGIONS = [
   {
     id: "eu-central",
     label: "Europe · Centre et Est",
-    edge: "Frankfurt / Warschau",
+    edge: "Francfort / Varsovie",
     baselinePing: 24,
     note: "Francfort porte l'essentiel du trafic ; les FAI de l'est passent parfois par elle plutôt que de peerer localement."
   },
@@ -58,12 +58,12 @@ export const REGIONS = [
   {
     id: "sea",
     label: "Asie du Sud-Est",
-    edge: "Singapur",
+    edge: "Singapour",
     baselinePing: 34,
     note: "Singapour dessert toute la région, donc Manille et Jakarta paient une taxe de câble sous-marin de 20-40 ms."
   },
   { id: "anz", label: "Australie et Nouvelle-Zélande", edge: "Sydney", baselinePing: 30, note: "Sydney va bien sur le plan national ; tout salon hébergé aux États-Unis est un plancher de 150 ms qu'aucun routeur ne peut corriger." },
-  { id: "japan", label: "Japon et Corée", edge: "Tokio / Seoul", baselinePing: 20, note: "Fibre domestique de premier ordre. Si ton ping est élevé ici, soupçonne le dernier tronçon chez toi." }
+  { id: "japan", label: "Japon et Corée", edge: "Tokyo / Séoul", baselinePing: 20, note: "Fibre domestique de premier ordre. Si ton ping est élevé ici, soupçonne le dernier tronçon chez toi." }
 ];
 export const CONNECTION_TYPES = [
   {

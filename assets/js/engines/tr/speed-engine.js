@@ -33,7 +33,7 @@ export const REGIONS = [
     baselinePing: 24,
     note: "Trafiğin çoğunu Frankfurt taşır; doğudaki ISS'ler bazen yerel eşleşme yerine buradan yönlendirir."
   },
-  { id: "uk", label: "Birleşik Krallık ve İrlanda", edge: "London", baselinePing: 18, note: "Londra'ya kısa atlama, ancak eski FTTC hatları mesafe gibi görünen serpiştirme gecikmesi ekler." },
+  { id: "uk", label: "Birleşik Krallık ve İrlanda", edge: "Londra", baselinePing: 18, note: "Londra'ya kısa atlama, ancak eski FTTC hatları mesafe gibi görünen serpiştirme gecikmesi ekler." },
   {
     id: "latam",
     label: "Latin Amerika",
@@ -58,7 +58,7 @@ export const REGIONS = [
   {
     id: "sea",
     label: "Güneydoğu Asya",
-    edge: "Singapore",
+    edge: "Singapur",
     baselinePing: 34,
     note: "Singapur tüm bölgeye hizmet eder, bu yüzden Manila ve Cakarta 20-40 ms denizaltı kablosu vergisi öder."
   },
