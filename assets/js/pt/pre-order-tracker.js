@@ -102,8 +102,8 @@ function render() {
     var text = $("[data-tldr-text]", tldr);
     var verdictEl = $("[data-tldr-verdict]", tldr);
     if (label) label.textContent = "Melhor canal \u00b7 TL;DR";
-    if (text) text.textContent = result.headline + " obtém " + result.best.score + " of 100 for a " + result.edition.label + " order in " + result.region.label + ", leading on " + (result.best.strengths.join(" e ").toLowerCase() || "overall balance") + ".";
-    if (verdictEl) verdictEl.textContent = "Best: " + result.best.channel.short + " \u2014 " + result.best.score + "/100";
+    if (text) text.textContent = result.headline + " obtém " + result.best.score + " de 100 para um pedido " + result.edition.label + " em " + result.region.label + ", liderando em " + (result.best.strengths.join(" e ").toLowerCase() || "equilíbrio geral") + ".";
+    if (verdictEl) verdictEl.textContent = "Melhor: " + result.best.channel.short + " \u2014 " + result.best.score + "/100";
   }
 
   var answer = $("[data-preorder-answer]");
@@ -123,19 +123,19 @@ function render() {
       // Ranked channels as milestone rows (styled in main.css); the winner
       // is first and already named in the verdict above.
       html += '<ol class="milestone-list">' + result.ranked.map(function (c, i) {
-        var s = c.strengths.length ? "Strong on " + c.strengths.join(" e ").toLowerCase() + ". " : "";
-        var r = c.risks.length ? "Fraco on " + c.risks.join(" e ").toLowerCase() + ". " : "";
+        var s = c.strengths.length ? "Forte em " + c.strengths.join(" e ").toLowerCase() + ". " : "";
+        var r = c.risks.length ? "Fraco em " + c.risks.join(" e ").toLowerCase() + ". " : "";
         return '<li><div class="milestone-row"><span><strong>' + (i + 1) + '. ' + esc(c.channel.label) + '</strong><br>' +
-          '<span class="field-hint">' + esc(s + r) + 'Confidence: ' + esc(L(CONFIDENCE_LABEL[c.confidence])) + '.</span></span>' +
+          '<span class="field-hint">' + esc(s + r) + 'Confiança: ' + esc(L(CONFIDENCE_LABEL[c.confidence])) + '.</span></span>' +
           '<span class="axis-score">' + c.score + '/100</span></div></li>';
       }).join("") + '</ol>';
     } else if (state.tab === "termos") {
-      html += '<p class="verdict-desc">The clauses behind the winning score. Read these, not the number.</p>';
+      html += '<p class="verdict-desc">As cláusulas por trás da pontuação vencedora. Leia estas, não o número.</p>';
       html += result.best.axes.map(function (a) {
         return '<div><div class="axis-row"><span class="axis-label">' + esc(a.label) + '</span>' +
           '<span class="axis-track"><span class="axis-fill" style="width:' + Math.round(a.raw * 10) + '%"></span></span>' +
           '<span class="axis-score">' + a.raw + '/10</span></div>' +
-          '<p class="field-hint">' + esc(a.detail) + ' Weight ' + a.weight + '%.</p></div>';
+          '<p class="field-hint">' + esc(a.detail) + ' Peso ' + a.weight + '%.</p></div>';
       }).join("");
       html += '<ul class="sources-list">' + result.best.channel.terms.map(function (t) {
         return '<li>' + esc(t) + '</li>';

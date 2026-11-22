@@ -66,9 +66,14 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "jogador focado só na história",
+  "online-casual": "jogador de história e jogo online casual",
+  "online-grinder": "jogador online desde o primeiro dia",
+  "undecided": "comprador que ainda não sabe"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /comprador$/.test(l) ? l : l + " comprador";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
   return "Melhor edição do GTA 6 para um jogador " + result.profile.label.toLowerCase() + ": " + result.best.edition.label + " (" + result.best.score + "/100). Seletor de edição do GTA 6 no ToolWools.";
@@ -163,7 +168,7 @@ function render() {
   viewBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.viewButton === state.view)); });
 
   var label = $("[data-output-label]");
-  if (label) label.textContent = "Edições on " + result.platformLabel;
+  if (label) label.textContent = "Edições em " + result.platformLabel;
 
   var tldr = $("[data-tldr-card]");
   if (tldr) {

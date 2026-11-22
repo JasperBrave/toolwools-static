@@ -63,7 +63,7 @@ function copyText(text, btn, labelSel) {
     var labelEl = labelSel ? btn.querySelector(labelSel) : null;
     if (labelEl) labelEl.textContent = label;
     window.setTimeout(function () {
-      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copy";
+      if (labelEl) labelEl.textContent = btn.dataset.defaultLabel || "Copiar";
     }, 1600);
   }
   if (!btn.dataset.defaultLabel && labelSel) {
@@ -159,7 +159,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   }).join("");
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
     + '      <p class="section-dek">Clasificado por total del recibo equivalente en USD, el más barato primero. El total del recibo incluye el impuesto; la columna de estantería muestra el precio listado, que excluye el impuesto en Estados Unidos, Canadá y Argentina (se añade al pagar).</p>\n'
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 price in every country, scrollable table">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Precio de GTA 6 en cada país, tabla desplazable">\n'
     + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " precio para 44 mercados, equivalente en USD más barato primero, tasas fechadas " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Precio de estantería</th><th scope="col">Impuesto</th><th scope="col">Total del recibo</th><th scope="col">USD</th><th scope="col">vs EE. UU.</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
@@ -176,7 +176,7 @@ function ladderTableHtml(price, ladder) {
   }).join("");
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">La pregunta de la actualización, respondida con una tasa de valor en lugar de una lista de funciones. Precios en ' + price.market.currency + " for " + price.market.country + ".</p>\n"
-    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, scrollable table">\n'
+    + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, tabla desplazable">\n'
     + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">Escalera de ediciones de GTA 6 con precios en ' + price.market.currency + " for " + price.market.country + ", con prima sobre Estándar y coste por cada 100.000 GTA$ incluidos.</caption>\n"
     + '        <thead><tr><th scope="col">Edición</th><th scope="col">Total local</th><th scope="col">Sobre Standard</th><th scope="col">GTA$ incluidos</th><th scope="col">Por cada 100.000 GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
@@ -231,7 +231,7 @@ function render() {
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
   var xLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado en X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado on Reddit"]');
+  var rLink = document.querySelector('.share-panel a[aria-label="Comparte este resultado en Reddit"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());
 

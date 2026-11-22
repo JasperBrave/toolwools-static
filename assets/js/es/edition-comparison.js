@@ -66,12 +66,17 @@ function syncUrl() {
   if (state.view !== "verdict") p.set("view", state.view);
   window.history.replaceState(null, "", window.location.pathname + "?" + p.toString());
 }
+var BUYER_PHRASE = {
+  "story-only": "jugador centrado solo en la historia",
+  "online-casual": "jugador de historia y juego en línea ocasional",
+  "online-grinder": "jugador en línea desde el primer día",
+  "undecided": "comprador que aún no lo tiene claro"
+};
 function buyerPhrase(profile) {
-  var l = profile.label.toLowerCase();
-  return /comprador$/.test(l) ? l : l + " comprador";
+  return BUYER_PHRASE[profile.id] || profile.label.toLowerCase();
 }
 function shareTitle(result) {
-  return "Mejor edición de GTA 6 para un jugador " + result.profile.label.toLowerCase() + ": " + result.best.edition.label + " (" + result.best.score + "/100). Selector de edición de GTA 6 en ToolWools.";
+  return "Mejor edición de GTA 6 para un " + buyerPhrase(result.profile) + ": " + result.best.edition.label + " (" + result.best.score + "/100). Selector de edición de GTA 6 en ToolWools.";
 }
 function xUrl(result) {
   return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareTitle(result)) + "&url=" + encodeURIComponent(shareUrl());
@@ -163,7 +168,7 @@ function render() {
   viewBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.viewButton === state.view)); });
 
   var label = $("[data-output-label]");
-  if (label) label.textContent = "Ediciones on " + result.platformLabel;
+  if (label) label.textContent = "Ediciones en " + result.platformLabel;
 
   var tldr = $("[data-tldr-card]");
   if (tldr) {
