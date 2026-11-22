@@ -101,20 +101,20 @@ function toneOf(result) {
   if (result.blocking || result.grade === "D" || result.grade === "F") return "upgrade";
   return "borderline";
 }
-var STATUS_LABEL = { pass: "Pass", marginal: "Marginal", fail: "Fail" };
+var STATUS_LABEL = { pass: "Pasa", marginal: "Límite", fail: "Falla" };
 var CREDIT = { pass: 100, marginal: 55, fail: 8 };
 var OP = { ping: "≤", jitter: "≤", loss: "≤", down: "≥", up: "≥" };
 
 function axesHtml(result) {
   return result.axes.map(function (a) {
     return '<div><div class="axis-row"><span class="axis-label">' + esc(a.label) + '</span><span class="axis-track"><span class="axis-fill" style="width:' + CREDIT[a.status] + '%"></span></span><span class="axis-score">' + esc(a.value) + " " + esc(a.unit) + '</span></div>' +
-      '<p class="verdict-desc"><span class="axis-status" data-status="' + a.status + '">' + STATUS_LABEL[a.status] + "</span> — Target " + OP[a.id] + " " + esc(a.target) + " " + esc(a.unit) + ". " + esc(a.detail) + "</p></div>";
+      '<p class="verdict-desc"><span class="axis-status" data-status="' + a.status + '">' + STATUS_LABEL[a.status] + "</span> — Objetivo " + OP[a.id] + " " + esc(a.target) + " " + esc(a.unit) + ". " + esc(a.detail) + "</p></div>";
   }).join("");
 }
 function targetsHtml(result) {
   return regionTargets(result.connection.id).map(function (t) {
     var pct = Math.min(100, Math.round((t.wiredTarget / 60) * 100));
-    var current = t.region.id === result.region.id ? " <strong>(your region)</strong>" : "";
+    var current = t.region.id === result.region.id ? " <strong>(tu región)</strong>" : "";
     return '<div><div class="axis-row"><span class="axis-label">' + esc(t.region.label) + '</span><span class="axis-track"><span class="axis-fill" style="width:' + pct + '%"></span></span><span class="axis-score">' + t.wiredTarget + " ms</span></div>" +
       '<p class="verdict-desc">' + esc(t.region.edge) + " · jugable hasta unos " + t.playableCeiling + " ms" + current + "</p></div>";
   }).join("");
@@ -179,7 +179,7 @@ function render() {
   var checkPanel = $("[data-tab-panel=\"check\"]");
   if (checkPanel) {
     var worst = result.axes.find(function (a) { return a.status === "fail"; }) || result.axes.find(function (a) { return a.status === "marginal"; });
-    var worstText = worst ? worst.label + " (" + STATUS_LABEL[worst.status].toLowerCase() + ")" : "None — all axes pass";
+    var worstText = worst ? worst.label + " (" + STATUS_LABEL[worst.status].toLowerCase() + ")" : "Ninguno — todos los ejes pasan";
     var pingPct = Math.min(100, Math.round((state.ping / 60) * 100));
     checkPanel.innerHTML =
       '<div class="verdict-body">' + iconFor(tone).replace("icon-lg", "verdict-icon tone-" + tone) +
@@ -188,7 +188,7 @@ function render() {
       '<p class="verdict-desc">' + esc(result.verdict) + "</p></div></div>" +
       '<div class="balance-bars">' +
       '<div><div class="balance-bar-head"><span class="lbl">Puntuación general</span><span class="val">' + result.score + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + result.score + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">Ping vs ' + result.pingTarget + ' ms target</span><span class="val">' + esc(state.ping) + ' ms</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + pingPct + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">Ping contra objetivo de ' + result.pingTarget + ' ms</span><span class="val">' + esc(state.ping) + ' ms</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + pingPct + '%"></div></div></div>' +
       "</div>" +
       '<div data-axes-list>' + axesHtml(result) + "</div>" +
       '<dl class="stat-grid">' +
@@ -209,7 +209,7 @@ function render() {
   var targetsPanel = $("[data-tab-panel=\"targets\"]");
   if (targetsPanel) {
     var intro = $(".verdict-desc", targetsPanel);
-    if (intro) intro.textContent = "Latency floors over " + result.connection.label.toLowerCase() + ". Change the line type to see the penalty applied to every region at once.";
+    if (intro) intro.textContent = "Pisos de latencia sobre " + result.connection.label.toLowerCase() + ". Cambia el tipo de línea para ver la penalización aplicada a cada región a la vez.";
     var list = $("[data-targets-list]", targetsPanel);
     if (list) list.innerHTML = targetsHtml(result);
   }

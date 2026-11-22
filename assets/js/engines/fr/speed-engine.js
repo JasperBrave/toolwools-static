@@ -33,7 +33,7 @@ export const REGIONS = [
     baselinePing: 24,
     note: "Francfort porte l'essentiel du trafic ; les FAI de l'est passent parfois par elle plutôt que de peerer localement."
   },
-  { id: "uk", label: "Royaume-Uni et Irlande", edge: "London", baselinePing: 18, note: "Court trajet vers Londres, mais les anciennes lignes FTTC ajoutent un délai d'entrelacement qui ressemble à de la distance." },
+  { id: "uk", label: "Royaume-Uni et Irlande", edge: "Londres", baselinePing: 18, note: "Court trajet vers Londres, mais les anciennes lignes FTTC ajoutent un délai d'entrelacement qui ressemble à de la distance." },
   {
     id: "latam",
     label: "Amérique latine",
