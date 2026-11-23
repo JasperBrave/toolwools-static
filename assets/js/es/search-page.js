@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Herramientas", guide: "Guías", resource: "Reference pages" };
     var LIVE_WORD = " en vivo";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "La búsqueda cubre 24 herramientas — 21 en vivo y 3 próximamente — además de 2 guías escritas y 7 páginas de referencia. Elige un punto de partida abajo o escribe lo que tu PC necesita saber.";
+      if (!trimmed) summaryEl.textContent = "La búsqueda cubre 24 herramientas — 22 en vivo y 2 próximamente — además de 2 guías escritas y 7 páginas de referencia. Elige un punto de partida abajo o escribe lo que tu PC necesita saber.";
       else if (!results.length) summaryEl.textContent = "Nada en el sitio coincide con \"" + trimmed + "\" todavía. Términos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encuentran más.";
       else {
         var best = results[0];

@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Ferramentas", guide: "Guias", resource: "Reference pages" };
     var LIVE_WORD = " ativas";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "A busca cobre 24 ferramentas — 21 ativas e 3 em breve — além de 2 guias escritos e 7 páginas de referência. Escolha um ponto de partida abaixo ou digite o que seu PC precisa saber.";
+      if (!trimmed) summaryEl.textContent = "A busca cobre 24 ferramentas — 22 ativas e 2 em breve — além de 2 guias escritos e 7 páginas de referência. Escolha um ponto de partida abaixo ou digite o que seu PC precisa saber.";
       else if (!results.length) summaryEl.textContent = "Nada no site corresponde a \"" + trimmed + "\" ainda. Termos de hardware como \"rtx 4070\", \"vram\" or \"download time\" encontram mais.";
       else {
         var best = results[0];

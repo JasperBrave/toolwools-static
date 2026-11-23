@@ -28,7 +28,7 @@
     { slug: "server-status", title: "GTA 6 Server Status", desc: "Are the GTA 6 servers down? Live status check." },
     { slug: "preload-tracker", title: "GTA 6 Preload History & Update Schedule", desc: "GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026." },
     { slug: "vehicle-comparison", title: "GTA 6 Vehicle Comparison", desc: "Compare any two GTA 6 vehicles head to head." },
-    { slug: "weapon-comparison", title: "GTA 6 Weapon Stats Comparison", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." },
+    { slug: "weapon-comparison", title: "GTA 6 Weapon Comparison — Ratings, Magazine & Price", desc: "Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026." },
     { slug: "generators", title: "GTA 6 Name Generator", desc: "Character names, crew tags, license plates, radio callsigns and gamertags — generated instantly.", url: "/generators", tags: "name generator gta 6" },
     { slug: "business-tracker", title: "GTA 6 Business Tracker", desc: "GTA 6 business calculator and tracker: no business can be bought yet, so track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods."},
   ];
