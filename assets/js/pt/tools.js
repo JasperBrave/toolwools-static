@@ -1,5 +1,5 @@
 // Ferramentas index: client-side filter over the full catalogue (24 tools:
-// 20 live + 4 coming-soon). The full list is rendered in the HTML, so the
+// 21 live + 3 coming-soon). The full list is rendered in the HTML, so the
 // page works with JavaScript off; this script only filters it. Stagger is
 // rendered inline at build time (L7), never gated on hydration.
 (function () {

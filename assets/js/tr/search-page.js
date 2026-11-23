@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Araçlar", guide: "Rehberler", resource: "Referans sayfaları" };
     var LIVE_WORD = " yayında";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Arama, 24 aracı kapsar — 20 yayında ve 4 çok yakında — ayrıca 2 yazılı rehber ve 7 referans sayfası. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
+      if (!trimmed) summaryEl.textContent = "Arama, 24 aracı kapsar — 21 yayında ve 3 çok yakında — ayrıca 2 yazılı rehber ve 7 referans sayfası. Aşağıdan bir başlangıç noktası seçin veya bilgisayarınızın bilmesi gerekeni yazın.";
       else if (!results.length) summaryEl.textContent = "Sitede \"" + trimmed + "\" ile eşleşen bir şey yok. \"rtx 4070\", \"vram\" veya \"download time\" gibi donanım terimleri en çok sonuç verir.";
       else {
         var best = results[0];

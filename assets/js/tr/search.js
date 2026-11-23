@@ -26,7 +26,7 @@
     { slug: "settings-optimizer", title: "Grafik Ayarları Optimize Edici", desc: "Hedef FPS'iniz ve donanımınız için grafik ayarlarını ayarlayın." },
     { slug: "hardware-comparison", title: "Donanım Karşılaştırması", desc: "GTA 6 için iki GPU veya CPU'yu başa baş karşılaştırın." },
     { slug: "server-status", title: "GTA 6 Sunucu Durumu", desc: "GTA 6 sunucuları kapalı mı? Canlı durum kontrolü." },
-    { slug: "preload-tracker", title: "GTA 6 Ön Yükleme Pencereleri", desc: "Lansman ön yüklemesi bitti. Bu araç hâlâ geliştirme aşamasında." },
+    { slug: "preload-tracker", title: "GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı", desc: "GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026." },
     { slug: "vehicle-comparison", title: "GTA 6 Araç Karşılaştırması", desc: "Herhangi iki GTA 6 aracını karşı karşıya karşılaştırın." },
     { slug: "weapon-comparison", title: "GTA 6 Silah İstatistikleri Karşılaştırması", desc: "Karşı karşıya GTA 6 silah istatistikleri: hasar, atış hızı, menzil, isabet." },
     { slug: "generators", title: "GTA 6 İsim Oluşturucu", desc: "Karakter adları, ekip etiketleri, plakalar, radyo çağrı işaretleri ve oyuncu etiketleri — anında oluşturulur.", url: "/tr/generators", tags: "name generator isim oluşturucu gta 6" },

@@ -26,7 +26,7 @@
     { slug: "settings-optimizer", title: "Graphics Settings Optimizer", desc: "Dial in graphics settings for your target FPS and rig." },
     { slug: "hardware-comparison", title: "Hardware Comparison", desc: "Compare two GPUs or CPUs head to head for GTA 6." },
     { slug: "server-status", title: "GTA 6 Server Status", desc: "Are the GTA 6 servers down? Live status check." },
-    { slug: "preload-tracker", title: "GTA 6 Preload Windows", desc: "The launch preload is over. This tool is still in development." },
+    { slug: "preload-tracker", title: "GTA 6 Preload History & Update Schedule", desc: "GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026." },
     { slug: "vehicle-comparison", title: "GTA 6 Vehicle Comparison", desc: "Compare any two GTA 6 vehicles head to head." },
     { slug: "weapon-comparison", title: "GTA 6 Weapon Stats Comparison", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." },
     { slug: "generators", title: "GTA 6 Name Generator", desc: "Character names, crew tags, license plates, radio callsigns and gamertags — generated instantly.", url: "/generators", tags: "name generator gta 6" },

@@ -26,7 +26,7 @@
     { slug: "settings-optimizer", title: "Otimizador de configurações", desc: "Ajuste as configurações gráficas para seu FPS alvo e seu setup." },
     { slug: "hardware-comparison", title: "Comparação de hardware", desc: "Compare duas GPUs ou CPUs frente a frente para o GTA 6." },
     { slug: "server-status", title: "Status do Servidor do GTA 6", desc: "Os servidores do GTA 6 estão fora do ar? Verificação de status ao vivo." },
-    { slug: "preload-tracker", title: "Janelas de Pré-carregamento do GTA 6", desc: "O pré-carregamento do lançamento acabou. Esta ferramenta ainda está em desenvolvimento." },
+    { slug: "preload-tracker", title: "Histórico de pré-carregamento e calendário de atualizações do GTA 6", desc: "Histórico de pré-carregamento e calendário de atualizações do GTA 6: o pré-carregamento de lançamento (10–19 nov 2026), atualizações de título 1.002.000, 1.002.001 e o primeiro patch pós-lançamento 01.002.002 (23 nov, com notas oficiais). Nenhum DLC anunciado. Última verificação 23 de nov de 2026." },
     { slug: "vehicle-comparison", title: "Comparação de Veículos do GTA 6", desc: "Compare any two GTA 6 vehicles head to head." },
     { slug: "weapon-comparison", title: "Comparação de Estatísticas de Armas do GTA 6", desc: "Head-to-head GTA 6 weapon stats: damage, fire rate, range, accuracy." },
     { slug: "generators", title: "Gerador de nomes do GTA 6", desc: "Nomes de personagem, tags de equipe, placas, indicativos de rádio e gamertags — gerados instantaneamente.", url: "/pt/generators", tags: "name generator gerador de nomes gta 6" },
