@@ -85,14 +85,14 @@ function renderCountdown() {
   if (secsEl) secsEl.textContent = pad(c.seconds);
 
   var label = $("[data-countdown-label]");
-  if (label) label.textContent = c.passed ? "GTA 6 has launched" : "Contagem regressiva de desbloqueio mundial";
+  if (label) label.textContent = c.passed ? "GTA 6 foi lançado" : "Contagem regressiva de desbloqueio mundial";
 
   // Announce only when the minute changes, not every tick.
   if (lastAnnouncedMinute !== c.minutes || c.passed) {
     lastAnnouncedMinute = c.minutes;
     var sentence = c.passed
-      ? "GTA 6 has launched. 19 de nov de 2026 at 05:00 UTC has passed."
-      : "GTA 6 launches in " + c.days + " dias, " + c.hours + " horas, " + c.minutes + " minutes.";
+      ? "GTA 6 foi lançado. 19 de nov de 2026 às 05:00 UTC já passou."
+      : "Faltam " + c.days + " dias, " + c.hours + " horas, " + c.minutes + " minutos para o lançamento do GTA 6.";
     var live = $("[data-live-region]");
     if (live) live.textContent = sentence;
     var tldrText = $("[data-tldr-text]");

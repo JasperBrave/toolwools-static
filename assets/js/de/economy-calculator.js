@@ -139,7 +139,7 @@ function methodTableHtml(rows, activeId) {
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Jede GTA-6-Geldmethode, gerankt nach Netto-GTA$ pro Stunde</h2>\n'
     + '      <p class="section-dek">Netto-Rate ist Auszahlung minus Buy-in, geteilt durch die volle Zykluszeit. Auszahlungen sind Projektionen, gerundet gezeigt. Alle neun Methoden sind GTA-Online-Methoden, gezeigt als die nächstliegenden verfügbaren Analoga.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Jede GTA-6-Geldmethode, gerankt nach Netto-GTA$ pro Stunde, scrollbare Tabelle">\n'
-    + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Projizierte GTA-6-Geldmethoden, gerankt nach Netto-GTA-Dollar pro Stunde, mit Auszahlung, Zykluszeit, Buy-in und Pro-Spieler-Rate.</caption>\n'
+    + '      <table class="data-table" id="method-table-data">\n        <caption class="sr-only">Projizierte GTA-6-Geldmethoden, gerankt nach Netto-GTA-Dollar pro Stunde, mit Auszahlung, Zykluszeit, Buy-in und Pro-Spieler-Rate.</caption>\n'
     + '        <thead><tr><th scope="col">Methode</th><th scope="col">Auszahlung</th><th scope="col">Netto / Std.</th><th scope="col">Zyklus</th><th scope="col">Buy-in</th><th scope="col">Pro Spieler</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Auszahlungen sind Projektionen, keine datamined Werte. Netto pro Stunde ist Auszahlung minus Buy-in, geteilt durch die Minuten eines vollen Zyklus.</p>\n    </section>';

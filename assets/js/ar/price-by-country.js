@@ -159,7 +159,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">سعر GTA 6 في كل بلد: ' + editionLabel + "</h2>\n"
     + '      <p class="section-dek">مرتبة حسب إجمالي الإيصال بما يعادل الدولار، الأرخص أولًا. يشمل إجمالي الإيصال الضريبة؛ ويُظهر عمود الرف السعر المعلن، الذي يستثني الضريبة في الولايات المتحدة وكندا والأرجنتين (تُضاف عند الدفع).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="سعر GTA 6 في كل بلد، جدول قابل للتمرير">\n'
-    + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">سعر GTA 6 المُقدَّر ' + editionLabel + " لـ 44 سوقًا، الأرخص بما يعادل الدولار أولًا، والأسعار مؤرخة في " + RATES_AS_OF + ".</caption>\n"
+    + '      <table class="data-table" id="price-table-data">\n        <caption class="sr-only">سعر GTA 6 المُقدَّر ' + editionLabel + " لـ 44 سوقًا، الأرخص بما يعادل الدولار أولًا، والأسعار مؤرخة في " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">البلد</th><th scope="col">سعر الرف</th><th scope="col">الضريبة</th><th scope="col">إجمالي الإيصال</th><th scope="col">دولار أمريكي</th><th scope="col">مقابل الولايات المتحدة</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">أسعار القوائم الإقليمية مُبلَّغ عنها، وليست أسعار متاجر مؤكدة. أسعار الصرف المرجعية مؤرخة في ' + RATES_LABEL + ".</p>\n    </section>";
@@ -176,7 +176,7 @@ function ladderTableHtml(price, ladder) {
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard مقابل Ultimate</h2>\n'
     + '      <p class="section-dek">سؤال الترقية، مجاب بمعدل قيمة بدلًا من قائمة مزايا. الأسعار بـ ' + price.market.currency + " لـ " + price.market.country + ".</p>\n"
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard مقابل Ultimate، جدول قابل للتمرير">\n'
-    + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">سلّم إصدارات GTA 6 مسعّر بـ ' + price.market.currency + " لـ " + price.market.country + "، مع الفرق عن Standard والتكلفة لكل 100,000 GTA$ مضمّنة.</caption>\n"
+    + '      <table class="data-table" id="edition-ladder-data">\n        <caption class="sr-only">سلّم إصدارات GTA 6 مسعّر بـ ' + price.market.currency + " لـ " + price.market.country + "، مع الفرق عن Standard والتكلفة لكل 100,000 GTA$ مضمّنة.</caption>\n"
     + '        <thead><tr><th scope="col">الإصدار</th><th scope="col">الإجمالي المحلي</th><th scope="col">فوق Standard</th><th scope="col">GTA$ المضمّنة</th><th scope="col">لكل 100 ألف GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">وسعرا Standard (79.99 دولار) و Ultimate (99.99 دولار) مؤكدان. ولا توجد نسخة Deluxe. ورقم GTA$ المضمّنة في Ultimate منمذج وليس مؤكدًا.</p>\n    </section>';

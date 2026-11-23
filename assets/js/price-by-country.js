@@ -159,7 +159,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
     + '      <p class="section-dek">Ranked by USD-equivalent receipt total, cheapest first. The receipt total includes tax; the shelf column shows the listed price, which excludes tax in the US, Canada and Argentina (added at checkout).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 price in every country, scrollable table">\n'
-    + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelled GTA 6 ' + editionLabel + " price for 44 markets, cheapest USD equivalent first, rates dated " + RATES_AS_OF + ".</caption>\n"
+    + '      <table class="data-table" id="price-table-data">\n        <caption class="sr-only">Modelled GTA 6 ' + editionLabel + " price for 44 markets, cheapest USD equivalent first, rates dated " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Shelf price</th><th scope="col">Tax</th><th scope="col">Receipt total</th><th scope="col">USD</th><th scope="col">vs US</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">Regional list prices are reported, not confirmed store prices. Reference exchange rates dated ' + RATES_LABEL + ".</p>\n    </section>";
@@ -176,7 +176,7 @@ function ladderTableHtml(price, ladder) {
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">The upgrade question, answered with a value rate instead of a feature list. Prices in ' + price.market.currency + " for " + price.market.country + ".</p>\n"
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, scrollable table">\n'
-    + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">GTA 6 edition ladder priced in ' + price.market.currency + " for " + price.market.country + ", with premium over Standard and cost per 100,000 bundled GTA$.</caption>\n"
+    + '      <table class="data-table" id="edition-ladder-data">\n        <caption class="sr-only">GTA 6 edition ladder priced in ' + price.market.currency + " for " + price.market.country + ", with premium over Standard and cost per 100,000 bundled GTA$.</caption>\n"
     + '        <thead><tr><th scope="col">Edition</th><th scope="col">Local total</th><th scope="col">Over Standard</th><th scope="col">Bundled GTA$</th><th scope="col">Per 100k GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">Standard ($79.99) and Ultimate ($99.99) prices are confirmed. Ultimate\'s bundled GTA$ figure is modelled, not confirmed.</p>\n    </section>';

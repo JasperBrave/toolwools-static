@@ -126,7 +126,7 @@ function methodTableHtml(rows, activeId) {
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">كل طرق كسب المال في GTA 6 مرتبة حسب صافي GTA$ في الساعة</h2>\n'
     + '      <p class="section-dek">المعدل الصافي هو العائد مطروحًا منه رسوم الدخول، مقسومًا على زمن الدورة الكاملة. العوائد تقديرية وتُعرض مقربة. الطرق التسع جميعها من طرق GTA Online، وتُعرض كأقرب نظائر متاحة.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="كل طرق كسب المال في GTA 6 مرتبة حسب صافي GTA$ في الساعة، جدول قابل للتمرير">\n'
-    + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">طرق كسب المال التقديرية في GTA 6 مرتبة حسب صافي دولارات GTA في الساعة، مع العائد وزمن الدورة ورسوم الدخول ومعدل اللاعب الواحد.</caption>\n'
+    + '      <table class="data-table" id="method-table-data">\n        <caption class="sr-only">طرق كسب المال التقديرية في GTA 6 مرتبة حسب صافي دولارات GTA في الساعة، مع العائد وزمن الدورة ورسوم الدخول ومعدل اللاعب الواحد.</caption>\n'
     + '        <thead><tr><th scope="col">الطريقة</th><th scope="col">العائد</th><th scope="col">الصافي / ساعة</th><th scope="col">الدورة</th><th scope="col">رسوم الدخول</th><th scope="col">لكل لاعب</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' العوائد تقديرية وليست مستخرجة من البيانات. الصافي في الساعة هو العائد مطروحًا منه رسوم الدخول، مقسومًا على دقائق الدورة الكاملة.</p>\n    </section>';

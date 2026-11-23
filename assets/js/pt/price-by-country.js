@@ -160,7 +160,7 @@ function priceTableHtml(ranked, country, editionLabel) {
   return '<section aria-labelledby="price-table">\n      <h2 id="price-table">GTA 6 price in every country: ' + editionLabel + "</h2>\n"
     + '      <p class="section-dek">Classificado por total do recibo equivalente em USD, o mais barato primeiro. O total do recibo inclui o imposto; a coluna de prateleira mostra o preço listado, que exclui o imposto nos Estados Unidos, no Canadá e na Argentina (adicionado no checkout).</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Preço de GTA 6 em cada país, tabela rolável">\n'
-    + '      <table class="data-table" id="price-table">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " preço para 44 mercados, equivalente em USD mais barato primeiro, taxas datadas " + RATES_AS_OF + ".</caption>\n"
+    + '      <table class="data-table" id="price-table-data">\n        <caption class="sr-only">Modelado GTA 6 ' + editionLabel + " preço para 44 mercados, equivalente em USD mais barato primeiro, taxas datadas " + RATES_AS_OF + ".</caption>\n"
     + '        <thead><tr><th scope="col">Country</th><th scope="col">Preço de prateleira</th><th scope="col">Imposto</th><th scope="col">Total do recibo</th><th scope="col">USD</th><th scope="col">vs EUA</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">Os preços de lista regionais são reportados, não preços confirmados de loja. Taxas de câmbio de referência datadas ' + RATES_LABEL + ".</p>\n    </section>";
@@ -177,7 +177,7 @@ function ladderTableHtml(price, ladder) {
   return '<section aria-labelledby="edition-ladder">\n      <h2 id="edition-ladder">GTA 6 Standard vs Ultimate</h2>\n'
     + '      <p class="section-dek">A pergunta do upgrade, respondida com uma taxa de valor em vez de uma lista de recursos. Preços em ' + price.market.currency + " for " + price.market.country + ".</p>\n"
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 Standard vs Ultimate, tabela rolável">\n'
-    + '      <table class="data-table" id="edition-ladder">\n        <caption class="sr-only">Escada de edições do GTA 6 com preços em ' + price.market.currency + " for " + price.market.country + ", com prêmio sobre Standard e custo por cada 100.000 GTA$ incluídos.</caption>\n"
+    + '      <table class="data-table" id="edition-ladder-data">\n        <caption class="sr-only">Escada de edições do GTA 6 com preços em ' + price.market.currency + " for " + price.market.country + ", com prêmio sobre Standard e custo por cada 100.000 GTA$ incluídos.</caption>\n"
     + '        <thead><tr><th scope="col">Edição</th><th scope="col">Total local</th><th scope="col">Sobre Standard</th><th scope="col">GTA$ incluídos</th><th scope="col">Por cada 100 mil GTA$</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">Os preços Standard (US$ 79,99) e Ultimate (US$ 99,99) estão confirmados. O número de GTA$ incluídos do Ultimate é modelado, não confirmado.</p>\n    </section>';

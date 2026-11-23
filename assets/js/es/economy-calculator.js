@@ -126,7 +126,7 @@ function methodTableHtml(rows, activeId) {
   return '<section aria-labelledby="method-table">\n      <h2 id="method-table">Cada método de dinero de GTA 6 clasificado por GTA$ netos por hora</h2>\n'
     + '      <p class="section-dek">La tasa neta es pago menos entrada, dividido por el tiempo total del ciclo. Los pagos son proyecciones, mostrados redondeados. Los nueve métodos son métodos de GTA Online, mostrados como los análogos disponibles más cercanos.</p>\n'
     + '      <div class="table-scroll" tabindex="0" role="region" aria-label="Cada método de dinero de GTA 6 clasificado por GTA$ netos por hora, tabla desplazable">\n'
-    + '      <table class="data-table" id="method-table">\n        <caption class="sr-only">Métodos de dinero proyectados de GTA 6 clasificados por dólares GTA netos por hora, con pago, tiempo de ciclo, entrada y tasa por jugador.</caption>\n'
+    + '      <table class="data-table" id="method-table-data">\n        <caption class="sr-only">Métodos de dinero proyectados de GTA 6 clasificados por dólares GTA netos por hora, con pago, tiempo de ciclo, entrada y tasa por jugador.</caption>\n'
     + '        <thead><tr><th scope="col">Método</th><th scope="col">Pago</th><th scope="col">Neto / h</th><th scope="col">Ciclo</th><th scope="col">Entrada</th><th scope="col">Por jugador</th></tr></thead>\n'
     + "        <tbody>" + body + "</tbody>\n      </table>\n    </div>\n"
     + '      <p class="field-hint" style="margin-top:0.75rem">' + PROJ_BADGE + ' Los pagos son proyecciones, no valores extraídos de datos. El neto por hora es pago menos entrada, dividido por los minutos que toma un ciclo completo.</p>\n    </section>';
