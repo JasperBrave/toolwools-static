@@ -1299,6 +1299,14 @@ table.data-table { width: 100%; min-width: 520px; font-size: 0.75rem; }
 .data-table td { padding: 0.625rem 1rem; vertical-align: top; }
 .data-table tbody tr + tr td { border-top: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent); }
 .data-table td.mono { font-family: var(--font-mono); font-weight: 600; color: var(--foreground); white-space: nowrap; }
+/* Iteration 31: weapon-table Class (col 2) + Source (col 10) cells must not
+   break mid-word. The narrow columns + `overflow-wrap: anywhere` (L1754)
+   fragmented badge labels ("REPORT / ED") and class names into single
+   syllables at 375px in all locales (TR class cells up to 10 line boxes).
+   The table scrolls horizontally inside .table-scroll, so widening these
+   columns costs nothing on the page. Scoped to #weapons-table: no other
+   table is affected. */
+#weapons-table td:nth-child(2), #weapons-table td:nth-child(10) { white-space: nowrap; }
 .data-table td .muted { color: var(--muted-foreground); }
 .tier-read { margin-top: 1.5rem; margin-inline: auto; max-width: 56rem; border-radius: var(--radius-2xl); border: 1px solid rgb(0 0 0 / 0.08); background: color-mix(in oklab, var(--background) 80%, transparent); backdrop-filter: blur(12px); padding: 1.5rem; text-align: left; }
 .dark .tier-read { border-color: rgb(255 255 255 / 0.1); }
