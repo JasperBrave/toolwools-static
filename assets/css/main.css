@@ -1307,6 +1307,32 @@ table.data-table { width: 100%; min-width: 520px; font-size: 0.75rem; }
    columns costs nothing on the page. Scoped to #weapons-table: no other
    table is affected. */
 #weapons-table td:nth-child(2), #weapons-table td:nth-child(10) { white-space: nowrap; }
+/* Iteration 33 F1/F2: vehicle-table Class (col 2) + Source (col 10) cells
+   must not break mid-word. Same mechanism as iteration 31: the narrow
+   columns + `overflow-wrap: anywhere` (L1771) fragmented "REPORTED"
+   (2 boxes) and class names ("Off-Road Vehicles", 4 boxes) at 375px in all
+   locales (EN baseline: Source 115/115, Class 80/115 multi-box). Scoped to
+   #vehicles-table: no other table is affected. */
+#vehicles-table td:nth-child(2), #vehicles-table td:nth-child(10) { white-space: nowrap; }
+/* Iteration 33 F6: weapon-table Fire mode (col 8) cells must not break
+   mid-word. DE "Halbautomatisch" split mid-word (2 boxes) in 40/53 rows
+   at 1280px; FR 24/53, TR 41/53, PT 2/53. Same nowrap pattern as
+   iteration 31, scoped to #weapons-table. */
+#weapons-table td:nth-child(8) { white-space: nowrap; }
+/* Iteration 33 F8: server-timeline SERVICE (col 2) label must not split
+   mid-word at phone width. At 375px the 87px column + `overflow-wrap:
+   anywhere` (L1771) split "PlayStation" mid-word across 8-14 line boxes
+   in all locales (rows 237px tall, EN). nowrap was trialled and REJECTED:
+   it widens the table to 1349-1601px at 1280px (PT 1601 vs the 1216px
+   wrapper), failing the 1280 gate in 5/7 locales. Fallback: min-width
+   200px, mobile-only — fits the longest label word in every locale (DE
+   "PlayStation-Network-Ausfall", 163px + 32px padding = 195px) so the label
+   wraps only at word boundaries; at 1280px the rule does not apply and
+   table widths stay identical to baseline. Scoped to
+   #incident-timeline-table. */
+@media (max-width: 767px) {
+  #incident-timeline-table td:nth-child(2) { min-width: 200px; }
+}
 /* Iteration 32 F3: edition-table Category (col 2) cells must not break
    mid-word. Same mechanism as iteration 31: the ~101px column +
    `overflow-wrap: anywhere` (L1771) split "customisation" into
@@ -2159,6 +2185,15 @@ p code, li code, td code { overflow-wrap: anywhere; }
   .methodology-formula,
   .methodology-details pre.methodology-formula { white-space: pre-wrap; }
 }
+/* Iteration 33 F7: edition score-formula <pre> must not scroll internally
+   at desktop width. The iter32 pre-wrap rule above is mobile-only, so at
+   1280px the 91-char score line (689px) overflowed the 628px <pre> by 61px
+   in all 7 locales. Scoped via main:has(#bonus-matrix) — that id exists
+   only on the 7 edition pages (as the bonus-matrix <h2> inside <main>) —
+   so the VRAM and other methodology-formula <pre> blocks (119 in the tree)
+   are untouched. Specificity (1,2,2) beats .methodology-details pre
+   (L1348) and .methodology-formula (L1882). */
+main:has(#bonus-matrix) .methodology-details pre.methodology-formula { white-space: pre-wrap; }
 @media (max-width: 639px) {
   .byline > div,
   .byline-meta,
@@ -2402,6 +2437,13 @@ p code, li code, td code { overflow-wrap: anywhere; }
    so drop the clamp entirely: full text in every locale and width, grid
    rows equalise via the existing flex: 1. */
 .tool-card p { -webkit-line-clamp: none; line-clamp: none; }
+/* Iteration 33 F4: .tool-card p must not clip unbreakable words. The DE
+   vehicle-card description clipped "Höchstgeschwindigkeit" at 375px
+   (scrollWidth 132 vs clientWidth 124, home + tools): the -webkit-box +
+   overflow:hidden clips the overlong word instead of wrapping it.
+   overflow-wrap: break-word is the fallback; hyphens: auto gives clean DE
+   syllable breaks (pages carry lang="de"). */
+.tool-card p { overflow-wrap: break-word; hyphens: auto; }
 /* F3: .tool-body's 3.5rem section gap stretched the sitemap (single-item
    sections ~79px tall with 56px gaps). Tighten the gap on the sitemap page
    only; every other .tool-body page keeps its rhythm. */

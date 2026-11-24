@@ -4882,7 +4882,7 @@ function renderCompare() {
     '<dl class="stat-grid">' +
     detailRow("تكلفة التسجيل", fmtMoney(a.registerCost, a.verified === "single-source" && a.registerCost != null), fmtMoney(b.registerCost, b.verified === "single-source" && b.registerCost != null)) +
     detailRow("قيمة البيع", fmtMoney(a.sellValue, a.verified === "single-source" && a.sellValue != null), fmtMoney(b.sellValue, b.verified === "single-source" && b.sellValue != null)) +
-    detailRow("الفئة", esc(a["class"] || "—"), esc(b["class"] || "—")) +
+    detailRow("الفئة", esc(classLabel(a["class"]) || "—"), esc(classLabel(b["class"]) || "—")) +
     detailRow("الحقبة", esc(a.era || "—"), esc(b.era || "—")) +
     detailRow("المتتبع", esc(a.tracker || "—"), esc(b.tracker || "—")) +
     detailRow("الموقع", esc(a.location || "—"), esc(b.location || "—")) +

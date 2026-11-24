@@ -4882,7 +4882,7 @@ function renderCompare() {
     '<dl class="stat-grid">' +
     detailRow("Kayıt Ücreti", fmtMoney(a.registerCost, a.verified === "single-source" && a.registerCost != null), fmtMoney(b.registerCost, b.verified === "single-source" && b.registerCost != null)) +
     detailRow("Satış Değeri", fmtMoney(a.sellValue, a.verified === "single-source" && a.sellValue != null), fmtMoney(b.sellValue, b.verified === "single-source" && b.sellValue != null)) +
-    detailRow("Sınıf", esc(a["class"] || "—"), esc(b["class"] || "—")) +
+    detailRow("Sınıf", esc(classLabel(a["class"]) || "—"), esc(classLabel(b["class"]) || "—")) +
     detailRow("Dönem", esc(a.era || "—"), esc(b.era || "—")) +
     detailRow("Takipçi", esc(a.tracker || "—"), esc(b.tracker || "—")) +
     detailRow("Konum", esc(a.location || "—"), esc(b.location || "—")) +

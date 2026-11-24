@@ -4880,7 +4880,7 @@ function renderCompare() {
     '<dl class="stat-grid">' +
     detailRow("Coût d'immatriculation", fmtMoney(a.registerCost, a.verified === "single-source" && a.registerCost != null), fmtMoney(b.registerCost, b.verified === "single-source" && b.registerCost != null)) +
     detailRow("Valeur de revente", fmtMoney(a.sellValue, a.verified === "single-source" && a.sellValue != null), fmtMoney(b.sellValue, b.verified === "single-source" && b.sellValue != null)) +
-    detailRow("Classe", esc(a["class"] || "—"), esc(b["class"] || "—")) +
+    detailRow("Classe", esc(classLabel(a["class"]) || "—"), esc(classLabel(b["class"]) || "—")) +
     detailRow("Époque", esc(a.era || "—"), esc(b.era || "—")) +
     detailRow("Tracker", esc(a.tracker || "—"), esc(b.tracker || "—")) +
     detailRow("Emplacement", esc(a.location || "—"), esc(b.location || "—")) +
