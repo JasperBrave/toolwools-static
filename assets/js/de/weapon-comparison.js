@@ -3198,6 +3198,7 @@ function classes() {
 
 function badge(w) {
   if (w.provenance === "on-screen") return "AM BILDSCHIRM";
+  if (w.verified === "single-source") return "VORLÄUFIG";
   if (w.provenance === "provisional") return "VORLÄUFIG";
   return "GEMELDET";
 }
@@ -3228,7 +3229,7 @@ function renderCompare() {
   var selA = document.querySelector("[data-weapon-a]");
   var selB = document.querySelector("[data-weapon-b]");
   if (!host || !selA || !selB) return;
-  var a = byId(selA.value), b = byId(selB.value);
+  var a = byId(selA.dataset.selectedId), b = byId(selB.dataset.selectedId);
   if (!a || !b) return;
   var aSale = a.salePrice != null ? ' <span class="field-hint">(Sale ' + fmtPrice(a.salePrice) + ')</span>' : "";
   var bSale = b.salePrice != null ? ' <span class="field-hint">(Sale ' + fmtPrice(b.salePrice) + ')</span>' : "";
@@ -3242,7 +3243,7 @@ function renderCompare() {
     '<dl class="stat-grid">' +
     detailRow("Magazin", a.mag != null ? String(a.mag) + (a.extendedMag != null ? " (ext. " + a.extendedMag + ")" : "") : "—",
       b.mag != null ? String(b.mag) + (b.extendedMag != null ? " (ext. " + b.extendedMag + ")" : "") : "—") +
-    detailRow("Feuermodus", esc(a.fireMode || "—"), esc(b.fireMode || "—")) +
+    detailRow("Feuermodus", esc(FIREMODE[a.fireMode] || a.fireMode || "—"), esc(FIREMODE[b.fireMode] || b.fireMode || "—")) +
     detailRow("Kaliber", esc(a.calibre || "—"), esc(b.calibre || "—")) +
     detailRow("Preis", fmtPrice(a.price) + aSale, fmtPrice(b.price) + bSale) +
     detailRow("Freischaltung", esc(a.unlock || "—"), esc(b.unlock || "—")) +
@@ -3268,7 +3269,15 @@ function renderCompare() {
   });
 }
 
+function classLabel(c) {
+  if (typeof CLASS !== "undefined" && CLASS[c]) return CLASS[c];
+  if (typeof CLASS_NAMES !== "undefined" && CLASS_NAMES[c]) return CLASS_NAMES[c];
+  return c;
+}
+
 var CLASS_NAMES = {"Assault Rifles": "Sturmgewehre (Assault Rifles)", "Launchers": "Raketenwerfer (Launchers)", "Machine Guns": "Maschinengewehre (Machine Guns)", "Pistols": "Pistolen (Pistols)", "Revolvers": "Revolver (Revolvers)", "SMGs": "Maschinenpistolen (SMGs)", "Shotguns": "Schrotflinten (Shotguns)", "Sniper Rifles": "Scharfschützengewehre (Sniper Rifles)", "Tactical Rifles": "Taktische Gewehre (Tactical Rifles)"};
+
+var FIREMODE = {"Semi-auto": "Halbautomatisch", "Full auto": "Vollautomatisch", "3-round burst": "3-Schuss-Salve", "Bolt action": "Repetierer", "Pump action": "Pump-Action", "Break action": "Break-Action", "Single shot": "Einzelschuss"};
 
 function populateSelects() {
   var selA = document.querySelector("[data-weapon-a]");
@@ -3283,49 +3292,208 @@ function populateSelects() {
       filt.appendChild(o);
     });
   }
-  function fill(sel, selectedId) {
-    sel.textContent = "";
-    var groups = {};
-    cls.forEach(function (c) { groups[c] = []; });
-    DATA.weapons.forEach(function (w) { (groups[w["class"]] = groups[w["class"]] || []).push(w); });
-    cls.forEach(function (c) {
-      var g = document.createElement("optgroup");
-      g.label = c;
-      groups[c].forEach(function (w) {
-        var o = document.createElement("option");
-        o.value = w.id; o.textContent = w.name;
-        g.appendChild(o);
-      });
-      sel.appendChild(g);
-    });
-    if (byId(selectedId)) sel.value = selectedId;
+  var emptyCell = document.querySelector("[data-table-empty] td");
+  var noResultsText = emptyCell ? emptyCell.textContent.trim() : "No guns match your search.";
+  var form = document.querySelector("#weapon-form");
+  if (form) form.addEventListener("submit", function (e) { e.preventDefault(); });
+  var combos = {};
+  function firstInClass(v, notId) {
+    var list = v === "all" ? DATA.weapons : DATA.weapons.filter(function (w) { return w["class"] === v; });
+    for (var i = 0; i < list.length; i++) { if (list[i].id !== notId) return list[i]; }
+    return list[0] || null;
   }
-  var params = new URLSearchParams(location.search);
-  var aId = params.get("a") || "girardi-es9";
-  var bId = params.get("b") || "klose-k17";
-  fill(selA, aId);
-  fill(selB, bId);
   function syncUrl() {
-    var q = new URLSearchParams({ a: selA.value, b: selB.value });
+    var q = new URLSearchParams({ a: combos.a.id, b: combos.b.id });
     history.replaceState(null, "", location.pathname + "?" + q.toString());
   }
-  selA.addEventListener("change", function () { syncUrl(); renderCompare(); });
-  selB.addEventListener("change", function () { syncUrl(); renderCompare(); });
-  if (filt) filt.addEventListener("change", function () {
-    var v = filt.value;
-    [selA, selB].forEach(function (sel) {
-      var cur = sel.value;
-      Array.prototype.forEach.call(sel.querySelectorAll("optgroup"), function (g) {
-        g.hidden = (v !== "all" && g.label !== v);
+  function setupCombo(input, listbox, side) {
+    if (!listbox) listbox = document.createElement("div");
+    var state = { input: input, listbox: listbox, side: side, id: null, active: -1, opts: [], open: false };
+    function inClass(w) {
+      return !filt || filt.value === "all" || w["class"] === filt.value;
+    }
+    function matches(w, q) {
+      if (!inClass(w)) return false;
+      if (!q) return true;
+      var hay = (w.name + " " + w["class"] + " " + classLabel(w["class"])).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    }
+    function openList(q) {
+      var query = q == null ? "" : String(q).trim().toLowerCase();
+      var groups = {};
+      cls.forEach(function (c) { groups[c] = []; });
+      DATA.weapons.forEach(function (w) { if (matches(w, query)) groups[w["class"]].push(w); });
+      listbox.textContent = "";
+      var opts = [];
+      cls.forEach(function (c) {
+        if (!groups[c].length) return;
+        var g = document.createElement("div");
+        g.setAttribute("role", "group");
+        g.setAttribute("aria-label", classLabel(c));
+        var h = document.createElement("div");
+        h.className = "combo-group";
+        h.setAttribute("aria-hidden", "true");
+        h.textContent = classLabel(c);
+        g.appendChild(h);
+        groups[c].forEach(function (w) {
+          var o = document.createElement("div");
+          o.className = "combo-option";
+          o.setAttribute("role", "option");
+          o.id = side + "-opt-" + w.id;
+          o.setAttribute("data-id", w.id);
+          o.setAttribute("aria-selected", w.id === state.id ? "true" : "false");
+          o.textContent = w.name;
+          o.addEventListener("mousedown", function (e) { e.preventDefault(); });
+          o.addEventListener("click", function () { choose(w.id); });
+          g.appendChild(o);
+          opts.push(o);
+        });
+        listbox.appendChild(g);
       });
-      if (v !== "all" && byId(cur) && byId(cur)["class"] !== v) {
-        var first = DATA.weapons.filter(function (w) { return w["class"] === v; })[0];
-        if (first) sel.value = first.id;
+      if (!opts.length) {
+        var em = document.createElement("div");
+        em.className = "combo-empty";
+        em.setAttribute("role", "option");
+        em.setAttribute("aria-disabled", "true");
+        em.textContent = noResultsText;
+        listbox.appendChild(em);
+      }
+      state.opts = opts;
+      state.active = -1;
+      input.removeAttribute("aria-activedescendant");
+      listbox.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      state.open = true;
+    }
+    function closeList(restore) {
+      if (restore) {
+        var w = state.id ? byId(state.id) : null;
+        if (w) input.value = w.name;
+      }
+      listbox.hidden = true;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+      state.open = false;
+      state.active = -1;
+    }
+    function setActive(i) {
+      if (!state.opts.length) return;
+      if (i < 0) i = 0;
+      if (i >= state.opts.length) i = state.opts.length - 1;
+      state.opts.forEach(function (o) { o.classList.remove("active"); });
+      state.active = i;
+      var o = state.opts[i];
+      o.classList.add("active");
+      input.setAttribute("aria-activedescendant", o.id);
+      if (o.scrollIntoView) o.scrollIntoView({ block: "nearest" });
+    }
+    function choose(id) {
+      var w = byId(id);
+      if (!w) return;
+      state.id = id;
+      input.dataset.selectedId = id;
+      input.value = w.name;
+      closeList(false);
+      syncUrl();
+      renderCompare();
+    }
+    function commitExact() {
+      var v = input.value.trim().toLowerCase();
+      if (!v) return false;
+      for (var i = 0; i < DATA.weapons.length; i++) {
+        var w = DATA.weapons[i];
+        if (w.name.toLowerCase() === v && inClass(w)) { choose(w.id); return true; }
+      }
+      return false;
+    }
+    function setSelected(id) {
+      var w = byId(id);
+      if (!w) return;
+      state.id = id;
+      input.dataset.selectedId = id;
+      input.value = w.name;
+    }
+    function refresh() { if (state.open) openList(""); }
+    input.addEventListener("focus", function () { openList(""); });
+    input.addEventListener("input", function () {
+      var v = input.value;
+      var selName = state.id && byId(state.id) ? byId(state.id).name : "";
+      if (selName && v.length > selName.length && v.indexOf(selName) === 0) {
+        v = v.slice(selName.length);
+        input.value = v;
+      }
+      openList(v);
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (!state.open) openList("");
+        else setActive(state.active + 1);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (state.open) setActive(state.active - 1);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (state.open && state.active >= 0 && state.opts[state.active]) {
+          choose(state.opts[state.active].getAttribute("data-id"));
+        } else if (state.open && !commitExact()) {
+          closeList(true);
+        }
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        if (state.open) closeList(true);
       }
     });
+    input.addEventListener("blur", function () {
+      setTimeout(function () {
+        if (document.activeElement !== input && state.open) {
+          if (!commitExact()) closeList(true);
+        }
+      }, 0);
+    });
+    document.addEventListener("mousedown", function (e) {
+      if (state.open && !input.parentElement.contains(e.target)) {
+        if (!commitExact()) closeList(true);
+      }
+    });
+    state.choose = choose;
+    state.setSelected = setSelected;
+    state.refresh = refresh;
+    return state;
+  }
+  var params = new URLSearchParams(location.search);
+  var aId = params.get("a");
+  if (!byId(aId)) aId = "girardi-es9";
+  var bId = params.get("b");
+  if (!byId(bId)) bId = "klose-k17";
+  combos.a = setupCombo(selA, document.querySelector("#weapon-a-listbox"), "a");
+  combos.b = setupCombo(selB, document.querySelector("#weapon-b-listbox"), "b");
+  combos.a.setSelected(aId);
+  combos.b.setSelected(bId);
+  if (filt) filt.addEventListener("change", function () {
+    var v = filt.value;
+    function inClassId(id) {
+      var w = byId(id);
+      return !!w && (v === "all" || w["class"] === v);
+    }
+    var nextA = combos.a.id, nextB = combos.b.id;
+    if (!inClassId(nextA)) {
+      var fa = firstInClass(v, null);
+      if (fa) nextA = fa.id;
+    }
+    if (!inClassId(nextB) || nextB === nextA) {
+      var fb = firstInClass(v, nextA);
+      if (fb) nextB = fb.id;
+    }
+    combos.a.setSelected(nextA);
+    combos.b.setSelected(nextB);
+    combos.a.refresh();
+    combos.b.refresh();
     filterTable();
+    syncUrl();
     renderCompare();
   });
+  syncUrl();
   renderCompare();
 }
 

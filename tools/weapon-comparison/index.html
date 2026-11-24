@@ -45,6 +45,16 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
+<style>
+.combo { position: relative; }
+.combo-list { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 0.25rem); max-height: 18rem; overflow-y: auto; margin-top: 0; background: var(--background); }
+.combo-group { padding: 0.5rem 1rem 0.25rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted-foreground); }
+.combo-option { display: block; padding: 0.625rem 1rem; font-size: 0.875rem; color: var(--foreground); overflow-wrap: anywhere; cursor: pointer; }
+.combo-option:hover, .combo-option.active { background: color-mix(in oklab, var(--accent-purple) 12%, transparent); }
+.combo-option[aria-selected="true"] { font-weight: 700; }
+.combo-empty { padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--muted-foreground); overflow-wrap: anywhere; }
+</style>
+
 <script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
 {
@@ -580,12 +590,18 @@
           <div class="input-panel-head"><h3 class="eyebrow-muted">Gun A vs Gun B</h3></div>
           <div class="input-notice" data-input-notice role="alert"></div>
           <div>
+            <div class="combo">
             <label class="field-label" for="weapon-a-select">Gun A</label>
-            <select class="input" id="weapon-a-select" data-weapon-a aria-label="Gun A"></select>
+            <input class="input" type="text" id="weapon-a-select" data-weapon-a role="combobox" aria-label="Gun A" aria-expanded="false" aria-controls="weapon-a-listbox" aria-autocomplete="list" autocomplete="off" spellcheck="false">
+            <div class="combo-list search-listbox" id="weapon-a-listbox" role="listbox" aria-label="Gun A" hidden></div>
+            </div>
           </div>
           <div>
+            <div class="combo">
             <label class="field-label" for="weapon-b-select">Gun B</label>
-            <select class="input" id="weapon-b-select" data-weapon-b aria-label="Gun B"></select>
+            <input class="input" type="text" id="weapon-b-select" data-weapon-b role="combobox" aria-label="Gun B" aria-expanded="false" aria-controls="weapon-b-listbox" aria-autocomplete="list" autocomplete="off" spellcheck="false">
+            <div class="combo-list search-listbox" id="weapon-b-listbox" role="listbox" aria-label="Gun B" hidden></div>
+            </div>
           </div>
           <div>
             <label class="field-label" for="class-filter-select">Class filter</label>
@@ -724,7 +740,7 @@
         <tr data-search="Shrewsbury SMS-01 Sniper Rifles class:Sniper Rifles"><th scope="row">Shrewsbury SMS-01</th><td>Sniper Rifles</td><td class="mono">6.8</td><td class="mono">8.6</td><td class="mono">3.3</td><td class="mono">8.4</td><td class="mono">—</td><td>Bolt action</td><td class="mono">$2,150</td><td>REPORTED</td></tr>
         <tr data-search="Fortune &amp; Son Laird 350 Sniper Rifles class:Sniper Rifles"><th scope="row">Fortune &amp; Son Laird 350</th><td>Sniper Rifles</td><td class="mono">6.5</td><td class="mono">8.8</td><td class="mono">3.6</td><td class="mono">8.4</td><td class="mono">5</td><td>Bolt action</td><td class="mono">$950</td><td>REPORTED</td></tr>
         <tr data-search="Fairview FF-50 Sniper Rifles class:Sniper Rifles"><th scope="row">Fairview FF-50</th><td>Sniper Rifles</td><td class="mono">8.5</td><td class="mono">7.8</td><td class="mono">2.5</td><td class="mono">8.5</td><td class="mono">5</td><td>Bolt action</td><td class="mono">$3,975</td><td>REPORTED</td></tr>
-        <tr data-search="Goodwin LMG 6 Machine Guns class:Machine Guns"><th scope="row">Goodwin LMG 6</th><td>Machine Guns</td><td class="mono">6.8</td><td class="mono">2.8</td><td class="mono">2.8</td><td class="mono">6.5</td><td class="mono">100</td><td>Full auto</td><td class="mono">$15,250</td><td>REPORTED</td></tr>
+        <tr data-search="Goodwin LMG 6 Machine Guns class:Machine Guns"><th scope="row">Goodwin LMG 6</th><td>Machine Guns</td><td class="mono">6.8</td><td class="mono">2.8</td><td class="mono">2.8</td><td class="mono">6.5</td><td class="mono">100</td><td>Full auto</td><td class="mono">$15,250</td><td>PROVISIONAL</td></tr>
         <tr data-search="AdB M350 Machine Guns class:Machine Guns"><th scope="row">AdB M350</th><td>Machine Guns</td><td class="mono">6.5</td><td class="mono">3.0</td><td class="mono">3.2</td><td class="mono">6.2</td><td class="mono">100</td><td>Full auto</td><td class="mono">$10,000</td><td>REPORTED</td></tr>
         <tr data-search="Hillinger Boomer Launchers class:Launchers"><th scope="row">Hillinger Boomer</th><td>Launchers</td><td class="mono">9.2</td><td class="mono">5.0</td><td class="mono">6.0</td><td class="mono">4.0</td><td class="mono">1</td><td>Single shot</td><td class="mono">$12,000</td><td>REPORTED</td></tr>
         <tr data-search="Deever Tech GLR40 Launchers class:Launchers"><th scope="row">Deever Tech GLR40</th><td>Launchers</td><td class="mono">9.2</td><td class="mono">6.0</td><td class="mono">5.0</td><td class="mono">4.0</td><td class="mono">6</td><td>Semi-auto</td><td class="mono">$15,500</td><td>REPORTED</td></tr>
