@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapura atende toda a região, então Manila e Jacarta pagam uma taxa de cabo submarino de 20-40 ms."
   },
   { id: "anz", label: "Austrália e Nova Zelândia", edge: "Sydney", baselinePing: 30, note: "Sydney vai bem no país; qualquer sala hospedada nos EUA é um piso de 150 ms que nenhum roteador resolve." },
-  { id: "japan", label: "Japão e Coreia", edge: "Tóquio / Seul", baselinePing: 20, note: "Fibra doméstica de primeira classe. Se seu ping está alto aqui, suspeite do último trecho dentro da sua casa." }
+  { id: "japan", label: "Japão e Coreia", edge: "Tóquio / Seul", baselinePing: 20, note: "Fibra doméstica até a borda de Tóquio / Seul: meta com fio de 22 ms. Se seu ping está alto aqui, suspeite do último trecho dentro da sua casa." }
 ];
 export const CONNECTION_TYPES = [
   {

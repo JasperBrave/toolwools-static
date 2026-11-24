@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapur sirve a toda la región, así que Manila y Yakarta pagan un peaje de cable submarino de 20-40 ms."
   },
   { id: "anz", label: "Australia y Nueva Zelanda", edge: "Sídney", baselinePing: 30, note: "Sídney va bien en el país; cualquier sala alojada en EE. UU. es un suelo de 150 ms que ningún router puede arreglar." },
-  { id: "japan", label: "Japón y Corea", edge: "Tokio / Seúl", baselinePing: 20, note: "Fibra doméstica de primera clase. Si tu ping es alto aquí, sospecha del último tramo dentro de tu casa." }
+  { id: "japan", label: "Japón y Corea", edge: "Tokio / Seúl", baselinePing: 20, note: "Fibra doméstica hasta el borde de Tokio / Seúl: objetivo cableado de 22 ms. Si tu ping es alto aquí, sospecha del último tramo dentro de tu casa." }
 ];
 export const CONNECTION_TYPES = [
   {

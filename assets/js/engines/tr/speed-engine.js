@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapur tüm bölgeye hizmet eder, bu yüzden Manila ve Cakarta 20-40 ms denizaltı kablosu vergisi öder."
   },
   { id: "anz", label: "Avustralya ve Yeni Zelanda", edge: "Sydney", baselinePing: 30, note: "Sidney yurt içinde iyidir; ABD'de barındırılan herhangi bir lobi, hiçbir yönlendiricinin düzeltemeyeceği 150 ms tabandır." },
-  { id: "japan", label: "Japonya ve Kore", edge: "Tokyo / Seul", baselinePing: 20, note: "Sınıfının en iyisi yurt içi fiber. Pingin burada yüksekse evin içindeki son atlamadan şüphelen." }
+  { id: "japan", label: "Japonya ve Kore", edge: "Tokyo / Seul", baselinePing: 20, note: "Tokyo / Seul uç noktasına yerli fiber: 22 ms kablolu hedef. Ping'iniz burada yüksekse, evinizin içindeki son atlamadan şüphelenin." }
 ];
 export const CONNECTION_TYPES = [
   {

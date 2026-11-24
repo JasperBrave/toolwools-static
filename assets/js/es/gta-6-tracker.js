@@ -101,7 +101,7 @@ function renderCountdown() {
     }
     var tldrLabel = $("[data-tldr-label]");
     if (tldrLabel) {
-      tldrLabel.textContent = c.passed ? "Launched · TL;DR" : "Launch in " + c.days + " days · TL;DR";
+      tldrLabel.textContent = c.passed ? "Lanzado · Resumen" : "Lanzamiento en " + c.days + " días · Resumen";
     }
   }
 }

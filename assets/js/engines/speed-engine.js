@@ -62,7 +62,7 @@ export const REGIONS = [
     note: "Singapore serves the whole region, so Manila and Jakarta pay a submarine-cable tax of 20–40 ms."
   },
   { id: "anz", label: "Australia & New Zealand", edge: "Sydney", baselinePing: 30, note: "Sydney is fine domestically; any US-hosted lobby is a hard 150 ms floor no router can fix." },
-  { id: "japan", label: "Japan & Korea", edge: "Tokyo / Seoul", baselinePing: 20, note: "Best-in-class domestic fibre. If your ping is high here, suspect the last hop inside your home." }
+  { id: "japan", label: "Japan & Korea", edge: "Tokyo / Seoul", baselinePing: 20, note: "Domestic fibre to the Tokyo / Seoul edge: 22 ms wired target. If your ping is high here, suspect the last hop inside your home." }
 ];
 export const CONNECTION_TYPES = [
   {

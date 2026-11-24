@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapour dessert toute la région, donc Manille et Jakarta paient une taxe de câble sous-marin de 20-40 ms."
   },
   { id: "anz", label: "Australie et Nouvelle-Zélande", edge: "Sydney", baselinePing: 30, note: "Sydney va bien sur le plan national ; tout salon hébergé aux États-Unis est un plancher de 150 ms qu'aucun routeur ne peut corriger." },
-  { id: "japan", label: "Japon et Corée", edge: "Tokyo / Séoul", baselinePing: 20, note: "Fibre domestique de premier ordre. Si ton ping est élevé ici, soupçonne le dernier tronçon chez toi." }
+  { id: "japan", label: "Japon et Corée", edge: "Tokyo / Séoul", baselinePing: 20, note: "Fibre domestique vers Tokyo / Séoul : 22 ms objectif filaire. Si votre ping est élevé ici, soupçonnez le dernier saut à l'intérieur de votre domicile." }
 ];
 export const CONNECTION_TYPES = [
   {

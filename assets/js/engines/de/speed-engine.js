@@ -63,7 +63,7 @@ export const REGIONS = [
     note: "Singapur bedient die ganze Region, also zahlen Manila und Jakarta eine Unterseekabel-Steuer von 20-40 ms."
   },
   { id: "anz", label: "Australien und Neuseeland", edge: "Sydney", baselinePing: 30, note: "Sydney ist im Inland in Ordnung; jede US-gehostete Lobby ist ein harter 150-ms-Floor, den kein Router beheben kann." },
-  { id: "japan", label: "Japan und Korea", edge: "Tokio / Seoul", baselinePing: 20, note: "Domestic-Fibre der Spitzenklasse. Wenn dein Ping hier hoch ist, vermute den letzten Hop in deinem Zuhause." }
+  { id: "japan", label: "Japan und Korea", edge: "Tokio / Seoul", baselinePing: 20, note: "Glasfaser im Inland, nächster Edge Tokio / Seoul: 22 ms Wired-Ziel. Wenn dein Ping hier hoch ist, vermute den letzten Hop in deinem Zuhause." }
 ];
 export const CONNECTION_TYPES = [
   {
