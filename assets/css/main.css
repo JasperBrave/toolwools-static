@@ -1149,8 +1149,10 @@ input::placeholder, textarea::placeholder { color: color-mix(in oklab, var(--mut
    <br> in the generator markup is the primary separator; this rule is the
    backstop so a future generator slip cannot re-jam them. Scoped to th so
    the <p class="field-hint"> usages and <br>-separated pre-order spans are
-   untouched. */
-th .field-hint { display: block; }
+   untouched. white-space: normal restores wrapping inside the hint — the
+   .data-table th rule sets nowrap, which the hint inherits, and without this
+   the long hint paints as one unwrapped line across the data columns (iter30 F1). */
+th .field-hint { display: block; white-space: normal; }
 select.input, input.input {
   width: 100%; height: 2.75rem; border-radius: var(--radius-md);
   border: 1px solid rgb(0 0 0 / 0.08); background: color-mix(in oklab, var(--background) 60%, transparent);
