@@ -1300,13 +1300,22 @@ table.data-table { width: 100%; min-width: 520px; font-size: 0.75rem; }
 .data-table tbody tr + tr td { border-top: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent); }
 .data-table td.mono { font-family: var(--font-mono); font-weight: 600; color: var(--foreground); white-space: nowrap; }
 /* Iteration 31: weapon-table Class (col 2) + Source (col 10) cells must not
-   break mid-word. The narrow columns + `overflow-wrap: anywhere` (L1754)
+   break mid-word. The narrow columns + `overflow-wrap: anywhere` (L1771)
    fragmented badge labels ("REPORT / ED") and class names into single
    syllables at 375px in all locales (TR class cells up to 10 line boxes).
    The table scrolls horizontally inside .table-scroll, so widening these
    columns costs nothing on the page. Scoped to #weapons-table: no other
    table is affected. */
 #weapons-table td:nth-child(2), #weapons-table td:nth-child(10) { white-space: nowrap; }
+/* Iteration 32 F3: edition-table Category (col 2) cells must not break
+   mid-word. Same mechanism as iteration 31: the ~101px column +
+   `overflow-wrap: anywhere` (L1771) split "customisation" into
+   "customisati/on" (4 lines) at 375px in all 7 locales (AR up to 8 line
+   boxes). The table scrolls horizontally inside .table-scroll, so widening
+   the column costs nothing on the page. Scoped to the edition table via
+   its bonus-matrix section (id="bonus-matrix" exists only on the 7 edition
+   pages): no other table is affected. */
+section[aria-labelledby="bonus-matrix"] .data-table td:nth-child(2) { white-space: nowrap; }
 .data-table td .muted { color: var(--muted-foreground); }
 .tier-read { margin-top: 1.5rem; margin-inline: auto; max-width: 56rem; border-radius: var(--radius-2xl); border: 1px solid rgb(0 0 0 / 0.08); background: color-mix(in oklab, var(--background) 80%, transparent); backdrop-filter: blur(12px); padding: 1.5rem; text-align: left; }
 .dark .tier-read { border-color: rgb(255 255 255 / 0.1); }
@@ -1466,7 +1475,7 @@ table.data-table { width: 100%; min-width: 520px; font-size: 0.75rem; }
 /* "Projected, not datamined" label (economy-calculator, M15). */
 .proj-badge { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-pink); border: 1px solid color-mix(in oklab, var(--accent-pink) 45%, transparent); border-radius: 999px; padding: 0.2rem 0.6rem; vertical-align: middle; }
 /* Confidence pills (interactive-map). */
-.conf-pill { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 0.15rem 0.55rem; border: 1px solid var(--border); color: var(--muted-foreground); }
+.conf-pill { display: inline-block; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 0.15rem 0.55rem; border: 1px solid var(--border); color: var(--muted-foreground); white-space: nowrap; }
 .conf-pill[data-conf="confirmed"] { color: var(--neon-cyan); border-color: color-mix(in oklab, var(--neon-cyan) 50%, transparent); }
 .conf-pill[data-conf="implied"] { color: var(--accent-blue); border-color: color-mix(in oklab, var(--accent-blue) 50%, transparent); }
 .conf-pill[data-conf="community"] { color: var(--accent-pink); border-color: color-mix(in oklab, var(--accent-pink) 50%, transparent); }
@@ -2131,6 +2140,24 @@ p code, li code, td code { overflow-wrap: anywhere; }
   .page-title { text-align: start; }
   .tool-body h2 { text-align: start; }
   .related-sub { text-align: start; }
+}
+
+/* Iteration 32 F1: methodology <pre> wraps instead of scrolling at phone
+   width. The <pre> carries class .methodology-formula, which HAS a pre-wrap
+   rule (L1732) — but it is dead: the later same-specificity rule (L1882)
+   and .methodology-details pre (L1348, higher specificity) both set
+   white-space: pre. At 375px the longest verdict line is 77 chars (PT) and
+   the <pre> scrolled 182-297px internally in all 7 locales (FR 247px, EN
+   196px). The compound selector (0,2,1) beats both pre rules; the plain
+   selector (0,1,0, later than L1882) covers formula blocks outside
+   .methodology-details. Mobile-only: at 1280px the <pre> is 628px wide and
+   the longest line fits, so pre-wrap is a no-op there and desktop rendering
+   is provably unchanged. Wrapping is at spaces (overflow-wrap: anywhere
+   from L1732 still applies); no wording is shortened — the French verdict
+   lines stay exactly as approved. */
+@media (max-width: 767px) {
+  .methodology-formula,
+  .methodology-details pre.methodology-formula { white-space: pre-wrap; }
 }
 @media (max-width: 639px) {
   .byline > div,
