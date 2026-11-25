@@ -1,7 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
+<!-- ============================================================================
+  ToolWools Phase 3 — AR homepage <head> (staging)
+  Source: live ~/workspace/toolwools-static/ar/index.html <head>, copied
+  VERBATIM except the four changes listed below (same four Worker B applied
+  to the EN head). No SEO value was changed: title, description, OG, Twitter,
+  canonical, all 8 hreflang incl. x-default, JSON-LD (Organization + WebSite
+  + SearchAction + BreadcrumbList), favicons and manifest are byte-identical
+  to the live AR head. The page stays dir="rtl" (live AR head is rtl).
+  CHANGES vs live AR head (only these four):
+  1. theme-color metas -> light #FAF9F6, dark #151719 (new tokens).
+  2. Font preloads -> Manrope latin + Inter latin (the 2 EN preloads as-is);
+     Space Grotesk preload DROPPED. Manrope/Inter ship NO Arabic (Phase 2
+     decision): Arabic renders in the system fallback font; no Arabic
+     webfont is loaded.
+  3. Stylesheets -> /assets/css/tokens.css + /assets/css/phase3-ar.css
+     (staging-relative); main.css NOT loaded in staging; print.css kept.
+  4. Inline theme script REPLACED by the no-flash guard (light-first,
+     TW_THEME_DEFAULT='light', localStorage tw-theme, sets data-theme + legacy
+     dark class) and MOVED before the stylesheet links, per the tokens.css
+     guard contract. The live script only toggled the .dark class and
+     followed prefers-color-scheme when nothing was stored.
+  ========================================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ToolWools - جميع أدوات GTA 6 وحاسباتها وأجهزة تتبعها</title>
 <meta name="description" content="كل ما يخص GTA 6، محسوب من أجلك. 24 أداة مباشرة وحاسبات وأجهزة تتبع ومخططات وأدلة للعبة GTA 6.">
@@ -34,8 +56,8 @@
 <meta name="application-name" content="ToolWools">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/ar/">
 <link rel="alternate" href="https://toolwools.com/" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/" hreflang="es">
@@ -55,12 +77,30 @@
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="sitemap" type="application/xml" title="خريطة الموقع" href="/sitemap.xml">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="preload" as="image" href="/assets/img/hero-vicecity.jpg" fetchpriority="high">
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="image" href="/assets/img/design4/hero-bg-800.webp" imagesrcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/phase3-ar.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -127,688 +167,766 @@
   ]
 }</script>
 </head>
+
 <body>
-<div class="site-shell">
+
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
-<header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="التنقل الأساسي">
-          <a href="/ar/" aria-current="page">الرئيسية</a>
-          <a href="/ar/tools">الأدوات</a>
-          <a href="/ar/trackers">أدوات التتبع</a>
-          <a href="/ar/generators">المولّدات</a>
-          <a href="/ar/news">الأخبار</a>
-          <a href="/ar/trailers">العروض الدعائية</a>
-        </nav>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/ar/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="التنقل الأساسي">
+      <ul>
+        <li><a href="/ar/" aria-current="page">الرئيسية</a></li>
+        <li><a href="/ar/tools">الأدوات</a></li>
+        <li><a href="/ar/trackers">أدوات التتبع</a></li>
+        <li><a href="/ar/generators">المولّدات</a></li>
+        <li><a href="/ar/news">الأخبار</a></li>
+        <li><a href="/ar/trailers">العروض الدعائية</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/">الإنجليزية</a>
-            <a href="/es/">Español</a>
-            <a href="/pt/">Português</a>
-            <a href="/de/">Deutsch</a>
-            <a href="/fr/">Français</a>
-            <a href="/tr/">Türkçe</a>
-            <a href="/ar/" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" aria-pressed="false">
-          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="افتح القائمة" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="نتائج البحث" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث عن الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="الجوال">
-          <a href="/ar/" aria-current="page">الرئيسية</a>
-          <a href="/ar/tools">الأدوات</a>
-          <a href="/ar/trackers">أدوات التتبع</a>
-          <a href="/ar/generators">المولّدات</a>
-          <a href="/ar/news">الأخبار</a>
-          <a href="/ar/trailers">العروض الدعائية</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>AR <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/ar/" lang="ar" aria-current="true">العربية <span aria-hidden="true">✓</span></a>
+        <a href="/es/" lang="es">Español</a><a href="/pt/" lang="pt">Português</a><a href="/de/" lang="de">Deutsch</a>
+        <a href="/fr/" lang="fr">Français</a><a href="/tr/" lang="tr">Türkçe</a><a href="/" lang="en">English</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="التبديل إلى المظهر الداكن">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="افتح القائمة">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="الجوال">
+      <a href="/ar/" aria-current="page">الرئيسية</a><a href="/ar/tools">الأدوات</a><a href="/ar/trackers">أدوات التتبع</a>
+      <a href="/ar/generators">المولّدات</a><a href="/ar/news">الأخبار</a><a href="/ar/trailers">العروض الدعائية</a>
+    </nav>
+    <div class="mobile-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" role="listbox" aria-label="نتائج البحث" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/" lang="en">EN</a><a href="/es/" lang="es">ES</a><a href="/pt/" lang="pt">PT</a>
+      <a href="/de/" lang="de">DE</a><a href="/fr/" lang="fr">FR</a><a href="/tr/" lang="tr">TR</a><a href="/ar/" lang="ar" aria-current="true">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>المظهر</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="التبديل إلى المظهر الداكن">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
-<main id="main">
-<!-- Hero -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="/assets/img/hero-vicecity.jpg" alt="" width="1600" height="1200" fetchpriority="high" loading="eager" decoding="async">
-    <div class="hero-fade-side"></div>
-    <div class="hero-fade-bottom"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="container hero-inner">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="hero-badge eyebrow-muted hero-fade-up" style="animation-delay:0ms">
-          <span class="hero-badge-dot live-dot" aria-hidden="true"></span>
-          مباشر · مركز أدوات GTA 6
-        </span>
-        <h1 id="hero-title" class="hero-fade-up" style="animation-delay:80ms">كل شيء <span class="gradient-text">GTA 6.</span><br>محسوب من أجلك.</h1>
-        <p class="hero-sub hero-fade-up" style="animation-delay:160ms">أدوات قوية وحاسبات وأجهزة تتبع ومخططات وأدلة، كل ما تحتاجه للعبة GTA 6 في مكان واحد.</p>
-        <div class="hero-ctas hero-fade-up" style="animation-delay:240ms">
-          <a href="/ar/tools" class="btn-ultra btn-lg"><span class="btn-ultra-inner" aria-hidden="true"></span>استكشف جميع الأدوات <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="/ar/trailers" class="btn-outline"><svg class="icon" viewbox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>شاهد أحدث عرض دعائي</a>
-        </div>
-        <ul class="hero-proof hero-fade-up" style="animation-delay:320ms" aria-label="الإحصاءات">
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <span><span class="hero-proof-title">24 أداة مباشرة</span><br><span class="hero-proof-sub">حاسبات وأجهزة تتبع</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-            <span><span class="hero-proof-title">21 نوفمبر 2026</span><br><span class="hero-proof-sub">آخر تحقق من البيانات</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-            <span><span class="hero-proof-title">لا حاجة للتسجيل</span><br><span class="hero-proof-sub">مجاني، لا حاجة إلى حساب</span></span>
-          </li>
-        </ul>
+
+<main id="main" tabindex="-1">
+<!-- ================= §02 — HERO ================= -->
+<section class="hero hero-d4" id="top" aria-labelledby="hero-h1">
+  <picture class="hero-bg" aria-hidden="true">
+    <source type="image/webp" srcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" sizes="100vw">
+    <img src="/assets/img/design4/hero-bg.jpg" srcset="/assets/img/design4/hero-bg-800.jpg 800w, /assets/img/design4/hero-bg.jpg 1672w" sizes="100vw" alt="" width="1672" height="941" fetchpriority="high">
+  </picture>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">GTA 6 وأدوات الألعاب</p>
+      <h1 id="hero-h1">كل شيء <span class="accent">GTA&nbsp;6.</span><br>كل شيء في مكان واحد.</h1>
+      <p class="hero-sub">أدوات قوية وحاسبات وأجهزة تتبع وأدلة: كل ما تحتاجه للعبة GTA&nbsp;6.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/ar/tools">استكشف جميع الأدوات <span aria-hidden="true">←</span></a>
+        <button class="btn btn-secondary" type="button" data-trailer-open><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5Z"/></svg> شاهد أحدث عرض دعائي</button>
       </div>
-      <div class="hero-countdown-wrap hero-fade-up" style="animation-delay:200ms">
-        <div class="countdown-card" aria-label="تم إصدار GTA 6">
-          <div class="countdown-label"><span class="dot live-dot" aria-hidden="true"></span><span>GTA 6 صدرت الآن</span></div>
-          <div class="countdown-meta"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19 نوفمبر 2026 • 12:00 صباحًا بتوقيت شرق الولايات المتحدة</div>
-          <a href="/ar/tools/add-to-calendar" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg>تعيين التذكيرات</a>
-        </div>
-      </div>
+      <ul class="stats-strip" aria-label="حقائق موثقة">
+        <li><span class="num tnum">24</span><span class="lbl">أداة مجانية</span></li>
+        <li><span class="num">19 Nov 2026</span><span class="lbl">تاريخ الإصدار</span></li>
+        <li><span class="num tnum">212 GB</span><span class="lbl">حجم التثبيت</span></li>
+      </ul>
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <div class="hero-scroll-hint-inner scroll-hint"><span>استكشف</span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+    <div class="hero-art" aria-hidden="true">
+      <picture class="hero-duo">
+        <source type="image/webp" srcset="/assets/img/design4/hero-duo-cutout-800.webp 800w, /assets/img/design4/hero-duo-cutout.webp 1292w" sizes="(max-width:1023px) 92vw, 640px">
+        <img src="/assets/img/design4/hero-duo-cutout.png" alt="" width="1292" height="1217" fetchpriority="high">
+      </picture>
+      <picture class="hero-car">
+        <source type="image/webp" srcset="/assets/img/design4/hero-car-cutout-800.webp 800w, /assets/img/design4/hero-car-cutout.webp 1774w" sizes="(max-width:1023px) 96vw, 700px">
+        <img src="/assets/img/design4/hero-car-cutout.png" alt="" width="1774" height="887" fetchpriority="high">
+      </picture>
     </div>
   </div>
 </section>
 
-<!-- Popular Tools -->
-<section class="section container" aria-labelledby="popular-tools-heading">
-  <a id="popular-tools" aria-hidden="true"></a>
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <h2 id="popular-tools-heading">الأدوات الشائعة</h2>
-      </div>
-      <p class="section-head-sub">إحدى عشرة أداة للبدء بها، اختيرت بناء على الأسئلة التي يطرحها اللاعبون أولا.</p>
-    </div>
-    <a class="section-head-action" href="/ar/tools" aria-label="عرض جميع الأدوات">عرض الكل <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="tools-grid">
-    <article aria-labelledby="tool-card-can-my-pc-run-gta-6">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/ar/tools/system-requirements" data-accent="purple" aria-label="هل يستطيع حاسوبي تشغيل GTA 6؟ (رائج)، حكم فوري لجهازك مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-badge" data-badge="hot">رائج</span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <h3 id="tool-card-can-my-pc-run-gta-6">هل يستطيع حاسوبي تشغيل GTA 6؟</h3>
-        <p>حكم فوري لجهازك مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-fps-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/ar/tools/fps-calculator" data-accent="pink" aria-label="حاسبة معدل الإطارات، توقع معدلات الإطارات من وحدة المعالجة المركزية ووحدة معالجة الرسومات والدقة المستهدفة.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <h3 id="tool-card-fps-calculator">حاسبة معدل الإطارات</h3>
-        <p>توقع معدلات الإطارات من وحدة المعالجة المركزية ووحدة معالجة الرسومات والدقة المستهدفة.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-bottleneck-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/ar/tools/bottleneck-calculator" data-accent="blue" aria-label="حاسبة عنق الزجاجة، تحقق من توازن وحدة المعالجة المركزية مقابل وحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-        <h3 id="tool-card-bottleneck-calculator">حاسبة عنق الزجاجة</h3>
-        <p>تحقق من توازن وحدة المعالجة المركزية مقابل وحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-download-time">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/ar/tools/download-time" data-accent="pink" aria-label="وقت التنزيل، المدة التي سيستغرقها تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <h3 id="tool-card-download-time">وقت التنزيل</h3>
-        <p>المدة التي سيستغرقها تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-storage-planner">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/ar/tools/storage-planner" data-accent="blue" aria-label="مخطط التخزين، حسابات المساحة الحرة مع تصحيح اليوم الأول وهامش للمحتوى الإضافي.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span>
-        <h3 id="tool-card-storage-planner">مخطط التخزين</h3>
-        <p>حسابات المساحة الحرة مع تصحيح اليوم الأول وهامش للمحتوى الإضافي.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-release-date-reminder">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/ar/tools/add-to-calendar" data-accent="purple" aria-label="مذكّر تاريخ الإصدار، GTA 6 صدرت — احصل على تذكيرات التصحيحات والمحتوى الإضافي في تقويمك.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <h3 id="tool-card-release-date-reminder">مذكّر تاريخ الإصدار</h3>
-        <p>GTA 6 صدرت — احصل على تذكيرات التصحيحات والمحتوى الإضافي في تقويمك.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-business-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/ar/tools/business-tracker" data-accent="blue" aria-label="متتبع أعمال GTA 6، تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد — كل رقم موسوم بمصدره.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-business-tracker">متتبع أعمال GTA 6</h3>
-        <p>تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد — كل رقم موسوم بمصدره.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-preload-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/ar/tools/preload-tracker" data-accent="blue" aria-label="سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات، سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-preload-tracker">سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3>
-        <p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-weapon-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:8" href="/ar/tools/weapon-comparison" data-accent="pink" aria-label="مقارنة أسلحة GTA 6 — التقييمات والمخزن والسعر، قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى — التقييمات الأربعة داخل اللعبة من 10 — إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-weapon-comparison">مقارنة أسلحة GTA 6 — التقييمات والمخزن والسعر</h3>
-        <p>قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى — التقييمات الأربعة داخل اللعبة من 10 — إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-vehicle-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:9" href="/ar/tools/vehicle-comparison" data-accent="blue" aria-label="مقارنة مركبات GTA 6 — التقييمات وتكلفة التسجيل وقيمة البيع، قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10 — السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة — إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-vehicle-comparison">مقارنة مركبات GTA 6 — التقييمات وتكلفة التسجيل وقيمة البيع</h3>
-        <p>قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10 — السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة — إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-server-status">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:10" href="/ar/tools/server-status" data-accent="pink" aria-label="حالة خوادم GTA 6: هل الخوادم متوقفة؟، لا خوادم لدى GTA 6 لتتعطل — فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-server-status">حالة خوادم GTA 6: هل الخوادم متوقفة؟</h3>
-        <p>لا خوادم لدى GTA 6 لتتعطل — فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية.</p>
-        <span class="tool-card-cta">استكشف الأداة <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
+<!-- ================= §03 — CATEGORY STRIP ================= -->
+<section class="section" style="padding-top:0" aria-label="الفئات">
+  <div class="wrap">
+    <nav class="cat-strip" aria-label="أبرز الفئات">
+      <ul>
+        <li><a href="/ar/tools"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4L14 13l-3-3 3.7-3.7Z"/></svg>الأدوات<br>والمرافق</a></li>
+        <li><a href="/ar/trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>أدوات التتبع<br>والإحصاءات</a></li>
+        <li><a href="/ar/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.01a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55h.01a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.01a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>المولّدات</a></li>
+        <li><a href="/ar/news"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13a2 2 0 0 1 2 2v12a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2Z"/><path d="M19 15H6M8 9h6M8 12h4"/></svg>الأخبار<br>والتحديثات</a></li>
+        <li><a href="/ar/trailers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 4 14 8-14 8Z"/></svg>العروض الدعائية<br>والوسائط</a></li>
+        <li><a href="/ar/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg>الأدلة<br>والمجتمع</a></li>
+      </ul>
+    </nav>
   </div>
 </section>
 
-<!-- Latest News + Trailer -->
-<section class="section container" aria-label="أحدث الأخبار والعروض الدعائية">
-  <div class="news-trailer-grid">
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-head">
-        <div><h2 id="news-heading">أحدث الأخبار</h2></div>
-        <a class="section-head-action" href="/ar/news" aria-label="عرض جميع الأخبار">عرض الكل <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+<!-- ================= §04 — POPULAR TOOLS ================= -->
+<section class="section" id="popular" aria-labelledby="popular-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="popular-layout">
+      <div class="popular-intro">
+        <p class="eyebrow">الأدوات الشائعة</p>
+        <h2 id="popular-h2">أدوات صُممت<br>للعب أفضل.</h2>
+        <p>احصل على المعلومات التي تحتاجها، وحسّن إعدادك، وابقَ في المقدمة.</p>
+        <a class="btn btn-secondary" href="/ar/tools">تصفح جميع الأدوات <span aria-hidden="true">←</span></a>
       </div>
-      <div class="news-grid">
-        <a class="article-featured stagger-fade-up" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/news-featured.webp" alt="لقطة سينمائية لمدينة فايس سيتي من العرض الدعائي الثاني للعبة GTA 6" width="800" height="450" loading="lazy" decoding="async">
-          <span class="article-featured-body">
-            <span class="article-featured-tag">المقطع الدعائي 2</span>
-            <h3>المقطع الدعائي 2 يكشف عن Jason و Lucia و Vice City المتجددة</h3>
-            <p>يوسع المقطع الدعائي الرسمي الثاني ديناميكية بوني وكلايد بين Jason و Lucia، عارضًا ليونيدا و Everglades و Vice City المكتظة بالسكان.</p>
-            <span class="article-featured-meta">6 مايو 2025 · Rockstar Games</span>
-          </span>
-        </a>
-        <ul class="news-list">
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-              <span><h3>تأجيل إطلاق GTA 6 إلى 19 نوفمبر 2026</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · 2 مايو 2025</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="blue">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-              <span><h3>المقطع الدعائي 1: مرحبًا بكم في Vice City</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · 5 ديسمبر 2023</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/ar/tools" data-accent="pink">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span>
-              <span><h3>GTA 6 متوفرة الآن على PS5 و Xbox — 30 إطارًا في الثانية، 212 غيغابايت</h3><span class="article-row-meta"><span class="tag">تحليل</span> · الربع الثالث 2026 · تحديث 20 نوفمبر 2026: صدرت في 19 نوفمبر 2026</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/ar/tools/system-requirements" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-              <span><h3>إصدار الكمبيوتر الشخصي: لا نافذة مؤرخة بعد</h3><span class="article-row-meta"><span class="tag">تحليل</span> · مستمر</span></span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section aria-labelledby="trailer-heading" id="trailer">
-      <div class="section-head">
-        <div><h2 id="trailer-heading">أحدث عرض دعائي</h2></div>
-        <a class="section-head-action" href="/ar/trailers" aria-label="عرض جميع العروض الدعائية">عرض الكل <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </div>
-      <div class="trailer-card stagger-fade-up">
-        <a class="trailer-thumb" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer" aria-label="تشغيل العرض الدعائي الرسمي الثاني للعبة GTA 6 على يوتيوب">
-          <img src="/assets/img/trailer-thumb.jpg" alt="مقطع GTA 6 الدعائي" width="1015" height="677" loading="lazy" decoding="async">
-          <span class="trailer-thumb-shade" aria-hidden="true"></span>
-          <span class="trailer-thumb-label eyebrow">المقطع الدعائي 2</span>
-          <span class="trailer-thumb-duration">3:22</span>
-          <span class="trailer-play" aria-hidden="true"><span class="trailer-play-circle"><svg class="icon-lg" viewbox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></span></span>
-        </a>
-        <div class="trailer-meta">
-          <div>
-            <div class="trailer-meta-title">GTA 6، العرض الدعائي الرسمي الثاني</div>
-            <div class="trailer-meta-sub"><span class="dot" aria-hidden="true"></span><span>Rockstar Games</span><span aria-hidden="true">•</span><span>أكثر من 180 مليون مشاهدة</span><span aria-hidden="true">•</span><span>6 مايو 2025</span></div>
-          </div>
-          <a class="trailer-yt" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer">YouTube <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+    <div class="tools-grid" id="tools-grid">
+      <article class="tool-card" data-tool="حاسوب gta 6 يشغل مدقق متطلبات نظام حكم فوري تقدير مجتمع حد أدنى موصى به فائق gpu cpu ram تخزين حاسوب"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3><a href="/ar/tools/system-requirements">هل يستطيع حاسوبي تشغيل GTA 6؟</a></h3><p>حكم فوري لجهازك مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="حاسبة معدل إطارات fps تقدير gpu 1080p 1440p 4k منخفض متوسط عال فائق أداء"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/><path d="M4 12h2M12 4V2"/></svg></div><h3><a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a></h3><p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر الإعدادات المسبقة.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="حاسبة عنق زجاجة cpu gpu توازن كشف حد أداء ترقية اختر"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><h3><a href="/ar/tools/bottleneck-calculator">حاسبة عنق الزجاجة</a></h3><p>اختر GPU وCPU. نكتشف عنق الزجاجة ونقترح أصغر ترقية.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="حاسبة وقت تنزيل 212 gb تثبيت اتصال سرعة تصحيح"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></div><h3><a href="/ar/tools/download-time">وقت التنزيل</a></h3><p>قدّر كم سيستغرق تثبيت اللعبة البالغ 212 GB على اتصالك.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="مخطط تخزين ميزانية غيغابايت تثبيت أساسي تصحيح يوم أول محتوى إضافي هامش تحديثات"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></div><h3><a href="/ar/tools/storage-planner">مخطط التخزين</a></h3><p>خطط لكل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي وهامش أمان.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="مذكّر تاريخ إصدار إطلاق تقويم google apple outlook تصحيحات محتوى إضافي أحداث إضافة"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div><h3><a href="/ar/tools/add-to-calendar">مذكّر تاريخ الإصدار</a></h3><p>تذكيرات بنقرة واحدة للتصحيحات والمحتوى الإضافي والأحداث. GTA 6 صدرت الآن.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="متتبع أعمال اقتصاد دخل ليونيدا 12 عمل استرداد محاكاة قصة مال"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div><h3><a href="/ar/tools/business-tracker">متتبع أعمال GTA 6</a></h3><p>تتبّع أعمال ليونيدا الـ12، وحاكِ الاسترداد بأرقامك الخاصة.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="مقارنة أسلحة 53 ضرر دقة تحكم مدى مخزن سعر"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></div><h3><a href="/ar/tools/weapon-comparison">مقارنة الأسلحة</a></h3><p>قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة والتحكم والمدى.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+      <article class="tool-card" data-tool="مقارنة مركبات 115 تقييم سرعة تسارع تحكم متانة تسجيل بيع قيمة"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13 5.5 6.5A2 2 0 0 1 7.4 5h9.2a2 2 0 0 1 1.9 1.5L20 13v5h-2.5"/><path d="M4 13h16v5h-2"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M9.3 18h5.4"/></svg></div><h3><a href="/ar/tools/vehicle-comparison">مقارنة المركبات</a></h3><p>قارن المركبات وفق التقييمات الخمسة داخل اللعبة من 10، إضافة إلى التسجيل وقيمة البيع.</p><span class="tool-cta" aria-hidden="true">استكشف الأداة <span aria-hidden="true">←</span></span></article>
+    </div>
+    </div>
+    <div class="tools-empty" id="tools-empty" role="status" hidden>لا توجد أدوات تطابق “<span id="tools-empty-q"></span>”. جرّب “FPS” أو “VRAM” أو “bottleneck”.</div>
+  </div>
+</section>
+
+<!-- ================= §05 — NEWS ================= -->
+<section class="section" id="news" aria-labelledby="news-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">أحدث الأخبار</p><h2 id="news-h2">GTA 6 صدرت الآن.</h2><p>أخبار حقيقية فقط: الإطلاق والتصحيح والعروض الدعائية، بترتيب التاريخ.</p></div>
+      <a class="btn btn-ghost" href="/ar/news">عرض جميع الأخبار <span aria-hidden="true">←</span></a>
+    </div>
+    <div class="news-layout">
+      <article class="feature-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/news-feature-800.webp 800w, /assets/img/design4/news-feature.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/news-feature.jpg" srcset="/assets/img/design4/news-feature-800.jpg 800w, /assets/img/design4/news-feature.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="أفق Vice City عند الغروب مع سيارة رياضية" width="1200" height="675" loading="lazy"></picture></div>
+        <div class="feature-body">
+          <p class="eyebrow" style="margin-bottom:8px">الخبر المميز</p>
+          <h3>صدرت GTA 6 الآن على PS5 و Xbox</h3>
+          <p>صدرت GTA 6 في 19 November 2026 على PlayStation 5 و Xbox Series X|S. حجم التثبيت 212 GB؛ وتعمل اللعبة بمعدل 30 FPS.</p>
+          <p class="meta"><time datetime="2026-11-19">Nov 19, 2026</time> · الإطلاق · Rockstar</p>
+          <p style="margin-top:12px"><a class="btn btn-primary btn-sm" href="/ar/news">اقرأ الخبر كاملًا <span aria-hidden="true">←</span></a></p>
+        </div>
+      </article>
+      <div>
+        <h3 class="news-more-h">المزيد من الأخبار</h3>
+        <div class="news-rows">
+          <a class="news-row" href="/ar/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/news-215.jpg" alt="" width="215" height="200" loading="lazy"></span><span><h4>Patch <span class="mono">01.002.002</span>، أول تحديث مع ملاحظات التصحيح الرسمية</h4><span class="meta"><time datetime="2026-11-23">Nov 23, 2026</time> · ملاحظات التصحيح</span></span></a>
+          <a class="news-row" href="/ar/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/trailer-250.jpg" alt="" width="250" height="210" loading="lazy"></span><span><h4>المقطع الدعائي 2 يكشف عن Jason و Lucia و Vice City المتجددة</h4><span class="meta"><time datetime="2025-05-06">May 6, 2025</time> · العروض الدعائية</span></span></a>
+          <a class="news-row" href="/ar/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/hero-694.jpg" alt="" width="694" height="395" loading="lazy"></span><span><h4>فُتحت الطلبات المسبقة: Standard بسعر $79.99 و Ultimate بسعر $99.99</h4><span class="meta"><time datetime="2026-06-25">Jun 25, 2026</time> · الطلبات المسبقة</span></span></a>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </section>
 
-<!-- Interactive Tools -->
-<section class="section container" aria-labelledby="interactive-heading">
-  <div id="interactive">
+<!-- ================= §06 — LATEST TRAILER ================= -->
+<section class="section" id="trailer" aria-labelledby="trailer-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">أحدث عرض دعائي</p><h2 id="trailer-h2">المقطع الدعائي 2: Jason و Lucia و Vice City.</h2></div>
+    </div>
+    <article class="feature-card trailer-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/trailer-thumb-800.webp 800w, /assets/img/design4/trailer-thumb.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/trailer-thumb.jpg" srcset="/assets/img/design4/trailer-thumb-800.jpg 800w, /assets/img/design4/trailer-thumb.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="أفق Vice City عند الغسق، موقع المقطع الدعائي 2" width="1200" height="675" loading="lazy"></picture>
+        <span class="duration-badge" aria-hidden="true">2:47</span>
+        <button class="play-btn" type="button" data-trailer-open aria-label="تشغيل العرض الدعائي الرسمي الثاني للعبة GTA 6 (دقيقتان و47 ثانية)"></button>
+      </div>
+      <div class="feature-body">
+        <p class="eyebrow" style="margin-bottom:8px">أحدث عرض دعائي</p>
+        <h3 style="font-size:1.25rem">GTA 6، العرض الدعائي الرسمي الثاني</h3>
+        <p class="meta"><time datetime="2025-05-06">May 6, 2025</time> · <span class="tnum">2:47</span> · Rockstar Games على YouTube</p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ============================================================================
+  ToolWools Phase 3 — Worker B — EN homepage sections 07–12 (HTML fragment)
+  Scope: sections 07 (map) · 08 (hardware) · 09 (browse) · 10 (discovery) ·
+  11 (newsletter) · 12 (footer) + consent banner + staging scripts.
+  Tokens only (design-system/tokens.css). Manrope headings, Inter body.
+  No white text on any orange fill. Light-theme orange text is #C2410C
+  (via --color-accent-text) only. Section headings follow COMPONENT-SYSTEM §25.
+  Image paths are staging-relative: Phase 10 must ship the four crops to
+  /assets/img/crops/ (see en-sec-07-12-NOTES.md). No deploy-tree writes.
+  ========================================================================== -->
+
+<!-- ================= 07 — INTERACTIVE MAP ================= -->
+<section class="section" id="sec-map" aria-labelledby="map-h2">
+  <div class="wrap">
     <div class="section-head">
       <div>
-        <h2 id="interactive-heading">الأدوات التفاعلية</h2>
-        <p class="section-head-sub">معاينات مباشرة للأدوات التي تحتاج إلى تجربة عملية.</p>
+        <p class="eyebrow">الخريطة التفاعلية</p>
+        <h2 id="map-h2">شاهد ولاية ليونيدا كاملة.</h2>
+        <p>معاينة حقيقية لتفاصيل Vice City. الخريطة التفاعلية الكاملة، مع التمرير والتقريب والدبابيس، على بُعد نقرة واحدة.</p>
+      </div>
+      <a class="btn btn-ghost" href="/ar/tools/interactive-map">عرض الخريطة <span aria-hidden="true">←</span></a>
+    </div>
+    <article class="feature-card map-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/map-preview-800.webp 800w, /assets/img/design4/map-preview.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/map-preview.jpg" srcset="/assets/img/design4/map-preview-800.jpg 800w, /assets/img/design4/map-preview.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="معاينة الخريطة التفاعلية لـ Vice City، مع الدبابيس" width="1200" height="675" loading="lazy"></picture></div>
+      <div class="feature-body">
+        <p class="eyebrow">الخريطة التفاعلية</p>
+        <h3>الخريطة التفاعلية لـ Vice City</h3>
+        <p>استكشف المدينة، واعثر على المواقع، والمزيد.</p>
+        <p class="map-note">تفاصيل Vice City: افتح الخريطة لترى ولاية ليونيدا كاملة. المعاينة، وليست الخريطة كاملة.</p>
+        <p class="map-layers" aria-label="طبقات الخريطة المعاينة">مدن وبلدات &middot; سواحل وجزر &middot; برية &middot; معالم</p>
+        <p><a class="btn btn-primary btn-sm" href="/ar/tools/interactive-map">عرض الخريطة <span aria-hidden="true">←</span></a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= 08 — PC & HARDWARE CENTER ================= -->
+<section class="section" id="sec-hardware" aria-labelledby="hw-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">مركز الحاسوب والأجهزة</p>
+        <h2 id="hw-h2">متطلبات النظام ومقارنة الأجهزة</h2>
+        <p>ميزتان منفصلتان. لا تُدمجان أبدًا في بطاقة واحدة.</p>
       </div>
     </div>
-    <div class="preview-grid">
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="blue" aria-labelledby="ip-map-title">
-        <div class="preview-card-pad"><h3 id="ip-map-title">خريطة فايس سيتي <span class="muted">(تفاعلية)</span></h3></div>
-        <div class="preview-map">
-          <img src="/assets/img/map-vicecity.jpg" alt="خريطة فايس سيتي التفاعلية مع علامات المناطق" width="600" height="450" loading="lazy" decoding="async">
-          <span class="preview-map-pin" style="top:28%;left:34%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:54%;left:58%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:70%;left:22%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:40%;left:76%" aria-hidden="true"><i></i></span>
-          <div class="preview-map-bar"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>6 مناطق</span><span aria-hidden="true">•</span><span>42 نقطة مهمة</span></div>
-        </div>
-        <a class="preview-card-link" href="/ar/tools/interactive-map" aria-labelledby="ip-map-title">عرض الخريطة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="purple" aria-labelledby="ip-sysreq-title">
-        <div class="preview-card-pad" style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem">
-          <h3 id="ip-sysreq-title">متطلبات النظام</h3>
-          <span class="preview-pill">مُوصى به (تقديري)</span>
-        </div>
-        <ul class="preview-rows">
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="preview-rows-label">نظام التشغيل</span><span class="preview-rows-value" title="Windows 10/11 64-bit">Windows 10/11 64-bit</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="preview-rows-label">CPU</span><span class="preview-rows-value" title="Intel i5-12400 / Ryzen 5 5600">Intel i5-12400 / Ryzen 5 5600</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><span class="preview-rows-label">الذاكرة</span><span class="preview-rows-value" title="16 غيغابايت">16 غيغابايت</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span><span class="preview-rows-label">GPU</span><span class="preview-rows-value" title="RTX 3060 / RX 6600">RTX 3060 / RX 6600</span></li>
+    <div class="hw-grid">
+      <article class="hw-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/pc-setup-800.webp 800w, /assets/img/design4/pc-setup.webp 1200w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/pc-setup.jpg" srcset="/assets/img/design4/pc-setup-800.jpg 800w, /assets/img/design4/pc-setup.jpg 1200w" sizes="(max-width:767px) 100vw, 514px" alt="إعداد حاسوب مع برج RGB ولوحة مفاتيح" width="1200" height="800" loading="lazy"></picture></div>
+        <h3>متطلبات النظام</h3>
+        <p>تأكد من أن حاسوبك جاهز للعبة GTA 6.</p>
+        <ul class="tier-list" aria-label="مستويات المتطلبات">
+          <li><strong>الحد الأدنى</strong>: تشغيل أساسي</li>
+          <li><strong>الموصى به</strong>: تشغيل سلس بدقة 1080p</li>
+          <li><strong>فائقة</strong>: تشغيل راقٍ بدقة 1440p و4K</li>
         </ul>
-        <a class="preview-card-link" href="/ar/tools/system-requirements" aria-labelledby="ip-sysreq-title">عرض جميع المتطلبات <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="honesty">لم تنشر Rockstar أي متطلبات للحاسوب. مستويات الحد الأدنى / الموصى به / الفائقة تقديرات من المجتمع.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/ar/tools/system-requirements">عرض التفاصيل <span aria-hidden="true">←</span></a></p>
       </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="pink" aria-labelledby="ip-opt-title">
-        <div class="preview-card-pad">
-          <div style="display:flex;align-items:flex-start;gap:0.5rem">
-            <span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-            <div>
-              <h3 id="ip-opt-title">أفضل محسن للإعدادات</h3>
-              <p class="preview-card-sub">اضبط إعدادات الرسومات وفقا لمعدل الإطارات المستهدف وجهازك.</p>
-            </div>
-          </div>
-          <div class="preview-gauge-wrap">
-            <div class="preview-gauge" role="img" aria-label="الإعداد المسبق للمحسن: أداء عال، 71 بالمئة">
-              <svg viewbox="0 0 100 100" aria-hidden="true">
-                <circle cx="50" cy="50" r="44" fill="none" stroke="var(--border)" stroke-width="8"/>
-                <circle cx="50" cy="50" r="44" fill="none" stroke="url(#opt-grad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="80" class="gauge-sweep" style="--gauge-target:80"/>
-                <defs><lineargradient id="opt-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--accent-purple)"/><stop offset="100%" stop-color="var(--accent-pink)"/></lineargradient></defs>
-              </svg>
-              <div class="preview-gauge-center"><div><div class="big">عالٍ</div><div class="small">الأداء</div><div class="pct">71%</div></div></div>
-            </div>
-          </div>
-        </div>
-        <a class="preview-card-link" href="/ar/tools/settings-optimizer" aria-labelledby="ip-opt-title">حسّن الآن <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:3" data-accent="purple" aria-labelledby="ip-hw-title">
-        <div class="preview-card-pad"><h3 id="ip-hw-title">مقارنة الأجهزة</h3></div>
-        <div class="preview-vs">
-          <div class="preview-gpu" data-accent="blue">
-            <div class="preview-gpu-tile"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RTX 4070 Super</div>
-            <div class="preview-gpu-vram">12 غيغابايت</div>
-          </div>
-          <div class="preview-vs-mid">
-            <div class="preview-vs-badge">VS</div>
-            <span class="preview-vs-delta">+18% FPS</span>
-          </div>
-          <div class="preview-gpu" data-accent="pink">
-            <div class="preview-gpu-tile"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RX 7900 XT</div>
-            <div class="preview-gpu-vram">20 غيغابايت</div>
-          </div>
-        </div>
-        <ul class="preview-spec-table">
-          <li><span class="a win">12 غيغابايت</span><span class="k">ذاكرة الفيديو</span><span class="b">20 غيغابايت</span></li>
-          <li><span class="a win">220 واط</span><span class="k">استهلاك الطاقة</span><span class="b">315 واط</span></li>
-          <li><span class="a">94</span><span class="k">متوسط معدل الإطارات</span><span class="b win">111</span></li>
-        </ul>
-        <a class="preview-card-link" href="/ar/tools/hardware-comparison" aria-labelledby="ip-hw-title" style="justify-content:center">قارن الآن <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <article class="hw-card">
+        <div class="img-wrap gpu-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/gpu-cutout-800.webp 800w, /assets/img/design4/gpu-cutout.webp 1774w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/gpu-cutout.png" alt="بطاقة رسومات RGB بثلاث مراوح" width="1774" height="887" loading="lazy"></picture></div>
+        <h3>مقارنة الأجهزة</h3>
+        <p>قارن خيارات GPU و CPU.</p>
+        <dl class="spec-rows">
+          <div class="spec-row"><dt>وحدات معالجة الرسومات المقارنة</dt><dd>RTX 4070 Super vs RX 7900 XT</dd></div>
+          <div class="spec-row"><dt>VRAM</dt><dd class="tnum"><bdi dir="ltr">12 GB vs 20 GB</bdi></dd></div>
+          <div class="spec-row"><dt>معدل الإطارات المتوقع بدقة 1440p</dt><dd>في أداة المقارنة</dd></div>
+        </dl>
+        <p class="honesty">ذاكرة الفيديو مواصفة محايدة هنا. 20 GB ليست الفائزة على 12 GB. توقعات معدل الإطارات موجودة في الأداة، لذا تعرض هذه المعاينة المواصفات فقط.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/ar/tools/hardware-comparison">قارن الآن <span aria-hidden="true">←</span></a></p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- Categories -->
-<section class="section container" aria-labelledby="categories-heading">
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-        <h2 id="categories-heading">تصفح جميع فئات الأدوات</h2>
+<!-- ================= 09 — BROWSE BY CATEGORY ================= -->
+<section class="section" id="sec-browse" aria-labelledby="browse-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">تصفح حسب الفئة</p>
+        <h2 id="browse-h2">اعثر على ما تحتاجه بالضبط.</h2>
+        <p>كل أداة في الكتالوج، مجمعة حسب ما تفعله. الأعداد من كتالوج الأدوات الـ24 المباشر.</p>
       </div>
-      <p class="section-head-sub">كل حاسبة ومخطط وأداة تتبع مصنفة حسب ما تحاول القيام به.</p>
     </div>
-    <a class="section-head-action" href="/ar/tools">عرض جميع الفئات <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="cats-grid">
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/tools?category=release" data-accent="purple" aria-label="تصفح أدوات الإصدار، أداتان">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg></span>
-      <span><span class="cat-card-title">أدوات الإصدار</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>أداتان</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/tools?category=pc" data-accent="blue" aria-label="تصفح أدوات الحاسوب، 3 أدوات">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-      <span><span class="cat-card-title">أدوات الحاسوب</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 أدوات</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/tools?category=performance" data-accent="pink" aria-label="تصفح الأداء · أداتان">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-      <span><span class="cat-card-title">الأداء</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>أداتان</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/tools?category=comparison" data-accent="purple" aria-label="تصفح المقارنة، 5 أدوات">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-      <span><span class="cat-card-title">المقارنة</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 أدوات</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/tools?category=trackers" data-accent="blue" aria-label="تصفح أجهزة التتبع، 5 أدوات">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-2 4-4"/><path d="m3 7 2-2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></span>
-      <span><span class="cat-card-title">أدوات التتبع</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 أدوات</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/tools?category=planners" data-accent="pink" aria-label="تصفح المخططات، 3 أدوات">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
-      <span><span class="cat-card-title">المخططات</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 أدوات</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/ar/generators" data-accent="purple" aria-label="تصفح المولدات، 5 قواعد تسمية؛ أنشئ اسمك فورًا">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg></span>
-      <span><span class="cat-card-title">المولّدات</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 قواعد</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/ar/guides" data-accent="blue" aria-label="تصفح الأدلة، دليلان">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-      <span><span class="cat-card-title">الأدلة</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>دليلان</span></span>
-    </a>
+    <nav aria-label="تصفح حسب الفئة">
+      <div class="browse-grid">
+        <a class="browse-tile" href="/ar/tools?category=release"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-2 7-2 7-2s0 4-2 7l-7 7-5-5 7-7Z"/><circle cx="15" cy="9" r="2"/></svg><span class="bt-title">أدوات الإصدار</span><span class="bt-count tnum">أداتان</span></a>
+        <a class="browse-tile" href="/ar/tools?category=pc"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span class="bt-title">أدوات الحاسوب</span><span class="bt-count tnum">3 أدوات</span></a>
+        <a class="browse-tile" href="/ar/tools?category=performance"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/></svg><span class="bt-title">الأداء</span><span class="bt-count tnum">أداتان</span></a>
+        <a class="browse-tile" href="/ar/tools?category=comparison"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7l7-4 7 4M3 13l2-6 2 6a3.5 3.5 0 0 1-4 0ZM17 13l2-6 2 6a3.5 3.5 0 0 1-4 0Z"/></svg><span class="bt-title">المقارنة</span><span class="bt-count tnum">5 أدوات</span></a>
+        <a class="browse-tile" href="/ar/tools?category=trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="bt-title">أدوات التتبع</span><span class="bt-count tnum">5 أدوات</span></a>
+        <a class="browse-tile" href="/ar/tools?category=planners"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span class="bt-title">المخططات</span><span class="bt-count tnum">3 أدوات</span></a>
+        <a class="browse-tile" href="/ar/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span class="bt-title">المولّدات</span><span class="bt-count tnum">5 مولّدات</span></a>
+        <a class="browse-tile" href="/ar/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span class="bt-title">الأدلة</span><span class="bt-count tnum">دليلان</span></a>
+        <a class="browse-tile" href="/ar/tools?category=economy"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span class="bt-title">الاقتصاد</span><span class="bt-count tnum">أداتان</span></a>
+        <a class="browse-tile" href="/ar/tools?category=map"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="bt-title">الخريطة</span><span class="bt-count tnum">أداة واحدة</span></a>
+      </div>
+    </nav>
   </div>
 </section>
 
-<!-- Why ToolWools -->
-<section class="section container" aria-label="لماذا ToolWools">
-  <div class="section-head">
-    <div>
-      <h2>صُممت لشوارع فايس سيتي</h2>
-      <p class="section-head-sub">مجانية إلى الأبد، مضبوطة للعبة GTA 6، وتحترم جهازك وبياناتك.</p>
-    </div>
-  </div>
-  <ul class="feats-grid">
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:0" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-      <span class="feat-tile-title">مجانية إلى الأبد</span>
-      <p class="feat-tile-sub">كل أداة، وكل تحديث. لا حواجز مدفوعة، ولا نسخة احترافية.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:1" data-accent="purple">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-      <span class="feat-tile-title">دقة مضبوطة</span>
-      <p class="feat-tile-sub">صيغ مضبوطة وفقا للسلوك المقاس في ألعاب مماثلة.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:2" data-accent="blue">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-      <span class="feat-tile-title">التقدير أولا</span>
-      <p class="feat-tile-sub">كل رقم يحمل هامش خطأ معلنًا ومصدرا مؤرخا.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:3" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <span class="feat-tile-title">تحليلات بموافقة</span>
-      <p class="feat-tile-sub">تحليلات مجمعة فقط بعد موافقتك. مدخلات الأدوات لا تغادر جهازك أبدا.</p>
-    </li>
-  </ul>
-</section>
-
-<!-- More ways to play -->
-<section class="section container" aria-label="طرق أكثر للعب">
-  <div class="section-head">
-    <div>
-      <h2>طرق أكثر للعب</h2>
-      <p class="section-head-sub">اتجاهات مباشرة، وأجهزة تتبع للمكملين، ومولدات للأوقات التي تريد فيها العبث فقط.</p>
-    </div>
-  </div>
-  <div class="advanced-grid">
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="cyan" aria-labelledby="trending-heading">
-      <div class="advanced-panel-eyebrow">اختيارات البداية</div>
-      <h3 id="trending-heading">الأدوات الرائجة</h3>
-      <p>الأدوات التي يحتاجها معظم الزوار أولا، بالترتيب.</p>
-      <div class="advanced-panel-body">
-        <ul class="trend-list">
-          <li><a class="trend-row" href="/ar/tools/system-requirements" aria-label="هل يستطيع حاسوبي تشغيل GTA 6؟"><span class="trend-rank first">1</span><span><span class="trend-row-title">هل يشغّل جهازي GTA 6؟</span><span class="trend-row-badge">ابدأ من هنا</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/ar/tools/fps-calculator" aria-label="ابحث عن حاسبة معدل الإطارات"><span class="trend-rank top">2</span><span><span class="trend-row-title">حاسبة معدل الإطارات</span><span class="trend-row-badge">الخطوة الثانية</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/ar/tools/download-time" aria-label="ابحث عن حاسبة وقت التنزيل"><span class="trend-rank top">3</span><span><span class="trend-row-title">حاسبة وقت التنزيل</span><span class="trend-row-badge">الخطوة الثالثة</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/ar/tools/settings-optimizer" aria-label="محسّن إعدادات الرسومات"><span class="trend-rank">4</span><span><span class="trend-row-title">محسّن إعدادات الرسومات</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/ar/tools/storage-planner" aria-label="ابحث عن حاسبة التخزين"><span class="trend-rank">5</span><span><span class="trend-row-title">حاسبة التخزين</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-        </ul>
+<!-- ================= 10 — DISCOVERY ================= -->
+<section class="section" id="sec-discovery" aria-labelledby="disc-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">الاكتشاف</p>
+        <h2 id="disc-h2">اعثر على المزيد، وتتبّع التقدم، وتحقق من الحالة.</h2>
+        <p>الأدوات الرائجة ومولدات الأسماء وأجهزة تتبع الإكمال: باقي الموقع في مكان واحد.</p>
       </div>
-      <a class="advanced-panel-cta" href="/ar/trending">عرض القائمة الكاملة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="blue" aria-labelledby="trackers-heading">
-      <div class="advanced-panel-eyebrow">إكمال 100%</div>
-      <h3 id="trackers-heading">التتبع</h3>
-      <p>قوائم تحقق مناسبة للمكملين الذين يحبون الطحن.</p>
-      <div class="advanced-panel-body">
-        <div class="tracker-tiles">
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><h4>متتبع المهام</h4><p>مهام القصة والمهام الجانبية.</p></a>
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><h4>متتبع المقتنيات</h4><p>اعثر على كل عنصر مخفي.</p></a>
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h4>قائمة تحقق 100%</h4><p>رحلة الإكمال الكاملة.</p></a>
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span><h4>متتبع الجوائز</h4><p>كل جائزة وإنجاز.</p></a>
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span><h4>مرآب المركبات</h4><p>سجل السيارات والدراجات والقوارب.</p></a>
-          <a class="tracker-tile" href="/ar/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h4>عتاد الأسلحة</h4><p>احفظ وقارن المجموعات.</p></a>
+    </div>
+    <div class="discovery-grid">
+      <div>
+        <h3 class="disc-sub">الرائجة (قائمة بداية)</h3>
+        <p class="disc-note">قائمة بداية مزروعة بالأدوات التي يحتاجها معظم الزوار أولًا. ليست تصنيف شعبية مباشرًا.</p>
+        <a class="trend-row" href="/ar/tools/system-requirements" aria-label="1 هل يستطيع حاسوبي تشغيل GTA 6؟"><span class="trend-rank tnum">1</span><span class="trend-title">هل يستطيع حاسوبي تشغيل GTA 6؟</span></a>
+        <a class="trend-row" href="/ar/tools/fps-calculator" aria-label="2 حاسبة معدل الإطارات"><span class="trend-rank tnum">2</span><span class="trend-title">حاسبة معدل الإطارات</span></a>
+        <a class="trend-row" href="/ar/tools/download-time" aria-label="3 وقت التنزيل"><span class="trend-rank tnum">3</span><span class="trend-title">وقت التنزيل</span></a>
+        <a class="trend-row" href="/ar/tools/settings-optimizer" aria-label="4 محسّن إعدادات الرسومات"><span class="trend-rank tnum">4</span><span class="trend-title">محسّن إعدادات الرسومات</span></a>
+        <a class="trend-row" href="/ar/tools/storage-planner" aria-label="5 مخطط التخزين"><span class="trend-rank tnum">5</span><span class="trend-title">مخطط التخزين</span></a>
+        <h3 class="disc-sub">مولدات الأسماء</h3>
+        <div class="gen-chips">
+          <a class="gen-chip" href="/ar/generators">اسم الشخصية</a>
+          <a class="gen-chip" href="/ar/generators">اسم الطاقم</a>
+          <a class="gen-chip" href="/ar/generators">لوحة الترخيص</a>
+          <a class="gen-chip" href="/ar/generators">إشارة النداء اللاسلكية</a>
+          <a class="gen-chip" href="/ar/generators">اسم اللاعب</a>
         </div>
+        <p class="disc-note">تفتح صفحة المولدات على أسماء الشخصيات. الروابط العميقة لكل نمط (&thinsp;?style=crew&thinsp; وأمثالها) لا يدعمها المولد المباشر بعد (انظر الملاحظات).</p>
       </div>
-      <a class="advanced-panel-cta" href="/ar/trackers">جميع أجهزة التتبع <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel wide card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="cyan" aria-labelledby="generators-heading">
-      <div class="advanced-panel-eyebrow">للمتعة فقط</div>
-      <h3 id="generators-heading">مولدات الأسماء</h3>
-      <p>قواعد تسمية لخمسة أنواع من الأسماء — أنشئ اسمك فورًا.</p>
-      <div class="advanced-panel-body">
-        <div class="gen-list">
-          <a class="gen-chip" href="/ar/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>اسم الشخصية</a>
-          <a class="gen-chip" href="/ar/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>اسم الطاقم</a>
-          <a class="gen-chip" href="/ar/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3H8a2 2 0 0 0-2 2v2"/><path d="M16 3h2a2 2 0 0 1 2 2v2"/></svg>لوحة الترخيص</a>
-          <a class="gen-chip" href="/ar/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>إشارة النداء اللاسلكية</a>
-          <a class="gen-chip" href="/ar/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>اسم اللاعب</a>
-          </div>
+      <div>
+        <h3 class="disc-sub">أدوات التتبع</h3>
+        <p class="disc-note">يُحفظ التقدم في هذا المتصفح فقط. يبدأ الزائر الجديد من 0%.</p>
+        <a class="tracker-tile" href="/ar/trackers/missions"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><span class="tt-title">متتبع المهام</span><span class="tt-desc">مهام في 5 فصول، تُحدد أثناء اللعب.</span></span></a>
+        <a class="tracker-tile" href="/ar/trackers/collectibles"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg><span><span class="tt-title">متتبع المقتنيات</span><span class="tt-desc">قفزات استعراضية وطرود مخفية والمزيد، معروضة كنطاقات.</span></span></a>
+        <a class="tracker-tile" href="/ar/trackers/100-percent"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg><span><span class="tt-title">قائمة تحقق 100%</span><span class="tt-desc">كل ما يُحتسب نحو إكمال 100%، في قائمة واحدة.</span></span></a>
+        <a class="tracker-tile" href="/ar/trackers/trophies"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 6H4a1 1 0 0 0-1 1c0 2.5 2 4 4 4M17 6h3a1 1 0 0 1 1 1c0 2.5-2 4-4 4"/></svg><span><span class="tt-title">متتبع الجوائز</span><span class="tt-desc">الجوائز والإنجازات، متعقَّبة من قائمة المجتمع.</span></span></a>
       </div>
-      <a class="advanced-panel-cta" href="/ar/generators">تصفح الكل <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
+      <div>
+        <h3 class="disc-sub">حالة الخوادم (فحص يدوي)</h3>
+        <p class="disc-note">لا يوجد خادم للعبة GTA 6. هذا فحص يدوي لخدمات Rockstar وPlayStation وXbox. آخر فحص <time datetime="2026-11-24T07:30:00Z">24 Nov 2026, 07:30 UTC</time>.</p>
+        <article class="status-card">
+          <h4>Rockstar Authentication</h4>
+          <p><span class="pill pill-success">تعمل</span></p>
+          <p class="status-src"><a href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">support.rockstargames.com/servicestatus</a></p>
+        </article>
+        <article class="status-card">
+          <h4>PlayStation Network</h4>
+          <p><span class="pill pill-success">تعمل</span></p>
+          <p class="status-src"><a href="https://status.playstation.com" target="_blank" rel="noopener">status.playstation.com</a></p>
+        </article>
+        <article class="status-card">
+          <h4>Xbox network</h4>
+          <p><span class="pill pill-warning">غير معروفة</span></p>
+          <p class="status-src">الفحص غير متاح. انظر <a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener">صفحة حالة Xbox الرسمية</a>.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Newsletter -->
-<section class="section container" id="newsletter" aria-label="التسجيل في النشرة البريدية">
-  <div class="newsletter-wrap">
-    <div class="newsletter-card stagger-fade-up">
-      <div class="newsletter-glow newsletter-glow-a" aria-hidden="true"></div>
-      <div class="newsletter-glow newsletter-glow-b" aria-hidden="true"></div>
-      <div class="newsletter-inner">
-        <span class="newsletter-eyebrow eyebrow">استخبارات ToolWools</span>
-        <h2>أتقن العالم السفلي لـ<span class="gradient-text">فايس سيتي</span></h2>
-        <p>احصل على أحدث أدوات GTA 6 وأدلة يوم التحديث وتنبيهات الأدوات الجديدة مباشرة في بريدك الوارد.</p>
-        <ul class="newsletter-perks">
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>لا رسائل مزعجة <span class="text-muted">· معلومات صافية، بلا ضجيج.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>وصول مبكر إلى الأدوات <span class="text-muted">· جرّب الأدوات الجديدة قبل إطلاقها — مجانًا، مثل كل أداة هنا.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>أدلة المشتركين <span class="text-muted">· أدلة شهرية مجانية للمشتركين.</span></li>
-        </ul>
-        <form class="newsletter-form" data-newsletter-form novalidate>
-          <label class="sr-only" for="newsletter-email">عنوان البريد الإلكتروني</label>
-          <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" autocomplete="email" required>
-          <button type="submit" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span>اشترك</button>
-        </form>
-        <p class="newsletter-feedback" data-newsletter-feedback hidden></p>
-        <div class="newsletter-success" data-newsletter-success role="status" hidden>
-          <span class="newsletter-success-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <p data-newsletter-success-msg>شكرا، أنت الآن على القائمة. ترقب إصدار الأداة التالية.</p>
-          <p class="sub">أدر اشتراكك في أي وقت من <a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a>.</p>
+<!-- ================= 11 — NEWSLETTER ================= -->
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2">ابقَ على اطلاع</h2>
+          <p>ملاحظات التصحيح والأدوات الجديدة والأدلة، عندما تصل، وليس قبلها. بلا رسائل مزعجة، ويمكنك إلغاء الاشتراك في أي وقت.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="you@example.com" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
-</main>
+
+<!-- ================= 12 — FOOTER ================= -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/ar/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">تصفح الأدوات ←</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
-              </span>
-            </span>
-          </a>
-          <p>الوجهة النهائية لأدوات GTA 6 وحاسباتها ومتتبعاتها ومخططاتها وأدلتها. كل ما تحتاجه، في مكان واحد، بلا إعلانات أولا وبلا انتفاخ.</p>
-        </div>
-        <div class="footer-cols">
-          <div>
-            <h3>أفضل الأدوات</h3>
-            <ul>
-              <li><a href="/ar/tools/system-requirements">هل يستطيع حاسوبي تشغيل GTA 6؟</a></li>
-              <li><a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a></li>
-              <li><a href="/ar/tools/download-time">حاسبة وقت التنزيل</a></li>
-              <li><a href="/ar/tools/system-requirements">متطلبات النظام</a></li>
-              <li><a href="/ar/tools/settings-optimizer">محسن الإعدادات</a></li>
-              <li><a href="/ar/tools/hardware-comparison">مقارنة الأجهزة</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>استكشف</h3>
-            <ul>
-              <li><a href="/ar/tools">جميع الأدوات</a></li>
-              <li><a href="/ar/trending">الرائج</a></li>
-              <li><a href="/ar/trackers">أدوات التتبع</a></li>
-              <li><a href="/ar/generators">المولّدات</a></li>
-              <li><a href="/ar/news">الأخبار</a></li>
-              <li><a href="/ar/trailers">العروض الدعائية</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>الموارد</h3>
-            <ul>
-              <li><a href="/ar/tools/interactive-map">الخريطة التفاعلية</a> <span class="footer-col-badge">جديد</span></li>
-              <li><a href="/ar/about">نبذة عنا</a></li>
-              <li><a href="/ar/methodology">المنهجية</a></li>
-              <li><a href="/ar/contact">اتصل بنا</a></li>
-              <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
-              <li><a href="/ar/sitemap">خريطة الموقع</a></li>
-              <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
-              <li><a href="/ar/terms">شروط الخدمة</a></li>
-              <li><a href="/editorial-policy">سياسة التحرير</a></li>
-              <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
-        <div class="footer-bottom-links">
-          <a href="/ar/privacy">الخصوصية</a>
-          <a href="/ar/terms">الشروط</a>
-          <button type="button" class="footer-link-btn" data-consent-open>إعدادات ملفات تعريف الارتباط</button>
-          <span class="sep" aria-hidden="true"></span>
-          <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
-        </div>
-      </div>
+  <div class="footer-top"><div class="wrap">صدرت GTA 6 الآن: Nov 19, 2026 &middot; <a href="/ar/tools">تصفح الأدوات <span aria-hidden="true">←</span></a></div></div>
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/ar/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>أدوات. أدلة. GTA 6.</p>
     </div>
+    <nav class="footer-col" aria-label="روابط سريعة">
+      <h3>روابط سريعة</h3>
+      <ul>
+        <li><a href="/ar/">الرئيسية</a></li>
+        <li><a href="/ar/tools">الأدوات</a></li>
+        <li><a href="/ar/news">الأخبار</a></li>
+        <li><a href="/ar/trailers">العروض الدعائية</a></li>
+        <li><a href="/ar/guides">الأدلة</a></li><li><a href="/ar/sitemap">خريطة الموقع</a></li><li><a href="/ar/trending">الرائج</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="الفئات">
+      <h3>الفئات</h3>
+      <ul>
+        <li><a href="/ar/tools?category=release">أدوات الإصدار</a></li>
+        <li><a href="/ar/tools?category=pc">أدوات الحاسوب</a></li>
+        <li><a href="/ar/tools?category=performance">الأداء</a></li>
+        <li><a href="/ar/tools?category=comparison">المقارنة</a></li>
+        <li><a href="/ar/tools?category=trackers">أدوات التتبع</a></li>
+        <li><a href="/ar/tools?category=planners">المخططات</a></li>
+        <li><a href="/ar/generators">المولّدات</a></li>
+        <li><a href="/ar/guides">الأدلة</a></li>
+        <li><a href="/ar/tools?category=economy">الاقتصاد</a></li>
+        <li><a href="/ar/tools?category=map">الخريطة</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="نبذة عنا">
+      <h3>نبذة عنا</h3>
+      <ul>
+        <li><a href="/ar/about">نبذة عن ToolWools</a></li>
+        <li><a href="/ar/contact">اتصل بنا</a></li>
+        <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+        <li><a href="/ar/terms">شروط الخدمة</a></li>
+        <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li><li><a href="/ar/methodology">المنهجية</a></li><li><a href="/editorial-policy">سياسة التحرير</a></li><li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</span>
+    <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
+    <span>صُنع بحب &hearts; لمعجبي GTA 6</span>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="الموافقة على التحليلات">
-  <div class="consent-inner">
-    <p><strong>التحليلات، بموافقتك فقط.</strong> نستخدم تحليلات Google المجمعة لمعرفة الأدوات المستخدمة. مدخلات الأدوات لا تغادر جهازك أبدا، ولا يُبنى أي ملف تعريف، ولا يُباع أي شيء. اقبل لتحميلها، أو ارفض وتصفح بدونها. يمكنك تغيير رأيك في أي وقت من إعدادات ملفات تعريف الارتباط في التذييل.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>قبول التحليلات</button>
-      <button type="button" class="btn-outline" data-consent-decline>رفض</button>
-      <a href="/ar/privacy">سياسة الخصوصية</a>
-    </div>
+
+<!-- Consent banner (§21 — live behaviour from assets/js/consent.js; shown here so the footer's إعدادات ملفات تعريف الارتباط button has a banner to re-open in staging) -->
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/ar/launch.js" defer></script>
+
+</main>
+
+
+<!-- Trailer dialog (§06 / §12) — embed loads only on play -->
+<dialog class="trailer-dialog" id="trailer-dialog" aria-label="GTA 6، العرض الدعائي الرسمي الثاني">
+  <div class="td-head"><strong>GTA 6، العرض الدعائي الرسمي الثاني (May 6, 2025) · 2:47</strong>
+    <button class="icon-btn" type="button" data-trailer-close aria-label="إغلاق العرض الدعائي"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <p class="td-loading" data-trailer-loading>جارٍ تحميل الفيديو…</p>
+  <iframe id="trailer-frame" src="about:blank" title="عرض GTA 6 الدعائي" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p class="td-foot">شاهد على YouTube: <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener">youtube.com/watch?v=VQRLujxTm3c</a></p>
+</dialog>
+
+<p class="visually-hidden" aria-live="polite" id="theme-status"></p>
+
+<script>
+(function(){
+"use strict";
+var root=document.documentElement;
+/* ---- Theme (light-first; TW_THEME_DEFAULT is defined in the head guard) ---- */
+function applyTheme(t,announce){
+  root.classList.add('tw-theme-switching');
+  root.dataset.theme=t;
+  try{localStorage.setItem('tw-theme',t);}catch(e){}
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.setAttribute('aria-pressed',t==='dark'?'true':'false');
+    b.setAttribute('aria-label',t==='dark'?'التبديل إلى المظهر الفاتح':'التبديل إلى المظهر الداكن');
+  });
+  var st=document.getElementById('theme-status');
+  if(st&&announce){st.textContent=t==='dark'?'المظهر الداكن مفعّل':'المظهر الفاتح مفعّل';}
+  setTimeout(function(){root.classList.remove('tw-theme-switching');},50);
+}
+applyTheme(root.dataset.theme||'light',false);
+document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+  b.addEventListener('click',function(){applyTheme(root.dataset.theme==='dark'?'light':'dark',true);});
+});
+/* ---- Header: scrolled state ---- */
+var bar=document.querySelector('[data-header-bar]');
+function onScroll(){if(bar)bar.classList.toggle('scrolled',window.scrollY>4);}
+onScroll();
+window.addEventListener('scroll',onScroll,{passive:true});
+/* ---- Mobile menu ---- */
+var menuBtn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
+function setMenu(open){
+  menu.hidden=!open;
+  menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  menuBtn.setAttribute('aria-label',open?'أغلق القائمة':'افتح القائمة');
+  menuBtn.querySelector('.icon-menu').style.display=open?'none':'';
+  menuBtn.querySelector('.icon-close').style.display=open?'':'none';
+  document.body.style.overflow=open?'hidden':'';
+  if(open){var first=menu.querySelector('a, input, button');if(first)first.focus();}
+  else{menuBtn.focus();}
+}
+menuBtn.addEventListener('click',function(){setMenu(menu.hidden);});
+menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){setMenu(false);}});
+/* ---- Language menu: close on Escape or outside click ---- */
+document.querySelectorAll('.lang-menu').forEach(function(m){
+  var summary=m.querySelector('summary');
+  document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m.open=false;});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.open=false;if(summary)summary.focus();}});
+});
+/* ---- Search combobox — REAL 24-item index from the live AR tree
+   (~/workspace/toolwools-static/assets/js/ar/search.js, titles/descs/tags
+   copied verbatim; hrefs: /ar/tools/<slug>, or t.url when set). ---- */
+var TOOLS=[
+ {slug:"system-requirements",title:"مدقق متطلبات نظام GTA 6",desc:"حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين."},
+ {slug:"download-time",title:"حاسبة وقت تنزيل GTA 6",desc:"قدّر كم سيستغرق التثبيت الأساسي البالغ نحو 212 غيغابايت على اتصالك، مع حساب تصحيح اليوم الأول."},
+ {slug:"storage-planner",title:"مخطط تخزين GTA 6",desc:"خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات."},
+ {slug:"add-to-calendar",title:"مذكّر تاريخ إصدار GTA 6",desc:"أضف إطلاق GTA 6 إلى تقويمك حسب منطقتك الزمنية."},
+ {slug:"readiness-score",title:"نتيجة جاهزية GTA 6",desc:"نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة."},
+ {slug:"bottleneck-calculator",title:"حاسبة عنق زجاجة GTA 6",desc:"تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K. نسبة عنق زجاجة مباشرة ونطاق معدل الإطارات وأصغر ترقية تعيد توازن جهازك."},
+ {slug:"vram-calculator",title:"مدقق متطلبات ذاكرة فيديو GTA 6",desc:"تحقق من الحد الأدنى لذاكرة الفيديو التي تحتاجها للعبة GTA 6 بدقة 1080p و1440p و4K. حكم لبطاقات 6 غيغابايت و8 غيغابايت و12 غيغابايت و16 غيغابايت."},
+ {slug:"fps-calculator",title:"حاسبة معدل إطارات GTA 6",desc:"قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة."},
+ {slug:"gpu-tier-list",title:"قائمة مستويات وحدة معالجة الرسومات في GTA 6",desc:"أفضل بطاقات الرسومات للعبة GTA 6، مرتبة حسب المستوى."},
+ {slug:"interactive-map",title:"الخريطة التفاعلية للعبة GTA 6",desc:"مستكشف ليونيدا ومقارنة أحجام لخريطة GTA 6."},
+ {slug:"pre-order-tracker",title:"أين تشتري GTA 6: مقارنة الإصدارات والقنوات",desc:"أين تشتري GTA 6، مقارنة حسب القناة."},
+ {slug:"edition-comparison",title:"منتقي إصدارات GTA 6",desc:"مقارنة بين كل إصدارات GTA 6: المكافآت والسعر وما يفتحه كل إصدار."},
+ {slug:"internet-speed-check",title:"مستشار سرعة الإنترنت في GTA 6",desc:"تحقق مما إذا كان اتصالك سريعا بما يكفي لتنزيلات GTA 6 واللعب عبر الإنترنت."},
+ {slug:"price-by-country",title:"سعر GTA 6 حسب البلد",desc:"سعر GTA 6 حسب البلد بالعملة المحلية."},
+ {slug:"economy-calculator",title:"حاسبة المال وعائد الأعمال للعبة GTA 6",desc:"اعرف أسرع طريقة لكسب GTA$ وأي الأعمال تسترد تكلفتها أولا."},
+ {slug:"gta-6-tracker",title:"معالم إطلاق GTA 6",desc:"معالم الإطلاق ونوافذ التحميل المسبق المكتملة للعبة GTA 6."},
+ {slug:"settings-optimizer",title:"محسّن إعدادات الرسومات",desc:"اضبط إعدادات الرسومات لمعدل الإطارات المستهدف وجهازك."},
+ {slug:"hardware-comparison",title:"مقارنة الأجهزة",desc:"قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجهًا لوجه لـ GTA 6."},
+ {slug:"server-status",title:"حالة خوادم GTA 6: هل الخوادم متوقفة؟",desc:"لا خوادم لدى GTA 6 لتتعطل, فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية."},
+ {slug:"preload-tracker",title:"سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات",desc:"سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026."},
+ {slug:"vehicle-comparison",title:"مقارنة مركبات GTA 6, التقييمات وتكلفة التسجيل وقيمة البيع",desc:"قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10, السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة, إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026."},
+ {slug:"weapon-comparison",title:"مقارنة أسلحة GTA 6, التقييمات والمخزن والسعر",desc:"قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى, التقييمات الأربعة داخل اللعبة من 10, إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026."},
+ {slug:"generators",title:"مولد أسماء GTA 6",desc:"أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين, تُنشأ فورًا.",url:"/ar/generators",tags:"name generator مولد الأسماء gta 6"},
+ {slug:"business-tracker",title:"متتبع أعمال GTA 6",desc:"حاسبة ومتتبع أعمال GTA 6: لا يمكن شراء أي عمل بعد، لذا تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة."}
+];
+var cards=document.querySelectorAll('#tools-grid .tool-card');
+function fold(s){return s.replace(/İ/g,'i').replace(/ı/g,'i').replace(/I/g,'i').toLowerCase();}
+function filterTools(q){
+  var n=fold(q.trim()),shown=0;
+  cards.forEach(function(c){
+    var hit=n.length<2||fold(c.getAttribute('data-tool')).indexOf(n)>-1;
+    c.style.display=hit?'':'none';if(hit)shown++;
+  });
+  var empty=document.getElementById('tools-empty');
+  empty.hidden=shown>0;document.getElementById('tools-empty-q').textContent=q;
+  if(n.length<2)return [];
+  return TOOLS.filter(function(t){return fold(t.title+' '+t.desc+' '+(t.tags||'')).indexOf(n)>-1;}).slice(0,6);
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+  var box=document.getElementById(inp.getAttribute('aria-controls'));
+  if(!box)return;
+  var activeIdx=-1,blurTimer=null;
+  function close(){box.hidden=true;box.innerHTML='';activeIdx=-1;inp.setAttribute('aria-expanded','false');inp.removeAttribute('aria-activedescendant');}
+  function render(q){
+    if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}
+    var list=filterTools(q);
+    activeIdx=-1;
+    if(fold(q).length<2){close();return;}
+    inp.setAttribute('aria-expanded','true');box.hidden=false;
+    if(!list.length){
+      box.innerHTML='<p class="search-empty" role="status">لا توجد أدوات تطابق &ldquo;'+esc(q.trim())+'&rdquo;. جرّب &ldquo;FPS&rdquo; أو &ldquo;VRAM&rdquo; أو &ldquo;bottleneck&rdquo;.</p>';
+      return;
+    }
+    box.innerHTML=list.map(function(t,i){
+      var href=t.url||('/ar/tools/'+t.slug);
+      return '<a href="'+href+'" role="option" id="'+inp.id+'-sr-'+i+'"><strong>'+esc(t.title)+'</strong><span>'+esc(t.desc)+'</span></a>';
+    }).join('');
+  }
+  inp.addEventListener('input',function(){render(inp.value);});
+  inp.addEventListener('focus',function(){if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}if(inp.value.trim().length>=2)render(inp.value);});
+  inp.addEventListener('keydown',function(e){
+    var links=box.querySelectorAll('a');
+    if(e.key==='Escape'){inp.value='';filterTools('');close();inp.blur();return;}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      if(!links.length)return;e.preventDefault();
+      activeIdx=e.key==='ArrowDown'?(activeIdx+1)%links.length:(activeIdx-1+links.length)%links.length;
+      links.forEach(function(l,i){l.classList.toggle('active',i===activeIdx);});
+      inp.setAttribute('aria-activedescendant',inp.id+'-sr-'+activeIdx);
+      return;
+    }
+    if(e.key==='Enter'&&activeIdx>=0&&links[activeIdx]){e.preventDefault();window.location.href=links[activeIdx].href;}
+  });
+  inp.addEventListener('blur',function(){blurTimer=setTimeout(function(){if(!box.contains(document.activeElement))close();},150);});
+});
+document.addEventListener('click',function(e){
+  document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+    var box=document.getElementById(inp.getAttribute('aria-controls'));
+    if(box&&!box.hidden&&!inp.closest('.header-search,.mobile-search').contains(e.target)){box.hidden=true;box.innerHTML='';}
+  });
+});
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    var vis=window.innerWidth>=1280?document.getElementById('header-search'):document.querySelector('.mobile-menu [data-header-search-input]');
+    if(!menu.hidden&&window.innerWidth<1280){vis=document.querySelector('.mobile-menu [data-header-search-input]');}
+    if(vis){if(window.innerWidth<1280&&menu.hidden)setMenu(true);vis.focus();}
+  }
+});
+/* ---- Trailer dialog (embed loads only on play; no autoplay) ---- */
+var dlg=document.getElementById('trailer-dialog'),frame=document.getElementById('trailer-frame');
+var lastTrigger=null;
+function openTrailer(trigger){
+  lastTrigger=trigger||document.activeElement;
+  var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=false;
+  frame.src='https://www.youtube-nocookie.com/embed/VQRLujxTm3c?autoplay=1&rel=0';
+  if(typeof dlg.showModal==='function'){dlg.showModal();}
+  else{dlg.setAttribute('open','');}
+  var closeBtn=dlg.querySelector('[data-trailer-close]');if(closeBtn)closeBtn.focus();
+}
+function closeTrailer(){
+  frame.src='about:blank';
+  if(typeof dlg.showModal==='function'){if(dlg.open)dlg.close();}
+  else{dlg.removeAttribute('open');}
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+}
+document.querySelectorAll('[data-trailer-open]').forEach(function(b){
+  b.addEventListener('click',function(){openTrailer(b);});
+});
+frame.addEventListener('load',function(){
+  if(frame.getAttribute('src')&&frame.getAttribute('src')!=='about:blank'){
+    var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=true;
+  }
+});
+dlg.querySelectorAll('[data-trailer-close]').forEach(function(b){b.addEventListener('click',closeTrailer);});
+dlg.addEventListener('click',function(e){if(e.target===dlg)closeTrailer();});
+/* Phase 9 Worker D (25 Nov 2026): trap Tab inside the trailer dialog (native
+   <dialog> does not trap Tab across the cross-origin iframe) and close on
+   Escape (guards the non-showModal fallback path, which has no native Escape
+   handling). Port of the EN fix (Worker A Fix A + Fix C). */
+dlg.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){e.preventDefault();closeTrailer();return;}
+  if(e.key!=='Tab')return;
+  var f=dlg.querySelectorAll('button,a[href],iframe,[tabindex]:not([tabindex="-1"])'),els=[],i;
+  for(i=0;i<f.length;i++){if(!f[i].disabled&&f[i].getClientRects().length)els.push(f[i]);}
+  if(!els.length)return;
+  var first=els[0],last=els[els.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+dlg.addEventListener('close',function(){
+  frame.src='about:blank';
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+});
+})();
+</script>
 <script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/ar/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/ar/header.js" defer></script>
-<script src="/assets/js/ar/search.js" defer></script>
-<script src="/assets/js/ar/newsletter.js" defer></script>
+<script>
+/* ==========================================================================
+   Phase 3 staging scripts for sections 07–12 (Worker B).
+   Phase 10 moves these into assets/js/ (newsletter.js / consent.js) and
+   deletes this block. No secrets are embedded here: the real submit reads
+   window.TOOLWOOLS_SUPABASE, which the production supabase.js provides.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  /* ---- Staging flag: newsletter demo mode --------------------------------
+     TW_NEWSLETTER_STAGING_DEMO = false → the real Supabase submit runs (demo mode off)
+     and a LABELLED demo success is shown ("Demo only — nothing was sent or
+     stored"). No email leaves the browser in staging.
+     PHASE 10: set to false at deploy (or remove the flag and this branch) to
+     enable the real Supabase PostgREST submit below. The real path is the
+     live code from assets/js/newsletter.js (audit 04 §7.3): POST
+     {cfg.url}/rest/v1/newsletter_subscribers, Prefer: return=minimal,
+     body {email (lowercased), source: "homepage", locale: "ar"},
+     HTTP 409 → "أنت موجود بالفعل على القائمة، ولا حاجة إلى أي إجراء آخر."
+     Never fake success: unconfigured/unreachable endpoint → honest error.
+     ------------------------------------------------------------------------ */
+  var TW_NEWSLETTER_STAGING_DEMO = false;
+
+  var nlForm = document.getElementById("nl-form");
+  if (nlForm) {
+    var nlEmail = document.getElementById("nl-email");
+    var nlErr = document.getElementById("nl-error");
+    var nlOk = document.getElementById("nl-success");
+    var nlOkMsg = nlOk ? nlOk.querySelector("[data-newsletter-success-msg]") : null;
+    var nlBtn = document.getElementById("nl-submit");
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function nlShowError(msg) {
+      nlErr.hidden = false; nlOk.hidden = true;
+      nlErr.textContent = msg;
+      nlEmail.setAttribute("aria-invalid", "true");
+    }
+    function nlShowSuccess(msg) {
+      nlForm.hidden = true; nlOk.hidden = false;
+      if (nlOkMsg) nlOkMsg.textContent = msg;
+      nlOk.focus();
+    }
+    nlForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var value = nlEmail.value.trim();
+      if (!EMAIL_RE.test(value)) {
+        nlShowError("يرجى إدخال عنوان بريد إلكتروني صالح.");
+        nlEmail.focus();
+        return;
+      }
+      nlEmail.removeAttribute("aria-invalid"); nlErr.hidden = true;
+      nlBtn.disabled = true; nlBtn.textContent = "جارٍ الاشتراك…";
+      if (TW_NEWSLETTER_STAGING_DEMO) {
+        /* Staging only: no network, no storage. Labelled demo success. */
+        window.setTimeout(function () {
+          nlBtn.disabled = false; nlBtn.textContent = "اشترك";
+          nlShowSuccess("عرض تجريبي فقط: أنت على القائمة. لم يُرسل أو يُحفظ أي شيء.");
+        }, 400);
+        return;
+      }
+      /* ---- Real submit (live assets/js/newsletter.js, Phase 10 only) ---- */
+      var cfg = window.TOOLWOOLS_SUPABASE || {};
+      if (!cfg.url || !cfg.key) {
+        nlBtn.disabled = false; nlBtn.textContent = "اشترك";
+        nlShowError("التسجيل في النشرة البريدية غير متصل حاليا، لذا لم يتم إرسال أي شيء. يرجى المحاولة لاحقا.");
+        nlEmail.focus();
+        return;
+      }
+      fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
+        method: "POST",
+        headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "ar" })
+      }).then(function (res) {
+        nlBtn.disabled = false; nlBtn.textContent = "اشترك";
+        if (res.status === 409) { nlShowSuccess("أنت موجود بالفعل على القائمة، ولا حاجة إلى أي إجراء آخر."); return; }
+        if (!res.ok) { throw new Error("http " + res.status); }
+        nlShowSuccess("تم تسجيلك. راقب بريدك الوارد لتلقي المحتوى التالي.");
+      }).catch(function () {
+        nlBtn.disabled = false; nlBtn.textContent = "اشترك";
+        nlShowError("تعذر علينا الحفظ الآن، لذا لم يتم إرسال أي شيء. يرجى المحاولة بعد لحظات.");
+        nlEmail.focus();
+      });
+    });
+  }
+
+  /* ---- Consent banner (live assets/js/consent.js behaviour) ------------- */
+  var CONSENT_KEY = "tw-consent";
+  var banner = document.getElementById("consent-banner");
+  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
+  function consentShow() { if (banner) banner.hidden = false; }
+  function consentHide() { if (banner) banner.hidden = true; }
+  if (banner) {
+    if (!consentStored()) {
+      var consentShown = false;
+      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
+      window.setTimeout(showSoon, 1800);
+      window.addEventListener("scroll", showSoon, { once: true, passive: true });
+    }
+    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        consentShow();
+        var f = banner.querySelector("[data-consent-accept]");
+        if (f) f.focus();
+      });
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

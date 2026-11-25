@@ -2,7 +2,7 @@
 // The source used a live autocomplete over the full content index; this
 // static build ships the tool catalogue (titles + descriptions from
 // src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
-// Enter opens, Escape closes. Links to /tools/<slug> (live tools), t.url when set
+// Enter opens, Escape closes. Links to /pt/tools/<slug> (live tools), t.url when set
 // (e.g. /pt/generators, which lives outside /tools), or /tools
 // for coming-soon entries, matching the source behaviour.
 (function () {
@@ -62,7 +62,7 @@
       } else {
         hits.forEach(function (t) {
           var a = document.createElement("a");
-          a.href = t.url || "/tools/" + t.slug;
+          a.href = t.url || "/pt/tools/" + t.slug;
           a.setAttribute("role", "option");
           var strong = document.createElement("span");
           strong.textContent = t.title;

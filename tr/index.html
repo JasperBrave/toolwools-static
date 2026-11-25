@@ -1,7 +1,27 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
 <meta charset="utf-8">
+<!-- ============================================================================
+  ToolWools Phase 3 — TR homepage <head> (staging)
+  Source: live ~/workspace/toolwools-static/tr/index.html <head>, copied
+  VERBATIM except the four changes listed below (same four Worker B applied
+  to the EN head). No SEO value was changed: title, description, OG, Twitter,
+  canonical, all 8 hreflang incl. x-default, JSON-LD (Organization + WebSite
+  + SearchAction + BreadcrumbList), favicons and manifest are byte-identical
+  to the live TR head.
+  CHANGES vs live TR head (only these four):
+  1. theme-color metas -> light #FAF9F6, dark #151719 (new tokens).
+  2. Font preloads -> Manrope latin + latin-ext, Inter latin + latin-ext
+     (Turkish needs latin-ext: İ/ş/ğ are outside latin); Space Grotesk preload DROPPED.
+  3. Stylesheets -> /assets/css/tokens.css + /assets/css/phase3-tr.css
+     (staging-relative); main.css NOT loaded in staging; print.css kept.
+  4. Inline theme script REPLACED by the no-flash guard (light-first,
+     TW_THEME_DEFAULT='light', localStorage tw-theme, sets data-theme + legacy
+     dark class) and MOVED before the stylesheet links, per the tokens.css
+     guard contract. The live script only toggled the .dark class and
+     followed prefers-color-scheme when nothing was stored.
+  ========================================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ToolWools - Tüm GTA 6 Araçları, Hesaplayıcılar ve Takipçiler</title>
 <meta name="description" content="GTA 6 ile ilgili her şey, sizin için hesaplandı. Grand Theft Auto 6 için 24 yayında araç, hesaplayıcı, takipçi, planlayıcı ve rehber.">
@@ -34,8 +54,8 @@
 <meta name="application-name" content="ToolWools">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/tr/">
 <link rel="alternate" href="https://toolwools.com/" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/" hreflang="es">
@@ -55,12 +75,32 @@
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="sitemap" type="application/xml" title="Site haritası" href="/sitemap.xml">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="preload" as="image" href="/assets/img/hero-vicecity.jpg" fetchpriority="high">
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+<link rel="preload" as="image" href="/assets/img/design4/hero-bg-800.webp" imagesrcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/phase3-tr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -127,688 +167,766 @@
   ]
 }</script>
 </head>
+
 <body>
-<div class="site-shell">
+
 <a class="skip-link" href="#main">İçeriğe atla</a>
-<header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="Birincil">
-          <a href="/tr/" aria-current="page">Ana Sayfa</a>
-          <a href="/tr/tools">Araçlar</a>
-          <a href="/tr/trackers">Takipçiler</a>
-          <a href="/tr/generators">Oluşturucular</a>
-          <a href="/tr/news">Haberler</a>
-          <a href="/tr/trailers">Fragmanlar</a>
-        </nav>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/tr/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="Birincil">
+      <ul>
+        <li><a href="/tr/" aria-current="page">Ana Sayfa</a></li>
+        <li><a href="/tr/tools">Araçlar</a></li>
+        <li><a href="/tr/trackers">Takipçiler</a></li>
+        <li><a href="/tr/generators">Oluşturucular</a></li>
+        <li><a href="/tr/news">Haberler</a></li>
+        <li><a href="/tr/trailers">Fragmanlar</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/">İngilizce</a>
-            <a href="/es/">Español</a>
-            <a href="/pt/">Português</a>
-            <a href="/de/">Deutsch</a>
-            <a href="/fr/">Français</a>
-            <a href="/tr/" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Türkçe</a>
-            <a href="/ar/">العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">
-          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Arama sonuçları" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Mobil">
-          <a href="/tr/" aria-current="page">Ana Sayfa</a>
-          <a href="/tr/tools">Araçlar</a>
-          <a href="/tr/trackers">Takipçiler</a>
-          <a href="/tr/generators">Oluşturucular</a>
-          <a href="/tr/news">Haberler</a>
-          <a href="/tr/trailers">Fragmanlar</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>TR <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/tr/" lang="tr" aria-current="true">Türkçe <span aria-hidden="true">✓</span></a>
+        <a href="/es/" lang="es">Español</a><a href="/pt/" lang="pt">Português</a><a href="/de/" lang="de">Deutsch</a>
+        <a href="/fr/" lang="fr">Français</a><a href="/" lang="en">English</a><a href="/ar/" lang="ar">العربية</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Koyu temaya geç">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Menüyü aç">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="Mobil">
+      <a href="/tr/" aria-current="page">Ana Sayfa</a><a href="/tr/tools">Araçlar</a><a href="/tr/trackers">Takipçiler</a>
+      <a href="/tr/generators">Oluşturucular</a><a href="/tr/news">Haberler</a><a href="/tr/trailers">Fragmanlar</a>
+    </nav>
+    <div class="mobile-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Arama sonuçları" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/" lang="en">EN</a><a href="/es/" lang="es">ES</a><a href="/pt/" lang="pt">PT</a>
+      <a href="/de/" lang="de">DE</a><a href="/fr/" lang="fr">FR</a><a href="/tr/" lang="tr" aria-current="true">TR</a><a href="/ar/" lang="ar">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>Tema</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Koyu temaya geç">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
-<main id="main">
-<!-- Hero -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="/assets/img/hero-vicecity.jpg" alt="" width="1600" height="1200" fetchpriority="high" loading="eager" decoding="async">
-    <div class="hero-fade-side"></div>
-    <div class="hero-fade-bottom"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="container hero-inner">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="hero-badge eyebrow-muted hero-fade-up" style="animation-delay:0ms">
-          <span class="hero-badge-dot live-dot" aria-hidden="true"></span>
-          Canlı · GTA 6 Araç Merkezi
-        </span>
-        <h1 id="hero-title" class="hero-fade-up" style="animation-delay:80ms">Her şey <span class="gradient-text">GTA 6.</span><br>Sizin İçin Hesaplandı.</h1>
-        <p class="hero-sub hero-fade-up" style="animation-delay:160ms">Güçlü araçlar, hesaplayıcılar, takipçiler, planlayıcılar ve rehberler, Grand Theft Auto 6 için ihtiyacınız olan her şey tek bir yerde.</p>
-        <div class="hero-ctas hero-fade-up" style="animation-delay:240ms">
-          <a href="/tr/tools" class="btn-ultra btn-lg"><span class="btn-ultra-inner" aria-hidden="true"></span>Tüm Araçları Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="/tr/trailers" class="btn-outline"><svg class="icon" viewbox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>Son Fragmanı İzle</a>
-        </div>
-        <ul class="hero-proof hero-fade-up" style="animation-delay:320ms" aria-label="İstatistikler">
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <span><span class="hero-proof-title">24 Yayında Araç</span><br><span class="hero-proof-sub">Hesaplayıcılar ve takipçiler</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-            <span><span class="hero-proof-title">21 Kas 2026</span><br><span class="hero-proof-sub">Son veri doğrulaması</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-            <span><span class="hero-proof-title">Kayıt yok</span><br><span class="hero-proof-sub">Ücretsiz, hesap gerekmez</span></span>
-          </li>
-        </ul>
+
+<main id="main" tabindex="-1">
+<!-- ================= §02 — HERO ================= -->
+<section class="hero hero-d4" id="top" aria-labelledby="hero-h1">
+  <picture class="hero-bg" aria-hidden="true">
+    <source type="image/webp" srcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" sizes="100vw">
+    <img src="/assets/img/design4/hero-bg.jpg" srcset="/assets/img/design4/hero-bg-800.jpg 800w, /assets/img/design4/hero-bg.jpg 1672w" sizes="100vw" alt="" width="1672" height="941" fetchpriority="high">
+  </picture>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">GTA 6 ve Oyun Araçları</p>
+      <h1 id="hero-h1">Her şey <span class="accent">GTA&nbsp;6.</span><br>Hepsi Tek Yerde.</h1>
+      <p class="hero-sub">Güçlü araçlar, hesaplayıcılar, takipçiler ve rehberler: GTA&nbsp;6 için ihtiyacın olan her şey.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/tr/tools">Tüm Araçları Keşfet <span aria-hidden="true">→</span></a>
+        <button class="btn btn-secondary" type="button" data-trailer-open><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5Z"/></svg> Son Fragmanı İzle</button>
       </div>
-      <div class="hero-countdown-wrap hero-fade-up" style="animation-delay:200ms">
-        <div class="countdown-card" aria-label="GTA 6 çıktı">
-          <div class="countdown-label"><span class="dot live-dot" aria-hidden="true"></span><span>GTA 6 Şimdi Çıktı</span></div>
-          <div class="countdown-meta"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19 Kas 2026 • 00.00 ET</div>
-          <a href="/tr/tools/add-to-calendar" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg>Hatırlatıcı ayarla</a>
-        </div>
-      </div>
+      <ul class="stats-strip" aria-label="Doğrulanmış bilgiler">
+        <li><span class="num tnum">24</span><span class="lbl">ücretsiz araç</span></li>
+        <li><span class="num">19 Nov 2026</span><span class="lbl">çıktı</span></li>
+        <li><span class="num tnum">212 GB</span><span class="lbl">kurulum boyutu</span></li>
+      </ul>
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <div class="hero-scroll-hint-inner scroll-hint"><span>Keşfet</span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+    <div class="hero-art" aria-hidden="true">
+      <picture class="hero-duo">
+        <source type="image/webp" srcset="/assets/img/design4/hero-duo-cutout-800.webp 800w, /assets/img/design4/hero-duo-cutout.webp 1292w" sizes="(max-width:1023px) 92vw, 640px">
+        <img src="/assets/img/design4/hero-duo-cutout.png" alt="" width="1292" height="1217" fetchpriority="high">
+      </picture>
+      <picture class="hero-car">
+        <source type="image/webp" srcset="/assets/img/design4/hero-car-cutout-800.webp 800w, /assets/img/design4/hero-car-cutout.webp 1774w" sizes="(max-width:1023px) 96vw, 700px">
+        <img src="/assets/img/design4/hero-car-cutout.png" alt="" width="1774" height="887" fetchpriority="high">
+      </picture>
     </div>
   </div>
 </section>
 
-<!-- Popular Tools -->
-<section class="section container" aria-labelledby="popular-tools-heading">
-  <a id="popular-tools" aria-hidden="true"></a>
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <h2 id="popular-tools-heading">Popüler Araçlar</h2>
-      </div>
-      <p class="section-head-sub">Oyuncuların ilk sorduğu sorulara göre seçilen, başlamak için on bir araç.</p>
-    </div>
-    <a class="section-head-action" href="/tr/tools" aria-label="Tüm araçları gör">Tümünü gör <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="tools-grid">
-    <article aria-labelledby="tool-card-can-my-pc-run-gta-6">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/tr/tools/system-requirements" data-accent="purple" aria-label="Bilgisayarım GTA 6&#x27;yı Çalıştırır mı? (Popüler), sisteminiz için topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-badge" data-badge="hot">Popüler</span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <h3 id="tool-card-can-my-pc-run-gta-6">Bilgisayarım GTA 6'yı Çalıştırır mı?</h3>
-        <p>Sisteminiz için topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-fps-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/tr/tools/fps-calculator" data-accent="pink" aria-label="FPS Hesaplayıcı, CPU, GPU ve hedef çözünürlüğünüzden kare hızlarını tahmin edin.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <h3 id="tool-card-fps-calculator">FPS Hesaplayıcı</h3>
-        <p>CPU, GPU ve hedef çözünürlüğünüzden kare hızlarını tahmin edin.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-bottleneck-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/tr/tools/bottleneck-calculator" data-accent="blue" aria-label="Darboğaz Hesaplayıcı, GTA 6 için CPU ve GPU dengesini 1080p, 1440p ve 4K çözünürlükte kontrol edin.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-        <h3 id="tool-card-bottleneck-calculator">Darboğaz Hesaplayıcı</h3>
-        <p>GTA 6 için CPU ve GPU dengesini 1080p, 1440p ve 4K çözünürlükte kontrol edin.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-download-time">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/tr/tools/download-time" data-accent="pink" aria-label="İndirme Süresi, 212 GB'lık oyun kurulumunun bağlantınızda ne kadar süreceği.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <h3 id="tool-card-download-time">İndirme Süresi</h3>
-        <p>212 GB'lık oyun kurulumunun bağlantınızda ne kadar süreceği.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-storage-planner">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/tr/tools/storage-planner" data-accent="blue" aria-label="Depolama Planlayıcı, ilk gün yaması ve DLC payı ile boş alan hesabı.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span>
-        <h3 id="tool-card-storage-planner">Depolama Planlayıcı</h3>
-        <p>İlk gün yaması ve DLC payı ile boş alan hesabı.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-release-date-reminder">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/tr/tools/add-to-calendar" data-accent="purple" aria-label="Çıkış Tarihi Hatırlatıcısı, GTA 6 çıktı — yama ve DLC hatırlatıcılarını takviminize alın.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <h3 id="tool-card-release-date-reminder">Çıkış Tarihi Hatırlatıcısı</h3>
-        <p>GTA 6 çıktı — yama ve DLC hatırlatıcılarını takviminize alın.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-business-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/tr/tools/business-tracker" data-accent="blue" aria-label="GTA 6 İşletme Takipçisi, 12 Leonida işletmesini takip edin, kendi rakamlarınızla geri ödemeyi simüle edin ve hikâye para yöntemlerini karşılaştırın. Henüz hiçbir işletme satın alınamıyor — her rakam kaynağıyla etiketlenmiştir.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-business-tracker">GTA 6 İşletme Takipçisi</h3>
-        <p>12 Leonida işletmesini takip edin, kendi rakamlarınızla geri ödemeyi simüle edin ve hikâye para yöntemlerini karşılaştırın. Henüz hiçbir işletme satın alınamıyor — her rakam kaynağıyla etiketlenmiştir.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-preload-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/tr/tools/preload-tracker" data-accent="blue" aria-label="GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı, GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-preload-tracker">GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3>
-        <p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-weapon-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:8" href="/tr/tools/weapon-comparison" data-accent="pink" aria-label="GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat, GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-weapon-comparison">GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat</h3>
-        <p>GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-vehicle-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:9" href="/tr/tools/vehicle-comparison" data-accent="blue" aria-label="GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri, GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-vehicle-comparison">GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri</h3>
-        <p>GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-server-status">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:10" href="/tr/tools/server-status" data-accent="pink" aria-label="GTA 6 Sunucu Durumu: Sunucular Çöktü mü?, GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-server-status">GTA 6 Sunucu Durumu: Sunucular Çöktü mü?</h3>
-        <p>GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.</p>
-        <span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
+<!-- ================= §03 — CATEGORY STRIP ================= -->
+<section class="section" style="padding-top:0" aria-label="Kategoriler">
+  <div class="wrap">
+    <nav class="cat-strip" aria-label="Öne çıkan kategoriler">
+      <ul>
+        <li><a href="/tr/tools"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4L14 13l-3-3 3.7-3.7Z"/></svg>Araçlar ve<br>Yardımcılar</a></li>
+        <li><a href="/tr/trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Takipçiler ve<br>İstatistikler</a></li>
+        <li><a href="/tr/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.01a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55h.01a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.01a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>Oluşturucular</a></li>
+        <li><a href="/tr/news"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13a2 2 0 0 1 2 2v12a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2Z"/><path d="M19 15H6M8 9h6M8 12h4"/></svg>Haberler ve<br>Güncellemeler</a></li>
+        <li><a href="/tr/trailers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 4 14 8-14 8Z"/></svg>Fragmanlar ve<br>Medya</a></li>
+        <li><a href="/tr/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg>Rehberler ve<br>Topluluk</a></li>
+      </ul>
+    </nav>
   </div>
 </section>
 
-<!-- Latest News + Trailer -->
-<section class="section container" aria-label="Son haberler ve fragmanlar">
-  <div class="news-trailer-grid">
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-head">
-        <div><h2 id="news-heading">Son Haberler</h2></div>
-        <a class="section-head-action" href="/tr/news" aria-label="Tüm haberleri gör">Tümünü gör <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+<!-- ================= §04 — POPULAR TOOLS ================= -->
+<section class="section" id="popular" aria-labelledby="popular-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="popular-layout">
+      <div class="popular-intro">
+        <p class="eyebrow">Popüler Araçlar</p>
+        <h2 id="popular-h2">Daha İyi Oyun İçin<br>Üretilmiş Araçlar.</h2>
+        <p>İhtiyacın olan bilgiyi al, kurulumunu iyileştir ve önde kal.</p>
+        <a class="btn btn-secondary" href="/tr/tools">Tüm Araçları Gör <span aria-hidden="true">→</span></a>
       </div>
-      <div class="news-grid">
-        <a class="article-featured stagger-fade-up" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/news-featured.webp" alt="GTA 6 Fragman 2&#x27;den Vice City&#x27;nin sinematik görüntüsü" width="800" height="450" loading="lazy" decoding="async">
-          <span class="article-featured-body">
-            <span class="article-featured-tag">Fragman 2</span>
-            <h3>Fragman 2, Jason, Lucia ve yeniden doğan bir Vice City'yi ortaya çıkarıyor</h3>
-            <p>İkinci resmi fragman, Jason ve Lucia arasındaki Bonnie ve Clyde dinamiğini genişletiyor, Leonida, Everglades ve yoğun nüfuslu bir Vice City'yi sergiliyor.</p>
-            <span class="article-featured-meta">6 Mayıs 2025 · Rockstar Games</span>
-          </span>
-        </a>
-        <ul class="news-list">
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-              <span><h3>GTA 6 lansmanı 19 Kasım 2026'ya ertelendi</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · 2 Mayıs 2025</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="blue">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-              <span><h3>Fragman 1: Vice City'ye hoş geldiniz</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · 5 Ara 2023</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/tr/tools" data-accent="pink">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span>
-              <span><h3>GTA 6 şimdi PS5 ve Xbox'ta çıktı — 30 FPS, 212 GB</h3><span class="article-row-meta"><span class="tag">Analiz</span> · 2026 3. çeyrek · Güncelleme 20 Kas 2026: 19 Kas 2026'da çıktı</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/tr/tools/system-requirements" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-              <span><h3>PC sürümü: henüz tarihli bir pencere yok</h3><span class="article-row-meta"><span class="tag">Analiz</span> · Devam ediyor</span></span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section aria-labelledby="trailer-heading" id="trailer">
-      <div class="section-head">
-        <div><h2 id="trailer-heading">Son Fragman</h2></div>
-        <a class="section-head-action" href="/tr/trailers" aria-label="Tüm fragmanları gör">Tümünü gör <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </div>
-      <div class="trailer-card stagger-fade-up">
-        <a class="trailer-thumb" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer" aria-label="GTA 6, Resmi Fragman 2&#x27;yi YouTube&#x27;da oynat">
-          <img src="/assets/img/trailer-thumb.jpg" alt="GTA 6 fragmanı" width="1015" height="677" loading="lazy" decoding="async">
-          <span class="trailer-thumb-shade" aria-hidden="true"></span>
-          <span class="trailer-thumb-label eyebrow">Fragman 2</span>
-          <span class="trailer-thumb-duration">3:22</span>
-          <span class="trailer-play" aria-hidden="true"><span class="trailer-play-circle"><svg class="icon-lg" viewbox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></span></span>
-        </a>
-        <div class="trailer-meta">
-          <div>
-            <div class="trailer-meta-title">GTA 6, Resmi Fragman 2</div>
-            <div class="trailer-meta-sub"><span class="dot" aria-hidden="true"></span><span>Rockstar Games</span><span aria-hidden="true">•</span><span>180 milyon+ görüntülenme</span><span aria-hidden="true">•</span><span>6 Mayıs 2025</span></div>
-          </div>
-          <a class="trailer-yt" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer">YouTube <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+    <div class="tools-grid" id="tools-grid">
+      <article class="tool-card" data-tool="pc gta 6 çalıştırır mı sistem gereksinimleri denetleyici anında karar topluluk tahminli minimum önerilen ultra katman gpu cpu ram depolama pc"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3><a href="/tr/tools/system-requirements">PC'm GTA 6'yı çalıştırır mı?</a></h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="fps hesaplayıcı kare hızı tahmini gpu 1080p 1440p 4k düşük orta yüksek ultra performans"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/><path d="M4 12h2M12 4V2"/></svg></div><h3><a href="/tr/tools/fps-calculator">FPS Hesaplayıcı</a></h3><p>GPU'n için 1080p, 1440p ve 4K'da, tüm ayarlarda kare hızını tahmin et.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="darboğaz hesaplayıcı cpu gpu denge tespit limit performans yükseltme seç"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><h3><a href="/tr/tools/bottleneck-calculator">Darboğaz Hesaplayıcı</a></h3><p>GPU + CPU seç. Darboğazı tespit edelim ve en küçük yükseltmeyi önerelim.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="indirme süresi hesaplayıcı 212 gb kurulum bağlantı hız yama"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></div><h3><a href="/tr/tools/download-time">İndirme Süresi</a></h3><p>212 GB'lık oyun kurulumunun bağlantında ne kadar süreceğini tahmin et.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="depolama planlayıcı bütçe gigabayt temel kurulum ilk gün yama dlc güvenli pay güncelleme"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></div><h3><a href="/tr/tools/storage-planner">Depolama Planlayıcı</a></h3><p>Her gigabaytı bütçele: temel kurulum, ilk gün yaması, mevsimsel DLC ve güvenli pay.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="çıkış tarihi hatırlatıcı lansman takvim google apple outlook yama dlc etkinlik ekle"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div><h3><a href="/tr/tools/add-to-calendar">Çıkış Tarihi Hatırlatıcısı</a></h3><p>Yamalar, DLC ve etkinlikler için tek tıkla hatırlatıcı. GTA 6 çıktı.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="işletme takipçisi ekonomi gelir leonida 12 işletme geri ödeme simüle hikaye para"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div><h3><a href="/tr/tools/business-tracker">İşletme Takipçisi</a></h3><p>12 Leonida işletmesini takip et ve kendi rakamlarınla geri ödemeyi simüle et.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="silah karşılaştırma 53 silah hasar isabet kullanım menzil şarjör fiyat"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></div><h3><a href="/tr/tools/weapon-comparison">Silah Karşılaştırması</a></h3><p>53 temel GTA 6 silahını Hasar, İsabet, Kullanım ve Menzil üzerinden karşılaştır.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="araç karşılaştırma 115 araç puan hız hızlanma yol tutuş dayanıklılık kayıt satış değeri"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13 5.5 6.5A2 2 0 0 1 7.4 5h9.2a2 2 0 0 1 1.9 1.5L20 13v5h-2.5"/><path d="M4 13h16v5h-2"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M9.3 18h5.4"/></svg></div><h3><a href="/tr/tools/vehicle-comparison">Araç Karşılaştırması</a></h3><p>Araçları oyundaki 10 üzerinden beş puanla, ayrıca kayıt ücreti ve satış değeriyle karşılaştır.</p><span class="tool-cta" aria-hidden="true">ARACI KEŞFET <span aria-hidden="true">→</span></span></article>
+    </div>
+    </div>
+    <div class="tools-empty" id="tools-empty" role="status" hidden>“<span id="tools-empty-q"></span>” ile eşleşen araç yok. “FPS”, “VRAM” veya “bottleneck” deneyin.</div>
+  </div>
+</section>
+
+<!-- ================= §05 — NEWS ================= -->
+<section class="section" id="news" aria-labelledby="news-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">Son haberler</p><h2 id="news-h2">GTA 6 Çıktı.</h2><p>Yalnızca gerçek haberler: çıkış, yama ve fragmanlar, tarih sırasıyla.</p></div>
+      <a class="btn btn-ghost" href="/tr/news">Tüm Haberleri Gör <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="news-layout">
+      <article class="feature-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/news-feature-800.webp 800w, /assets/img/design4/news-feature.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/news-feature.jpg" srcset="/assets/img/design4/news-feature-800.jpg 800w, /assets/img/design4/news-feature.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Gün batımında spor arabayla Vice City silüeti" width="1200" height="675" loading="lazy"></picture></div>
+        <div class="feature-body">
+          <p class="eyebrow" style="margin-bottom:8px">Öne çıkan haber</p>
+          <h3>GTA 6 şimdi PS5 ve Xbox'ta çıktı</h3>
+          <p>GTA 6, 19 November 2026 tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Kurulum 212 GB; oyun 30 FPS çalışıyor.</p>
+          <p class="meta"><time datetime="2026-11-19">Nov 19, 2026</time> · Çıkış · Rockstar</p>
+          <p style="margin-top:12px"><a class="btn btn-primary btn-sm" href="/tr/news">Haberin Tamamını Oku <span aria-hidden="true">→</span></a></p>
+        </div>
+      </article>
+      <div>
+        <h3 class="news-more-h">Diğer haberler</h3>
+        <div class="news-rows">
+          <a class="news-row" href="/tr/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/news-215.jpg" alt="" width="215" height="200" loading="lazy"></span><span><h4>Patch <span class="mono">01.002.002</span>, resmi yama notlarıyla ilk güncelleme</h4><span class="meta"><time datetime="2026-11-23">Nov 23, 2026</time> · Yama notları</span></span></a>
+          <a class="news-row" href="/tr/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/trailer-250.jpg" alt="" width="250" height="210" loading="lazy"></span><span><h4>Fragman 2, Jason, Lucia ve yeniden doğan Vice City'yi gösteriyor</h4><span class="meta"><time datetime="2025-05-06">May 6, 2025</time> · Fragmanlar</span></span></a>
+          <a class="news-row" href="/tr/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/hero-694.jpg" alt="" width="694" height="395" loading="lazy"></span><span><h4>Ön siparişler açıldı: Standard $79.99, Ultimate $99.99</h4><span class="meta"><time datetime="2026-06-25">Jun 25, 2026</time> · Ön siparişler</span></span></a>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </section>
 
-<!-- Interactive Tools -->
-<section class="section container" aria-labelledby="interactive-heading">
-  <div id="interactive">
+<!-- ================= §06 — LATEST TRAILER ================= -->
+<section class="section" id="trailer" aria-labelledby="trailer-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">Son fragman</p><h2 id="trailer-h2">Fragman 2: Jason, Lucia ve Vice City.</h2></div>
+    </div>
+    <article class="feature-card trailer-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/trailer-thumb-800.webp 800w, /assets/img/design4/trailer-thumb.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/trailer-thumb.jpg" srcset="/assets/img/design4/trailer-thumb-800.jpg 800w, /assets/img/design4/trailer-thumb.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Alacakaranlıkta Vice City silüeti, Fragman 2'nin geçtiği yer" width="1200" height="675" loading="lazy"></picture>
+        <span class="duration-badge" aria-hidden="true">2:47</span>
+        <button class="play-btn" type="button" data-trailer-open aria-label="GTA 6 Resmi Fragman 2'yi oynat (2 dakika 47 saniye)"></button>
+      </div>
+      <div class="feature-body">
+        <p class="eyebrow" style="margin-bottom:8px">Son fragman</p>
+        <h3 style="font-size:1.25rem">GTA 6 Resmi Fragman 2</h3>
+        <p class="meta"><time datetime="2025-05-06">May 6, 2025</time> · <span class="tnum">2:47</span> · YouTube'da Rockstar Games</p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ============================================================================
+  ToolWools Phase 3 — Worker B — EN homepage sections 07–12 (HTML fragment)
+  Scope: sections 07 (map) · 08 (hardware) · 09 (browse) · 10 (discovery) ·
+  11 (newsletter) · 12 (footer) + consent banner + staging scripts.
+  Tokens only (design-system/tokens.css). Manrope headings, Inter body.
+  No white text on any orange fill. Light-theme orange text is #C2410C
+  (via --color-accent-text) only. Section headings follow COMPONENT-SYSTEM §25.
+  Image paths are staging-relative: Phase 10 must ship the four crops to
+  /assets/img/crops/ (see en-sec-07-12-NOTES.md). No deploy-tree writes.
+  ========================================================================== -->
+
+<!-- ================= 07 — INTERACTIVE MAP ================= -->
+<section class="section" id="sec-map" aria-labelledby="map-h2">
+  <div class="wrap">
     <div class="section-head">
       <div>
-        <h2 id="interactive-heading">Etkileşimli Araçlar</h2>
-        <p class="section-head-sub">Uygulamalı tanıtım gerektiren araçların canlı önizlemeleri.</p>
+        <p class="eyebrow">İnteraktif harita</p>
+        <h2 id="map-h2">Leonida eyaletinin tamamını gör.</h2>
+        <p>Vice City detayının gerçek bir önizlemesi. Kaydırma, yakınlaştırma ve işaretçilerle tam interaktif harita bir tık uzakta.</p>
+      </div>
+      <a class="btn btn-ghost" href="/tr/tools/interactive-map">Haritayı gör <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <article class="feature-card map-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/map-preview-800.webp 800w, /assets/img/design4/map-preview.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/map-preview.jpg" srcset="/assets/img/design4/map-preview-800.jpg 800w, /assets/img/design4/map-preview.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Vice City interaktif haritasının önizlemesi, işaretçilerle" width="1200" height="675" loading="lazy"></picture></div>
+      <div class="feature-body">
+        <p class="eyebrow">İnteraktif harita</p>
+        <h3>Vice City İnteraktif Haritası</h3>
+        <p>Şehri keşfet, konumları bul ve daha fazlası.</p>
+        <p class="map-note">Vice City detayı: Leonida eyaletinin tamamı için haritayı aç. Önizleme, tüm harita değil.</p>
+        <p class="map-layers" aria-label="Önizlenen harita katmanları">Şehirler ve kasabalar &middot; Sahil ve adalar &middot; Vahşi doğa &middot; Simgesel yerler</p>
+        <p><a class="btn btn-primary btn-sm" href="/tr/tools/interactive-map">Haritayı gör <span aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= 08 — PC & HARDWARE CENTER ================= -->
+<section class="section" id="sec-hardware" aria-labelledby="hw-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">PC ve donanım merkezi</p>
+        <h2 id="hw-h2">Sistem Gereksinimleri ve Donanım Karşılaştırması</h2>
+        <p>İki ayrı özellik. Asla tek kartta birleştirilmez.</p>
       </div>
     </div>
-    <div class="preview-grid">
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="blue" aria-labelledby="ip-map-title">
-        <div class="preview-card-pad"><h3 id="ip-map-title">Vice City Haritası <span class="muted">(Etkileşimli)</span></h3></div>
-        <div class="preview-map">
-          <img src="/assets/img/map-vicecity.jpg" alt="Bölge işaretli etkileşimli Vice City haritası" width="600" height="450" loading="lazy" decoding="async">
-          <span class="preview-map-pin" style="top:28%;left:34%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:54%;left:58%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:70%;left:22%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:40%;left:76%" aria-hidden="true"><i></i></span>
-          <div class="preview-map-bar"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>6 bölge</span><span aria-hidden="true">•</span><span>42 önemli nokta</span></div>
-        </div>
-        <a class="preview-card-link" href="/tr/tools/interactive-map" aria-labelledby="ip-map-title">Haritayı gör <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="purple" aria-labelledby="ip-sysreq-title">
-        <div class="preview-card-pad" style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem">
-          <h3 id="ip-sysreq-title">Sistem Gereksinimleri</h3>
-          <span class="preview-pill">Önerilen (tahmini)</span>
-        </div>
-        <ul class="preview-rows">
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="preview-rows-label">İşletim Sistemi</span><span class="preview-rows-value" title="Windows 10/11 64-bit">Windows 10/11 64-bit</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="preview-rows-label">CPU</span><span class="preview-rows-value" title="Intel i5-12400 / Ryzen 5 5600">Intel i5-12400 / Ryzen 5 5600</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><span class="preview-rows-label">RAM</span><span class="preview-rows-value" title="16 GB">16 GB</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span><span class="preview-rows-label">GPU</span><span class="preview-rows-value" title="RTX 3060 / RX 6600">RTX 3060 / RX 6600</span></li>
+    <div class="hw-grid">
+      <article class="hw-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/pc-setup-800.webp 800w, /assets/img/design4/pc-setup.webp 1200w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/pc-setup.jpg" srcset="/assets/img/design4/pc-setup-800.jpg 800w, /assets/img/design4/pc-setup.jpg 1200w" sizes="(max-width:767px) 100vw, 514px" alt="PC kurulumu: RGB kasa ve klavye" width="1200" height="800" loading="lazy"></picture></div>
+        <h3>Sistem Gereksinimleri</h3>
+        <p>PC'nin GTA 6 için hazır olduğundan emin ol.</p>
+        <ul class="tier-list" aria-label="Gereksinim katmanları">
+          <li><strong>Minimum</strong>: giriş seviyesi oyun</li>
+          <li><strong>Önerilen</strong>: akıcı 1080p oyun</li>
+          <li><strong>Ultra</strong>: üst düzey 1440p ve 4K oyun</li>
         </ul>
-        <a class="preview-card-link" href="/tr/tools/system-requirements" aria-labelledby="ip-sysreq-title">Tüm gereksinimleri gör <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="honesty">Rockstar hiçbir PC gereksinimi yayımlamadı. Minimum / Önerilen / Ultra katmanları topluluk tahminidir.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/tr/tools/system-requirements">Detayları gör <span aria-hidden="true">&rarr;</span></a></p>
       </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="pink" aria-labelledby="ip-opt-title">
-        <div class="preview-card-pad">
-          <div style="display:flex;align-items:flex-start;gap:0.5rem">
-            <span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-            <div>
-              <h3 id="ip-opt-title">En İyi Ayar Optimize Edici</h3>
-              <p class="preview-card-sub">Hedef FPS'iniz ve sisteminiz için grafik ayarlarını yapın.</p>
-            </div>
-          </div>
-          <div class="preview-gauge-wrap">
-            <div class="preview-gauge" role="img" aria-label="Optimize edici hazır ayarı: Yüksek performans, yüzde 71">
-              <svg viewbox="0 0 100 100" aria-hidden="true">
-                <circle cx="50" cy="50" r="44" fill="none" stroke="var(--border)" stroke-width="8"/>
-                <circle cx="50" cy="50" r="44" fill="none" stroke="url(#opt-grad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="80" class="gauge-sweep" style="--gauge-target:80"/>
-                <defs><lineargradient id="opt-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--accent-purple)"/><stop offset="100%" stop-color="var(--accent-pink)"/></lineargradient></defs>
-              </svg>
-              <div class="preview-gauge-center"><div><div class="big">Yüksek</div><div class="small">Performans</div><div class="pct">71%</div></div></div>
-            </div>
-          </div>
-        </div>
-        <a class="preview-card-link" href="/tr/tools/settings-optimizer" aria-labelledby="ip-opt-title">Şimdi optimize et <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:3" data-accent="purple" aria-labelledby="ip-hw-title">
-        <div class="preview-card-pad"><h3 id="ip-hw-title">Donanım Karşılaştırması</h3></div>
-        <div class="preview-vs">
-          <div class="preview-gpu" data-accent="blue">
-            <div class="preview-gpu-tile"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RTX 4070 Super</div>
-            <div class="preview-gpu-vram">12 GB</div>
-          </div>
-          <div class="preview-vs-mid">
-            <div class="preview-vs-badge">VS</div>
-            <span class="preview-vs-delta">+18% FPS</span>
-          </div>
-          <div class="preview-gpu" data-accent="pink">
-            <div class="preview-gpu-tile"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RX 7900 XT</div>
-            <div class="preview-gpu-vram">20 GB</div>
-          </div>
-        </div>
-        <ul class="preview-spec-table">
-          <li><span class="a win">12 GB</span><span class="k">VRAM</span><span class="b">20 GB</span></li>
-          <li><span class="a win">220 W</span><span class="k">TDP</span><span class="b">315 W</span></li>
-          <li><span class="a">94</span><span class="k">Ort FPS</span><span class="b win">111</span></li>
-        </ul>
-        <a class="preview-card-link" href="/tr/tools/hardware-comparison" aria-labelledby="ip-hw-title" style="justify-content:center">Şimdi karşılaştır <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <article class="hw-card">
+        <div class="img-wrap gpu-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/gpu-cutout-800.webp 800w, /assets/img/design4/gpu-cutout.webp 1774w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/gpu-cutout.png" alt="Üç fanlı RGB ekran kartı" width="1774" height="887" loading="lazy"></picture></div>
+        <h3>Donanım Karşılaştırması</h3>
+        <p>GPU ve CPU seçeneklerini karşılaştır.</p>
+        <dl class="spec-rows">
+          <div class="spec-row"><dt>Karşılaştırılan GPU</dt><dd>RTX 4070 Super vs RX 7900 XT</dd></div>
+          <div class="spec-row"><dt>VRAM</dt><dd class="tnum">12 GB vs 20 GB</dd></div>
+          <div class="spec-row"><dt>Tahmini 1440p FPS</dt><dd>Karşılaştırma aracında</dd></div>
+        </dl>
+        <p class="honesty">VRAM burada tarafsız bir özelliktir. 20 GB, 12 GB karşısında kazanan ilan edilmez. Kare hızı tahminleri araçta, bu önizleme yalnızca özellikleri gösterir.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/tr/tools/hardware-comparison">Şimdi karşılaştır <span aria-hidden="true">&rarr;</span></a></p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- Categories -->
-<section class="section container" aria-labelledby="categories-heading">
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-        <h2 id="categories-heading">Tüm Araç Kategorilerine Göz At</h2>
+<!-- ================= 09 — BROWSE BY CATEGORY ================= -->
+<section class="section" id="sec-browse" aria-labelledby="browse-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Tüm Araç Kategorilerine Göz At</p>
+        <h2 id="browse-h2">Tam ihtiyacın olanı bul.</h2>
+        <p>Katalogdaki her araç, ne yaptığına göre gruplandı. Sayılar canlı 24 araçlık katalogdandır.</p>
       </div>
-      <p class="section-head-sub">Her hesaplayıcı, planlayıcı ve takipçi, ne yapmaya çalıştığınıza göre gruplandırıldı.</p>
     </div>
-    <a class="section-head-action" href="/tr/tools">Tüm Kategorileri Gör <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="cats-grid">
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/tools?category=release" data-accent="purple" aria-label="Çıkış Araçlarına göz at, 2 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg></span>
-      <span><span class="cat-card-title">Çıkış Araçları</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/tools?category=pc" data-accent="blue" aria-label="PC Araçlarına göz at, 3 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-      <span><span class="cat-card-title">PC Araçları</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/tools?category=performance" data-accent="pink" aria-label="Performans&#x27;a göz at · 2 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-      <span><span class="cat-card-title">Performans</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/tools?category=comparison" data-accent="purple" aria-label="Karşılaştırmaya göz at, 5 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-      <span><span class="cat-card-title">Karşılaştırma</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/tools?category=trackers" data-accent="blue" aria-label="Takipçilere göz at, 5 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-2 4-4"/><path d="m3 7 2-2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></span>
-      <span><span class="cat-card-title">Takipçiler</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/tools?category=planners" data-accent="pink" aria-label="Planlayıcılara göz at, 3 araç">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
-      <span><span class="cat-card-title">Planlayıcılar</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 Araç</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/tr/generators" data-accent="purple" aria-label="Oluşturuculara göz at, 5 adlandırma kuralı; anında oluştur">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg></span>
-      <span><span class="cat-card-title">Oluşturucular</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Kural</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/tr/guides" data-accent="blue" aria-label="Rehberlere göz at, 2 rehber">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-      <span><span class="cat-card-title">Rehberler</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Rehber</span></span>
-    </a>
+    <nav aria-label="Tüm Araç Kategorilerine Göz At">
+      <div class="browse-grid">
+        <a class="browse-tile" href="/tr/tools?category=release"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-2 7-2 7-2s0 4-2 7l-7 7-5-5 7-7Z"/><circle cx="15" cy="9" r="2"/></svg><span class="bt-title">Çıkış Araçları</span><span class="bt-count tnum">2 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=pc"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span class="bt-title">PC Araçları</span><span class="bt-count tnum">3 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=performance"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/></svg><span class="bt-title">Performans</span><span class="bt-count tnum">2 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=comparison"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7l7-4 7 4M3 13l2-6 2 6a3.5 3.5 0 0 1-4 0ZM17 13l2-6 2 6a3.5 3.5 0 0 1-4 0Z"/></svg><span class="bt-title">Karşılaştırma</span><span class="bt-count tnum">5 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="bt-title">Takipçiler</span><span class="bt-count tnum">5 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=planners"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span class="bt-title">Planlayıcılar</span><span class="bt-count tnum">3 araç</span></a>
+        <a class="browse-tile" href="/tr/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span class="bt-title">Oluşturucular</span><span class="bt-count tnum">5 oluşturucu</span></a>
+        <a class="browse-tile" href="/tr/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span class="bt-title">Rehberler</span><span class="bt-count tnum">2 rehber</span></a>
+        <a class="browse-tile" href="/tr/tools?category=economy"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span class="bt-title">Ekonomi</span><span class="bt-count tnum">2 araç</span></a>
+        <a class="browse-tile" href="/tr/tools?category=map"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="bt-title">Harita</span><span class="bt-count tnum">1 araç</span></a>
+      </div>
+    </nav>
   </div>
 </section>
 
-<!-- Why ToolWools -->
-<section class="section container" aria-label="Neden ToolWools">
-  <div class="section-head">
-    <div>
-      <h2>Vice City sokakları için inşa edildi</h2>
-      <p class="section-head-sub">Sonsuza dek ücretsiz, GTA 6 için ayarlı, sisteminize ve verilerinize saygılı.</p>
-    </div>
-  </div>
-  <ul class="feats-grid">
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:0" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-      <span class="feat-tile-title">Sonsuza dek ücretsiz</span>
-      <p class="feat-tile-sub">Her araç, her güncelleme. Ödeme duvarı yok, pro sürüm yok.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:1" data-accent="purple">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-      <span class="feat-tile-title">Ayarlanmış doğruluk</span>
-      <p class="feat-tile-sub">Formüller, karşılaştırılabilir oyunlardaki ölçülmüş davranışlara göre ayarlandı.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:2" data-accent="blue">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-      <span class="feat-tile-title">Önce tahmin</span>
-      <p class="feat-tile-sub">Her sayı, belirtilmiş bir hata aralığı ve tarihli bir kaynak taşır.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:3" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <span class="feat-tile-title">Onaylı analitik</span>
-      <p class="feat-tile-sub">Toplu analitik yalnızca kabul ettikten sonra. Araç girdileri cihazınızdan asla ayrılmaz.</p>
-    </li>
-  </ul>
-</section>
-
-<!-- More ways to play -->
-<section class="section container" aria-label="Oynamanın daha fazla yolu">
-  <div class="section-head">
-    <div>
-      <h2>Oynamanın daha fazla yolu</h2>
-      <p class="section-head-sub">Canlı trendler, tamamlayıcı takipçileri ve sadece eğlenmek istediğinizde kullanabileceğiniz oluşturucular.</p>
-    </div>
-  </div>
-  <div class="advanced-grid">
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="cyan" aria-labelledby="trending-heading">
-      <div class="advanced-panel-eyebrow">Başlangıç seçimleri</div>
-      <h3 id="trending-heading">Trend Araçlar</h3>
-      <p>Ziyaretçilerin ilk ihtiyaç duyduğu araçlar, sırayla.</p>
-      <div class="advanced-panel-body">
-        <ul class="trend-list">
-          <li><a class="trend-row" href="/tr/tools/system-requirements" aria-label="Bilgisayarım GTA 6&#x27;yı Çalıştırır mı?"><span class="trend-rank first">1</span><span><span class="trend-row-title">PC'm GTA 6'yı çalıştırır mı?</span><span class="trend-row-badge">Buradan başla</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tr/tools/fps-calculator" aria-label="FPS Hesaplayıcı ara"><span class="trend-rank top">2</span><span><span class="trend-row-title">FPS Hesaplayıcı</span><span class="trend-row-badge">İkinci adım</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tr/tools/download-time" aria-label="İndirme Süresi Hesaplayıcı ara"><span class="trend-rank top">3</span><span><span class="trend-row-title">İndirme Süresi Hesaplayıcı</span><span class="trend-row-badge">Üçüncü adım</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tr/tools/settings-optimizer" aria-label="Grafik Ayarları Optimize Edici"><span class="trend-rank">4</span><span><span class="trend-row-title">Ayar Optimize Edici</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tr/tools/storage-planner" aria-label="Depolama Hesaplayıcı ara"><span class="trend-rank">5</span><span><span class="trend-row-title">Depolama Hesaplayıcı</span></span><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-        </ul>
+<!-- ================= 10 — DISCOVERY ================= -->
+<section class="section" id="sec-discovery" aria-labelledby="disc-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Keşfet</p>
+        <h2 id="disc-h2">Daha fazlasını bul, ilerlemeyi takip et, durumu kontrol et.</h2>
+        <p>Trend araçlar, isim oluşturucular ve tamamlama takipçileri: sitenin geri kalanı tek yerde.</p>
       </div>
-      <a class="advanced-panel-cta" href="/tr/trending">Tam listeyi gör <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="blue" aria-labelledby="trackers-heading">
-      <div class="advanced-panel-eyebrow">100% tamamlama</div>
-      <h3 id="trackers-heading">Takip</h3>
-      <p>Uzun uğraş seven tamamlayıcılar için kontrol listeleri.</p>
-      <div class="advanced-panel-body">
-        <div class="tracker-tiles">
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><h4>Görev Takipçisi</h4><p>Hikâye ve yan görevler.</p></a>
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><h4>Koleksiyon Takipçisi</h4><p>Gizli her öğeyi bulun.</p></a>
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h4>100% Kontrol Listesi</h4><p>Tam bir tamamlayıcı uğraşı.</p></a>
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span><h4>Kupa Takipçisi</h4><p>Her kupa ve başarı.</p></a>
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span><h4>Araç Garajı</h4><p>Arabaları, motosikletleri ve tekneleri kaydedin.</p></a>
-          <a class="tracker-tile" href="/tr/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h4>Silah Donanımı</h4><p>Kitleri kaydedin ve karşılaştırın.</p></a>
+    </div>
+    <div class="discovery-grid">
+      <div>
+        <h3 class="disc-sub">Trendler (başlangıç listesi)</h3>
+        <p class="disc-note">Çoğu ziyaretçinin önce ihtiyaç duyduğu araçların başlangıç listesi. Canlı popülerlik sıralaması değil.</p>
+        <a class="trend-row" href="/tr/tools/system-requirements" aria-label="1 PC'm GTA 6'yı çalıştırır mı?"><span class="trend-rank tnum">1</span><span class="trend-title">PC'm GTA 6'yı çalıştırır mı?</span></a>
+        <a class="trend-row" href="/tr/tools/fps-calculator" aria-label="2 FPS Hesaplayıcı"><span class="trend-rank tnum">2</span><span class="trend-title">FPS Hesaplayıcı</span></a>
+        <a class="trend-row" href="/tr/tools/download-time" aria-label="3 İndirme Süresi"><span class="trend-rank tnum">3</span><span class="trend-title">İndirme Süresi</span></a>
+        <a class="trend-row" href="/tr/tools/settings-optimizer" aria-label="4 Ayar Optimize Edici"><span class="trend-rank tnum">4</span><span class="trend-title">Ayar Optimize Edici</span></a>
+        <a class="trend-row" href="/tr/tools/storage-planner" aria-label="5 Depolama Planlayıcı"><span class="trend-rank tnum">5</span><span class="trend-title">Depolama Planlayıcı</span></a>
+        <h3 class="disc-sub">İsim oluşturucular</h3>
+        <div class="gen-chips">
+          <a class="gen-chip" href="/tr/generators">Karakter</a>
+          <a class="gen-chip" href="/tr/generators">Ekip</a>
+          <a class="gen-chip" href="/tr/generators">Plaka</a>
+          <a class="gen-chip" href="/tr/generators">Radyo çağrı işareti</a>
+          <a class="gen-chip" href="/tr/generators">Oyuncu etiketi</a>
         </div>
+        <p class="disc-note">Oluşturucu sayfası Karakter adlarıyla açılır. Tarz başına derin bağlantılar (&thinsp;?style=crew&thinsp; ve benzerleri) canlı oluşturucu tarafından henüz desteklenmiyor (notlara bakın).</p>
       </div>
-      <a class="advanced-panel-cta" href="/tr/trackers">Tüm Takipçiler <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel wide card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="cyan" aria-labelledby="generators-heading">
-      <div class="advanced-panel-eyebrow">Sadece eğlence için</div>
-      <h3 id="generators-heading">İsim Oluşturucuları</h3>
-      <p>Beş tür isim için adlandırma kuralları — kendininkini anında oluştur.</p>
-      <div class="advanced-panel-body">
-        <div class="gen-list">
-          <a class="gen-chip" href="/tr/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Karakter Adı</a>
-          <a class="gen-chip" href="/tr/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>Ekip Adı</a>
-          <a class="gen-chip" href="/tr/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3H8a2 2 0 0 0-2 2v2"/><path d="M16 3h2a2 2 0 0 1 2 2v2"/></svg>Plaka</a>
-          <a class="gen-chip" href="/tr/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>Telsiz Çağrı İşareti</a>
-          <a class="gen-chip" href="/tr/generators"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>Oyuncu etiketi</a>
-          </div>
+      <div>
+        <h3 class="disc-sub">Takipçiler</h3>
+        <p class="disc-note">İlerleme yalnızca bu tarayıcıda saklanır. Yeni ziyaretçi %0 ile başlar.</p>
+        <a class="tracker-tile" href="/tr/trackers/missions"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><span class="tt-title">Görev Takipçisi</span><span class="tt-desc">5 bölümdeki görevler, oynadıkça işaretlenir.</span></span></a>
+        <a class="tracker-tile" href="/tr/trackers/collectibles"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg><span><span class="tt-title">Koleksiyon Takipçisi</span><span class="tt-desc">Dublör atlayışları, gizli paketler ve daha fazlası, aralık olarak gösterilir.</span></span></a>
+        <a class="tracker-tile" href="/tr/trackers/100-percent"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg><span><span class="tt-title">100% Kontrol Listesi</span><span class="tt-desc">100% tamamlamaya sayılan her şey, tek listede.</span></span></a>
+        <a class="tracker-tile" href="/tr/trackers/trophies"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 6H4a1 1 0 0 0-1 1c0 2.5 2 4 4 4M17 6h3a1 1 0 0 1 1 1c0 2.5-2 4-4 4"/></svg><span><span class="tt-title">Kupa Takipçisi</span><span class="tt-desc">Kupalar ve başarılar, topluluk listesinden takip ediliyor.</span></span></a>
       </div>
-      <a class="advanced-panel-cta" href="/tr/generators">Tümüne Göz At <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
+      <div>
+        <h3 class="disc-sub">Sunucu durumu (manuel kontrol)</h3>
+        <p class="disc-note">GTA 6 sunucusu yok. Bu, Rockstar, PlayStation ve Xbox hizmetlerinin manuel kontrolüdür. Son kontrol <time datetime="2026-11-24T07:30:00Z">24 Nov 2026, 07:30 UTC</time>.</p>
+        <article class="status-card">
+          <h4>Rockstar Authentication</h4>
+          <p><span class="pill pill-success">Çalışıyor</span></p>
+          <p class="status-src"><a href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">support.rockstargames.com/servicestatus</a></p>
+        </article>
+        <article class="status-card">
+          <h4>PlayStation Network</h4>
+          <p><span class="pill pill-success">Çalışıyor</span></p>
+          <p class="status-src"><a href="https://status.playstation.com" target="_blank" rel="noopener">status.playstation.com</a></p>
+        </article>
+        <article class="status-card">
+          <h4>Xbox network</h4>
+          <p><span class="pill pill-warning">Bilinmiyor</span></p>
+          <p class="status-src">Kontrol yapılamıyor. Bkz. <a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener">resmi Xbox durum sayfası</a>.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Newsletter -->
-<section class="section container" id="newsletter" aria-label="Bülten kaydı">
-  <div class="newsletter-wrap">
-    <div class="newsletter-card stagger-fade-up">
-      <div class="newsletter-glow newsletter-glow-a" aria-hidden="true"></div>
-      <div class="newsletter-glow newsletter-glow-b" aria-hidden="true"></div>
-      <div class="newsletter-inner">
-        <span class="newsletter-eyebrow eyebrow">ToolWools İstihbaratı</span>
-        <h2>Ustalaşın <span class="gradient-text">Vice City</span> yeraltı dünyasında</h2>
-        <p>En yeni GTA 6 araçlarını, yama günü rehberlerini ve yeni araç uyarılarını doğrudan gelen kutunuza alın.</p>
-        <ul class="newsletter-perks">
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Spam yok <span class="text-muted">· Saf bilgi, sıfır gürültü.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Erken araç erişimi <span class="text-muted">· Yeni araçları lansmandan önce deneyin — buradaki her araç gibi ücretsiz.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>Abone rehberleri <span class="text-muted">· Aboneler için ücretsiz aylık rehberler.</span></li>
-        </ul>
-        <form class="newsletter-form" data-newsletter-form novalidate>
-          <label class="sr-only" for="newsletter-email">E-posta adresi</label>
-          <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" autocomplete="email" required>
-          <button type="submit" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span>Abone ol</button>
-        </form>
-        <p class="newsletter-feedback" data-newsletter-feedback hidden></p>
-        <div class="newsletter-success" data-newsletter-success role="status" hidden>
-          <span class="newsletter-success-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <p data-newsletter-success-msg>Teşekkürler, listeye eklendiniz. Bir sonraki araç sürümünü bekleyin.</p>
-          <p class="sub">Aboneliğinizi istediğiniz zaman şuradan yönetin: <a href="/tr/email-preferences">e-posta tercihleri</a>.</p>
+<!-- ================= 11 — NEWSLETTER ================= -->
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2">Gündemde Kal</h2>
+          <p>Yama notları, yeni araçlar ve rehberler, geldiklerinde, öncesinde değil. Spam yok, istediğin zaman ayrılabilirsin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="ornek@ornek.com" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
-</main>
+
+<!-- ================= 12 — FOOTER ================= -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/tr/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">Araçlara göz at →</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
-              </span>
-            </span>
-          </a>
-          <p>GTA 6 araçları, hesaplayıcıları, izleyicileri, planlayıcıları ve kılavuzları için nihai adres. İhtiyacınız olan her şey, tek yerde, reklam öncelikli değil, şişkinlik yok.</p>
-        </div>
-        <div class="footer-cols">
-          <div>
-            <h3>En İyi Araçlar</h3>
-            <ul>
-              <li><a href="/tr/tools/system-requirements">Bilgisayarım GTA 6'yı Çalıştırır mı?</a></li>
-              <li><a href="/tr/tools/fps-calculator">FPS Hesaplayıcı</a></li>
-              <li><a href="/tr/tools/download-time">İndirme Süresi Hesaplayıcı</a></li>
-              <li><a href="/tr/tools/system-requirements">Sistem Gereksinimleri</a></li>
-              <li><a href="/tr/tools/settings-optimizer">Ayar Optimizasyon Aracı</a></li>
-              <li><a href="/tr/tools/hardware-comparison">Donanım Karşılaştırması</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>Keşfet</h3>
-            <ul>
-              <li><a href="/tr/tools">Tüm Araçlar</a></li>
-              <li><a href="/tr/trending">Trend</a></li>
-              <li><a href="/tr/trackers">Takipçiler</a></li>
-              <li><a href="/tr/generators">Oluşturucular</a></li>
-              <li><a href="/tr/news">Haberler</a></li>
-              <li><a href="/tr/trailers">Fragmanlar</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>Kaynaklar</h3>
-            <ul>
-              <li><a href="/tr/tools/interactive-map">Etkileşimli Harita</a> <span class="footer-col-badge">Yeni</span></li>
-              <li><a href="/tr/about">Hakkında</a></li>
-              <li><a href="/tr/methodology">Metodoloji</a></li>
-              <li><a href="/tr/contact">İletişim</a></li>
-              <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
-              <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-              <li><a href="/tr/terms">Kullanım Şartları</a></li>
-              <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
-        <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
-          <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
-        </div>
-      </div>
+  <div class="footer-top"><div class="wrap">GTA 6 çıktı: Nov 19, 2026 &middot; <a href="/tr/tools">Araçlara göz at <span aria-hidden="true">&rarr;</span></a></div></div>
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/tr/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>Araçlar. Rehberler. GTA 6.</p>
     </div>
+    <nav class="footer-col" aria-label="Hızlı bağlantılar">
+      <h3>Hızlı Bağlantılar</h3>
+      <ul>
+        <li><a href="/tr/">Ana Sayfa</a></li>
+        <li><a href="/tr/tools">Araçlar</a></li>
+        <li><a href="/tr/news">Haberler</a></li>
+        <li><a href="/tr/trailers">Fragmanlar</a></li>
+        <li><a href="/tr/guides">Rehberler</a></li><li><a href="/tr/sitemap">Site haritası</a></li><li><a href="/tr/trending">Trend</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Kategoriler">
+      <h3>Kategoriler</h3>
+      <ul>
+        <li><a href="/tr/tools?category=release">Çıkış Araçları</a></li>
+        <li><a href="/tr/tools?category=pc">PC Araçları</a></li>
+        <li><a href="/tr/tools?category=performance">Performans</a></li>
+        <li><a href="/tr/tools?category=comparison">Karşılaştırma</a></li>
+        <li><a href="/tr/tools?category=trackers">Takipçiler</a></li>
+        <li><a href="/tr/tools?category=planners">Planlayıcılar</a></li>
+        <li><a href="/tr/generators">Oluşturucular</a></li>
+        <li><a href="/tr/guides">Rehberler</a></li>
+        <li><a href="/tr/tools?category=economy">Ekonomi</a></li>
+        <li><a href="/tr/tools?category=map">Harita</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Hakkında">
+      <h3>Hakkında</h3>
+      <ul>
+        <li><a href="/tr/about">ToolWools Hakkında</a></li>
+        <li><a href="/tr/contact">İletişim</a></li>
+        <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+        <li><a href="/tr/terms">Kullanım Şartları</a></li>
+        <li><a href="/tr/disclaimer">Sorumluluk Reddi</a></li><li><a href="/tr/methodology">Metodoloji</a></li><li><a href="/editorial-policy">Yayın Politikası</a></li><li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 ToolWools. Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile ilişkili değildir.</span>
+    <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><button type="button" data-consent-open>Çerez ayarları</button></span>
+    <span>GTA Topluluğu için yapıldı &hearts;</span>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+
+<!-- Consent banner (§21 — live behaviour from assets/js/consent.js; shown here so the footer's Çerez ayarları button has a banner to re-open in staging) -->
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/tr/launch.js" defer></script>
+
+</main>
+
+
+<!-- Trailer dialog (§06 / §12) — embed loads only on play -->
+<dialog class="trailer-dialog" id="trailer-dialog" aria-label="GTA 6 Resmi Fragman 2">
+  <div class="td-head"><strong>GTA 6 Resmi Fragman 2 (May 6, 2025) · 2:47</strong>
+    <button class="icon-btn" type="button" data-trailer-close aria-label="Fragmanı kapat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <p class="td-loading" data-trailer-loading>Video yükleniyor…</p>
+  <iframe id="trailer-frame" src="about:blank" title="GTA 6 fragmanı" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p class="td-foot">YouTube'da izle: <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener">youtube.com/watch?v=VQRLujxTm3c</a></p>
+</dialog>
+
+<p class="visually-hidden" aria-live="polite" id="theme-status"></p>
+
+<script>
+(function(){
+"use strict";
+var root=document.documentElement;
+/* ---- Theme (light-first; TW_THEME_DEFAULT is defined in the head guard) ---- */
+function applyTheme(t,announce){
+  root.classList.add('tw-theme-switching');
+  root.dataset.theme=t;
+  try{localStorage.setItem('tw-theme',t);}catch(e){}
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.setAttribute('aria-pressed',t==='dark'?'true':'false');
+    b.setAttribute('aria-label',t==='dark'?'Açık temaya geç':'Koyu temaya geç');
+  });
+  var st=document.getElementById('theme-status');
+  if(st&&announce){st.textContent=t==='dark'?'Koyu tema açık':'Açık tema açık';}
+  setTimeout(function(){root.classList.remove('tw-theme-switching');},50);
+}
+applyTheme(root.dataset.theme||'light',false);
+document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+  b.addEventListener('click',function(){applyTheme(root.dataset.theme==='dark'?'light':'dark',true);});
+});
+/* ---- Header: scrolled state ---- */
+var bar=document.querySelector('[data-header-bar]');
+function onScroll(){if(bar)bar.classList.toggle('scrolled',window.scrollY>4);}
+onScroll();
+window.addEventListener('scroll',onScroll,{passive:true});
+/* ---- Mobile menu ---- */
+var menuBtn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
+function setMenu(open){
+  menu.hidden=!open;
+  menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  menuBtn.setAttribute('aria-label',open?'Menüyü kapat':'Menüyü aç');
+  menuBtn.querySelector('.icon-menu').style.display=open?'none':'';
+  menuBtn.querySelector('.icon-close').style.display=open?'':'none';
+  document.body.style.overflow=open?'hidden':'';
+  if(open){var first=menu.querySelector('a, input, button');if(first)first.focus();}
+  else{menuBtn.focus();}
+}
+menuBtn.addEventListener('click',function(){setMenu(menu.hidden);});
+menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){setMenu(false);}});
+/* ---- Language menu: close on Escape or outside click ---- */
+document.querySelectorAll('.lang-menu').forEach(function(m){
+  var summary=m.querySelector('summary');
+  document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m.open=false;});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.open=false;if(summary)summary.focus();}});
+});
+/* ---- Search combobox — REAL 24-item index from the live TR tree
+   (~/workspace/toolwools-static/assets/js/tr/search.js, titles/descs/tags
+   copied verbatim; hrefs: /tr/tools/<slug>, or t.url when set). ---- */
+var TOOLS=[
+ {slug:"system-requirements",title:"GTA 6 Sistem Gereksinimleri Denetleyicisi",desc:"Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."},
+ {slug:"download-time",title:"GTA 6 İndirme Süresi Hesaplayıcı",desc:"Bağlantınızda yaklaşık 212 GB'lık temel kurulumun ne kadar süreceğini tahmin edin, ayrıca ilk gün yaması hesabı."},
+ {slug:"storage-planner",title:"GTA 6 Depolama Planlayıcı",desc:"Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay."},
+ {slug:"add-to-calendar",title:"GTA 6 Çıkış Tarihi Hatırlatıcısı",desc:"GTA 6 çıkışını kendi saat diliminizde takviminize ekleyin."},
+ {slug:"readiness-score",title:"GTA 6 Hazırlık Puanı",desc:"Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ."},
+ {slug:"bottleneck-calculator",title:"GTA 6 Darboğaz Hesaplayıcı",desc:"1080p, 1440p ve 4K'da GTA 6 için CPU ve GPU dengesini kontrol edin. Canlı darboğaz yüzdesi, FPS aralığı ve sisteminizi yeniden dengeleyen en küçük yükseltme."},
+ {slug:"vram-calculator",title:"GTA 6 VRAM Gereksinimleri Denetleyicisi",desc:"1080p, 1440p ve 4K'da GTA 6 için ihtiyacınız olan minimum VRAM'i kontrol edin. 6 GB, 8 GB, 12 GB ve 16 GB kartlar için karar."},
+ {slug:"fps-calculator",title:"GTA 6 FPS Hesaplayıcı",desc:"GPU'nuz için 1080p, 1440p ve 4K'da Düşük, Orta, Yüksek ve Ultra ayarlarında kare hızını tahmin edin."},
+ {slug:"gpu-tier-list",title:"GTA 6 GPU Katman Listesi",desc:"GTA 6 için en iyi ekran kartları, katmana göre sıralandı."},
+ {slug:"interactive-map",title:"GTA 6 İnteraktif Harita",desc:"GTA 6 haritası için Leonida gezgini ve boyut karşılaştırması."},
+ {slug:"pre-order-tracker",title:"GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması",desc:"GTA 6'yı nereden alabilirsiniz, kanala göre karşılaştırıldı."},
+ {slug:"edition-comparison",title:"GTA 6 Sürüm Seçici",desc:"Her GTA 6 sürümü karşılaştırıldı: bonuslar, fiyat ve her birinin açtıkları."},
+ {slug:"internet-speed-check",title:"GTA 6 İnternet Hızı Danışmanı",desc:"Bağlantınızın GTA 6 indirmeleri ve Online için yeterince hızlı olup olmadığını kontrol edin."},
+ {slug:"price-by-country",title:"GTA 6 Ülkelere Göre Fiyat",desc:"GTA 6 fiyatı ülkelere göre yerel para birimiyle."},
+ {slug:"economy-calculator",title:"GTA 6 Para ve İşletme Getiri Hesaplayıcı",desc:"GTA$ kazanmanın en hızlı yolunu ve hangi işletmelerin önce kendini amorti ettiğini bulun."},
+ {slug:"gta-6-tracker",title:"GTA 6 Lansman Kilometre Taşları",desc:"GTA 6 için lansman kilometre taşları ve tamamlanan ön yükleme pencereleri."},
+ {slug:"settings-optimizer",title:"Grafik Ayarları Optimize Edici",desc:"Hedef FPS'iniz ve donanımınız için grafik ayarlarını ayarlayın."},
+ {slug:"hardware-comparison",title:"Donanım Karşılaştırması",desc:"GTA 6 için iki GPU veya CPU'yu başa baş karşılaştırın."},
+ {slug:"server-status",title:"GTA 6 Sunucu Durumu: Sunucular Çöktü mü?",desc:"GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı."},
+ {slug:"preload-tracker",title:"GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı",desc:"GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026."},
+ {slug:"vehicle-comparison",title:"GTA 6 Araç Karşılaştırması, Puanlar, Kayıt Ücreti ve Satış Değeri",desc:"GTA 6 araçlarını oyundaki 10 üzerinden beş puan, Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık, artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."},
+ {slug:"weapon-comparison",title:"GTA 6 Silah Karşılaştırması, Puanlar, Şarjör ve Fiyat",desc:"GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil, oyundaki 10 üzerinden dört puan, artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."},
+ {slug:"generators",title:"GTA 6 İsim Oluşturucu",desc:"Karakter adları, ekip etiketleri, plakalar, radyo çağrı işaretleri ve oyuncu etiketleri, anında oluşturulur.",url:"/tr/generators",tags:"name generator isim oluşturucu gta 6"},
+ {slug:"business-tracker",title:"GTA 6 İşletme Takipçisi",desc:"GTA 6 işletme hesaplayıcı ve takipçisi: henüz hiçbir işletme satın alınamıyor; 12 Leonida işletmesini takip edin, kendi rakamlarınızla geri ödemeyi simüle edin ve hikâye para yöntemlerini karşılaştırın."}
+];
+var cards=document.querySelectorAll('#tools-grid .tool-card');
+function fold(s){return s.replace(/İ/g,'i').replace(/ı/g,'i').replace(/I/g,'i').toLowerCase();}
+function filterTools(q){
+  var n=fold(q.trim()),shown=0;
+  cards.forEach(function(c){
+    var hit=n.length<2||fold(c.getAttribute('data-tool')).indexOf(n)>-1;
+    c.style.display=hit?'':'none';if(hit)shown++;
+  });
+  var empty=document.getElementById('tools-empty');
+  empty.hidden=shown>0;document.getElementById('tools-empty-q').textContent=q;
+  if(n.length<2)return [];
+  return TOOLS.filter(function(t){return fold(t.title+' '+t.desc+' '+(t.tags||'')).indexOf(n)>-1;}).slice(0,6);
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+  var box=document.getElementById(inp.getAttribute('aria-controls'));
+  if(!box)return;
+  var activeIdx=-1,blurTimer=null;
+  function close(){box.hidden=true;box.innerHTML='';activeIdx=-1;inp.setAttribute('aria-expanded','false');inp.removeAttribute('aria-activedescendant');}
+  function render(q){
+    if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}
+    var list=filterTools(q);
+    activeIdx=-1;
+    if(fold(q).length<2){close();return;}
+    inp.setAttribute('aria-expanded','true');box.hidden=false;
+    if(!list.length){
+      box.innerHTML='<p class="search-empty" role="status">Şununla eşleşen araç yok &ldquo;'+esc(q.trim())+'&rdquo;. &ldquo;FPS&rdquo;, &ldquo;VRAM&rdquo; veya &ldquo;bottleneck&rdquo; deneyin.</p>';
+      return;
+    }
+    box.innerHTML=list.map(function(t,i){
+      var href=t.url||('/tr/tools/'+t.slug);
+      return '<a href="'+href+'" role="option" id="'+inp.id+'-sr-'+i+'"><strong>'+esc(t.title)+'</strong><span>'+esc(t.desc)+'</span></a>';
+    }).join('');
+  }
+  inp.addEventListener('input',function(){render(inp.value);});
+  inp.addEventListener('focus',function(){if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}if(inp.value.trim().length>=2)render(inp.value);});
+  inp.addEventListener('keydown',function(e){
+    var links=box.querySelectorAll('a');
+    if(e.key==='Escape'){inp.value='';filterTools('');close();inp.blur();return;}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      if(!links.length)return;e.preventDefault();
+      activeIdx=e.key==='ArrowDown'?(activeIdx+1)%links.length:(activeIdx-1+links.length)%links.length;
+      links.forEach(function(l,i){l.classList.toggle('active',i===activeIdx);});
+      inp.setAttribute('aria-activedescendant',inp.id+'-sr-'+activeIdx);
+      return;
+    }
+    if(e.key==='Enter'&&activeIdx>=0&&links[activeIdx]){e.preventDefault();window.location.href=links[activeIdx].href;}
+  });
+  inp.addEventListener('blur',function(){blurTimer=setTimeout(function(){if(!box.contains(document.activeElement))close();},150);});
+});
+document.addEventListener('click',function(e){
+  document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+    var box=document.getElementById(inp.getAttribute('aria-controls'));
+    if(box&&!box.hidden&&!inp.closest('.header-search,.mobile-search').contains(e.target)){box.hidden=true;box.innerHTML='';}
+  });
+});
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    var vis=window.innerWidth>=1280?document.getElementById('header-search'):document.querySelector('.mobile-menu [data-header-search-input]');
+    if(!menu.hidden&&window.innerWidth<1280){vis=document.querySelector('.mobile-menu [data-header-search-input]');}
+    if(vis){if(window.innerWidth<1280&&menu.hidden)setMenu(true);vis.focus();}
+  }
+});
+/* ---- Trailer dialog (embed loads only on play; no autoplay) ---- */
+var dlg=document.getElementById('trailer-dialog'),frame=document.getElementById('trailer-frame');
+var lastTrigger=null;
+function openTrailer(trigger){
+  lastTrigger=trigger||document.activeElement;
+  var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=false;
+  frame.src='https://www.youtube-nocookie.com/embed/VQRLujxTm3c?autoplay=1&rel=0';
+  if(typeof dlg.showModal==='function'){dlg.showModal();}
+  else{dlg.setAttribute('open','');}
+  var closeBtn=dlg.querySelector('[data-trailer-close]');if(closeBtn)closeBtn.focus();
+}
+function closeTrailer(){
+  frame.src='about:blank';
+  if(typeof dlg.showModal==='function'){if(dlg.open)dlg.close();}
+  else{dlg.removeAttribute('open');}
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+}
+document.querySelectorAll('[data-trailer-open]').forEach(function(b){
+  b.addEventListener('click',function(){openTrailer(b);});
+});
+frame.addEventListener('load',function(){
+  if(frame.getAttribute('src')&&frame.getAttribute('src')!=='about:blank'){
+    var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=true;
+  }
+});
+dlg.querySelectorAll('[data-trailer-close]').forEach(function(b){b.addEventListener('click',closeTrailer);});
+dlg.addEventListener('click',function(e){if(e.target===dlg)closeTrailer();});
+/* Phase 9 Worker D (25 Nov 2026): trap Tab inside the trailer dialog (native
+   <dialog> does not trap Tab across the cross-origin iframe) and close on
+   Escape (guards the non-showModal fallback path, which has no native Escape
+   handling). Port of the EN fix (Worker A Fix A + Fix C). */
+dlg.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){e.preventDefault();closeTrailer();return;}
+  if(e.key!=='Tab')return;
+  var f=dlg.querySelectorAll('button,a[href],iframe,[tabindex]:not([tabindex="-1"])'),els=[],i;
+  for(i=0;i<f.length;i++){if(!f[i].disabled&&f[i].getClientRects().length)els.push(f[i]);}
+  if(!els.length)return;
+  var first=els[0],last=els[els.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+dlg.addEventListener('close',function(){
+  frame.src='about:blank';
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+});
+})();
+</script>
 <script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/tr/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/tr/header.js" defer></script>
-<script src="/assets/js/tr/search.js" defer></script>
-<script src="/assets/js/tr/newsletter.js" defer></script>
+<script>
+/* ==========================================================================
+   Phase 3 staging scripts for sections 07–12 (Worker B).
+   Phase 10 moves these into assets/js/ (newsletter.js / consent.js) and
+   deletes this block. No secrets are embedded here: the real submit reads
+   window.TOOLWOOLS_SUPABASE, which the production supabase.js provides.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  /* ---- Staging flag: newsletter demo mode --------------------------------
+     TW_NEWSLETTER_STAGING_DEMO = false → the real Supabase submit runs (demo mode off)
+     and a LABELLED demo success is shown ("Demo only — nothing was sent or
+     stored"). No email leaves the browser in staging.
+     PHASE 10: set to false at deploy (or remove the flag and this branch) to
+     enable the real Supabase PostgREST submit below. The real path is the
+     live code from assets/js/newsletter.js (audit 04 §7.3): POST
+     {cfg.url}/rest/v1/newsletter_subscribers, Prefer: return=minimal,
+     body {email (lowercased), source: "homepage", locale: "tr"},
+     HTTP 409 → "Zaten listedesiniz, yapmanız gereken başka bir şey yok."
+     Never fake success: unconfigured/unreachable endpoint → honest error.
+     ------------------------------------------------------------------------ */
+  var TW_NEWSLETTER_STAGING_DEMO = false;
+
+  var nlForm = document.getElementById("nl-form");
+  if (nlForm) {
+    var nlEmail = document.getElementById("nl-email");
+    var nlErr = document.getElementById("nl-error");
+    var nlOk = document.getElementById("nl-success");
+    var nlOkMsg = nlOk ? nlOk.querySelector("[data-newsletter-success-msg]") : null;
+    var nlBtn = document.getElementById("nl-submit");
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function nlShowError(msg) {
+      nlErr.hidden = false; nlOk.hidden = true;
+      nlErr.textContent = msg;
+      nlEmail.setAttribute("aria-invalid", "true");
+    }
+    function nlShowSuccess(msg) {
+      nlForm.hidden = true; nlOk.hidden = false;
+      if (nlOkMsg) nlOkMsg.textContent = msg;
+      nlOk.focus();
+    }
+    nlForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var value = nlEmail.value.trim();
+      if (!EMAIL_RE.test(value)) {
+        nlShowError("Lütfen geçerli bir e-posta adresi girin.");
+        nlEmail.focus();
+        return;
+      }
+      nlEmail.removeAttribute("aria-invalid"); nlErr.hidden = true;
+      nlBtn.disabled = true; nlBtn.textContent = "Abone olunuyor…";
+      if (TW_NEWSLETTER_STAGING_DEMO) {
+        /* Staging only: no network, no storage. Labelled demo success. */
+        window.setTimeout(function () {
+          nlBtn.disabled = false; nlBtn.textContent = "Abone ol";
+          nlShowSuccess("Yalnızca demo: Listedesiniz. Hiçbir şey gönderilmedi veya kaydedilmedi.");
+        }, 400);
+        return;
+      }
+      /* ---- Real submit (live assets/js/newsletter.js, Phase 10 only) ---- */
+      var cfg = window.TOOLWOOLS_SUPABASE || {};
+      if (!cfg.url || !cfg.key) {
+        nlBtn.disabled = false; nlBtn.textContent = "Abone ol";
+        nlShowError("Bülten kaydı şu anda bağlı değil, bu yüzden hiçbir şey gönderilmedi. Lütfen daha sonra tekrar deneyin.");
+        nlEmail.focus();
+        return;
+      }
+      fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
+        method: "POST",
+        headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "tr" })
+      }).then(function (res) {
+        nlBtn.disabled = false; nlBtn.textContent = "Abone ol";
+        if (res.status === 409) { nlShowSuccess("Zaten listedesiniz, yapmanız gereken başka bir şey yok."); return; }
+        if (!res.ok) { throw new Error("http " + res.status); }
+        nlShowSuccess("Katıldınız. Bir sonraki içerik için gelen kutunuzu takip edin.");
+      }).catch(function () {
+        nlBtn.disabled = false; nlBtn.textContent = "Abone ol";
+        nlShowError("Şu anda kaydedemedik, bu yüzden hiçbir şey gönderilmedi. Lütfen birazdan tekrar deneyin.");
+        nlEmail.focus();
+      });
+    });
+  }
+
+  /* ---- Consent banner (live assets/js/consent.js behaviour) ------------- */
+  var CONSENT_KEY = "tw-consent";
+  var banner = document.getElementById("consent-banner");
+  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
+  function consentShow() { if (banner) banner.hidden = false; }
+  function consentHide() { if (banner) banner.hidden = true; }
+  if (banner) {
+    if (!consentStored()) {
+      var consentShown = false;
+      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
+      window.setTimeout(showSoon, 1800);
+      window.addEventListener("scroll", showSoon, { once: true, passive: true });
+    }
+    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        consentShow();
+        var f = banner.querySelector("[data-consent-accept]");
+        if (f) f.focus();
+      });
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

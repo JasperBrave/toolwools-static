@@ -1,7 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
+<!-- ============================================================================
+  ToolWools Phase 3 — Worker B — EN homepage <head> (staging)
+  Source: live ~/workspace/toolwools-static/index.html <head>, copied VERBATIM
+  except the four changes listed below (see en-sec-07-12-NOTES.md for the
+  change record). No SEO value was changed: title, description, OG, Twitter,
+  canonical, all 8 hreflang incl. x-default, JSON-LD (Organization + WebSite
+  + SearchAction + BreadcrumbList), favicons and manifest are byte-identical
+  to the live head. This file is the <head> block only; the staging <html>
+  tag must carry data-theme="light" (the guard below sets it before paint).
+  CHANGES vs live head (only these four):
+  1. theme-color metas → light #FAF9F6, dark #151719 (new tokens).
+  2. Font preloads → Manrope latin + Inter latin; Space Grotesk preload DROPPED.
+  3. Stylesheets → /assets/css/tokens.css + /assets/css/phase3-en.css
+     (staging-relative); main.css NOT loaded in staging; print.css kept.
+  4. Inline theme script REPLACED by the no-flash guard (light-first,
+     TW_THEME_DEFAULT='light', localStorage tw-theme, sets data-theme + legacy
+     dark class) and MOVED before the stylesheet links, per the tokens.css
+     guard contract. The live script only toggled the .dark class and
+     followed prefers-color-scheme when nothing was stored.
+  ========================================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ToolWools — All GTA 6 Tools, Calculators &amp; Trackers</title>
 <meta name="description" content="Everything GTA 6, calculated for you. 24 live tools, calculators, trackers, planners and guides for Grand Theft Auto 6.">
@@ -34,8 +54,8 @@
 <meta name="application-name" content="ToolWools">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/">
 <link rel="alternate" href="https://toolwools.com/" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/" hreflang="es">
@@ -55,12 +75,30 @@
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="preload" as="image" href="/assets/img/hero-vicecity.jpg" fetchpriority="high">
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="image" href="/assets/img/design4/hero-bg-800.webp" imagesrcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" imagesizes="100vw" fetchpriority="high">
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/phase3-en.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -97,688 +135,766 @@
 }
 </script>
 </head>
+
 <body>
-<div class="site-shell">
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag">All GTA 6 Tools in One Place</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="Primary">
-          <a href="/" aria-current="page">Home</a>
-          <a href="/tools">Tools</a>
-          <a href="/trackers">Trackers</a>
-          <a href="/generators">Generators</a>
-          <a href="/news">News</a>
-          <a href="/trailers">Trailers</a>
-        </nav>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/" aria-current="page">Home</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/trackers">Trackers</a></li>
+        <li><a href="/generators">Generators</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/trailers">Trailers</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
-            <a href="/es/">Español</a>
-            <a href="/pt/">Português</a>
-            <a href="/de/">Deutsch</a>
-            <a href="/fr/">Français</a>
-            <a href="/tr/">Türkçe</a>
-            <a href="/ar/">العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
-          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Mobile">
-          <a href="/" aria-current="page">Home</a>
-          <a href="/tools">Tools</a>
-          <a href="/trackers">Trackers</a>
-          <a href="/generators">Generators</a>
-          <a href="/news">News</a>
-          <a href="/trailers">Trailers</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>EN <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/" aria-current="true">English <span aria-hidden="true">✓</span></a>
+        <a href="/es/" lang="es">Español</a><a href="/pt/" lang="pt">Português</a><a href="/de/" lang="de">Deutsch</a>
+        <a href="/fr/" lang="fr">Français</a><a href="/tr/" lang="tr">Türkçe</a><a href="/ar/" lang="ar">العربية</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="Mobile">
+      <a href="/" aria-current="page">Home</a><a href="/tools">Tools</a><a href="/trackers">Trackers</a>
+      <a href="/generators">Generators</a><a href="/news">News</a><a href="/trailers">Trailers</a>
+    </nav>
+    <div class="mobile-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" role="listbox" aria-label="Search results" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/" aria-current="true">EN</a><a href="/es/" lang="es">ES</a><a href="/pt/" lang="pt">PT</a>
+      <a href="/de/" lang="de">DE</a><a href="/fr/" lang="fr">FR</a><a href="/tr/" lang="tr">TR</a><a href="/ar/" lang="ar">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>Theme</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
-<main id="main">
-<!-- Hero -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-bg" aria-hidden="true">
-    <img src="/assets/img/hero-vicecity.jpg" alt="" width="1600" height="1200" fetchpriority="high" loading="eager" decoding="async">
-    <div class="hero-fade-side"></div>
-    <div class="hero-fade-bottom"></div>
-    <div class="hero-glow"></div>
-  </div>
-  <div class="container hero-inner">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="hero-badge eyebrow-muted hero-fade-up" style="animation-delay:0ms">
-          <span class="hero-badge-dot live-dot" aria-hidden="true"></span>
-          Live · The GTA 6 Tools Hub
-        </span>
-        <h1 id="hero-title" class="hero-fade-up" style="animation-delay:80ms">Everything <span class="gradient-text">GTA 6.</span><br>Calculated for You.</h1>
-        <p class="hero-sub hero-fade-up" style="animation-delay:160ms">Powerful tools, calculators, trackers, planners and guides — everything you need for Grand Theft Auto 6 in one place.</p>
-        <div class="hero-ctas hero-fade-up" style="animation-delay:240ms">
-          <a href="/tools" class="btn-ultra btn-lg"><span class="btn-ultra-inner" aria-hidden="true"></span>Explore All Tools <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="/trailers" class="btn-outline"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>Watch Latest Trailer</a>
-        </div>
-        <ul class="hero-proof hero-fade-up" style="animation-delay:320ms" aria-label="Proof stats">
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <span><span class="hero-proof-title">24 Live Tools</span><br><span class="hero-proof-sub">Calculators &amp; trackers</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-            <span><span class="hero-proof-title">Nov 21, 2026</span><br><span class="hero-proof-sub">Last data verified</span></span>
-          </li>
-          <li>
-            <span class="hero-proof-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-            <span><span class="hero-proof-title">No sign-up</span><br><span class="hero-proof-sub">Free, no account needed</span></span>
-          </li>
-        </ul>
+
+<main id="main" tabindex="-1">
+<!-- ================= §02 — HERO ================= -->
+<section class="hero hero-d4" id="top" aria-labelledby="hero-h1">
+  <picture class="hero-bg" aria-hidden="true">
+    <source type="image/webp" srcset="/assets/img/design4/hero-bg-800.webp 800w, /assets/img/design4/hero-bg.webp 1672w" sizes="100vw">
+    <img src="/assets/img/design4/hero-bg.jpg" srcset="/assets/img/design4/hero-bg-800.jpg 800w, /assets/img/design4/hero-bg.jpg 1672w" sizes="100vw" alt="" width="1672" height="941" fetchpriority="high">
+  </picture>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">GTA 6 &amp; Gaming Tools</p>
+      <h1 id="hero-h1">Everything <span class="accent">GTA&nbsp;6.</span><br>Everything in One Place.</h1>
+      <p class="hero-sub">Powerful tools, calculators, trackers and guides: everything you need for GTA&nbsp;6.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/tools">Explore All Tools <span aria-hidden="true">→</span></a>
+        <button class="btn btn-secondary" type="button" data-trailer-open><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5Z"/></svg> Watch Latest Trailer</button>
       </div>
-      <div class="hero-countdown-wrap hero-fade-up" style="animation-delay:200ms">
-        <div class="countdown-card" aria-label="GTA 6 has been released">
-          <div class="countdown-label"><span class="dot live-dot" aria-hidden="true"></span><span>GTA 6 Is Out Now</span></div>
-          <div class="countdown-meta"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Nov 19, 2026 • 12:00 AM ET</div>
-          <a href="/tools/add-to-calendar" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg>Set Reminders</a>
-        </div>
-      </div>
+      <ul class="stats-strip" aria-label="Verified facts">
+        <li><span class="num tnum">24</span><span class="lbl">free tools</span></li>
+        <li><span class="num">19 Nov 2026</span><span class="lbl">launched</span></li>
+        <li><span class="num tnum">212 GB</span><span class="lbl">install size</span></li>
+      </ul>
     </div>
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <div class="hero-scroll-hint-inner scroll-hint"><span>Explore</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+    <div class="hero-art" aria-hidden="true">
+      <picture class="hero-duo">
+        <source type="image/webp" srcset="/assets/img/design4/hero-duo-cutout-800.webp 800w, /assets/img/design4/hero-duo-cutout.webp 1292w" sizes="(max-width:1023px) 92vw, 640px">
+        <img src="/assets/img/design4/hero-duo-cutout.png" alt="" width="1292" height="1217" fetchpriority="high">
+      </picture>
+      <picture class="hero-car">
+        <source type="image/webp" srcset="/assets/img/design4/hero-car-cutout-800.webp 800w, /assets/img/design4/hero-car-cutout.webp 1774w" sizes="(max-width:1023px) 96vw, 700px">
+        <img src="/assets/img/design4/hero-car-cutout.png" alt="" width="1774" height="887" fetchpriority="high">
+      </picture>
     </div>
   </div>
 </section>
 
-<!-- Popular Tools -->
-<section class="section container" aria-labelledby="popular-tools-heading">
-  <a id="popular-tools" aria-hidden="true"></a>
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <h2 id="popular-tools-heading">Popular Tools</h2>
-      </div>
-      <p class="section-head-sub">Eleven tools to start with, chosen by the questions players ask first.</p>
-    </div>
-    <a class="section-head-action" href="/tools" aria-label="View all tools">View all <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="tools-grid">
-    <article aria-labelledby="tool-card-can-my-pc-run-gta-6">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/tools/system-requirements" data-accent="purple" aria-label="Can My PC Run GTA 6? (Hot) — Instant verdict for your rig against community-estimated Minimum, Recommended and Ultra tiers.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-badge" data-badge="hot">Hot</span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <h3 id="tool-card-can-my-pc-run-gta-6">Can My PC Run GTA 6?</h3>
-        <p>Instant verdict for your rig against community-estimated Minimum, Recommended and Ultra tiers.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-fps-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/tools/fps-calculator" data-accent="pink" aria-label="FPS Calculator — Project frame rates from your CPU, GPU and target resolution.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <h3 id="tool-card-fps-calculator">FPS Calculator</h3>
-        <p>Project frame rates from your CPU, GPU and target resolution.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-bottleneck-calculator">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/tools/bottleneck-calculator" data-accent="blue" aria-label="Bottleneck Calculator — Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-        <h3 id="tool-card-bottleneck-calculator">Bottleneck Calculator</h3>
-        <p>Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-download-time">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/tools/download-time" data-accent="pink" aria-label="Download Time — How long the 212 GB install (plus 1.7–3.8 GB day-one patches) will take on your connection.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <h3 id="tool-card-download-time">Download Time</h3>
-        <p>How long the 212 GB install (plus 1.7–3.8 GB day-one patches) will take on your connection.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-storage-planner">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/tools/storage-planner" data-accent="blue" aria-label="Storage Planner — Free-space math with day-one patch and DLC headroom.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span>
-        <h3 id="tool-card-storage-planner">Storage Planner</h3>
-        <p>Free-space math with day-one patch and DLC headroom.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-release-date-reminder">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/tools/add-to-calendar" data-accent="purple" aria-label="Release Date Reminder — GTA 6 is out — get patch and DLC reminders in your calendar.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <h3 id="tool-card-release-date-reminder">Release Date Reminder</h3>
-        <p>GTA 6 is out — get patch and DLC reminders in your calendar.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-business-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/tools/business-tracker" data-accent="blue" aria-label="GTA 6 Business Tracker — Track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods. No business can be bought yet — every figure is labelled by source.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
-        <h3 id="tool-card-business-tracker">GTA 6 Business Tracker</h3>
-        <p>Track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods. No business can be bought yet — every figure is labelled by source.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-preload-tracker">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/tools/preload-tracker" data-accent="blue" aria-label="GTA 6 Preload History &amp; Update Schedule — GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
-        <h3 id="tool-card-preload-tracker">GTA 6 Preload History &amp; Update Schedule</h3>
-        <p>GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-weapon-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:8" href="/tools/weapon-comparison" data-accent="pink" aria-label="GTA 6 Weapon Comparison — Ratings, Magazine &amp; Price — Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-weapon-comparison">GTA 6 Weapon Comparison — Ratings, Magazine &amp; Price</h3>
-        <p>Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-vehicle-comparison">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:9" href="/tools/vehicle-comparison" data-accent="blue" aria-label="GTA 6 Vehicle Comparison — Ratings, Register Cost &amp; Sell Value — Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 — Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength — plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <h3 id="tool-card-vehicle-comparison">GTA 6 Vehicle Comparison — Ratings, Register Cost &amp; Sell Value</h3>
-        <p>Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 — Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength — plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
-    <article aria-labelledby="tool-card-server-status">
-      <a class="tool-card card-hover-glow stagger-fade-up" style="--stagger-index:10" href="/tools/server-status" data-accent="pink" aria-label="GTA 6 Server Status — Are the Servers Down? — GTA 6 has no servers to go down — it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <h3 id="tool-card-server-status">GTA 6 Server Status — Are the Servers Down?</h3>
-        <p>GTA 6 has no servers to go down — it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.</p>
-        <span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
-      </a>
-    </article>
+<!-- ================= §03 — CATEGORY STRIP ================= -->
+<section class="section" style="padding-top:0" aria-label="Categories">
+  <div class="wrap">
+    <nav class="cat-strip" aria-label="Top categories">
+      <ul>
+        <li><a href="/tools"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4L14 13l-3-3 3.7-3.7Z"/></svg>Tools &amp;<br>Utilities</a></li>
+        <li><a href="/trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Trackers &amp;<br>Stats</a></li>
+        <li><a href="/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.01a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55h.01a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.01a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1Z"/></svg>Generators</a></li>
+        <li><a href="/news"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13a2 2 0 0 1 2 2v12a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2Z"/><path d="M19 15H6M8 9h6M8 12h4"/></svg>News &amp;<br>Updates</a></li>
+        <li><a href="/trailers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 4 14 8-14 8Z"/></svg>Trailers &amp;<br>Media</a></li>
+        <li><a href="/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg>Guides &amp;<br>Community</a></li>
+      </ul>
+    </nav>
   </div>
 </section>
 
-<!-- Latest News + Trailer -->
-<section class="section container" aria-label="Latest news and trailers">
-  <div class="news-trailer-grid">
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-head">
-        <div><h2 id="news-heading">Latest News</h2></div>
-        <a class="section-head-action" href="/news" aria-label="View all news">View all <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+<!-- ================= §04 — POPULAR TOOLS ================= -->
+<section class="section" id="popular" aria-labelledby="popular-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="popular-layout">
+      <div class="popular-intro">
+        <p class="eyebrow">Popular tools</p>
+        <h2 id="popular-h2">Tools Built for<br>Better Gameplay.</h2>
+        <p>Get the information you need, improve your setup and stay ahead.</p>
+        <a class="btn btn-secondary" href="/tools">Browse All Tools <span aria-hidden="true">→</span></a>
       </div>
-      <div class="news-grid">
-        <a class="article-featured stagger-fade-up" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">
-          <img src="/assets/img/news-featured.webp" alt="Cinematic shot of Vice City from GTA 6 Trailer 2" width="800" height="450" loading="lazy" decoding="async">
-          <span class="article-featured-body">
-            <span class="article-featured-tag">Trailer 2</span>
-            <h3>Trailer 2 reveals Jason, Lucia and a reborn Vice City</h3>
-            <p>The second official trailer expands on the Bonnie-and-Clyde dynamic between Jason and Lucia, showcasing Leonida, the Everglades and a densely populated Vice City.</p>
-            <span class="article-featured-meta">May 6, 2025 · Rockstar Games</span>
-          </span>
-        </a>
-        <ul class="news-list">
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-              <span><h3>GTA 6 launch pushed to November 19, 2026</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · May 2, 2025</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener noreferrer" data-accent="blue">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-              <span><h3>Trailer 1: welcome to Vice City</h3><span class="article-row-meta"><span class="tag">Rockstar</span> · Dec 5, 2023</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/tools" data-accent="pink">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span>
-              <span><h3>GTA 6 is out now on PS5 and Xbox — 30 FPS, 212 GB</h3><span class="article-row-meta"><span class="tag">Analysis</span> · Q3 2026 · Update Nov 20, 2026: launched Nov 19, 2026</span></span>
-            </a>
-          </li>
-          <li>
-            <a class="article-row" href="/tools/system-requirements" data-accent="purple">
-              <span class="article-row-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-              <span><h3>PC version: no dated window yet</h3><span class="article-row-meta"><span class="tag">Analysis</span> · Ongoing</span></span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section aria-labelledby="trailer-heading" id="trailer">
-      <div class="section-head">
-        <div><h2 id="trailer-heading">Latest Trailer</h2></div>
-        <a class="section-head-action" href="/trailers" aria-label="View all trailers">View all <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </div>
-      <div class="trailer-card stagger-fade-up">
-        <a class="trailer-thumb" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer" aria-label="Play GTA 6 – Official Trailer 2 on YouTube">
-          <img src="/assets/img/trailer-thumb.jpg" alt="GTA 6 trailer" width="1015" height="677" loading="lazy" decoding="async">
-          <span class="trailer-thumb-shade" aria-hidden="true"></span>
-          <span class="trailer-thumb-label eyebrow">Trailer 2</span>
-          <span class="trailer-thumb-duration">3:22</span>
-          <span class="trailer-play" aria-hidden="true"><span class="trailer-play-circle"><svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></span></span>
-        </a>
-        <div class="trailer-meta">
-          <div>
-            <div class="trailer-meta-title">GTA 6 – Official Trailer 2</div>
-            <div class="trailer-meta-sub"><span class="dot" aria-hidden="true"></span><span>Rockstar Games</span><span aria-hidden="true">•</span><span>180M+ views</span><span aria-hidden="true">•</span><span>May 6, 2025</span></div>
-          </div>
-          <a class="trailer-yt" href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener noreferrer">YouTube <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
+    <div class="tools-grid" id="tools-grid">
+      <article class="tool-card" data-tool="can my pc run gta 6 system requirements checker instant verdict community-estimated minimum recommended ultra tiers gpu cpu ram storage pc"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3><a href="/tools/system-requirements">Can My PC Run GTA 6?</a></h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="fps calculator estimate frame rate gpu 1080p 1440p 4k low medium high ultra performance"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/><path d="M4 12h2M12 4V2"/></svg></div><h3><a href="/tools/fps-calculator">FPS Calculator</a></h3><p>Estimate frame rate for your GPU at 1080p, 1440p and 4K across presets.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="bottleneck calculator cpu gpu balance detect limit performance upgrade pick"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><h3><a href="/tools/bottleneck-calculator">Bottleneck Calculator</a></h3><p>Pick GPU + CPU. We detect the bottleneck and suggest the smallest upgrade.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="download time calculator 212 gb install connection speed patch"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg></div><h3><a href="/tools/download-time">Download Time</a></h3><p>Estimate how long the 212 GB game install will take on your connection.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="storage planner budget gigabyte base install day-one patch dlc headroom updates"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></div><h3><a href="/tools/storage-planner">Storage Planner</a></h3><p>Budget every gigabyte: base install, day-one patch, seasonal DLC and headroom.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="release date reminder launch calendar google apple outlook patches dlc events add"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div><h3><a href="/tools/add-to-calendar">Release Date Reminder</a></h3><p>One-click reminders for patches, DLC and events. GTA 6 is out now.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="business tracker economy income leonida 12 businesses simulate payback story money"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div><h3><a href="/tools/business-tracker">Business Tracker</a></h3><p>Track the 12 Leonida businesses and simulate payback with your own numbers.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="weapon comparison 53 guns damage accuracy handling range magazine price"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></div><h3><a href="/tools/weapon-comparison">Weapon Comparison</a></h3><p>Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+      <article class="tool-card" data-tool="vehicle comparison 115 cars ratings speed acceleration handling strength register sell value"><div class="tool-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13 5.5 6.5A2 2 0 0 1 7.4 5h9.2a2 2 0 0 1 1.9 1.5L20 13v5h-2.5"/><path d="M4 13h16v5h-2"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M9.3 18h5.4"/></svg></div><h3><a href="/tools/vehicle-comparison">Vehicle Comparison</a></h3><p>Compare vehicles on the five in-game ratings out of 10, plus register and sell value.</p><span class="tool-cta" aria-hidden="true">EXPLORE TOOL <span aria-hidden="true">→</span></span></article>
+    </div>
+    </div>
+    <div class="tools-empty" id="tools-empty" role="status" hidden>No tools match “<span id="tools-empty-q"></span>”. Try “FPS”, “VRAM” or “bottleneck”.</div>
+  </div>
+</section>
+
+<!-- ================= §05 — NEWS ================= -->
+<section class="section" id="news" aria-labelledby="news-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">Latest news</p><h2 id="news-h2">GTA 6 Is Out Now.</h2><p>Real news only: launch, patch and trailers, in date order.</p></div>
+      <a class="btn btn-ghost" href="/news">View All News <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="news-layout">
+      <article class="feature-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/news-feature-800.webp 800w, /assets/img/design4/news-feature.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/news-feature.jpg" srcset="/assets/img/design4/news-feature-800.jpg 800w, /assets/img/design4/news-feature.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Vice City skyline at sunset with a sports car" width="1200" height="675" loading="lazy"></picture></div>
+        <div class="feature-body">
+          <p class="eyebrow" style="margin-bottom:8px">Featured story</p>
+          <h3>GTA 6 is out now on PS5 and Xbox</h3>
+          <p>GTA 6 launched on 19 November 2026 on PlayStation 5 and Xbox Series X|S. The install is 212 GB; the game runs at 30 FPS.</p>
+          <p class="meta"><time datetime="2026-11-19">Nov 19, 2026</time> · Launch · Rockstar</p>
+          <p style="margin-top:12px"><a class="btn btn-primary btn-sm" href="/news">Read Full News <span aria-hidden="true">→</span></a></p>
+        </div>
+      </article>
+      <div>
+        <h3 class="news-more-h">More news</h3>
+        <div class="news-rows">
+          <a class="news-row" href="/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/news-215.jpg" alt="" width="215" height="200" loading="lazy"></span><span><h4>Patch <span class="mono">01.002.002</span>, first update with official patch notes</h4><span class="meta"><time datetime="2026-11-23">Nov 23, 2026</time> · Patch notes</span></span></a>
+          <a class="news-row" href="/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/trailer-250.jpg" alt="" width="250" height="210" loading="lazy"></span><span><h4>Trailer 2 reveals Jason, Lucia and a reborn Vice City</h4><span class="meta"><time datetime="2025-05-06">May 6, 2025</time> · Trailers</span></span></a>
+          <a class="news-row" href="/news"><span class="thumb" aria-hidden="true"><img src="/assets/img/hero-694.jpg" alt="" width="694" height="395" loading="lazy"></span><span><h4>Pre-orders opened: Standard $79.99, Ultimate $99.99</h4><span class="meta"><time datetime="2026-06-25">Jun 25, 2026</time> · Pre-orders</span></span></a>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </section>
 
-<!-- Interactive Tools -->
-<section class="section container" aria-labelledby="interactive-heading">
-  <div id="interactive">
+<!-- ================= §06 — LATEST TRAILER ================= -->
+<section class="section" id="trailer" aria-labelledby="trailer-h2" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><p class="eyebrow">Latest trailer</p><h2 id="trailer-h2">Trailer 2: Jason, Lucia and Vice City.</h2></div>
+    </div>
+    <article class="feature-card trailer-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/trailer-thumb-800.webp 800w, /assets/img/design4/trailer-thumb.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/trailer-thumb.jpg" srcset="/assets/img/design4/trailer-thumb-800.jpg 800w, /assets/img/design4/trailer-thumb.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Vice City skyline at dusk, the setting of Trailer 2" width="1200" height="675" loading="lazy"></picture>
+        <span class="duration-badge" aria-hidden="true">2:47</span>
+        <button class="play-btn" type="button" data-trailer-open aria-label="Play GTA 6 Official Trailer 2 (2 minutes 47 seconds)"></button>
+      </div>
+      <div class="feature-body">
+        <p class="eyebrow" style="margin-bottom:8px">Latest trailer</p>
+        <h3 style="font-size:1.25rem">GTA 6 Official Trailer 2</h3>
+        <p class="meta"><time datetime="2025-05-06">May 6, 2025</time> · <span class="tnum">2:47</span> · Rockstar Games on YouTube</p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ============================================================================
+  ToolWools Phase 3 — Worker B — EN homepage sections 07–12 (HTML fragment)
+  Scope: sections 07 (map) · 08 (hardware) · 09 (browse) · 10 (discovery) ·
+  11 (newsletter) · 12 (footer) + consent banner + staging scripts.
+  Tokens only (design-system/tokens.css). Manrope headings, Inter body.
+  No white text on any orange fill. Light-theme orange text is #C2410C
+  (via --color-accent-text) only. Section headings follow COMPONENT-SYSTEM §25.
+  Image paths are staging-relative: Phase 10 must ship the four crops to
+  /assets/img/crops/ (see en-sec-07-12-NOTES.md). No deploy-tree writes.
+  ========================================================================== -->
+
+<!-- ================= 07 — INTERACTIVE MAP ================= -->
+<section class="section" id="sec-map" aria-labelledby="map-h2">
+  <div class="wrap">
     <div class="section-head">
       <div>
-        <h2 id="interactive-heading">Interactive Tools</h2>
-        <p class="section-head-sub">Live previews of the tools that need a hands-on demo.</p>
+        <p class="eyebrow">Interactive map</p>
+        <h2 id="map-h2">See the whole state of Leonida.</h2>
+        <p>A real preview of the Vice City detail. The full interactive map, with pan, zoom and pins, lives one click away.</p>
+      </div>
+      <a class="btn btn-ghost" href="/tools/interactive-map">Open Map <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <article class="feature-card map-card">
+      <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/map-preview-800.webp 800w, /assets/img/design4/map-preview.webp 1200w" sizes="(max-width:1023px) 100vw, 640px"><img src="/assets/img/design4/map-preview.jpg" srcset="/assets/img/design4/map-preview-800.jpg 800w, /assets/img/design4/map-preview.jpg 1200w" sizes="(max-width:1023px) 100vw, 640px" alt="Illustrated preview of the Vice City interactive map, with location pins and a legend" width="1200" height="675" loading="lazy"></picture></div>
+      <div class="feature-body">
+        <p class="eyebrow">Interactive map</p>
+        <h3>Vice City Interactive Map</h3>
+        <p>Explore the city, find locations and more.</p>
+        <p class="map-note">Vice City detail: open the map for the full state of Leonida. Preview image, not the whole map.</p>
+        <p class="map-layers" aria-label="Map layers previewed">Cities &amp; towns &middot; Coast &amp; keys &middot; Wilderness &middot; Landmarks</p>
+        <p><a class="btn btn-primary btn-sm" href="/tools/interactive-map">Open Map <span aria-hidden="true">&rarr;</span></a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= 08 — PC & HARDWARE CENTER ================= -->
+<section class="section" id="sec-hardware" aria-labelledby="hw-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">PC &amp; hardware center</p>
+        <h2 id="hw-h2">System Requirements &amp; Hardware Comparison</h2>
+        <p>Two distinct features. Never merged into one card.</p>
       </div>
     </div>
-    <div class="preview-grid">
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="blue" aria-labelledby="ip-map-title">
-        <div class="preview-card-pad"><h3 id="ip-map-title">Vice City Map <span class="muted">(Interactive)</span></h3></div>
-        <div class="preview-map">
-          <img src="/assets/img/map-vicecity.jpg" alt="Interactive Vice City map with district pins" width="600" height="450" loading="lazy" decoding="async">
-          <span class="preview-map-pin" style="top:28%;left:34%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:54%;left:58%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:70%;left:22%" aria-hidden="true"><i></i></span>
-          <span class="preview-map-pin" style="top:40%;left:76%" aria-hidden="true"><i></i></span>
-          <div class="preview-map-bar"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>6 districts</span><span aria-hidden="true">•</span><span>42 POIs</span></div>
-        </div>
-        <a class="preview-card-link" href="/tools/interactive-map" aria-labelledby="ip-map-title">View map <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="purple" aria-labelledby="ip-sysreq-title">
-        <div class="preview-card-pad" style="display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem">
-          <h3 id="ip-sysreq-title">System Requirements</h3>
-          <span class="preview-pill">Recommended (estimated)</span>
-        </div>
-        <ul class="preview-rows">
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="preview-rows-label">OS</span><span class="preview-rows-value" title="Windows 10/11 64-bit">Windows 10/11 64-bit</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="preview-rows-label">CPU</span><span class="preview-rows-value" title="Intel i5-12400 / Ryzen 5 5600">Intel i5-12400 / Ryzen 5 5600</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><span class="preview-rows-label">RAM</span><span class="preview-rows-value" title="16 GB">16 GB</span></li>
-          <li><span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span><span class="preview-rows-label">GPU</span><span class="preview-rows-value" title="RTX 3060 / RX 6600">RTX 3060 / RX 6600</span></li>
+    <div class="hw-grid">
+      <article class="hw-card">
+        <div class="img-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/pc-setup-800.webp 800w, /assets/img/design4/pc-setup.webp 1200w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/pc-setup.jpg" srcset="/assets/img/design4/pc-setup-800.jpg 800w, /assets/img/design4/pc-setup.jpg 1200w" sizes="(max-width:767px) 100vw, 514px" alt="Gaming PC setup with an RGB tower, monitor, keyboard and headset" width="1200" height="800" loading="lazy"></picture></div>
+        <h3>System Requirements</h3>
+        <p>Make sure your PC is ready for GTA 6.</p>
+        <ul class="tier-list" aria-label="Requirement tiers">
+          <li><strong>Minimum</strong>: entry-level play</li>
+          <li><strong>Recommended</strong>: smooth 1080p play</li>
+          <li><strong>Ultra</strong>: high-end 1440p and 4K play</li>
         </ul>
-        <a class="preview-card-link" href="/tools/system-requirements" aria-labelledby="ip-sysreq-title">View full requirements <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="honesty">Rockstar has published no PC requirements. The Minimum / Recommended / Ultra tiers are community-estimated.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/tools/system-requirements">View Details <span aria-hidden="true">&rarr;</span></a></p>
       </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="pink" aria-labelledby="ip-opt-title">
-        <div class="preview-card-pad">
-          <div style="display:flex;align-items:flex-start;gap:0.5rem">
-            <span class="preview-rows-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-            <div>
-              <h3 id="ip-opt-title">Best Settings Optimizer</h3>
-              <p class="preview-card-sub">Dial in graphics for your target FPS and rig.</p>
-            </div>
-          </div>
-          <div class="preview-gauge-wrap">
-            <div class="preview-gauge" role="img" aria-label="Optimizer preset: High performance, 71 percent">
-              <svg viewBox="0 0 100 100" aria-hidden="true">
-                <circle cx="50" cy="50" r="44" fill="none" stroke="var(--border)" stroke-width="8"/>
-                <circle cx="50" cy="50" r="44" fill="none" stroke="url(#opt-grad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="80" class="gauge-sweep" style="--gauge-target:80"/>
-                <defs><linearGradient id="opt-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--accent-purple)"/><stop offset="100%" stop-color="var(--accent-pink)"/></linearGradient></defs>
-              </svg>
-              <div class="preview-gauge-center"><div><div class="big">High</div><div class="small">Performance</div><div class="pct">71%</div></div></div>
-            </div>
-          </div>
-        </div>
-        <a class="preview-card-link" href="/tools/settings-optimizer" aria-labelledby="ip-opt-title">Optimize now <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </article>
-      <article class="preview-card card-hover-glow stagger-fade-up" style="--stagger-index:3" data-accent="purple" aria-labelledby="ip-hw-title">
-        <div class="preview-card-pad"><h3 id="ip-hw-title">Hardware Comparison</h3></div>
-        <div class="preview-vs">
-          <div class="preview-gpu" data-accent="blue">
-            <div class="preview-gpu-tile"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RTX 4070 Super</div>
-            <div class="preview-gpu-vram">12 GB</div>
-          </div>
-          <div class="preview-vs-mid">
-            <div class="preview-vs-badge">VS</div>
-            <span class="preview-vs-delta">+18% FPS</span>
-          </div>
-          <div class="preview-gpu" data-accent="pink">
-            <div class="preview-gpu-tile"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
-            <div class="preview-gpu-name">RX 7900 XT</div>
-            <div class="preview-gpu-vram">20 GB</div>
-          </div>
-        </div>
-        <ul class="preview-spec-table">
-          <li><span class="a win">12 GB</span><span class="k">VRAM</span><span class="b">20 GB</span></li>
-          <li><span class="a win">220 W</span><span class="k">TDP</span><span class="b">315 W</span></li>
-          <li><span class="a">94</span><span class="k">Avg FPS</span><span class="b win">111</span></li>
-        </ul>
-        <a class="preview-card-link" href="/tools/hardware-comparison" aria-labelledby="ip-hw-title" style="justify-content:center">Compare now <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <article class="hw-card">
+        <div class="img-wrap gpu-wrap"><picture><source type="image/webp" srcset="/assets/img/design4/gpu-cutout-800.webp 800w, /assets/img/design4/gpu-cutout.webp 1774w" sizes="(max-width:767px) 100vw, 514px"><img src="/assets/img/design4/gpu-cutout.png" alt="Triple-fan RGB graphics card" width="1774" height="887" loading="lazy"></picture></div>
+        <h3>Hardware Comparison</h3>
+        <p>Compare GPU &amp; CPU options.</p>
+        <dl class="spec-rows">
+          <div class="spec-row"><dt>GPUs compared</dt><dd>RTX 4070 Super vs RX 7900 XT</dd></div>
+          <div class="spec-row"><dt>VRAM</dt><dd class="tnum">12 GB vs 20 GB</dd></div>
+          <div class="spec-row"><dt>Projected 1440p FPS</dt><dd>On the comparison tool</dd></div>
+        </dl>
+        <p class="honesty">VRAM is a neutral spec here. 20 GB is not crowned the winner over 12 GB. Frame-rate projections live on the tool, so this preview shows specs only.</p>
+        <p><a class="btn btn-secondary btn-sm" href="/tools/hardware-comparison">Compare Now <span aria-hidden="true">&rarr;</span></a></p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- Categories -->
-<section class="section container" aria-labelledby="categories-heading">
-  <div class="section-head">
-    <div>
-      <div class="section-head-title">
-        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-        <h2 id="categories-heading">Browse All Tool Categories</h2>
+<!-- ================= 09 — BROWSE BY CATEGORY ================= -->
+<section class="section" id="sec-browse" aria-labelledby="browse-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Browse by category</p>
+        <h2 id="browse-h2">Find exactly what you need.</h2>
+        <p>Every tool in the catalogue, grouped by what it does. Counts are from the live 24-tool catalogue.</p>
       </div>
-      <p class="section-head-sub">Every calculator, planner and tracker grouped by what you're trying to do.</p>
     </div>
-    <a class="section-head-action" href="/tools">View All Categories <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-  </div>
-  <div class="cats-grid">
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:0" href="/tools?category=release" data-accent="purple" aria-label="Browse Release Tools — 2 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M12 14v4"/><path d="M10 16h4"/></svg></span>
-      <span><span class="cat-card-title">Release Tools</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:1" href="/tools?category=pc" data-accent="blue" aria-label="Browse PC Tools — 3 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
-      <span><span class="cat-card-title">PC Tools</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:2" href="/tools?category=performance" data-accent="pink" aria-label="Browse Performance — 2 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-      <span><span class="cat-card-title">Performance</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:3" href="/tools?category=comparison" data-accent="purple" aria-label="Browse Comparison — 5 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-      <span><span class="cat-card-title">Comparison</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:4" href="/tools?category=trackers" data-accent="blue" aria-label="Browse Trackers — 5 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2-2 4-4"/><path d="m3 7 2-2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></span>
-      <span><span class="cat-card-title">Trackers</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:5" href="/tools?category=planners" data-accent="pink" aria-label="Browse Planners — 3 tools">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
-      <span><span class="cat-card-title">Planners</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>3 Tools</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:6" href="/generators" data-accent="purple" aria-label="Browse Generators — 5 naming rules, generate instantly">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg></span>
-      <span><span class="cat-card-title">Generators</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>5 Rules</span></span>
-    </a>
-    <a class="cat-card card-hover-glow stagger-fade-up" style="--stagger-index:7" href="/guides" data-accent="blue" aria-label="Browse Guides — 2 guides">
-      <span class="cat-card-scan" aria-hidden="true"></span>
-      <svg class="icon cat-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      <span class="cat-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-      <span><span class="cat-card-title">Guides</span><span class="cat-card-count"><span class="dot" aria-hidden="true"></span>2 Guides</span></span>
-    </a>
+    <nav aria-label="Browse by category">
+      <div class="browse-grid">
+        <a class="browse-tile" href="/tools?category=release"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M14 4c3-2 7-2 7-2s0 4-2 7l-7 7-5-5 7-7Z"/><circle cx="15" cy="9" r="2"/></svg><span class="bt-title">Release Tools</span><span class="bt-count tnum">2 tools</span></a>
+        <a class="browse-tile" href="/tools?category=pc"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span class="bt-title">PC Tools</span><span class="bt-count tnum">3 tools</span></a>
+        <a class="browse-tile" href="/tools?category=performance"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 1 8-8"/><path d="M12 12l4-3"/></svg><span class="bt-title">Performance</span><span class="bt-count tnum">2 tools</span></a>
+        <a class="browse-tile" href="/tools?category=comparison"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 7l7-4 7 4M3 13l2-6 2 6a3.5 3.5 0 0 1-4 0ZM17 13l2-6 2 6a3.5 3.5 0 0 1-4 0Z"/></svg><span class="bt-title">Comparisons</span><span class="bt-count tnum">5 tools</span></a>
+        <a class="browse-tile" href="/tools?category=trackers"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="bt-title">Trackers</span><span class="bt-count tnum">5 tools</span></a>
+        <a class="browse-tile" href="/tools?category=planners"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span class="bt-title">Planners</span><span class="bt-count tnum">3 tools</span></a>
+        <a class="browse-tile" href="/generators"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span class="bt-title">Generators</span><span class="bt-count tnum">5 generators</span></a>
+        <a class="browse-tile" href="/guides"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span class="bt-title">Guides</span><span class="bt-count tnum">2 guides</span></a>
+        <a class="browse-tile" href="/tools?category=economy"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span class="bt-title">Economy</span><span class="bt-count tnum">2 tools</span></a>
+        <a class="browse-tile" href="/tools?category=map"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="bt-title">Map</span><span class="bt-count tnum">1 tool</span></a>
+      </div>
+    </nav>
   </div>
 </section>
 
-<!-- Why ToolWools -->
-<section class="section container" aria-label="Why ToolWools">
-  <div class="section-head">
-    <div>
-      <h2>Built for the streets of Vice City</h2>
-      <p class="section-head-sub">Free forever, dialled for GTA 6, respectful of your rig and your data.</p>
-    </div>
-  </div>
-  <ul class="feats-grid">
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:0" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-      <span class="feat-tile-title">Free forever</span>
-      <p class="feat-tile-sub">Every tool, every update. No paywalls, no pro tier.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:1" data-accent="purple">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
-      <span class="feat-tile-title">Dialled-in accuracy</span>
-      <p class="feat-tile-sub">Formulas tuned against measured behaviour in comparable games.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:2" data-accent="blue">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>
-      <span class="feat-tile-title">Estimate-first</span>
-      <p class="feat-tile-sub">Every number carries a stated error band and a dated source.</p>
-    </li>
-    <li class="feat-tile card-hover-glow surface-card stagger-fade-up" style="--stagger-index:3" data-accent="pink">
-      <span class="feat-tile-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <span class="feat-tile-title">Analytics with consent</span>
-      <p class="feat-tile-sub">Aggregate analytics only after you accept. Tool inputs never leave your device.</p>
-    </li>
-  </ul>
-</section>
-
-<!-- More ways to play -->
-<section class="section container" aria-label="More ways to play">
-  <div class="section-head">
-    <div>
-      <h2>More ways to play</h2>
-      <p class="section-head-sub">Live trends, completionist trackers, and generators for when you just want to mess around.</p>
-    </div>
-  </div>
-  <div class="advanced-grid">
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:0" data-accent="cyan" aria-labelledby="trending-heading">
-      <div class="advanced-panel-eyebrow">Starter picks</div>
-      <h3 id="trending-heading">Trending Tools</h3>
-      <p>The tools most visitors need first, in order.</p>
-      <div class="advanced-panel-body">
-        <ul class="trend-list">
-          <li><a class="trend-row" href="/tools/system-requirements" aria-label="Can My PC Run GTA 6?"><span class="trend-rank first">1</span><span><span class="trend-row-title">Can My PC Run GTA 6?</span><span class="trend-row-badge">Start here</span></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tools/fps-calculator" aria-label="Search for FPS Calculator"><span class="trend-rank top">2</span><span><span class="trend-row-title">FPS Calculator</span><span class="trend-row-badge">Step two</span></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tools/download-time" aria-label="Search for Download Time Calculator"><span class="trend-rank top">3</span><span><span class="trend-row-title">Download Time Calculator</span><span class="trend-row-badge">Step three</span></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tools/settings-optimizer" aria-label="Graphics Settings Optimizer"><span class="trend-rank">4</span><span><span class="trend-row-title">Settings Optimizer</span></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-          <li><a class="trend-row" href="/tools/storage-planner" aria-label="Search for Storage Calculator"><span class="trend-rank">5</span><span><span class="trend-row-title">Storage Calculator</span></span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>
-        </ul>
+<!-- ================= 10 — DISCOVERY ================= -->
+<section class="section" id="sec-discovery" aria-labelledby="disc-h2">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Discovery</p>
+        <h2 id="disc-h2">Find more, track progress, check status.</h2>
+        <p>Trending tools, name generators and completion trackers: the rest of the site, in one place.</p>
       </div>
-      <a class="advanced-panel-cta" href="/trending">See the full list <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel card-hover-glow stagger-fade-up" style="--stagger-index:1" data-accent="blue" aria-labelledby="trackers-heading">
-      <div class="advanced-panel-eyebrow">100% run</div>
-      <h3 id="trackers-heading">Tracking</h3>
-      <p>Grind-friendly completionist checklists.</p>
-      <div class="advanced-panel-body">
-        <div class="tracker-tiles">
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><h4>Mission Tracker</h4><p>Story &amp; side missions.</p></a>
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span><h4>Collectibles Tracker</h4><p>Find every hidden pickup.</p></a>
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h4>100% Checklist</h4><p>The full completionist grind.</p></a>
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span><h4>Trophy Tracker</h4><p>Every trophy &amp; achievement.</p></a>
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span><h4>Vehicle Garage</h4><p>Log cars, bikes &amp; boats.</p></a>
-          <a class="tracker-tile" href="/trackers"><span class="tracker-tile-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h4>Weapon Loadout</h4><p>Save and compare kits.</p></a>
+    </div>
+    <div class="discovery-grid">
+      <div>
+        <h3 class="disc-sub">Trending (starter list)</h3>
+        <p class="disc-note">A seeded starter list of the tools most visitors need first. Not a live popularity ranking.</p>
+        <a class="trend-row" href="/tools/system-requirements" aria-label="1 Can My PC Run GTA 6?"><span class="trend-rank tnum">1</span><span class="trend-title">Can My PC Run GTA 6?</span></a>
+        <a class="trend-row" href="/tools/fps-calculator" aria-label="2 FPS Calculator"><span class="trend-rank tnum">2</span><span class="trend-title">FPS Calculator</span></a>
+        <a class="trend-row" href="/tools/download-time" aria-label="3 Download Time"><span class="trend-rank tnum">3</span><span class="trend-title">Download Time</span></a>
+        <a class="trend-row" href="/tools/settings-optimizer" aria-label="4 Settings Optimizer"><span class="trend-rank tnum">4</span><span class="trend-title">Settings Optimizer</span></a>
+        <a class="trend-row" href="/tools/storage-planner" aria-label="5 Storage Planner"><span class="trend-rank tnum">5</span><span class="trend-title">Storage Planner</span></a>
+        <h3 class="disc-sub">Name generators</h3>
+        <div class="gen-chips">
+          <a class="gen-chip" href="/generators">Character</a>
+          <a class="gen-chip" href="/generators">Crew</a>
+          <a class="gen-chip" href="/generators">License Plate</a>
+          <a class="gen-chip" href="/generators">Radio Callsign</a>
+          <a class="gen-chip" href="/generators">Gamertag</a>
         </div>
+        <p class="disc-note">The generators page opens on Character names. Deep links per style (&thinsp;?style=crew&thinsp; and friends) are not honoured by the live generator yet (see notes).</p>
       </div>
-      <a class="advanced-panel-cta" href="/trackers">All Trackers <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
-    <section class="advanced-panel wide card-hover-glow stagger-fade-up" style="--stagger-index:2" data-accent="cyan" aria-labelledby="generators-heading">
-      <div class="advanced-panel-eyebrow">Just for fun</div>
-      <h3 id="generators-heading">Name Generators</h3>
-      <p>Naming rules for five kinds of name — generate yours instantly.</p>
-      <div class="advanced-panel-body">
-        <div class="gen-list">
-          <a class="gen-chip" href="/generators"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Character Name</a>
-          <a class="gen-chip" href="/generators"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>Crew Name</a>
-          <a class="gen-chip" href="/generators"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3H8a2 2 0 0 0-2 2v2"/><path d="M16 3h2a2 2 0 0 1 2 2v2"/></svg>License Plate</a>
-          <a class="gen-chip" href="/generators"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>Radio Callsign</a>
-          <a class="gen-chip" href="/generators"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>Gamertag</a>
-          </div>
+      <div>
+        <h3 class="disc-sub">Trackers</h3>
+        <p class="disc-note">Progress is saved in this browser only. A new visitor starts at 0%.</p>
+        <a class="tracker-tile" href="/trackers/missions"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><span class="tt-title">Mission Tracker</span><span class="tt-desc">Missions across 5 chapters, checked off as you play.</span></span></a>
+        <a class="tracker-tile" href="/trackers/collectibles"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg><span><span class="tt-title">Collectibles Tracker</span><span class="tt-desc">Stunt jumps, hidden packages and more, shown as ranges.</span></span></a>
+        <a class="tracker-tile" href="/trackers/100-percent"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></svg><span><span class="tt-title">100% Checklist</span><span class="tt-desc">Everything that counts toward 100% completion, in one list.</span></span></a>
+        <a class="tracker-tile" href="/trackers/trophies"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 6H4a1 1 0 0 0-1 1c0 2.5 2 4 4 4M17 6h3a1 1 0 0 1 1 1c0 2.5-2 4-4 4"/></svg><span><span class="tt-title">Trophy Tracker</span><span class="tt-desc">Trophies and achievements, tracked from the community list.</span></span></a>
       </div>
-      <a class="advanced-panel-cta" href="/generators">Browse All <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    </section>
+      <div>
+        <h3 class="disc-sub">Server status (manual check)</h3>
+        <p class="disc-note">There is no GTA 6 server. This is a manual check of Rockstar, PlayStation and Xbox services. Last checked <time datetime="2026-11-24T07:30:00Z">24 Nov 2026, 07:30 UTC</time>.</p>
+        <article class="status-card">
+          <h4>Rockstar Authentication</h4>
+          <p><span class="pill pill-success">Operational</span></p>
+          <p class="status-src"><a href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener">support.rockstargames.com/servicestatus</a></p>
+        </article>
+        <article class="status-card">
+          <h4>PlayStation Network</h4>
+          <p><span class="pill pill-success">Operational</span></p>
+          <p class="status-src"><a href="https://status.playstation.com" target="_blank" rel="noopener">status.playstation.com</a></p>
+        </article>
+        <article class="status-card">
+          <h4>Xbox network</h4>
+          <p><span class="pill pill-warning">Unknown</span></p>
+          <p class="status-src">Check unavailable. See the <a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener">official Xbox status page</a>.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Newsletter -->
-<section class="section container" id="newsletter" aria-label="Newsletter signup">
-  <div class="newsletter-wrap">
-    <div class="newsletter-card stagger-fade-up">
-      <div class="newsletter-glow newsletter-glow-a" aria-hidden="true"></div>
-      <div class="newsletter-glow newsletter-glow-b" aria-hidden="true"></div>
-      <div class="newsletter-inner">
-        <span class="newsletter-eyebrow eyebrow">ToolWools Intelligence</span>
-        <h2>Master the <span class="gradient-text">Vice City</span> underground</h2>
-        <p>Get the latest GTA 6 tools, patch-day guides, and new-tool alerts delivered straight to your inbox.</p>
-        <ul class="newsletter-perks">
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>No spam <span class="text-muted">· Pure signal, zero noise.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>Early tool access <span class="text-muted">· Try new tools before they launch — free, like every tool here.</span></li>
-          <li><span class="newsletter-perks-icon" aria-hidden="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>Subscriber guides <span class="text-muted">· Monthly guides, free for subscribers.</span></li>
-        </ul>
-        <form class="newsletter-form" data-newsletter-form novalidate>
-          <label class="sr-only" for="newsletter-email">Email address</label>
-          <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" autocomplete="email" required>
-          <button type="submit" class="btn-ultra"><span class="btn-ultra-inner" aria-hidden="true"></span>Subscribe</button>
-        </form>
-        <p class="newsletter-feedback" data-newsletter-feedback hidden></p>
-        <div class="newsletter-success" data-newsletter-success role="status" hidden>
-          <span class="newsletter-success-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="m9 12 2 2 4-4"/></svg></span>
-          <p data-newsletter-success-msg>Thanks — you're on the list. Watch for the next tool drop.</p>
-          <p class="sub">Manage your subscription anytime from <a href="/email-preferences">email preferences</a>.</p>
+<!-- ================= 11 — NEWSLETTER ================= -->
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2">Stay in the Loop</h2>
+          <p>Patch notes, new tools, and guides, when they land, not before. No spam, unsubscribe anytime.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="you@example.com" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
-</main>
+
+<!-- ================= 12 — FOOTER ================= -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">Browse tools →</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag">All GTA 6 Tools in One Place</span>
-              </span>
-            </span>
-          </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
-        </div>
-        <div class="footer-cols">
-          <div>
-            <h3>Top Tools</h3>
-            <ul>
-              <li><a href="/tools/system-requirements">Can My PC Run GTA 6?</a></li>
-              <li><a href="/tools/fps-calculator">FPS Calculator</a></li>
-              <li><a href="/tools/download-time">Download Time Calculator</a></li>
-              <li><a href="/tools/system-requirements">System Requirements</a></li>
-              <li><a href="/tools/settings-optimizer">Settings Optimizer</a></li>
-              <li><a href="/tools/hardware-comparison">Hardware Comparison</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>Explore</h3>
-            <ul>
-              <li><a href="/tools">All Tools</a></li>
-              <li><a href="/trending">Trending</a></li>
-              <li><a href="/trackers">Trackers</a></li>
-              <li><a href="/generators">Generators</a></li>
-              <li><a href="/news">News</a></li>
-              <li><a href="/trailers">Trailers</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>Resources</h3>
-            <ul>
-              <li><a href="/tools/interactive-map">Interactive Map</a> <span class="footer-col-badge">New</span></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/methodology">Methodology</a></li>
-              <li><a href="/contact">Contact</a></li>
-              <li><a href="/email-preferences">Email Preferences</a></li>
-              <li><a href="/sitemap">Sitemap</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
-              <li><a href="/editorial-policy">Editorial Policy</a></li>
-              <li><a href="/disclaimer">Disclaimer</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
-        <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>
-          <span class="sep" aria-hidden="true"></span>
-          <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
-        </div>
-      </div>
+  <div class="footer-top"><div class="wrap">GTA 6 is out now: Nov 19, 2026 &middot; <a href="/tools">Browse tools <span aria-hidden="true">&rarr;</span></a></div></div>
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>Tools. Guides. GTA 6.</p>
     </div>
+    <nav class="footer-col" aria-label="Quick links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/trailers">Trailers</a></li>
+        <li><a href="/guides">Guides</a></li><li><a href="/sitemap">Sitemap</a></li><li><a href="/trending">Trending</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Categories">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="/tools?category=release">Release Tools</a></li>
+        <li><a href="/tools?category=pc">PC Tools</a></li>
+        <li><a href="/tools?category=performance">Performance</a></li>
+        <li><a href="/tools?category=comparison">Comparisons</a></li>
+        <li><a href="/tools?category=trackers">Trackers</a></li>
+        <li><a href="/tools?category=planners">Planners</a></li>
+        <li><a href="/generators">Generators</a></li>
+        <li><a href="/guides">Guides</a></li>
+        <li><a href="/tools?category=economy">Economy</a></li>
+        <li><a href="/tools?category=map">Map</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="About">
+      <h3>About</h3>
+      <ul>
+        <li><a href="/about">About ToolWools</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li><li><a href="/methodology">Methodology</a></li><li><a href="/editorial-policy">Editorial Policy</a></li><li><a href="/email-preferences">Email Preferences</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 ToolWools. All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</span>
+    <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><button type="button" data-consent-open>Cookie settings</button></span>
+    <span>Built for the GTA Community &hearts;</span>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics consent">
-  <div class="consent-inner">
-    <p><strong>Analytics, only with your OK.</strong> We use aggregate Google Analytics to see which tools get used. Tool inputs never leave your device, no profile is built, and nothing is sold. Accept to load it, or decline and browse without it. You can change your mind anytime from Cookie settings in the footer.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accept analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Decline</button>
-      <a href="/privacy">Privacy policy</a>
-    </div>
+
+<!-- Consent banner (§21 — live behaviour from assets/js/consent.js; shown here so the footer's Cookie settings button has a banner to re-open in staging) -->
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/launch.js" defer></script>
+
+</main>
+
+
+<!-- Trailer dialog (§06 / §12) — embed loads only on play -->
+<dialog class="trailer-dialog" id="trailer-dialog" aria-label="GTA 6 Official Trailer 2">
+  <div class="td-head"><strong>GTA 6 Official Trailer 2 (May 6, 2025) · 2:47</strong>
+    <button class="icon-btn" type="button" data-trailer-close aria-label="Close trailer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <p class="td-loading" data-trailer-loading>Loading video…</p>
+  <iframe id="trailer-frame" src="about:blank" title="GTA 6 trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p class="td-foot">Watch on YouTube: <a href="https://www.youtube.com/watch?v=VQRLujxTm3c" target="_blank" rel="noopener">youtube.com/watch?v=VQRLujxTm3c</a></p>
+</dialog>
+
+<p class="visually-hidden" aria-live="polite" id="theme-status"></p>
+
+<script>
+(function(){
+"use strict";
+var root=document.documentElement;
+/* ---- Theme (light-first; TW_THEME_DEFAULT is defined in the head guard) ---- */
+function applyTheme(t,announce){
+  root.classList.add('tw-theme-switching');
+  root.dataset.theme=t;
+  try{localStorage.setItem('tw-theme',t);}catch(e){}
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.setAttribute('aria-pressed',t==='dark'?'true':'false');
+    b.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');
+  });
+  var st=document.getElementById('theme-status');
+  if(st&&announce){st.textContent=t==='dark'?'Dark theme on':'Light theme on';}
+  setTimeout(function(){root.classList.remove('tw-theme-switching');},50);
+}
+applyTheme(root.dataset.theme||'light',false);
+document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+  b.addEventListener('click',function(){applyTheme(root.dataset.theme==='dark'?'light':'dark',true);});
+});
+/* ---- Header: scrolled state ---- */
+var bar=document.querySelector('[data-header-bar]');
+function onScroll(){if(bar)bar.classList.toggle('scrolled',window.scrollY>4);}
+onScroll();
+window.addEventListener('scroll',onScroll,{passive:true});
+/* ---- Mobile menu ---- */
+var menuBtn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
+function setMenu(open){
+  menu.hidden=!open;
+  menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  menuBtn.querySelector('.icon-menu').style.display=open?'none':'';
+  menuBtn.querySelector('.icon-close').style.display=open?'':'none';
+  document.body.style.overflow=open?'hidden':'';
+  if(open){var first=menu.querySelector('a, input, button');if(first)first.focus();}
+  else{menuBtn.focus();}
+}
+menuBtn.addEventListener('click',function(){setMenu(menu.hidden);});
+menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){setMenu(false);}});
+/* ---- Language menu: close on Escape or outside click ---- */
+document.querySelectorAll('.lang-menu').forEach(function(m){
+  var summary=m.querySelector('summary');
+  document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m.open=false;});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.open=false;if(summary)summary.focus();}});
+});
+/* ---- Search combobox — REAL 24-item index from the live tree
+   (~/workspace/toolwools-static/assets/js/search.js, titles/descs/tags
+   copied verbatim; hrefs: /tools/<slug>, or t.url when set). ---- */
+var TOOLS=[
+ {slug:"system-requirements",title:"GTA 6 System Requirements Checker",desc:"Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."},
+ {slug:"download-time",title:"GTA 6 Download Time Calculator",desc:"Estimate how long the ~212 GB base install will take on your connection, plus day-one patch math."},
+ {slug:"storage-planner",title:"GTA 6 Storage Planner",desc:"Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates."},
+ {slug:"add-to-calendar",title:"GTA 6 Release Date Reminder",desc:"Add the GTA 6 launch to your calendar in your timezone."},
+ {slug:"readiness-score",title:"GTA 6 Readiness Score",desc:"One score for your whole rig: performance, VRAM, storage and network."},
+ {slug:"bottleneck-calculator",title:"GTA 6 Bottleneck Calculator",desc:"Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig."},
+ {slug:"vram-calculator",title:"GTA 6 VRAM Requirements Checker",desc:"Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards."},
+ {slug:"fps-calculator",title:"GTA 6 FPS Calculator",desc:"Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra."},
+ {slug:"gpu-tier-list",title:"GTA 6 GPU Tier List",desc:"Best graphics cards for GTA 6, ranked by tier."},
+ {slug:"interactive-map",title:"GTA 6 Interactive Map",desc:"Leonida explorer and size comparison for the GTA 6 map."},
+ {slug:"pre-order-tracker",title:"Where to Buy GTA 6: Editions & Channels Compared",desc:"Where to buy GTA 6, compared by channel."},
+ {slug:"edition-comparison",title:"GTA 6 Edition Picker",desc:"Every GTA 6 edition compared: bonuses, price and what each unlocks."},
+ {slug:"internet-speed-check",title:"GTA 6 Internet Speed Advisor",desc:"Check whether your connection is fast enough for GTA 6 downloads and Online."},
+ {slug:"price-by-country",title:"GTA 6 Price by Country",desc:"GTA 6 price by country in local currency."},
+ {slug:"economy-calculator",title:"GTA 6 Money and Business ROI Calculator",desc:"Work out the fastest way to earn GTA$ and which businesses pay back first."},
+ {slug:"gta-6-tracker",title:"GTA 6 Launch Milestones",desc:"Launch milestones and completed preload windows for GTA 6."},
+ {slug:"settings-optimizer",title:"Graphics Settings Optimizer",desc:"Dial in graphics settings for your target FPS and rig."},
+ {slug:"hardware-comparison",title:"Hardware Comparison",desc:"Compare two GPUs or CPUs head to head for GTA 6."},
+ {slug:"server-status",title:"GTA 6 Server Status: Are the Servers Down?",desc:"GTA 6 has no servers to go down. It launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked."},
+ {slug:"preload-tracker",title:"GTA 6 Preload History & Update Schedule",desc:"GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026."},
+ {slug:"vehicle-comparison",title:"GTA 6 Vehicle Comparison: Ratings, Register Cost & Sell Value",desc:"Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 (Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength), plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026."},
+ {slug:"weapon-comparison",title:"GTA 6 Weapon Comparison: Ratings, Magazine & Price",desc:"Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range, the four in-game ratings out of 10, plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026."},
+ {slug:"generators",title:"GTA 6 Name Generator",desc:"Character names, crew tags, license plates, radio callsigns and gamertags, generated instantly.",url:"/generators",tags:"name generator gta 6"},
+ {slug:"business-tracker",title:"GTA 6 Business Tracker",desc:"GTA 6 business calculator and tracker: no business can be bought yet, so track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods."}
+];
+var cards=document.querySelectorAll('#tools-grid .tool-card');
+function fold(s){return s.replace(/İ/g,'i').replace(/ı/g,'i').replace(/I/g,'i').toLowerCase();}
+function filterTools(q){
+  var n=fold(q.trim()),shown=0;
+  cards.forEach(function(c){
+    var hit=n.length<2||fold(c.getAttribute('data-tool')).indexOf(n)>-1;
+    c.style.display=hit?'':'none';if(hit)shown++;
+  });
+  var empty=document.getElementById('tools-empty');
+  empty.hidden=shown>0;document.getElementById('tools-empty-q').textContent=q;
+  if(n.length<2)return [];
+  return TOOLS.filter(function(t){return fold(t.title+' '+t.desc+' '+(t.tags||'')).indexOf(n)>-1;}).slice(0,6);
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+  var box=document.getElementById(inp.getAttribute('aria-controls'));
+  if(!box)return;
+  var activeIdx=-1,blurTimer=null;
+  function close(){box.hidden=true;box.innerHTML='';activeIdx=-1;inp.setAttribute('aria-expanded','false');inp.removeAttribute('aria-activedescendant');}
+  function render(q){
+    if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}
+    var list=filterTools(q);
+    activeIdx=-1;
+    if(fold(q).length<2){close();return;}
+    inp.setAttribute('aria-expanded','true');box.hidden=false;
+    if(!list.length){
+      box.innerHTML='<p class="search-empty" role="status">No tools match &ldquo;'+esc(q.trim())+'&rdquo;. Try &ldquo;FPS&rdquo;, &ldquo;VRAM&rdquo; or &ldquo;bottleneck&rdquo;.</p>';
+      return;
+    }
+    box.innerHTML=list.map(function(t,i){
+      var href=t.url||('/tools/'+t.slug);
+      return '<a href="'+href+'" role="option" id="'+inp.id+'-sr-'+i+'"><strong>'+esc(t.title)+'</strong><span>'+esc(t.desc)+'</span></a>';
+    }).join('');
+  }
+  inp.addEventListener('input',function(){render(inp.value);});
+  inp.addEventListener('focus',function(){if(blurTimer){clearTimeout(blurTimer);blurTimer=null;}if(inp.value.trim().length>=2)render(inp.value);});
+  inp.addEventListener('keydown',function(e){
+    var links=box.querySelectorAll('a');
+    if(e.key==='Escape'){inp.value='';filterTools('');close();inp.blur();return;}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      if(!links.length)return;e.preventDefault();
+      activeIdx=e.key==='ArrowDown'?(activeIdx+1)%links.length:(activeIdx-1+links.length)%links.length;
+      links.forEach(function(l,i){l.classList.toggle('active',i===activeIdx);});
+      inp.setAttribute('aria-activedescendant',inp.id+'-sr-'+activeIdx);
+      return;
+    }
+    if(e.key==='Enter'&&activeIdx>=0&&links[activeIdx]){e.preventDefault();window.location.href=links[activeIdx].href;}
+  });
+  inp.addEventListener('blur',function(){blurTimer=setTimeout(function(){if(!box.contains(document.activeElement))close();},150);});
+});
+document.addEventListener('click',function(e){
+  document.querySelectorAll('[data-header-search-input]').forEach(function(inp){
+    var box=document.getElementById(inp.getAttribute('aria-controls'));
+    if(box&&!box.hidden&&!inp.closest('.header-search,.mobile-search').contains(e.target)){box.hidden=true;box.innerHTML='';}
+  });
+});
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    var vis=window.innerWidth>=1280?document.getElementById('header-search'):document.querySelector('.mobile-menu [data-header-search-input]');
+    if(!menu.hidden&&window.innerWidth<1280){vis=document.querySelector('.mobile-menu [data-header-search-input]');}
+    if(vis){if(window.innerWidth<1280&&menu.hidden)setMenu(true);vis.focus();}
+  }
+});
+/* ---- Trailer dialog (embed loads only on play; no autoplay) ---- */
+var dlg=document.getElementById('trailer-dialog'),frame=document.getElementById('trailer-frame');
+var lastTrigger=null;
+function openTrailer(trigger){
+  lastTrigger=trigger||document.activeElement;
+  var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=false;
+  frame.src='https://www.youtube-nocookie.com/embed/VQRLujxTm3c?autoplay=1&rel=0';
+  if(typeof dlg.showModal==='function'){dlg.showModal();}
+  else{dlg.setAttribute('open','');}
+  var closeBtn=dlg.querySelector('[data-trailer-close]');if(closeBtn)closeBtn.focus();
+}
+function closeTrailer(){
+  frame.src='about:blank';
+  if(typeof dlg.showModal==='function'){if(dlg.open)dlg.close();}
+  else{dlg.removeAttribute('open');}
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+}
+document.querySelectorAll('[data-trailer-open]').forEach(function(b){
+  b.addEventListener('click',function(){openTrailer(b);});
+});
+frame.addEventListener('load',function(){
+  if(frame.getAttribute('src')&&frame.getAttribute('src')!=='about:blank'){
+    var ld=dlg.querySelector('[data-trailer-loading]');if(ld)ld.hidden=true;
+  }
+});
+dlg.querySelectorAll('[data-trailer-close]').forEach(function(b){b.addEventListener('click',closeTrailer);});
+dlg.addEventListener('click',function(e){if(e.target===dlg)closeTrailer();});
+/* Phase 9 Worker A (25 Nov 2026): trap Tab inside the modal dialog — the native
+   <dialog> let focus escape to <body> once per cycle (after the YouTube link),
+   because the tab order inside the dialog ends at the link. Wraps Tab from the
+   last focusable element to the first, and Shift+Tab from the first to the last. */
+dlg.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){e.preventDefault();closeTrailer();return;}
+  if(e.key!=='Tab')return;
+  var f=dlg.querySelectorAll('button,a[href],iframe,[tabindex]:not([tabindex="-1"])'),els=[],i;
+  for(i=0;i<f.length;i++){if(!f[i].disabled&&f[i].getClientRects().length)els.push(f[i]);}
+  if(!els.length)return;
+  var first=els[0],last=els[els.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+dlg.addEventListener('close',function(){
+  frame.src='about:blank';
+  if(lastTrigger&&lastTrigger.focus)lastTrigger.focus();
+});
+})();
+</script>
 <script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/header.js" defer></script>
-<script src="/assets/js/search.js" defer></script>
-<script src="/assets/js/newsletter.js" defer></script>
+<script>
+/* ==========================================================================
+   Phase 3 staging scripts for sections 07–12 (Worker B).
+   Phase 10 moves these into assets/js/ (newsletter.js / consent.js) and
+   deletes this block. No secrets are embedded here: the real submit reads
+   window.TOOLWOOLS_SUPABASE, which the production supabase.js provides.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  /* ---- Staging flag: newsletter demo mode --------------------------------
+     TW_NEWSLETTER_STAGING_DEMO = false → the real Supabase submit runs (demo mode off)
+     and a LABELLED demo success is shown ("Demo only — nothing was sent or
+     stored"). No email leaves the browser in staging.
+     PHASE 10: set to false at deploy (or remove the flag and this branch) to
+     enable the real Supabase PostgREST submit below. The real path is the
+     live code from assets/js/newsletter.js (audit 04 §7.3): POST
+     {cfg.url}/rest/v1/newsletter_subscribers, Prefer: return=minimal,
+     body {email (lowercased), source: "homepage", locale: "en"},
+     HTTP 409 → "You are already on the list. Nothing else to do."
+     Never fake success: unconfigured/unreachable endpoint → honest error.
+     ------------------------------------------------------------------------ */
+  var TW_NEWSLETTER_STAGING_DEMO = false;
+
+  var nlForm = document.getElementById("nl-form");
+  if (nlForm) {
+    var nlEmail = document.getElementById("nl-email");
+    var nlErr = document.getElementById("nl-error");
+    var nlOk = document.getElementById("nl-success");
+    var nlOkMsg = nlOk ? nlOk.querySelector("[data-newsletter-success-msg]") : null;
+    var nlBtn = document.getElementById("nl-submit");
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function nlShowError(msg) {
+      nlErr.hidden = false; nlOk.hidden = true;
+      nlErr.textContent = msg;
+      nlEmail.setAttribute("aria-invalid", "true");
+    }
+    function nlShowSuccess(msg) {
+      nlForm.hidden = true; nlOk.hidden = false;
+      if (nlOkMsg) nlOkMsg.textContent = msg;
+      nlOk.focus();
+    }
+    nlForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var value = nlEmail.value.trim();
+      if (!EMAIL_RE.test(value)) {
+        nlShowError("Enter an email like name@example.com.");
+        nlEmail.focus();
+        return;
+      }
+      nlEmail.removeAttribute("aria-invalid"); nlErr.hidden = true;
+      nlBtn.disabled = true; nlBtn.textContent = "Subscribing…";
+      if (TW_NEWSLETTER_STAGING_DEMO) {
+        /* Staging only: no network, no storage. Labelled demo success. */
+        window.setTimeout(function () {
+          nlBtn.disabled = false; nlBtn.textContent = "Subscribe";
+          nlShowSuccess("Demo only: you are on the list. Nothing was sent or stored.");
+        }, 400);
+        return;
+      }
+      /* ---- Real submit (live assets/js/newsletter.js, Phase 10 only) ---- */
+      var cfg = window.TOOLWOOLS_SUPABASE || {};
+      if (!cfg.url || !cfg.key) {
+        nlBtn.disabled = false; nlBtn.textContent = "Subscribe";
+        nlShowError("Newsletter signup is not connected right now, so nothing was sent. Please try again later.");
+        nlEmail.focus();
+        return;
+      }
+      fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
+        method: "POST",
+        headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "en" })
+      }).then(function (res) {
+        nlBtn.disabled = false; nlBtn.textContent = "Subscribe";
+        if (res.status === 409) { nlShowSuccess("You are already on the list. Nothing else to do."); return; }
+        if (!res.ok) { throw new Error("http " + res.status); }
+        nlShowSuccess("You are in. Watch your inbox for the next drop.");
+      }).catch(function () {
+        nlBtn.disabled = false; nlBtn.textContent = "Subscribe";
+        nlShowError("We could not save that just now, so nothing was sent. Please try again in a moment.");
+        nlEmail.focus();
+      });
+    });
+  }
+
+  /* ---- Consent banner (live assets/js/consent.js behaviour) ------------- */
+  var CONSENT_KEY = "tw-consent";
+  var banner = document.getElementById("consent-banner");
+  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
+  function consentShow() { if (banner) banner.hidden = false; }
+  function consentHide() { if (banner) banner.hidden = true; }
+  if (banner) {
+    if (!consentStored()) {
+      var consentShown = false;
+      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
+      window.setTimeout(showSoon, 1800);
+      window.addEventListener("scroll", showSoon, { once: true, passive: true });
+    }
+    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        consentShow();
+        var f = banner.querySelector("[data-consent-accept]");
+        if (f) f.focus();
+      });
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

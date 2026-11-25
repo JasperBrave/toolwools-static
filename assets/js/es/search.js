@@ -2,7 +2,7 @@
 // The source used a live autocomplete over the full content index; this
 // static build ships the tool catalogue (titles + descriptions from
 // src/lib/tools/registry.ts) and filters it in the browser. Arrow keys move,
-// Enter opens, Escape closes. Links to /tools/<slug> (live tools), t.url when set
+// Enter opens, Escape closes. Links to /es/tools/<slug> (live tools), t.url when set
 // (e.g. /es/generators, which lives outside /tools), or /tools
 // for coming-soon entries, matching the source behaviour.
 (function () {
@@ -20,8 +20,8 @@
     { slug: "pre-order-tracker", title: "Dónde comprar GTA 6: ediciones y canales comparados", desc: "Dónde comprar GTA 6, comparado por canal." },
     { slug: "edition-comparison", title: "Selector de ediciones de GTA 6", desc: "Todas las ediciones de GTA 6 comparadas: bonificaciones, precio y lo que desbloquea cada una." },
     { slug: "internet-speed-check", title: "Asesor de velocidad de internet de GTA 6", desc: "Comprueba si tu conexión es lo bastante rápida para las descargas de GTA 6 y Online." },
-    { slug: "price-by-country", title: "Precio de GTA 6 por país", desc: "GTA 6 price by country in local currency." },
-    { slug: "economy-calculator", title: "GTA 6 Money and ROI de negocio Calculadora", desc: "Descubre la forma más rápida de ganar GTA$ y qué negocios se amortizan antes." },
+    { slug: "price-by-country", title: "Precio de GTA 6 por país", desc: "Precio de GTA 6 por país en moneda local." },
+    { slug: "economy-calculator", title: "Calculadora de dinero y ROI de negocios de GTA 6", desc: "Descubre la forma más rápida de ganar GTA$ y qué negocios se amortizan antes." },
     { slug: "gta-6-tracker", title: "Hitos del lanzamiento de GTA 6", desc: "Hitos de lanzamiento y ventanas de precarga completadas para GTA 6." },
     { slug: "settings-optimizer", title: "Optimizador de ajustes", desc: "Ajusta la configuración de gráficos para tu FPS objetivo y tu equipo." },
     { slug: "hardware-comparison", title: "Comparación de hardware", desc: "Compara dos GPUs o CPUs cara a cara para GTA 6." },
@@ -62,7 +62,7 @@
       } else {
         hits.forEach(function (t) {
           var a = document.createElement("a");
-          a.href = t.url || "/tools/" + t.slug;
+          a.href = t.url || "/es/tools/" + t.slug;
           a.setAttribute("role", "option");
           var strong = document.createElement("span");
           strong.textContent = t.title;

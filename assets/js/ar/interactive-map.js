@@ -479,3 +479,6 @@ applyFilters("districts");
 renderSize();
 renderCompare();
 syncUrl();
+
+// Staging (Phase 3 Worker C): signal successful dataset load to map-panzoom.js.
+window.__twMapReady = true;

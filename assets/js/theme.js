@@ -3,7 +3,9 @@
 // L6: no stored preference -> follow prefers-color-scheme (task decision).
 (function () {
   var KEY = "tw-theme";
+  var TW_THEME_DEFAULT = "light"; // staging: light-first (see map-en.html guard)
   function apply(theme) {
+    document.documentElement.dataset.theme = theme;
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
       btn.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
@@ -16,7 +18,7 @@
   function save(theme) {
     try { window.localStorage.setItem(KEY, theme); } catch (e) { /* private mode: theme lasts for the session */ }
   }
-  var current = stored() || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  var current = stored() || TW_THEME_DEFAULT;
   apply(current);
   document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
     btn.addEventListener("click", function () {
