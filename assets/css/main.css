@@ -2460,3 +2460,22 @@ main:has(#bonus-matrix) .methodology-details pre.methodology-formula { white-spa
    next badge ("...dans le navigateur PC · PS5 · Xbox"). Widen the gap above
    the 480px 2x2-grid breakpoint (that rule keeps its own gap). */
 @media (min-width: 481px) { .hero-badges { gap: 1rem; } }
+
+/* FIX-AUDIT F16 (26 Nov 2026): Inter latin-ext subset for main.css pages.
+   main.css declared only inter-latin.woff2 (no unicode-range), so latin-ext
+   glyphs (TR s with cedilla / g-breve / dotted capital I) fell back to a
+   system font on all main.css pages (render-proven: the same "16px Inter"
+   spec measured differently on main.css vs tokens.css pages). This
+   append-only block mirrors tokens.css; unicode-range gating means only
+   pages containing latin-ext glyphs download the 85 KB file. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latinext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
