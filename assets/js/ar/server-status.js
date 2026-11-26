@@ -8,7 +8,7 @@
 // "Check unavailable — see official page"، وليس اللون الأخضر أبدًا.
 
 var DATA = {
-  "checkedAt": "2026-11-24T07:30:00Z",
+  "checkedAt": "2026-11-26T07:30:00Z",
   "checkedBy": "ToolWools",
   "services": [
     {
@@ -28,8 +28,8 @@ var DATA = {
     {
       "id": "xbox",
       "name": "Xbox network",
-      "status": "unknown",
-      "note": "Check unavailable — first-hand fetch on 24 Nov 2026 07:30 UTC returned only a loading shell. See the official page.",
+      "status": "operational",
+      "note": "All services up and running on Microsoft's Xbox status page (verified in a live browser on 26 Nov 2026 07:30 UTC; all 11 services normal).",
       "source": "https://support.xbox.com/en-US/xbox-live-status"
     }
   ],
