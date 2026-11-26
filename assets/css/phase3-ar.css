@@ -281,3 +281,6 @@
 
 /*! FULL-MATCH FIX (coordinator 26 Nov 2026): popular kicker colour — .popular-intro p grey override; scoped token rule */
 #popular .eyebrow{color:var(--color-accent-text)}
+
+/*! PIXEL-AUDIT AR FIX 1 (26 Nov 2026): popular dek orphan - "واحد." alone on line 2 at 1280 ([275,68], ratio 0.25) and 375 ([294,75], ratio 0.26). text-wrap:pretty was tried first and is a NO-OP here (Chromium keeps [275,68]; pretty is already inherited on this element and does not move the orphan). text-wrap:balance rebalances to [156,187] at 1280/1024 and [167,202] at 375, still 2 lines, same height. No copy change. */
+.popular-intro p:not(.eyebrow){text-wrap:balance}

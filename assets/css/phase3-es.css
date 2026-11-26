@@ -353,3 +353,17 @@
    orange. Scoped #popular rule wins on specificity (1,1,0 vs 0,1,1); the
    token resolves per theme (#C2410C light / #FF792F dark). */
 #popular .eyebrow{color:var(--color-accent-text)}
+
+/*! PIXEL-AUDIT ES STAGE 1 FINAL (26 Nov 2026, worker 4f7fd372).
+   T1 TRIAL REVERTED: 12px tile labels at >=1280 overlapped (min label gap
+   5px -> -3px, three pairs negative; tiles 74 -> 77px). 11px stands.
+   T2 FIX (kept): .footer-bottom horizontal padding 24px at 1024-1279.
+   The .footer-bottom{padding:... 0} rule zeroes the .wrap side padding
+   below 1280, so the bottom-bar text sits flush at the viewport edge and
+   the trailing heart in "Hecho para la comunidad de GTA" is cut in half
+   at 1024 (screenshot-proven). 24px matches the .footer-grid side padding
+   at this width; rows are unchanged (row1 729px / row2 616px in 976px),
+   so the bottom bar stays 103px and the footer stays 270px. */
+@media (min-width:1024px) and (max-width:1279px){
+  .footer-bottom{padding-left:24px;padding-right:24px}
+}

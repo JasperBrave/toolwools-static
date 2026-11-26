@@ -417,3 +417,12 @@
 
 /* W-11 fix (26 Nov 2026): popular kicker orange at ALL widths - the scoped >=1280 (FR) / >=1024 (TR) rules left it grey below their breakpoints. Token rule, same values as the scoped rules. */
 #popular .eyebrow{color:var(--color-accent-text)}
+
+/*! PIXEL-AUDIT TR 26 Nov 2026 — duration badge 1 line at 1024-1279px.
+   TR badge text "2:47 - 193M görüntülenme" is 192px at 13px mono; badge total
+   222px vs 221px available in the 233px thumb (left:12px) so it wraps to 2
+   lines (48px tall). Plan section 5 sets the badge text to 12px at 1024; at
+   12px the total is 198px, 1 line. 1280+ and 375 keep 13px (1 line there). */
+@media (min-width:1024px) and (max-width:1279px){
+  .media-row .duration-badge{font-size:.75rem}
+}
