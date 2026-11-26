@@ -402,3 +402,104 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/*! POPULAR-SPACING-AUDIT ES (26 Nov 2026, worker 25ab1a60). Staging only.
+   Baseline: deploy 6a7547e (phase3-es.css md5 29e8b4c817345c9f3f192d67eabd6ffd).
+   All values measured fresh on ES (probe-es.js, tag base); targets from
+   mockup-measurements.md + FULL-MATCH-PLAN.md section 10. No hero change,
+   no hardware change, no copy change, no white text on orange. */
+
+/* ---- P1: 375 cards uniform (base 107/131/153 -> all tallest) ----
+   At <640px the grid is 1 column and rows are auto, so each card's height
+   follows its own title/desc lines. grid-auto-rows:1fr makes every implicit
+   row the tallest card's height (153px). 1280/1024 already uniform via the
+   fixed 201px/270px rows; this rule is scoped below 640px only. */
+@media (max-width:639px){
+  .tools-grid{grid-auto-rows:1fr}
+}
+
+/* ---- P2: popular dek balance (kills the "lugar." orphan, same height) ----
+   ES dek is 3 lines at every width with a 73-79px orphan ("lugar.") on line 3.
+   text-wrap:balance redistributes the same 3 lines; height stays 51px @1280/
+   1024 and 77px @375. No copy touched. */
+.popular-intro p:not(.eyebrow){text-wrap:balance}
+
+/* ---- P3: intro internal gaps to the mockup ----
+   Mockup (1024 direct): kicker->heading 14, heading->dek 10, dek->pill 14.
+   Scaled x1.19 @1280: 17 / 12 / 17. Live was 12 / 16 / 16 at all widths. */
+@media (min-width:1024px) and (max-width:1279px){
+  #popular .eyebrow{margin-bottom:14px}
+  #popular-h2{margin-bottom:10px}
+  .popular-intro p:not(.eyebrow){margin-bottom:14px}
+}
+@media (min-width:1280px){
+  #popular .eyebrow{margin-bottom:17px}
+  #popular-h2{margin-bottom:12px}
+  .popular-intro p:not(.eyebrow){margin-bottom:17px}
+}
+
+/* ---- P4: tower gap to the mockup's spacing (trial A) ----
+   Live tower sat 16px below the intro, top inside grid row 2's band
+   (1280: top y956, row 2 is y888-1089; tower 206x181 vs cards 265x201),
+   so it read as a 4th card in row 2. Mockup tower straddles the row 2/3
+   boundary (y640-792 vs rows y620-692 / y700-772) and sits ~50px clear
+   of the intro text at 1280 scale. 50px @1280 / 42px @1024 pushes the live
+   tower across the row boundary (1280: top y~990, bottom y~1171, crossing
+   the 1089-1099 row gap). Stripes move with the tower (same top rule).
+   NOTE: the mockup's literal tower position (top 18px above the pill top,
+   beside the 142px pill) is unreachable in ES: the ES pill is 246px wide
+   in a 312px intro, so the 206px tower would cover the pill's right 60%
+   (see audit report). This offset is the closest CSS-only match.
+   @1024 the tower already straddles rows 1/2 (173 tall vs 270 cards); the
+   42px offset is the mockup-scale value there. */
+@media (min-width:1024px) and (max-width:1279px){
+  .popular-tower{top:calc(100% + 42px)}
+  .popular-stripes{top:calc(100% + 42px)}
+}
+@media (min-width:1280px){
+  .popular-tower{top:calc(100% + 50px)}
+  .popular-stripes{top:calc(100% + 50px)}
+}
+
+/* ---- P5: section gaps @1024-1279 to the mockup (direct values) ----
+   Mockup: strip->popular kicker 34, popular->news 14, news->hardware 14.
+   Live was 40 / 17 / 17 at every width (the section paddings). @1280 the
+   live values already match the scaled targets (40.5 / 16.7 / 16.7), so
+   this is scoped to 1024-1279 only. 375 keeps its own rhythm. */
+@media (min-width:1024px) and (max-width:1279px){
+  main#main>section[aria-label="Categorías"]{padding-bottom:34px}
+  main#main>#popular{padding-bottom:14px}
+  main#main>#news{padding-bottom:14px}
+}
+
+/* ---- P6: newsletter band meets the footer divider (mockup ~1px) ----
+   Mockup: NL band bottom y1290, footer divider core y1291-1298 -> gap ~1px.
+   Live: 28px at every width (the #sec-newsletter padding-bottom:28px).
+   0px is within tolerance of the ~1px mockup gap. Band height unchanged
+   (104/87/417); footer height unchanged (292/270/924). */
+main#main>#sec-newsletter{padding-bottom:0}
+
+/* ---- P7: keep the popular contain-intrinsic-size honest at <1024 ----
+   P1 makes the 375 layout 1933 -> 2063px (intro 531 + gap 32 + grid 1501);
+   the base intrinsic placeholder (1933px) would under-report the offscreen
+   height by 130px. Scoped below 1024 so the 830/623 values at >=1024 stand.
+   All other intrinsic values still match their content (strip 75/90 = card
+   height; news 340; NL 104/87/417 = band height; popular 830/623). */
+@media (max-width:1023px){
+  main#main>#popular{contain-intrinsic-size:2063px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (min-width:1280px){.tool-card h3{min-height:65px}.tool-card p{min-height:121px}.tools-grid{grid-auto-rows:minmax(201px,auto)}}
+@media (min-width:1024px) and (max-width:1279px){.tool-card h3{min-height:109px}.tool-card p{min-height:169px}.tools-grid{grid-auto-rows:minmax(270px,auto)}}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:80px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2157px}main#main>footer.site-footer{contain-intrinsic-size:930px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:982px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:709px}main#main>footer.site-footer{contain-intrinsic-size:292px}}

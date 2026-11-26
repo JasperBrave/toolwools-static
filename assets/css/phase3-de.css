@@ -369,3 +369,84 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/* ================= POPULAR-SPACING-AUDIT 2026-11-26 (DE, staging) =================
+   Baseline measured 26 Nov (probe-before.json): cards uniform boxes
+   251x246 @1280 / 211x291 @1024, but dek tops misaligned up to 12px/row
+   (title boxes 52-66px @1280) and bottom whitespace (card bottom minus dek
+   bottom) spread 21-59px @1280. Tower verified: overlap 0px2, gap to grid
+   16px, 206x181 @1280 / 173x152 @1024, top:calc(100% + 16px) — the 16px
+   clear gap under the pill is far tighter than the mockup's ~50px gap at
+   1280 scale, so the tower reads as a 4th item in row 2's band.
+   No copy changed, no HTML change, no hero/hardware touch. */
+
+/* Dek leading 24px -> 22px on every width: 15px font, 1.47 leading stays
+   readable and shrinks the 5-vs-6-line dek spread. */
+.tool-card p{line-height:22px}
+
+@media (min-width:1280px){
+  /* Tower + stripes: 16px -> 50px clear gap below the intro text. */
+  .popular-tower{top:calc(100% + 50px)}
+  .popular-stripes{top:calc(100% + 50px)}
+  /* Titles: longest measured title box is 66px (3 lines); a 66px floor
+     aligns every dek top in a row. Tallest content then is
+     12+66+4+132+8+12 = 234px, so rows 246 -> 240 (6px headroom). */
+  .tool-card h3{min-height:66px}
+  .tools-grid{grid-auto-rows:240px}
+}
+
+@media (min-width:1024px) and (max-width:1279px){
+  /* Tower + stripes: 16px -> 40px clear gap below the intro text
+     (50px at 1280 scale). */
+  .popular-tower{top:calc(100% + 40px)}
+  .popular-stripes{top:calc(100% + 40px)}
+  /* Titles: 65px floor (3 lines) aligns row 3 dek tops; card 6's 5-line
+     title (101px) and card 1's 4-line title (85px) still stand proud —
+     a full floor would overflow card 9's 8-line dek. Tallest content
+     12+65+4+176+8+12 = 277px, so rows 291 -> 282 (5px headroom). */
+  .tool-card h3{min-height:65px}
+  .tools-grid{grid-auto-rows:282px}
+}
+
+/* Grid rows stretch to fill the fixed-height card (align-content default),
+   so the free space landed inside the title row unevenly and dek tops
+   still spread 14px/row after the floor. Pack rows at the top instead:
+   the title floor then fixes every dek top exactly, and all slack collects
+   as bottom whitespace below the dek. */
+.tool-card{align-content:start}
+
+/* Contain-intrinsic-size corrections (measured 26 Nov, 1s-wait scroll reads).
+   Sections use content-visibility:auto, so a stale hint shows as a wrong
+   off-screen placeholder height and a scroll jump when it renders.
+   - Footer @1024: hint 293px, placeholder measured 301px, TRUE height 270px
+     (= the C-03 accepted value — the "301" in earlier probes was the
+     placeholder, not the footer). Measured: placeholder box = intrinsic +
+     border-top, so the hint must be true-minus-border: 270-8 = 262.
+   - Footer @1280: hint 298px, true 292px (the §10 target); hint 292-10 = 282.
+   - Footer @375: hint 947px = true, but placeholder reads 953 (947+6 border);
+     hint 947-6 = 941.
+   - Popular: my row-height changes moved true heights to 757 / 883 / 1798
+     (was 775 / 910 / 1852); hints were 758 / 893 / 1835. Update all three. */
+main#main>#popular{contain-intrinsic-size:1798px}
+main#main>footer.site-footer{contain-intrinsic-size:941px}
+@media (min-width:1024px) and (max-width:1279px){
+  main#main>footer.site-footer{contain-intrinsic-size:262px}
+  main#main>#popular{contain-intrinsic-size:883px}
+}
+@media (min-width:1280px){
+  main#main>footer.site-footer{contain-intrinsic-size:282px}
+  main#main>#popular{contain-intrinsic-size:757px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:88px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2170px}main#main>footer.site-footer{contain-intrinsic-size:947px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:883px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:757px}main#main>footer.site-footer{contain-intrinsic-size:292px}}

@@ -451,3 +451,88 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/*! POPULAR-SPACING-AUDIT PT (26 Nov 2026, Michael: popular inconsistency + spacing + full audit).
+   Staging only. Measured on the 6a7547e deploy tree (detail-base-*.json, geom-base-*.json).
+   A. Card titles: the real text column is only 102px @1280 / 67px @1024
+      (card 226/191 - padding 24 - icon 48 - gap 16 - h3 padding-right 36 for
+      the CTA circle), so PT titles wrap to 2-4 lines @1280 and 3-6 @1024 and
+      every dek started at a different height. A 3-line min-height on the h3
+      aligns all dek starts (@1280: 8/9 cards at the same y, card5's 4-line
+      title 21px lower; @1024 it is a no-op — every title is >=3 lines, and a
+      4-line min-height would push card1's 10-line dek to 1px from the card's
+      bottom border, so the 1024 raggedness stands as a locale limit).
+      TRIED AND REVERTED: hyphens:none — it removed the hyphen glyphs but left
+      orphan fragments ("armazenam / ento", a lone "o" after "Comparaçã"),
+      which read as rendering bugs; the hyphenated breaks ("Planeja-dor",
+      "Com-para-ção") are correct PT typography. overflow-wrap:break-word is
+      kept as the no-overflow safety net. Fit verified: worst card (card1,
+      7-line dek @1280) text ends 19px above the card's bottom border; @1024
+      (10-line dek) 22px. No copy changed, 17px kept.
+   B. Tower: the mockup's tower top sits beside the pill (18px above the pill
+      top @1024; PIL re-measure: tower right x358, grid left x370, gap 12px
+      @1024 = 14px @1280 — the live 16px gap already matches, so the brief's
+      "~50px" does not reproduce and the gap is NOT changed). Live tower top
+      was 16px BELOW the whole intro, 225px below the section top vs the
+      mockup's 131px scaled, which is why it reads as a 4th item in row 2's
+      band (71% of its height inside row 2). Moved up to pill-top -21px @1280.
+      @1024 only -11px: the PT dek's second line runs to x249, 27px into the
+      tower's x-range, so the full -18px would clip the dek's descenders.
+      Blocked at full width: the PT pill is 235px wide and its arrow ends at
+      x286, 6px inside the tower's x-range — so the tower is narrowed
+      206->187px @1280 (173->154 @1024), left edge exactly at the pill's right
+      edge (0px2 overlap), right edge and 16px grid gap kept. Stripes stay at
+      top:calc(100% + 16px): they now sit at the tower's lower left, like the
+      mockup's second stripes group. Geometric overlap stays 0px2 with every
+      card and with the pill. NOTE for the coordinator: the same move-up in EN
+      would need the tower narrowed 206->134px (EN pill 170 + intro 312), so
+      this fix may stay PT-only.
+   C. Intro gaps vs the mockup (box gaps): kicker->h2 12 vs 17 @1280
+      (eyebrow margin 12->17 @1280 only; @1024 12 vs 14 is within tolerance);
+      h2->dek 16 vs 12 (h2 margin 16->12 @>=1024); dek->pill 16 vs 17 kept.
+   D. Section gaps vs the mockup: strip->popular 40 vs 35 @1024 (strip
+      section pb 40->35 @1024-1279; @1280 40 vs 42 is within tolerance);
+      popular->news 17 vs 14 @1024 and news->hardware 17 vs 14 @1024
+      (section pb 17->14 @1024-1279; @1280 17 is the scaled target);
+      newsletter->footer 28 vs ~1 at every width (NL section pb 28->0).
+      All CIS values are unchanged by these padding changes (CIS = height -
+      padding, and the section heights move by the same amount). */
+.tool-card h3{overflow-wrap:break-word}
+main#main>#sec-newsletter{padding-bottom:0}
+@media (min-width:1024px){
+  #popular-h2{margin-bottom:12px}
+  .tool-card h3{min-height:calc(3 * 1.25em)}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  main#main>section[aria-label=Categorias]{padding-bottom:35px}
+  main#main>#popular{padding-bottom:14px}
+  main#main>#news{padding-bottom:14px}
+  .popular-tower{top:calc(100% - 41px);width:154px}
+}
+@media (min-width:1280px){
+  #popular .eyebrow{margin-bottom:17px}
+  .popular-tower{top:calc(100% - 57px);width:187px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (min-width:1280px){.tool-card h3{min-height:87px}.tool-card p{min-height:168px}.tools-grid{grid-auto-rows:minmax(267px,auto)}}
+@media (min-width:1024px) and (max-width:1279px){.tool-card h3{min-height:131px}.tool-card p{min-height:241px}.tools-grid{grid-auto-rows:minmax(342px,auto)}}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:96px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2268px}main#main>footer.site-footer{contain-intrinsic-size:953px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:1264px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:916px}main#main>footer.site-footer{contain-intrinsic-size:292px}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): PT stripes follow the moved tower.
+   The PT worker moved the tower up (-57px @1280, -41px @1024) and narrowed it
+   but left the slashes at the base position, so they floated 73px below and
+   65px left of the tower, disconnected. Same rule as EN: stripes top = tower
+   top, stripes left = tower-left - 60px (tower left rel 235 @1280, 198 @1024). */
+@media (min-width:1280px){.popular-stripes{top:calc(100% - 57px);left:175px}}
+@media (min-width:1024px) and (max-width:1279px){.popular-stripes{top:calc(100% - 41px);left:138px}}

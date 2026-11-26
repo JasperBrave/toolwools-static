@@ -395,3 +395,85 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/*! POPULAR-SPACING-AUDIT EN (26 Nov 2026, staging only, worker EN):
+   Root cause of the ragged cards (measured, base 1280/1024/375): the card is
+   a grid with align-content:stretch (default), so the slack of a short card
+   is spread equally over its 3 auto rows — dek tops staggered 54-68px @1280
+   and 67-97px @1024, dek bottoms spread 15-24px. Fix: align-content:start
+   (slack goes to the bottom only) + fixed 2-line title box + fixed dek box
+   at each breakpoint's measured max lines. No copy changed, no clamp.
+   Tower (measured vs mockup UI_Visual_all_homepage.jpg): mockup gap
+   tower->grid ~23 mockup px = ~29px @1280 (task brief said ~50px; pixel
+   measurement says ~29px — implemented the measured value, flagged in the
+   report); mockup tower top ~5 mockup px below row-2 top; slashes peek
+   from behind the tower's upper-left. Section gaps measured from the
+   mockup's white bands (503-526, 791-807, 1021-1032, 1185-1194 mockup px):
+   strip->popular 24px (30 @1280), popular->news 17px (21 @1280),
+   news->hw 12px (15 @1280), hw->nl 10px (12 @1280), nl->footer ~0-5px.
+   Hero-owned gaps (stats->strip 23/64/48px) NOT touched: they are the
+   hero's own padding-bottom and the hero is out of scope. */
+
+/* ---- Part 1a: uniform card internals, all widths ---- */
+.tool-card{align-content:start}
+@media (min-width:1024px){
+  /* 2-line title box (2.5em = 42.5px @17px, 40px @16px) */
+  .tool-card h3{min-height:2.5em}
+}
+@media (min-width:1280px){
+  /* dek max is 5 lines x 24px = 120px; rows stay 201px (minmax = safety valve) */
+  .tool-card p{min-height:120px}
+  .tools-grid{grid-auto-rows:minmax(201px,auto)}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  /* Icon 48->40px + col-gap 16->12px widens the text column 132->144px, so
+     every title fits in 2 lines at the plan's 17px (incl. "Release Date
+     Reminder", 3 lines before) and the longest dek drops 7->6 lines.
+     Dek box 6 lines x 24px = 144px; content max 224px -> rows 226px.
+     Tower top: rows 226px put row-2 top 236px below the section top and the
+     intro is 188px -> gap 53px for tower top = row-2 top +5px. */
+  .tool-card{grid-template-columns:40px 1fr;column-gap:12px}
+  .tool-card .tool-icon{width:40px;height:40px}
+  .tool-card p{min-height:144px}
+  .tools-grid{grid-auto-rows:minmax(226px,auto)}
+}
+@media (max-width:1023px){
+  /* titles are 1 line here; dek max is 3 lines x 24px = 72px */
+  .tool-card p{min-height:72px}
+}
+
+/* ---- Part 1b: tower + slashes ---- */
+@media (min-width:1280px){
+  /* gap to grid 16 -> 30px (col-gap 8 + right 22); top 16 -> 8px below the
+     intro so the tower top sits 6px below row-2 top (mockup: +5 mockup px);
+     height 181 -> 212px (mockup tower height @1280), biased to the RGB tower */
+  .popular-tower{top:calc(100% + 8px);right:22px;height:212px;object-position:70% 50%}
+  .popular-stripes{top:calc(100% + 8px);left:24px}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  /* gap to grid 16 -> 24px (mockup 29px x 1024/1280); top aligned with row-2
+     top +5px: rows are 226px after the card fix, so row-2 top is 236px below
+     the section top and the intro is 188px -> gap 53px; height 152 -> 170px
+     (mockup tower height at this scale) */
+  .popular-tower{top:calc(100% + 53px);right:16px;height:170px;object-position:70% 50%}
+  .popular-stripes{top:calc(100% + 53px);left:24px}
+}
+
+/* ---- Part 2: section gaps (mockup white-band targets) ---- */
+@media (min-width:1280px){
+  main#main>section[aria-label=Categories]{padding-bottom:30px}
+  main#main>#popular{padding-bottom:21px}
+  main#main>#sec-hardware{padding-bottom:12px}
+  main#main>#sec-newsletter{padding-bottom:6px}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  main#main>section[aria-label=Categories]{padding-bottom:24px}
+  main#main>#sec-hardware{padding-bottom:10px}
+  main#main>#sec-newsletter{padding-bottom:5px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:1831px}main#main>footer.site-footer{contain-intrinsic-size:947px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:715px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:644px}main#main>footer.site-footer{contain-intrinsic-size:258px}}

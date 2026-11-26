@@ -319,3 +319,70 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/*! POPULAR-SPACING-AUDIT AR (26 Nov 2026, Michael: fix popular tools
+   inconsistency + audit spacing + full audit). Staging only; deploy CSS
+   untouched. Measurements: measure-base.json in this dir.
+   F1 TOWER GAP: live top:calc(100% + 16px) put the 206x181 tower's top
+   13.8px below the row-2 cards' top edge (880.8 vs 867 @1280), 16px from
+   the grid, 181px tall vs 201px cards -> reads as a 4th item in row 2.
+   Geometric overlap 0px2 (verified), horizontal gap 16px already matches
+   the mockup (12px @1024 -> 15px @1280, in tol) and is NOT changed.
+   Mockup intro->tower breathing room is ~50px at 1280 scale (40px @1024):
+   tower top moves to 48px below the row-2 top edge, clearly off-row, and
+   spans the row2/row3 boundary. Stripes move with the tower (same top).
+   RTL note: tower is left:8px (grid-side edge in RTL), NOT right:8px;
+   verified by getBoundingClientRect: tower x912-1118, grid right 896.
+   F2 375 CARDS: heights 152.5/131.3/107.3 (dek 3L/3L/2L) -> min-height
+   153px (max natural 152.5, rounded up) under 640px, same pattern as the
+   EN 375 min-height:131px fix. 1280/1024 rows already uniform
+   (265.3x201 / 220x270, all 9) via grid-auto-rows:201px @1280 and row
+   stretch @1024; not changed. No copy change; no translation shortened.
+   F3 SECTION GAPS (mockup-measurements.md §2 + FULL-MATCH-PLAN §10):
+   - strip -> popular: mockup 34px @1024 (42.5 @1280); live 40px both.
+     34px @1024-1279, 43px @1280. <1024 stays 40 (no mockup mobile).
+   - popular -> news: mockup 14px @1024 (17.5 @1280); live 17px both.
+     14px @1024-1279; @1280 stays 17 (target 17.5, in tol).
+   - news -> hardware: plan §10 gap 14px @1024, 17px @1280; live 17 both.
+     14px @1024-1279; @1280 stays 17.
+   NOT changed (recorded, not fixable or no plan target): NL -> footer
+   28px padB (mockup compresses inter-section space; no plan target;
+   footer height 292 met); HW h2 28px @1280 (deliberate HW-fix deviation,
+   hardware out of scope); NL input 362.6 (C-02 ceiling 363); intro 312
+   (C-01: 393 needs 1232 > 1152); cards stay ~201px (C-06 B). */
+@media (min-width:1024px) and (max-width:1279px){
+  .popular-tower{top:calc(100% + 40px)}
+  .popular-stripes{top:calc(100% + 40px)}
+  main#main>section[aria-label="الفئات"]{padding-bottom:34px}
+  main#main>#popular{padding-bottom:14px}
+  main#main>#news{padding-bottom:14px}
+}
+@media (min-width:1280px){
+  .popular-tower{top:calc(100% + 50px)}
+  .popular-stripes{top:calc(100% + 50px)}
+  main#main>section[aria-label="الفئات"]{padding-bottom:43px}
+}
+@media (max-width:639px){
+  .tool-card{min-height:153px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (min-width:1280px){.tool-card h3{min-height:51px}.tool-card p{min-height:112px}.tools-grid{grid-auto-rows:minmax(201px,auto)}}
+@media (min-width:1024px) and (max-width:1279px){.tool-card h3{min-height:94px}.tool-card p{min-height:160px}.tools-grid{grid-auto-rows:minmax(270px,auto)}}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:80px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): newsletter->footer gap 28->6px @>=1024,
+   matching the 0-10px family the other six locales landed (TR 2, ES 0, EN 6/5,
+   FR 10/8). AR worker left it at 28 for lack of a plan target; the mockup
+   shows a tight gap. Footer height itself unchanged. */
+@media (min-width:1024px){main#main>#sec-newsletter{padding-bottom:6px}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2098px}main#main>footer.site-footer{contain-intrinsic-size:930px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:910px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:640px}main#main>footer.site-footer{contain-intrinsic-size:292px}}

@@ -461,3 +461,58 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/* ================= TR POPULAR-SPACING AUDIT (26 Nov 2026, measured) =================
+   TOWER: mockup (PIL-measured, 1024 scale) tower top y642, pill bottom y675,
+   dek bottom y660, grid rows 534-611 / 617-693 / 698-776, tower bottom y792.
+   So the mockup tower tucks UNDER the intro (top 33px above the pill bottom,
+   18px below the dek) and straddles the row1/row2 boundary; it does NOT sit
+   16px below the intro inside row 2's band. Live base: top calc(100% + 16px)
+   -> tower 305-486 @1280 sits wholly inside row 2 (291-492) and reads as a
+   4th card. New top puts the tower top 13px below the dek bottom at both
+   widths (250 @1280, 235 @1024), straddling the row1/row2 boundary.
+   The tower then passes behind the pill's right end (pill ends x233, tower
+   starts x162 @1280), so the pill gets position/z-index + an opaque surface
+   background (mockup pill is white; btn-secondary is transparent) so it
+   stays fully readable over the photo/stripes. Stripes move with the tower.
+   375 CARDS: base boxes uneven 153/131/107 (card0 title 2L + dek 3L,
+   card5 title 1L + dek 2L, rest 131). min-height 153px (tallest natural)
+   below 1024px equalises them; @1024/1280 fixed auto-rows already uniform.
+   SPACING (mockup-measurements.md gaps, scaled x1.19 @1280, direct @1024):
+   strip->popular 34 @1024 / 40 @1280 (live 40 both: fix 1024 only);
+   popular->news and news->hardware 14 @1024 / 17 @1280 (live 17 both:
+   fix 1024 only); NL->footer band->divider 1px (live 28: fix to 2px @>=1024);
+   HW->NL 2px is already exact per the mockup - untouched. Hardware section
+   itself untouched (6a7547e). Hero untouched. No copy changed. */
+@media (min-width:1024px) and (max-width:1279px){
+  .popular-tower,.popular-stripes{top:calc(100% - 33px)}
+  .popular-intro .btn{position:relative;z-index:2;background:var(--color-surface)}
+  main#main>section[aria-label="Kategoriler"]{padding-bottom:34px}
+  main#main>#popular{padding-bottom:14px}
+  main#main>#news{padding-bottom:14px}
+}
+@media (min-width:1280px){
+  .popular-tower,.popular-stripes{top:calc(100% - 39px)}
+  .popular-intro .btn{position:relative;z-index:2;background:var(--color-surface)}
+}
+@media (min-width:1024px){
+  main#main>#sec-newsletter{padding-bottom:2px}
+}
+@media (max-width:1023px){
+  .tool-card{min-height:153px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (min-width:1280px){.tool-card h3{min-height:59px}.tool-card p{min-height:121px}.tools-grid{grid-auto-rows:minmax(201px,auto)}}
+@media (min-width:1024px) and (max-width:1279px){.tool-card h3{min-height:94px}.tool-card p{min-height:160px}.tools-grid{grid-auto-rows:minmax(270px,auto)}}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:80px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2098px}main#main>footer.site-footer{contain-intrinsic-size:953px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:910px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:691px}main#main>footer.site-footer{contain-intrinsic-size:258px}}

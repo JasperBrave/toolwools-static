@@ -447,3 +447,54 @@
 @media (max-width:1023px){
   .hw-card-outer .hw-teaser-img{height:170px}
 }
+
+/*! POPULAR-SPACING-AUDIT FR (26 Nov 2026, staging only, measured on deploy 6a7547e).
+   P-01 title zone: the card grid STRETCHES its 3 auto rows to fill the fixed
+   row height, so 2-line titles got rows of 50/58px and 3-line titles 64px
+   (title-probe.js) -> dek tops spread 67/75/81 @1280 and 96..133 @1024.
+   A fixed row1 (max <a> height + 4px h3 margin: 65.5+4=69.5 -> 70 @1280;
+   108+4=112 -> 113 @1024, 1px insurance) makes every dek start at the same
+   y. Row3 1fr absorbs the leftover; no text is shortened or clamped.
+   P-02 tower: horizontal gap to the grid 16px -> ~50px @1280 (mockup tower
+   right x358, grid left ~x398-410 -> ~40-52 mockup px -> ~50-65 scaled;
+   coordinator ~50) and 16 -> 40 @1024 (mockup scale 1:1). Tower top stays
+   calc(100%+16px): raising it would cover the browse pill (x64-178,
+   y887-923 @1280). Stripes left 40->8 @1280 keeps the visible sliver
+   58->56px (tower now covers more of the group); @1024 the sliver stays
+   89px, no stripes change.
+   S-01..S-04 section gaps from mockup pixel scans (mockup px, x1.25 @1280,
+   x1.0 @1024): strip->popular 28 -> 35/28 (was 40/40); popular->media
+   24 -> 30/24 (was 17/17); HW->NL 18 -> 22/18 (was 2/2, newsletter-side
+   padding-top only - no hardware rule touched); NL->footer ~8 -> 10/8
+   (was 28/28). Media->HW stays 17 (plan S10 target); hero->strip stays
+   23 @1280 (mockup ~19, +4 in tolerance) and 64 @1024 is hero-side, out
+   of scope. All scoped >=1024; 375 unchanged. */
+@media (min-width:1280px){
+  .tool-card{grid-template-rows:70px auto 1fr}
+  .popular-tower{right:42px}
+  .popular-stripes{left:8px}
+  main#main>section[aria-label="Catégories"]{padding-bottom:35px}
+  main#main>#popular{padding-bottom:30px}
+  main#main>#sec-newsletter{padding-top:22px;padding-bottom:10px}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .tool-card{grid-template-rows:113px auto 1fr}
+  .tools-grid{grid-auto-rows:354px}
+  .popular-tower{right:32px}
+  main#main>section[aria-label="Catégories"]{padding-bottom:28px}
+  main#main>#popular{padding-bottom:24px}
+  main#main>#sec-newsletter{padding-top:18px;padding-bottom:8px}
+}
+
+/*! COORDINATOR MERGE (26 Nov 2026): EN card-internals mechanism applied per-locale
+   (align-content:start + title/dek min-height boxes = measured maxima, no clamp).
+   Maxima measured by coordinator probe-merge.js on this locale's staging CSS. */
+.tool-card{align-content:start}
+@media (max-width:1023px){.tool-card h3{min-height:43px}.tool-card p{min-height:96px}}
+@media (max-width:640px){.tools-grid{grid-auto-rows:1fr}}
+
+/*! COORDINATOR MERGE (26 Nov 2026): CIS re-measured after this round's card/
+   spacing changes (coordinator probe-cis.js, scrolled render). True heights. */
+@media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2242px}main#main>footer.site-footer{contain-intrinsic-size:982px}}
+@media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:1106px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
+@media (min-width:1280px){main#main>#popular{contain-intrinsic-size:716px}main#main>footer.site-footer{contain-intrinsic-size:292px}}
