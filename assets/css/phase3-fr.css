@@ -498,3 +498,31 @@
 @media (max-width:1023px){main#main>#popular{contain-intrinsic-size:2242px}main#main>footer.site-footer{contain-intrinsic-size:982px}}
 @media (min-width:1024px) and (max-width:1279px){main#main>#popular{contain-intrinsic-size:1106px}main#main>footer.site-footer{contain-intrinsic-size:270px}}
 @media (min-width:1280px){main#main>#popular{contain-intrinsic-size:716px}main#main>footer.site-footer{contain-intrinsic-size:292px}}
+
+/*! REA FULL-MATCH W-01 (26 Nov 2026, coordinator): hardware H2 33px / 2 lines
+   at >=1280. Restores the 33px rule the HW-FIX block overrode to 28px, AND
+   widens the heading column: the H2 now spans the full card width (the
+   170px teaser image beside it left a ~265px column where 33px wrapped to
+   4 lines). The image moves beside the dek + CTA (rows 3-4) instead of
+   spanning rows 1-4. 1024-1279 untouched (28px/2L already correct there). */
+@media (min-width:1280px){
+  .hw-card-outer .hw-teaser-img{grid-column:2;grid-row:3/span 2}
+  #hw-h2{font-size:33px;line-height:33px;grid-column:1/-1}
+}
+
+/*! REA FULL-MATCH W-04 (26 Nov 2026, coordinator): FR newsletter band was
+   pushed 22px below its section top at >=1280 (18px at 1024-1279) by the
+   FR-only section-gap tuning (nl padding-top 22px/18px) — the only locale
+   with the gap, and the driver of the FR newsletter REA outlier (76.3 vs
+   EN 48.6: top 22 rows white vs mockup dark + every element shifted 22px).
+   Zero the padding-top and move the gap to the hardware side (hw pb 2->12
+   at >=1280, 2->10 at 1024-1279), so the hw->nl gap stays 12px/10px and
+   the band top-aligns like every other locale. */
+@media (min-width:1280px){
+  main#main>#sec-hardware{padding-bottom:12px}
+  main#main>#sec-newsletter{padding-top:0}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  main#main>#sec-hardware{padding-bottom:10px}
+  main#main>#sec-newsletter{padding-top:0}
+}
