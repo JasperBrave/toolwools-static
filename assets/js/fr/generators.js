@@ -95,7 +95,7 @@
   ];
   var CALL_BODIES = [
     // 3 letters only: W/K + body is always exactly 4 letters, matching the
-    // "3-4 letters" rule on the generators page (real broadcast callsigns
+    // "4 letters" rule on the generators page (real broadcast callsigns
     // are 4 letters). 39 bodies x 2 prefixes = 78 distinct callsigns.
     "BAY", "SUN", "SOL", "MAR", "RIO", "ORO", "REY", "GTA", "VIC",
     "LEO", "MIA", "SKY", "SEA", "FOX", "JET", "ICE", "RED", "GEM",
@@ -720,6 +720,7 @@
     if (!favListEl) { return; }
     while (favListEl.firstChild) { favListEl.removeChild(favListEl.firstChild); }
     if (favEmptyEl) { favEmptyEl.style.display = favorites.length ? "none" : ""; }
+    favListEl.style.display = favorites.length ? "" : "none";
     for (var i = 0; i < favorites.length; i++) {
       (function (f) {
         var li = document.createElement("li");

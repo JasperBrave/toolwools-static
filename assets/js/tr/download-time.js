@@ -2,7 +2,7 @@
 // Math follows the source route (src/routes/tools.download-time.tsx):
 // seconds = totalGB * 8000 / effectiveMbps, effectiveMbps = mbps * eff / 100.
 // AUDIT FIX H2 (pass 2A): one install-size constant, 212 GB base (212 GB
-// game install plus a 1.7-3.8 GB day-one patch). The old default was 150 GB base
+// game install plus a 1.7 GB (PS5) – 3.8 GB (Xbox) day-one patch). The old default was 150 GB base
 // + 15 GB patch, for a 165 GB total; the new total is 214.8 GB. State lives in the URL (?mbps=&gb=&patch=&eff=).
 var DEFAULTS = { mbps: 100, gb: 212, patch: 2.8, eff: 80 };
 var PRESETS = [
