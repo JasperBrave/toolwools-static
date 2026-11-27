@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,8 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Haritası, İnteraktif Leonida ve Vice City Gezgini">
     <meta name="twitter:description" content="Her Leonida bölgesi ve Vice City semtinin interaktif GTA 6 haritası, Rockstar&#x27;ın doğruladığına göre etiketlenmiş, ayrıca GTA 5&#x27;e karşı harita boyutu ve bir koleksiyon tahmini.">
     <meta name="twitter:image" content="https://toolwools.com/og/interactive-map.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tr/tools/interactive-map">
 <link rel="alternate" href="https://toolwools.com/tools/interactive-map" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/interactive-map" hreflang="es">
@@ -41,92 +41,99 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
     <link rel="stylesheet" href="/assets/css/tokens.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tool-map-tr.css">
     <link rel="stylesheet" href="/assets/css/map-panzoom.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
-    <script>
-      /* TW theme guard (staging, Phase 3 Worker C): light-first. TW_THEME_DEFAULT='light';
-         stored "tw-theme" ("light"|"dark") wins; no stored choice renders light.
-         Sets dataset.theme + legacy "dark" class before first paint. */
-      (function(){var TW_THEME_DEFAULT="light";try{var t=localStorage.getItem("tw-theme")||TW_THEME_DEFAULT;document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");}catch(e){document.documentElement.dataset.theme=TW_THEME_DEFAULT;}})();
-    </script>
   </head>
 <body>
   <div class="site-shell">
 
 <a class="skip-link" href="#main">İçeriğe atla</a>
-<header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/tr/" aria-label="TOOLWOOLS" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag" aria-hidden="true">Tüm GTA 6 Araçları Tek Yerde</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="Birincil">
-          <a href="/tr/">Ana Sayfa</a>
-          <a href="/tr/tools" aria-current="page">Araçlar</a>
-          <a href="/tr/trackers">Takipçiler</a>
-          <a href="/tr/generators">Oluşturucular</a>
-          <a href="/tr/news">Haberler</a>
-          <a href="/tr/trailers">Fragmanlar</a>
-        </nav>
+
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/tr/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="Birincil">
+            <ul>
+        <li><a href="/tr/">Ana Sayfa</a></li>
+        <li><a href="/tr/tools" aria-current="page">Araçlar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/tr/trackers">Takipçiler <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/tr/generators">Oluşturucular <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/tr/news">Haberler</a></li>
+        <li><a href="/tr/trailers">Fragmanlar</a></li>
+        <li><a href="/tr/guides">Rehberler</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/tools/interactive-map">İngilizce</a>
-            <a href="/es/tools/interactive-map">Español</a>
-            <a href="/pt/tools/interactive-map">Português</a>
-            <a href="/de/tools/interactive-map">Deutsch</a>
-            <a href="/fr/tools/interactive-map">Français</a>
-            <a href="/tr/tools/interactive-map" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Türkçe</a>
-            <a href="/ar/tools/interactive-map">العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">
-          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Arama sonuçları" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Mobil">
-          <a href="/tr/">Ana Sayfa</a>
-          <a href="/tr/tools" aria-current="page">Araçlar</a>
-          <a href="/tr/trackers">Takipçiler</a>
-          <a href="/tr/generators">Oluşturucular</a>
-          <a href="/tr/news">Haberler</a>
-          <a href="/tr/trailers">Fragmanlar</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>TR <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/tr/tools/interactive-map" lang="tr" aria-current="true">Türkçe <span aria-hidden="true">✓</span></a>
+        <a href="/es/tools/interactive-map" lang="es">Español</a><a href="/pt/tools/interactive-map" lang="pt">Português</a><a href="/de/tools/interactive-map" lang="de">Deutsch</a>
+        <a href="/fr/tools/interactive-map" lang="fr">Français</a><a href="/tools/interactive-map" lang="en">English</a><a href="/ar/tools/interactive-map" lang="ar">العربية</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Koyu temaya geç">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Menüyü aç">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="Mobil">
+      <a href="/tr/">Ana Sayfa</a><a href="/tr/tools" aria-current="page">Araçlar</a><a href="/tr/trackers">Takipçiler</a>
+      <a href="/tr/generators">Oluşturucular</a><a href="/tr/news">Haberler</a><a href="/tr/trailers">Fragmanlar</a><a href="/tr/guides">Rehberler</a>
+    </nav>
+    <div class="mobile-nav-search mobile-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" data-search-results role="listbox" aria-label="Arama sonuçları" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/tools/interactive-map" lang="en">EN</a><a href="/es/tools/interactive-map" lang="es">ES</a><a href="/pt/tools/interactive-map" lang="pt">PT</a>
+      <a href="/de/tools/interactive-map" lang="de">DE</a><a href="/fr/tools/interactive-map" lang="fr">FR</a><a href="/tr/tools/interactive-map" lang="tr" aria-current="true">TR</a><a href="/ar/tools/interactive-map" lang="ar">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>Tema</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Koyu temaya geç">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -142,62 +149,16 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Etkileşimli Harita</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Harita</span>
-      </div>
+      <div class="page-eyebrow"><span>Harita</span></div>
       <h1 id="page-title" class="page-title">GTA 6 Haritası, İnteraktif Leonida ve Vice City Gezgini</h1>
       <p class="page-subtitle">Leonida'nın her adlandırılmış bölgesi ve Vice City'nin her semti tek bir kaydırılabilir şemada, ne kadar güçlü doğrulandığına göre etiketlenmiş, ayrıca GTA V'e karşı bir boyut karşılaştırması ve dürüst bir koleksiyon tahmini.</p>
-      <dl class="hero-badges">
-        <div><dt>Kapsam</dt><dd>10 bölge + 12 semt</dd></div>
-        <div><dt>Varlıklar</dt><dd>Sızdırılmış varlık kullanılmadı</dd></div>
-        <div><dt>Boyut</dt><dd>Boyut bandı, sahte bir sayı değil</dd></div>
-        <div><dt>Güncellendi</dt><dd><time datetime="2026-11-22">22 Kas 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Çoğu GTA 6 harita sayfası tahmini gerçek olarak sunar. Bu sayfa ikisini ayırır. Tuvaldeki her bölge bir kanıt düzeyi taşır, resmi Rockstar materyalinde doğrulanmış, fragman görüntülerinden güçlü şekilde ima edilmiş veya haritalama topluluğu tarafından çıkarılmış, ve haritayı yalnızca gerçekten gösterilenlere indirebilirsiniz. Boyut karşılaştırıcı, 'GTA 6 haritası ne kadar büyük' sorusunu dürüstçe yanıtlar: gerekçesi ekli bir aralık, çünkü Rockstar hiçbir rakam yayımlamadı.</p>
-          </div>
-<section class="byline" aria-label="Bu sayfa hakkında">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/about#editorial-desk">ToolWools Editoryal Masası</a>&nbsp;·</span> GTA 6 dünya ve çıkış takibi</p>
-        <p class="byline-note">İnceleyen <span class="byline-seg"><a href="/about#community-contributors">Topluluk haritalama katkıcıları</a>&nbsp;·</span> Bölge ve coğrafya çapraz kontrolü</p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2026-07-29">29 Tem 2026</time>&nbsp;· Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </section>
-<div class="sr-only" data-live-region aria-live="polite">Rockstar, GTA 6 haritası için bir boyut yayımlamadı. Adlandırılmış bölgelere ve eyalet ölçeğindeki ortama dayanarak, makul bir tahmin 90-170 km² oynanabilir arazi, GTA V'in 1,2× ila 2,27×'idir.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Anlık görüntü · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>Rockstar, GTA 6 haritası için bir boyut yayımlamadı. Adlandırılmış bölgelere ve eyalet ölçeğindeki ortama dayanarak, makul bir tahmin 90-170 km² oynanabilir arazi, GTA V'in 1,2× ila 2,27×'idir.</span></p>
-      </div>
+      <p class="hero-meta"><span>Kapsam: 10 bölge + 12 semt</span><span>Varlıklar: Sızdırılmış varlık kullanılmadı</span><span>Boyut: Boyut bandı, sahte bir sayı değil</span><span>Güncellendi: <time datetime="2026-11-22">22 Kas 2026</time></span><span>Yazan <a href="/about#editorial-desk">ToolWools Editoryal Masası</a></span><span>GTA 6 dünya ve çıkış takibi</span><span>İnceleyen <a href="/about#community-contributors">Topluluk haritalama katkıcıları</a></span><span>Bölge ve coğrafya çapraz kontrolü</span><span>Yayınlanma <time datetime="2026-07-29">29 Tem 2026</time></span><span>Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></span></p>
     </section>
 
-    <section aria-labelledby="where">
-      <h2 id="where">GTA 6 nerede geçiyor?</h2>
-      <div class="mx-auto max-w-3xl text-left">
-        <p data-speakable="where" class="text-base md:text-lg leading-relaxed text-foreground">GTA 6'nın geçtiği yer <strong>Leonida</strong>, Rockstar'ın kurgusal Florida versiyonu, ve <strong>Vice City</strong>, güneydoğu kıyısında Miami yerine. 2002'den beri Vice City'ye ilk ana seri dönüşüdür ve tek bir şehir ve çevresi yerine tüm bir eyaleti kapsayan ilk GTA'dır.</p>
-        <figure class="map-figure">
-          <img src="/assets/img/map-vicecity.jpg" alt="Vice City, Leonida&#x27;nın stilize haritası, ilgi noktaları işaretli" width="600" height="450" loading="lazy">
-          <figcaption>Vice City'nin stilize şeması. Aşağıdaki interaktif gezgin kanıt etiketli sürümdür, her bölge ve semt kaynağını taşır.</figcaption>
-        </figure>
-        <ul role="list" class="mt-6 grid gap-3 sm:grid-cols-2">
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Eyalet</p><p class="mt-1 text-sm font-semibold text-foreground">Leonida, kurgusal Florida</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Ana şehir</p><p class="mt-1 text-sm font-semibold text-foreground">Vice City, kurgusal Miami</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Adlandırılmış bölgeler</p><p class="mt-1 text-sm font-semibold text-foreground">Rockstar tarafından doğrulanan 6</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Tahmini boyut</p><p class="mt-1 text-sm font-semibold text-foreground">90-170 km² oynanabilir arazi</p></li>
-        </ul>
-        <p class="mt-6 text-sm text-muted-foreground leading-relaxed">Leonida gerçek eyaleti sıkıştırır: Keys, Everglades, merkezi çiftlik bölgesi, panhandle ve kuzey ormanları hepsi görünür, ancak gerçek mesafelerinin bir kısmında. Şunu açın <a href="#explorer">harita gezgini</a> parçaların birbirine göre nasıl durduğunu görmek için.</p>
-      </div>
-      <div class="context-links">
-      <h3>İlgili yanıtlar</h3>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-2">GTA 6 nerede geçiyor?</a> Tek paragraflık yanıt, SSS bölümünde.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-4">GTA 6 haritası neye dayanıyor?</a> Her bölgenin hangi gerçek Florida konumlarına karşılık geldiği.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/add-to-calendar">Çıkış tarihi hatırlatıcısı</a> GTA 6 lansman tarihini kendi saat diliminizde takviminize ekleyin.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/news">En son GTA 6 haberleri</a> Yeni resmi materyal geldiğinde bu haritaya eklenir.</span></li></ul>
-    </div>
-    </section>
+
+<div class="sr-only" data-live-region aria-live="polite">Rockstar, GTA 6 haritası için bir boyut yayımlamadı. Adlandırılmış bölgelere ve eyalet ölçeğindeki ortama dayanarak, makul bir tahmin 90-170 km² oynanabilir arazi, GTA V'in 1,2× ila 2,27×'idir.</div>
+
+
 
 <section aria-labelledby="explorer">
       <h2 id="explorer">GTA 6 harita gezgini</h2>
@@ -282,6 +243,31 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section aria-labelledby="where">
+      <h2 id="where">GTA 6 nerede geçiyor?</h2>
+      <div class="mx-auto max-w-3xl text-left">
+        <p data-speakable="where" class="text-base md:text-lg leading-relaxed text-foreground">GTA 6'nın geçtiği yer <strong>Leonida</strong>, Rockstar'ın kurgusal Florida versiyonu, ve <strong>Vice City</strong>, güneydoğu kıyısında Miami yerine. 2002'den beri Vice City'ye ilk ana seri dönüşüdür ve tek bir şehir ve çevresi yerine tüm bir eyaleti kapsayan ilk GTA'dır.</p>
+        <figure class="map-figure">
+          <img src="/assets/img/map-vicecity.jpg" alt="Vice City, Leonida&#x27;nın stilize haritası, ilgi noktaları işaretli" width="600" height="450" loading="lazy">
+          <figcaption>Vice City'nin stilize şeması. Aşağıdaki interaktif gezgin kanıt etiketli sürümdür, her bölge ve semt kaynağını taşır.</figcaption>
+        </figure>
+        <ul role="list" class="mt-6 grid gap-3 sm:grid-cols-2">
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Eyalet</p><p class="mt-1 text-sm font-semibold text-foreground">Leonida, kurgusal Florida</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Ana şehir</p><p class="mt-1 text-sm font-semibold text-foreground">Vice City, kurgusal Miami</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Adlandırılmış bölgeler</p><p class="mt-1 text-sm font-semibold text-foreground">Rockstar tarafından doğrulanan 6</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Tahmini boyut</p><p class="mt-1 text-sm font-semibold text-foreground">90-170 km² oynanabilir arazi</p></li>
+        </ul>
+        <p class="mt-6 text-sm text-muted-foreground leading-relaxed">Leonida gerçek eyaleti sıkıştırır: Keys, Everglades, merkezi çiftlik bölgesi, panhandle ve kuzey ormanları hepsi görünür, ancak gerçek mesafelerinin bir kısmında. Şunu açın <a href="#explorer">harita gezgini</a> parçaların birbirine göre nasıl durduğunu görmek için.</p>
+      </div>
+      <div class="context-links">
+      <h3>İlgili yanıtlar</h3>
+      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-2">GTA 6 nerede geçiyor?</a> Tek paragraflık yanıt, SSS bölümünde.</span></li>
+<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-4">GTA 6 haritası neye dayanıyor?</a> Her bölgenin hangi gerçek Florida konumlarına karşılık geldiği.</span></li>
+<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/add-to-calendar">Çıkış tarihi hatırlatıcısı</a> GTA 6 lansman tarihini kendi saat diliminizde takviminize ekleyin.</span></li>
+<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/news">En son GTA 6 haberleri</a> Yeni resmi materyal geldiğinde bu haritaya eklenir.</span></li></ul>
+    </div>
     </section>
 
     <section aria-labelledby="size">
@@ -570,10 +556,6 @@
       </div>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Varsayımlar</strong> <span>Bölge konumları soyut bir koordinat uzayında stilize bir şemadır, izlenmiş veya veri madenciliğiyle çıkarılmış bir harita varlığı değildir; göreli yerleşim gerçek Florida coğrafyasını ve resmi görüntüleri izler, mutlak mesafeler yalnızca gösterge niteliğindedir. Karşılaştırma alanları, oynanabilir arazinin topluluk ölçümlerini kullanır (GTA V ≈ 75 km², RDR2 ≈ 75 km², San Andreas ≈ 36 km², Vice City 2002 ≈ 3,5 km²) ve tutarlı bir yöntemle ölçülmüştür. GTA 6 rakamı, adlandırılmış bölge sayısından ve Rockstar'ın nesilden nesile büyüme örüntüsünden türetilen 90-170 km²'lik bir tahmin bandıdır.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
-      <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </aside>
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Leonida ve Vice City haritası nasıl keşfedilir</h2>
@@ -613,12 +595,16 @@ ratioRange = [ lowTarget ÷ highBase, highTarget ÷ lowBase ]
 GTA 6 band = 90–170 km² playable land (estimate)
 GTA V      = 75 km² (community measurement)</pre>
           <ul class="list-disc list-outside space-y-1.5"><li>Bölgeler yalnızca Rockstar onları resmi materyalde adlandırdığında veya bir fragmanda açıkça gösterdiğinde Doğrulandı olarak işaretlenir.</li><li>Şema orijinal vektör çalışmasıdır; sızdırılmış, veri madenciliğiyle elde edilmiş veya üçüncü taraf harita görseli yeniden üretilmez.</li><li>Boyut rakamları tutarlı bir oynanabilir arazi kuralı kullanır, böylece oranlar mutlak sayılar topluluk tarafından ölçülmüş olsa bile anlamlı kalır.</li><li>GTA 6 alanı bir bant olarak yayımlanır. Rockstar resmi bir rakam yayımlarsa, bant değiştirilir, tahminle daraltılmaz.</li></ul>
+          <div class="assumptions-block">
+            <p><strong>Varsayımlar</strong> <span>Bölge konumları soyut bir koordinat uzayında stilize bir şemadır, izlenmiş veya veri madenciliğiyle çıkarılmış bir harita varlığı değildir; göreli yerleşim gerçek Florida coğrafyasını ve resmi görüntüleri izler, mutlak mesafeler yalnızca gösterge niteliğindedir. Karşılaştırma alanları, oynanabilir arazinin topluluk ölçümlerini kullanır (GTA V ≈ 75 km², RDR2 ≈ 75 km², San Andreas ≈ 36 km², Vice City 2002 ≈ 3,5 km²) ve tutarlı bir yöntemle ölçülmüştür. GTA 6 rakamı, adlandırılmış bölge sayısından ve Rockstar'ın nesilden nesile büyüme örüntüsünden türetilen 90-170 km²'lik bir tahmin bandıdır.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+            <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p>
+          </div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
+      <header>
         <h2 id="faq" class="h2-lg">GTA 6 harita, ortam ve sızıntı soruları</h2>
         <p class="section-dek">Kanıt dereceli yanıtlar, doğrulanmış, ima edilmiş veya çıkarılmış.</p>
       </header>
@@ -688,87 +674,91 @@ GTA V      = 75 km² (community measurement)</pre>
     </aside>
         </article>
       </div>
-    </main>
-
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/tr/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı: 19 Kasım 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">Araçlara göz at →</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/tr/" aria-label="TOOLWOOLS" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag" aria-hidden="true">Tüm GTA 6 Araçları Tek Yerde</span>
-              </span>
-            </span>
-          </a>
-          <p>GTA 6 araçları, hesaplayıcıları, izleyicileri, planlayıcıları ve kılavuzları için nihai adres. İhtiyacınız olan her şey, tek yerde, reklam öncelikli değil, şişkinlik yok.</p>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
         </div>
-        <div class="footer-cols">
-          <div>
-            <h3>En İyi Araçlar</h3>
-            <ul>
-              <li><a href="/tr/tools/system-requirements">Bilgisayarım GTA 6'yı Çalıştırır mı?</a></li>
-              <li><a href="/tr/tools/fps-calculator">FPS Hesaplayıcı</a></li>
-              <li><a href="/tr/tools/download-time">İndirme Süresi Hesaplayıcı</a></li>
-              <li><a href="/tr/tools/system-requirements">Sistem Gereksinimleri</a></li>
-              <li><a href="/tr/tools/settings-optimizer">Ayar Optimizasyon Aracı</a></li>
-              <li><a href="/tr/tools/hardware-comparison">Donanım Karşılaştırması</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>Keşfet</h3>
-            <ul>
-              <li><a href="/tr/tools">Tüm Araçlar</a></li>
-              <li><a href="/tr/trending">Trend</a></li>
-              <li><a href="/tr/trackers">Takipçiler</a></li>
-              <li><a href="/tr/generators">Oluşturucular</a></li>
-              <li><a href="/tr/news">Haberler</a></li>
-              <li><a href="/tr/trailers">Fragmanlar</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>Kaynaklar</h3>
-            <ul>
-              <li><a href="/tr/tools/interactive-map">Etkileşimli Harita</a> <span class="footer-col-badge">Yeni</span></li>
-              <li><a href="/tr/about">Hakkında</a></li>
-              <li><a href="/tr/methodology">Metodoloji</a></li>
-              <li><a href="/tr/contact">İletişim</a></li>
-              <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
-              <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/editorial-policy">Yayın Politikası</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
-        <div class="footer-bottom-links">
-          <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
+</section>
+    </main>
+
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/tr/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>Araçlar. Rehberler. GTA 6.</p>
+    </div>
+    <nav class="footer-col" aria-label="Hızlı bağlantılar">
+      <h3>Hızlı Bağlantılar</h3>
+      
+      <ul>
+        <li><a href="/tr/">Ana Sayfa</a></li>
+        <li><a href="/tr/tools">Araçlar</a></li>
+        <li><a href="/tr/news">Haberler</a></li>
+        <li><a href="/tr/trailers">Fragmanlar</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Kategoriler">
+      <h3>Kategoriler</h3>
+      
+      <ul>
+        <li><a href="/tr/tools?category=release">Çıkış Araçları</a></li>
+        <li><a href="/tr/tools?category=pc">PC Araçları</a></li>
+        <li><a href="/tr/tools?category=performance">Performans</a></li>
+        <li><a href="/tr/tools?category=comparison">Karşılaştırma</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Hakkında">
+      <h3>Hakkında</h3>
+      
+      <ul>
+        <li><a href="/tr/about">ToolWools Hakkında</a></li>
+        <li><a href="/tr/contact">İletişim</a></li>
+        <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+        <li><a href="/tr/terms">Kullanım Şartları</a></li>
+        <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 ToolWools. Tüm hakları saklıdır.</span>
+    <span>Rockstar Games veya Take-Two Interactive ile ilişkili değildir.</span>
+    <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
+    <span>GTA Topluluğu için yapıldı &hearts;</span>
+  </div>
 </footer>
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
+  </div>
+</div>
   <script src="/assets/js/tr/theme.js" defer></script>
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
   <script type="module" src="/assets/js/tr/interactive-map.js"></script>
   <script src="/assets/js/tr/map-panzoom.js" defer></script>
 <script type="application/ld+json">{
@@ -816,7 +806,7 @@ GTA V      = 75 km² (community measurement)</pre>
       },
       "datePublished": "2026-07-29",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

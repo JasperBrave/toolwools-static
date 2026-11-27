@@ -41,10 +41,28 @@
   }
 
   // Ctrl/Cmd+K focuses the header search from anywhere.
+  // Phase 4 fix: the desktop search is hidden below 1280px (the mobile
+  // nav holds the search there), so the first [data-header-search-input]
+  // in DOM order is invisible at mobile widths and focus() on it is a
+  // no-op. Focus the VISIBLE input instead; if it lives in the closed
+  // mobile nav, open the nav first (mirrors the homepage inline handler).
   document.addEventListener("keydown", function (e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-      var input = document.querySelector("[data-header-search-input]");
-      if (input) { e.preventDefault(); input.focus(); }
+      var desktop = null, mobile = null;
+      document.querySelectorAll("[data-header-search-input]").forEach(function (input) {
+        if (input.closest("[data-mobile-nav]")) { mobile = input; }
+        else if (input.offsetParent !== null) { desktop = input; }
+      });
+      var navOpen = nav && !nav.hidden;
+      var target = (navOpen && mobile) ? mobile : (desktop || mobile);
+      if (target) {
+        e.preventDefault();
+        if (target === mobile && nav && nav.hidden) {
+          nav.hidden = false;
+          if (toggle) { toggle.setAttribute("aria-expanded", "true"); toggle.setAttribute("aria-label", "Close menu"); }
+        }
+        target.focus();
+      }
     }
   });
 

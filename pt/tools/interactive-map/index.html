@@ -22,13 +22,13 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mapa do GTA 6, Explorador Interativo de Leonida e Vice City">
     <meta name="twitter:description" content="Mapa interativo do GTA 6 de cada região de Leonida e distrito de Vice City, marcado conforme o que a Rockstar confirmou, além do tamanho do mapa vs GTA 5 e uma previsão de colecionáveis.">
     <meta name="twitter:image" content="https://toolwools.com/og/interactive-map.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/pt/tools/interactive-map">
 <link rel="alternate" href="https://toolwools.com/tools/interactive-map" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/interactive-map" hreflang="es">
@@ -41,92 +41,100 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
     <link rel="stylesheet" href="/assets/css/tokens.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tool-map-pt.css">
     <link rel="stylesheet" href="/assets/css/map-panzoom.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
-    <script>
-      /* TW theme guard (staging, Phase 3 Worker C): light-first. TW_THEME_DEFAULT='light';
-         stored "tw-theme" ("light"|"dark") wins; no stored choice renders light.
-         Sets dataset.theme + legacy "dark" class before first paint. */
-      (function(){var TW_THEME_DEFAULT="light";try{var t=localStorage.getItem("tw-theme")||TW_THEME_DEFAULT;document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");}catch(e){document.documentElement.dataset.theme=TW_THEME_DEFAULT;}})();
-    </script>
   </head>
 <body>
   <div class="site-shell">
 
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
-<header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/pt/" aria-label="TOOLWOOLS" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag" aria-hidden="true">Todas as ferramentas de GTA 6 em um só lugar</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="Principal">
-          <a href="/pt/">Início</a>
-          <a href="/pt/tools" aria-current="page">Ferramentas</a>
-          <a href="/pt/trackers">Rastreadores</a>
-          <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
-          <a href="/pt/trailers">Trailers</a>
-        </nav>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/pt/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="Principal">
+            <ul>
+        <li><a href="/pt/">Início</a></li>
+        <li><a href="/pt/tools" aria-current="page">Ferramentas <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/trackers">Rastreadores <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/generators">Geradores <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/news">Notícias</a></li>
+        <li><a href="/pt/trailers">Trailers</a></li>
+        <li><a href="/pt/guides">Guias</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary>PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/tools/interactive-map">English</a>
-            <a href="/es/tools/interactive-map">Español</a>
-            <a href="/pt/tools/interactive-map" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Português</a>
-            <a href="/de/tools/interactive-map">Deutsch</a>
-            <a href="/fr/tools/interactive-map">Français</a>
-            <a href="/tr/tools/interactive-map">Türkçe</a>
-            <a href="/ar/tools/interactive-map">العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Mudar para o tema escuro" aria-pressed="false">
-          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Resultados da busca" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Móvel">
-          <a href="/pt/">Início</a>
-          <a href="/pt/tools" aria-current="page">Ferramentas</a>
-          <a href="/pt/trackers">Rastreadores</a>
-          <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
-          <a href="/pt/trailers">Trailers</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>PT <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/pt/tools/interactive-map" lang="pt" aria-current="true">Português <span aria-hidden="true">✓</span></a>
+        <a href="/es/tools/interactive-map" lang="es">Español</a><a href="/tools/interactive-map" lang="en">English</a><a href="/de/tools/interactive-map" lang="de">Deutsch</a>
+        <a href="/fr/tools/interactive-map" lang="fr">Français</a><a href="/tr/tools/interactive-map" lang="tr">Türkçe</a><a href="/ar/tools/interactive-map" lang="ar">العربية</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Mudar para o tema escuro">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="Móvel">
+      <a href="/pt/">Início</a><a href="/pt/tools" aria-current="page">Ferramentas</a><a href="/pt/trackers">Rastreadores</a>
+      <a href="/pt/generators">Geradores</a><a href="/pt/news">Notícias</a><a href="/pt/trailers">Trailers</a><a href="/pt/guides">Guias</a>
+    </nav>
+    <div class="mobile-search mobile-nav-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" data-search-results role="listbox" aria-label="Resultados da busca" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/tools/interactive-map" lang="en">EN</a><a href="/es/tools/interactive-map" lang="es">ES</a><a href="/pt/tools/interactive-map" lang="pt" aria-current="true">PT</a>
+      <a href="/de/tools/interactive-map" lang="de">DE</a><a href="/fr/tools/interactive-map" lang="fr">FR</a><a href="/tr/tools/interactive-map" lang="tr">TR</a><a href="/ar/tools/interactive-map" lang="ar">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>Tema</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Mudar para o tema escuro">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -142,62 +150,16 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Mapa interativo</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span>Mapa</span>
-      </div>
+      <div class="page-eyebrow"><span>Mapa</span></div>
       <h1 id="page-title" class="page-title">Mapa do GTA 6, Explorador Interativo de Leonida e Vice City</h1>
       <p class="page-subtitle">Cada região nomeada de Leonida e cada distrito de Vice City em um esquema deslocável, marcado conforme o quão firmemente está confirmado, além de uma comparação de tamanho com o GTA V e uma previsão honesta de colecionáveis.</p>
-      <dl class="hero-badges">
-        <div><dt>Cobertura</dt><dd>10 regiões + 12 distritos</dd></div>
-        <div><dt>Recursos</dt><dd>Sem recursos vazados</dd></div>
-        <div><dt>Tamanho</dt><dd>Faixa de tamanho, não um número falso</dd></div>
-        <div><dt>Atualizado</dt><dd><time datetime="2026-11-22">22 de nov de 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>A maioria das páginas de mapas do GTA 6 apresenta suposições como fatos. Esta separa as duas. Cada região no canvas carrega um nível de evidência, confirmado em material oficial da Rockstar, fortemente implícito em imagens de trailer, ou inferido pela comunidade de mapeamento, e você pode filtrar o mapa até apenas o que realmente foi mostrado. O comparador de tamanho responde «qual o tamanho do mapa do GTA 6» de forma honesta: um intervalo com seu raciocínio anexo, porque a Rockstar não publicou nenhum número.</p>
-          </div>
-<section class="byline" aria-label="Sobre esta página">
-      <div>
-        <p class="byline-meta">Por <span class="byline-seg"><a href="/pt/about#editorial-desk">Mesa editorial da ToolWools</a>&nbsp;·</span> Acompanhamento do mundo e do lançamento do GTA 6</p>
-        <p class="byline-note">Revisado por <span class="byline-seg"><a href="/pt/about#community-contributors">Colaboradores comunitários de mapeamento</a>&nbsp;·</span> Verificação cruzada de regiões e geografia</p>
-      </div>
-      <p class="byline-dates">Publicado <time datetime="2026-07-29">29 de jul de 2026</time>&nbsp;· Última revisão <time datetime="2026-11-22">22 de novembro de 2026</time></p>
-    </section>
-<div class="sr-only" data-live-region aria-live="polite">A Rockstar não publicou um tamanho para o mapa do GTA 6. Com base nas regiões nomeadas e no cenário em escala estadual, uma estimativa razoável é 90–170 km² de terra jogável, 1,2× a 2,27× GTA V.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Instantâneo · Resumo</span></p>
-        <p class="tldr-text"><span data-tldr-text>A Rockstar não publicou um tamanho para o mapa do GTA 6. Com base nas regiões nomeadas e no cenário em escala estadual, uma estimativa razoável é 90–170 km² de terra jogável, 1,2× a 2,27× GTA V.</span></p>
-      </div>
+      <p class="hero-meta"><span>Cobertura: 10 regiões + 12 distritos</span><span>Recursos: Sem recursos vazados</span><span>Tamanho: Faixa de tamanho, não um número falso</span><span>Atualizado: <time datetime="2026-11-22">22 de nov de 2026</time></span><span>Por <a href="/pt/about#editorial-desk">Mesa editorial da ToolWools</a></span><span>Acompanhamento do mundo e do lançamento do GTA 6</span><span>Revisado por <a href="/pt/about#community-contributors">Colaboradores comunitários de mapeamento</a></span><span>Verificação cruzada de regiões e geografia</span><span>Publicado <time datetime="2026-07-29">29 de jul de 2026</time></span><span>Última revisão <time datetime="2026-11-22">22 de novembro de 2026</time></span></p>
     </section>
 
-    <section aria-labelledby="where">
-      <h2 id="where">Onde se passa o GTA 6?</h2>
-      <div class="mx-auto max-w-3xl text-left">
-        <p data-speakable="where" class="text-base md:text-lg leading-relaxed text-foreground">O GTA 6 se passa em <strong>Leonida</strong>, a versão fictícia da Flórida da Rockstar, com <strong>Vice City</strong>, substituindo Miami, na costa sudeste. É o primeiro retorno principal a Vice City desde 2002, e o primeiro GTA a cobrir um estado inteiro em vez de uma única cidade e seu interior.</p>
-        <figure class="map-figure">
-          <img src="/assets/img/map-vicecity.jpg" alt="Mapa estilizado de Vice City, Leonida, com pontos de interesse marcados" width="600" height="450" loading="lazy">
-          <figcaption>Esquema estilizado de Vice City. O explorador interativo abaixo é a versão marcada por evidência, cada região e distrito carrega sua fonte.</figcaption>
-        </figure>
-        <ul role="list" class="mt-6 grid gap-3 sm:grid-cols-2">
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Estado</p><p class="mt-1 text-sm font-semibold text-foreground">Leonida, Flórida fictícia</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Cidade âncora</p><p class="mt-1 text-sm font-semibold text-foreground">Vice City, Miami fictício</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Regiões nomeadas</p><p class="mt-1 text-sm font-semibold text-foreground">6 confirmadas pela Rockstar</p></li>
-          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Tamanho estimado</p><p class="mt-1 text-sm font-semibold text-foreground">90–170 km² de terra jogável</p></li>
-        </ul>
-        <p class="mt-6 text-sm text-muted-foreground leading-relaxed">Leonida comprime o estado real: os Keys, os Everglades, o campo agrícola central, o panhandle e as florestas do norte aparecem todos, mas a uma fração de sua distância real. Abra o <a href="#explorer">explorador de mapas</a> para ver como as peças se situam em relação umas às outras.</p>
-      </div>
-      <div class="context-links">
-      <h3>Respostas relacionadas</h3>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-2">Onde fica o GTA 6?</a> A resposta de um parágrafo, no FAQ.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-4">Em que se baseia o mapa do GTA 6?</a> A quais locais reais da Flórida cada região corresponde.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/pt/tools/add-to-calendar">Lembrete de data de lançamento</a> Adicione a data de lançamento do GTA 6 ao seu calendário no seu próprio fuso horário.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/pt/news">Últimas notícias do GTA 6</a> O novo material oficial é incorporado a este mapa quando chega.</span></li></ul>
-    </div>
-    </section>
+
+<div class="sr-only" data-live-region aria-live="polite">A Rockstar não publicou um tamanho para o mapa do GTA 6. Com base nas regiões nomeadas e no cenário em escala estadual, uma estimativa razoável é 90–170 km² de terra jogável, 1,2× a 2,27× GTA V.</div>
+
+
 
 <section aria-labelledby="explorer">
       <h2 id="explorer">Explorador de mapas do GTA 6</h2>
@@ -282,6 +244,31 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section aria-labelledby="where">
+      <h2 id="where">Onde se passa o GTA 6?</h2>
+      <div class="mx-auto max-w-3xl text-left">
+        <p data-speakable="where" class="text-base md:text-lg leading-relaxed text-foreground">O GTA 6 se passa em <strong>Leonida</strong>, a versão fictícia da Flórida da Rockstar, com <strong>Vice City</strong>, substituindo Miami, na costa sudeste. É o primeiro retorno principal a Vice City desde 2002, e o primeiro GTA a cobrir um estado inteiro em vez de uma única cidade e seu interior.</p>
+        <figure class="map-figure">
+          <img src="/assets/img/map-vicecity.jpg" alt="Mapa estilizado de Vice City, Leonida, com pontos de interesse marcados" width="600" height="450" loading="lazy">
+          <figcaption>Esquema estilizado de Vice City. O explorador interativo abaixo é a versão marcada por evidência, cada região e distrito carrega sua fonte.</figcaption>
+        </figure>
+        <ul role="list" class="mt-6 grid gap-3 sm:grid-cols-2">
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Estado</p><p class="mt-1 text-sm font-semibold text-foreground">Leonida, Flórida fictícia</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Cidade âncora</p><p class="mt-1 text-sm font-semibold text-foreground">Vice City, Miami fictício</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Regiões nomeadas</p><p class="mt-1 text-sm font-semibold text-foreground">6 confirmadas pela Rockstar</p></li>
+          <li class="rounded-xl border border-black/[0.08] dark:border-white/10 bg-background/80 p-4 shadow-sm"><p class="eyebrow-muted">Tamanho estimado</p><p class="mt-1 text-sm font-semibold text-foreground">90–170 km² de terra jogável</p></li>
+        </ul>
+        <p class="mt-6 text-sm text-muted-foreground leading-relaxed">Leonida comprime o estado real: os Keys, os Everglades, o campo agrícola central, o panhandle e as florestas do norte aparecem todos, mas a uma fração de sua distância real. Abra o <a href="#explorer">explorador de mapas</a> para ver como as peças se situam em relação umas às outras.</p>
+      </div>
+      <div class="context-links">
+      <h3>Respostas relacionadas</h3>
+      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-2">Onde fica o GTA 6?</a> A resposta de um parágrafo, no FAQ.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="#faq-q-4">Em que se baseia o mapa do GTA 6?</a> A quais locais reais da Flórida cada região corresponde.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/pt/tools/add-to-calendar">Lembrete de data de lançamento</a> Adicione a data de lançamento do GTA 6 ao seu calendário no seu próprio fuso horário.</span></li>
+<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/pt/news">Últimas notícias do GTA 6</a> O novo material oficial é incorporado a este mapa quando chega.</span></li></ul>
+    </div>
     </section>
 
     <section aria-labelledby="size">
@@ -570,10 +557,6 @@
       </div>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Suposições">
-      <p><strong>Suposições</strong> <span>As posições das regiões são um esquema estilizado em um espaço de coordenadas abstrato, não um recurso de mapa traçado ou extraído de dados, o posicionamento relativo segue a geografia real da Flórida e a filmagem oficial, as distâncias absolutas são apenas indicativas. As áreas de comparação usam medições comunitárias de terra jogável (GTA V ≈ 75 km², RDR2 ≈ 75 km², San Andreas ≈ 36 km², Vice City 2002 ≈ 3,5 km²) medidas com uma convenção consistente. O número do GTA 6 é uma faixa de estimativa de 90–170 km², derivada do número de regiões nomeadas e do padrão de crescimento da Rockstar geração após geração.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
-      <p class="updated-line">Atualizado <time datetime="2026-11-22">22 de novembro de 2026</time></p>
-    </aside>
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Como explorar o mapa de Leonida e Vice City</h2>
@@ -613,12 +596,16 @@ ratioRange = [ lowTarget ÷ highBase, highTarget ÷ lowBase ]
 GTA 6 band = 90–170 km² playable land (estimate)
 GTA V      = 75 km² (community measurement)</pre>
           <ul class="list-disc list-outside space-y-1.5"><li>As regiões só são marcadas como Confirmado quando a Rockstar as nomeou em material oficial ou as mostrou sem ambiguidade em um trailer.</li><li>O esquema é arte vetorial original; nenhuma imagem de mapa vazada, extraída de dados ou de terceiros é reproduzida.</li><li>Os números de tamanho usam uma convenção consistente de terra jogável para que as proporções continuem significativas, mesmo que os números absolutos sejam medidos pela comunidade.</li><li>A área do GTA 6 é publicada como uma faixa. Se a Rockstar divulgar um número oficial, a faixa é substituída, não estreitada por suposição.</li></ul>
+          <div class="assumptions-block">
+            <p><strong>Suposições</strong> <span>As posições das regiões são um esquema estilizado em um espaço de coordenadas abstrato, não um recurso de mapa traçado ou extraído de dados, o posicionamento relativo segue a geografia real da Flórida e a filmagem oficial, as distâncias absolutas são apenas indicativas. As áreas de comparação usam medições comunitárias de terra jogável (GTA V ≈ 75 km², RDR2 ≈ 75 km², San Andreas ≈ 36 km², Vice City 2002 ≈ 3,5 km²) medidas com uma convenção consistente. O número do GTA 6 é uma faixa de estimativa de 90–170 km², derivada do número de regiões nomeadas e do padrão de crescimento da Rockstar geração após geração.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
+            <p class="updated-line">Atualizado <time datetime="2026-11-22">22 de novembro de 2026</time></p>
+          </div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
+      <header>
         <h2 id="faq" class="h2-lg">Perguntas de mapa, ambientação e vazamentos do GTA 6</h2>
         <p class="section-dek">Respostas classificadas por evidência, confirmadas, implícitas ou inferidas.</p>
       </header>
@@ -688,87 +675,90 @@ GTA V      = 75 km² (community measurement)</pre>
     </aside>
         </article>
       </div>
-    </main>
-
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/pt/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 já está disponível: 19 de novembro de 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">Explorar ferramentas →</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/pt/" aria-label="TOOLWOOLS" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag" aria-hidden="true">Todas as ferramentas de GTA 6 em um só lugar</span>
-              </span>
-            </span>
-          </a>
-          <p>O destino definitivo para ferramentas, calculadoras, rastreadores, planejadores e guias de GTA 6. Tudo o que você precisa em um só lugar, sem publicidade invasiva nem conteúdo desnecessário.</p>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
         </div>
-        <div class="footer-cols">
-          <div>
-            <h3>Principais ferramentas</h3>
-            <ul>
-              <li><a href="/pt/tools/system-requirements">Meu PC roda GTA 6?</a></li>
-              <li><a href="/pt/tools/fps-calculator">Calculadora de FPS</a></li>
-              <li><a href="/pt/tools/download-time">Calculadora de tempo de download</a></li>
-              <li><a href="/pt/tools/system-requirements">Requisitos do sistema</a></li>
-              <li><a href="/pt/tools/settings-optimizer">Otimizador de configurações</a></li>
-              <li><a href="/pt/tools/hardware-comparison">Comparação de hardware</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>Explorar</h3>
-            <ul>
-              <li><a href="/pt/tools">Todas as Ferramentas</a></li>
-              <li><a href="/pt/trending">Em alta</a></li>
-              <li><a href="/pt/trackers">Rastreadores</a></li>
-              <li><a href="/pt/generators">Geradores</a></li>
-              <li><a href="/pt/news">Notícias</a></li>
-              <li><a href="/pt/trailers">Trailers</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>Recursos</h3>
-            <ul>
-              <li><a href="/pt/tools/interactive-map">Mapa interativo</a> <span class="footer-col-badge">Novo</span></li>
-              <li><a href="/pt/about">Sobre</a></li>
-              <li><a href="/pt/methodology">Metodologia</a></li>
-              <li><a href="/pt/contact">Contato</a></li>
-              <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
-              <li><a href="/pt/sitemap">Mapa do site</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
-        <div class="footer-bottom-links">
-          <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
+</section>
+    </main>
+
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/pt/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>Ferramentas. Guias. GTA 6.</p>
+    </div>
+    <nav class="footer-col" aria-label="Links rápidos">
+      <h3>Links rápidos</h3>
+      
+      <ul>
+        <li><a href="/pt/">Início</a></li>
+        <li><a href="/pt/tools">Ferramentas</a></li>
+        <li><a href="/pt/news">Notícias</a></li>
+        <li><a href="/pt/trailers">Trailers</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Categorias">
+      <h3>Categorias</h3>
+      
+      <ul>
+        <li><a href="/pt/tools?category=release">Ferramentas de lançamento</a></li>
+        <li><a href="/pt/tools?category=pc">Ferramentas de PC</a></li>
+        <li><a href="/pt/tools?category=performance">Desempenho</a></li>
+        <li><a href="/pt/tools?category=comparison">Comparação</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Sobre">
+      <h3>Sobre</h3>
+      
+      <ul>
+        <li><a href="/pt/about">Sobre a ToolWools</a></li>
+        <li><a href="/pt/contact">Contato</a></li>
+        <li><a href="/pt/privacy">Política de privacidade</a></li>
+        <li><a href="/pt/terms">Termos de serviço</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 ToolWools. Todos os direitos reservados.</span>
+    <span>Não afiliado à Rockstar Games nem à Take-Two Interactive.</span>
+    <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
+    <span>Feito para a comunidade de GTA &hearts;</span>
+  </div>
 </footer>
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
+  <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceitar analytics</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Recusar</button>
+  </div>
+</div>
   <script src="/assets/js/pt/theme.js" defer></script>
   <script src="/assets/js/pt/header.js" defer></script>
   <script src="/assets/js/pt/search.js" defer></script>
   <script src="/assets/js/pt/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/pt/newsletter.js" defer></script>
+  <script src="/assets/js/pt/consent.js" defer></script>
   <script type="module" src="/assets/js/pt/interactive-map.js"></script>
   <script src="/assets/js/pt/map-panzoom.js" defer></script>
 <script type="application/ld+json">

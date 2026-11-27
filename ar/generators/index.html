@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="مولد أسماء GTA 6: الشخصيات والطواقم واللوحات وإشارات النداء | ToolWools">
 <meta name="twitter:description" content="مولد أسماء GTA 6: أنشئ أسماء الشخصيات ووسوم الطواقم ولوحات الترخيص وإشارات النداء اللاسلكية وأسماء اللاعبين، مبنية وفق الحدود التي تفرضها اللعبة فعلًا.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://toolwools.com/ar/generators">
 <link rel="alternate" href="https://toolwools.com/generators" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/generators" hreflang="es">
@@ -41,11 +41,29 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-generators-ar.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision: see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -69,7 +87,8 @@
     {
       "@type": "WebPage",
       "url": "https://toolwools.com/ar/generators",
-      "dateModified": "2026-11-21"
+      "dateModified": "2026-11-21",
+      "inLanguage": "ar"
     },
     {
       "@type": "FAQPage",
@@ -111,7 +130,7 @@
           "name": "هل ستحفظ المولدات اختياراتي؟",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "نعم — تعيش الأسماء المحفوظة في متصفحك (localStorage) دون حاجة إلى حساب، بنفس طريقة عمل النتائج المحفوظة في الحاسبات. استخدم قائمة المفضلة في هذه الصفحة للاحتفاظ بالأسماء التي تعجبك."
+            "text": "نعم. تعيش الأسماء المحفوظة في متصفحك (localStorage) دون حاجة إلى حساب، بنفس طريقة عمل النتائج المحفوظة في الحاسبات. استخدم قائمة المفضلة في هذه الصفحة للاحتفاظ بالأسماء التي تعجبك."
           }
         },
         {
@@ -163,16 +182,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -181,21 +198,22 @@
           <a href="/ar/">الرئيسية</a>
           <a href="/ar/tools">الأدوات</a>
           <a href="/ar/trackers">أدوات التتبع</a>
-          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/generators" aria-current="page">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث عن الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/generators">الإنجليزية</a>
             <a href="/es/generators">Español</a>
@@ -226,37 +244,37 @@
           <a href="/ar/">الرئيسية</a>
           <a href="/ar/tools">الأدوات</a>
           <a href="/ar/trackers">أدوات التتبع</a>
-          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/generators" aria-current="page">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/generators" lang="en">EN</a><a href="/es/generators" lang="es">ES</a><a href="/pt/generators" lang="pt">PT</a><a href="/de/generators" lang="de">DE</a><a href="/fr/generators" lang="fr">FR</a><a href="/tr/generators" lang="tr">TR</a><a href="/ar/generators" lang="ar" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="مسار التنقل" class="breadcrumbs">
+    <main id="main" class="tool-main">
+      <div class="tool-body">
+        <article aria-labelledby="page-hero-heading">
+<section class="page-hero" aria-labelledby="page-hero-heading">
+      <div class="page-breadcrumbs" aria-label="مسار التنقل">
         <a href="/ar/">الرئيسية</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">المولّدات</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">المولّدات · مباشرة</span>
-      <h1 id="page-hero-heading">مولد أسماء GTA 6</h1>
-      <p class="page-hero-sub">أسماء الشخصيات ووسوم الطواقم ولوحات الترخيص وإشارات النداء اللاسلكية وأسماء اللاعبين، مبنية وفق الحدود التي تفرضها اللعبة فعلًا. والمولدات التفاعلية مباشرة الآن؛ اختر نمطًا أدناه وأنشئ اسمك الأول.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">تم التحديث في نوفمبر 2026</p>
-    <section aria-labelledby="generator">
+      </div>
+      <p class="page-eyebrow">المولّدات · مباشرة</p>
+      <h1 id="page-hero-heading" class="page-title">مولد أسماء GTA 6</h1>
+      <p class="page-subtitle">أسماء الشخصيات ووسوم الطواقم ولوحات الترخيص وإشارات النداء اللاسلكية وأسماء اللاعبين، مبنية وفق الحدود التي تفرضها اللعبة فعلًا.</p>
+      <p class="hero-meta"><span>تم التحديث في نوفمبر 2026</span></p>
+    </section>
+<section aria-labelledby="generator">
       <h2 id="generator">جرّب المولدات</h2>
-      <p class="tool-dek">خمسة أنماط بنقرة واحدة لكل منها. كل نتيجة تتبع الحدود أدناه — انسخها أو شاركها أو احفظها في مفضلتك.</p>
-      <div class="surface-card" data-generator style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem;margin-top:1.5rem">
-        <div role="tablist" aria-label="جرّب المولدات" style="display:flex;flex-wrap:wrap;gap:0.5rem"><button type="button" class="btn-ultra" data-gen-tab="character" role="tab" aria-selected="true">أسماء الشخصيات</button><button type="button" class="btn-outline" data-gen-tab="crew" role="tab" aria-selected="false">أسماء الطواقم ووسومها</button><button type="button" class="btn-outline" data-gen-tab="plate" role="tab" aria-selected="false">لوحات الترخيص</button><button type="button" class="btn-outline" data-gen-tab="callsign" role="tab" aria-selected="false">إشارات النداء اللاسلكية</button><button type="button" class="btn-outline" data-gen-tab="gamertag" role="tab" aria-selected="false">أسماء اللاعبين</button></div>
+      <p class="tool-dek">خمسة أنماط بنقرة واحدة لكل منها. كل نتيجة تتبع الحدود أدناه: انسخها أو شاركها أو احفظها في مفضلتك.</p>
+      <div class="surface-card" data-generator>
+        <div role="tablist" aria-label="جرّب المولدات"><button type="button" class="btn-ultra" data-gen-tab="character" role="tab" aria-selected="true">أسماء الشخصيات</button><button type="button" class="btn-outline" data-gen-tab="crew" role="tab" aria-selected="false">أسماء الطواقم ووسومها</button><button type="button" class="btn-outline" data-gen-tab="plate" role="tab" aria-selected="false">لوحات الترخيص</button><button type="button" class="btn-outline" data-gen-tab="callsign" role="tab" aria-selected="false">إشارات النداء اللاسلكية</button><button type="button" class="btn-outline" data-gen-tab="gamertag" role="tab" aria-selected="false">أسماء اللاعبين</button></div>
         <div class="gen-filters" data-gen-filters>
           <fieldset class="gen-filter-group" data-gen-filter-gender>
             <legend>الجنس</legend>
@@ -272,59 +290,59 @@
           </div>
         </div>
         <div class="gen-result-row">
-          <p data-gen-result style="font-size:1.75rem;font-weight:700;line-height:1.2;overflow-wrap:anywhere">Mateo Garcia</p>
+          <p data-gen-result>Mateo Garcia</p>
           <button type="button" class="gen-lock" data-gen-lock="name" aria-pressed="false" aria-label="قفل الاسم"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">قفل الاسم</span></button>
         </div>
-<p data-gen-detail style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">الاسم الأول + اسم العائلة · بجذور ليونيدا</p>
+<p data-gen-detail>الاسم الأول + اسم العائلة · بجذور ليونيدا</p>
         <div class="gen-card" data-gen-card hidden>
             <div class="gen-card-field">
               <span class="gen-card-label">اللقب:</span>
-              <span class="gen-card-value" data-gen-card-nickname>—</span>
+              <span class="gen-card-value" data-gen-card-nickname></span>
               <button type="button" class="gen-lock" data-gen-lock="nickname" aria-pressed="false" aria-label="قفل اللقب"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">قفل اللقب</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">العمر:</span>
-              <span class="gen-card-value" data-gen-card-age>—</span>
+              <span class="gen-card-value" data-gen-card-age></span>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">المنزل:</span>
-              <span class="gen-card-value" data-gen-card-home>—</span>
+              <span class="gen-card-value" data-gen-card-home></span>
               <button type="button" class="gen-lock" data-gen-lock="home" aria-pressed="false" aria-label="قفل المنزل"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">قفل المنزل</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">العمل:</span>
-              <span class="gen-card-value" data-gen-card-hustle>—</span>
+              <span class="gen-card-value" data-gen-card-hustle></span>
               <button type="button" class="gen-lock" data-gen-lock="hustle" aria-pressed="false" aria-label="قفل العمل"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">قفل العمل</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">القصة:</span>
-              <span class="gen-card-value" data-gen-card-backstory>—</span>
+              <span class="gen-card-value" data-gen-card-backstory></span>
               <button type="button" class="gen-lock" data-gen-lock="backstory" aria-pressed="false" aria-label="قفل القصة"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">قفل القصة</span></button>
             </div>
         </div>
-<div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+<div class="gen-actions">
           <button type="button" class="btn-ultra" data-gen-generate>أنشئ</button>
           <button type="button" class="btn-outline" data-gen-copy>انسخ</button>
           <button type="button" class="btn-outline" data-gen-share>شارك</button>
           <button type="button" class="btn-outline" data-gen-favorite>احفظ في المفضلة</button>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem">
+        <div class="gen-actions">
           <button type="button" class="btn-outline" data-gen-batch-generate>أنشئ 10</button>
         </div>
         <div class="gen-batch-grid" data-gen-batch></div>
-<p data-gen-status aria-live="polite" style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);min-height:1.25rem"></p>
-<h3 style="margin-top:1rem;font-size:1rem;font-weight:700">المفضلة المحفوظة</h3>
-<p data-gen-favorites-empty style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">لا توجد مفضلة بعد. أنشئ اسمًا واحفظه هنا.</p>
-<ul data-gen-favorites role="list" style="margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem;list-style:none;padding:0"></ul>
-        <h3 style="margin-top:1rem;font-size:1rem;font-weight:700">الرميات الأخيرة</h3>
-        <p data-gen-history-empty style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">لا توجد رميات بعد. أنشئ اسمًا وسيظهر هنا.</p>
-        <ul class="gen-history" data-gen-history role="list" style="margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem;list-style:none;padding:0"></ul>
+<p data-gen-status aria-live="polite"></p>
+<h3>المفضلة المحفوظة</h3>
+<p data-gen-favorites-empty>لا توجد مفضلة بعد. أنشئ اسمًا واحفظه هنا.</p>
+<ul data-gen-favorites role="list"></ul>
+        <h3>الرميات الأخيرة</h3>
+        <p data-gen-history-empty>لا توجد رميات بعد. أنشئ اسمًا وسيظهر هنا.</p>
+        <ul class="gen-history" data-gen-history role="list"></ul>
       </div>
     </section>
     <section aria-labelledby="rules">
       <h2 id="rules">قواعد التسمية التي تطبقها المولدات</h2>
       <p class="tool-dek">خمسة أنواع من الأسماء وخمس مجموعات حدود تفرضها اللعبة والمنصات فعلًا. وتستخدم المولدات هذه القواعد بالضبط.</p>
-      <div class="news-grid" style="margin-top:1.5rem"><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">أسماء الشخصيات</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">أسماء تناسب ليونيدا. قصيرة ولا تُنسى وقابلة للنطق في الدردشة الصوتية، فمقطعان صوتيان يغلبان أربعة عندما يناديك أحدهم باسمك تحت النيران.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">أزواج الاسم الأول والأخير وأنواع الألقاب ونكهة Vice City.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">أسماء الطواقم ووسومها</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">أسماء طواقم حتى 30 حرفًا، مع وسم من 4 أحرف يُقرأ بنظرة في قائمة اللاعبين. فالوسم هو الهوية، والاسم هو النكهة.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">اسم الطاقم ووسم من 4 أحرف وسطر شعار.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">لوحات الترخيص</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">8 أحرف أبجدية رقمية بالضبط. واللوحة هي الشيء الوحيد الذي يراه كل لاعب آخر على سيارتك، لذا يجب أن تُقرأ كم مزحة أو تهديد، لا كسلسلة عشوائية.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">لوحة من 8 أحرف وأنواع الأسلوب.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">إشارات النداء اللاسلكية</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">3-4 أحرف صديقة للنطق الصوتي. فإشارة النداء التي تنجو من قناة لاسلكية صاخبة أثمن من ذكية لا تنجو.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">إشارة نداء من 3-4 أحرف وتهجئة صوتية.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">أسماء اللاعبين</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">12-16 حرفًا دون حيل الأرقام بدل الأحرف. فالوسم الذي يمكنك قوله بصوت عالٍ دون تهجئته هو وسم يتذكره الناس.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">وسم من 12-16 حرفًا وأنواع آمنة للتوفر.</p></article></div>
+      <div class="news-grid"><article class="surface-card"><h3>أسماء الشخصيات</h3><p>أسماء تناسب ليونيدا. قصيرة ولا تُنسى وقابلة للنطق في الدردشة الصوتية، فمقطعان صوتيان يغلبان أربعة عندما يناديك أحدهم باسمك تحت النيران.</p><p>أزواج الاسم الأول والأخير وأنواع الألقاب ونكهة Vice City.</p></article><article class="surface-card"><h3>أسماء الطواقم ووسومها</h3><p>أسماء طواقم حتى 30 حرفًا، مع وسم من 4 أحرف يُقرأ بنظرة في قائمة اللاعبين. فالوسم هو الهوية، والاسم هو النكهة.</p><p>اسم الطاقم ووسم من 4 أحرف وسطر شعار.</p></article><article class="surface-card"><h3>لوحات الترخيص</h3><p>8 أحرف أبجدية رقمية بالضبط. واللوحة هي الشيء الوحيد الذي يراه كل لاعب آخر على سيارتك، لذا يجب أن تُقرأ كم مزحة أو تهديد، لا كسلسلة عشوائية.</p><p>لوحة من 8 أحرف وأنواع الأسلوب.</p></article><article class="surface-card"><h3>إشارات النداء اللاسلكية</h3><p>3-4 أحرف صديقة للنطق الصوتي. فإشارة النداء التي تنجو من قناة لاسلكية صاخبة أثمن من ذكية لا تنجو.</p><p>إشارة نداء من 3-4 أحرف وتهجئة صوتية.</p></article><article class="surface-card"><h3>أسماء اللاعبين</h3><p>12-16 حرفًا دون حيل الأرقام بدل الأحرف. فالوسم الذي يمكنك قوله بصوت عالٍ دون تهجئته هو وسم يتذكره الناس.</p><p>وسم من 12-16 حرفًا وأنواع آمنة للتوفر.</p></article></div>
     </section>
     <section class="block prose" aria-labelledby="naming-guide">
       <h2 id="naming-guide">كيف تختار اسما يناسب ليونيدا</h2>
@@ -352,8 +370,8 @@
       </ul>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">أسئلة المولدات، وقد أُجيب عنها</h2>
+      <header>
+        <h2 id="faq">أسئلة المولدات، وقد أُجيب عنها</h2>
         <p class="tool-dek">ما الذي تصنعه وكيف تعمل ولماذا توجد الحدود.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -361,7 +379,7 @@
         <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">هل المولدات الخمسة مباشرة الآن؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">نعم. المولدات الخمسة مباشرة الآن: أسماء الشخصيات وأسماء الطواقم ووسومها ولوحات الترخيص وإشارات النداء اللاسلكية وأسماء اللاعبين. اختر نمطًا أعلاه وأنشئ اسمك الأول.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">هل يمكنني استخدام اسم مبني وفق هذه القواعد في GTA Online؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">تتبع الأسماء المبنية وفق هذه القواعد حدود الأحرف والتنسيقات التي تقبلها المنصات، لكن التوفر يعتمد على المنصة. وتحقق من الاسم حيث تلعب قبل الالتزام به.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">لماذا توجد حدود على الأسماء؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">لأن اللعبة والمنصات تفرضها: وسوم الطواقم 4 أحرف واللوحات 8 أحرف أبجدية رقمية وأسماء اللاعبين من 12 إلى 16. والمولد الذي يتجاهل الحدود ينتج أسماء لا يمكنك استخدامها.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">هل ستحفظ المولدات اختياراتي؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">نعم — تعيش الأسماء المحفوظة في متصفحك (localStorage) دون حاجة إلى حساب، بنفس طريقة عمل النتائج المحفوظة في الحاسبات. استخدم قائمة المفضلة في هذه الصفحة للاحتفاظ بالأسماء التي تعجبك.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">هل ستحفظ المولدات اختياراتي؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">نعم. تعيش الأسماء المحفوظة في متصفحك (localStorage) دون حاجة إلى حساب، بنفس طريقة عمل النتائج المحفوظة في الحاسبات. استخدم قائمة المفضلة في هذه الصفحة للاحتفاظ بالأسماء التي تعجبك.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">ما الذي يجعل اسم شخصية GTA 6 جيدا؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">أن يكون قصيرا ويمكنك قوله بصوت عال دون تهجئته. اسم أول مع اسم عائلة، ومقطعان صوتيان أفضل من أربعة، ودون شيء يحتاج إلى أرقام تحل محل الحروف. إذا استطاع لاعب آخر تذكره بعد سماعه مرة واحدة في الدردشة الصوتية، فهو اسم جيد.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-6"><details><summary aria-controls="faq-a-6"><h3 id="faq-q-6">هل الأسماء المولدة مجانية الاستخدام؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-6" role="region" aria-labelledby="faq-q-6"><p class="faq-answer">نعم. المولدات مجانية، دون تسجيل ودون إعلانات، وكل اسم يصنع على جهازك، فلا يتم رفع أي شيء. الاسم المولد هو مزيج من كلمات من قوائم هذه الصفحة، لذا تحقق من توفره حيث تريد استخدامه. فقد يستخدم شخص آخر التركيبة نفسها بالفعل.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-7"><details><summary aria-controls="faq-a-7"><h3 id="faq-q-7">ما الذي يجعل وسم الطاقم جيدا؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-7" role="region" aria-labelledby="faq-q-7"><p class="faq-answer">أربعة أحرف تقرأ بنظرة واحدة في قائمة اللاعبين. الوسم هو الهوية واسم الطاقم هو النكهة، لذا اختر وسما لا يحتاج إلى شرح واسما يستطيع الناس قوله. تجنب الحروف التي تتشابه بأحجام صغيرة، وتحقق من أن الوسم يقرأ بالطريقة نفسها لدى جميع أفراد الطاقم.</p></div></details></article></li>
@@ -369,29 +387,47 @@
         <li><article aria-labelledby="faq-q-9"><details><summary aria-controls="faq-a-9"><h3 id="faq-q-9">هل تعمل المولدات بلغتي؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-9" role="region" aria-labelledby="faq-q-9"><p class="faq-answer">نعم. هذه الصفحة مترجمة إلى سبع لغات، وتعمل المولدات بالطريقة نفسها في كل منها. الأسماء نفسها تبقى كما هي في جميع اللغات، لأنها أسماء علم. ولا تترجم إلا الأزرار والتسميات والأدلة.</p></div></details></article></li>
       </ul>
     </section>
+        </article>
+      </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
   </div>
-</article>
-</main>
+</section>
+    </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -430,9 +466,9 @@
               <li><a href="/ar/contact">اتصل بنا</a></li>
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
+              <li><a href="/editorial-policy">سياسة التحرير</a></li>
               <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
               <li><a href="/ar/terms">شروط الخدمة</a></li>
-              <li><a href="/editorial-policy">سياسة التحرير</a></li>
               <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
@@ -442,10 +478,7 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/ar/privacy">الخصوصية</a>
-          <a href="/ar/terms">الشروط</a>
-          <button type="button" class="footer-link-btn" data-consent-open>إعدادات ملفات تعريف الارتباط</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
@@ -466,10 +499,10 @@
 <script src="/assets/js/ar/launch.js" defer></script>
 <script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/ar/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
+<script src="/assets/js/ar/consent.js" defer></script>
 <script src="/assets/js/ar/header.js" defer></script>
 <script src="/assets/js/ar/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
+<script src="/assets/js/ar/faq.js" defer></script>
 <script src="/assets/js/ar/generators.js" defer></script>
 <script src="/assets/js/ar/newsletter.js" defer></script>
 </body>

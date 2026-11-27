@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:url" content="https://toolwools.com/es/generators">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="Generador de nombres de GTA 6: personaje, equipo, matrículas e indicativos | ToolWools">
 <meta name="twitter:description" content="Generador de nombres de GTA 6: genera nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags, construidos según los límites que el juego realmente impone.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://toolwools.com/es/generators">
 <link rel="alternate" href="https://toolwools.com/generators" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/generators" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-generators-es.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision: see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -70,7 +90,8 @@
     {
       "@type": "WebPage",
       "url": "https://toolwools.com/es/generators",
-      "dateModified": "2026-11-21"
+      "dateModified": "2026-11-21",
+      "inLanguage": "es"
     },
     {
       "@type": "FAQPage",
@@ -165,16 +186,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" aria-label="Sitio">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/es/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
             </span>
           </span>
@@ -183,21 +202,22 @@
           <a href="/es/">Inicio</a>
           <a href="/es/tools">Herramientas</a>
           <a href="/es/trackers">Rastreadores</a>
-          <a href="/es/generators">Generadores</a>
+          <a href="/es/generators" aria-current="page">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Seleccionar idioma">ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/generators">English</a>
             <a href="/es/generators" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
@@ -228,37 +248,37 @@
           <a href="/es/">Inicio</a>
           <a href="/es/tools">Herramientas</a>
           <a href="/es/trackers">Rastreadores</a>
-          <a href="/es/generators">Generadores</a>
+          <a href="/es/generators" aria-current="page">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/generators" lang="en">EN</a><a href="/es/generators" lang="es" aria-current="true">ES</a><a href="/pt/generators" lang="pt">PT</a><a href="/de/generators" lang="de">DE</a><a href="/fr/generators" lang="fr">FR</a><a href="/tr/generators" lang="tr">TR</a><a href="/ar/generators" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Migas de pan" class="breadcrumbs">
+    <main id="main" class="tool-main">
+      <div class="tool-body">
+        <article aria-labelledby="page-hero-heading">
+<section class="page-hero" aria-labelledby="page-hero-heading">
+      <div class="page-breadcrumbs" aria-label="Migas de pan">
         <a href="/es/">Inicio</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">Generadores</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Generadores · En vivo</span>
-      <h1 id="page-hero-heading">Generador de nombres de GTA 6</h1>
-      <p class="page-hero-sub">Generador de nombres de GTA 6: las reglas de nombres para nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags, construidos según los límites que el juego realmente impone. Los generadores interactivos ya están en vivo; elige un estilo abajo y genera tu primer nombre.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">Actualizado en noviembre de 2026</p>
-    <section aria-labelledby="generator">
+      </div>
+      <p class="page-eyebrow">Generadores · En vivo</p>
+      <h1 id="page-hero-heading" class="page-title">Generador de nombres de GTA 6</h1>
+      <p class="page-subtitle">Generador de nombres de GTA 6: las reglas de nombres para nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags, construidos según los límites que el juego realmente impone.</p>
+      <p class="hero-meta"><span>Actualizado en noviembre de 2026</span></p>
+    </section>
+<section aria-labelledby="generator">
       <h2 id="generator">Prueba los generadores</h2>
       <p class="tool-dek">Cinco estilos, un clic cada uno. Cada resultado sigue los límites de abajo: cópialo, compártelo o guárdalo en tus favoritos.</p>
-      <div class="surface-card" data-generator style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem;margin-top:1.5rem">
-        <div role="tablist" aria-label="Prueba los generadores" style="display:flex;flex-wrap:wrap;gap:0.5rem"><button type="button" class="btn-ultra" data-gen-tab="character" role="tab" aria-selected="true">Nombres de personaje</button><button type="button" class="btn-outline" data-gen-tab="crew" role="tab" aria-selected="false">Nombres y etiquetas de equipo</button><button type="button" class="btn-outline" data-gen-tab="plate" role="tab" aria-selected="false">Matrículas</button><button type="button" class="btn-outline" data-gen-tab="callsign" role="tab" aria-selected="false">Indicativos de radio</button><button type="button" class="btn-outline" data-gen-tab="gamertag" role="tab" aria-selected="false">Gamertags</button></div>
+      <div class="surface-card" data-generator>
+        <div role="tablist" aria-label="Prueba los generadores"><button type="button" class="btn-ultra" data-gen-tab="character" role="tab" aria-selected="true">Nombres de personaje</button><button type="button" class="btn-outline" data-gen-tab="crew" role="tab" aria-selected="false">Nombres y etiquetas de equipo</button><button type="button" class="btn-outline" data-gen-tab="plate" role="tab" aria-selected="false">Matrículas</button><button type="button" class="btn-outline" data-gen-tab="callsign" role="tab" aria-selected="false">Indicativos de radio</button><button type="button" class="btn-outline" data-gen-tab="gamertag" role="tab" aria-selected="false">Gamertags</button></div>
         <div class="gen-filters" data-gen-filters>
           <fieldset class="gen-filter-group" data-gen-filter-gender>
             <legend>Género</legend>
@@ -274,59 +294,59 @@
           </div>
         </div>
         <div class="gen-result-row">
-          <p data-gen-result style="font-size:1.75rem;font-weight:700;line-height:1.2;overflow-wrap:anywhere">Mateo Garcia</p>
+          <p data-gen-result>Mateo Garcia</p>
           <button type="button" class="gen-lock" data-gen-lock="name" aria-pressed="false" aria-label="Fijar nombre"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">Fijar nombre</span></button>
         </div>
-<p data-gen-detail style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">Nombre + apellido · con raíces en Leonida</p>
+<p data-gen-detail>Nombre + apellido · con raíces en Leonida</p>
         <div class="gen-card" data-gen-card hidden>
             <div class="gen-card-field">
               <span class="gen-card-label">Apodo:</span>
-              <span class="gen-card-value" data-gen-card-nickname>—</span>
+              <span class="gen-card-value" data-gen-card-nickname></span>
               <button type="button" class="gen-lock" data-gen-lock="nickname" aria-pressed="false" aria-label="Fijar apodo"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">Fijar apodo</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">Edad:</span>
-              <span class="gen-card-value" data-gen-card-age>—</span>
+              <span class="gen-card-value" data-gen-card-age></span>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">Hogar:</span>
-              <span class="gen-card-value" data-gen-card-home>—</span>
+              <span class="gen-card-value" data-gen-card-home></span>
               <button type="button" class="gen-lock" data-gen-lock="home" aria-pressed="false" aria-label="Fijar hogar"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">Fijar hogar</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">Negocio:</span>
-              <span class="gen-card-value" data-gen-card-hustle>—</span>
+              <span class="gen-card-value" data-gen-card-hustle></span>
               <button type="button" class="gen-lock" data-gen-lock="hustle" aria-pressed="false" aria-label="Fijar negocio"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">Fijar negocio</span></button>
             </div>
             <div class="gen-card-field">
               <span class="gen-card-label">Historia:</span>
-              <span class="gen-card-value" data-gen-card-backstory>—</span>
+              <span class="gen-card-value" data-gen-card-backstory></span>
               <button type="button" class="gen-lock" data-gen-lock="backstory" aria-pressed="false" aria-label="Fijar historia"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="gen-visually-hidden">Fijar historia</span></button>
             </div>
         </div>
-<div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+<div class="gen-actions">
           <button type="button" class="btn-ultra" data-gen-generate>Generar</button>
           <button type="button" class="btn-outline" data-gen-copy>Copiar</button>
           <button type="button" class="btn-outline" data-gen-share>Compartir</button>
           <button type="button" class="btn-outline" data-gen-favorite>Guardar en favoritos</button>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem">
+        <div class="gen-actions">
           <button type="button" class="btn-outline" data-gen-batch-generate>Generar 10</button>
         </div>
         <div class="gen-batch-grid" data-gen-batch></div>
-<p data-gen-status aria-live="polite" style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground);min-height:1.25rem"></p>
-<h3 style="margin-top:1rem;font-size:1rem;font-weight:700">Favoritos guardados</h3>
-<p data-gen-favorites-empty style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">Aún no hay favoritos. Genera un nombre y guárdalo aquí.</p>
-<ul data-gen-favorites role="list" style="margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem;list-style:none;padding:0"></ul>
-        <h3 style="margin-top:1rem;font-size:1rem;font-weight:700">Tiradas recientes</h3>
-        <p data-gen-history-empty style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground)">Aún no hay tiradas. Genera un nombre y aparecerá aquí.</p>
-        <ul class="gen-history" data-gen-history role="list" style="margin-top:0.5rem;display:flex;flex-direction:column;gap:0.5rem;list-style:none;padding:0"></ul>
+<p data-gen-status aria-live="polite"></p>
+<h3>Favoritos guardados</h3>
+<p data-gen-favorites-empty>Aún no hay favoritos. Genera un nombre y guárdalo aquí.</p>
+<ul data-gen-favorites role="list"></ul>
+        <h3>Tiradas recientes</h3>
+        <p data-gen-history-empty>Aún no hay tiradas. Genera un nombre y aparecerá aquí.</p>
+        <ul class="gen-history" data-gen-history role="list"></ul>
       </div>
     </section>
     <section aria-labelledby="rules">
       <h2 id="rules">Las reglas de nombres que aplican los generadores</h2>
       <p class="tool-dek">Cinco tipos de nombre, cinco conjuntos de límites que el juego y las plataformas realmente imponen. Los generadores usan exactamente estas reglas.</p>
-      <div class="news-grid" style="margin-top:1.5rem"><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">Nombres de personaje</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Nombres que encajan en Leonida. Cortos, memorables y pronunciables en el chat de voz: dos sílabas ganan a cuatro cuando alguien grita tu nombre bajo fuego.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">Pares de nombre y apellido, variantes de apodo, sabor de Vice City.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">Nombres y etiquetas de equipo</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Nombres de equipo de hasta 30 caracteres, con una etiqueta de 4 caracteres que se lee de un vistazo en la lista de jugadores. La etiqueta es la identidad; el nombre es el sabor.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">Nombre de equipo, etiqueta de 4 caracteres, línea de lema.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">Matrículas</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">Exactamente 8 caracteres alfanuméricos. La matrícula es lo único que todos los demás jugadores ven en tu coche, así que debería leerse como una broma o una amenaza, no como una cadena aleatoria.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">Matrícula de 8 caracteres, variantes de estilo.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">Indicativos de radio</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">3-4 letras, fácil de pronunciar por fonética. Un indicativo que sobrevive a un canal de radio ruidoso vale más que uno ingenioso que no lo hace.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">Indicativo de 3-4 letras, deletreo fonético.</p></article><article class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">Gamertags</h3><p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">12-16 caracteres, sin trucos de números por letras. Una etiqueta que puedes decir en voz alta sin deletrearla es una etiqueta que la gente recuerda.</p><p style="margin-top:0.75rem;font-size:0.875rem;color:var(--muted-foreground)">Etiqueta de 12-16 caracteres, variantes seguras de disponibilidad.</p></article></div>
+      <div class="news-grid"><article class="surface-card"><h3>Nombres de personaje</h3><p>Nombres que encajan en Leonida. Cortos, memorables y pronunciables en el chat de voz: dos sílabas ganan a cuatro cuando alguien grita tu nombre bajo fuego.</p><p>Pares de nombre y apellido, variantes de apodo, sabor de Vice City.</p></article><article class="surface-card"><h3>Nombres y etiquetas de equipo</h3><p>Nombres de equipo de hasta 30 caracteres, con una etiqueta de 4 caracteres que se lee de un vistazo en la lista de jugadores. La etiqueta es la identidad; el nombre es el sabor.</p><p>Nombre de equipo, etiqueta de 4 caracteres, línea de lema.</p></article><article class="surface-card"><h3>Matrículas</h3><p>Exactamente 8 caracteres alfanuméricos. La matrícula es lo único que todos los demás jugadores ven en tu coche, así que debería leerse como una broma o una amenaza, no como una cadena aleatoria.</p><p>Matrícula de 8 caracteres, variantes de estilo.</p></article><article class="surface-card"><h3>Indicativos de radio</h3><p>3-4 letras, fácil de pronunciar por fonética. Un indicativo que sobrevive a un canal de radio ruidoso vale más que uno ingenioso que no lo hace.</p><p>Indicativo de 3-4 letras, deletreo fonético.</p></article><article class="surface-card"><h3>Gamertags</h3><p>12-16 caracteres, sin trucos de números por letras. Una etiqueta que puedes decir en voz alta sin deletrearla es una etiqueta que la gente recuerda.</p><p>Etiqueta de 12-16 caracteres, variantes seguras de disponibilidad.</p></article></div>
     </section>
     <section class="block prose" aria-labelledby="naming-guide">
       <h2 id="naming-guide">Cómo elegir un nombre que encaje en Leonida</h2>
@@ -354,8 +374,8 @@
       </ul>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Preguntas sobre generadores, respondidas</h2>
+      <header>
+        <h2 id="faq">Preguntas sobre generadores, respondidas</h2>
         <p class="tool-dek">Qué hacen, cómo funcionan y por qué existen los límites.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -371,29 +391,47 @@
         <li><article aria-labelledby="faq-q-9"><details><summary aria-controls="faq-a-9"><h3 id="faq-q-9">¿Los generadores funcionan en mi idioma?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-9" role="region" aria-labelledby="faq-q-9"><p class="faq-answer">Sí. Esta página está traducida a siete idiomas y los generadores funcionan igual en cada uno. Los nombres se mantienen iguales en todos los idiomas, porque son nombres propios. Solo se traducen los botones, las etiquetas y las guías.</p></div></details></article></li>
       </ul>
     </section>
+        </article>
+      </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Mantente al tanto</h2>
+          <p>Consigue las últimas noticias, herramientas y guías de GTA 6.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Dirección de correo</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Suscribirse</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
   </div>
-</article>
-</main>
+</section>
+    </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/es/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ya está disponible — 19 de noviembre de 2026</span>
+        <span class="eyebrow-muted">GTA 6 ya está disponible, 19 de noviembre de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar herramientas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/es/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
               </span>
             </span>
@@ -432,9 +470,9 @@
               <li><a href="/es/contact">Contacto</a></li>
               <li><a href="/es/email-preferences">Preferencias de correo</a></li>
               <li><a href="/es/sitemap">Mapa del sitio</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/es/privacy">Política de privacidad</a></li>
               <li><a href="/es/terms">Términos de servicio</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
             </ul>
           </div>
@@ -444,10 +482,7 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/es/privacy">Privacidad</a>
-          <a href="/es/terms">Términos</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Configuración de cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><a href="/es/disclaimer">Descargo de responsabilidad</a><button type="button" data-consent-open>Configuración de cookies</button></span>
           <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
         </div>
       </div>
