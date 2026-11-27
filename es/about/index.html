@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:url" content="https://toolwools.com/es/about">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="Acerca de ToolWools: quién crea las herramientas de GTA 6 | ToolWools">
 <meta name="twitter:description" content="ToolWools es un sitio editorial independiente de herramientas, calculadoras, rastreadores y planificadores de GTA 6. Conoce a los autores, revisores y al editor, y lee la política de correcciones.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/es/about">
 <link rel="alternate" href="https://toolwools.com/about" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/about" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-legal-es.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -121,16 +141,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" aria-label="Sitio">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/es/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
             </span>
           </span>
@@ -142,18 +160,19 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Seleccionar idioma">ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/about">English</a>
             <a href="/es/about" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
@@ -177,7 +196,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvil">
@@ -187,30 +206,30 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/about" lang="en">EN</a><a href="/es/about" lang="es" aria-current="true">ES</a><a href="/pt/about" lang="pt">PT</a><a href="/de/about" lang="de">DE</a><a href="/fr/about" lang="fr">FR</a><a href="/tr/about" lang="tr">TR</a><a href="/ar/about" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
+<main id="main" class="tool-main" tabindex="-1">
+<div class="tool-body">
 <article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Migas de pan" class="breadcrumbs">
+  <section class="page-hero" aria-labelledby="page-hero-heading">
+      <div class="page-breadcrumbs" aria-label="Migas de pan">
         <a href="/es/">Inicio</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">Acerca de</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Acerca de</span>
-      <h1 id="page-hero-heading">Quién crea ToolWools</h1>
-      <p class="page-hero-sub">ToolWools es un sitio editorial independiente de herramientas, calculadoras, rastreadores y planificadores de GTA 6. Cada número del sitio está modelado, probado y revisado por personas con nombre, y cada cambio tiene fecha en el registro de cambios de la herramienta.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+      </div>
+      <div class="page-eyebrow"><span>Acerca de</span></div>
+      <h1 id="page-hero-heading" class="page-title">Quién crea ToolWools</h1>
+      <p class="page-subtitle">ToolWools es un sitio editorial independiente de herramientas, calculadoras, rastreadores y planificadores de GTA 6. Cada número del sitio está modelado, probado y revisado por personas con nombre, y cada cambio tiene fecha en el registro de cambios de la herramienta.</p>
+    </section>
     <section class="hub-note" aria-labelledby="disclosure">
-      <h2 id="disclosure" style="font-size:0.875rem;font-weight:700">Declaración editorial</h2>
+      <h2 id="disclosure">Declaración editorial</h2>
       <p style="margin-top:0.5rem">ToolWools se financia con sus lectores, pero opera de forma independiente. Nuestras calculadoras, puntuaciones de nivel y veredictos no están patrocinados por Rockstar Games, NVIDIA, AMD, Intel ni ningún fabricante de hardware. No aceptamos pagos, hardware gratuito ni colocación de afiliados a cambio de puntuaciones. Cada componente se mide con la misma metodología pública y se vuelve a probar cuando salen nuevos controladores o versiones del motor.</p>
     </section>
     <section aria-labelledby="scope">
@@ -249,11 +268,11 @@
         </article><article id="when-and-where" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
           <h3 style="font-size:1.125rem;font-weight:700">¿Cuándo y dónde?</h3>
           <p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground)">Logística del lanzamiento, tiempos y el mundo en sí.</p>
-          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/es/tools/add-to-calendar">Recordatorio de fecha de lanzamiento</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Convierte el lanzamiento a tu zona horaria y genera un archivo de calendario.</p></li><li><a href="/es/tools/download-time">Calculadora de tiempo de descarga</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Convierte tu velocidad real sostenida de conexión en una estimación de descarga de precarga y del día de lanzamiento.</p></li><li><a href="/es/tools/interactive-map">Mapa interactivo</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Regiones de Leonida, distritos de Vice City, comparación de tamaño con mapas anteriores de GTA y filtrado por evidencia.</p></li><li><a href="/es/tools/economy-calculator">Calculadora de economía</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Clasifica los métodos de ganar dinero por pago neto por hora, además de los modos de ROI de negocio y valor de tarjetas.</p></li><li><a href="/es/tools/preload-tracker">Historial de precarga y calendario de actualizaciones de GTA 6</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Historial de precarga y calendario de actualizaciones de GTA 6: la precarga del lanzamiento (10–19 nov 2026), actualizaciones de título 1.002.000, 1.002.001 y el primer parche posterior al lanzamiento 01.002.002 (23 nov, con notas oficiales). Sin DLC anunciado. Última revisión 23 nov 2026.</p></li><li><a href="/es/tools/weapon-comparison">Comparación de armas de GTA 6 — Valoraciones, cargador y precio</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compara las 53 armas base de GTA 6 en Daño, Precisión, Manejo y Alcance — las cuatro valoraciones del juego sobre 10 — además del tamaño del cargador, el modo de disparo y el precio. En el juego no existe ninguna estadística de cadencia de fuego; esta herramienta muestra los números que muestra el juego. Última revisión: 24 nov 2026.</p></li><li><a href="/es/tools/vehicle-comparison">Comparación de vehículos de GTA 6 — Valoraciones, coste de registro y valor de venta</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compara vehículos de GTA 6 cara a cara en las cinco valoraciones del juego sobre 10 — Velocidad, Aceleración, Manejo en asfalto, Manejo todoterreno, Fuerza — además del coste de registro y el valor de venta. Aún no existe ninguna velocidad máxima medida; esta herramienta muestra los números que muestra el juego. Última revisión: 24 nov 2026.</p></li><li><a href="/es/tools/server-status">Estado del servidor de GTA 6 — ¿Los servidores están caídos?</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 no tiene servidores que puedan caerse — se lanzó el 19 nov 2026 como un juego para un jugador sin modo online. Comprueba los tres servicios de los que depende: Rockstar Authentication, PlayStation Network y Xbox network, revisados a mano el 24 nov 2026, con las páginas oficiales enlazadas.</p></li><li><a href="/es/tools/business-tracker">Seguimiento de negocios de GTA 6</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Calculadora y seguimiento de negocios de GTA 6: aún no se puede comprar ningún negocio; sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia.</p></li><li><a href="/es/tools/pre-order-tracker">Dónde comprar GTA 6: ediciones y canales comparados</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Tres canales de compra puntuados por cancelabilidad, protección de precio, tiempos de descarga, bonificaciones y reventa.</p></li><li><a href="/es/tools/price-by-country">Precio por país</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Precio de GTA 6 en 44 mercados, en moneda local y USD, con impuestos desglosados.</p></li><li><a href="/es/tools/gta-6-tracker">Hitos del lanzamiento</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 se lanzó el 19 nov 2026. Las ventanas de precarga completadas, los hitos de lanzamiento y el instante de lanzamiento en tu zona horaria.</p></li></ul>
+          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/es/tools/add-to-calendar">Recordatorio de fecha de lanzamiento</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Convierte el lanzamiento a tu zona horaria y genera un archivo de calendario.</p></li><li><a href="/es/tools/download-time">Calculadora de tiempo de descarga</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Convierte tu velocidad real sostenida de conexión en una estimación de descarga de precarga y del día de lanzamiento.</p></li><li><a href="/es/tools/interactive-map">Mapa interactivo</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Regiones de Leonida, distritos de Vice City, comparación de tamaño con mapas anteriores de GTA y filtrado por evidencia.</p></li><li><a href="/es/tools/economy-calculator">Calculadora de economía</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Clasifica los métodos de ganar dinero por pago neto por hora, además de los modos de ROI de negocio y valor de tarjetas.</p></li><li><a href="/es/tools/preload-tracker">Historial de precarga y calendario de actualizaciones de GTA 6</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Historial de precarga y calendario de actualizaciones de GTA 6: la precarga del lanzamiento (10–19 nov 2026), actualizaciones de título 1.002.000, 1.002.001 y el primer parche posterior al lanzamiento 01.002.002 (23 nov, con notas oficiales). Sin DLC anunciado. Última revisión 23 nov 2026.</p></li><li><a href="/es/tools/weapon-comparison">Comparación de armas de GTA 6, Valoraciones, cargador y precio</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compara las 53 armas base de GTA 6 en Daño, Precisión, Manejo y Alcance, las cuatro valoraciones del juego sobre 10, además del tamaño del cargador, el modo de disparo y el precio. En el juego no existe ninguna estadística de cadencia de fuego; esta herramienta muestra los números que muestra el juego. Última revisión: 24 nov 2026.</p></li><li><a href="/es/tools/vehicle-comparison">Comparación de vehículos de GTA 6, Valoraciones, coste de registro y valor de venta</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compara vehículos de GTA 6 cara a cara en las cinco valoraciones del juego sobre 10, Velocidad, Aceleración, Manejo en asfalto, Manejo todoterreno, Fuerza, además del coste de registro y el valor de venta. Aún no existe ninguna velocidad máxima medida; esta herramienta muestra los números que muestra el juego. Última revisión: 24 nov 2026.</p></li><li><a href="/es/tools/server-status">Estado del servidor de GTA 6, ¿Los servidores están caídos?</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 no tiene servidores que puedan caerse, se lanzó el 19 nov 2026 como un juego para un jugador sin modo online. Comprueba los tres servicios de los que depende: Rockstar Authentication, PlayStation Network y Xbox network, revisados a mano el 24 nov 2026, con las páginas oficiales enlazadas.</p></li><li><a href="/es/tools/business-tracker">Seguimiento de negocios de GTA 6</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Calculadora y seguimiento de negocios de GTA 6: aún no se puede comprar ningún negocio; sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia.</p></li><li><a href="/es/tools/pre-order-tracker">Dónde comprar GTA 6: ediciones y canales comparados</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Tres canales de compra puntuados por cancelabilidad, protección de precio, tiempos de descarga, bonificaciones y reventa.</p></li><li><a href="/es/tools/price-by-country">Precio por país</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Precio de GTA 6 en 44 mercados, en moneda local y USD, con impuestos desglosados.</p></li><li><a href="/es/tools/gta-6-tracker">Hitos del lanzamiento</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 se lanzó el 19 nov 2026. Las ventanas de precarga completadas, los hitos de lanzamiento y el instante de lanzamiento en tu zona horaria.</p></li></ul>
         </article><article id="need-a-name" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
           <h3 style="font-size:1.125rem;font-weight:700">¿Necesitas un nombre?</h3>
           <p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground)">Nombres de personaje, equipo, matrícula e indicativo para tu persona de GTA 6.</p>
-          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/es/generators">Generador de nombres</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags — generados al instante.</p></li></ul>
+          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/es/generators">Generador de nombres</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Nombres de personaje, etiquetas de equipo, matrículas, indicativos de radio y gamertags, generados al instante.</p></li></ul>
         </article></div>
       <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground)">Explora por centro: <a href="/es/tools">todas las herramientas y calculadoras</a>, <a href="/es/guides">guías</a>, <a href="/es/trending">herramientas en tendencia</a>, o <a href="/es/methodology#models">cómo funciona cada modelo</a>.</p>
     </section>
@@ -270,7 +289,7 @@
       </div>
     </section>
     <section class="hub-note" aria-labelledby="privacy">
-      <h2 id="privacy" style="font-size:0.875rem;font-weight:700">Tus datos, y lo que no hacemos con ellos</h2>
+      <h2 id="privacy">Tus datos, y lo que no hacemos con ellos</h2>
       <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.5rem;display:flex;flex-direction:column;gap:0.375rem">
         <li>Cada calculadora se ejecuta en tu navegador. Tu lista de componentes, resolución y ajustes nunca se envían a un servidor.</li>
         <li>No hay cuentas, ni inicios de sesión, ni requisito de correo para usar ninguna herramienta del sitio.</li>
@@ -312,13 +331,13 @@
       <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground)">Las reglas que aplica cada rol, fuentes, verificaciones cruzadas y cadencia de nuevas pruebas, están publicadas en su totalidad en <a href="/es/methodology#verification">cómo verificamos cada afirmación</a>.</p>
     </section>
     <section class="hub-note" aria-labelledby="corrections">
-      <h2 id="corrections" style="font-size:0.875rem;font-weight:700">Política de correcciones</h2>
+      <h2 id="corrections">Política de correcciones</h2>
       <p style="margin-top:0.5rem">Cada cambio de modelo tiene fecha en el registro de cambios de la herramienta. Si ves un número que no coincide con tu equipo, escribe a <a href="mailto:corrections@toolwools.com">corrections@toolwools.com</a> con tu configuración y la lectura exacta. Volvemos a probar en el equipo de referencia, publicamos la corrección y damos crédito a quien lo reportó.</p>
       <p style="margin-top:0.75rem"><a href="mailto:hello@toolwools.com">hello@toolwools.com</a> contacto general</p>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Sobre este sitio, respondido</h2>
+      <header>
+        <h2 id="faq">Sobre este sitio, respondido</h2>
         <p class="tool-dek">Propiedad, independencia, manejo de datos y correcciones en forma breve.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -330,33 +349,51 @@
       </ul>
     </section>
     <section class="hub-note" aria-labelledby="methodology-link">
-      <h2 id="methodology-link" style="font-size:1rem;font-weight:700">Cómo verificamos cada afirmación</h2>
+      <h2 id="methodology-link">Cómo verificamos cada afirmación</h2>
       <p style="margin-top:0.5rem">El flujo de verificación, fuentes, verificaciones cruzadas y cadencia de nuevas pruebas con controladores, vive en la página de metodología.</p>
       <p style="margin-top:0.75rem"><a href="/es/methodology">Lee la metodología →</a></p>
     </section>
-  </div>
 </article>
+</div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Mantente al tanto</h2>
+          <p>Consigue las últimas noticias, herramientas y guías de GTA 6.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Dirección de correo</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Suscribirse</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/es/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ya está disponible — 19 de noviembre de 2026</span>
+        <span class="eyebrow-muted">GTA 6 ya está disponible, 19 de noviembre de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar herramientas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/es/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
               </span>
             </span>
@@ -395,9 +432,9 @@
               <li><a href="/es/contact">Contacto</a></li>
               <li><a href="/es/email-preferences">Preferencias de correo</a></li>
               <li><a href="/es/sitemap">Mapa del sitio</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/es/privacy">Política de privacidad</a></li>
               <li><a href="/es/terms">Términos de servicio</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
             </ul>
           </div>
@@ -407,24 +444,18 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/es/privacy">Privacidad</a>
-          <a href="/es/terms">Términos</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Configuración de cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><a href="/es/disclaimer">Descargo de responsabilidad</a><button type="button" data-consent-open>Configuración de cookies</button></span>
           <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimiento de analítica">
-  <div class="consent-inner">
-    <p><strong>Analítica, solo con tu permiso.</strong> Usamos Google Analytics agregado para ver qué herramientas se usan. Los datos que introduces nunca salen de tu dispositivo, no se crea ningún perfil y no se vende nada. Acepta para cargarlo o recházalo y navega sin él. Puedes cambiar de opinión cuando quieras desde Configuración de cookies en el pie de página.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Aceptar analítica</button>
-      <button type="button" class="btn-outline" data-consent-decline>Rechazar</button>
-      <a href="/es/privacy">Política de privacidad</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimiento de analítica" hidden>
+  <p>Usamos Google Analytics agregado para mejorar el sitio. Sin perfiles, nada se vende. Acepta o rechaza; la elección se guarda en este navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceptar analítica</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Rechazar</button>
   </div>
 </div>
 </div>

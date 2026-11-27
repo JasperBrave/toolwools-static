@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="About ToolWools — Who Builds the GTA 6 Tools | ToolWools">
 <meta name="twitter:description" content="ToolWools is an independent editorial site for GTA 6 tools, calculators, trackers and planners. Meet the authors, reviewers and editor, and read the corrections policy.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/about">
 <link rel="alternate" href="https://toolwools.com/about" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/about" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-legal-en.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -92,7 +112,7 @@
           "name": "How do I report a number that looks wrong?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Use the corrections address on this page and include the tool, your exact inputs, the value we gave, the value you measured, and how you measured it. We reproduce it on the reference rig first — reproduction is the gate — then ship a dated fix in the tool's changelog and credit you unless you ask us not to."
+            "text": "Use the corrections address on this page and include the tool, your exact inputs, the value we gave, the value you measured, and how you measured it. We reproduce it on the reference rig first, reproduction is the gate, then ship a dated fix in the tool's changelog and credit you unless you ask us not to."
           }
         },
         {
@@ -121,16 +141,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -142,26 +160,27 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/about" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
-            <a href="/es/about">Español</a>
-            <a href="/pt/about">Português</a>
-            <a href="/de/about">Deutsch</a>
-            <a href="/fr/about">Français</a>
-            <a href="/tr/about">Türkçe</a>
-            <a href="/ar/about">العربية</a>
+            <a href="/es/about" lang="es">Español</a>
+            <a href="/pt/about" lang="pt">Português</a>
+            <a href="/de/about" lang="de">Deutsch</a>
+            <a href="/fr/about" lang="fr">Français</a>
+            <a href="/tr/about" lang="tr">Türkçe</a>
+            <a href="/ar/about" lang="ar">العربية</a>
           </div>
         </details>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
@@ -177,7 +196,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -187,30 +206,30 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/about" aria-current="true">EN</a><a href="/es/about" lang="es">ES</a><a href="/pt/about" lang="pt">PT</a><a href="/de/about" lang="de">DE</a><a href="/fr/about" lang="fr">FR</a><a href="/tr/about" lang="tr">TR</a><a href="/ar/about" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
+<main id="main" class="tool-main" tabindex="-1">
+<div class="tool-body">
 <article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Breadcrumb" class="breadcrumbs">
+  <section class="page-hero" aria-labelledby="page-hero-heading">
+      <div class="page-breadcrumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">About</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">About</span>
-      <h1 id="page-hero-heading">Who builds ToolWools</h1>
-      <p class="page-hero-sub">ToolWools is an independent editorial site for GTA 6 tools, calculators, trackers, and planners. Every number on the site is modelled, benchmarked, and reviewed by named people — and every change is dated in the tool's changelog.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+      </div>
+      <div class="page-eyebrow"><span>About</span></div>
+      <h1 id="page-hero-heading" class="page-title">Who builds ToolWools</h1>
+      <p class="page-subtitle">ToolWools is an independent editorial site for GTA 6 tools, calculators, trackers, and planners. Every number on the site is modelled, benchmarked, and reviewed by named people, and every change is dated in the tool's changelog.</p>
+    </section>
     <section class="hub-note" aria-labelledby="disclosure">
-      <h2 id="disclosure" style="font-size:0.875rem;font-weight:700">Editorial disclosure</h2>
+      <h2 id="disclosure">Editorial disclosure</h2>
       <p style="margin-top:0.5rem">ToolWools is reader-supported but independently operated. Our calculators, tier scores, and verdicts are not sponsored by Rockstar Games, NVIDIA, AMD, Intel, or any hardware vendor. We accept no payment, free hardware, or affiliate placement in exchange for scores. Every part is measured against the same public methodology and re-benchmarked when new drivers or engine builds ship.</p>
     </section>
     <section aria-labelledby="scope">
@@ -222,11 +241,11 @@
         <li>A free set of GTA 6 calculators, checkers and planners that run entirely in your browser.</li>
         <li>An estimate-first site: every number carries a stated error band and a dated source list.</li>
         <li>Independently operated and reader-supported, with no sponsored scores and no paid tier placement.</li>
-        <li>Maintained continuously — models are re-anchored on every driver cycle and at launch, not written once.</li></ul></div>
+        <li>Maintained continuously, models are re-anchored on every driver cycle and at launch, not written once.</li></ul></div>
         <div class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem"><h3 style="font-size:1rem;font-weight:700">What it isn't</h3>
         <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.75rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
         <li>Not affiliated with, endorsed by, or speaking for Rockstar Games or Take-Two Interactive.</li>
-        <li>Not a source of official system requirements — Rockstar has not published PC specs yet.</li>
+        <li>Not a source of official system requirements, Rockstar has not published PC specs yet.</li>
         <li>Not a leaks site. Unverified material may be discussed and labelled, but it never moves a calculation.</li>
         <li>Not an account-gated product. There is nothing to sign up for and nothing to pay for.</li></ul></div>
       </div>
@@ -249,17 +268,17 @@
         </article><article id="when-and-where" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
           <h3 style="font-size:1.125rem;font-weight:700">When and where?</h3>
           <p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground)">Launch logistics, timing and the world itself.</p>
-          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/tools/add-to-calendar">Release Date Reminder</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Converts launch to your local timezone and generates a calendar file for it.</p></li><li><a href="/tools/download-time">Download Time Calculator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Turns your real sustained connection speed into a preload and launch-day download estimate.</p></li><li><a href="/tools/interactive-map">Interactive Map</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Leonida regions, Vice City districts, size comparison against past GTA maps, and evidence filtering.</p></li><li><a href="/tools/economy-calculator">Economy Calculator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Ranks money methods by net payout per hour, plus business ROI and card-value modes.</p></li><li><a href="/tools/preload-tracker">GTA 6 Preload History &amp; Update Schedule</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.</p></li><li><a href="/tools/weapon-comparison">GTA 6 Weapon Comparison — Ratings, Magazine &amp; Price</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p></li><li><a href="/tools/vehicle-comparison">GTA 6 Vehicle Comparison — Ratings, Register Cost &amp; Sell Value</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 — Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength — plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p></li><li><a href="/tools/server-status">GTA 6 Server Status — Are the Servers Down?</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 has no servers to go down — it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.</p></li><li><a href="/tools/business-tracker">GTA 6 Business Tracker</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 business calculator and tracker: no business can be bought yet, so track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods.</p></li><li><a href="/tools/pre-order-tracker">Where to Buy GTA 6: Editions &amp; Channels Compared</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Three buying channels scored on cancellability, price protection, download timing, bonuses and resale.</p></li><li><a href="/tools/price-by-country">Price by Country</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 price in 44 markets, local currency and USD, tax split out.</p></li><li><a href="/tools/gta-6-tracker">Launch Milestones</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 launched Nov 19, 2026. The completed preload windows, launch milestones and the launch moment in your timezone.</p></li></ul>
+          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/tools/add-to-calendar">Release Date Reminder</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Converts launch to your local timezone and generates a calendar file for it.</p></li><li><a href="/tools/download-time">Download Time Calculator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Turns your real sustained connection speed into a preload and launch-day download estimate.</p></li><li><a href="/tools/interactive-map">Interactive Map</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Leonida regions, Vice City districts, size comparison against past GTA maps, and evidence filtering.</p></li><li><a href="/tools/economy-calculator">Economy Calculator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Ranks money methods by net payout per hour, plus business ROI and card-value modes.</p></li><li><a href="/tools/preload-tracker">GTA 6 Preload History &amp; Update Schedule</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.</p></li><li><a href="/tools/weapon-comparison">GTA 6 Weapon Comparison, Ratings, Magazine &amp; Price</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range, the four in-game ratings out of 10, plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p></li><li><a href="/tools/vehicle-comparison">GTA 6 Vehicle Comparison, Ratings, Register Cost &amp; Sell Value</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10, Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength, plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p></li><li><a href="/tools/server-status">GTA 6 Server Status, Are the Servers Down?</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 has no servers to go down, it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.</p></li><li><a href="/tools/business-tracker">GTA 6 Business Tracker</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 business calculator and tracker: no business can be bought yet, so track the 12 Leonida businesses, simulate payback with your own numbers, and compare story money methods.</p></li><li><a href="/tools/pre-order-tracker">Where to Buy GTA 6: Editions &amp; Channels Compared</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Three buying channels scored on cancellability, price protection, download timing, bonuses and resale.</p></li><li><a href="/tools/price-by-country">Price by Country</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 price in 44 markets, local currency and USD, tax split out.</p></li><li><a href="/tools/gta-6-tracker">Launch Milestones</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">GTA 6 launched Nov 19, 2026. The completed preload windows, launch milestones and the launch moment in your timezone.</p></li></ul>
         </article><article id="need-a-name" class="surface-card" style="border-radius:var(--radius-2xl);padding:1.25rem 1.5rem">
           <h3 style="font-size:1.125rem;font-weight:700">Need a name?</h3>
           <p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground)">Character, crew, plate and callsign names for your GTA 6 persona.</p>
-          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/generators">Name Generator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Character names, crew tags, license plates, radio callsigns and gamertags — generated instantly.</p></li></ul>
+          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem"><li><a href="/generators">Name Generator</a><p style="margin-top:0.25rem;font-size:0.8125rem;color:var(--muted-foreground);line-height:1.6">Character names, crew tags, license plates, radio callsigns and gamertags, generated instantly.</p></li></ul>
         </article></div>
       <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground)">Browse by hub instead: <a href="/tools">all tools and calculators</a>, <a href="/guides">guides</a>, <a href="/trending">trending tools</a>, or <a href="/methodology#models">how each model works</a>.</p>
     </section>
     <section aria-labelledby="funding">
       <h2 id="funding">How this site makes money</h2>
-      <p class="tool-dek">A short section, because the answer is short — and because you should not have to guess whether a recommendation was bought.</p>
+      <p class="tool-dek">A short section, because the answer is short, and because you should not have to guess whether a recommendation was bought.</p>
       <div class="block" style="margin-top:1.5rem">
         <h3 style="font-size:1rem;font-weight:700">Reader-supported, ad-light</h3>
         <p style="margin-top:0.375rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">The site is funded by display placement and, in future, optional reader support. Whatever runs alongside the content has no input into it: nobody buying space sees a score before it publishes.</p>
@@ -270,7 +289,7 @@
       </div>
     </section>
     <section class="hub-note" aria-labelledby="privacy">
-      <h2 id="privacy" style="font-size:0.875rem;font-weight:700">Your data, and what we don't do with it</h2>
+      <h2 id="privacy">Your data, and what we don't do with it</h2>
       <ul style="list-style:disc;padding-left:1.25rem;margin-top:0.5rem;display:flex;flex-direction:column;gap:0.375rem">
         <li>Every calculator runs client-side in your browser. Your part list, resolution and settings are never sent to a server.</li>
         <li>There are no accounts, no logins, and no email requirement to use any tool on the site.</li>
@@ -302,66 +321,84 @@
     <section aria-labelledby="editorial-workflow">
       <h2 id="editorial-workflow">Author, reviewer, editor: who can change what</h2>
       <p class="tool-dek">Three roles with deliberately separated powers, so no single person can move a published number on their own.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Editorial roles and permissions — scrollable table" style="margin-top:1.5rem">
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Editorial roles and permissions, scrollable table" style="margin-top:1.5rem">
         <table class="data-table" style="min-width:560px">
           <caption class="sr-only">Editorial roles and their permissions</caption>
           <thead><tr><th scope="col">Role</th><th scope="col">Can</th><th scope="col">Cannot</th></tr></thead>
-          <tbody><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Author — Hardware Desk</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Builds the models, captures benchmarks, proposes every value and every band on the site.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot ship a model change without a reviewer sign-off, and cannot publish a number without a source.</td></tr><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Reviewer — independent benchmarkers</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cross-checks proposed deltas against public datasets and blocks anything that fails reproduction.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot author values, and holds no financial relationship with this site.</td></tr><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Editor — Editorial</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Owns corrections, enforces the sourcing checklist, and dates every change in the tool's changelog.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot overrule a reviewer's technical block or quietly edit a published number.</td></tr></tbody>
+          <tbody><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Author, Hardware Desk</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Builds the models, captures benchmarks, proposes every value and every band on the site.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot ship a model change without a reviewer sign-off, and cannot publish a number without a source.</td></tr><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Reviewer, independent benchmarkers</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cross-checks proposed deltas against public datasets and blocks anything that fails reproduction.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot author values, and holds no financial relationship with this site.</td></tr><tr><th scope="row" style="padding:0.75rem 1rem;vertical-align:top;font-weight:600;text-align:left">Editor, Editorial</th><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Owns corrections, enforces the sourcing checklist, and dates every change in the tool's changelog.</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Cannot overrule a reviewer's technical block or quietly edit a published number.</td></tr></tbody>
         </table>
       </div>
-      <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground)">The rules each role enforces — sourcing, cross-checks, retest cadence — are published in full under <a href="/methodology#verification">how we verify every claim</a>.</p>
+      <p style="margin-top:1rem;font-size:0.875rem;color:var(--muted-foreground)">The rules each role enforces, sourcing, cross-checks, retest cadence, are published in full under <a href="/methodology#verification">how we verify every claim</a>.</p>
     </section>
     <section class="hub-note" aria-labelledby="corrections">
-      <h2 id="corrections" style="font-size:0.875rem;font-weight:700">Corrections policy</h2>
+      <h2 id="corrections">Corrections policy</h2>
       <p style="margin-top:0.5rem">Every model change is dated in the tool's Changelog. If you spot a number that doesn't match your rig, mail <a href="mailto:corrections@toolwools.com">corrections@toolwools.com</a> with your setup and the exact reading. We re-run on the reference rig, publish the fix, and credit the reporter.</p>
-      <p style="margin-top:0.75rem"><a href="mailto:hello@toolwools.com">hello@toolwools.com</a> — general contact</p>
+      <p style="margin-top:0.75rem"><a href="mailto:hello@toolwools.com">hello@toolwools.com</a>, general contact</p>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">About this site, answered</h2>
+      <header>
+        <h2 id="faq">About this site, answered</h2>
         <p class="tool-dek">Ownership, independence, data handling and corrections in short form.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Who runs this site?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">A small independent editorial team: a hardware desk that builds and benchmarks the models, a panel of external benchmark reviewers who cross-check them, and an editor who owns sourcing and corrections. All three are described by name and remit on this page, and each tool&#x27;s byline links back here.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">Are these the official GTA 6 system requirements?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">No. Rockstar Games has not published PC system requirements for GTA 6. Every tier, score and frame-rate band on this site is an estimate derived from the announced console targets and from measured behaviour in comparable RAGE-engine titles. Estimates are labelled as estimates on every page that shows one.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">How do I report a number that looks wrong?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Use the corrections address on this page and include the tool, your exact inputs, the value we gave, the value you measured, and how you measured it. We reproduce it on the reference rig first — reproduction is the gate — then ship a dated fix in the tool&#x27;s changelog and credit you unless you ask us not to.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">How do I report a number that looks wrong?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Use the corrections address on this page and include the tool, your exact inputs, the value we gave, the value you measured, and how you measured it. We reproduce it on the reference rig first, reproduction is the gate, then ship a dated fix in the tool&#x27;s changelog and credit you unless you ask us not to.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Do you accept sponsored placement or free hardware?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">No. No vendor pays for a tier, a verdict, or a mention, and we do not accept loaned or gifted parts in exchange for coverage. Every card and CPU goes through the same published formula, and the formula itself is on the methodology page so any placement can be checked independently.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Do you store my hardware details?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">No. Calculations run in your browser and your inputs never reach a server. Share links encode inputs in the URL, and any saved results live in your own browser storage. There are no accounts on this site. Analytics is aggregate only, and only runs after you accept it in the consent banner.</p></div></details></article></li>
       </ul>
     </section>
     <section class="hub-note" aria-labelledby="methodology-link">
-      <h2 id="methodology-link" style="font-size:1rem;font-weight:700">How we verify every claim</h2>
-      <p style="margin-top:0.5rem">The verification workflow — sources, cross-checks, driver retest cadence — lives on the methodology page.</p>
+      <h2 id="methodology-link">How we verify every claim</h2>
+      <p style="margin-top:0.5rem">The verification workflow, sources, cross-checks, driver retest cadence, lives on the methodology page.</p>
       <p style="margin-top:0.75rem"><a href="/methodology">Read the methodology →</a></p>
     </section>
-  </div>
 </article>
+</div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
+          <a href="/" class="logo-link">
+              <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -395,9 +432,9 @@
               <li><a href="/contact">Contact</a></li>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms &amp; Conditions</a></li>
               <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
@@ -405,26 +442,20 @@
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics consent">
-  <div class="consent-inner">
-    <p><strong>Analytics, only with your OK.</strong> We use aggregate Google Analytics to see which tools get used. Tool inputs never leave your device, no profile is built, and nothing is sold. Accept to load it, or decline and browse without it. You can change your mind anytime from Cookie settings in the footer.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accept analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Decline</button>
-      <a href="/privacy">Privacy policy</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
   </div>
 </div>
 </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,8 +30,8 @@
 <meta property="article:modified_time" content="2026-08-03T00:00:00+00:00">
 <meta property="article:author" content="ToolWools Hardware-Desk">
 <meta property="article:section" content="Guides">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/de/guides/cpu-gpu-pairing">
 <link rel="alternate" href="https://toolwools.com/guides/cpu-gpu-pairing" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/guides/cpu-gpu-pairing" hreflang="es">
@@ -45,11 +45,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-guides-de.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -131,16 +151,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -152,18 +170,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides" aria-current="page">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/guides/cpu-gpu-pairing">English</a>
             <a href="/es/guides/cpu-gpu-pairing">Español</a>
@@ -187,7 +206,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -197,57 +216,59 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides" aria-current="page">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/guides/cpu-gpu-pairing" lang="en">EN</a><a href="/es/guides/cpu-gpu-pairing" lang="es">ES</a><a href="/pt/guides/cpu-gpu-pairing" lang="pt">PT</a><a href="/de/guides/cpu-gpu-pairing" aria-current="true">DE</a><a href="/fr/guides/cpu-gpu-pairing" lang="fr">FR</a><a href="/tr/guides/cpu-gpu-pairing" lang="tr">TR</a><a href="/ar/guides/cpu-gpu-pairing" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Brotkrumen" class="breadcrumbs">
-        <a href="/de/">Startseite</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/de/guides">Guides</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">CPU-GPU-Pairing</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Guide</span>
-      <h1 id="page-hero-heading">CPU-GPU-Paarung für GTA 6</h1>
-      <p class="page-hero-sub">Zwölf echte Pairings, gelabelt ausgewogen, CPU-gebunden oder GPU-hungrig, und der Grund, warum Draw Calls, nicht rohe Leistung, entscheiden, welches deines ist.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <section class="tldr-card" aria-labelledby="tldr">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+      <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Brotkrumen">
+      <a href="/de/">Startseite</a>
+      <span aria-hidden="true">/</span>
+      <a href="/de/guides">Guides</a>
+      <span aria-hidden="true">/</span>
+      <span class="current" aria-current="page">CPU-GPU-Pairing</span>
+      </div>
+      <div class="page-eyebrow"><span>Guide</span></div>
+      <h1 id="page-title" class="page-title">CPU-GPU-Paarung für GTA 6</h1>
+      <p class="page-subtitle">Zwölf echte Pairings, gelabelt ausgewogen, CPU-gebunden oder GPU-hungrig, und der Grund, warum Draw Calls, nicht rohe Leistung, entscheiden, welches deines ist.</p>
+      <p class="hero-meta">
+        <span>Veröffentlicht 3. Aug. 2026</span><span>Aktualisiert 3. Aug. 2026</span><span>Zuletzt verifiziert 17. November 2026</span>
+      </p>
+      </section>
+    <section class="article-lede" aria-labelledby="tldr">
       <h2 id="tldr">Kurz gesagt</h2>
-      <p style="margin-top:0.5rem">Balance wird durch Draw Calls entschieden, nicht durch rohe Leistung. Bei 1080p ist die CPU oft der Begrenzer, bei 4K ist es fast immer die GPU. Die zwölf Pairings unten sind gelabelt ausgewogen, CPU-gebunden oder GPU-hungrig bei der Auflösung, bei der sie getestet wurden, prüfe deines bei der Auflösung, bei der du wirklich spielst.</p>
-      <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">Veröffentlicht 3. Aug. 2026 · Aktualisiert 3. Aug. 2026 · Zuletzt verifiziert 17. November 2026</p>
+      <p>Balance wird durch Draw Calls entschieden, nicht durch rohe Leistung. Bei 1080p ist die CPU oft der Begrenzer, bei 4K ist es fast immer die GPU. Die zwölf Pairings unten sind gelabelt ausgewogen, CPU-gebunden oder GPU-hungrig bei der Auflösung, bei der sie getestet wurden, prüfe deines bei der Auflösung, bei der du wirklich spielst.</p>
     </section>
     <section aria-labelledby="pairings">
       <h2 id="pairings">Zwölf Pairings, zwölf Urteile</h2>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="CPU- und GPU-Pairing-Tabelle, scrollbares Tabellen-Layout" style="margin-top:1.5rem">
-        <table class="data-table" style="min-width:680px">
+      <div class="table-scroll" tabindex="0" role="region" aria-label="CPU- und GPU-Pairing-Tabelle, scrollbares Tabellen-Layout">
+        <table class="data-table pairings-table" style="min-width:680px">
           <caption class="sr-only">Zwölf CPU- und GPU-Pairings mit ihrem Balance-Urteil</caption>
           <thead><tr><th scope="col">CPU</th><th scope="col">GPU</th><th scope="col">Urteil</th><th scope="col">Warum</th></tr></thead>
-          <tbody><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 5 5600</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4060</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ein sauberes Mid-Range-Pairing. Kein Teil wartet auf das andere bei 1080p Hoch, und die 8 GB VRAM sind das praktische Ceiling, nicht die CPU.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 5 5600</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4070</td><td style="padding:0.75rem 1rem;vertical-align:top">CPU-limitiert</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Die 4070 hat Headroom, den die 5600 bei 1080p nicht füttern kann. Wechsle zu 1440p oder steppe die CPU hoch, bevor du mehr für die Karte ausgibst.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 5 5600</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4080</td><td style="padding:0.75rem 1rem;vertical-align:top">CPU-limitiert</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ein schlecht gematchtes Pairing. Die 4080 verbringt die meisten Frames damit, auf Draw Calls zu warten, die die 5600 nicht schnell genug ausgeben kann.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 5 7600</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4070</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ein starkes 1440p-Pairing. Das Single-Thread-Tempo der 7600 hält mit der 4070 bei Hoch mit, und die Balance hält auch bei 4K.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 7 7800X3D</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4070</td><td style="padding:0.75rem 1rem;vertical-align:top">GPU-hungrig</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Die CPU ist der Karte weit voraus. Bei 1080p ist die 4070 das Ceiling, die 7800X3D verdient ihren Unterhalt nur mit einer stärkeren GPU.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 7 7800X3D</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4090</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Das Referenz-Pairing. Beide Teile sind an der Spitze ihrer Klasse und kein Teil wartet auf das andere bei 1440p oder 4K.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Core i5-12400F</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 3060</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ein Budget-Pairing, das funktioniert, weil beide Teile zusammen bescheiden sind. 1080p Mittel ist das ehrliche Ziel.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Core i5-12400F</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4070</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Überraschend ausgeglichen. Das Single-Thread-Tempo der 12400F reicht für die 4070 bei 1440p, wo die GPU das schwere Heben macht.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Core i5-13600K</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4070 Ti</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Ein High-Refresh-1440p-Pairing. Die Extra-Kerne der 13600K handhaben die Hintergrund-Last, während die 4070 Ti rendert.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Core i7-14700K</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4090</td><td style="padding:0.75rem 1rem;vertical-align:top">Ausgewogen</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Top-End-Intel-Pairing. Ausgewogen bei 4K, und die Thread-Zahl der 14700K lässt Headroom für Streaming neben dem Spiel.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Ryzen 5 3600</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 4060</td><td style="padding:0.75rem 1rem;vertical-align:top">CPU-limitiert</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Die 3600 ist hier der Begrenzer, besonders bei 1080p, wo Draw Calls dominieren. Ein CPU-Upgrade kauft mehr Frames als ein GPU-Upgrade.</td></tr><tr><td style="padding:0.75rem 1rem;vertical-align:top;font-weight:600">Core i7-9700K</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">RTX 3070</td><td style="padding:0.75rem 1rem;vertical-align:top">CPU-limitiert</td><td style="padding:0.75rem 1rem;vertical-align:top;color:var(--muted-foreground)">Acht Threads ohne Hyperthreading, in einem Spiel, das sie nutzen wird. Die 9700K ist das Ceiling bei 1080p, die 3070 hat Platz übrig.</td></tr></tbody>
+          <tbody><tr><td>Ryzen 5 5600</td><td>RTX 4060</td><td>Ausgewogen</td><td>Ein sauberes Mid-Range-Pairing. Kein Teil wartet auf das andere bei 1080p Hoch, und die 8 GB VRAM sind das praktische Ceiling, nicht die CPU.</td></tr><tr><td>Ryzen 5 5600</td><td>RTX 4070</td><td>CPU-limitiert</td><td>Die 4070 hat Headroom, den die 5600 bei 1080p nicht füttern kann. Wechsle zu 1440p oder steppe die CPU hoch, bevor du mehr für die Karte ausgibst.</td></tr><tr><td>Ryzen 5 5600</td><td>RTX 4080</td><td>CPU-limitiert</td><td>Ein schlecht gematchtes Pairing. Die 4080 verbringt die meisten Frames damit, auf Draw Calls zu warten, die die 5600 nicht schnell genug ausgeben kann.</td></tr><tr><td>Ryzen 5 7600</td><td>RTX 4070</td><td>Ausgewogen</td><td>Ein starkes 1440p-Pairing. Das Single-Thread-Tempo der 7600 hält mit der 4070 bei Hoch mit, und die Balance hält auch bei 4K.</td></tr><tr><td>Ryzen 7 7800X3D</td><td>RTX 4070</td><td>GPU-hungrig</td><td>Die CPU ist der Karte weit voraus. Bei 1080p ist die 4070 das Ceiling, die 7800X3D verdient ihren Unterhalt nur mit einer stärkeren GPU.</td></tr><tr><td>Ryzen 7 7800X3D</td><td>RTX 4090</td><td>Ausgewogen</td><td>Das Referenz-Pairing. Beide Teile sind an der Spitze ihrer Klasse und kein Teil wartet auf das andere bei 1440p oder 4K.</td></tr><tr><td>Core i5-12400F</td><td>RTX 3060</td><td>Ausgewogen</td><td>Ein Budget-Pairing, das funktioniert, weil beide Teile zusammen bescheiden sind. 1080p Mittel ist das ehrliche Ziel.</td></tr><tr><td>Core i5-12400F</td><td>RTX 4070</td><td>Ausgewogen</td><td>Überraschend ausgeglichen. Das Single-Thread-Tempo der 12400F reicht für die 4070 bei 1440p, wo die GPU das schwere Heben macht.</td></tr><tr><td>Core i5-13600K</td><td>RTX 4070 Ti</td><td>Ausgewogen</td><td>Ein High-Refresh-1440p-Pairing. Die Extra-Kerne der 13600K handhaben die Hintergrund-Last, während die 4070 Ti rendert.</td></tr><tr><td>Core i7-14700K</td><td>RTX 4090</td><td>Ausgewogen</td><td>Top-End-Intel-Pairing. Ausgewogen bei 4K, und die Thread-Zahl der 14700K lässt Headroom für Streaming neben dem Spiel.</td></tr><tr><td>Ryzen 5 3600</td><td>RTX 4060</td><td>CPU-limitiert</td><td>Die 3600 ist hier der Begrenzer, besonders bei 1080p, wo Draw Calls dominieren. Ein CPU-Upgrade kauft mehr Frames als ein GPU-Upgrade.</td></tr><tr><td>Core i7-9700K</td><td>RTX 3070</td><td>CPU-limitiert</td><td>Acht Threads ohne Hyperthreading, in einem Spiel, das sie nutzen wird. Die 9700K ist das Ceiling bei 1080p, die 3070 hat Platz übrig.</td></tr></tbody>
         </table>
       </div>
     </section>
     <section aria-labelledby="draw-calls">
       <h2 id="draw-calls">Warum Draw Calls die Balance entscheiden</h2>
-      <div class="block" style="margin-top:1.5rem">
+      <div class="block">
         <p>Eine offene Welt sind Tausende von Objekten pro Frame, und jedes ist ein Draw Call, den die CPU ausgeben muss, bevor die GPU es rendern kann. Eine CPU, die Calls langsam ausgibt, kappt die Framerate, egal wie schnell die GPU ist, weil die GPU ihre Zeit mit Warten verbringt. Deshalb zählt Single-Thread-Tempo so viel wie Kern-Zahl, und warum das Bottleneck-Modell Draw-Call-Durchsatz über rohe Takt-Geschwindigkeit wiegt.</p>
-        <p style="margin-top:0.75rem">Die praktische Konsequenz: Ein GPU-Upgrade auf einem CPU-gebundenen System kauft nichts, bis die CPU behoben ist, und der billigste Fix ist meist eine CPU eine Tier hoch, nicht eine GPU zwei Tiers hoch. Der Bottleneck-Rechner zeigt das kleinste Upgrade, das die Zahl wirklich bewegt.</p>
+        <p>Die praktische Konsequenz: Ein GPU-Upgrade auf einem CPU-gebundenen System kauft nichts, bis die CPU behoben ist, und der billigste Fix ist meist eine CPU eine Tier hoch, nicht eine GPU zwei Tiers hoch. Der Bottleneck-Rechner zeigt das kleinste Upgrade, das die Zahl wirklich bewegt.</p>
       </div>
     </section>
-    <p style="margin-top:1.5rem"><a href="/de/tools/bottleneck-calculator" class="btn-primary">Prüfe dein eigenes Pairing →</a></p>
+    <p class="article-cta"><a href="/de/tools/bottleneck-calculator" class="btn btn-primary">Prüfe dein eigenes Pairing →</a></p>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Pairing-Fragen, beantwortet</h2>
-        <p class="tool-dek">Was CPU-gebunden bedeutet, warum Draw Calls zählen und wie Auflösung die Balance verschiebt.</p>
+      <header>
+        <h2 id="faq">Pairing-Fragen, beantwortet</h2>
+        <p class="section-dek">Was CPU-gebunden bedeutet, warum Draw Calls zählen und wie Auflösung die Balance verschiebt.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Was bedeutet CPU-gebunden wirklich?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Es bedeutet, dass die CPU Draw Calls nicht schnell genug ausgeben kann, damit die GPU beschäftigt bleibt. Die GPU wartet, Frames droppen, und eine stärkere Karte ändert nichts, bis die CPU behoben ist. Bei 1080p ist das üblich, bei 4K ist es selten.</p></div></details></article></li>
@@ -257,29 +278,47 @@
         <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Wie prüfe ich mein eigenes Pairing?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">Nutze den Bottleneck-Rechner mit deiner genauen CPU, GPU, Auflösung und Framerate-Ziel. Er gibt einen Score, ein Urteil und das kleinste Upgrade zurück, das die Unbalance behebt.</p></div></details></article></li>
       </ul>
     </section>
+    </article>
   </div>
-</article>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -318,10 +357,10 @@
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
-              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
               <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
-              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -330,34 +369,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
+
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/de/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/de/theme.js" defer></script>
-<script src="/assets/js/de/consent.js" defer></script>
-<script src="/assets/js/de/header.js" defer></script>
-<script src="/assets/js/de/search.js" defer></script>
-<script src="/assets/js/de/faq.js" defer></script>
-<script src="/assets/js/de/newsletter.js" defer></script>
+  <script src="/assets/js/de/theme.js" defer></script>
+  <script src="/assets/js/de/header.js" defer></script>
+  <script src="/assets/js/de/search.js" defer></script>
+  <script src="/assets/js/de/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/de/newsletter.js" defer></script>
+  <script src="/assets/js/de/consent.js" defer></script>
+
 </body>
 </html>

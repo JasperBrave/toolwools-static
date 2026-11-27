@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="de_DE">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,8 +30,8 @@
 <meta property="article:modified_time" content="2026-07-24T00:00:00+00:00">
 <meta property="article:author" content="Équipe matériel ToolWools">
 <meta property="article:section" content="Guides">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/fr/guides/how-fps-is-estimated">
 <link rel="alternate" href="https://toolwools.com/guides/how-fps-is-estimated" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/guides/how-fps-is-estimated" hreflang="es">
@@ -45,11 +45,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-guides-fr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -131,16 +151,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Aller au contenu</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/fr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
             </span>
           </span>
@@ -152,18 +170,19 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides" aria-current="page">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="RECHERCHER" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Choisir la langue">FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/guides/how-fps-is-estimated">English</a>
             <a href="/es/guides/how-fps-is-estimated">Español</a>
@@ -187,7 +206,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -197,50 +216,52 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides" aria-current="page">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/guides/how-fps-is-estimated" lang="en">EN</a><a href="/es/guides/how-fps-is-estimated" lang="es">ES</a><a href="/pt/guides/how-fps-is-estimated" lang="pt">PT</a><a href="/de/guides/how-fps-is-estimated" lang="de">DE</a><a href="/fr/guides/how-fps-is-estimated" aria-current="true">FR</a><a href="/tr/guides/how-fps-is-estimated" lang="tr">TR</a><a href="/ar/guides/how-fps-is-estimated" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Fil d&#x27;Ariane" class="breadcrumbs">
-        <a href="/fr/">Accueil</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/fr/guides">Guides</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">Comment les FPS sont estimés</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Guide</span>
-      <h1 id="page-hero-heading">Comment les FPS sont estimés</h1>
-      <p class="page-hero-sub">Le modèle en six étapes derrière le calculateur de FPS : ce qu'est l'estimation, à quoi elle est ancrée et jusqu'où elle peut bouger. Écrit pour que vous puissiez le vérifier.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <section class="tldr-card" aria-labelledby="tldr">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+      <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Fil d&#x27;Ariane">
+      <a href="/fr/">Accueil</a>
+      <span aria-hidden="true">/</span>
+      <a href="/fr/guides">Guides</a>
+      <span aria-hidden="true">/</span>
+      <span class="current" aria-current="page">Comment les FPS sont estimés</span>
+      </div>
+      <div class="page-eyebrow"><span>Guide</span></div>
+      <h1 id="page-title" class="page-title">Comment les FPS sont estimés</h1>
+      <p class="page-subtitle">Le modèle en six étapes derrière le calculateur de FPS : ce qu'est l'estimation, à quoi elle est ancrée et jusqu'où elle peut bouger. Écrit pour que vous puissiez le vérifier.</p>
+      <p class="hero-meta">
+        <span>Publié le 24 juillet 2026</span><span>Mis à jour le 24 juillet 2026</span><span>Dernière vérification le 17 novembre 2026</span>
+      </p>
+      </section>
+    <section class="article-lede" aria-labelledby="tldr">
       <h2 id="tldr">En bref</h2>
-      <p style="margin-top:0.5rem">Le calculateur de FPS estime les fréquences d'images à partir des performances mesurées dans RDR2, Cyberpunk 2077 et GTA V, mises à l'échelle par niveau de GPU et facteur CPU, ajustées pour le préréglage et les upscalers, et présentées sous forme d'une bande de ±15 %, jamais comme un nombre unique. Le modèle se revalidera contre les performances réelles de GTA 6 lorsque les premiers tests indépendants paraîtront, et la bande d'erreur se resserrera ou sera corrigée publiquement. Cette revalidation est toujours en attente.</p>
-      <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">Publié le 24 juillet 2026 · Mis à jour le 24 juillet 2026 · Dernière vérification le 17 novembre 2026</p>
+      <p>Le calculateur de FPS estime les fréquences d'images à partir des performances mesurées dans RDR2, Cyberpunk 2077 et GTA V, mises à l'échelle par niveau de GPU et facteur CPU, ajustées pour le préréglage et les upscalers, et présentées sous forme d'une bande de ±15 %, jamais comme un nombre unique. Le modèle se revalidera contre les performances réelles de GTA 6 lorsque les premiers tests indépendants paraîtront, et la bande d'erreur se resserrera ou sera corrigée publiquement. Cette revalidation est toujours en attente.</p>
     </section>
     <section aria-labelledby="model">
       <h2 id="model">Le modèle en six étapes</h2>
-      <ol style="list-style:decimal;padding-left:1.25rem;margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.7"><li><strong style="color:var(--foreground)">1. Ancrez aux jeux mesurés.</strong> Partez des fréquences d'images mesurées dans RDR2, Cyberpunk 2077 et GTA V avec des préréglages équivalents. Ce sont les analogues publiés les plus proches de la charge de travail du moteur RAGE de GTA 6, et chaque nombre du modèle remonte à un benchmark publié.</li><li><strong style="color:var(--foreground)">2. Mettez à l'échelle par niveau de GPU.</strong> Appliquez le delta de niveau : le ratio de performance mesuré entre la carte utilisée par le benchmark et la carte estimée. Les deltas de niveau proviennent des ensembles de données TechPowerUp et Hardware Unboxed, pas du marketing des fabricants.</li><li><strong style="color:var(--foreground)">3. Appliquez le facteur CPU.</strong> En 1080p, le CPU est souvent le limiteur, en 4K rarement. Un facteur d'échelle, dérivé des mêmes benchmarks à différentes résolutions, ajuste l'estimation pour le niveau de CPU et la résolution ensemble.</li><li><strong style="color:var(--foreground)">4. Ajustez pour le préréglage.</strong> Bas, Moyen, Élevé et Ultra ne sont pas des pas égaux. Chaque préréglage porte un coût mesuré des jeux d'ancrage, appliqué comme multiplicateur plutôt que comme supposition.</li><li><strong style="color:var(--foreground)">5. Tenez compte des upscalers et du ray tracing.</strong> DLSS, FSR et ray tracing portent chacun un coût ou un gain fixe et déclaré, calibré sur des captures RDR2. L'estimation montre le paramètre supposé, donc un écart est visible.</li><li><strong style="color:var(--foreground)">6. Présentez une bande, pas un point.</strong> Le résultat est un FPS moyen et un 1 % bas, chacun sous forme de plage avec une bande de ±15 %. Un nombre à point unique serait une affirmation, la bande est la forme honnête de l'estimation.</li></ol>
+      <ol class="steps-list"><li><strong>1. Ancrez aux jeux mesurés.</strong> Partez des fréquences d'images mesurées dans RDR2, Cyberpunk 2077 et GTA V avec des préréglages équivalents. Ce sont les analogues publiés les plus proches de la charge de travail du moteur RAGE de GTA 6, et chaque nombre du modèle remonte à un benchmark publié.</li><li><strong>2. Mettez à l'échelle par niveau de GPU.</strong> Appliquez le delta de niveau : le ratio de performance mesuré entre la carte utilisée par le benchmark et la carte estimée. Les deltas de niveau proviennent des ensembles de données TechPowerUp et Hardware Unboxed, pas du marketing des fabricants.</li><li><strong>3. Appliquez le facteur CPU.</strong> En 1080p, le CPU est souvent le limiteur, en 4K rarement. Un facteur d'échelle, dérivé des mêmes benchmarks à différentes résolutions, ajuste l'estimation pour le niveau de CPU et la résolution ensemble.</li><li><strong>4. Ajustez pour le préréglage.</strong> Bas, Moyen, Élevé et Ultra ne sont pas des pas égaux. Chaque préréglage porte un coût mesuré des jeux d'ancrage, appliqué comme multiplicateur plutôt que comme supposition.</li><li><strong>5. Tenez compte des upscalers et du ray tracing.</strong> DLSS, FSR et ray tracing portent chacun un coût ou un gain fixe et déclaré, calibré sur des captures RDR2. L'estimation montre le paramètre supposé, donc un écart est visible.</li><li><strong>6. Présentez une bande, pas un point.</strong> Le résultat est un FPS moyen et un 1 % bas, chacun sous forme de plage avec une bande de ±15 %. Un nombre à point unique serait une affirmation, la bande est la forme honnête de l'estimation.</li></ol>
     </section>
     <section aria-labelledby="calibration">
       <h2 id="calibration">Calibration : à quoi l'estimation est ancrée</h2>
-      <div class="block" style="margin-top:1.5rem">
+      <div class="block">
         <p>Les ensembles de données d'ancrage sont RDR2, Cyberpunk 2077 et GTA V avec des préréglages équivalents, avec des deltas de niveau de TechPowerUp et Hardware Unboxed. Les captures d'allocation VRAM de RDR2 calibrent le côté mémoire de l'estimation. Chaque entrée utilisée par le modèle est listée sur la page de méthodologie, avec sa bande d'erreur.</p>
-        <p style="margin-top:0.75rem">Ce que le modèle ne peut pas encore faire : il ne peut pas prédire le comportement exact du moteur de GTA 6, sa charge d'appels de dessin dans les parties les plus denses de Vice City, ni comment le patch du premier jour de Rockstar changera les performances. Ce sont les raisons pour lesquelles la bande existe.</p>
+        <p>Ce que le modèle ne peut pas encore faire : il ne peut pas prédire le comportement exact du moteur de GTA 6, sa charge d'appels de dessin dans les parties les plus denses de Vice City, ni comment le patch du premier jour de Rockstar changera les performances. Ce sont les raisons pour lesquelles la bande existe.</p>
       </div>
     </section>
     <section aria-labelledby="limits">
       <h2 id="limits">Limites de l'estimation</h2>
-      <div class="block" style="margin-top:1.5rem">
-        <ul style="list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+      <div class="block">
+        <ul class="article-list">
           <li>La bande est de ±15 % sur la moyenne. Une carte estimée à 60 FPS pourrait atterrir n'importe où entre 51 et 69.</li>
           <li>Les 1 % bas sont plus difficiles à estimer que les moyennes et portent la même bande.</li>
           <li>Les sorties de pilotes avec un impact connu sur GTA V ou RDR2 déclenchent une nouvelle exécution des deltas de niveau.</li>
@@ -248,11 +269,11 @@
         </ul>
       </div>
     </section>
-    <p style="margin-top:1.5rem"><a href="/fr/tools/fps-calculator" class="btn-primary">Essayez le calculateur de FPS →</a></p>
+    <p class="article-cta"><a href="/fr/tools/fps-calculator" class="btn btn-primary">Essayez le calculateur de FPS →</a></p>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Estimation des FPS, réponses</h2>
-        <p class="tool-dek">Plages, jeux d'ancrage, upscalers et revalidation en attente.</p>
+      <header>
+        <h2 id="faq">Estimation des FPS, réponses</h2>
+        <p class="section-dek">Plages, jeux d'ancrage, upscalers et revalidation en attente.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Pourquoi l'estimation est-elle une plage, pas un nombre unique ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Parce que GTA 6 vient tout juste de sortir sur consoles et qu'il n'y a pas encore de version PC à mesurer. L'estimation est ancrée sur le comportement mesuré dans RDR2, Cyberpunk 2077 et GTA V, et la bande de ±15 % est la variance de ces ensembles de données. Un nombre unique impliquerait une précision que le modèle n'a pas.</p></div></details></article></li>
@@ -262,29 +283,47 @@
         <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Et les 1 % bas ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">Le calculateur rapporte une moyenne et un 1 % bas, chacun sous forme de plage. Le 1 % bas est le nombre qui décide si un jeu semble fluide, et c'est le plus difficile à estimer, c'est pourquoi il porte la même bande de ±15 %.</p></div></details></article></li>
       </ul>
     </section>
+    </article>
   </div>
-</article>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Restez dans la boucle</h2>
+          <p>Obtenez les dernières actualités, outils et guides GTA 6 dans votre boîte de réception.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Adresse e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">S'abonner</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/fr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 est disponible — 19 novembre 2026</span>
+        <span class="eyebrow-muted">GTA 6 est disponible, 19 novembre 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorer les outils →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/fr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
               </span>
             </span>
@@ -323,10 +362,10 @@
               <li><a href="/fr/contact">Contact</a></li>
               <li><a href="/fr/email-preferences">Préférences e-mail</a></li>
               <li><a href="/fr/sitemap">Plan du site</a></li>
-              <li><a href="/fr/privacy">Politique de confidentialité</a></li>
-              <li><a href="/fr/terms">Conditions d'utilisation</a></li>
               <li><a href="/editorial-policy">Politique éditoriale</a></li>
-              <li><a href="/fr/disclaimer">Avertissement</a></li>
+          <li><a href="/fr/privacy">Politique de confidentialité</a></li>
+          <li><a href="/fr/terms">Conditions d'utilisation</a></li>
+          <li><a href="/fr/disclaimer">Avertissement</a></li>
             </ul>
           </div>
         </div>
@@ -335,34 +374,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Tous droits réservés. Non affilié à Rockstar Games ou Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/fr/privacy">Confidentialité</a>
-          <a href="/fr/terms">Conditions</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Paramètres des cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/fr/privacy">Confidentialité</a><a href="/fr/terms">Conditions</a><a href="/fr/disclaimer">Avertissement</a><button type="button" data-consent-open>Paramètres des cookies</button></span>
           <span>Fait avec <span class="heart">♥</span> pour les fans de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentement aux statistiques">
-  <div class="consent-inner">
-    <p><strong>Statistiques, seulement avec votre accord.</strong> Nous utilisons Google Analytics agrégé pour voir quels outils sont utilisés. Les données saisies dans les outils ne quittent jamais votre appareil, aucun profil n'est créé et rien n'est vendu. Acceptez pour l'activer, ou refusez et naviguez sans. Vous pouvez changer d'avis à tout moment depuis les paramètres des cookies en pied de page.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accepter les statistiques</button>
-      <button type="button" class="btn-outline" data-consent-decline>Refuser</button>
-      <a href="/fr/privacy">Politique de confidentialité</a>
-    </div>
+
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentement aux statistiques" hidden>
+  <p>Nous utilisons Google Analytics agrégé pour améliorer le site. Aucun profil, rien n'est vendu. Accepter ou refuser ; le choix est enregistré dans ce navigateur.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accepter les statistiques</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Refuser</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/fr/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/fr/theme.js" defer></script>
-<script src="/assets/js/fr/consent.js" defer></script>
-<script src="/assets/js/fr/header.js" defer></script>
-<script src="/assets/js/fr/search.js" defer></script>
-<script src="/assets/js/fr/faq.js" defer></script>
-<script src="/assets/js/fr/newsletter.js" defer></script>
+  <script src="/assets/js/fr/theme.js" defer></script>
+  <script src="/assets/js/fr/header.js" defer></script>
+  <script src="/assets/js/fr/search.js" defer></script>
+  <script src="/assets/js/fr/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/fr/newsletter.js" defer></script>
+  <script src="/assets/js/fr/consent.js" defer></script>
+
 </body>
 </html>

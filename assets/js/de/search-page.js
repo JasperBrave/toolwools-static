@@ -55,7 +55,7 @@
     var kindLabel = { tool: "Tools", guide: "Guides", resource: "Referenz-Seiten" };
     var LIVE_WORD = " live";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "Die Suche deckt 24 Tools ab — 24 live und 0 bald verfügbar — sowie 2 geschriebene Guides und 7 Referenz-Seiten. Wähle unten einen Startpunkt oder tippe, was dein PC wissen muss.";
+      if (!trimmed) summaryEl.textContent = "Die Suche deckt 24 Tools ab, 24 live und 0 bald verfügbar, sowie 2 geschriebene Guides und 7 Referenz-Seiten. Wähle unten einen Startpunkt oder tippe, was dein PC wissen muss.";
       else if (!results.length) summaryEl.textContent = "Nichts auf der Site passt zu \"" + trimmed + "\" bisher. Hardware-Begriffe wie \"rtx 4070\", \"vram\" oder \"download time\" finden am meisten.";
       else {
         var best = results[0];

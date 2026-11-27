@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="GTA 6 Guides — How FPS Is Estimated &amp; CPU-GPU Pairing | ToolWools">
 <meta name="twitter:description" content="Two written guides so far, each explaining a model or a decision in enough detail to check it. No filler, no undated promises.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/guides">
 <link rel="alternate" href="https://toolwools.com/guides" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/guides" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-guides-en.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,7 +96,7 @@
           "name": "Are these guides or marketing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Guides. Each one explains a model or a decision in enough detail to check it — the FPS guide walks the six-step model, the pairing guide lists twelve real pairings with verdicts."
+            "text": "Guides. Each one explains a model or a decision in enough detail to check it, the FPS guide walks the six-step model, the pairing guide lists twelve real pairings with verdicts."
           }
         },
         {
@@ -92,7 +112,7 @@
           "name": "What guides are coming next?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "VRAM budgeting — allocated vs used, and when stutter starts — is next in the queue. It is in draft; no date is promised until the model behind it is validated."
+            "text": "VRAM budgeting, allocated vs used, and when stutter starts, is next in the queue. It is in draft; no date is promised until the model behind it is validated."
           }
         },
         {
@@ -100,7 +120,7 @@
           "name": "Can I suggest a guide topic?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — use the contact form and choose Tool feedback. Topics that map to a model we can validate go on the list."
+            "text": "Yes, use the contact form and choose Tool feedback. Topics that map to a model we can validate go on the list."
           }
         }
       ]
@@ -113,16 +133,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -134,18 +152,19 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides" aria-current="page">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/guides" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
             <a href="/es/guides">Español</a>
@@ -169,7 +188,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -179,77 +198,95 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides" aria-current="page">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/guides" aria-current="true">EN</a><a href="/es/guides" lang="es">ES</a><a href="/pt/guides" lang="pt">PT</a><a href="/de/guides" lang="de">DE</a><a href="/fr/guides" lang="fr">FR</a><a href="/tr/guides" lang="tr">TR</a><a href="/ar/guides" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Breadcrumb" class="breadcrumbs">
-        <a href="/">Home</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">Guides</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Guides</span>
-      <h1 id="page-hero-heading">Guides that show their work</h1>
-      <p class="page-hero-sub">Two written guides so far, each explaining a model or a decision in enough detail to check it. No filler, no undated promises.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+      <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span class="current" aria-current="page">Guides</span>
+      </div>
+      <div class="page-eyebrow"><span>Guides</span></div>
+      <h1 id="page-title" class="page-title">Guides that show their work</h1>
+      <p class="page-subtitle">Two written guides so far, each explaining a model or a decision in enough detail to check it. No filler, no undated promises.</p>
+      </section>
     <section aria-labelledby="guides-list">
       <h2 id="guides-list">Two guides, written to be checked</h2>
-      <p class="tool-dek">Read in order: the FPS guide first, then the pairing guide, then the FPS Calculator to test what you learned.</p>
-      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/guides/how-fps-is-estimated"><span class="badge badge-blue">Guide</span><h3>How FPS is estimated</h3><p class="news-date">Published July 24, 2026</p><p>The six-step model behind the FPS Calculator: what the estimate is, what it is anchored to, and how far it can move.</p><span class="open-link">Read guide →</span></a></li><li><a class="guide-card" href="/guides/cpu-gpu-pairing"><span class="badge badge-blue">Guide</span><h3>CPU-GPU pairing for GTA 6</h3><p class="news-date">Published August 3, 2026</p><p>Twelve real pairings, labelled balanced, CPU-bound or GPU-starved — and why draw calls, not raw power, decide the balance.</p><span class="open-link">Read guide →</span></a></li></ul>
+      <p class="section-dek">Read in order: the FPS guide first, then the pairing guide, then the FPS Calculator to test what you learned.</p>
+      <ul class="guide-cards"><li><a class="guide-card" href="/guides/how-fps-is-estimated"><span class="badge">Guide</span><h3>How FPS is estimated</h3><p class="news-date">Published July 24, 2026</p><p>The six-step model behind the FPS Calculator: what the estimate is, what it is anchored to, and how far it can move.</p><span class="open-link">Read guide →</span></a></li><li><a class="guide-card" href="/guides/cpu-gpu-pairing"><span class="badge">Guide</span><h3>CPU-GPU pairing for GTA 6</h3><p class="news-date">Published August 3, 2026</p><p>Twelve real pairings, labelled balanced, CPU-bound or GPU-starved, and why draw calls, not raw power, decide the balance.</p><span class="open-link">Read guide →</span></a></li></ul>
     </section>
     <section class="hub-note" aria-labelledby="next-guide">
-      <h2 id="next-guide" style="font-size:0.875rem;font-weight:700">Next in the queue</h2>
-      <p style="margin-top:0.5rem">VRAM budgeting — allocated vs used, and when stutter starts — is in draft. No date is promised until the model behind it is validated.</p>
+      <h2 id="next-guide" class="eyebrow-muted">Next in the queue</h2>
+      <p>VRAM budgeting, allocated vs used, and when stutter starts, is in draft. No date is promised until the model behind it is validated.</p>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">About the guides</h2>
-        <p class="tool-dek">How guides are written, updated, and chosen.</p>
+      <header>
+        <h2 id="faq">About the guides</h2>
+        <p class="section-dek">How guides are written, updated, and chosen.</p>
       </header>
       <ul class="faq-list" role="list">
-        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Are these guides or marketing?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Guides. Each one explains a model or a decision in enough detail to check it — the FPS guide walks the six-step model, the pairing guide lists twelve real pairings with verdicts.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Are these guides or marketing?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Guides. Each one explains a model or a decision in enough detail to check it, the FPS guide walks the six-step model, the pairing guide lists twelve real pairings with verdicts.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">How often are guides updated?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">When the underlying model changes. A guide that cites a model version stays pinned to it until the model re-runs, and the change is dated.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">What guides are coming next?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">VRAM budgeting — allocated vs used, and when stutter starts — is next in the queue. It is in draft; no date is promised until the model behind it is validated.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Can I suggest a guide topic?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Yes — use the contact form and choose Tool feedback. Topics that map to a model we can validate go on the list.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">What guides are coming next?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">VRAM budgeting, allocated vs used, and when stutter starts, is next in the queue. It is in draft; no date is promised until the model behind it is validated.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Can I suggest a guide topic?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Yes, use the contact form and choose Tool feedback. Topics that map to a model we can validate go on the list.</p></div></details></article></li>
       </ul>
     </section>
+    </article>
   </div>
-</article>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -283,46 +320,41 @@
               <li><a href="/contact">Contact</a></li>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
-              <li><a href="/disclaimer">Disclaimer</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics consent">
-  <div class="consent-inner">
-    <p><strong>Analytics, only with your OK.</strong> We use aggregate Google Analytics to see which tools get used. Tool inputs never leave your device, no profile is built, and nothing is sold. Accept to load it, or decline and browse without it. You can change your mind anytime from Cookie settings in the footer.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accept analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Decline</button>
-      <a href="/privacy">Privacy policy</a>
-    </div>
+
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/header.js" defer></script>
-<script src="/assets/js/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
-<script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
+
 </body>
 </html>

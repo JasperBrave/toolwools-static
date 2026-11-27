@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,8 +30,8 @@
 <meta property="article:modified_time" content="2026-07-24T00:00:00+00:00">
 <meta property="article:author" content="ToolWools Hardware Desk">
 <meta property="article:section" content="Guides">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/ar/guides/how-fps-is-estimated">
 <link rel="alternate" href="https://toolwools.com/guides/how-fps-is-estimated" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/guides/how-fps-is-estimated" hreflang="es">
@@ -45,11 +45,29 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-guides-ar.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -129,16 +147,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -150,6 +166,7 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides" aria-current="page">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -161,7 +178,7 @@
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/guides/how-fps-is-estimated">الإنجليزية</a>
             <a href="/es/guides/how-fps-is-estimated">Español</a>
@@ -195,50 +212,52 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides" aria-current="page">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/guides/how-fps-is-estimated" lang="en">EN</a><a href="/es/guides/how-fps-is-estimated" lang="es">ES</a><a href="/pt/guides/how-fps-is-estimated" lang="pt">PT</a><a href="/de/guides/how-fps-is-estimated" lang="de">DE</a><a href="/fr/guides/how-fps-is-estimated" lang="fr">FR</a><a href="/tr/guides/how-fps-is-estimated" lang="tr">TR</a><a href="/ar/guides/how-fps-is-estimated" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="مسار التنقل" class="breadcrumbs">
-        <a href="/ar/">الرئيسية</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/ar/guides">الأدلة</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">كيف يُقدَّر معدل الإطارات</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">الدليل</span>
-      <h1 id="page-hero-heading">كيف يُقدَّر معدل الإطارات</h1>
-      <p class="page-hero-sub">النموذج المكون من ست خطوات وراء حاسبة معدل الإطارات: ما هو التقدير، وما الذي يستند إليه، وإلى أي مدى يمكن أن يتحرك. كُتب لتتمكن من التحقق منه.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <section class="tldr-card" aria-labelledby="tldr">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+      <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="مسار التنقل">
+      <a href="/ar/">الرئيسية</a>
+      <span aria-hidden="true">/</span>
+      <a href="/ar/guides">الأدلة</a>
+      <span aria-hidden="true">/</span>
+      <span class="current" aria-current="page">كيف يُقدَّر معدل الإطارات</span>
+      </div>
+      <div class="page-eyebrow"><span>الدليل</span></div>
+      <h1 id="page-title" class="page-title">كيف يُقدَّر معدل الإطارات</h1>
+      <p class="page-subtitle">النموذج المكون من ست خطوات وراء حاسبة معدل الإطارات: ما هو التقدير، وما الذي يستند إليه، وإلى أي مدى يمكن أن يتحرك. كُتب لتتمكن من التحقق منه.</p>
+      <p class="hero-meta">
+        <span>نُشر في 24 يوليو 2026</span><span>حُدث في 24 يوليو 2026</span><span>آخر تحقق في 17 نوفمبر 2026</span>
+      </p>
+      </section>
+    <section class="article-lede" aria-labelledby="tldr">
       <h2 id="tldr">باختصار</h2>
-      <p style="margin-top:0.5rem">تقدّر حاسبة معدل الإطارات معدلات الإطارات من الأداء المقاس في RDR2 و Cyberpunk 2077 و GTA V، مع القياس حسب مستوى وحدة معالجة الرسومات وعامل وحدة المعالجة المركزية، والتعديل حسب الإعداد المسبق وأدوات رفع الدقة، وتُعرض كنطاق ±15%، وليس أبدًا كرقم واحد. وسيعيد النموذج التحقق مقابل أداء GTA 6 الحقيقي عندما تظهر أول القياسات المستقلة، وسيتم تضييق نطاق الخطأ أو تصحيحه علنًا. ولا تزال إعادة التحقق هذه معلّقة.</p>
-      <p style="margin-top:0.75rem;font-size:0.8125rem;color:var(--muted-foreground)">نُشر في 24 يوليو 2026 · حُدث في 24 يوليو 2026 · آخر تحقق في 17 نوفمبر 2026</p>
+      <p>تقدّر حاسبة معدل الإطارات معدلات الإطارات من الأداء المقاس في RDR2 و Cyberpunk 2077 و GTA V، مع القياس حسب مستوى وحدة معالجة الرسومات وعامل وحدة المعالجة المركزية، والتعديل حسب الإعداد المسبق وأدوات رفع الدقة، وتُعرض كنطاق ±15%، وليس أبدًا كرقم واحد. وسيعيد النموذج التحقق مقابل أداء GTA 6 الحقيقي عندما تظهر أول القياسات المستقلة، وسيتم تضييق نطاق الخطأ أو تصحيحه علنًا. ولا تزال إعادة التحقق هذه معلّقة.</p>
     </section>
     <section aria-labelledby="model">
       <h2 id="model">النموذج المكون من ست خطوات</h2>
-      <ol style="list-style:decimal;padding-inline-start:1.25rem;margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.7"><li><strong style="color:var(--foreground)">1. الاستناد إلى ألعاب مقاسة.</strong> ابدأ من معدلات الإطارات المقاسة في RDR2 و Cyberpunk 2077 و GTA V بإعدادات مسبقة مكافئة. وهي أقرب نظائر صادرة لعبء عمل محرك RAGE في GTA 6، وكل رقم في النموذج يعود إلى قياس منشور.</li><li><strong style="color:var(--foreground)">2. القياس حسب مستوى وحدة معالجة الرسومات.</strong> طبّق فرق المستوى: نسبة الأداء المقاسة بين البطاقة التي استخدمها القياس والبطاقة المقدرة. وتأتي فروق المستوى من بيانات TechPowerUp و Hardware Unboxed، وليس من تسويق البائعين.</li><li><strong style="color:var(--foreground)">3. تطبيق عامل وحدة المعالجة المركزية.</strong> بدقة 1080p تكون وحدة المعالجة المركزية غالبًا هي المحدد، وبدقة 4K نادرًا ما تكون. ويضبط عامل قياس، مشتق من نفس القياسات بدقات مختلفة، التقدير حسب مستوى وحدة المعالجة المركزية والدقة معًا.</li><li><strong style="color:var(--foreground)">4. التعديل حسب الإعداد المسبق.</strong> ليست إعدادات منخفضة ومتوسطة وعالية وفائقة خطوات متساوية. ويحمل كل إعداد مسبق تكلفة مقاسة من ألعاب الاستناد، تُطبق كمضاعف وليس كتخمين.</li><li><strong style="color:var(--foreground)">5. حساب أدوات رفع الدقة وتتبع الأشعة.</strong> تحمل DLSS و FSR وتتبع الأشعة كل منها تكلفة أو مكسبًا ثابتًا ومعلنًا، معايرة مقابل لقطات RDR2. ويعرض التقدير الإعداد الذي افترضه، فيكون عدم التطابق مرئيًا.</li><li><strong style="color:var(--foreground)">6. تقديم نطاق وليس نقطة.</strong> النتيجة هي متوسط معدل إطارات وأدنى 1%، كل منهما كنطاق بنطاق ±15%. وسيكون الرقم ذو النقطة الواحدة ادعاءً، أما النطاق فهو الشكل الصادق للتقدير.</li></ol>
+      <ol class="steps-list"><li><strong>1. الاستناد إلى ألعاب مقاسة.</strong> ابدأ من معدلات الإطارات المقاسة في RDR2 و Cyberpunk 2077 و GTA V بإعدادات مسبقة مكافئة. وهي أقرب نظائر صادرة لعبء عمل محرك RAGE في GTA 6، وكل رقم في النموذج يعود إلى قياس منشور.</li><li><strong>2. القياس حسب مستوى وحدة معالجة الرسومات.</strong> طبّق فرق المستوى: نسبة الأداء المقاسة بين البطاقة التي استخدمها القياس والبطاقة المقدرة. وتأتي فروق المستوى من بيانات TechPowerUp و Hardware Unboxed، وليس من تسويق البائعين.</li><li><strong>3. تطبيق عامل وحدة المعالجة المركزية.</strong> بدقة 1080p تكون وحدة المعالجة المركزية غالبًا هي المحدد، وبدقة 4K نادرًا ما تكون. ويضبط عامل قياس، مشتق من نفس القياسات بدقات مختلفة، التقدير حسب مستوى وحدة المعالجة المركزية والدقة معًا.</li><li><strong>4. التعديل حسب الإعداد المسبق.</strong> ليست إعدادات منخفضة ومتوسطة وعالية وفائقة خطوات متساوية. ويحمل كل إعداد مسبق تكلفة مقاسة من ألعاب الاستناد، تُطبق كمضاعف وليس كتخمين.</li><li><strong>5. حساب أدوات رفع الدقة وتتبع الأشعة.</strong> تحمل DLSS و FSR وتتبع الأشعة كل منها تكلفة أو مكسبًا ثابتًا ومعلنًا، معايرة مقابل لقطات RDR2. ويعرض التقدير الإعداد الذي افترضه، فيكون عدم التطابق مرئيًا.</li><li><strong>6. تقديم نطاق وليس نقطة.</strong> النتيجة هي متوسط معدل إطارات وأدنى 1%، كل منهما كنطاق بنطاق ±15%. وسيكون الرقم ذو النقطة الواحدة ادعاءً، أما النطاق فهو الشكل الصادق للتقدير.</li></ol>
     </section>
     <section aria-labelledby="calibration">
       <h2 id="calibration">المعايرة: ما الذي يستند إليه التقدير</h2>
-      <div class="block" style="margin-top:1.5rem">
+      <div class="block">
         <p>بيانات الاستناد هي RDR2 و Cyberpunk 2077 و GTA V بإعدادات مسبقة مكافئة، مع فروق مستوى من TechPowerUp و Hardware Unboxed. ولقطات تخصيص ذاكرة الفيديو من RDR2 تعاير جانب الذاكرة في التقدير. وكل مدخل يستخدمه النموذج مدرج في صفحة المنهجية مع نطاق خطئه.</p>
-        <p style="margin-top:0.75rem">ما لا يستطيع النموذج فعله بعد: لا يستطيع التنبؤ بسلوك محرك GTA 6 الدقيق، أو بحمل استدعاءات الرسم في أكثر أجزاء Vice City كثافة، أو بكيفية تغيير تصحيح اليوم الأول من Rockstar للأداء. وهذه هي أسباب وجود النطاق.</p>
+        <p>ما لا يستطيع النموذج فعله بعد: لا يستطيع التنبؤ بسلوك محرك GTA 6 الدقيق، أو بحمل استدعاءات الرسم في أكثر أجزاء Vice City كثافة، أو بكيفية تغيير تصحيح اليوم الأول من Rockstar للأداء. وهذه هي أسباب وجود النطاق.</p>
       </div>
     </section>
     <section aria-labelledby="limits">
       <h2 id="limits">حدود التقدير</h2>
-      <div class="block" style="margin-top:1.5rem">
-        <ul style="list-style:disc;padding-inline-start:1.25rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.875rem;color:var(--muted-foreground);line-height:1.6">
+      <div class="block">
+        <ul class="article-list">
           <li>النطاق ±15% على المتوسط. ويمكن لبطاقة مقدرة بـ 60 إطارًا في الثانية أن تقع في أي مكان بين 51 و69.</li>
           <li>أدنى 1% أصعب تقديرًا من المتوسطات ويحمل نفس النطاق.</li>
           <li>إصدارات برامج التشغيل ذات التأثير المعروف على GTA V أو RDR2 تؤدي إلى إعادة تشغيل فروق المستوى.</li>
@@ -246,11 +265,11 @@
         </ul>
       </div>
     </section>
-    <p style="margin-top:1.5rem"><a href="/ar/tools/fps-calculator" class="btn-primary">جرّب حاسبة معدل الإطارات ←</a></p>
+    <p class="article-cta"><a href="/ar/tools/fps-calculator" class="btn btn-primary">جرّب حاسبة معدل الإطارات ←</a></p>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">تقدير معدل الإطارات، بإجابات</h2>
-        <p class="tool-dek">النطاقات وألعاب الاستناد وأدوات رفع الدقة وإعادة التحقق المعلّقة.</p>
+      <header>
+        <h2 id="faq">تقدير معدل الإطارات، بإجابات</h2>
+        <p class="section-dek">النطاقات وألعاب الاستناد وأدوات رفع الدقة وإعادة التحقق المعلّقة.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">لماذا التقدير نطاق وليس رقمًا واحدًا؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">لأن GTA 6 صدرت للتو على وحدات التحكم، ولا توجد بعد نسخة كمبيوتر لقياسها. ويستند التقدير إلى سلوك مقاس في RDR2 و Cyberpunk 2077 و GTA V، ونطاق ±15% هو التباين في تلك البيانات. وسيوحي رقم واحد بدقة لا يملكها النموذج.</p></div></details></article></li>
@@ -260,29 +279,47 @@
         <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">ماذا عن أدنى 1%؟</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">تبلغ الحاسبة عن متوسط وأدنى 1%، كل منهما كنطاق. وأدنى 1% هو الرقم الذي يحدد ما إذا كانت اللعبة تبدو سلسة، وهو الأصعب تقديرًا، ولهذا يحمل نفس نطاق ±15%.</p></div></details></article></li>
       </ul>
     </section>
+    </article>
   </div>
-</article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -321,10 +358,10 @@
               <li><a href="/ar/contact">اتصل بنا</a></li>
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
-              <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
-              <li><a href="/ar/terms">شروط الخدمة</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
-              <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -333,34 +370,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/ar/privacy">الخصوصية</a>
-          <a href="/ar/terms">الشروط</a>
-          <button type="button" class="footer-link-btn" data-consent-open>إعدادات ملفات تعريف الارتباط</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="الموافقة على التحليلات">
-  <div class="consent-inner">
-    <p><strong>التحليلات، بموافقتك فقط.</strong> نستخدم تحليلات Google المجمعة لمعرفة الأدوات المستخدمة. مدخلات الأدوات لا تغادر جهازك أبدا، ولا يُبنى أي ملف تعريف، ولا يُباع أي شيء. اقبل لتحميلها، أو ارفض وتصفح بدونها. يمكنك تغيير رأيك في أي وقت من إعدادات ملفات تعريف الارتباط في التذييل.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>قبول التحليلات</button>
-      <button type="button" class="btn-outline" data-consent-decline>رفض</button>
-      <a href="/ar/privacy">سياسة الخصوصية</a>
-    </div>
+
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/ar/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/ar/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/ar/header.js" defer></script>
-<script src="/assets/js/ar/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
-<script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/theme.js" defer></script>
+  <script src="/assets/js/ar/header.js" defer></script>
+  <script src="/assets/js/ar/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/consent.js" defer></script>
+
 </body>
 </html>

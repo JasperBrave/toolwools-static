@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notícias do GTA 6: anúncios com fontes e análise | ToolWools</title>
 <meta name="description" content="Seis coisas que realmente aconteceram, com a fonte anexada a cada uma. Primeiro os anúncios da Rockstar, depois a análise com data do que ainda não está confirmado.">
 <meta name="author" content="ToolWools">
@@ -16,7 +16,7 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:url" content="https://toolwools.com/pt/news">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="Notícias do GTA 6: anúncios com fontes e análise | ToolWools">
 <meta name="twitter:description" content="Seis coisas que realmente aconteceram, com a fonte anexada a cada uma. Primeiro os anúncios da Rockstar, depois a análise com data do que ainda não está confirmado.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://toolwools.com/pt/news">
 <link rel="alternate" href="https://toolwools.com/news" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/news" hreflang="es">
@@ -40,12 +40,31 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-utility-pt.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,16 +94,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/pt/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
             </span>
           </span>
@@ -94,20 +111,21 @@
           <a href="/pt/tools">Ferramentas</a>
           <a href="/pt/trackers">Rastreadores</a>
           <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
+          <a href="/pt/news" aria-current="page">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Selecionar idioma">PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/news">English</a>
             <a href="/es/news">Español</a>
@@ -131,7 +149,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvel">
@@ -139,103 +157,125 @@
           <a href="/pt/tools">Ferramentas</a>
           <a href="/pt/trackers">Rastreadores</a>
           <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
+          <a href="/pt/news" aria-current="page">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/news" lang="en">EN</a><a href="/es/news" lang="es">ES</a><a href="/pt/news" lang="pt" aria-current="true">PT</a><a href="/de/news" lang="de">DE</a><a href="/fr/news" lang="fr">FR</a><a href="/tr/news" lang="tr">TR</a><a href="/ar/news" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Trilha de navegação" class="breadcrumbs">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+  <article aria-labelledby="page-title">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Trilha de navegação">
         <a href="/pt/">Início</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">Notícias</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Notícias</span>
-      <h1 id="page-hero-heading">Notícias do GTA 6, com fontes</h1>
-      <p class="page-hero-sub">Seis coisas que realmente aconteceram, com a fonte anexada a cada uma. Primeiro os anúncios da própria Rockstar, depois nossa análise com data do que ainda não está confirmado.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <section class="news-grid" aria-label="Notícias do GTA 6">
+      </div>
+      <div class="page-eyebrow"><span>Notícias</span></div>
+      <h1 id="page-title" class="page-title">Notícias do GTA 6, com fontes</h1>
+      <p class="page-subtitle">Seis coisas que realmente aconteceram, com a fonte anexada a cada uma. Primeiro os anúncios da própria Rockstar, depois nossa análise com data do que ainda não está confirmado.</p>
+    </section>
+
+    <section class="news-grid" aria-labelledby="news-grid-h2">
+      <h2 class="sr-only" id="news-grid-h2">Notícias do GTA 6</h2>
       <article class="news-card">
         <span class="badge badge-purple">Rockstar</span>
-        <h2>GTA 6 já está disponível para PS5 e Xbox</h2>
+        <h3>GTA 6 já está disponível para PS5 e Xbox</h3>
         <p class="news-date">19 de novembro de 2026</p>
         <p>GTA 6 foi lançado em 19 de novembro de 2026 para PlayStation 5 e Xbox Series X|S. A instalação ocupa 212 GB e o jogo roda a 30 FPS em todos os consoles, sem modo de desempenho.</p>
         <p class="news-source">Fonte: <a href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener">Rockstar Newsroom</a></p>
       </article>
       <article class="news-card">
         <span class="badge badge-purple">Rockstar</span>
-        <h2>Lançamento do GTA 6 adiado para 19 de novembro de 2026</h2>
+        <h3>Lançamento do GTA 6 adiado para 19 de novembro de 2026</h3>
         <p class="news-date">2 de maio de 2025</p>
         <p>A Rockstar Games confirma uma data de lançamento prevista para 19 de novembro de 2026 no PlayStation 5 e Xbox Series X|S. A Rockstar não anunciou uma versão para PC.</p>
         <p class="news-source">Fonte: <a href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener">Rockstar Newsroom</a> (data de lançamento). Estado do PC: ToolWools.</p>
       </article>
 <article class="news-card">
         <span class="badge badge-purple">Rockstar</span>
-        <h2>O trailer 2 revela Jason, Lucia e uma Vice City renascida</h2>
+        <h3>O trailer 2 revela Jason, Lucia e uma Vice City renascida</h3>
         <p class="news-date">6 de maio de 2025</p>
         <p>O segundo trailer oficial expande a dinâmica de Bonnie e Clyde entre Jason e Lucia, mostrando Leonida, os Everglades e uma Vice City densamente povoada.</p>
         <p class="news-source">Fonte: <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">Rockstar Games</a></p>
       </article>
 <article class="news-card">
         <span class="badge badge-purple">Rockstar</span>
-        <h2>Trailer 1: bem-vindos a Vice City</h2>
+        <h3>Trailer 1: bem-vindos a Vice City</h3>
         <p class="news-date">5 de dez de 2023</p>
         <p>A primeira revelação oficial da Rockstar confirmou o cenário de Leonida, a premissa de dois protagonistas e uma janela de 2025 que desde então mudou.</p>
         <p class="news-source">Fonte: <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">Rockstar Games</a></p>
       </article>
 <article class="news-card">
         <span class="badge badge-blue">Análise</span>
-        <h2>As pré-vendas abriram em 2026: Standard US$ 79,99, Ultimate US$ 99,99</h2>
+        <h3>As pré-vendas abriram em 2026: Standard US$ 79,99, Ultimate US$ 99,99</h3>
         <p class="news-date">Q3 2026</p>
         <p>As pré-vendas abriram em 2026, antes do lançamento em 19 de novembro de 2026 no PlayStation 5 e Xbox Series X|S. A linha confirmada é Standard (US$ 79,99) e Ultimate (US$ 99,99), apenas digital.</p>
-        <p><strong>Atualização — 20 de nov de 2026:</strong> As pré-vendas abriram em 2026 e o GTA 6 lançou em 19 de novembro de 2026 no PlayStation 5 e Xbox Series X|S. A linha confirmada é Standard (US$ 79,99) e Ultimate (US$ 99,99), apenas digital.</p>
+        <p><strong>Atualização (20 de nov de 2026):</strong> As pré-vendas abriram em 2026 e o GTA 6 lançou em 19 de novembro de 2026 no PlayStation 5 e Xbox Series X|S. A linha confirmada é Standard (US$ 79,99) e Ultimate (US$ 99,99), apenas digital.</p>
         <p class="news-source">Fonte: <a href="/pt/tools">Análise da ToolWools</a></p>
       </article>
 <article class="news-card">
         <span class="badge badge-blue">Análise</span>
-        <h2>Versão de PC: ainda sem janela com data</h2>
+        <h3>Versão de PC: ainda sem janela com data</h3>
         <p class="news-date">Em andamento</p>
         <p>A Rockstar não anunciou uma data de lançamento para PC. Seguindo o padrão da Rockstar com GTA V e RDR2, espere um intervalo de 6 a 18 meses após o lançamento nos consoles.</p>
         <p class="news-source">Fonte: <a href="/pt/tools/system-requirements">Análise da ToolWools</a></p>
       </article>
     </section>
     <section class="hub-note" aria-labelledby="news-note">
-      <h2 id="news-note" style="font-size:0.875rem;font-weight:700">O que conta como notícia aqui</h2>
-      <p style="margin-top:0.5rem">Apenas anúncios da Rockstar e nossa própria análise com data. Sem vazamentos apresentados como fatos, sem rumores republicados e sem datas sem fonte. Cada item acima nomeia de onde veio.</p>
-      <p style="margin-top:0.75rem">Última verificação <time datetime="2026-11-21">21 de novembro de 2026</time>.</p>
+      <p class="hub-note-title" id="news-note">O que conta como notícia aqui</p>
+      <p>Apenas anúncios da Rockstar e nossa própria análise com data. Sem vazamentos apresentados como fatos, sem rumores republicados e sem datas sem fonte. Cada item acima nomeia de onde veio.</p>
+      <p>Última verificação <time datetime="2026-11-21">21 de novembro de 2026</time>.</p>
     </section>
+
+  </article>
   </div>
-</article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/pt/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 já está disponível — 19 de novembro de 2026</span>
+        <span class="eyebrow-muted">GTA 6 já está disponível, 19 de novembro de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar ferramentas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/pt/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
               </span>
             </span>
@@ -274,9 +314,9 @@
               <li><a href="/pt/contact">Contato</a></li>
               <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
               <li><a href="/pt/sitemap">Mapa do site</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/pt/privacy">Política de privacidade</a></li>
               <li><a href="/pt/terms">Termos de serviço</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li>
             </ul>
           </div>
@@ -286,34 +326,28 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/pt/privacy">Privacidade</a>
-          <a href="/pt/terms">Termos</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Configurações de cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
           <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimento de analytics">
-  <div class="consent-inner">
-    <p><strong>Analytics, somente com a sua permissão.</strong> Usamos o Google Analytics agregado para ver quais ferramentas são usadas. Os dados que você insere nunca saem do seu dispositivo, nenhum perfil é criado e nada é vendido. Aceite para carregá-lo ou recuse e navegue sem ele. Você pode mudar de ideia quando quiser em Configurações de cookies no rodapé.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Aceitar analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Recusar</button>
-      <a href="/pt/privacy">Política de privacidade</a>
-    </div>
+
+  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
+  <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceitar analytics</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Recusar</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/pt/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/pt/theme.js" defer></script>
-<script src="/assets/js/pt/consent.js" defer></script>
-<script src="/assets/js/pt/header.js" defer></script>
-<script src="/assets/js/pt/search.js" defer></script>
-<script src="/assets/js/pt/faq.js" defer></script>
-<script src="/assets/js/pt/newsletter.js" defer></script>
+  <script src="/assets/js/pt/theme.js" defer></script>
+  <script src="/assets/js/pt/header.js" defer></script>
+  <script src="/assets/js/pt/search.js" defer></script>
+  <script src="/assets/js/pt/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/pt/newsletter.js" defer></script>
+  <script src="/assets/js/pt/consent.js" defer></script>
 </body>
 </html>

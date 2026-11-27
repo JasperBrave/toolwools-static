@@ -55,7 +55,7 @@
     var kindLabel = { tool: "الأدوات", guide: "الأدلة", resource: "صفحات مرجعية" };
     var LIVE_WORD = " مباشرة";
     if (summaryEl) {
-      if (!trimmed) summaryEl.textContent = "يغطي البحث 24 أداة — 24 مباشرة و0 قريبًا — بالإضافة إلى دليلين مكتوبين و7 صفحات مرجعية. واختر نقطة بداية أدناه أو اكتب ما يحتاج جهازك إلى معرفته.";
+      if (!trimmed) summaryEl.textContent = "يغطي البحث 24 أداة، 24 مباشرة و0 قريبًا، بالإضافة إلى دليلين مكتوبين و7 صفحات مرجعية. واختر نقطة بداية أدناه أو اكتب ما يحتاج جهازك إلى معرفته.";
       else if (!results.length) summaryEl.textContent = "لا يوجد في الموقع ما يطابق \"" + trimmed + "\" بعد. مصطلحات الأجهزة مثل \"rtx 4070\" أو \"vram\" أو \"download time\" تعطي أفضل النتائج.";
       else {
         var best = results[0];

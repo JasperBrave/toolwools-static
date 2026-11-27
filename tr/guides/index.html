@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="GTA 6 Rehberleri: FPS Nasıl Tahmin Edilir ve CPU-GPU Eşleştirme | ToolWools">
 <meta name="twitter:description" content="Şimdiye kadar iki yazılı rehber, her biri bir modeli veya kararı kontrol edilebilecek kadar ayrıntılı açıklıyor. Dolgu yok, tarihsiz vaat yok.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/tr/guides">
 <link rel="alternate" href="https://toolwools.com/guides" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/guides" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-guides-tr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -111,16 +131,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -132,18 +150,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides" aria-current="page">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/guides">İngilizce</a>
             <a href="/es/guides">Español</a>
@@ -167,7 +186,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -177,41 +196,41 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides" aria-current="page">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/guides" lang="en">EN</a><a href="/es/guides" lang="es">ES</a><a href="/pt/guides" lang="pt">PT</a><a href="/de/guides" lang="de">DE</a><a href="/fr/guides" lang="fr">FR</a><a href="/tr/guides" aria-current="true">TR</a><a href="/ar/guides" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Sayfa yolu" class="breadcrumbs">
-        <a href="/tr/">Ana Sayfa</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">Rehberler</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Rehberler</span>
-      <h1 id="page-hero-heading">İşini gösteren rehberler</h1>
-      <p class="page-hero-sub">Şimdiye kadar iki yazılı rehber, her biri bir modeli veya kararı kontrol edilebilecek kadar ayrıntılı açıklıyor. Dolgu yok, tarihsiz vaat yok.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+<main id="main" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+      <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+      <a href="/tr/">Ana Sayfa</a>
+      <span aria-hidden="true">/</span>
+      <span class="current" aria-current="page">Rehberler</span>
+      </div>
+      <div class="page-eyebrow"><span>Rehberler</span></div>
+      <h1 id="page-title" class="page-title">İşini gösteren rehberler</h1>
+      <p class="page-subtitle">Şimdiye kadar iki yazılı rehber, her biri bir modeli veya kararı kontrol edilebilecek kadar ayrıntılı açıklıyor. Dolgu yok, tarihsiz vaat yok.</p>
+      </section>
     <section aria-labelledby="guides-list">
       <h2 id="guides-list">İki rehber, kontrol edilmek üzere yazıldı</h2>
-      <p class="tool-dek">Sırayla okuyun: önce FPS rehberi, sonra eşleştirme rehberi, ardından öğrendiklerinizi test etmek için FPS Hesaplayıcı.</p>
-      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/tr/guides/how-fps-is-estimated"><span class="badge badge-blue">Rehber</span><h3>FPS nasıl tahmin edilir</h3><p class="news-date">24 Temmuz 2026'da yayımlandı</p><p>FPS Hesaplayıcı'nın arkasındaki altı adımlı model: tahmin nedir, neye sabitlenmiştir ve ne kadar oynayabilir.</p><span class="open-link">Rehberi okuyun →</span></a></li><li><a class="guide-card" href="/tr/guides/cpu-gpu-pairing"><span class="badge badge-blue">Rehber</span><h3>GTA 6 için CPU-GPU eşleştirme</h3><p class="news-date">3 Ağustos 2026'da yayımlandı</p><p>On iki gerçek eşleştirme, dengeli, CPU'ya bağlı veya GPU açlığı çeken olarak etiketlenmiş, ve dengenin neden çizim çağrılarına, ham güce değil, bağlı olduğu.</p><span class="open-link">Rehberi okuyun →</span></a></li></ul>
+      <p class="section-dek">Sırayla okuyun: önce FPS rehberi, sonra eşleştirme rehberi, ardından öğrendiklerinizi test etmek için FPS Hesaplayıcı.</p>
+      <ul class="guide-cards"><li><a class="guide-card" href="/tr/guides/how-fps-is-estimated"><span class="badge">Rehber</span><h3>FPS nasıl tahmin edilir</h3><p class="news-date">24 Temmuz 2026'da yayımlandı</p><p>FPS Hesaplayıcı'nın arkasındaki altı adımlı model: tahmin nedir, neye sabitlenmiştir ve ne kadar oynayabilir.</p><span class="open-link">Rehberi okuyun →</span></a></li><li><a class="guide-card" href="/tr/guides/cpu-gpu-pairing"><span class="badge">Rehber</span><h3>GTA 6 için CPU-GPU eşleştirme</h3><p class="news-date">3 Ağustos 2026'da yayımlandı</p><p>On iki gerçek eşleştirme, dengeli, CPU'ya bağlı veya GPU açlığı çeken olarak etiketlenmiş, ve dengenin neden çizim çağrılarına, ham güce değil, bağlı olduğu.</p><span class="open-link">Rehberi okuyun →</span></a></li></ul>
     </section>
     <section class="hub-note" aria-labelledby="next-guide">
-      <h2 id="next-guide" style="font-size:0.875rem;font-weight:700">Sırada bir sonraki</h2>
-      <p style="margin-top:0.5rem">VRAM bütçeleme, ayrılan ve kullanılan karşılaştırması ve takılmanın ne zaman başladığı, taslak aşamasında. Arkasındaki model doğrulanana kadar tarih sözü verilmiyor.</p>
+      <h2 id="next-guide" class="eyebrow-muted">Sırada bir sonraki</h2>
+      <p>VRAM bütçeleme, ayrılan ve kullanılan karşılaştırması ve takılmanın ne zaman başladığı, taslak aşamasında. Arkasındaki model doğrulanana kadar tarih sözü verilmiyor.</p>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Rehberler hakkında</h2>
-        <p class="tool-dek">Rehberler nasıl yazılır, güncellenir ve seçilir.</p>
+      <header>
+        <h2 id="faq">Rehberler hakkında</h2>
+        <p class="section-dek">Rehberler nasıl yazılır, güncellenir ve seçilir.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Bunlar rehber mi yoksa pazarlama mı?</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Rehberler. Her biri bir modeli veya kararı kontrol edilebilecek kadar ayrıntılı açıklar: FPS rehberi altı adımlı modeli adım adım anlatır, eşleştirme rehberi on iki gerçek eşleştirmeyi kararlarıyla listeler.</p></div></details></article></li>
@@ -220,29 +239,47 @@
         <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Rehber konusu önerebilir miyim?</h3><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Evet, iletişim formunu kullanın ve Araç geri bildirimi seçin. Doğrulayabileceğimiz bir modele karşılık gelen konular listeye girer.</p></div></details></article></li>
       </ul>
     </section>
+    </article>
   </div>
-</article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -281,10 +318,10 @@
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-              <li><a href="/tr/terms">Kullanım Şartları</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -293,34 +330,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/tr/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
-<script src="/assets/js/tr/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
-<script src="/assets/js/tr/header.js" defer></script>
-<script src="/assets/js/tr/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
-<script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/theme.js" defer></script>
+  <script src="/assets/js/tr/header.js" defer></script>
+  <script src="/assets/js/tr/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
+
 </body>
 </html>
