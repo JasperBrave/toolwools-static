@@ -569,3 +569,331 @@ ul, ol { margin: 0; }
 [dir="rtl"] .faq-question { text-align: start; }
 [dir="rtl"] .tier-read, [dir="rtl"] .hub-note { text-align: start; }
 [dir="rtl"] .methodology-body ul.list-disc, [dir="rtl"] .sources-list { padding-left: 0; }
+
+/* ==========================================================================
+   DESIGN-QUALITY PHASE 4 - Name generators (DQ-12, G1-G5, X1-X6)
+   Appended 2026-11-28. One block, same content in all 7
+   tool-generators CSS files. Companion HTML edits (in transform.py, same
+   for all locales): the result row plus detail line plus character card
+   are wrapped in one div.gen-result, and the Generate 10 button moves
+   from its own gen-actions row into the main action row. No copy,
+   numbers, URLs or SEO heads change; engines and data files untouched.
+   Design notes, in the order the fixes land:
+   - The slab splits: controls sit on the page background (the workspace
+     surface goes flat); the result gets its own tinted primary surface
+     in the accent-soft tone, and the generated name grows to 40px, the
+     page's focal point, the same grade as the H1. Favourites and recent
+     rolls stay below as quiet ruled lists.
+   - Three control shapes: tabs become an underline strip (the active tab
+     is an orange underline, not a fill); Gender and Vibe become segmented
+     controls on one shared track (the checked segment is the orange
+     fill); actions stay solid and outline pills; the region select stays
+     a rectangular field. One orange active per group, never four
+     identical pills.
+   - Locks: the button already carries its own words in a visually
+     hidden span (Lock name, and the translated equivalents). When a
+     lock is pressed, that span becomes visible text, the button fills
+     orange with dark text, and the padlock body fills solid. Unlocked
+     stays the quiet icon circle.
+   - Rules: the five cards become one ruled list with dividers; the
+     paragraphs keep the 68ch measure so no new line-length finding
+     type appears. The guide prose was already card-free; the FAQ was
+     already a divider list.
+   - Cross-cutting: H2 28px content, newsletter H2 28px (the Phases 2-3
+     convention), in-list H3 18px, prose sub-heads stay 20px; gaps by
+     job (48 base, 96 into the rules act, 64 before the newsletter);
+     dark newsletter input themed; dark result surface gets the strong
+     border, as the raised panels did in Phase 2.
+   - Deliberately NOT changed, with reasons: the footer strip single
+     arrow and its eyebrow label (footer is out of scope for this
+     phase, as in Phase 3); the light-to-dark accent shift from
+     #ff681f to #ff792f (Phases 2-3 left the token alone, and a per-page
+     override would diverge from the shipped phases - it needs a
+     template-wide token decision); the hero meta (already one
+     fragment) and the detail line dot separators (engine copy).
+   Specificity notes: base h2 is (0,0,1), so H2 rules use
+   .tool-body article h2 (0,1,2); #nl-h2 is an ID rule (1,0,0) like
+   the base. Tab rules are scoped to the tablist so the JS-toggled
+   btn-ultra and btn-outline classes keep working untouched.
+   ========================================================================== */
+
+/* --- Hierarchy: one H2 size per breakpoint (X1) --------------------------- */
+.tool-body article h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  .tool-body article h2 {
+    font-size: 24px;
+  }
+}
+/* Newsletter H2: ID rule (1,0,0) - 28px, same as Phases 2-3. */
+#nl-h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  #nl-h2 {
+    font-size: 24px;
+  }
+}
+/* H3: two levels - in-list heads 18px; prose sub-heads stay 20px. */
+[data-generator] h3 {
+  font-size: 18px;
+}
+.tool-body .news-grid h3 {
+  font-size: 18px;
+}
+.tool-body .faq-list summary h3 {
+  font-size: 18px;
+}
+
+/* --- Gaps by job (X2) ------------------------------------------------------
+   Base 48px at 1280 / 32px at 1024-1279 / 24px at 1023 and below (was a
+   flat 96 / 64 / 48). Major act (+48 / +32 / +24 = 96 / 64 / 48): the
+   rules act after the workspace. Utility (+16 / +16 / +8 = 64 / 48 /
+   32): the newsletter band. 24px inside the workspace. */
+.tool-body > article {
+  gap: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article {
+    gap: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article {
+    gap: 24px;
+  }
+}
+.tool-body > article > section[aria-labelledby="rules"] {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="rules"] {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="rules"] {
+    margin-top: 24px;
+  }
+}
+#sec-newsletter {
+  margin-top: 64px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #sec-newsletter {
+    margin-top: 48px;
+  }
+}
+@media (max-width: 1023px) {
+  #sec-newsletter {
+    margin-top: 32px;
+  }
+}
+
+/* --- Split the slab (G1) ----------------------------------------------------
+   The workspace surface goes flat: controls sit on the page background.
+   The result is the product, so it gets its own tinted primary surface
+   (accent-soft tone, primary radius, shadow-md) and the generated name
+   grows to 40px - the same grade as the H1, the focal point of the page. */
+[data-generator].surface-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+[data-generator] {
+  gap: 24px;
+}
+.tool-body .gen-result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+  padding: 24px;
+}
+[data-gen-result] {
+  font-size: 40px;
+  line-height: 1.15;
+}
+@media (max-width: 767px) {
+  [data-gen-result] {
+    font-size: 32px;
+  }
+  .tool-body .gen-result {
+    padding: 20px;
+  }
+}
+/* Favourites and recent rolls: quiet ruled lists below the workspace. */
+[data-generator] > h3 {
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+}
+/* Batch rows (JS-built): dividers between the ten names. */
+.tool-body .gen-batch-grid > div {
+  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+}
+
+/* --- Tabs: underline strip, not pills (G2) ----------------------------------
+   The JS toggles btn-ultra (active) and btn-outline on the tabs, so the
+   shape change is CSS only. Active tab: dark text, bold, orange
+   underline. Inactive: muted text, no fill, no border. At 375 the tabs
+   wrap as plain text rows - no orphaned pill. */
+[data-generator] [role="tablist"] {
+  gap: 4px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+[data-generator] [role="tablist"] .btn-ultra,
+[data-generator] [role="tablist"] .btn-outline {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 44px;
+  padding: 10px 2px;
+  margin-bottom: -1px;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  white-space: normal;
+  transform: none;
+}
+[data-generator] [role="tablist"] .btn-ultra {
+  color: var(--color-text);
+  font-weight: 700;
+  border-bottom-color: var(--color-accent);
+}
+[data-generator] [role="tablist"] button:hover {
+  color: var(--color-text);
+  background: transparent;
+}
+
+/* --- Gender and Vibe: segmented controls on one shared track (G2) -----------
+   One track per group, not separate pills. The checked segment is the
+   orange fill with dark text - the single orange active of its group.
+   The native radio stays in the DOM (the JS reads its checked state and
+   screen readers announce it); it is only taken out of the visual flow,
+   and the focus ring still lands on the label. */
+[data-generator] .gen-choices {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+}
+[data-generator] .gen-choice {
+  position: relative;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  margin: 0;
+}
+[data-generator] .gen-choice input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+[data-generator] .gen-choice:has(input:checked) {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+[data-generator] .gen-choice:has(input:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* --- Labelled lock state (G3) ------------------------------------------------
+   The button already carries its own words in the visually hidden span
+   (Lock name, and the translated equivalents in the other locales).
+   Pressed: the span becomes visible text, the button fills orange with
+   dark text, and the padlock body fills solid. Unlocked stays the quiet
+   icon circle. The aria-pressed attribute and the is-locked class are
+   both maintained by the JS, so both selectors are covered. */
+[data-generator] .gen-lock {
+  gap: 6px;
+}
+[data-generator] .gen-lock[aria-pressed="true"],
+[data-generator] .gen-lock.is-locked {
+  background: var(--color-accent);
+  border-color: transparent;
+  color: var(--color-on-accent);
+  padding: 0.375rem 0.75rem;
+}
+[data-generator] .gen-lock[aria-pressed="true"] svg rect,
+[data-generator] .gen-lock.is-locked svg rect {
+  fill: currentColor;
+}
+[data-generator] .gen-lock[aria-pressed="true"] .gen-visually-hidden,
+[data-generator] .gen-lock.is-locked .gen-visually-hidden {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
+  border: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* --- Rules as a divider list (G4) --------------------------------------------
+   Five identical cards in a 2-column grid left Gamertags orphaned in the
+   last row. One ruled list, dividers between items, paragraphs capped at
+   the 68ch measure (the same measure as the prose and FAQ answers). */
+.tool-body .news-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.tool-body .news-grid article.surface-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 20px 0;
+}
+.tool-body .news-grid article.surface-card + article.surface-card {
+  border-top: 1px solid var(--color-border);
+}
+.tool-body .news-grid article.surface-card:first-child {
+  padding-top: 0;
+}
+.tool-body .news-grid article.surface-card:last-child {
+  padding-bottom: 0;
+}
+.tool-body .news-grid p {
+  max-width: var(--measure-body);
+}
+
+/* --- Dark mode: three elevations + themed newsletter input (X6) -------------
+   The result surface is the raised element in dark (accent-soft resolves
+   per theme); it takes the strong border, as the raised panels did in
+   Phase 2. The newsletter input is themed, same selectors as Phases 2-3,
+   unscoped because the newsletter sits outside .tool-body. */
+[data-theme="dark"] .tool-body .gen-result,
+html.dark .tool-body .gen-result {
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}
