@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="كل أدوات GTA 6: 24 حاسبة ومتتبعًا ومخططًا مباشرًا | ToolWools">
 <meta name="twitter:description" content="كل أدوات GTA 6 المباشرة في مكان واحد. 24 حاسبة ومخططًا ومتتبعًا يمكنك استخدامها الآن، بالإضافة إلى 0 أخرى على خارطة الطريق.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/ar/tools">
 <link rel="alternate" href="https://toolwools.com/tools" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools" hreflang="es">
@@ -41,11 +41,29 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hub-ar.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -73,27 +91,26 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
         </a>
         <nav class="nav-primary" aria-label="التنقل الأساسي">
           <a href="/ar/">الرئيسية</a>
-          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/tools" aria-current="page">الأدوات</a>
           <a href="/ar/trackers">أدوات التتبع</a>
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -129,49 +146,49 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث عن الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="الجوال">
           <a href="/ar/">الرئيسية</a>
-          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/tools" aria-current="page">الأدوات</a>
           <a href="/ar/trackers">أدوات التتبع</a>
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools" lang="en">EN</a><a href="/es/tools" lang="es">ES</a><a href="/pt/tools" lang="pt">PT</a><a href="/de/tools" lang="de">DE</a><a href="/fr/tools" lang="fr">FR</a><a href="/tr/tools" lang="tr">TR</a><a href="/ar/tools" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="مسار التنقل" class="breadcrumbs">
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+<section class="page-hero">
+      <div class="page-breadcrumbs" aria-label="مسار التنقل">
         <a href="/ar/">الرئيسية</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">الأدوات</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">الفهرس</span>
-      <h1 id="page-hero-heading">جميع الأدوات</h1>
-      <p class="page-hero-sub">كل أدوات GTA 6 المباشرة في مكان واحد. حاسبات ومخططات ومتتبعات يمكنك استخدامها الآن</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+      </div>
+      <div class="page-eyebrow"><span>الفهرس</span></div>
+      <h1 id="page-title" class="page-title">جميع الأدوات</h1>
+      <p class="page-subtitle">كل أدوات GTA 6 المباشرة في مكان واحد. حاسبات ومخططات ومتتبعات يمكنك استخدامها الآن</p>
+</section>
     <section aria-labelledby="tools-search-heading">
       <h2 id="tools-search-heading" class="sr-only">ابحث في الأدوات وصفِّها</h2>
       <form role="search" data-tools-search-form>
         <label class="filter-label" for="tools-search">ابحث في 24 أداة مباشرة</label>
         <input type="search" id="tools-search" class="search-big" data-tools-search placeholder="ابحث عن حاسبات ومتتبعات ومخططات..." autocomplete="off">
       </form>
-      <div style="margin-top:1.5rem">
+      <div class="filter-group">
         <span class="filter-label" id="cat-label">الفئات الشائعة</span>
         <div class="chip-row" role="group" aria-labelledby="cat-label"><button type="button" class="chip" data-category-filter="pc" aria-pressed="false">جاهزية الكمبيوتر</button><button type="button" class="chip" data-category-filter="performance" aria-pressed="false">الأداء</button><button type="button" class="chip" data-category-filter="release" aria-pressed="false">التحضير للإطلاق</button><button type="button" class="chip" data-category-filter="map" aria-pressed="false">الخريطة والعالم</button><button type="button" class="chip" data-category-filter="economy" aria-pressed="false">الاقتصاد</button><button type="button" class="chip" data-category-filter="trackers" aria-pressed="false">أدوات التتبع</button><button type="button" class="chip" data-category-filter="planners" aria-pressed="false">المخططات</button><button type="button" class="chip" data-category-filter="comparison" aria-pressed="false">المقارنة</button><button type="button" class="chip" data-category-filter="generators" aria-pressed="false">المولّدات</button></div>
       </div>
-      <div style="margin-top:1.5rem">
+      <div class="filter-group">
         <span class="filter-label" id="status-label">صفِّ حسب الحالة</span>
         <div class="chip-row" role="group" aria-labelledby="status-label">
           <button type="button" class="chip" data-status-filter="" aria-pressed="true">كل الأدوات</button>
@@ -180,282 +197,276 @@
         </div>
       </div>
     </section>
-    <section aria-labelledby="tools-results-heading" style="margin-top:2.5rem">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+    <section aria-labelledby="tools-results-heading">
+      <div class="tools-results-head">
         <h2 id="tools-results-heading" data-tools-heading>الأدوات المباشرة</h2>
-        <span class="tool-count" data-tools-count>24 من أصل 24 أداة · 24 مباشرة</span>
+        <span class="tool-count" data-tools-count aria-live="polite">24 من أصل 24 أداة · 24 مباشرة</span>
       </div>
-      <ul class="tools-grid" data-tools-list style="margin-top:1.5rem">
-        <li data-tool-card data-category="pc" data-status="live" data-search-text="مدقق متطلبات نظام GTA 6 حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين. pc المواصفات" style="--stagger-index:0" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:0" href="/ar/tools/system-requirements" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+      <ul class="tools-grid" data-tools-list>
+        <li data-tool-card data-category="pc" data-status="live" data-search-text="مدقق متطلبات نظام GTA 6 حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين. pc المواصفات">
+      <a class="tool-card" href="/ar/tools/system-requirements" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مدقق متطلبات نظام GTA 6</h3>
         <p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="حاسبة وقت تنزيل GTA 6 قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك. planners المخططات" style="--stagger-index:1" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:1" href="/ar/tools/download-time" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="حاسبة وقت تنزيل GTA 6 قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك. planners المخططات">
+      <a class="tool-card" href="/ar/tools/download-time" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>حاسبة وقت تنزيل GTA 6</h3>
         <p>قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="مخطط تخزين GTA 6 خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات. planners المخططات" style="--stagger-index:2" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:2" href="/ar/tools/storage-planner" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="مخطط تخزين GTA 6 خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات. planners المخططات">
+      <a class="tool-card" href="/ar/tools/storage-planner" data-accent="pink">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مخطط تخزين GTA 6</h3>
         <p>خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="release" data-status="live" data-search-text="مذكّر تاريخ إصدار GTA 6 GTA 6 متوفرة الآن — اضبط تذكيرات بالتصحيحات والمحتوى الإضافي والفعاليات بنقرة واحدة. release الإصدار" style="--stagger-index:3" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:3" href="/ar/tools/add-to-calendar" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="release" data-status="live" data-search-text="مذكّر تاريخ إصدار GTA 6 GTA 6 متوفرة الآن, اضبط تذكيرات بالتصحيحات والمحتوى الإضافي والفعاليات بنقرة واحدة. release الإصدار">
+      <a class="tool-card" href="/ar/tools/add-to-calendar" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مذكّر تاريخ إصدار GTA 6</h3>
-        <p>GTA 6 متوفرة الآن — اضبط تذكيرات بالتصحيحات والمحتوى الإضافي والفعاليات بنقرة واحدة.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>GTA 6 متوفرة الآن, اضبط تذكيرات بالتصحيحات والمحتوى الإضافي والفعاليات بنقرة واحدة.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="release" data-status="live" data-search-text="نتيجة جاهزية GTA 6 نتيجة جاهزية إطلاق واحدة من 0 إلى 100 عبر الأداء وذاكرة الفيديو والتخزين والإنترنت. بتقدير من F إلى S مع إصلاح أضعف حلقة. release الإصدار" style="--stagger-index:4" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:4" href="/ar/tools/readiness-score" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="release" data-status="live" data-search-text="نتيجة جاهزية GTA 6 نتيجة جاهزية إطلاق واحدة من 0 إلى 100 عبر الأداء وذاكرة الفيديو والتخزين والإنترنت. بتقدير من F إلى S مع إصلاح أضعف حلقة. release الإصدار">
+      <a class="tool-card" href="/ar/tools/readiness-score" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>نتيجة جاهزية GTA 6</h3>
         <p>نتيجة جاهزية إطلاق واحدة من 0 إلى 100 عبر الأداء وذاكرة الفيديو والتخزين والإنترنت. بتقدير من F إلى S مع إصلاح أضعف حلقة.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="pc" data-status="live" data-search-text="حاسبة عنق زجاجة GTA 6 اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية. ونكتشف عنق الزجاجة لـ GTA 6 ونقترح أصغر ترقية لإصلاحه. pc الأداء" style="--stagger-index:5" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:5" href="/ar/tools/bottleneck-calculator" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="pc" data-status="live" data-search-text="حاسبة عنق زجاجة GTA 6 اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية. ونكتشف عنق الزجاجة لـ GTA 6 ونقترح أصغر ترقية لإصلاحه. pc الأداء">
+      <a class="tool-card" href="/ar/tools/bottleneck-calculator" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>حاسبة عنق زجاجة GTA 6</h3>
         <p>اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية. ونكتشف عنق الزجاجة لـ GTA 6 ونقترح أصغر ترقية لإصلاحه.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="pc" data-status="live" data-search-text="مدقق متطلبات ذاكرة فيديو GTA 6 اختر الدقة وإعداد الجودة المسبق. وتعرض الأداة الحد الأدنى من ذاكرة الفيديو المطلوبة وما إذا كانت وحدة معالجة الرسومات لديك تجتاز. pc الأداء" style="--stagger-index:6" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:6" href="/ar/tools/vram-calculator" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="pc" data-status="live" data-search-text="مدقق متطلبات ذاكرة فيديو GTA 6 اختر الدقة وإعداد الجودة المسبق. وتعرض الأداة الحد الأدنى من ذاكرة الفيديو المطلوبة وما إذا كانت وحدة معالجة الرسومات لديك تجتاز. pc الأداء">
+      <a class="tool-card" href="/ar/tools/vram-calculator" data-accent="pink">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مدقق متطلبات ذاكرة فيديو GTA 6</h3>
         <p>اختر الدقة وإعداد الجودة المسبق. وتعرض الأداة الحد الأدنى من ذاكرة الفيديو المطلوبة وما إذا كانت وحدة معالجة الرسومات لديك تجتاز.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="performance" data-status="live" data-search-text="حاسبة معدل إطارات GTA 6 قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة. performance الأداء" style="--stagger-index:7" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:7" href="/ar/tools/fps-calculator" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="performance" data-status="live" data-search-text="حاسبة معدل إطارات GTA 6 قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة. performance الأداء">
+      <a class="tool-card" href="/ar/tools/fps-calculator" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>حاسبة معدل إطارات GTA 6</h3>
         <p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="قائمة مستويات وحدة معالجة الرسومات في GTA 6 تصنيف S/A/B/C/D لكل وحدة معالجة رسومات لأداء GTA 6. قابل للبحث والتصفية، ويُحدث عند إصدار برامج التشغيل. comparison المقارنة" style="--stagger-index:8" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:8" href="/ar/tools/gpu-tier-list" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="قائمة مستويات وحدة معالجة الرسومات في GTA 6 تصنيف S/A/B/C/D لكل وحدة معالجة رسومات لأداء GTA 6. قابل للبحث والتصفية، ويُحدث عند إصدار برامج التشغيل. comparison المقارنة">
+      <a class="tool-card" href="/ar/tools/gpu-tier-list" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>قائمة مستويات وحدة معالجة الرسومات في GTA 6</h3>
         <p>تصنيف S/A/B/C/D لكل وحدة معالجة رسومات لأداء GTA 6. قابل للبحث والتصفية، ويُحدث عند إصدار برامج التشغيل.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="map" data-status="live" data-search-text="الخريطة التفاعلية للعبة GTA 6 كل منطقة مسماة في ليونيدا على مخطط واحد، موسومة حسب مستوى الدليل، بالإضافة إلى مقارنة الحجم مع GTA V و RDR2. map الخريطة" style="--stagger-index:9" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:9" href="/ar/tools/interactive-map" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="map" data-status="live" data-search-text="الخريطة التفاعلية للعبة GTA 6 كل منطقة مسماة في ليونيدا على مخطط واحد، موسومة حسب مستوى الدليل، بالإضافة إلى مقارنة الحجم مع GTA V و RDR2. map الخريطة">
+      <a class="tool-card" href="/ar/tools/interactive-map" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>الخريطة التفاعلية للعبة GTA 6</h3>
         <p>كل منطقة مسماة في ليونيدا على مخطط واحد، موسومة حسب مستوى الدليل، بالإضافة إلى مقارنة الحجم مع GTA V و RDR2.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="أين تشتري GTA 6: مقارنة الإصدارات والقنوات ثلاث قنوات شراء مصنفة حسب قابلية الإلغاء وحماية السعر وتوقيت التنزيل والمكافآت وإعادة البيع، لمنصتك ومنطقتك. trackers أدوات التتبع" style="--stagger-index:10" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:10" href="/ar/tools/pre-order-tracker" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="أين تشتري GTA 6: مقارنة الإصدارات والقنوات ثلاث قنوات شراء مصنفة حسب قابلية الإلغاء وحماية السعر وتوقيت التنزيل والمكافآت وإعادة البيع، لمنصتك ومنطقتك. trackers أدوات التتبع">
+      <a class="tool-card" href="/ar/tools/pre-order-tracker" data-accent="pink">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>أين تشتري GTA 6: مقارنة الإصدارات والقنوات</h3>
         <p>ثلاث قنوات شراء مصنفة حسب قابلية الإلغاء وحماية السعر وتوقيت التنزيل والمكافآت وإعادة البيع، لمنصتك ومنطقتك.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="منتقي إصدارات GTA 6 ما يفتحه كل إصدار فعليًا داخل اللعبة، مع التتبع بينما تؤكده Rockstar. والأسعار على صفحة السعر حسب البلد. comparison المقارنة" style="--stagger-index:11" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:11" href="/ar/tools/edition-comparison" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="منتقي إصدارات GTA 6 ما يفتحه كل إصدار فعليًا داخل اللعبة، مع التتبع بينما تؤكده Rockstar. والأسعار على صفحة السعر حسب البلد. comparison المقارنة">
+      <a class="tool-card" href="/ar/tools/edition-comparison" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>منتقي إصدارات GTA 6</h3>
         <p>ما يفتحه كل إصدار فعليًا داخل اللعبة، مع التتبع بينما تؤكده Rockstar. والأسعار على صفحة السعر حسب البلد.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="مستشار سرعة الإنترنت في GTA 6 قيّم زمن الاستجابة والاهتزاز وفقدان الحزم والسرعة مقابل هدف واقعي لمنطقتك وجهازك. planners المخططات" style="--stagger-index:12" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:12" href="/ar/tools/internet-speed-check" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="مستشار سرعة الإنترنت في GTA 6 قيّم زمن الاستجابة والاهتزاز وفقدان الحزم والسرعة مقابل هدف واقعي لمنطقتك وجهازك. planners المخططات">
+      <a class="tool-card" href="/ar/tools/internet-speed-check" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مستشار سرعة الإنترنت في GTA 6</h3>
         <p>قيّم زمن الاستجابة والاهتزاز وفقدان الحزم والسرعة مقابل هدف واقعي لمنطقتك وجهازك.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="حالة خوادم GTA 6: هل الخوادم متوقفة؟ لا خوادم لدى GTA 6 لتتعطل — فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية. trackers أدوات التتبع" style="--stagger-index:13" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:13" href="/ar/tools/server-status" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="حالة خوادم GTA 6: هل الخوادم متوقفة؟ لا خوادم لدى GTA 6 لتتعطل, فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية. trackers أدوات التتبع">
+      <a class="tool-card" href="/ar/tools/server-status" data-accent="pink">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>حالة خوادم GTA 6: هل الخوادم متوقفة؟</h3>
-        <p>لا خوادم لدى GTA 6 لتتعطل — فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>لا خوادم لدى GTA 6 لتتعطل, فقد صدرت في 19 نوفمبر 2026 لعبة فردية بلا طور على الإنترنت. تحقق من الخدمات الثلاث التي تعتمد عليها: Rockstar Authentication وPlayStation Network وشبكة Xbox، وقد فُحصت يدويًا في 24 نوفمبر 2026، مع روابط للصفحات الرسمية.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="سعر GTA 6 حسب البلد سعر GTA 6 في 44 سوقًا بالعملة المحلية والدولار الأمريكي، مع فصل الضريبة. ويشمل سلم إصداري Standard و Ultimate. trackers أدوات التتبع" style="--stagger-index:14" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:14" href="/ar/tools/price-by-country" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="سعر GTA 6 حسب البلد سعر GTA 6 في 44 سوقًا بالعملة المحلية والدولار الأمريكي، مع فصل الضريبة. ويشمل سلم إصداري Standard و Ultimate. trackers أدوات التتبع">
+      <a class="tool-card" href="/ar/tools/price-by-country" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>سعر GTA 6 حسب البلد</h3>
         <p>سعر GTA 6 في 44 سوقًا بالعملة المحلية والدولار الأمريكي، مع فصل الضريبة. ويشمل سلم إصداري Standard و Ultimate.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026. trackers أدوات التتبع" style="--stagger-index:15" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:15" href="/ar/tools/preload-tracker" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026. trackers أدوات التتبع">
+      <a class="tool-card" href="/ar/tools/preload-tracker" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3>
         <p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="economy" data-status="live" data-search-text="حاسبة أموال GTA 6 وعائد استثمار الأعمال رتّب طرق كسب المال حسب صافي الدولارات في الساعة، وحدد وقت أي هدف ادخار، وقارن ساعات استرداد الأعمال وقيّم سعر بطاقات Shark مقابل الجهد. economy الاقتصاد" style="--stagger-index:16" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:16" href="/ar/tools/economy-calculator" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="economy" data-status="live" data-search-text="حاسبة أموال GTA 6 وعائد استثمار الأعمال رتّب طرق كسب المال حسب صافي الدولارات في الساعة، وحدد وقت أي هدف ادخار، وقارن ساعات استرداد الأعمال وقيّم سعر بطاقات Shark مقابل الجهد. economy الاقتصاد">
+      <a class="tool-card" href="/ar/tools/economy-calculator" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>حاسبة أموال GTA 6 وعائد استثمار الأعمال</h3>
         <p>رتّب طرق كسب المال حسب صافي الدولارات في الساعة، وحدد وقت أي هدف ادخار، وقارن ساعات استرداد الأعمال وقيّم سعر بطاقات Shark مقابل الجهد.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة مركبات GTA 6 — التقييمات وتكلفة التسجيل وقيمة البيع قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10 — السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة — إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026. comparison المقارنة" style="--stagger-index:17" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:17" href="/ar/tools/vehicle-comparison" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
-        <h3>مقارنة مركبات GTA 6 — التقييمات وتكلفة التسجيل وقيمة البيع</h3>
-        <p>قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10 — السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة — إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة مركبات GTA 6, التقييمات وتكلفة التسجيل وقيمة البيع قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10, السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة, إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026. comparison المقارنة">
+      <a class="tool-card" href="/ar/tools/vehicle-comparison" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
+        <h3>مقارنة مركبات GTA 6: التقييمات وتكلفة التسجيل وقيمة البيع</h3>
+        <p>قارن مركبات GTA 6 وجهًا لوجه وفق التقييمات الخمسة داخل اللعبة من 10, السرعة والتسارع والتحكم على الأسفلت والتحكم على الطرق الوعرة والمتانة, إضافة إلى تكلفة التسجيل وقيمة البيع. لا توجد سرعة قصوى مقيسة بعد؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة أسلحة GTA 6 — التقييمات والمخزن والسعر قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى — التقييمات الأربعة داخل اللعبة من 10 — إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026. comparison المقارنة" style="--stagger-index:18" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:18" href="/ar/tools/weapon-comparison" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
-        <h3>مقارنة أسلحة GTA 6 — التقييمات والمخزن والسعر</h3>
-        <p>قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى — التقييمات الأربعة داخل اللعبة من 10 — إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة أسلحة GTA 6, التقييمات والمخزن والسعر قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى, التقييمات الأربعة داخل اللعبة من 10, إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026. comparison المقارنة">
+      <a class="tool-card" href="/ar/tools/weapon-comparison" data-accent="pink">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
+        <h3>مقارنة أسلحة GTA 6: التقييمات والمخزن والسعر</h3>
+        <p>قارن الأسلحة الأساسية الـ53 في GTA 6 من حيث الضرر والدقة وسرعة التحكم والمدى, التقييمات الأربعة داخل اللعبة من 10, إضافة إلى حجم المخزن ووضع الإطلاق والسعر. لا توجد إحصائية لمعدل إطلاق النار في اللعبة؛ وهذه الأداة تعرض الأرقام التي تعرضها اللعبة. آخر تحقق 24 نوفمبر 2026.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="معالم إطلاق GTA 6 صدرت GTA 6 في 19 نوفمبر 2026. نوافذ التحميل المسبق المكتملة ومعالم الإطلاق ولحظة الإطلاق بمنطقتك الزمنية. trackers أدوات التتبع" style="--stagger-index:19" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:19" href="/ar/tools/gta-6-tracker" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="معالم إطلاق GTA 6 صدرت GTA 6 في 19 نوفمبر 2026. نوافذ التحميل المسبق المكتملة ومعالم الإطلاق ولحظة الإطلاق بمنطقتك الزمنية. trackers أدوات التتبع">
+      <a class="tool-card" href="/ar/tools/gta-6-tracker" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>معالم إطلاق GTA 6</h3>
         <p>صدرت GTA 6 في 19 نوفمبر 2026. نوافذ التحميل المسبق المكتملة ومعالم الإطلاق ولحظة الإطلاق بمنطقتك الزمنية.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="performance" data-status="live" data-search-text="محسن إعدادات GTA 6 اضبط إعدادات الرسومات لمعدل الإطارات المستهدف وجهازك. performance الأداء" style="--stagger-index:20" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:20" href="/ar/tools/settings-optimizer" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="performance" data-status="live" data-search-text="محسن إعدادات GTA 6 اضبط إعدادات الرسومات لمعدل الإطارات المستهدف وجهازك. performance الأداء">
+      <a class="tool-card" href="/ar/tools/settings-optimizer" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>محسن إعدادات GTA 6</h3>
         <p>اضبط إعدادات الرسومات لمعدل الإطارات المستهدف وجهازك.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة أجهزة GTA 6 قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجهًا لوجه لـ GTA 6. comparison المقارنة" style="--stagger-index:21" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:21" href="/ar/tools/hardware-comparison" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="مقارنة أجهزة GTA 6 قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجهًا لوجه لـ GTA 6. comparison المقارنة">
+      <a class="tool-card" href="/ar/tools/hardware-comparison" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مقارنة أجهزة GTA 6</h3>
         <p>قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجهًا لوجه لـ GTA 6.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="generators" data-status="live" data-search-text="مولد أسماء GTA 6 أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين — تُنشأ فورًا. generators المولّدات" style="--stagger-index:22" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:22" href="/ar/generators" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="generators" data-status="live" data-search-text="مولد أسماء GTA 6 أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين, تُنشأ فورًا. generators المولّدات">
+      <a class="tool-card" href="/ar/generators" data-accent="purple">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>مولد أسماء GTA 6</h3>
-        <p>أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين — تُنشأ فورًا.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>أسماء الشخصيات، ووسوم الطواقم، ولوحات الترخيص، وإشارات النداء اللاسلكية، وأسماء اللاعبين, تُنشأ فورًا.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="economy" data-status="live" data-search-text="متتبع أعمال GTA 6 تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد — كل رقم موسوم بمصدره. economy الاقتصاد" style="--stagger-index:23" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:23" href="/ar/tools/business-tracker" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">مباشر</span></span>
+<li data-tool-card data-category="economy" data-status="live" data-search-text="متتبع أعمال GTA 6 تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد, كل رقم موسوم بمصدره. economy الاقتصاد">
+      <a class="tool-card" href="/ar/tools/business-tracker" data-accent="blue">
+        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">مباشر</span></span>
         <h3>متتبع أعمال GTA 6</h3>
-        <p>تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد — كل رقم موسوم بمصدره.</p>
-        <span class="tool-card-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>تتبع أعمال Leonida الـ12، وحاكِ الاسترداد بأرقامك الخاصة، وقارن طرق كسب المال في القصة. لا يمكن شراء أي عمل بعد, كل رقم موسوم بمصدره.</p>
+        <span class="link-cta">فتح <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
       </ul>
       <div class="empty-state" data-tools-empty hidden>
         <p>لا توجد أدوات تطابق هذا البحث بعد. جرّب <a href="/ar/search">البحث في الأدلة والموارد</a> أيضًا.</p>
-        <p style="margin-top:0.75rem"><button type="button" class="btn-outline" data-tools-clear>مسح البحث</button></p>
+        <p><button type="button" class="btn btn-secondary" data-tools-clear>مسح البحث</button></p>
       </div>
       <p class="verified-line">24 أداة مباشرة، و0 أخرى على خارطة الطريق. آخر تحقق <time datetime="2026-11-26">26 نوفمبر 2026</time>.</p>
     </section>
-  </div>
 </article>
+</div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -494,10 +505,10 @@
               <li><a href="/ar/contact">اتصل بنا</a></li>
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
-              <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
-              <li><a href="/ar/terms">شروط الخدمة</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
-              <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -506,35 +517,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/ar/privacy">الخصوصية</a>
-          <a href="/ar/terms">الشروط</a>
-          <button type="button" class="footer-link-btn" data-consent-open>إعدادات ملفات تعريف الارتباط</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="الموافقة على التحليلات">
-  <div class="consent-inner">
-    <p><strong>التحليلات، بموافقتك فقط.</strong> نستخدم تحليلات Google المجمعة لمعرفة الأدوات المستخدمة. مدخلات الأدوات لا تغادر جهازك أبدا، ولا يُبنى أي ملف تعريف، ولا يُباع أي شيء. اقبل لتحميلها، أو ارفض وتصفح بدونها. يمكنك تغيير رأيك في أي وقت من إعدادات ملفات تعريف الارتباط في التذييل.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>قبول التحليلات</button>
-      <button type="button" class="btn-outline" data-consent-decline>رفض</button>
-      <a href="/ar/privacy">سياسة الخصوصية</a>
-    </div>
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
   </div>
 </div>
-</div>
 <script src="/assets/js/ar/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/ar/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
 <script src="/assets/js/ar/header.js" defer></script>
 <script src="/assets/js/ar/search.js" defer></script>
 <script src="/assets/js/faq.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/ar/newsletter.js" defer></script>
+<script src="/assets/js/consent.js" defer></script>
 <script src="/assets/js/ar/tools.js" defer></script>
 </body>
 </html>

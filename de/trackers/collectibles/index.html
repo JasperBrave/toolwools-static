@@ -37,6 +37,13 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,114 +75,117 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-de.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">Zum Inhalt springen</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/de/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="Tracker"><a href="/de/trackers">Tracker</a><a href="/de/trackers/missions">Missionen</a><a href="/de/trackers/collectibles" aria-current="page">Sammelobjekte</a><a href="/de/trackers/100-percent">100-%-Checkliste</a><a href="/de/trackers/trophies">Trophäen</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Zum dunklen Theme wechseln" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<header class="site-header" aria-label="Website">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/de/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Primär">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools">Tools</a>
+          <a href="/de/trackers" aria-current="page">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers/collectibles">English</a>
+            <a href="/es/trackers/collectibles">Español</a>
+            <a href="/pt/trackers/collectibles">Português</a>
+            <a href="/de/trackers/collectibles" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deutsch</a>
+            <a href="/fr/trackers/collectibles">Français</a>
+            <a href="/tr/trackers/collectibles">Türkçe</a>
+            <a href="/ar/trackers/collectibles">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Zum dunklen Theme wechseln" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Mobil">
+          <a href="/de/">Startseite</a>
+          <a href="/de/tools">Tools</a>
+          <a href="/de/trackers" aria-current="page">Tracker</a>
+          <a href="/de/generators">Generatoren</a>
+          <a href="/de/news">News</a>
+          <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers/collectibles" lang="en">EN</a><a href="/es/trackers/collectibles" lang="es">ES</a><a href="/pt/trackers/collectibles" lang="pt">PT</a><a href="/de/trackers/collectibles" lang="de" aria-current="true">DE</a><a href="/fr/trackers/collectibles" lang="fr">FR</a><a href="/tr/trackers/collectibles" lang="tr">TR</a><a href="/ar/trackers/collectibles" lang="ar">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="Brotkrumen-Navigation" class="breadcrumbs"><a href="/de/">Startseite</a><span aria-hidden="true"> / </span><a href="/de/trackers">Tracker</a><span aria-hidden="true"> / </span><span aria-current="page">Sammelobjekte</span></nav><div data-tracker-kind="collectibles" data-tracker-key="tw-tracker-collectibles"><p class="eyebrow">Sammelobjekt-Tracker</p><h1>Sammelobjekt-Tracker: 8 Arten in Leonida</h1><p class="dek">Acht Sammelobjekt- und Aktivitätsarten, mit dem Zählbereich, in dem jede erwartet wird. Die Bereiche werden gezeigt als <strong>Bereiche, nie eine falsche genaue Gesamtzahl</strong> : Die Pre-Launch-Bereiche stammen aus ToolWools’ eigenen Kartendaten, und wo das erschienene Spiel seitdem eine echte Gesamtzahl veröffentlicht hat, sagt die Seite das.</p><div class="note" role="note"><h2>Post-Launch-Gesamtzahlen, die das erschienene Spiel wirklich zählt</h2><p>Die Ingame-100-%-Checkliste (PowerPyx-Transkription) zählt echte Gesamtzahlen, die einige Pre-Launch-Bereiche ersetzen: <strong>130 Stunt-Sprünge</strong> (von 397 Stunts), <strong>40 einzigartige Rennen</strong>, <strong>33 Unterwasser-Entdeckungen</strong>, <strong>18 Sammelkarten-Sets</strong> (480 Karten), <strong>7 Kenton-Sets</strong>, <strong>125 Kokain-Flamingos</strong>, <strong>34 Zeitschriften, Bücher und Comics</strong>, <strong>18 Meditationsplätze</strong>, <strong>100 WAiNK-Orte</strong>. Diese Gesamtzahlen werden Zeile für Zeile auf der <a href="/de/trackers/100-percent">100-%-Checkliste</a>. Diese Seite behält die Pre-Launch-Bereiche für die acht Arten unten, weil für sie noch keine Liste pro Ort veröffentlicht wurde: Ein Bereich ist ehrlich, eine erfundene genaue Gesamtzahl nicht.</p></div><p class="conf-legend"><span class="legend-label">Konfidenz:</span><span class="conf-pill conf-confirmed">Bestätigt</span><span class="conf-pill conf-implied">Stark angedeutet</span><span class="conf-pill conf-community">Von der Community abgeleitet</span><span class="legend-label">Bestätigt: in offiziellem Rockstar-Material genannt oder gezeigt. Stark angedeutet: durch offizielles Material stark angedeutet oder von mehreren unabhängigen Guides bestätigt. Von der Community abgeleitet: Guide- oder Community-Transkription, als Schätzung behandeln.</span></p>
-    <div class="progress-block" aria-labelledby="progress-heading">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Brotkrumen-Navigation"><a href="/de/">Startseite</a><span aria-hidden="true">/</span><a href="/de/trackers">Tracker</a><span aria-hidden="true">/</span><span aria-current="page">Sammelobjekte</span></div>
+      <div class="page-eyebrow"><span>Sammelobjekt-Tracker</span></div>
+      <h1 id="page-title" class="page-title">Sammelobjekt-Tracker: 8 Arten in Leonida</h1>
+      <p class="page-subtitle">Acht Sammelobjekt- und Aktivitätsarten, mit dem Zählbereich, in dem jede erwartet wird. Die Bereiche werden gezeigt als <strong>Bereiche, nie eine falsche genaue Gesamtzahl</strong> : Die Pre-Launch-Bereiche stammen aus ToolWools’ eigenen Kartendaten, und wo das erschienene Spiel seitdem eine echte Gesamtzahl veröffentlicht hat, sagt die Seite das.</p>
+    </section>
+    <div data-tracker-kind="collectibles" data-tracker-key="tw-tracker-collectibles"><section class="tracker-workspace" aria-labelledby="progress-heading">
+      <div class="note" role="note"><h2>Post-Launch-Gesamtzahlen, die das erschienene Spiel wirklich zählt</h2><p>Die Ingame-100-%-Checkliste (PowerPyx-Transkription) zählt echte Gesamtzahlen, die einige Pre-Launch-Bereiche ersetzen: <strong>130 Stunt-Sprünge</strong> (von 397 Stunts), <strong>40 einzigartige Rennen</strong>, <strong>33 Unterwasser-Entdeckungen</strong>, <strong>18 Sammelkarten-Sets</strong> (480 Karten), <strong>7 Kenton-Sets</strong>, <strong>125 Kokain-Flamingos</strong>, <strong>34 Zeitschriften, Bücher und Comics</strong>, <strong>18 Meditationsplätze</strong>, <strong>100 WAiNK-Orte</strong>. Diese Gesamtzahlen werden Zeile für Zeile auf der <a href="/de/trackers/100-percent">100-%-Checkliste</a>. Diese Seite behält die Pre-Launch-Bereiche für die acht Arten unten, weil für sie noch keine Liste pro Ort veröffentlicht wurde: Ein Bereich ist ehrlich, eine erfundene genaue Gesamtzahl nicht.</p></div>
+      <p class="conf-legend"><span class="legend-label">Konfidenz:</span><span class="conf-pill conf-confirmed">Bestätigt</span><span class="conf-pill conf-implied">Stark angedeutet</span><span class="conf-pill conf-community">Von der Community abgeleitet</span><span class="legend-label">Bestätigt: in offiziellem Rockstar-Material genannt oder gezeigt. Stark angedeutet: durch offizielles Material stark angedeutet oder von mehreren unabhängigen Guides bestätigt. Von der Community abgeleitet: Guide- oder Community-Transkription, als Schätzung behandeln.</span></p>
+      <div class="progress-block" aria-labelledby="progress-heading">
       <h2 id="progress-heading" class="sr-only">Dein Fortschritt</h2>
       <p class="progress-text" id="progress-text" aria-live="polite">0 / 8 Arten begonnen · 0%</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"></div></div>
@@ -186,58 +196,108 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
       </div>
       <p class="progress-note" id="action-status" role="status"></p>
     </div>
-    <div class="done-banner" id="done-banner" role="status">Alle 8 Arten begonnen: Das ist jede Art, die diese Seite trackt.</div>
-<section data-collectible-type="stunt-jumps" aria-labelledby="h-stunt-jumps"><div class="chapter-head"><h2 id="h-stunt-jumps">Stunt-Sprünge</h2><span class="chapter-count type-progress" data-type-progress="stunt-jumps"></span></div><p class="dek">Zählbereich: <strong>50–70</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-stunt-jumps">Wie viele hast du gefunden?</label><input type="number" id="count-stunt-jumps" data-count-id="stunt-jumps" data-band-lo="50" data-band-hi="70" min="0" max="70" inputmode="numeric" aria-describedby="band-stunt-jumps"><span class="item-desc" id="band-stunt-jumps">Gib eine Zahl von 0 bis 70 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V kam mit 50 einzigartigen Stunt-Sprüngen; San Andreas mit 70. Jedes GTA der 3D-Ära hatte sie.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Kein Stunt-Sprung-Hinweis wurde gezeigt. Trailer-Material zeigt Rampen-Zufahrten auf Dämmen und erhöhte Baustellen, die zum Muster passen.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste des erschienenen Spiels zählt 130 Stunt-Sprünge (von 397 Stunts). Der Pre-Launch-Bereich war 50–70.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Grassrivers</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="hidden-packages" aria-labelledby="h-hidden-packages"><div class="chapter-head"><h2 id="h-hidden-packages">Versteckte Pakete / Caches</h2><span class="chapter-count type-progress" data-type-progress="hidden-packages"></span></div><p class="dek">Zählbereich: <strong>50–100</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-hidden-packages">Wie viele hast du gefunden?</label><input type="number" id="count-hidden-packages" data-count-id="hidden-packages" data-band-lo="50" data-band-hi="100" min="0" max="100" inputmode="numeric" aria-describedby="band-hidden-packages"><span class="item-desc" id="band-hidden-packages">Gib eine Zahl von 0 bis 100 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> Vice City (2002) hatte 100 versteckte Pakete; GTA Online nutzte das Format wieder als vergrabene Caches an Land und auf dem Meeresboden.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht gezeigt. Eine Keys- und Sumpf-Karte mit Tauch-Ebene ist die stärkste mögliche Passung für das Format, weshalb es gelistet ist, nur als Erwartung.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Es gibt noch keine veröffentlichte Gesamtzahl für versteckte Pakete. Der Bereich gilt, bis eine Liste pro Ort veröffentlicht wird.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a>, <a href="https://toolwools.com/de/tools/interactive-map">Offshore reef &amp; open water</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="wildlife" aria-labelledby="h-wildlife"><div class="chapter-head"><h2 id="h-wildlife">Wildtier-Sichtungen</h2><span class="chapter-count type-progress" data-type-progress="wildlife"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-wildlife" data-spot-id="wildlife"><label for="spot-wildlife"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> RDR2 kam mit 178 Tierarten und einem Kompendium; GTA V beschränkte Wildtiere auf eine kleine Auswahl außerhalb der Stadt.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Alligatoren, Watvögel und Meeresleben tauchen in offiziellem Sumpf- und Wasser-Material auf, was eine deutlich reichere Darstellung ist als GTA V bei der Enthüllung hatte.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste verlangt 100 von 255 untersuchten Tieren: Wildtiere sind ein echtes System, aber es gibt keine feste Sichtungsliste zum Abhaken.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Grassrivers</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a>, <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="dive-sites" aria-labelledby="h-dive-sites"><div class="chapter-head"><h2 id="h-dive-sites">Tauchplätze und Wracks</h2><span class="chapter-count type-progress" data-type-progress="dive-sites"></span></div><p class="dek">Zählbereich: <strong>20–40</strong> &middot; <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="counter-row"><label for="count-dive-sites">Wie viele hast du gefunden?</label><input type="number" id="count-dive-sites" data-count-id="dive-sites" data-band-lo="20" data-band-hi="40" min="0" max="40" inputmode="numeric" aria-describedby="band-dive-sites"><span class="item-desc" id="band-dive-sites">Gib eine Zahl von 0 bis 40 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V modellierte einen kompletten Meeresboden mit Wracks, U-Boot-Teilen und 30 Atommüll-Behältern.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Unterwasser- und Freiwasser-Material taucht in offiziellen Trailern auf. Das Riff ist die offensichtlichste Nutzung eines Florida-Settings.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste zählt 33 Unterwasser-Entdeckungen (Schiffswracks, Teil von Kentons Questreihe): nah an diesem Bereich, aber eine andere Zahl, also bleibt der Bereich.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Offshore reef &amp; open water</a>, <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="street-races" aria-labelledby="h-street-races"><div class="chapter-head"><h2 id="h-street-races">Straßenrennen</h2><span class="chapter-count type-progress" data-type-progress="street-races"></span></div><p class="dek">Zählbereich: <strong>15–30</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-street-races">Wie viele hast du gefunden?</label><input type="number" id="count-street-races" data-count-id="street-races" data-band-lo="15" data-band-hi="30" min="0" max="30" inputmode="numeric" aria-describedby="band-street-races"><span class="item-desc" id="band-street-races">Gib eine Zahl von 0 bis 30 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V kam mit Straßen-, See- und Offroad-Rennserien, die über die Welt freigeschaltet wurden statt über ein Menü.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht als eigenständige Aktivität bestätigt. Trailer-Material zeigt eine Autokultur-Szene, modifizierte Fahrzeuge, nächtliche Treffen, passend zu Renn-Inhalten.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste zählt 40 einzigartige Rennen (30 Siege nötig) und 13 Goldmedaillen für Renn-Herausforderungen. Der Bereich wurde geschrieben, bevor diese Gesamtzahlen bekannt waren.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Ambrosia</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="properties" aria-labelledby="h-properties"><div class="chapter-head"><h2 id="h-properties">Käufliche Immobilien</h2><span class="chapter-count type-progress" data-type-progress="properties"></span></div><p class="dek">Zählbereich: <strong>10–25</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-properties">Wie viele hast du gefunden?</label><input type="number" id="count-properties" data-count-id="properties" data-band-lo="10" data-band-hi="25" min="0" max="25" inputmode="numeric" aria-describedby="band-properties"><span class="item-desc" id="band-properties">Gib eine Zahl von 0 bis 25 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> Vice City (2002) baute seinen ganzen Fortschritts-Loop auf Immobilienkauf; GTA V reduzierte ihn auf eine Handvoll Businesses.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht bestätigt. Rockstars Rückkehr nach Vice City und die Zwei-Protagonisten-Struktur machen einen Besitz-Loop plausibel, aber keine Immobilien-Oberfläche wurde gezeigt.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die einzige käufliche Immobilie, die bisher bestätigt ist, sind Garagen: 8 zu verkaufen, $160,000 insgesamt (ToolWools Business-Tracker, 21 Nov 2026). Kein anderer Immobilienkauf ist bestätigt.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Port Gellhorn</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="landmarks" aria-labelledby="h-landmarks"><div class="chapter-head"><h2 id="h-landmarks">Aussichtspunkte an Wahrzeichen</h2><span class="chapter-count type-progress" data-type-progress="landmarks"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-landmarks" data-spot-id="landmarks"><label for="spot-landmarks"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> RDR2 nutzte Points of Interest und Aussichten; GTA V nutzte die Touristen-Foto-Mechanik sparsam.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Offizielles Material setzt stark auf malerische Bilder, Strandstreifen, Skyline, Sumpf-Sonnenuntergänge, was meist mit einer Form von Foto- oder Entdeckungssystem einhergeht.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste verlangt 100 gescannte WAiNK-Orte (Wahrzeichen und Skulpturen): ein echtes Entdeckungssystem, aber ohne feste Aussichtspunkt-Liste zum Abhaken.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="social-media" aria-labelledby="h-social-media"><div class="chapter-head"><h2 id="h-social-media">Ingame-Social-Feed-Momente</h2><span class="chapter-count type-progress" data-type-progress="social-media"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-social-media" data-spot-id="social-media"><label for="spot-social-media"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> Neu in der Serie. GTA V hatte Lifeinvader als Kulisse statt als systemisches Feature.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Trailer 1 ist als Hochformat-Videoclips aus einem Ingame-Feed gerahmt, und Rockstars eigene Enthüllungsmaterialien setzen auf dieses Stilmittel: das klarste Signal für ein neues System in offiziellem Material.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Es gibt noch keine veröffentlichte Liste von Feed-Momenten. Das bleibt eine Liste zum Sichten, keine Checkliste.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section aria-labelledby="sources"><h2 id="sources">Quellen: Sammelobjekt-Bereiche</h2><ul><li>ToolWools-Kartendaten, <code>assets/js/map-data.js</code> (COLLECTIBLES, aus der TanStack-Quelle portiert): alle 8 Arten, Bereiche, Konfidenz, wahrscheinliche Regionen, Serien-Präzedenz- und GTA-6-Hinweis-Notizen. Die Koordinaten sind eine stilisierte Skizze, kein abgepaustes Karten-Asset.</li><li>Post-Launch-Gesamtzahlen: PowerPyx 100% Completion Checklist &amp; Guide: https://www.powerpyx.com/gta-6-100-completion-checklist-guide/ (abgerufen am 24 Nov 2026).</li><li>Garagen-Gesamtzahl: ToolWools Business-Tracker, 21 Nov 2026: 8 Garagen zu verkaufen, $160,000 insgesamt; im Story-Modus kann kein Business gekauft werden.</li></ul></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">GTA 6 ist jetzt draußen: Nov 19, 2026 &middot; <a href="/de/tools">Tools entdecken <span aria-hidden="true">&rarr;</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/de/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>Tools. Guides. GTA 6.</p>
+      <div class="done-banner" id="done-banner" role="status">Alle 8 Arten begonnen: Das ist jede Art, die diese Seite trackt.</div>
+    </section>
+<div class="tracker-groups">
+      <section data-collectible-type="stunt-jumps" aria-labelledby="h-stunt-jumps"><div class="chapter-head"><h2 id="h-stunt-jumps">Stunt-Sprünge</h2><span class="chapter-count type-progress" data-type-progress="stunt-jumps"></span></div><p class="dek">Zählbereich: <strong>50–70</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-stunt-jumps">Wie viele hast du gefunden?</label><input type="number" id="count-stunt-jumps" data-count-id="stunt-jumps" data-band-lo="50" data-band-hi="70" min="0" max="70" inputmode="numeric" aria-describedby="band-stunt-jumps"><span class="item-desc" id="band-stunt-jumps">Gib eine Zahl von 0 bis 70 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V kam mit 50 einzigartigen Stunt-Sprüngen; San Andreas mit 70. Jedes GTA der 3D-Ära hatte sie.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Kein Stunt-Sprung-Hinweis wurde gezeigt. Trailer-Material zeigt Rampen-Zufahrten auf Dämmen und erhöhte Baustellen, die zum Muster passen.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste des erschienenen Spiels zählt 130 Stunt-Sprünge (von 397 Stunts). Der Pre-Launch-Bereich war 50–70.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Grassrivers</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="hidden-packages" aria-labelledby="h-hidden-packages"><div class="chapter-head"><h2 id="h-hidden-packages">Versteckte Pakete / Caches</h2><span class="chapter-count type-progress" data-type-progress="hidden-packages"></span></div><p class="dek">Zählbereich: <strong>50–100</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-hidden-packages">Wie viele hast du gefunden?</label><input type="number" id="count-hidden-packages" data-count-id="hidden-packages" data-band-lo="50" data-band-hi="100" min="0" max="100" inputmode="numeric" aria-describedby="band-hidden-packages"><span class="item-desc" id="band-hidden-packages">Gib eine Zahl von 0 bis 100 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> Vice City (2002) hatte 100 versteckte Pakete; GTA Online nutzte das Format wieder als vergrabene Caches an Land und auf dem Meeresboden.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht gezeigt. Eine Keys- und Sumpf-Karte mit Tauch-Ebene ist die stärkste mögliche Passung für das Format, weshalb es gelistet ist, nur als Erwartung.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Es gibt noch keine veröffentlichte Gesamtzahl für versteckte Pakete. Der Bereich gilt, bis eine Liste pro Ort veröffentlicht wird.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a>, <a href="https://toolwools.com/de/tools/interactive-map">Offshore reef &amp; open water</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="wildlife" aria-labelledby="h-wildlife"><div class="chapter-head"><h2 id="h-wildlife">Wildtier-Sichtungen</h2><span class="chapter-count type-progress" data-type-progress="wildlife"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-wildlife" data-spot-id="wildlife"><label for="spot-wildlife"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> RDR2 kam mit 178 Tierarten und einem Kompendium; GTA V beschränkte Wildtiere auf eine kleine Auswahl außerhalb der Stadt.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Alligatoren, Watvögel und Meeresleben tauchen in offiziellem Sumpf- und Wasser-Material auf, was eine deutlich reichere Darstellung ist als GTA V bei der Enthüllung hatte.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste verlangt 100 von 255 untersuchten Tieren: Wildtiere sind ein echtes System, aber es gibt keine feste Sichtungsliste zum Abhaken.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Grassrivers</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a>, <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="dive-sites" aria-labelledby="h-dive-sites"><div class="chapter-head"><h2 id="h-dive-sites">Tauchplätze und Wracks</h2><span class="chapter-count type-progress" data-type-progress="dive-sites"></span></div><p class="dek">Zählbereich: <strong>20–40</strong> &middot; <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="counter-row"><label for="count-dive-sites">Wie viele hast du gefunden?</label><input type="number" id="count-dive-sites" data-count-id="dive-sites" data-band-lo="20" data-band-hi="40" min="0" max="40" inputmode="numeric" aria-describedby="band-dive-sites"><span class="item-desc" id="band-dive-sites">Gib eine Zahl von 0 bis 40 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V modellierte einen kompletten Meeresboden mit Wracks, U-Boot-Teilen und 30 Atommüll-Behältern.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Unterwasser- und Freiwasser-Material taucht in offiziellen Trailern auf. Das Riff ist die offensichtlichste Nutzung eines Florida-Settings.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste zählt 33 Unterwasser-Entdeckungen (Schiffswracks, Teil von Kentons Questreihe): nah an diesem Bereich, aber eine andere Zahl, also bleibt der Bereich.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Offshore reef &amp; open water</a>, <a href="https://toolwools.com/de/tools/interactive-map">Leonida Keys</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="street-races" aria-labelledby="h-street-races"><div class="chapter-head"><h2 id="h-street-races">Straßenrennen</h2><span class="chapter-count type-progress" data-type-progress="street-races"></span></div><p class="dek">Zählbereich: <strong>15–30</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-street-races">Wie viele hast du gefunden?</label><input type="number" id="count-street-races" data-count-id="street-races" data-band-lo="15" data-band-hi="30" min="0" max="30" inputmode="numeric" aria-describedby="band-street-races"><span class="item-desc" id="band-street-races">Gib eine Zahl von 0 bis 30 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> GTA V kam mit Straßen-, See- und Offroad-Rennserien, die über die Welt freigeschaltet wurden statt über ein Menü.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht als eigenständige Aktivität bestätigt. Trailer-Material zeigt eine Autokultur-Szene, modifizierte Fahrzeuge, nächtliche Treffen, passend zu Renn-Inhalten.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste zählt 40 einzigartige Rennen (30 Siege nötig) und 13 Goldmedaillen für Renn-Herausforderungen. Der Bereich wurde geschrieben, bevor diese Gesamtzahlen bekannt waren.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Ambrosia</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="properties" aria-labelledby="h-properties"><div class="chapter-head"><h2 id="h-properties">Käufliche Immobilien</h2><span class="chapter-count type-progress" data-type-progress="properties"></span></div><p class="dek">Zählbereich: <strong>10–25</strong> &middot; <span class="conf-pill conf-community">Von der Community abgeleitet</span></p><div class="counter-row"><label for="count-properties">Wie viele hast du gefunden?</label><input type="number" id="count-properties" data-count-id="properties" data-band-lo="10" data-band-hi="25" min="0" max="25" inputmode="numeric" aria-describedby="band-properties"><span class="item-desc" id="band-properties">Gib eine Zahl von 0 bis 25 ein. Der Fortschritt wird am Bereich gemessen, nie an einer erfundenen genauen Gesamtzahl.</span></div><p class="dek"><strong>Serien-Präzedenz:</strong> Vice City (2002) baute seinen ganzen Fortschritts-Loop auf Immobilienkauf; GTA V reduzierte ihn auf eine Handvoll Businesses.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Nicht bestätigt. Rockstars Rückkehr nach Vice City und die Zwei-Protagonisten-Struktur machen einen Besitz-Loop plausibel, aber keine Immobilien-Oberfläche wurde gezeigt.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die einzige käufliche Immobilie, die bisher bestätigt ist, sind Garagen: 8 zu verkaufen, $160,000 insgesamt (ToolWools Business-Tracker, 21 Nov 2026). Kein anderer Immobilienkauf ist bestätigt.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Port Gellhorn</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="landmarks" aria-labelledby="h-landmarks"><div class="chapter-head"><h2 id="h-landmarks">Aussichtspunkte an Wahrzeichen</h2><span class="chapter-count type-progress" data-type-progress="landmarks"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-landmarks" data-spot-id="landmarks"><label for="spot-landmarks"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> RDR2 nutzte Points of Interest und Aussichten; GTA V nutzte die Touristen-Foto-Mechanik sparsam.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Offizielles Material setzt stark auf malerische Bilder, Strandstreifen, Skyline, Sumpf-Sonnenuntergänge, was meist mit einer Form von Foto- oder Entdeckungssystem einhergeht.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Die 100-%-Checkliste verlangt 100 gescannte WAiNK-Orte (Wahrzeichen und Skulpturen): ein echtes Entdeckungssystem, aber ohne feste Aussichtspunkt-Liste zum Abhaken.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a>, <a href="https://toolwools.com/de/tools/interactive-map">Mount Kalaga National Park</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section><section data-collectible-type="social-media" aria-labelledby="h-social-media"><div class="chapter-head"><h2 id="h-social-media">Ingame-Social-Feed-Momente</h2><span class="chapter-count type-progress" data-type-progress="social-media"></span></div><p class="dek"><strong>Nicht zählbar</strong> : eine Liste zum Sichten, keine Checkliste mit falschem Nenner. · <span class="conf-pill conf-implied">Stark angedeutet</span></p><div class="check-item"><input type="checkbox" id="spot-social-media" data-spot-id="social-media"><label for="spot-social-media"><span class="item-name">In der Welt gesichtet</span><span class="item-desc">Hake das ab, sobald du diese Art im Spiel gesehen hast. Es gibt keine Gesamtzahl, gegen die gezählt wird.</span></label></div><p class="dek"><strong>Serien-Präzedenz:</strong> Neu in der Serie. GTA V hatte Lifeinvader als Kulisse statt als systemisches Feature.</p><p class="dek"><strong>GTA-6-Hinweis:</strong> Trailer 1 ist als Hochformat-Videoclips aus einem Ingame-Feed gerahmt, und Rockstars eigene Enthüllungsmaterialien setzen auf dieses Stilmittel: das klarste Signal für ein neues System in offiziellem Material.</p><p class="dek"><strong>Post-Launch-Prüfung:</strong> Es gibt noch keine veröffentlichte Liste von Feed-Momenten. Das bleibt eine Liste zum Sichten, keine Checkliste.</p><p class="dek"><strong>Wahrscheinliche Regionen:</strong> <a href="https://toolwools.com/de/tools/interactive-map">Vice City</a> (siehe den <a href="https://toolwools.com/de/tools/interactive-map">interaktive Karte</a>)</p></section>
+    </div><section aria-labelledby="sources"><h2 id="sources">Quellen: Sammelobjekt-Bereiche</h2><ul><li>ToolWools-Kartendaten, <code>assets/js/map-data.js</code> (COLLECTIBLES, aus der TanStack-Quelle portiert): alle 8 Arten, Bereiche, Konfidenz, wahrscheinliche Regionen, Serien-Präzedenz- und GTA-6-Hinweis-Notizen. Die Koordinaten sind eine stilisierte Skizze, kein abgepaustes Karten-Asset.</li><li>Post-Launch-Gesamtzahlen: PowerPyx 100% Completion Checklist &amp; Guide: https://www.powerpyx.com/gta-6-100-completion-checklist-guide/ (abgerufen am 24 Nov 2026).</li><li>Garagen-Gesamtzahl: ToolWools Business-Tracker, 21 Nov 2026: 8 Garagen zu verkaufen, $160,000 insgesamt; im Story-Modus kann kein Business gekauft werden.</li></ul></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="Schnelllinks">
-      <h3>Schnelllinks</h3>
-      <ul>
-        <li><a href="/de/">Startseite</a></li>
-        <li><a href="/de/tools">Tools</a></li>
-        <li><a href="/de/news">News</a></li>
-        <li><a href="/de/trailers">Trailer</a></li>
-        <li><a href="/de/guides">Guides</a></li><li><a href="/de/sitemap">Sitemap</a></li><li><a href="/de/trending">Trends</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Kategorien">
-      <h3>Kategorien</h3>
-      <ul>
-        <li><a href="/de/tools?category=release">Release-Tools</a></li>
-        <li><a href="/de/tools?category=pc">PC-Tools</a></li>
-        <li><a href="/de/tools?category=performance">Leistung</a></li>
-        <li><a href="/de/tools?category=comparison">Vergleich</a></li>
-        <li><a href="/de/tools?category=trackers">Tracker</a></li>
-        <li><a href="/de/tools?category=planners">Planer</a></li>
-        <li><a href="/de/generators">Generatoren</a></li>
-        <li><a href="/de/guides">Guides</a></li>
-        <li><a href="/de/tools?category=economy">Wirtschaft</a></li>
-        <li><a href="/de/tools?category=map">Karte</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Über uns">
-      <h3>Über uns</h3>
-      <ul>
-        <li><a href="/de/about">Über ToolWools</a></li>
-        <li><a href="/de/contact">Kontakt</a></li>
-        <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-        <li><a href="/de/terms">Nutzungsbedingungen</a></li>
-        <li><a href="/de/disclaimer">Haftungsausschluss</a></li><li><a href="/de/methodology">Methodik</a></li><li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li><li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 ToolWools. Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</span>
-    <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
-    <span>Für die GTA-Community gemacht &hearts;</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/de/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Tools entdecken →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/de/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
+              </span>
+            </span>
+          </a>
+          <p>Das ultimative Ziel für GTA-6-Tools, Rechner, Tracker, Planer und Guides. Alles, was du brauchst, an einem Ort, keine Ads zuerst, kein Ballast.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Top-Tools</h3>
+            <ul>
+              <li><a href="/de/tools/system-requirements">Kann mein PC GTA 6 schaffen?</a></li>
+              <li><a href="/de/tools/fps-calculator">FPS-Rechner</a></li>
+              <li><a href="/de/tools/download-time">Download-Zeit-Rechner</a></li>
+              <li><a href="/de/tools/system-requirements">Systemanforderungen</a></li>
+              <li><a href="/de/tools/settings-optimizer">Einstellungs-Optimierer</a></li>
+              <li><a href="/de/tools/hardware-comparison">Hardware-Vergleich</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Entdecken</h3>
+            <ul>
+              <li><a href="/de/tools">Alle Tools</a></li>
+              <li><a href="/de/trending">Trends</a></li>
+              <li><a href="/de/trackers">Tracker</a></li>
+              <li><a href="/de/generators">Generatoren</a></li>
+              <li><a href="/de/news">News</a></li>
+              <li><a href="/de/trailers">Trailer</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Ressourcen</h3>
+            <ul>
+              <li><a href="/de/tools/interactive-map">Interaktive Karte</a> <span class="footer-col-badge">Neu</span></li>
+              <li><a href="/de/about">Über uns</a></li>
+              <li><a href="/de/methodology">Methodik</a></li>
+              <li><a href="/de/contact">Kontakt</a></li>
+              <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
+              <li><a href="/de/sitemap">Sitemap</a></li>
+              <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
+              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
+          <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
   <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
   <div class="consent-actions">
@@ -246,37 +306,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/de/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/de/header.js" defer></script>
+<script src="/assets/js/de/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/de/newsletter.js" defer></script>
+<script src="/assets/js/de/consent.js" defer></script>
 </body>
 </html>

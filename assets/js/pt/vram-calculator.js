@@ -157,7 +157,7 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " (" + cardVram + " GB) @ " + state.res + " " + L(PRESET_META[state.preset].label) + " · GTA 6 VRAM: " + verdict.label) + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " (" + cardVram + " GB) @ " + state.res + " " + L(PRESET_META[state.preset].label) + " · GTA 6 VRAM: " + verdict.label) + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " (" + cardVram + " GB) — " + verdict.label + " (GTA 6 VRAM)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);

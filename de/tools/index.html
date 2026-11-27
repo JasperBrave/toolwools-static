@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,8 +26,8 @@
 <meta name="twitter:title" content="Alle GTA-6-Tools: 24 Live-Rechner, Tracker und Planer | ToolWools">
 <meta name="twitter:description" content="Jedes Live-GTA-6-Tool an einem Ort. 24 Rechner, Planer und Tracker, die du jetzt nutzen kannst, plus 0 weitere auf der Roadmap.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/de/tools">
 <link rel="alternate" href="https://toolwools.com/tools" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hub-de.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,33 +95,32 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
         </a>
         <nav class="nav-primary" aria-label="Primär">
           <a href="/de/">Startseite</a>
-          <a href="/de/tools">Tools</a>
+          <a href="/de/tools" aria-current="page">Tools</a>
           <a href="/de/trackers">Tracker</a>
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
@@ -131,49 +150,49 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
           <a href="/de/">Startseite</a>
-          <a href="/de/tools">Tools</a>
+          <a href="/de/tools" aria-current="page">Tools</a>
           <a href="/de/trackers">Tracker</a>
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools" lang="en">EN</a><a href="/es/tools" lang="es">ES</a><a href="/pt/tools" lang="pt">PT</a><a href="/de/tools" aria-current="true">DE</a><a href="/fr/tools" lang="fr">FR</a><a href="/tr/tools" lang="tr">TR</a><a href="/ar/tools" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Brotkrumen" class="breadcrumbs">
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+<section class="page-hero">
+      <div class="page-breadcrumbs" aria-label="Brotkrumen">
         <a href="/de/">Startseite</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">Tools</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Katalog</span>
-      <h1 id="page-hero-heading">Alle Tools</h1>
-      <p class="page-hero-sub">Jedes Live-GTA-6-Tool an einem Ort. Rechner, Planer und Tracker, die du jetzt nutzen kannst</p>
-    </div>
-  </header>
-  <div class="container tool-body">
+      </div>
+      <div class="page-eyebrow"><span>Katalog</span></div>
+      <h1 id="page-title" class="page-title">Alle Tools</h1>
+      <p class="page-subtitle">Jedes Live-GTA-6-Tool an einem Ort. Rechner, Planer und Tracker, die du jetzt nutzen kannst</p>
+</section>
     <section aria-labelledby="tools-search-heading">
       <h2 id="tools-search-heading" class="sr-only">Tools suchen und filtern</h2>
       <form role="search" data-tools-search-form>
         <label class="filter-label" for="tools-search">24 Live-Tools suchen</label>
         <input type="search" id="tools-search" class="search-big" data-tools-search placeholder="Finde Rechner, Tracker, Planer ..." autocomplete="off">
       </form>
-      <div style="margin-top:1.5rem">
+      <div class="filter-group">
         <span class="filter-label" id="cat-label">Beliebte Kategorien</span>
         <div class="chip-row" role="group" aria-labelledby="cat-label"><button type="button" class="chip" data-category-filter="pc" aria-pressed="false">PC-Bereitschaft</button><button type="button" class="chip" data-category-filter="performance" aria-pressed="false">Leistung</button><button type="button" class="chip" data-category-filter="release" aria-pressed="false">Launch-Vorbereitung</button><button type="button" class="chip" data-category-filter="map" aria-pressed="false">Karte und Welt</button><button type="button" class="chip" data-category-filter="economy" aria-pressed="false">Wirtschaft</button><button type="button" class="chip" data-category-filter="trackers" aria-pressed="false">Tracker</button><button type="button" class="chip" data-category-filter="planners" aria-pressed="false">Planer</button><button type="button" class="chip" data-category-filter="comparison" aria-pressed="false">Vergleich</button><button type="button" class="chip" data-category-filter="generators" aria-pressed="false">Generatoren</button></div>
       </div>
-      <div style="margin-top:1.5rem">
+      <div class="filter-group">
         <span class="filter-label" id="status-label">Nach Status filtern</span>
         <div class="chip-row" role="group" aria-labelledby="status-label">
           <button type="button" class="chip" data-status-filter="" aria-pressed="true">Alle Tools</button>
@@ -182,282 +201,276 @@
         </div>
       </div>
     </section>
-    <section aria-labelledby="tools-results-heading" style="margin-top:2.5rem">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+    <section aria-labelledby="tools-results-heading">
+      <div class="tools-results-head">
         <h2 id="tools-results-heading" data-tools-heading>Live-Tools</h2>
-        <span class="tool-count" data-tools-count>24 von 24 Tools · 24 live</span>
+        <span class="tool-count" data-tools-count aria-live="polite">24 von 24 Tools · 24 live</span>
       </div>
-      <ul class="tools-grid" data-tools-list style="margin-top:1.5rem">
-        <li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-Systemanforderungs-Checker Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher. pc Specs" style="--stagger-index:0" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:0" href="/de/tools/system-requirements" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+      <ul class="tools-grid" data-tools-list>
+        <li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-Systemanforderungs-Checker Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher. pc Specs">
+      <a class="tool-card" href="/de/tools/system-requirements" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Systemanforderungs-Checker</h3>
         <p>Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Download-Zeit-Rechner Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert. planners Planer" style="--stagger-index:1" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:1" href="/de/tools/download-time" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Download-Zeit-Rechner Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert. planners Planer">
+      <a class="tool-card" href="/de/tools/download-time" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Download-Zeit-Rechner</h3>
         <p>Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Speicher-Planer Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates. planners Planer" style="--stagger-index:2" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:2" href="/de/tools/storage-planner" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Speicher-Planer Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates. planners Planer">
+      <a class="tool-card" href="/de/tools/storage-planner" data-accent="pink">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Speicher-Planer</h3>
         <p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="release" data-status="live" data-search-text="GTA-6-Release-Date-Erinnerung Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events. release Release" style="--stagger-index:3" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:3" href="/de/tools/add-to-calendar" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="release" data-status="live" data-search-text="GTA-6-Release-Date-Erinnerung Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events. release Release">
+      <a class="tool-card" href="/de/tools/add-to-calendar" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Release-Date-Erinnerung</h3>
         <p>Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="release" data-status="live" data-search-text="GTA-6-Readiness-Score Ein 0–100-Launch-Bereitschafts-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit Schwächstes-Glied-Fix. release Release" style="--stagger-index:4" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:4" href="/de/tools/readiness-score" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="release" data-status="live" data-search-text="GTA-6-Readiness-Score Ein 0–100-Launch-Bereitschafts-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit Schwächstes-Glied-Fix. release Release">
+      <a class="tool-card" href="/de/tools/readiness-score" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Readiness-Score</h3>
         <p>Ein 0–100-Launch-Bereitschafts-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit Schwächstes-Glied-Fix.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-Bottleneck-Rechner Wähle GPU + CPU. Wir erkennen den Bottleneck für GTA 6 und schlagen das kleinste Upgrade vor, um ihn zu beheben. pc Leistung" style="--stagger-index:5" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:5" href="/de/tools/bottleneck-calculator" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-Bottleneck-Rechner Wähle GPU + CPU. Wir erkennen den Bottleneck für GTA 6 und schlagen das kleinste Upgrade vor, um ihn zu beheben. pc Leistung">
+      <a class="tool-card" href="/de/tools/bottleneck-calculator" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Bottleneck-Rechner</h3>
         <p>Wähle GPU + CPU. Wir erkennen den Bottleneck für GTA 6 und schlagen das kleinste Upgrade vor, um ihn zu beheben.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-VRAM-Anforderungs-Checker Wähle Auflösung und Qualitäts-Preset. Tool zeigt das minimale benötigte VRAM und ob deine GPU besteht. pc Leistung" style="--stagger-index:6" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:6" href="/de/tools/vram-calculator" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="pc" data-status="live" data-search-text="GTA-6-VRAM-Anforderungs-Checker Wähle Auflösung und Qualitäts-Preset. Tool zeigt das minimale benötigte VRAM und ob deine GPU besteht. pc Leistung">
+      <a class="tool-card" href="/de/tools/vram-calculator" data-accent="pink">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-VRAM-Anforderungs-Checker</h3>
         <p>Wähle Auflösung und Qualitäts-Preset. Tool zeigt das minimale benötigte VRAM und ob deine GPU besteht.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="performance" data-status="live" data-search-text="GTA-6-FPS-Rechner Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra. performance Leistung" style="--stagger-index:7" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:7" href="/de/tools/fps-calculator" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="performance" data-status="live" data-search-text="GTA-6-FPS-Rechner Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra. performance Leistung">
+      <a class="tool-card" href="/de/tools/fps-calculator" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-FPS-Rechner</h3>
         <p>Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-GPU-Tier-Liste S/A/B/C/D-Ranking jeder GPU für GTA-6-Leistung. Durchsuchbar, filterbar, aktualisiert bei Treiber-Drops. comparison Vergleich" style="--stagger-index:8" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:8" href="/de/tools/gpu-tier-list" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-GPU-Tier-Liste S/A/B/C/D-Ranking jeder GPU für GTA-6-Leistung. Durchsuchbar, filterbar, aktualisiert bei Treiber-Drops. comparison Vergleich">
+      <a class="tool-card" href="/de/tools/gpu-tier-list" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-GPU-Tier-Liste</h3>
         <p>S/A/B/C/D-Ranking jeder GPU für GTA-6-Leistung. Durchsuchbar, filterbar, aktualisiert bei Treiber-Drops.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="map" data-status="live" data-search-text="GTA-6-Interaktive-Karte Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2. map Karte" style="--stagger-index:9" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:9" href="/de/tools/interactive-map" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="map" data-status="live" data-search-text="GTA-6-Interaktive-Karte Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2. map Karte">
+      <a class="tool-card" href="/de/tools/interactive-map" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Interaktive-Karte</h3>
         <p>Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA 6 kaufen: Editionen und Kanäle im Vergleich Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region. trackers Tracker" style="--stagger-index:10" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:10" href="/de/tools/pre-order-tracker" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA 6 kaufen: Editionen und Kanäle im Vergleich Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region. trackers Tracker">
+      <a class="tool-card" href="/de/tools/pre-order-tracker" data-accent="pink">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA 6 kaufen: Editionen und Kanäle im Vergleich</h3>
         <p>Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Editions-Picker Was jede Edition wirklich ingame freischaltet, getrackt, während Rockstar es bestätigt. Preise leben auf der Preis-nach-Land-Seite. comparison Vergleich" style="--stagger-index:11" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:11" href="/de/tools/edition-comparison" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Editions-Picker Was jede Edition wirklich ingame freischaltet, getrackt, während Rockstar es bestätigt. Preise leben auf der Preis-nach-Land-Seite. comparison Vergleich">
+      <a class="tool-card" href="/de/tools/edition-comparison" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Editions-Picker</h3>
         <p>Was jede Edition wirklich ingame freischaltet, getrackt, während Rockstar es bestätigt. Preise leben auf der Preis-nach-Land-Seite.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Internet-Geschwindigkeits-Berater Bewerte Latenz, Jitter, Paketverlust und Geschwindigkeit gegen ein realistisches Ziel für deine Region und dein Gerät. planners Planer" style="--stagger-index:12" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:12" href="/de/tools/internet-speed-check" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="planners" data-status="live" data-search-text="GTA-6-Internet-Geschwindigkeits-Berater Bewerte Latenz, Jitter, Paketverlust und Geschwindigkeit gegen ein realistisches Ziel für deine Region und dein Gerät. planners Planer">
+      <a class="tool-card" href="/de/tools/internet-speed-check" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Internet-Geschwindigkeits-Berater</h3>
         <p>Bewerte Latenz, Jitter, Paketverlust und Geschwindigkeit gegen ein realistisches Ziel für deine Region und dein Gerät.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Server-Status: Sind die Server down? GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten. trackers Tracker" style="--stagger-index:13" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:13" href="/de/tools/server-status" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Server-Status: Sind die Server down? GTA 6 hat keine Server, die ausfallen könnten, es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten. trackers Tracker">
+      <a class="tool-card" href="/de/tools/server-status" data-accent="pink">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Server-Status: Sind die Server down?</h3>
-        <p>GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>GTA 6 hat keine Server, die ausfallen könnten, es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Preis nach Land GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter. trackers Tracker" style="--stagger-index:14" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:14" href="/de/tools/price-by-country" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Preis nach Land GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter. trackers Tracker">
+      <a class="tool-card" href="/de/tools/price-by-country" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Preis nach Land</h3>
         <p>GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Preload-Verlauf und Update-Zeitplan GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026. trackers Tracker" style="--stagger-index:15" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:15" href="/de/tools/preload-tracker" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Preload-Verlauf und Update-Zeitplan GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026. trackers Tracker">
+      <a class="tool-card" href="/de/tools/preload-tracker" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Preload-Verlauf und Update-Zeitplan</h3>
         <p>GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="economy" data-status="live" data-search-text="GTA-6-Geld- und Business-ROI-Rechner Ranke Geldmethoden nach Netto-$/Stunde, plane jedes Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind. economy Wirtschaft" style="--stagger-index:16" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:16" href="/de/tools/economy-calculator" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="economy" data-status="live" data-search-text="GTA-6-Geld- und Business-ROI-Rechner Ranke Geldmethoden nach Netto-$/Stunde, plane jedes Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind. economy Wirtschaft">
+      <a class="tool-card" href="/de/tools/economy-calculator" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Geld- und Business-ROI-Rechner</h3>
         <p>Ranke Geldmethoden nach Netto-$/Stunde, plane jedes Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026. comparison Vergleich" style="--stagger-index:17" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:17" href="/de/tools/vehicle-comparison" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
-        <h3>GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert</h3>
-        <p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Fahrzeugvergleich, Werte, Registrierungskosten &amp; Verkaufswert Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10, Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke, plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026. comparison Vergleich">
+      <a class="tool-card" href="/de/tools/vehicle-comparison" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
+        <h3>GTA-6-Fahrzeugvergleich: Werte, Registrierungskosten &amp; Verkaufswert</h3>
+        <p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10, Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke, plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026. comparison Vergleich" style="--stagger-index:18" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:18" href="/de/tools/weapon-comparison" data-accent="pink">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
-        <h3>GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis</h3>
-        <p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Waffenvergleich, Werte, Magazin &amp; Preis Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite, den vier Ingame-Werten von 10, plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026. comparison Vergleich">
+      <a class="tool-card" href="/de/tools/weapon-comparison" data-accent="pink">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
+        <h3>GTA-6-Waffenvergleich: Werte, Magazin &amp; Preis</h3>
+        <p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite, den vier Ingame-Werten von 10, plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Launch-Meilensteine GTA 6 startete am 19. Nov. 2026. Die abgeschlossenen Preload-Fenster, Launch-Meilensteine und der Launch-Zeitpunkt in deiner Zeitzone. trackers Tracker" style="--stagger-index:19" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:19" href="/de/tools/gta-6-tracker" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="trackers" data-status="live" data-search-text="GTA-6-Launch-Meilensteine GTA 6 startete am 19. Nov. 2026. Die abgeschlossenen Preload-Fenster, Launch-Meilensteine und der Launch-Zeitpunkt in deiner Zeitzone. trackers Tracker">
+      <a class="tool-card" href="/de/tools/gta-6-tracker" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Launch-Meilensteine</h3>
         <p>GTA 6 startete am 19. Nov. 2026. Die abgeschlossenen Preload-Fenster, Launch-Meilensteine und der Launch-Zeitpunkt in deiner Zeitzone.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="performance" data-status="live" data-search-text="GTA-6-Einstellungs-Optimierer Stelle Grafik-Einstellungen für deine Ziel-FPS und deinen PC ein. performance Leistung" style="--stagger-index:20" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:20" href="/de/tools/settings-optimizer" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="performance" data-status="live" data-search-text="GTA-6-Einstellungs-Optimierer Stelle Grafik-Einstellungen für deine Ziel-FPS und deinen PC ein. performance Leistung">
+      <a class="tool-card" href="/de/tools/settings-optimizer" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Einstellungs-Optimierer</h3>
         <p>Stelle Grafik-Einstellungen für deine Ziel-FPS und deinen PC ein.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Hardware-Vergleich Vergleiche zwei GPUs oder CPUs Head-to-Head für GTA 6. comparison Vergleich" style="--stagger-index:21" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:21" href="/de/tools/hardware-comparison" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="comparison" data-status="live" data-search-text="GTA-6-Hardware-Vergleich Vergleiche zwei GPUs oder CPUs Head-to-Head für GTA 6. comparison Vergleich">
+      <a class="tool-card" href="/de/tools/hardware-comparison" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Hardware-Vergleich</h3>
         <p>Vergleiche zwei GPUs oder CPUs Head-to-Head für GTA 6.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="generators" data-status="live" data-search-text="GTA-6-Namens-Generator Charakter-Namen, Crew-Tags, Kennzeichen, Funk-Rufzeichen und Gamertags — sofort generiert. generators Generatoren" style="--stagger-index:22" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:22" href="/de/generators" data-accent="purple">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="generators" data-status="live" data-search-text="GTA-6-Namens-Generator Charakter-Namen, Crew-Tags, Kennzeichen, Funk-Rufzeichen und Gamertags, sofort generiert. generators Generatoren">
+      <a class="tool-card" href="/de/generators" data-accent="purple">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4 5 5L7 22l-5-5L15 4Z"/><path d="m14 7 3 3"/><path d="m5 6 3 3"/><path d="m19 20 3 3"/><path d="m2 22 3-3"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Namens-Generator</h3>
-        <p>Charakter-Namen, Crew-Tags, Kennzeichen, Funk-Rufzeichen und Gamertags — sofort generiert.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>Charakter-Namen, Crew-Tags, Kennzeichen, Funk-Rufzeichen und Gamertags, sofort generiert.</p>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
-<li data-tool-card data-category="economy" data-status="live" data-search-text="GTA-6-Business-Tracker Verfolge die 12 Leonida-Businesses, simuliere den Payback mit deinen eigenen Zahlen und vergleiche Story-Geldmethoden. Noch kann kein Business gekauft werden — jede Zahl ist mit ihrer Quelle gekennzeichnet. economy Wirtschaft" style="--stagger-index:23" class="stagger-fade-up">
-      <a class="tool-card card-hover-glow" style="--stagger-index:23" href="/de/tools/business-tracker" data-accent="blue">
-        <span class="tool-card-glow" aria-hidden="true"></span>
-        <span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span><span class="badge badge-blue">Live</span></span>
+<li data-tool-card data-category="economy" data-status="live" data-search-text="GTA-6-Business-Tracker Verfolge die 12 Leonida-Businesses, simuliere den Payback mit deinen eigenen Zahlen und vergleiche Story-Geldmethoden. Noch kann kein Business gekauft werden, jede Zahl ist mit ihrer Quelle gekennzeichnet. economy Wirtschaft">
+      <a class="tool-card" href="/de/tools/business-tracker" data-accent="blue">
+        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="tool-card-badge-row"><span class="badge badge-blue">Live</span></span>
         <h3>GTA-6-Business-Tracker</h3>
-        <p>Verfolge die 12 Leonida-Businesses, simuliere den Payback mit deinen eigenen Zahlen und vergleiche Story-Geldmethoden. Noch kann kein Business gekauft werden — jede Zahl ist mit ihrer Quelle gekennzeichnet.</p>
-        <span class="tool-card-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        <p>Verfolge die 12 Leonida-Businesses, simuliere den Payback mit deinen eigenen Zahlen und vergleiche Story-Geldmethoden. Noch kann kein Business gekauft werden, jede Zahl ist mit ihrer Quelle gekennzeichnet.</p>
+        <span class="link-cta">Öffnen <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
       </a>
     </li>
       </ul>
       <div class="empty-state" data-tools-empty hidden>
         <p>Noch passen keine Tools zu dieser Suche. Versuche <a href="/de/search">Guides und Ressourcen zu suchen</a> auch.</p>
-        <p style="margin-top:0.75rem"><button type="button" class="btn-outline" data-tools-clear>Suche leeren</button></p>
+        <p><button type="button" class="btn btn-secondary" data-tools-clear>Suche leeren</button></p>
       </div>
       <p class="verified-line">24 Tools live, 0 weitere auf der Roadmap. Zuletzt verifiziert <time datetime="2026-11-26">26. November 2026</time>.</p>
     </section>
-  </div>
 </article>
+</div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -496,10 +509,10 @@
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
-              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
               <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
-              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -508,35 +521,29 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
   </div>
 </div>
-</div>
 <script src="/assets/js/de/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/de/theme.js" defer></script>
-<script src="/assets/js/de/consent.js" defer></script>
 <script src="/assets/js/de/header.js" defer></script>
 <script src="/assets/js/de/search.js" defer></script>
 <script src="/assets/js/de/faq.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/de/newsletter.js" defer></script>
+<script src="/assets/js/de/consent.js" defer></script>
 <script src="/assets/js/de/tools.js" defer></script>
 </body>
 </html>

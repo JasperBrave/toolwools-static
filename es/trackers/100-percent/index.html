@@ -37,6 +37,13 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,114 +75,118 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-es.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">Saltar al contenido</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/es/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="Rastreadores"><a href="/es/trackers">Rastreadores</a><a href="/es/trackers/missions">Misiones</a><a href="/es/trackers/collectibles">Coleccionables</a><a href="/es/trackers/100-percent" aria-current="page">Lista de verificación 100%</a><a href="/es/trackers/trophies">Trofeos</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar al tema oscuro" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" aria-label="Sitio">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/es/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Principal">
+          <a href="/es/">Inicio</a>
+          <a href="/es/tools">Herramientas</a>
+          <a href="/es/trackers" aria-current="page">Rastreadores</a>
+          <a href="/es/generators">Generadores</a>
+          <a href="/es/news">Noticias</a>
+          <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers/100-percent">English</a>
+            <a href="/es/trackers/100-percent" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
+            <a href="/pt/trackers/100-percent">Português</a>
+            <a href="/de/trackers/100-percent">Deutsch</a>
+            <a href="/fr/trackers/100-percent">Français</a>
+            <a href="/tr/trackers/100-percent">Türkçe</a>
+            <a href="/ar/trackers/100-percent">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar al tema oscuro" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Móvil">
+          <a href="/es/">Inicio</a>
+          <a href="/es/tools">Herramientas</a>
+          <a href="/es/trackers" aria-current="page">Rastreadores</a>
+          <a href="/es/generators">Generadores</a>
+          <a href="/es/news">Noticias</a>
+          <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers/100-percent" lang="en">EN</a><a href="/es/trackers/100-percent" lang="es" aria-current="true">ES</a><a href="/pt/trackers/100-percent" lang="pt">PT</a><a href="/de/trackers/100-percent" lang="de">DE</a><a href="/fr/trackers/100-percent" lang="fr">FR</a><a href="/tr/trackers/100-percent" lang="tr">TR</a><a href="/ar/trackers/100-percent" lang="ar">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="Migas de pan" class="breadcrumbs"><a href="/es/">Inicio</a><span aria-hidden="true"> / </span><a href="/es/trackers">Rastreadores</a><span aria-hidden="true"> / </span><span aria-current="page">Lista de verificación 100%</span></nav><div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="requisitos"><p class="eyebrow">Lista de verificación 100%</p><h1>100% completado: los 35 requisitos</h1><div class="note" role="note"><h2>El 100% significa esto: la definición, publicada</h2><p><strong>El 100% significa: termina la historia y luego completa las 35 líneas de abajo.</strong> La lista está en el juego en Progress > Stats > 100% Completion y solo se hace visible después de la historia; el progreso hecho durante la historia ya cuenta. Terminarla da el trofeo de Oro <strong>A Long Road</strong>.</p><p>Las 35 líneas caen en tres grupos: Historia y tareas (12 líneas, 45%), Exploración y actividades (20 líneas, 45%), Descubrimiento (3 líneas, 10%). Los porcentajes son las cuotas por sección de GTABase. Nada de la lista se puede perder: todo se puede hacer aún en modo libre después de la historia.</p><p><strong>El 100% no es lo mismo que encontrarlo todo.</strong> La mayoría de las líneas piden solo parte de una categoría (300 de 397 acrobacias, 50 de 91 atracos, 200 de 277 vehículos). PowerPyx sitúa la lista en torno al 60% de la finalización real del juego. La mayoría de las misiones secundarias y de los extraños no hacen falta para nada.</p></div><p class="conf-legend"><span class="legend-label">Confianza:</span><span class="conf-pill conf-confirmed">Confirmado</span><span class="conf-pill conf-implied">Fuertemente implícito</span><span class="conf-pill conf-community">Inferido por la comunidad</span><span class="legend-label">Confirmado: nombrado o mostrado en material oficial de Rockstar. Fuertemente implícito: fuertemente implícito en material oficial o corroborado por varias guías independientes. Inferido por la comunidad: transcripción de guías o de la comunidad, trátalo como una estimación.</span></p>
-    <div class="progress-block" aria-labelledby="progress-heading">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Migas de pan"><a href="/es/">Inicio</a><span aria-hidden="true">/</span><a href="/es/trackers">Rastreadores</a><span aria-hidden="true">/</span><span aria-current="page">Lista de verificación 100%</span></div>
+      <div class="page-eyebrow"><span>Lista de verificación 100%</span></div>
+      <h1 id="page-title" class="page-title">100% completado: los 35 requisitos</h1>
+    </section>
+    <div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="requisitos"><section class="tracker-workspace" aria-labelledby="progress-heading">
+      <div class="note" role="note"><h2>El 100% significa esto: la definición, publicada</h2><p><strong>El 100% significa: termina la historia y luego completa las 35 líneas de abajo.</strong> La lista está en el juego en Progress > Stats > 100% Completion y solo se hace visible después de la historia; el progreso hecho durante la historia ya cuenta. Terminarla da el trofeo de Oro <strong>A Long Road</strong>.</p><p>Las 35 líneas caen en tres grupos: Historia y tareas (12 líneas, 45%), Exploración y actividades (20 líneas, 45%), Descubrimiento (3 líneas, 10%). Los porcentajes son las cuotas por sección de GTABase. Nada de la lista se puede perder: todo se puede hacer aún en modo libre después de la historia.</p><p><strong>El 100% no es lo mismo que encontrarlo todo.</strong> La mayoría de las líneas piden solo parte de una categoría (300 de 397 acrobacias, 50 de 91 atracos, 200 de 277 vehículos). PowerPyx sitúa la lista en torno al 60% de la finalización real del juego. La mayoría de las misiones secundarias y de los extraños no hacen falta para nada.</p></div>
+      <p class="conf-legend"><span class="legend-label">Confianza:</span><span class="conf-pill conf-confirmed">Confirmado</span><span class="conf-pill conf-implied">Fuertemente implícito</span><span class="conf-pill conf-community">Inferido por la comunidad</span><span class="legend-label">Confirmado: nombrado o mostrado en material oficial de Rockstar. Fuertemente implícito: fuertemente implícito en material oficial o corroborado por varias guías independientes. Inferido por la comunidad: transcripción de guías o de la comunidad, trátalo como una estimación.</span></p>
+      <div class="progress-block" aria-labelledby="progress-heading">
       <h2 id="progress-heading" class="sr-only">Tu progreso</h2>
       <p class="progress-text" id="progress-text" aria-live="polite">0 / 0 marcadas · 0%</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" role="progressbar" aria-label="Progreso" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div></div>
@@ -187,58 +198,108 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
       </div>
       <p class="progress-note" id="action-status" role="status"></p>
     </div>
-    <div class="done-banner" id="done-banner" role="status">Todo marcado: es el conjunto completo. Bien hecho.</div>
-<section aria-labelledby="g-0"><h2 id="g-0">Historia y tareas (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">Historia completada</span><span class="item-desc">Requerido: terminar la historia · En el juego: se muestra como 100%</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">Tareas opcionales completadas</span><span class="item-desc">Requerido: 100 · En el juego: 200–300 estimados</span><span class="item-desc">Las tareas opcionales son los iconos de mapa de fondo negro y letra rosa y los iconos morados. PowerPyx estima que existen 200–300.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">Operaciones de bandas despejadas</span><span class="item-desc">Requerido: 39 de 39 · En el juego: 39</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">Trabajos de banco completados</span><span class="item-desc">Requerido: 22 de 22 · En el juego: 22</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">Trabajos de préstamos completados</span><span class="item-desc">Requerido: 7 de 7 · En el juego: 7</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">Smash 'N' Grabs completados</span><span class="item-desc">Requerido: 34 de 35 · En el juego: 35</span><span class="item-desc">Casas de empeño y joyerías. Entra en la trastienda y saquea la caja fuerte, o puede que no cuente.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">Stick Ups completados</span><span class="item-desc">Requerido: 50 de 91 · En el juego: 91</span><span class="item-desc">Tiendas de conveniencia, de comida rápida y licorerías.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">Narcóticos vendidos</span><span class="item-desc">Requerido: $100,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">Joyas vendidas</span><span class="item-desc">Requerido: $100,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">Billetes marcados vendidos</span><span class="item-desc">Requerido: $250,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">Cámaras acorazadas asaltadas</span><span class="item-desc">Requerido: 8 de 8 · En el juego: 8</span><span class="item-desc">En los 8 bancos grandes.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">Vehículos vendidos</span><span class="item-desc">Requerido: $200,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">Exploración y actividades (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">Conjuntos de Kenton completados</span><span class="item-desc">Requerido: 5 de 7 · En el juego: 7</span><span class="item-desc">Conjuntos de buceo de tesoros de la misión de Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">Conjuntos de cartas coleccionables encontrados</span><span class="item-desc">Requerido: 15 de 18 · En el juego: 18</span><span class="item-desc">480 cartas únicas en los 18 conjuntos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">Ubicaciones WAiNK escaneadas</span><span class="item-desc">Requerido: 100 · En el juego: más de 100</span><span class="item-desc">Lugares emblemáticos y esculturas escaneados con el teléfono.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">Descubrimientos submarinos encontrados</span><span class="item-desc">Requerido: 33 de 33 · En el juego: 33</span><span class="item-desc">Naufragios hundidos, parte de la misión de Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">Revistas, libros y cómics encontrados</span><span class="item-desc">Requerido: 30 de 34 · En el juego: 34</span><span class="item-desc">27 revistas más 7 intercambios de libros.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">Puntos de meditación completados</span><span class="item-desc">Requerido: 15 de 18 · En el juego: 18</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">Flamencos de cocaína destruidos</span><span class="item-desc">Requerido: 100 de 125 · En el juego: 125</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">Listas de reproducción únicas completadas</span><span class="item-desc">Requerido: 2 de 2 · En el juego: 2</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">Estilos descubiertos</span><span class="item-desc">Requerido: 70 de 79 · En el juego: 79</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">Carreras únicas ganadas</span><span class="item-desc">Requerido: 30 de 40 · En el juego: 40</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">Medallas de oro de desafíos de carreras</span><span class="item-desc">Requerido: 10 de 13 · En el juego: 13</span><span class="item-desc">CIFRA EN DISPUTA: MapDex señala esta cifra requerida como el único número en disputa entre los tres medios que comparó (Press Start, PowerPyx, Push Square).</span><span class="item-meta"><span class="conf-pill conf-community">Cifra en disputa</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">Medallas de oro del campo de tiro</span><span class="item-desc">Requerido: 42 de 42 · En el juego: 42</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">Videojuegos jugados</span><span class="item-desc">Requerido: 4 de 4 · En el juego: 4</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">Rivales de billar derrotados</span><span class="item-desc">Requerido: 5 de 7 · En el juego: 7</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">Campos de minigolf jugados</span><span class="item-desc">Requerido: 2 de 3 · En el juego: 3</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">Canastas de baloncesto</span><span class="item-desc">Requerido: 90 de 100 · En el juego: 100</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">Contrarrelojes de dron completadas</span><span class="item-desc">Requerido: 42 de 42 · En el juego: 42</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">Acrobacias completadas</span><span class="item-desc">Requerido: 300 de 397 · En el juego: 397</span><span class="item-desc">130 saltos de acrobacias, 202 bajo los puentes, 40 vuelos rasantes, 25 saltos base.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">Desafíos completados</span><span class="item-desc">Requerido: 70 de 80 · En el juego: 80</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">Mazos objetivo de Bret</span><span class="item-desc">Requerido: 15 de 15 · En el juego: 15</span><span class="item-desc">La misión de caza de Bret.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">Descubrimiento (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">Vehículos de modelo base escaneados</span><span class="item-desc">Requerido: 200 de 277 · En el juego: 277</span><span class="item-desc">277 modelos base de 557 vehículos en total (280 son Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">Armas estándar encontradas</span><span class="item-desc">Requerido: 50 de 66 · En el juego: 66</span><span class="item-desc">53 armas de fuego, 9 cuerpo a cuerpo, 4 explosivos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">Animales estudiados</span><span class="item-desc">Requerido: 100 de 255 · En el juego: 255</span><span class="item-desc">Estudia mirando por los prismáticos; cazar no es necesario para esta línea.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section><section aria-labelledby="notcovered"><h2 id="notcovered">Lo que esta lista no cubre</h2><ul><li>La mayoría de los hilos de extraños y misiones secundarias: solo hacen falta 8 para el trofeo Strangers &amp; Freaks, y la lista del 100% no los exige más allá de las 100 tareas opcionales.</li><li>Conjuntos completos de coleccionables: la mayoría de los tipos solo se exigen en parte (15 de 18 conjuntos de cartas, 5 de 7 conjuntos de Kenton, 100 de 125 flamencos). Encontrar todos los objetos de una categoría va más allá del 100%.</li><li>Garajes y negocios: tener los 8 garajes da el trofeo Little Boxes, pero los garajes no son una línea de la lista del 100%. Ningún negocio se puede comprar en el modo historia.</li><li>Trucos (existen 61) y la lista completa de 55 trofeos: la lista da un trofeo, A Long Road; los otros 54 se siguen en el <a href="/es/trackers/trophies">rastreador de trofeos</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">Fuentes: definición del 100%</h2><ul><li>PowerPyx, «GTA 6 100% Completion Checklist &amp; Guide»: las 35 líneas transcritas de la lista de Progress > Stats > 100% Completion del juego. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa, 18 Nov 2026: las mismas 35 líneas; cuotas por sección Historia y tareas 45% / Exploración y actividades 45% / Descubrimiento 10%; señala que PowerPyx y GTABase listan los mismos requisitos línea por línea. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex, «GTA 6 100% Completion Checklist: 35 Requirements»: 35 líneas en los mismos tres grupos; compara Press Start, PowerPyx y Push Square y marca una cifra requerida como en disputa (medallas de oro de desafíos de carreras, 10 de 13), señalada como tal arriba. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>No se ha encontrado documentación de Rockstar sobre la lista; la definición de arriba es una transcripción de la lista del juego hecha por guías posteriores al lanzamiento, no una publicación oficial de Rockstar. Todas las fuentes consultadas el 24 Nov 2026.</li></ul></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">GTA 6 ya está disponible: Nov 19, 2026 &middot; <a href="/es/tools">Explorar herramientas <span aria-hidden="true">&rarr;</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/es/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>Herramientas. Guías. GTA 6.</p>
+      <div class="done-banner" id="done-banner" role="status">Todo marcado: es el conjunto completo. Bien hecho.</div>
+    </section>
+<div class="tracker-groups">
+      <section aria-labelledby="g-0"><h2 id="g-0">Historia y tareas (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">Historia completada</span><span class="item-desc">Requerido: terminar la historia · En el juego: se muestra como 100%</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">Tareas opcionales completadas</span><span class="item-desc">Requerido: 100 · En el juego: 200–300 estimados</span><span class="item-desc">Las tareas opcionales son los iconos de mapa de fondo negro y letra rosa y los iconos morados. PowerPyx estima que existen 200–300.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">Operaciones de bandas despejadas</span><span class="item-desc">Requerido: 39 de 39 · En el juego: 39</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">Trabajos de banco completados</span><span class="item-desc">Requerido: 22 de 22 · En el juego: 22</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">Trabajos de préstamos completados</span><span class="item-desc">Requerido: 7 de 7 · En el juego: 7</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">Smash 'N' Grabs completados</span><span class="item-desc">Requerido: 34 de 35 · En el juego: 35</span><span class="item-desc">Casas de empeño y joyerías. Entra en la trastienda y saquea la caja fuerte, o puede que no cuente.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">Stick Ups completados</span><span class="item-desc">Requerido: 50 de 91 · En el juego: 91</span><span class="item-desc">Tiendas de conveniencia, de comida rápida y licorerías.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">Narcóticos vendidos</span><span class="item-desc">Requerido: $100,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">Joyas vendidas</span><span class="item-desc">Requerido: $100,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">Billetes marcados vendidos</span><span class="item-desc">Requerido: $250,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">Cámaras acorazadas asaltadas</span><span class="item-desc">Requerido: 8 de 8 · En el juego: 8</span><span class="item-desc">En los 8 bancos grandes.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">Vehículos vendidos</span><span class="item-desc">Requerido: $200,000 · En el juego: objetivo de efectivo</span><span class="item-desc">Valor vendido, no número de objetos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">Exploración y actividades (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">Conjuntos de Kenton completados</span><span class="item-desc">Requerido: 5 de 7 · En el juego: 7</span><span class="item-desc">Conjuntos de buceo de tesoros de la misión de Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">Conjuntos de cartas coleccionables encontrados</span><span class="item-desc">Requerido: 15 de 18 · En el juego: 18</span><span class="item-desc">480 cartas únicas en los 18 conjuntos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">Ubicaciones WAiNK escaneadas</span><span class="item-desc">Requerido: 100 · En el juego: más de 100</span><span class="item-desc">Lugares emblemáticos y esculturas escaneados con el teléfono.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">Descubrimientos submarinos encontrados</span><span class="item-desc">Requerido: 33 de 33 · En el juego: 33</span><span class="item-desc">Naufragios hundidos, parte de la misión de Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">Revistas, libros y cómics encontrados</span><span class="item-desc">Requerido: 30 de 34 · En el juego: 34</span><span class="item-desc">27 revistas más 7 intercambios de libros.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">Puntos de meditación completados</span><span class="item-desc">Requerido: 15 de 18 · En el juego: 18</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">Flamencos de cocaína destruidos</span><span class="item-desc">Requerido: 100 de 125 · En el juego: 125</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">Listas de reproducción únicas completadas</span><span class="item-desc">Requerido: 2 de 2 · En el juego: 2</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">Estilos descubiertos</span><span class="item-desc">Requerido: 70 de 79 · En el juego: 79</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">Carreras únicas ganadas</span><span class="item-desc">Requerido: 30 de 40 · En el juego: 40</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">Medallas de oro de desafíos de carreras</span><span class="item-desc">Requerido: 10 de 13 · En el juego: 13</span><span class="item-desc">CIFRA EN DISPUTA: MapDex señala esta cifra requerida como el único número en disputa entre los tres medios que comparó (Press Start, PowerPyx, Push Square).</span><span class="item-meta"><span class="conf-pill conf-community">Cifra en disputa</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">Medallas de oro del campo de tiro</span><span class="item-desc">Requerido: 42 de 42 · En el juego: 42</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">Videojuegos jugados</span><span class="item-desc">Requerido: 4 de 4 · En el juego: 4</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">Rivales de billar derrotados</span><span class="item-desc">Requerido: 5 de 7 · En el juego: 7</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">Campos de minigolf jugados</span><span class="item-desc">Requerido: 2 de 3 · En el juego: 3</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">Canastas de baloncesto</span><span class="item-desc">Requerido: 90 de 100 · En el juego: 100</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">Contrarrelojes de dron completadas</span><span class="item-desc">Requerido: 42 de 42 · En el juego: 42</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">Acrobacias completadas</span><span class="item-desc">Requerido: 300 de 397 · En el juego: 397</span><span class="item-desc">130 saltos de acrobacias, 202 bajo los puentes, 40 vuelos rasantes, 25 saltos base.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">Desafíos completados</span><span class="item-desc">Requerido: 70 de 80 · En el juego: 80</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">Mazos objetivo de Bret</span><span class="item-desc">Requerido: 15 de 15 · En el juego: 15</span><span class="item-desc">La misión de caza de Bret.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">Descubrimiento (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">Vehículos de modelo base escaneados</span><span class="item-desc">Requerido: 200 de 277 · En el juego: 277</span><span class="item-desc">277 modelos base de 557 vehículos en total (280 son Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">Armas estándar encontradas</span><span class="item-desc">Requerido: 50 de 66 · En el juego: 66</span><span class="item-desc">53 armas de fuego, 9 cuerpo a cuerpo, 4 explosivos.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">Animales estudiados</span><span class="item-desc">Requerido: 100 de 255 · En el juego: 255</span><span class="item-desc">Estudia mirando por los prismáticos; cazar no es necesario para esta línea.</span><span class="item-meta"><span class="conf-pill conf-community">Inferido por la comunidad</span></span></label></li></ul></section>
+    </div><section aria-labelledby="notcovered"><h2 id="notcovered">Lo que esta lista no cubre</h2><ul><li>La mayoría de los hilos de extraños y misiones secundarias: solo hacen falta 8 para el trofeo Strangers &amp; Freaks, y la lista del 100% no los exige más allá de las 100 tareas opcionales.</li><li>Conjuntos completos de coleccionables: la mayoría de los tipos solo se exigen en parte (15 de 18 conjuntos de cartas, 5 de 7 conjuntos de Kenton, 100 de 125 flamencos). Encontrar todos los objetos de una categoría va más allá del 100%.</li><li>Garajes y negocios: tener los 8 garajes da el trofeo Little Boxes, pero los garajes no son una línea de la lista del 100%. Ningún negocio se puede comprar en el modo historia.</li><li>Trucos (existen 61) y la lista completa de 55 trofeos: la lista da un trofeo, A Long Road; los otros 54 se siguen en el <a href="/es/trackers/trophies">rastreador de trofeos</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">Fuentes: definición del 100%</h2><ul><li>PowerPyx, «GTA 6 100% Completion Checklist &amp; Guide»: las 35 líneas transcritas de la lista de Progress > Stats > 100% Completion del juego. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa, 18 Nov 2026: las mismas 35 líneas; cuotas por sección Historia y tareas 45% / Exploración y actividades 45% / Descubrimiento 10%; señala que PowerPyx y GTABase listan los mismos requisitos línea por línea. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex, «GTA 6 100% Completion Checklist: 35 Requirements»: 35 líneas en los mismos tres grupos; compara Press Start, PowerPyx y Push Square y marca una cifra requerida como en disputa (medallas de oro de desafíos de carreras, 10 de 13), señalada como tal arriba. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>No se ha encontrado documentación de Rockstar sobre la lista; la definición de arriba es una transcripción de la lista del juego hecha por guías posteriores al lanzamiento, no una publicación oficial de Rockstar. Todas las fuentes consultadas el 24 Nov 2026.</li></ul></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Mantente al tanto</h2>
+          <p>Consigue las últimas noticias, herramientas y guías de GTA 6.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Dirección de correo</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Suscribirse</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="Enlaces rápidos">
-      <h3>Enlaces rápidos</h3>
-      <ul>
-        <li><a href="/es/">Inicio</a></li>
-        <li><a href="/es/tools">Herramientas</a></li>
-        <li><a href="/es/news">Noticias</a></li>
-        <li><a href="/es/trailers">Tráilers</a></li>
-        <li><a href="/es/guides">Guías</a></li><li><a href="/es/sitemap">Mapa del sitio</a></li><li><a href="/es/trending">Tendencias</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Categorías">
-      <h3>Categorías</h3>
-      <ul>
-        <li><a href="/es/tools?category=release">Herramientas de lanzamiento</a></li>
-        <li><a href="/es/tools?category=pc">Herramientas de PC</a></li>
-        <li><a href="/es/tools?category=performance">Rendimiento</a></li>
-        <li><a href="/es/tools?category=comparison">Comparación</a></li>
-        <li><a href="/es/tools?category=trackers">Rastreadores</a></li>
-        <li><a href="/es/tools?category=planners">Planificadores</a></li>
-        <li><a href="/es/generators">Generadores</a></li>
-        <li><a href="/es/guides">Guías</a></li>
-        <li><a href="/es/tools?category=economy">Economía</a></li>
-        <li><a href="/es/tools?category=map">Mapa</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Acerca de">
-      <h3>Acerca de</h3>
-      <ul>
-        <li><a href="/es/about">Acerca de ToolWools</a></li>
-        <li><a href="/es/contact">Contacto</a></li>
-        <li><a href="/es/privacy">Política de privacidad</a></li>
-        <li><a href="/es/terms">Términos de servicio</a></li>
-        <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li><li><a href="/es/methodology">Metodología</a></li><li><a href="/editorial-policy">Política editorial</a></li><li><a href="/es/email-preferences">Preferencias de correo</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 ToolWools. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</span>
-    <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><button type="button" data-consent-open>Configuración de cookies</button></span>
-    <span>Hecho para la comunidad de GTA &hearts;</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/es/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 ya está disponible, 19 de noviembre de 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Explorar herramientas →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/es/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
+              </span>
+            </span>
+          </a>
+          <p>El destino definitivo para herramientas, calculadoras, rastreadores, planificadores y guías de GTA 6. Todo lo que necesitas en un solo lugar, sin publicidad invasiva ni relleno.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Herramientas principales</h3>
+            <ul>
+              <li><a href="/es/tools/system-requirements">¿Mi PC puede con GTA 6?</a></li>
+              <li><a href="/es/tools/fps-calculator">Calculadora de FPS</a></li>
+              <li><a href="/es/tools/download-time">Calculadora de tiempo de descarga</a></li>
+              <li><a href="/es/tools/system-requirements">Requisitos del sistema</a></li>
+              <li><a href="/es/tools/settings-optimizer">Optimizador de ajustes</a></li>
+              <li><a href="/es/tools/hardware-comparison">Comparación de hardware</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Explorar</h3>
+            <ul>
+              <li><a href="/es/tools">Todas las herramientas</a></li>
+              <li><a href="/es/trending">Tendencias</a></li>
+              <li><a href="/es/trackers">Rastreadores</a></li>
+              <li><a href="/es/generators">Generadores</a></li>
+              <li><a href="/es/news">Noticias</a></li>
+              <li><a href="/es/trailers">Tráilers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="/es/tools/interactive-map">Mapa interactivo</a> <span class="footer-col-badge">Nuevo</span></li>
+              <li><a href="/es/about">Acerca de</a></li>
+              <li><a href="/es/methodology">Metodología</a></li>
+              <li><a href="/es/contact">Contacto</a></li>
+              <li><a href="/es/email-preferences">Preferencias de correo</a></li>
+              <li><a href="/es/sitemap">Mapa del sitio</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
+              <li><a href="/es/privacy">Política de privacidad</a></li>
+              <li><a href="/es/terms">Términos de servicio</a></li>
+              <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><a href="/es/disclaimer">Descargo de responsabilidad</a><button type="button" data-consent-open>Configuración de cookies</button></span>
+          <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimiento de analítica" hidden>
   <p>Usamos Google Analytics agregado para mejorar el sitio. Sin perfiles, nada se vende. Acepta o rechaza; la elección se guarda en este navegador.</p>
   <div class="consent-actions">
@@ -247,37 +308,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/es/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/es/header.js" defer></script>
+<script src="/assets/js/es/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/es/newsletter.js" defer></script>
+<script src="/assets/js/es/consent.js" defer></script>
 </body>
 </html>

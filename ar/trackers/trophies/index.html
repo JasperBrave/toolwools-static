@@ -37,6 +37,11 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,114 +73,118 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-ar.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">تخطَّ إلى المحتوى</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/ar/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="أدوات التتبع"><a href="/ar/trackers">أدوات التتبع</a><a href="/ar/trackers/missions">المهام</a><a href="/ar/trackers/collectibles">المقتنيات</a><a href="/ar/trackers/100-percent">قائمة تحقق 100%</a><a href="/ar/trackers/trophies" aria-current="page">الجوائز</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="site-header" aria-label="الموقع">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/ar/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="التنقل الأساسي">
+          <a href="/ar/">الرئيسية</a>
+          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/trackers" aria-current="page">أدوات التتبع</a>
+          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/news">الأخبار</a>
+          <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers/trophies">الإنجليزية</a>
+            <a href="/es/trackers/trophies">Español</a>
+            <a href="/pt/trackers/trophies">Português</a>
+            <a href="/de/trackers/trophies">Deutsch</a>
+            <a href="/fr/trackers/trophies">Français</a>
+            <a href="/tr/trackers/trophies">Türkçe</a>
+            <a href="/ar/trackers/trophies" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" aria-pressed="false">
+          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="افتح القائمة" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="الجوال">
+          <a href="/ar/">الرئيسية</a>
+          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/trackers" aria-current="page">أدوات التتبع</a>
+          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/news">الأخبار</a>
+          <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers/trophies" lang="en">EN</a><a href="/es/trackers/trophies" lang="es">ES</a><a href="/pt/trackers/trophies" lang="pt">PT</a><a href="/de/trackers/trophies" lang="de">DE</a><a href="/fr/trackers/trophies" lang="fr">FR</a><a href="/tr/trackers/trophies" lang="tr">TR</a><a href="/ar/trackers/trophies" lang="ar" aria-current="true">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="مسار التنقل" class="breadcrumbs"><a href="/ar/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/ar/trackers">أدوات التتبع</a><span aria-hidden="true"> / </span><span aria-current="page">الجوائز</span></nav><div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-trophies" data-tracker-label="جوائز"><p class="eyebrow">متتبع الجوائز</p><h1>متتبع الجوائز: جوائز وإنجازات الـ55 كلها</h1><p class="dek"><strong>55 جائزة</strong> على PlayStation 5 و <strong>55 إنجازًا بقيمة 1,000 Gamerscore</strong> على Xbox Series X|S: القائمة نفسها على الجهازين: <strong>1 بلاتينية، 2 ذهبية، 6 فضية، 46 برونزية</strong>. يوجد <strong>لا جوائز عبر الإنترنت</strong>؛ كل شيء يُكسب في وضع القصة.</p><div class="note" role="note"><h2>ليست القائمة الرسمية: اقرأ هذا أولًا</h2><p><strong>لم تنشر Rockstar ولا Sony ولا Microsoft قائمة الجوائز رسميًا.</strong> هذه الصفحة <strong>تجميع مجتمعي</strong>: ظهرت القائمة الكاملة في 18 Nov 2026، قبل الإطلاق بيوم، وتنقلها PowerPyx وGTABase (بقيم Gamerscore، عبر GamesRadar+) وInsider Gaming وBeebom بالشكل نفسه. أسماء الجوائز ودرجاتها متطابقة في المصادر الأربعة؛ أما الأوصاف فهي صياغة المصادر لمتطلبات اللعبة. وإذا نُشرت قائمة رسمية واختلفت، ستُصحح هذه الصفحة لتطابقها.</p><p>تقدّر PowerPyx الطريق إلى البلاتينية بنحو 200 ساعة، وتقيّم الصعوبة بـ 4/10، وتقول إنه لا يمكن تفويت أي جائزة. 28 من الـ55 جوائز مخفية مرتبطة بالقصة: وهي خلف تحذير حرق أدناه، ومغلقة افتراضيًا.</p></div><p class="conf-legend"><span class="legend-label">الثقة:</span><span class="conf-pill conf-confirmed">مؤكد</span><span class="conf-pill conf-implied">مُستدل عليه بقوة</span><span class="conf-pill conf-community">مستنتج من المجتمع</span><span class="legend-label">مؤكد: ذُكر اسمه أو ظهر في مواد Rockstar الرسمية. مُستدل عليه بقوة: استُدل عليه بقوة من المواد الرسمية أو أكدته عدة أدلة مستقلة. مستنتج من المجتمع: نقل من دليل أو مجتمع، ويُعامل كتقدير.</span></p>
-    <div class="progress-block" aria-labelledby="progress-heading">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="مسار التنقل"><a href="/ar/">الرئيسية</a><span aria-hidden="true">/</span><a href="/ar/trackers">أدوات التتبع</a><span aria-hidden="true">/</span><span aria-current="page">الجوائز</span></div>
+      <div class="page-eyebrow"><span>متتبع الجوائز</span></div>
+      <h1 id="page-title" class="page-title">متتبع الجوائز: جوائز وإنجازات الـ55 كلها</h1>
+      <p class="page-subtitle"><strong>55 جائزة</strong> على PlayStation 5 و <strong>55 إنجازًا بقيمة 1,000 Gamerscore</strong> على Xbox Series X|S: القائمة نفسها على الجهازين: <strong>1 بلاتينية، 2 ذهبية، 6 فضية، 46 برونزية</strong>. يوجد <strong>لا جوائز عبر الإنترنت</strong>؛ كل شيء يُكسب في وضع القصة.</p>
+    </section>
+    <div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-trophies" data-tracker-label="جوائز"><section class="tracker-workspace" aria-labelledby="progress-heading">
+      <div class="note" role="note"><h2>ليست القائمة الرسمية: اقرأ هذا أولًا</h2><p><strong>لم تنشر Rockstar ولا Sony ولا Microsoft قائمة الجوائز رسميًا.</strong> هذه الصفحة <strong>تجميع مجتمعي</strong>: ظهرت القائمة الكاملة في 18 Nov 2026، قبل الإطلاق بيوم، وتنقلها PowerPyx وGTABase (بقيم Gamerscore، عبر GamesRadar+) وInsider Gaming وBeebom بالشكل نفسه. أسماء الجوائز ودرجاتها متطابقة في المصادر الأربعة؛ أما الأوصاف فهي صياغة المصادر لمتطلبات اللعبة. وإذا نُشرت قائمة رسمية واختلفت، ستُصحح هذه الصفحة لتطابقها.</p><p>تقدّر PowerPyx الطريق إلى البلاتينية بنحو 200 ساعة، وتقيّم الصعوبة بـ 4/10، وتقول إنه لا يمكن تفويت أي جائزة. 28 من الـ55 جوائز مخفية مرتبطة بالقصة: وهي خلف تحذير حرق أدناه، ومغلقة افتراضيًا.</p></div>
+      <p class="conf-legend"><span class="legend-label">الثقة:</span><span class="conf-pill conf-confirmed">مؤكد</span><span class="conf-pill conf-implied">مُستدل عليه بقوة</span><span class="conf-pill conf-community">مستنتج من المجتمع</span><span class="legend-label">مؤكد: ذُكر اسمه أو ظهر في مواد Rockstar الرسمية. مُستدل عليه بقوة: استُدل عليه بقوة من المواد الرسمية أو أكدته عدة أدلة مستقلة. مستنتج من المجتمع: نقل من دليل أو مجتمع، ويُعامل كتقدير.</span></p>
+      <div class="progress-block" aria-labelledby="progress-heading">
       <h2 id="progress-heading" class="sr-only">تقدّمك</h2>
       <p class="progress-text" id="progress-text" aria-live="polite">0 / 0 محدد · 0%</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" role="progressbar" aria-label="التقدم" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div></div>
@@ -187,58 +196,106 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
       </div>
       <p class="progress-note" id="action-status" role="status"></p>
     </div>
-    <div class="done-banner" id="done-banner" role="status">تم تحديد الكل: هذه هي المجموعة الكاملة. أحسنت.</div>
-<section aria-labelledby="nonhidden"><h2 id="nonhidden">الجوائز غير المخفية (27)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="t-00" data-track-id="t-00"><label for="t-00"><span class="item-name">Vice Got a Price!</span><span class="item-desc">تهانينا! أنت أسطورة ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-platinum">بلاتينية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-01" data-track-id="t-01"><label for="t-01"><span class="item-name">A Long Road</span><span class="item-desc">حقّق إكمال 100%.</span><span class="item-meta"><span class="tier-pill tier-gold">ذهبية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-02" data-track-id="t-02"><label for="t-02"><span class="item-name">Cunning Stunts</span><span class="item-desc">أكمل 250 حيلة.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-03" data-track-id="t-03"><label for="t-03"><span class="item-name">The Shootist</span><span class="item-desc">احصل على ميدالية ذهبية في كل تحديات ميدان الرماية.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-04" data-track-id="t-04"><label for="t-04"><span class="item-name">Strangers &amp; Freaks</span><span class="item-desc">أكمل 8 سلاسل مهام للغرباء في أنحاء ولاية ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-05" data-track-id="t-05"><label for="t-05"><span class="item-name">Don&#x27;t Touch My Deck</span><span class="item-desc">أكمل 3 مجموعات بطاقات مقتنيات.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-06" data-track-id="t-06"><label for="t-06"><span class="item-name">You WAiNKer!</span><span class="item-desc">قم بـ WAiNK في 100 موقع.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-07" data-track-id="t-07"><label for="t-07"><span class="item-name">Maximum Withdrawal</span><span class="item-desc">اسطُ على 5 خزائن بنوك واهرب.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-08" data-track-id="t-08"><label for="t-08"><span class="item-name">Master of None</span><span class="item-desc">جرّب كل نوع من الأنشطة مرة واحدة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-09" data-track-id="t-09"><label for="t-09"><span class="item-name">Top Fun</span><span class="item-desc">اربح سباق Top Fun Drone في كل موقع.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-10" data-track-id="t-10"><label for="t-10"><span class="item-name">Earn Cash, Not Kudos</span><span class="item-desc">اربح 20 سباقًا مختلفًا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-11" data-track-id="t-11"><label for="t-11"><span class="item-name">Baited My Tackle</span><span class="item-desc">تغلب على Cal في تحدي صيد.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-12" data-track-id="t-12"><label for="t-12"><span class="item-name">Stick Fiddler</span><span class="item-desc">أكمل لعبة أركيد.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-13" data-track-id="t-13"><label for="t-13"><span class="item-name">Positive Mental Attitude</span><span class="item-desc">تأمل في كل موقع في أنحاء ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-14" data-track-id="t-14"><label for="t-14"><span class="item-name">One Last Thing</span><span class="item-desc">أكمل 50 تحديًا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-15" data-track-id="t-15"><label for="t-15"><span class="item-name">Hot Together</span><span class="item-desc">تخلص من مستوى مطلوب 4 نجوم مع شريكك واهرب من المطاردة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-16" data-track-id="t-16"><label for="t-16"><span class="item-name">Retail Therapy</span><span class="item-desc">اسطُ على 3 متاجر متتالية مع شريكك دون أن تفقد مستوى المطلوب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-17" data-track-id="t-17"><label for="t-17"><span class="item-name">Whip It Good</span><span class="item-desc">اكتشف 100 مركبة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-18" data-track-id="t-18"><label for="t-18"><span class="item-name">Gunslinger</span><span class="item-desc">اقضِ على 5 أعداء في استخدام واحد لتركيز القتال.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-19" data-track-id="t-19"><label for="t-19"><span class="item-name">Sneakthief</span><span class="item-desc">اسطُ على متجر مجوهرات دون أن تُكتشف.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-20" data-track-id="t-20"><label for="t-20"><span class="item-name">A Classic Blitz Play</span><span class="item-desc">اسطُ على شاحنة مدرعة واهرب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-21" data-track-id="t-21"><label for="t-21"><span class="item-name">The Goodtime State</span><span class="item-desc">استكشف ليونيدا كلها.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-22" data-track-id="t-22"><label for="t-22"><span class="item-name">Pest Control</span><span class="item-desc">اسطُ على عملية غير قانونية تخص كل عصابة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-23" data-track-id="t-23"><label for="t-23"><span class="item-name">Dime on the Dollar</span><span class="item-desc">اكسب $250,000 بغسل الأوراق النقدية المُعلَّمة عبر جهات اتصالك.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-24" data-track-id="t-24"><label for="t-24"><span class="item-name">Treat Yo Self</span><span class="item-desc">أنفق $100,000 في كل المتاجر.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-25" data-track-id="t-25"><label for="t-25"><span class="item-name">Little Boxes</span><span class="item-desc">اشترِ كل ممتلكات المرائب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-26" data-track-id="t-26"><label for="t-26"><span class="item-name">On the Spot</span><span class="item-desc">سجّل 10 مركبات في تطبيق Scooter Bros.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><details class="spoiler"><summary>الجوائز المخفية (28): حرق كبير لقصة اللعبة</summary><p class="dek">تسمّي هذه الجوائز الـ28 مهام القصة وشخصياتها. وهي مخفية هنا حتى لا تحرق الصفحة القصة عند أول عرض. وتحديدها ما زال يُحسب في شريط التقدم أعلاه.</p><ul class="check-list"><li class="check-item"><input type="checkbox" id="t-100" data-track-id="t-100"><label for="t-100"><span class="item-name">You Gotta Know When to Get Off</span><span class="item-desc">أكمل الفصل 5.</span><span class="item-meta"><span class="tier-pill tier-gold">ذهبية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-101" data-track-id="t-101"><label for="t-101"><span class="item-name">Just Like Paradise</span><span class="item-desc">أكمل Gone Fishing.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-102" data-track-id="t-102"><label for="t-102"><span class="item-name">Paradise Lost</span><span class="item-desc">أكمل الفصل 1.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-103" data-track-id="t-103"><label for="t-103"><span class="item-name">T**s Ass Drug Money</span><span class="item-desc">أكمل الفصل 2.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-104" data-track-id="t-104"><label for="t-104"><span class="item-name">Vice City, Baby!</span><span class="item-desc">أكمل الفصل 3.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-105" data-track-id="t-105"><label for="t-105"><span class="item-name">Top Of The World, Ma</span><span class="item-desc">أكمل الفصل 4.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-106" data-track-id="t-106"><label for="t-106"><span class="item-name">Trust</span><span class="item-desc">أكمل Breakfast Run.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-107" data-track-id="t-107"><label for="t-107"><span class="item-name">Break the Bank</span><span class="item-desc">أكمل The Cartel Heist.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-108" data-track-id="t-108"><label for="t-108"><span class="item-name">Family Matters</span><span class="item-desc">أكمل Child's Play.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-109" data-track-id="t-109"><label for="t-109"><span class="item-name">DWNFALL</span><span class="item-desc">أكمل Headliners.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-110" data-track-id="t-110"><label for="t-110"><span class="item-name">Hi-Jacked</span><span class="item-desc">أكمل VCIA Takedown.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-111" data-track-id="t-111"><label for="t-111"><span class="item-name">Snow Storm</span><span class="item-desc">أكمل Operation Savage Glory.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-112" data-track-id="t-112"><label for="t-112"><span class="item-name">Road to Rehabilitation</span><span class="item-desc">أكمل المهمة الأخيرة لـ Andy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-113" data-track-id="t-113"><label for="t-113"><span class="item-name">This Was No Boat Accident</span><span class="item-desc">أكمل المهمة الأخيرة لـ Kenton.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-114" data-track-id="t-114"><label for="t-114"><span class="item-name">The Lone Rider</span><span class="item-desc">أكمل المهمة الأخيرة لـ Billy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-115" data-track-id="t-115"><label for="t-115"><span class="item-name">Supply &amp; Demand</span><span class="item-desc">أكمل المهمة الأخيرة لـ Randy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-116" data-track-id="t-116"><label for="t-116"><span class="item-name">Spin On This!</span><span class="item-desc">أكمل المهمة الأخيرة لـ Tyrone.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-117" data-track-id="t-117"><label for="t-117"><span class="item-name">Fair Game</span><span class="item-desc">اصطد حيوانًا فريدًا لـ Bret.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-118" data-track-id="t-118"><label for="t-118"><span class="item-name">Catch Me If You Can</span><span class="item-desc">قم بمغادرة غير مجدولة في VCIA.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-119" data-track-id="t-119"><label for="t-119"><span class="item-name">Challenging Tank</span><span class="item-desc">الجو حار نوعًا ما في هذه الـ Rhinos.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-120" data-track-id="t-120"><label for="t-120"><span class="item-name">In The Beginning…</span><span class="item-desc">استمتع بكوكتيل مع إطلالة على Ocean Beach.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-121" data-track-id="t-121"><label for="t-121"><span class="item-name">Capital Offense</span><span class="item-desc">اخرج محطمًا من معرض مركبات بأسلوب كلاسيكي.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-122" data-track-id="t-122"><label for="t-122"><span class="item-name">Let&#x27;s Go Bowling</span><span class="item-desc">أكمل الرمية في صالة البولينغ الخاصة بـ Kolt &amp; Associates.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-123" data-track-id="t-123"><label for="t-123"><span class="item-name">Personal Best</span><span class="item-desc">شراكة ذات جاذبية جماهيرية.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-124" data-track-id="t-124"><label for="t-124"><span class="item-name">Actions Speak Louder</span><span class="item-desc">قرارات اتُّخذت (للأفضل أو للأسوأ).</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-125" data-track-id="t-125"><label for="t-125"><span class="item-name">Bad Luck, I Guess</span><span class="item-desc">المحاولة الثانية تجلب الحظ.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-126" data-track-id="t-126"><label for="t-126"><span class="item-name">The Truth Is Out There</span><span class="item-desc">ما الذي حدث للتو؟</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-127" data-track-id="t-127"><label for="t-127"><span class="item-name">Ten Pin</span><span class="item-desc">أطِح بهم بهجوم قتال قريب من مركبة متحركة</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></details><section aria-labelledby="sources"><h2 id="sources">المصادر: قائمة الجوائز</h2><ul><li>Insider Gaming، “Complete GTA 6 Trophy List”، نشر في 18 Nov 2026: جدول الأسماء الـ55 كاملًا (27 غير مخفية + 28 مخفية) مع الدرجات والأوصاف. https://insider-gaming.com/complete-gta-6-trophy-list-how-to-get-all-trophies-achievements/</li><li>Beebom، “GTA 6 Trophy List”: الأسماء الـ55 نفسها، والدرجات نفسها، والتقسيم 28/27 نفسه. https://beebom.com/gta-6-trophy-achievements-list/</li><li>gamemapa، 18 Nov 2026: 55 جائزة (1 بلاتينية، 2 ذهبية، 6 فضية، 46 برونزية)، و1,000 Gamerscore على Xbox؛ ويذكر صراحة أن Rockstar ولا Sony ولا Microsoft نشرت القائمة رسميًا. https://gamemapa.com/en/gta-6/guides/gta-6-trophy-achievement-list/</li><li>digitalnexus.pl: الـ55 والدرجات نفسها؛ وتقدير PowerPyx للبلاتينية نحو 200 ساعة، والصعوبة 4/10، ولا جائزة قابلة للتفويت. https://digitalnexus.pl/en/gta-6/trophy-list-platinum-guide/</li><li>الجائزة المطبوعة باسم “T**s Ass Drug Money” منقولة كما تطبعها قوائم المصادر تمامًا (مراقبة)؛ والفصل الذي تسمّيه هو “Tits Ass Drug Money”. تم الوصول إلى كل المصادر في 24 Nov 2026.</li></ul></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">صدرت GTA 6 الآن: Nov 19, 2026 &middot; <a href="/ar/tools">تصفح الأدوات <span aria-hidden="true">←</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/ar/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>أدوات. أدلة. GTA 6.</p>
+      <div class="done-banner" id="done-banner" role="status">تم تحديد الكل: هذه هي المجموعة الكاملة. أحسنت.</div>
+    </section>
+<section aria-labelledby="nonhidden"><h2 id="nonhidden">الجوائز غير المخفية (27)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="t-00" data-track-id="t-00"><label for="t-00"><span class="item-name">Vice Got a Price!</span><span class="item-desc">تهانينا! أنت أسطورة ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-platinum">بلاتينية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-01" data-track-id="t-01"><label for="t-01"><span class="item-name">A Long Road</span><span class="item-desc">حقّق إكمال 100%.</span><span class="item-meta"><span class="tier-pill tier-gold">ذهبية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-02" data-track-id="t-02"><label for="t-02"><span class="item-name">Cunning Stunts</span><span class="item-desc">أكمل 250 حيلة.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-03" data-track-id="t-03"><label for="t-03"><span class="item-name">The Shootist</span><span class="item-desc">احصل على ميدالية ذهبية في كل تحديات ميدان الرماية.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-04" data-track-id="t-04"><label for="t-04"><span class="item-name">Strangers &amp; Freaks</span><span class="item-desc">أكمل 8 سلاسل مهام للغرباء في أنحاء ولاية ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-05" data-track-id="t-05"><label for="t-05"><span class="item-name">Don&#x27;t Touch My Deck</span><span class="item-desc">أكمل 3 مجموعات بطاقات مقتنيات.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-06" data-track-id="t-06"><label for="t-06"><span class="item-name">You WAiNKer!</span><span class="item-desc">قم بـ WAiNK في 100 موقع.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-07" data-track-id="t-07"><label for="t-07"><span class="item-name">Maximum Withdrawal</span><span class="item-desc">اسطُ على 5 خزائن بنوك واهرب.</span><span class="item-meta"><span class="tier-pill tier-silver">فضية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-08" data-track-id="t-08"><label for="t-08"><span class="item-name">Master of None</span><span class="item-desc">جرّب كل نوع من الأنشطة مرة واحدة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-09" data-track-id="t-09"><label for="t-09"><span class="item-name">Top Fun</span><span class="item-desc">اربح سباق Top Fun Drone في كل موقع.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-10" data-track-id="t-10"><label for="t-10"><span class="item-name">Earn Cash, Not Kudos</span><span class="item-desc">اربح 20 سباقًا مختلفًا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-11" data-track-id="t-11"><label for="t-11"><span class="item-name">Baited My Tackle</span><span class="item-desc">تغلب على Cal في تحدي صيد.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-12" data-track-id="t-12"><label for="t-12"><span class="item-name">Stick Fiddler</span><span class="item-desc">أكمل لعبة أركيد.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-13" data-track-id="t-13"><label for="t-13"><span class="item-name">Positive Mental Attitude</span><span class="item-desc">تأمل في كل موقع في أنحاء ليونيدا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-14" data-track-id="t-14"><label for="t-14"><span class="item-name">One Last Thing</span><span class="item-desc">أكمل 50 تحديًا.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-15" data-track-id="t-15"><label for="t-15"><span class="item-name">Hot Together</span><span class="item-desc">تخلص من مستوى مطلوب 4 نجوم مع شريكك واهرب من المطاردة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-16" data-track-id="t-16"><label for="t-16"><span class="item-name">Retail Therapy</span><span class="item-desc">اسطُ على 3 متاجر متتالية مع شريكك دون أن تفقد مستوى المطلوب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-17" data-track-id="t-17"><label for="t-17"><span class="item-name">Whip It Good</span><span class="item-desc">اكتشف 100 مركبة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-18" data-track-id="t-18"><label for="t-18"><span class="item-name">Gunslinger</span><span class="item-desc">اقضِ على 5 أعداء في استخدام واحد لتركيز القتال.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-19" data-track-id="t-19"><label for="t-19"><span class="item-name">Sneakthief</span><span class="item-desc">اسطُ على متجر مجوهرات دون أن تُكتشف.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-20" data-track-id="t-20"><label for="t-20"><span class="item-name">A Classic Blitz Play</span><span class="item-desc">اسطُ على شاحنة مدرعة واهرب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-21" data-track-id="t-21"><label for="t-21"><span class="item-name">The Goodtime State</span><span class="item-desc">استكشف ليونيدا كلها.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-22" data-track-id="t-22"><label for="t-22"><span class="item-name">Pest Control</span><span class="item-desc">اسطُ على عملية غير قانونية تخص كل عصابة.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-23" data-track-id="t-23"><label for="t-23"><span class="item-name">Dime on the Dollar</span><span class="item-desc">اكسب $250,000 بغسل الأوراق النقدية المُعلَّمة عبر جهات اتصالك.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-24" data-track-id="t-24"><label for="t-24"><span class="item-name">Treat Yo Self</span><span class="item-desc">أنفق $100,000 في كل المتاجر.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-25" data-track-id="t-25"><label for="t-25"><span class="item-name">Little Boxes</span><span class="item-desc">اشترِ كل ممتلكات المرائب.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-26" data-track-id="t-26"><label for="t-26"><span class="item-name">On the Spot</span><span class="item-desc">سجّل 10 مركبات في تطبيق Scooter Bros.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><details class="spoiler"><summary>الجوائز المخفية (28): حرق كبير لقصة اللعبة</summary><p class="dek">تسمّي هذه الجوائز الـ28 مهام القصة وشخصياتها. وهي مخفية هنا حتى لا تحرق الصفحة القصة عند أول عرض. وتحديدها ما زال يُحسب في شريط التقدم أعلاه.</p><ul class="check-list"><li class="check-item"><input type="checkbox" id="t-100" data-track-id="t-100"><label for="t-100"><span class="item-name">You Gotta Know When to Get Off</span><span class="item-desc">أكمل الفصل 5.</span><span class="item-meta"><span class="tier-pill tier-gold">ذهبية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-101" data-track-id="t-101"><label for="t-101"><span class="item-name">Just Like Paradise</span><span class="item-desc">أكمل Gone Fishing.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-102" data-track-id="t-102"><label for="t-102"><span class="item-name">Paradise Lost</span><span class="item-desc">أكمل الفصل 1.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-103" data-track-id="t-103"><label for="t-103"><span class="item-name">T**s Ass Drug Money</span><span class="item-desc">أكمل الفصل 2.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-104" data-track-id="t-104"><label for="t-104"><span class="item-name">Vice City, Baby!</span><span class="item-desc">أكمل الفصل 3.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-105" data-track-id="t-105"><label for="t-105"><span class="item-name">Top Of The World, Ma</span><span class="item-desc">أكمل الفصل 4.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-106" data-track-id="t-106"><label for="t-106"><span class="item-name">Trust</span><span class="item-desc">أكمل Breakfast Run.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-107" data-track-id="t-107"><label for="t-107"><span class="item-name">Break the Bank</span><span class="item-desc">أكمل The Cartel Heist.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-108" data-track-id="t-108"><label for="t-108"><span class="item-name">Family Matters</span><span class="item-desc">أكمل Child's Play.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-109" data-track-id="t-109"><label for="t-109"><span class="item-name">DWNFALL</span><span class="item-desc">أكمل Headliners.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-110" data-track-id="t-110"><label for="t-110"><span class="item-name">Hi-Jacked</span><span class="item-desc">أكمل VCIA Takedown.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-111" data-track-id="t-111"><label for="t-111"><span class="item-name">Snow Storm</span><span class="item-desc">أكمل Operation Savage Glory.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-112" data-track-id="t-112"><label for="t-112"><span class="item-name">Road to Rehabilitation</span><span class="item-desc">أكمل المهمة الأخيرة لـ Andy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-113" data-track-id="t-113"><label for="t-113"><span class="item-name">This Was No Boat Accident</span><span class="item-desc">أكمل المهمة الأخيرة لـ Kenton.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-114" data-track-id="t-114"><label for="t-114"><span class="item-name">The Lone Rider</span><span class="item-desc">أكمل المهمة الأخيرة لـ Billy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-115" data-track-id="t-115"><label for="t-115"><span class="item-name">Supply &amp; Demand</span><span class="item-desc">أكمل المهمة الأخيرة لـ Randy.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-116" data-track-id="t-116"><label for="t-116"><span class="item-name">Spin On This!</span><span class="item-desc">أكمل المهمة الأخيرة لـ Tyrone.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-117" data-track-id="t-117"><label for="t-117"><span class="item-name">Fair Game</span><span class="item-desc">اصطد حيوانًا فريدًا لـ Bret.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-118" data-track-id="t-118"><label for="t-118"><span class="item-name">Catch Me If You Can</span><span class="item-desc">قم بمغادرة غير مجدولة في VCIA.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-119" data-track-id="t-119"><label for="t-119"><span class="item-name">Challenging Tank</span><span class="item-desc">الجو حار نوعًا ما في هذه الـ Rhinos.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-120" data-track-id="t-120"><label for="t-120"><span class="item-name">In The Beginning…</span><span class="item-desc">استمتع بكوكتيل مع إطلالة على Ocean Beach.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-121" data-track-id="t-121"><label for="t-121"><span class="item-name">Capital Offense</span><span class="item-desc">اخرج محطمًا من معرض مركبات بأسلوب كلاسيكي.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-122" data-track-id="t-122"><label for="t-122"><span class="item-name">Let&#x27;s Go Bowling</span><span class="item-desc">أكمل الرمية في صالة البولينغ الخاصة بـ Kolt &amp; Associates.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-123" data-track-id="t-123"><label for="t-123"><span class="item-name">Personal Best</span><span class="item-desc">شراكة ذات جاذبية جماهيرية.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-124" data-track-id="t-124"><label for="t-124"><span class="item-name">Actions Speak Louder</span><span class="item-desc">قرارات اتُّخذت (للأفضل أو للأسوأ).</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-125" data-track-id="t-125"><label for="t-125"><span class="item-name">Bad Luck, I Guess</span><span class="item-desc">المحاولة الثانية تجلب الحظ.</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-126" data-track-id="t-126"><label for="t-126"><span class="item-name">The Truth Is Out There</span><span class="item-desc">ما الذي حدث للتو؟</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="t-127" data-track-id="t-127"><label for="t-127"><span class="item-name">Ten Pin</span><span class="item-desc">أطِح بهم بهجوم قتال قريب من مركبة متحركة</span><span class="item-meta"><span class="tier-pill tier-bronze">برونزية</span><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></details><section aria-labelledby="sources"><h2 id="sources">المصادر: قائمة الجوائز</h2><ul><li>Insider Gaming، “Complete GTA 6 Trophy List”، نشر في 18 Nov 2026: جدول الأسماء الـ55 كاملًا (27 غير مخفية + 28 مخفية) مع الدرجات والأوصاف. https://insider-gaming.com/complete-gta-6-trophy-list-how-to-get-all-trophies-achievements/</li><li>Beebom، “GTA 6 Trophy List”: الأسماء الـ55 نفسها، والدرجات نفسها، والتقسيم 28/27 نفسه. https://beebom.com/gta-6-trophy-achievements-list/</li><li>gamemapa، 18 Nov 2026: 55 جائزة (1 بلاتينية، 2 ذهبية، 6 فضية، 46 برونزية)، و1,000 Gamerscore على Xbox؛ ويذكر صراحة أن Rockstar ولا Sony ولا Microsoft نشرت القائمة رسميًا. https://gamemapa.com/en/gta-6/guides/gta-6-trophy-achievement-list/</li><li>digitalnexus.pl: الـ55 والدرجات نفسها؛ وتقدير PowerPyx للبلاتينية نحو 200 ساعة، والصعوبة 4/10، ولا جائزة قابلة للتفويت. https://digitalnexus.pl/en/gta-6/trophy-list-platinum-guide/</li><li>الجائزة المطبوعة باسم “T**s Ass Drug Money” منقولة كما تطبعها قوائم المصادر تمامًا (مراقبة)؛ والفصل الذي تسمّيه هو “Tits Ass Drug Money”. تم الوصول إلى كل المصادر في 24 Nov 2026.</li></ul></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="روابط سريعة">
-      <h3>روابط سريعة</h3>
-      <ul>
-        <li><a href="/ar/">الرئيسية</a></li>
-        <li><a href="/ar/tools">الأدوات</a></li>
-        <li><a href="/ar/news">الأخبار</a></li>
-        <li><a href="/ar/trailers">العروض الدعائية</a></li>
-        <li><a href="/ar/guides">الأدلة</a></li><li><a href="/ar/sitemap">خريطة الموقع</a></li><li><a href="/ar/trending">الرائج</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="الفئات">
-      <h3>الفئات</h3>
-      <ul>
-        <li><a href="/ar/tools?category=release">أدوات الإصدار</a></li>
-        <li><a href="/ar/tools?category=pc">أدوات الحاسوب</a></li>
-        <li><a href="/ar/tools?category=performance">الأداء</a></li>
-        <li><a href="/ar/tools?category=comparison">المقارنة</a></li>
-        <li><a href="/ar/tools?category=trackers">أدوات التتبع</a></li>
-        <li><a href="/ar/tools?category=planners">المخططات</a></li>
-        <li><a href="/ar/generators">المولّدات</a></li>
-        <li><a href="/ar/guides">الأدلة</a></li>
-        <li><a href="/ar/tools?category=economy">الاقتصاد</a></li>
-        <li><a href="/ar/tools?category=map">الخريطة</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="نبذة عنا">
-      <h3>نبذة عنا</h3>
-      <ul>
-        <li><a href="/ar/about">نبذة عن ToolWools</a></li>
-        <li><a href="/ar/contact">اتصل بنا</a></li>
-        <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
-        <li><a href="/ar/terms">شروط الخدمة</a></li>
-        <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li><li><a href="/ar/methodology">المنهجية</a></li><li><a href="/editorial-policy">سياسة التحرير</a></li><li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</span>
-    <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
-    <span>صُنع بحب &hearts; لمعجبي GTA 6</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/ar/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">تصفح الأدوات ←</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/ar/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
+              </span>
+            </span>
+          </a>
+          <p>الوجهة النهائية لأدوات GTA 6 وحاسباتها ومتتبعاتها ومخططاتها وأدلتها. كل ما تحتاجه، في مكان واحد، بلا إعلانات أولا وبلا انتفاخ.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>أفضل الأدوات</h3>
+            <ul>
+              <li><a href="/ar/tools/system-requirements">هل يستطيع حاسوبي تشغيل GTA 6؟</a></li>
+              <li><a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a></li>
+              <li><a href="/ar/tools/download-time">حاسبة وقت التنزيل</a></li>
+              <li><a href="/ar/tools/system-requirements">متطلبات النظام</a></li>
+              <li><a href="/ar/tools/settings-optimizer">محسن الإعدادات</a></li>
+              <li><a href="/ar/tools/hardware-comparison">مقارنة الأجهزة</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>استكشف</h3>
+            <ul>
+              <li><a href="/ar/tools">جميع الأدوات</a></li>
+              <li><a href="/ar/trending">الرائج</a></li>
+              <li><a href="/ar/trackers">أدوات التتبع</a></li>
+              <li><a href="/ar/generators">المولّدات</a></li>
+              <li><a href="/ar/news">الأخبار</a></li>
+              <li><a href="/ar/trailers">العروض الدعائية</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>الموارد</h3>
+            <ul>
+              <li><a href="/ar/tools/interactive-map">الخريطة التفاعلية</a> <span class="footer-col-badge">جديد</span></li>
+              <li><a href="/ar/about">نبذة عنا</a></li>
+              <li><a href="/ar/methodology">المنهجية</a></li>
+              <li><a href="/ar/contact">اتصل بنا</a></li>
+              <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
+              <li><a href="/ar/sitemap">خريطة الموقع</a></li>
+              <li><a href="/editorial-policy">سياسة التحرير</a></li>
+              <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+              <li><a href="/ar/terms">شروط الخدمة</a></li>
+              <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
+          <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
   <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
   <div class="consent-actions">
@@ -247,37 +304,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/ar/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/ar/header.js" defer></script>
+<script src="/assets/js/ar/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/ar/newsletter.js" defer></script>
+<script src="/assets/js/ar/consent.js" defer></script>
 </body>
 </html>

@@ -37,6 +37,11 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,114 +73,117 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-ar.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">تخطَّ إلى المحتوى</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/ar/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="أدوات التتبع"><a href="/ar/trackers">أدوات التتبع</a><a href="/ar/trackers/missions">المهام</a><a href="/ar/trackers/collectibles">المقتنيات</a><a href="/ar/trackers/100-percent" aria-current="page">قائمة تحقق 100%</a><a href="/ar/trackers/trophies">الجوائز</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
+
+<header class="site-header" aria-label="الموقع">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/ar/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="التنقل الأساسي">
+          <a href="/ar/">الرئيسية</a>
+          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/trackers" aria-current="page">أدوات التتبع</a>
+          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/news">الأخبار</a>
+          <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers/100-percent">الإنجليزية</a>
+            <a href="/es/trackers/100-percent">Español</a>
+            <a href="/pt/trackers/100-percent">Português</a>
+            <a href="/de/trackers/100-percent">Deutsch</a>
+            <a href="/fr/trackers/100-percent">Français</a>
+            <a href="/tr/trackers/100-percent">Türkçe</a>
+            <a href="/ar/trackers/100-percent" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" aria-pressed="false">
+          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="افتح القائمة" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="ابحث في الأدوات" aria-label="ابحث عن الأدوات" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="الجوال">
+          <a href="/ar/">الرئيسية</a>
+          <a href="/ar/tools">الأدوات</a>
+          <a href="/ar/trackers" aria-current="page">أدوات التتبع</a>
+          <a href="/ar/generators">المولّدات</a>
+          <a href="/ar/news">الأخبار</a>
+          <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers/100-percent" lang="en">EN</a><a href="/es/trackers/100-percent" lang="es">ES</a><a href="/pt/trackers/100-percent" lang="pt">PT</a><a href="/de/trackers/100-percent" lang="de">DE</a><a href="/fr/trackers/100-percent" lang="fr">FR</a><a href="/tr/trackers/100-percent" lang="tr">TR</a><a href="/ar/trackers/100-percent" lang="ar" aria-current="true">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="مسار التنقل" class="breadcrumbs"><a href="/ar/">الرئيسية</a><span aria-hidden="true"> / </span><a href="/ar/trackers">أدوات التتبع</a><span aria-hidden="true"> / </span><span aria-current="page">قائمة تحقق 100%</span></nav><div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="متطلبات"><p class="eyebrow">قائمة تحقق 100%</p><h1>إكمال 100%: المتطلبات الـ35</h1><div class="note" role="note"><h2>100% تعني هذا: التعريف منشور</h2><p><strong>100% تعني: أنهِ القصة، ثم أكمل الأسطر الـ35 أدناه.</strong> تعيش قائمة التحقق في اللعبة تحت Progress > Stats > 100% Completion ولا تصبح مرئية إلا بعد القصة؛ والتقدم المحرز أثناء القصة يُحتسب أصلًا. إكمالها يمنح الجائزة الذهبية <strong>A Long Road</strong>.</p><p>تندرج الأسطر الـ35 في ثلاث مجموعات: القصة والمهام (12 سطرًا، 45%)، والاستكشاف والأنشطة (20 سطرًا، 45%)، والاكتشاف (3 أسطر، 10%). النسب المئوية هي حصص أقسام GTABase. لا شيء في قائمة التحقق قابل للتفويت: يمكن إنجاز كل شيء في التجوال الحر بعد القصة.</p><p><strong>إكمال 100% ليس نفسه إيجاد كل شيء.</strong> تطلب معظم الأسطر جزءًا فقط من فئة (300 من 397 حيلة، و50 من 91 عملية سطو، و200 من 277 مركبة). تضع PowerPyx قائمة التحقق عند نحو 60% من الإكمال الحقيقي للعبة. معظم المهام الجانبية والغرباء غير مطلوبين إطلاقًا.</p></div><p class="conf-legend"><span class="legend-label">الثقة:</span><span class="conf-pill conf-confirmed">مؤكد</span><span class="conf-pill conf-implied">مُستدل عليه بقوة</span><span class="conf-pill conf-community">مستنتج من المجتمع</span><span class="legend-label">مؤكد: ذُكر اسمه أو ظهر في مواد Rockstar الرسمية. مُستدل عليه بقوة: استُدل عليه بقوة من المواد الرسمية أو أكدته عدة أدلة مستقلة. مستنتج من المجتمع: نقل من دليل أو مجتمع، ويُعامل كتقدير.</span></p>
-    <div class="progress-block" aria-labelledby="progress-heading">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="مسار التنقل"><a href="/ar/">الرئيسية</a><span aria-hidden="true">/</span><a href="/ar/trackers">أدوات التتبع</a><span aria-hidden="true">/</span><span aria-current="page">قائمة تحقق 100%</span></div>
+      <div class="page-eyebrow"><span>قائمة تحقق 100%</span></div>
+      <h1 id="page-title" class="page-title">إكمال 100%: المتطلبات الـ35</h1>
+    </section>
+    <div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="متطلبات"><section class="tracker-workspace" aria-labelledby="progress-heading">
+      <div class="note" role="note"><h2>100% تعني هذا: التعريف منشور</h2><p><strong>100% تعني: أنهِ القصة، ثم أكمل الأسطر الـ35 أدناه.</strong> تعيش قائمة التحقق في اللعبة تحت Progress > Stats > 100% Completion ولا تصبح مرئية إلا بعد القصة؛ والتقدم المحرز أثناء القصة يُحتسب أصلًا. إكمالها يمنح الجائزة الذهبية <strong>A Long Road</strong>.</p><p>تندرج الأسطر الـ35 في ثلاث مجموعات: القصة والمهام (12 سطرًا، 45%)، والاستكشاف والأنشطة (20 سطرًا، 45%)، والاكتشاف (3 أسطر، 10%). النسب المئوية هي حصص أقسام GTABase. لا شيء في قائمة التحقق قابل للتفويت: يمكن إنجاز كل شيء في التجوال الحر بعد القصة.</p><p><strong>إكمال 100% ليس نفسه إيجاد كل شيء.</strong> تطلب معظم الأسطر جزءًا فقط من فئة (300 من 397 حيلة، و50 من 91 عملية سطو، و200 من 277 مركبة). تضع PowerPyx قائمة التحقق عند نحو 60% من الإكمال الحقيقي للعبة. معظم المهام الجانبية والغرباء غير مطلوبين إطلاقًا.</p></div>
+      <p class="conf-legend"><span class="legend-label">الثقة:</span><span class="conf-pill conf-confirmed">مؤكد</span><span class="conf-pill conf-implied">مُستدل عليه بقوة</span><span class="conf-pill conf-community">مستنتج من المجتمع</span><span class="legend-label">مؤكد: ذُكر اسمه أو ظهر في مواد Rockstar الرسمية. مُستدل عليه بقوة: استُدل عليه بقوة من المواد الرسمية أو أكدته عدة أدلة مستقلة. مستنتج من المجتمع: نقل من دليل أو مجتمع، ويُعامل كتقدير.</span></p>
+      <div class="progress-block" aria-labelledby="progress-heading">
       <h2 id="progress-heading" class="sr-only">تقدّمك</h2>
       <p class="progress-text" id="progress-text" aria-live="polite">0 / 0 محدد · 0%</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" role="progressbar" aria-label="التقدم" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div></div>
@@ -187,58 +195,108 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
       </div>
       <p class="progress-note" id="action-status" role="status"></p>
     </div>
-    <div class="done-banner" id="done-banner" role="status">تم تحديد الكل: هذه هي المجموعة الكاملة. أحسنت.</div>
-<section aria-labelledby="g-0"><h2 id="g-0">القصة والمهام (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">إكمال القصة</span><span class="item-desc">المطلوب: إنهاء القصة · في اللعبة: تظهر بنسبة 100%</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">المهام الاختيارية المكتملة</span><span class="item-desc">المطلوب: 100 · في اللعبة: تقدير 200–300</span><span class="item-desc">المهام الاختيارية هي أيقونات الخريطة بخلفية سوداء وحروف وردية والأيقونات البنفسجية. تقدّر PowerPyx وجود 200–300 منها.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">عمليات العصابات المُنجزة</span><span class="item-desc">المطلوب: 39 من 39 · في اللعبة: 39</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">عمليات البنوك المكتملة بالكامل</span><span class="item-desc">المطلوب: 22 من 22 · في اللعبة: 22</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">عمليات قروض يوم الدفع المكتملة بالكامل</span><span class="item-desc">المطلوب: 7 من 7 · في اللعبة: 7</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">عمليات التحطيم والنهب المكتملة بالكامل</span><span class="item-desc">المطلوب: 34 من 35 · في اللعبة: 35</span><span class="item-desc">محلات الرهن ومحلات المجوهرات. ادخل الغرفة الخلفية وانهب الخزنة، وإلا فقد لا تُحتسب.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">عمليات السطو المكتملة بالكامل</span><span class="item-desc">المطلوب: 50 من 91 · في اللعبة: 91</span><span class="item-desc">متاجر البقالة والوجبات السريعة والخمور.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">المخدرات المُصرّفة</span><span class="item-desc">المطلوب: $100,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">المجوهرات المُصرّفة</span><span class="item-desc">المطلوب: $100,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">الأوراق النقدية المُعلَّمة المُصرّفة</span><span class="item-desc">المطلوب: $250,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">الخزائن المقتحمة</span><span class="item-desc">المطلوب: 8 من 8 · في اللعبة: 8</span><span class="item-desc">في البنوك الكبيرة الثمانية.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">المركبات المُصرّفة</span><span class="item-desc">المطلوب: $200,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">الاستكشاف والأنشطة (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">مجموعات Kenton المكتملة</span><span class="item-desc">المطلوب: 5 من 7 · في اللعبة: 7</span><span class="item-desc">مجموعات الغوص عن الكنوز من سلسلة مهام Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">مجموعات بطاقات المقتنيات الموجودة</span><span class="item-desc">المطلوب: 15 من 18 · في اللعبة: 18</span><span class="item-desc">480 بطاقة فريدة في المجموعات الـ18.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">مواقع WAiNK الممسوحة</span><span class="item-desc">المطلوب: 100 · في اللعبة: أكثر من 100</span><span class="item-desc">معالم ومنحوتات ممسوحة بالهاتف.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">الاكتشافات تحت الماء الموجودة</span><span class="item-desc">المطلوب: 33 من 33 · في اللعبة: 33</span><span class="item-desc">حطام سفن غارقة، جزء من سلسلة مهام Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">المجلات والكتب والقصص المصورة الموجودة</span><span class="item-desc">المطلوب: 30 من 34 · في اللعبة: 34</span><span class="item-desc">27 مجلة إضافة إلى 7 عمليات تبادل كتب.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">مواقع التأمل المكتملة</span><span class="item-desc">المطلوب: 15 من 18 · في اللعبة: 18</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">فلامنغو الكوكايين المدمرة</span><span class="item-desc">المطلوب: 100 من 125 · في اللعبة: 125</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">قوائم التشغيل الفريدة المكتملة</span><span class="item-desc">المطلوب: 2 من 2 · في اللعبة: 2</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">الأنماط المكتشفة</span><span class="item-desc">المطلوب: 70 من 79 · في اللعبة: 79</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">السباقات الفريدة الفائزة</span><span class="item-desc">المطلوب: 30 من 40 · في اللعبة: 40</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">الميداليات الذهبية لتحدي السباق</span><span class="item-desc">المطلوب: 10 من 13 · في اللعبة: 13</span><span class="item-desc">رقم متنازع عليه: تشير MapDex إلى هذا الرقم المطلوب باعتباره الرقم المتنازع عليه الوحيد بين المصادر الثلاثة التي قارنتها (Press Start وPowerPyx وPush Square).</span><span class="item-meta"><span class="conf-pill conf-community">رقم متنازع عليه</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">الميداليات الذهبية لميدان الرماية</span><span class="item-desc">المطلوب: 42 من 42 · في اللعبة: 42</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">ألعاب الفيديو الملعوبة</span><span class="item-desc">المطلوب: 4 من 4 · في اللعبة: 4</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">خصوم البلياردو المهزومون</span><span class="item-desc">المطلوب: 5 من 7 · في اللعبة: 7</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">مواقع الغولف المصغر الملعوبة</span><span class="item-desc">المطلوب: 2 من 3 · في اللعبة: 3</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">سلال كرة السلة</span><span class="item-desc">المطلوب: 90 من 100 · في اللعبة: 100</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">تجارب الطائرات المسيّرة ضد الزمن المكتملة</span><span class="item-desc">المطلوب: 42 من 42 · في اللعبة: 42</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">الحيل المكتملة</span><span class="item-desc">المطلوب: 300 من 397 · في اللعبة: 397</span><span class="item-desc">130 قفزة استعراضية، و202 تحت الجسور، و40 طيران سكين، و25 قفزة قاعدة.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">التحديات المكتملة</span><span class="item-desc">المطلوب: 70 من 80 · في اللعبة: 80</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">مجموعات أهداف Bret</span><span class="item-desc">المطلوب: 15 من 15 · في اللعبة: 15</span><span class="item-desc">سلسلة مهام الصيد الخاصة بـ Bret.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">الاكتشاف (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">مركبات الطراز الأساسي الممسوحة</span><span class="item-desc">المطلوب: 200 من 277 · في اللعبة: 277</span><span class="item-desc">277 طرازًا أساسيًا من أصل 557 مركبة إجمالًا (280 منها Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">الأسلحة القياسية الموجودة</span><span class="item-desc">المطلوب: 50 من 66 · في اللعبة: 66</span><span class="item-desc">53 سلاحًا ناريًا، و9 أسلحة قتال قريب، و4 متفجرات.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">الحيوانات المدروسة</span><span class="item-desc">المطلوب: 100 من 255 · في اللعبة: 255</span><span class="item-desc">ادرس بالنظر من خلال المنظار؛ الصيد غير مطلوب لهذا السطر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><section aria-labelledby="notcovered"><h2 id="notcovered">ما لا تغطيه قائمة التحقق هذه</h2><ul><li>معظم سلاسل الغرباء / المهام الجانبية: 8 فقط مطلوبة لجائزة Strangers &amp; Freaks، وقائمة 100% نفسها لا تطلبها إلا ضمن المهام الاختيارية الـ100.</li><li>مجموعات المقتنيات الكاملة: معظم الأنواع مطلوبة جزئيًا فقط (15 من 18 مجموعة بطاقات، و5 من 7 مجموعات Kenton، و100 من 125 فلامنغو). إيجاد كل عنصر في فئة ما يتجاوز 100%.</li><li>المرائب والأعمال: امتلاك المرائب الثمانية كلها يمنح جائزة Little Boxes، لكن المرائب ليست سطرًا في قائمة تحقق 100%. لا يمكن شراء أي عمل في وضع القصة.</li><li>رموز الغش (يوجد 61) وقائمة الجوائز الـ55 الكاملة: قائمة التحقق تمنح جائزة واحدة، A Long Road؛ أما الجوائز الـ54 الأخرى فتُتتبع في <a href="/ar/trackers/trophies">متتبع الجوائز</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">المصادر: تعريف 100%</h2><ul><li>PowerPyx، “GTA 6 100% Completion Checklist &amp; Guide”: الأسطر الـ35 كلها منقولة من قائمة التحقق داخل اللعبة Progress > Stats > 100% Completion. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa، 18 Nov 2026: الأسطر الـ35 نفسها؛ حصص الأقسام: القصة والمهام 45% / الاستكشاف والأنشطة 45% / الاكتشاف 10%؛ ويلاحظ أن PowerPyx وGTABase تدرجان المتطلبات نفسها سطرًا سطرًا. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex، “GTA 6 100% Completion Checklist: 35 Requirements”: 35 سطرًا في المجموعات الثلاث نفسها؛ ويقارن Press Start وPowerPyx وPush Square ويشير إلى رقم مطلوب واحد باعتباره متنازعًا عليه (الميداليات الذهبية لتحدي السباق، 10 من 13)، وقد وُسم كذلك أعلاه. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>لم يُعثر على أي وثيقة من Rockstar عن قائمة التحقق؛ والتعريف أعلاه نقلٌ لقائمة التحقق داخل اللعبة من أدلة بعد الإطلاق، وليس منشورًا رسميًا من Rockstar. تم الوصول إلى كل المصادر في 24 Nov 2026.</li></ul></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">صدرت GTA 6 الآن: Nov 19, 2026 &middot; <a href="/ar/tools">تصفح الأدوات <span aria-hidden="true">←</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/ar/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>أدوات. أدلة. GTA 6.</p>
+      <div class="done-banner" id="done-banner" role="status">تم تحديد الكل: هذه هي المجموعة الكاملة. أحسنت.</div>
+    </section>
+<div class="tracker-groups">
+      <section aria-labelledby="g-0"><h2 id="g-0">القصة والمهام (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">إكمال القصة</span><span class="item-desc">المطلوب: إنهاء القصة · في اللعبة: تظهر بنسبة 100%</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">المهام الاختيارية المكتملة</span><span class="item-desc">المطلوب: 100 · في اللعبة: تقدير 200–300</span><span class="item-desc">المهام الاختيارية هي أيقونات الخريطة بخلفية سوداء وحروف وردية والأيقونات البنفسجية. تقدّر PowerPyx وجود 200–300 منها.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">عمليات العصابات المُنجزة</span><span class="item-desc">المطلوب: 39 من 39 · في اللعبة: 39</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">عمليات البنوك المكتملة بالكامل</span><span class="item-desc">المطلوب: 22 من 22 · في اللعبة: 22</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">عمليات قروض يوم الدفع المكتملة بالكامل</span><span class="item-desc">المطلوب: 7 من 7 · في اللعبة: 7</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">عمليات التحطيم والنهب المكتملة بالكامل</span><span class="item-desc">المطلوب: 34 من 35 · في اللعبة: 35</span><span class="item-desc">محلات الرهن ومحلات المجوهرات. ادخل الغرفة الخلفية وانهب الخزنة، وإلا فقد لا تُحتسب.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">عمليات السطو المكتملة بالكامل</span><span class="item-desc">المطلوب: 50 من 91 · في اللعبة: 91</span><span class="item-desc">متاجر البقالة والوجبات السريعة والخمور.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">المخدرات المُصرّفة</span><span class="item-desc">المطلوب: $100,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">المجوهرات المُصرّفة</span><span class="item-desc">المطلوب: $100,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">الأوراق النقدية المُعلَّمة المُصرّفة</span><span class="item-desc">المطلوب: $250,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">الخزائن المقتحمة</span><span class="item-desc">المطلوب: 8 من 8 · في اللعبة: 8</span><span class="item-desc">في البنوك الكبيرة الثمانية.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">المركبات المُصرّفة</span><span class="item-desc">المطلوب: $200,000 · في اللعبة: هدف نقدي</span><span class="item-desc">القيمة المُصرّفة، وليس عدد العناصر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">الاستكشاف والأنشطة (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">مجموعات Kenton المكتملة</span><span class="item-desc">المطلوب: 5 من 7 · في اللعبة: 7</span><span class="item-desc">مجموعات الغوص عن الكنوز من سلسلة مهام Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">مجموعات بطاقات المقتنيات الموجودة</span><span class="item-desc">المطلوب: 15 من 18 · في اللعبة: 18</span><span class="item-desc">480 بطاقة فريدة في المجموعات الـ18.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">مواقع WAiNK الممسوحة</span><span class="item-desc">المطلوب: 100 · في اللعبة: أكثر من 100</span><span class="item-desc">معالم ومنحوتات ممسوحة بالهاتف.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">الاكتشافات تحت الماء الموجودة</span><span class="item-desc">المطلوب: 33 من 33 · في اللعبة: 33</span><span class="item-desc">حطام سفن غارقة، جزء من سلسلة مهام Kenton.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">المجلات والكتب والقصص المصورة الموجودة</span><span class="item-desc">المطلوب: 30 من 34 · في اللعبة: 34</span><span class="item-desc">27 مجلة إضافة إلى 7 عمليات تبادل كتب.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">مواقع التأمل المكتملة</span><span class="item-desc">المطلوب: 15 من 18 · في اللعبة: 18</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">فلامنغو الكوكايين المدمرة</span><span class="item-desc">المطلوب: 100 من 125 · في اللعبة: 125</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">قوائم التشغيل الفريدة المكتملة</span><span class="item-desc">المطلوب: 2 من 2 · في اللعبة: 2</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">الأنماط المكتشفة</span><span class="item-desc">المطلوب: 70 من 79 · في اللعبة: 79</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">السباقات الفريدة الفائزة</span><span class="item-desc">المطلوب: 30 من 40 · في اللعبة: 40</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">الميداليات الذهبية لتحدي السباق</span><span class="item-desc">المطلوب: 10 من 13 · في اللعبة: 13</span><span class="item-desc">رقم متنازع عليه: تشير MapDex إلى هذا الرقم المطلوب باعتباره الرقم المتنازع عليه الوحيد بين المصادر الثلاثة التي قارنتها (Press Start وPowerPyx وPush Square).</span><span class="item-meta"><span class="conf-pill conf-community">رقم متنازع عليه</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">الميداليات الذهبية لميدان الرماية</span><span class="item-desc">المطلوب: 42 من 42 · في اللعبة: 42</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">ألعاب الفيديو الملعوبة</span><span class="item-desc">المطلوب: 4 من 4 · في اللعبة: 4</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">خصوم البلياردو المهزومون</span><span class="item-desc">المطلوب: 5 من 7 · في اللعبة: 7</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">مواقع الغولف المصغر الملعوبة</span><span class="item-desc">المطلوب: 2 من 3 · في اللعبة: 3</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">سلال كرة السلة</span><span class="item-desc">المطلوب: 90 من 100 · في اللعبة: 100</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">تجارب الطائرات المسيّرة ضد الزمن المكتملة</span><span class="item-desc">المطلوب: 42 من 42 · في اللعبة: 42</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">الحيل المكتملة</span><span class="item-desc">المطلوب: 300 من 397 · في اللعبة: 397</span><span class="item-desc">130 قفزة استعراضية، و202 تحت الجسور، و40 طيران سكين، و25 قفزة قاعدة.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">التحديات المكتملة</span><span class="item-desc">المطلوب: 70 من 80 · في اللعبة: 80</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">مجموعات أهداف Bret</span><span class="item-desc">المطلوب: 15 من 15 · في اللعبة: 15</span><span class="item-desc">سلسلة مهام الصيد الخاصة بـ Bret.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">الاكتشاف (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">مركبات الطراز الأساسي الممسوحة</span><span class="item-desc">المطلوب: 200 من 277 · في اللعبة: 277</span><span class="item-desc">277 طرازًا أساسيًا من أصل 557 مركبة إجمالًا (280 منها Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">الأسلحة القياسية الموجودة</span><span class="item-desc">المطلوب: 50 من 66 · في اللعبة: 66</span><span class="item-desc">53 سلاحًا ناريًا، و9 أسلحة قتال قريب، و4 متفجرات.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">الحيوانات المدروسة</span><span class="item-desc">المطلوب: 100 من 255 · في اللعبة: 255</span><span class="item-desc">ادرس بالنظر من خلال المنظار؛ الصيد غير مطلوب لهذا السطر.</span><span class="item-meta"><span class="conf-pill conf-community">مستنتج من المجتمع</span></span></label></li></ul></section>
+    </div><section aria-labelledby="notcovered"><h2 id="notcovered">ما لا تغطيه قائمة التحقق هذه</h2><ul><li>معظم سلاسل الغرباء / المهام الجانبية: 8 فقط مطلوبة لجائزة Strangers &amp; Freaks، وقائمة 100% نفسها لا تطلبها إلا ضمن المهام الاختيارية الـ100.</li><li>مجموعات المقتنيات الكاملة: معظم الأنواع مطلوبة جزئيًا فقط (15 من 18 مجموعة بطاقات، و5 من 7 مجموعات Kenton، و100 من 125 فلامنغو). إيجاد كل عنصر في فئة ما يتجاوز 100%.</li><li>المرائب والأعمال: امتلاك المرائب الثمانية كلها يمنح جائزة Little Boxes، لكن المرائب ليست سطرًا في قائمة تحقق 100%. لا يمكن شراء أي عمل في وضع القصة.</li><li>رموز الغش (يوجد 61) وقائمة الجوائز الـ55 الكاملة: قائمة التحقق تمنح جائزة واحدة، A Long Road؛ أما الجوائز الـ54 الأخرى فتُتتبع في <a href="/ar/trackers/trophies">متتبع الجوائز</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">المصادر: تعريف 100%</h2><ul><li>PowerPyx، “GTA 6 100% Completion Checklist &amp; Guide”: الأسطر الـ35 كلها منقولة من قائمة التحقق داخل اللعبة Progress > Stats > 100% Completion. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa، 18 Nov 2026: الأسطر الـ35 نفسها؛ حصص الأقسام: القصة والمهام 45% / الاستكشاف والأنشطة 45% / الاكتشاف 10%؛ ويلاحظ أن PowerPyx وGTABase تدرجان المتطلبات نفسها سطرًا سطرًا. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex، “GTA 6 100% Completion Checklist: 35 Requirements”: 35 سطرًا في المجموعات الثلاث نفسها؛ ويقارن Press Start وPowerPyx وPush Square ويشير إلى رقم مطلوب واحد باعتباره متنازعًا عليه (الميداليات الذهبية لتحدي السباق، 10 من 13)، وقد وُسم كذلك أعلاه. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>لم يُعثر على أي وثيقة من Rockstar عن قائمة التحقق؛ والتعريف أعلاه نقلٌ لقائمة التحقق داخل اللعبة من أدلة بعد الإطلاق، وليس منشورًا رسميًا من Rockstar. تم الوصول إلى كل المصادر في 24 Nov 2026.</li></ul></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="روابط سريعة">
-      <h3>روابط سريعة</h3>
-      <ul>
-        <li><a href="/ar/">الرئيسية</a></li>
-        <li><a href="/ar/tools">الأدوات</a></li>
-        <li><a href="/ar/news">الأخبار</a></li>
-        <li><a href="/ar/trailers">العروض الدعائية</a></li>
-        <li><a href="/ar/guides">الأدلة</a></li><li><a href="/ar/sitemap">خريطة الموقع</a></li><li><a href="/ar/trending">الرائج</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="الفئات">
-      <h3>الفئات</h3>
-      <ul>
-        <li><a href="/ar/tools?category=release">أدوات الإصدار</a></li>
-        <li><a href="/ar/tools?category=pc">أدوات الحاسوب</a></li>
-        <li><a href="/ar/tools?category=performance">الأداء</a></li>
-        <li><a href="/ar/tools?category=comparison">المقارنة</a></li>
-        <li><a href="/ar/tools?category=trackers">أدوات التتبع</a></li>
-        <li><a href="/ar/tools?category=planners">المخططات</a></li>
-        <li><a href="/ar/generators">المولّدات</a></li>
-        <li><a href="/ar/guides">الأدلة</a></li>
-        <li><a href="/ar/tools?category=economy">الاقتصاد</a></li>
-        <li><a href="/ar/tools?category=map">الخريطة</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="نبذة عنا">
-      <h3>نبذة عنا</h3>
-      <ul>
-        <li><a href="/ar/about">نبذة عن ToolWools</a></li>
-        <li><a href="/ar/contact">اتصل بنا</a></li>
-        <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
-        <li><a href="/ar/terms">شروط الخدمة</a></li>
-        <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li><li><a href="/ar/methodology">المنهجية</a></li><li><a href="/editorial-policy">سياسة التحرير</a></li><li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</span>
-    <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
-    <span>صُنع بحب &hearts; لمعجبي GTA 6</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/ar/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">تصفح الأدوات ←</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/ar/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
+              </span>
+            </span>
+          </a>
+          <p>الوجهة النهائية لأدوات GTA 6 وحاسباتها ومتتبعاتها ومخططاتها وأدلتها. كل ما تحتاجه، في مكان واحد، بلا إعلانات أولا وبلا انتفاخ.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>أفضل الأدوات</h3>
+            <ul>
+              <li><a href="/ar/tools/system-requirements">هل يستطيع حاسوبي تشغيل GTA 6؟</a></li>
+              <li><a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a></li>
+              <li><a href="/ar/tools/download-time">حاسبة وقت التنزيل</a></li>
+              <li><a href="/ar/tools/system-requirements">متطلبات النظام</a></li>
+              <li><a href="/ar/tools/settings-optimizer">محسن الإعدادات</a></li>
+              <li><a href="/ar/tools/hardware-comparison">مقارنة الأجهزة</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>استكشف</h3>
+            <ul>
+              <li><a href="/ar/tools">جميع الأدوات</a></li>
+              <li><a href="/ar/trending">الرائج</a></li>
+              <li><a href="/ar/trackers">أدوات التتبع</a></li>
+              <li><a href="/ar/generators">المولّدات</a></li>
+              <li><a href="/ar/news">الأخبار</a></li>
+              <li><a href="/ar/trailers">العروض الدعائية</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>الموارد</h3>
+            <ul>
+              <li><a href="/ar/tools/interactive-map">الخريطة التفاعلية</a> <span class="footer-col-badge">جديد</span></li>
+              <li><a href="/ar/about">نبذة عنا</a></li>
+              <li><a href="/ar/methodology">المنهجية</a></li>
+              <li><a href="/ar/contact">اتصل بنا</a></li>
+              <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
+              <li><a href="/ar/sitemap">خريطة الموقع</a></li>
+              <li><a href="/editorial-policy">سياسة التحرير</a></li>
+              <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+              <li><a href="/ar/terms">شروط الخدمة</a></li>
+              <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
+          <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
   <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
   <div class="consent-actions">
@@ -247,37 +305,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/ar/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/ar/header.js" defer></script>
+<script src="/assets/js/ar/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/ar/newsletter.js" defer></script>
+<script src="/assets/js/ar/consent.js" defer></script>
 </body>
 </html>

@@ -57,7 +57,7 @@
   var storageNote = $("#storage-note");
   if (storageNote) {
     storageNote.textContent = storageOK
-      ? "Your progress is saved in this browser only. Clearing browser data clears it — there is no account and no sync."
+      ? "Your progress is saved in this browser only. Clearing browser data clears it, there is no account and no sync."
       : "Browser storage is unavailable (for example, private mode), so your progress lasts for this session only and will not be saved.";
   }
 
@@ -110,7 +110,7 @@
       });
       var status = $("#action-status");
       var text = lines.length ? lines.join("\n") : "Nothing checked yet.";
-      function done(ok) { if (status) status.textContent = ok ? "Copied " + lines.length + " checked item(s) to the clipboard." : "Copy did not work in this browser — select the list manually."; }
+      function done(ok) { if (status) status.textContent = ok ? "Copied " + lines.length + " checked item(s) to the clipboard." : "Copy did not work in this browser, select the list manually."; }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
       } else { done(false); }
@@ -174,7 +174,7 @@
         if (inp) {
           var lo = inp.getAttribute("data-band-lo"), hi = inp.getAttribute("data-band-hi");
           var v = parseInt(inp.value, 10);
-          out.textContent = (isNaN(v) ? 0 : v) + " found \u2014 band " + lo + "\u2013" + hi;
+          out.textContent = (isNaN(v) ? 0 : v) + " found, band " + lo + "\u2013" + hi;
         } else {
           var box = typeEl.querySelector('input[type="checkbox"][data-spot-id]');
           out.textContent = (box && box.checked) ? "Spotted in the world" : "Not spotted yet";

@@ -37,6 +37,13 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,163 +69,213 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-pt.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">Pular para o conteúdo</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/pt/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="Rastreadores"><a href="/pt/trackers" aria-current="page">Rastreadores</a><a href="/pt/trackers/missions">Missões</a><a href="/pt/trackers/collectibles">Colecionáveis</a><a href="/pt/trackers/100-percent">Checklist 100%</a><a href="/pt/trackers/trophies">Troféus</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Mudar para o tema escuro" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" aria-label="Site">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/pt/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Principal">
+          <a href="/pt/">Início</a>
+          <a href="/pt/tools">Ferramentas</a>
+          <a href="/pt/trackers" aria-current="page">Rastreadores</a>
+          <a href="/pt/generators">Geradores</a>
+          <a href="/pt/news">Notícias</a>
+          <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers">English</a>
+            <a href="/es/trackers">Español</a>
+            <a href="/pt/trackers" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Português</a>
+            <a href="/de/trackers">Deutsch</a>
+            <a href="/fr/trackers">Français</a>
+            <a href="/tr/trackers">Türkçe</a>
+            <a href="/ar/trackers">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Mudar para o tema escuro" aria-pressed="false">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Móvel">
+          <a href="/pt/">Início</a>
+          <a href="/pt/tools">Ferramentas</a>
+          <a href="/pt/trackers" aria-current="page">Rastreadores</a>
+          <a href="/pt/generators">Geradores</a>
+          <a href="/pt/news">Notícias</a>
+          <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers" lang="en">EN</a><a href="/es/trackers" lang="es">ES</a><a href="/pt/trackers" lang="pt" aria-current="true">PT</a><a href="/de/trackers" lang="de">DE</a><a href="/fr/trackers" lang="fr">FR</a><a href="/tr/trackers" lang="tr">TR</a><a href="/ar/trackers" lang="ar">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="Trilha de navegação" class="breadcrumbs"><a href="/pt/">Início</a><span aria-hidden="true"> / </span><span aria-current="page">Rastreadores</span></nav><div data-tracker-kind="hub"><p class="eyebrow">Rastreadores</p><h1>Rastreadores do GTA 6: missões, colecionáveis, troféus</h1><p class="dek">Quatro rastreadores que funcionam. Cada um leva à sua própria página, e cada página mostra seu progresso neste navegador. Sem conta, sem sincronização: limpar os dados do navegador apaga o progresso.</p><div class="tracker-grid" style="margin-top:32px"><article class="tracker-card" data-hub-key="tw-tracker-missions" data-hub-kind="checkbox" data-hub-total="91" data-hub-label="missões"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><h2>Rastreador de missões</h2><p>As 91 missões da história em 5 capítulos, com subtotais por capítulo.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de missões" aria-valuemin="0" aria-valuemax="91" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/missions">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-collectibles" data-hub-kind="collectibles" data-hub-total="8" data-hub-label="tipos iniciados"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg><h2>Rastreador de colecionáveis</h2><p>8 tipos de colecionáveis em Leonida: faixas onde há contagens, listas de avistamentos onde não há.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de colecionáveis" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/collectibles">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-100-percent" data-hub-kind="checkbox" data-hub-total="35" data-hub-label="requisitos"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><h2>Checklist 100%</h2><p>Os 35 requisitos que a checklist 100% do jogo realmente pede: a definição, publicada.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso da checklist 100%" aria-valuemin="0" aria-valuemax="35" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/100-percent">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-trophies" data-hub-kind="checkbox" data-hub-total="55" data-hub-label="troféus"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><h2>Rastreador de troféus</h2><p>Os 55 troféus e conquistas: 1 Platina, 2 Ouro, 6 Prata, 46 Bronze.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de troféus" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/trophies">Abrir rastreador →</a></p></article></div><section aria-labelledby="what-changed"><h2 id="what-changed">O que mudou nesta página</h2><ul><li>A página antiga anunciava seis rastreadores que não existiam, e os seis cartões apontavam para esta mesma página. Cada cartão acima agora leva à sua própria página.</li><li>Os quatro rastreadores acima estão abertos e podem ser marcados.</li><li>Garagem de veículos e Equipamento de armas não têm cartão nem página: não estão aprovados. Veículos e armas são cobertos pelas ferramentas de <a href="https://toolwools.com/pt/tools/vehicle-comparison">comparação de veículos</a> e <a href="https://toolwools.com/pt/tools/weapon-comparison">comparação de armas</a> ferramentas.</li><li>Estranhos e trabalhos secundários fazem parte dos rastreadores de missões e troféus (8 fios de estranhos para o troféu Strangers &amp; Freaks), não são um cartão separado.</li></ul></section><section aria-labelledby="how-saved"><h2 id="how-saved">Como seu progresso é salvo</h2><p class="dek">Marcar uma caixa o salva neste navegador (localStorage, uma chave por rastreador: <code>tw-tracker-missions</code>, <code>tw-tracker-collectibles</code>, <code>tw-tracker-100-percent</code>, <code>tw-tracker-trophies</code>). Nada sai do seu dispositivo. Se o armazenamento do navegador não estiver disponível, o progresso dura apenas a sessão: a página do rastreador diz isso claramente.</p></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">GTA 6 já está disponível: Nov 19, 2026 &middot; <a href="/pt/tools">Explorar ferramentas <span aria-hidden="true">&rarr;</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/pt/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>Ferramentas. Guias. GTA 6.</p>
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Trilha de navegação"><a href="/pt/">Início</a><span aria-hidden="true">/</span><span aria-current="page">Rastreadores</span></div>
+      <div class="page-eyebrow"><span>Rastreadores</span></div>
+      <h1 id="page-title" class="page-title">Rastreadores do GTA 6: missões, colecionáveis, troféus</h1>
+      <p class="page-subtitle">Quatro rastreadores que funcionam. Cada um leva à sua própria página, e cada página mostra seu progresso neste navegador. Sem conta, sem sincronização: limpar os dados do navegador apaga o progresso.</p>
+    </section>
+    <div data-tracker-kind="hub"><div class="tracker-grid"><article class="tracker-card" data-hub-key="tw-tracker-missions" data-hub-kind="checkbox" data-hub-total="91" data-hub-label="missões"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><h2>Rastreador de missões</h2><p>As 91 missões da história em 5 capítulos, com subtotais por capítulo.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de missões" aria-valuemin="0" aria-valuemax="91" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/missions">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-collectibles" data-hub-kind="collectibles" data-hub-total="8" data-hub-label="tipos iniciados"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg><h2>Rastreador de colecionáveis</h2><p>8 tipos de colecionáveis em Leonida: faixas onde há contagens, listas de avistamentos onde não há.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de colecionáveis" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/collectibles">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-100-percent" data-hub-kind="checkbox" data-hub-total="35" data-hub-label="requisitos"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><h2>Checklist 100%</h2><p>Os 35 requisitos que a checklist 100% do jogo realmente pede: a definição, publicada.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso da checklist 100%" aria-valuemin="0" aria-valuemax="35" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/100-percent">Abrir rastreador →</a></p></article><article class="tracker-card" data-hub-key="tw-tracker-trophies" data-hub-kind="checkbox" data-hub-total="55" data-hub-label="troféus"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><h2>Rastreador de troféus</h2><p>Os 55 troféus e conquistas: 1 Platina, 2 Ouro, 6 Prata, 46 Bronze.</p><p class="progress-text" data-hub-progress aria-live="polite">Nada marcado ainda</p><div class="progress-track"><div class="progress-fill" data-hub-fill role="progressbar" aria-label="Progresso do rastreador de troféus" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" data-hub-bar></div></div><p><a class="card-link" href="/pt/trackers/trophies">Abrir rastreador →</a></p></article></div><section aria-labelledby="what-changed"><h2 id="what-changed">O que mudou nesta página</h2><ul><li>A página antiga anunciava seis rastreadores que não existiam, e os seis cartões apontavam para esta mesma página. Cada cartão acima agora leva à sua própria página.</li><li>Os quatro rastreadores acima estão abertos e podem ser marcados.</li><li>Garagem de veículos e Equipamento de armas não têm cartão nem página: não estão aprovados. Veículos e armas são cobertos pelas ferramentas de <a href="https://toolwools.com/pt/tools/vehicle-comparison">comparação de veículos</a> e <a href="https://toolwools.com/pt/tools/weapon-comparison">comparação de armas</a> ferramentas.</li><li>Estranhos e trabalhos secundários fazem parte dos rastreadores de missões e troféus (8 fios de estranhos para o troféu Strangers &amp; Freaks), não são um cartão separado.</li></ul></section><section aria-labelledby="how-saved"><h2 id="how-saved">Como seu progresso é salvo</h2><p class="dek">Marcar uma caixa o salva neste navegador (localStorage, uma chave por rastreador: <code>tw-tracker-missions</code>, <code>tw-tracker-collectibles</code>, <code>tw-tracker-100-percent</code>, <code>tw-tracker-trophies</code>). Nada sai do seu dispositivo. Se o armazenamento do navegador não estiver disponível, o progresso dura apenas a sessão: a página do rastreador diz isso claramente.</p></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="Links rápidos">
-      <h3>Links rápidos</h3>
-      <ul>
-        <li><a href="/pt/">Início</a></li>
-        <li><a href="/pt/tools">Ferramentas</a></li>
-        <li><a href="/pt/news">Notícias</a></li>
-        <li><a href="/pt/trailers">Trailers</a></li>
-        <li><a href="/pt/guides">Guias</a></li><li><a href="/pt/sitemap">Mapa do site</a></li><li><a href="/pt/trending">Em alta</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Categorias">
-      <h3>Categorias</h3>
-      <ul>
-        <li><a href="/pt/tools?category=release">Ferramentas de lançamento</a></li>
-        <li><a href="/pt/tools?category=pc">Ferramentas de PC</a></li>
-        <li><a href="/pt/tools?category=performance">Desempenho</a></li>
-        <li><a href="/pt/tools?category=comparison">Comparação</a></li>
-        <li><a href="/pt/tools?category=trackers">Rastreadores</a></li>
-        <li><a href="/pt/tools?category=planners">Planejadores</a></li>
-        <li><a href="/pt/generators">Geradores</a></li>
-        <li><a href="/pt/guides">Guias</a></li>
-        <li><a href="/pt/tools?category=economy">Economia</a></li>
-        <li><a href="/pt/tools?category=map">Mapa</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Sobre">
-      <h3>Sobre</h3>
-      <ul>
-        <li><a href="/pt/about">Sobre a ToolWools</a></li>
-        <li><a href="/pt/contact">Contato</a></li>
-        <li><a href="/pt/privacy">Política de privacidade</a></li>
-        <li><a href="/pt/terms">Termos de serviço</a></li>
-        <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li><li><a href="/pt/methodology">Metodologia</a></li><li><a href="/editorial-policy">Política editorial</a></li><li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 ToolWools. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</span>
-    <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><button type="button" data-consent-open>Configurações de cookies</button></span>
-    <span>Feito para a comunidade de GTA &hearts;</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/pt/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 já está disponível, 19 de novembro de 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Explorar ferramentas →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/pt/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
+              </span>
+            </span>
+          </a>
+          <p>O destino definitivo para ferramentas, calculadoras, rastreadores, planejadores e guias de GTA 6. Tudo o que você precisa em um só lugar, sem publicidade invasiva nem conteúdo desnecessário.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>Principais ferramentas</h3>
+            <ul>
+              <li><a href="/pt/tools/system-requirements">Meu PC roda GTA 6?</a></li>
+              <li><a href="/pt/tools/fps-calculator">Calculadora de FPS</a></li>
+              <li><a href="/pt/tools/download-time">Calculadora de tempo de download</a></li>
+              <li><a href="/pt/tools/system-requirements">Requisitos do sistema</a></li>
+              <li><a href="/pt/tools/settings-optimizer">Otimizador de configurações</a></li>
+              <li><a href="/pt/tools/hardware-comparison">Comparação de hardware</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Explorar</h3>
+            <ul>
+              <li><a href="/pt/tools">Todas as Ferramentas</a></li>
+              <li><a href="/pt/trending">Em alta</a></li>
+              <li><a href="/pt/trackers">Rastreadores</a></li>
+              <li><a href="/pt/generators">Geradores</a></li>
+              <li><a href="/pt/news">Notícias</a></li>
+              <li><a href="/pt/trailers">Trailers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="/pt/tools/interactive-map">Mapa interativo</a> <span class="footer-col-badge">Novo</span></li>
+              <li><a href="/pt/about">Sobre</a></li>
+              <li><a href="/pt/methodology">Metodologia</a></li>
+              <li><a href="/pt/contact">Contato</a></li>
+              <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
+              <li><a href="/pt/sitemap">Mapa do site</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
+              <li><a href="/pt/privacy">Política de privacidade</a></li>
+              <li><a href="/pt/terms">Termos de serviço</a></li>
+              <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
+          <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
   <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
   <div class="consent-actions">
@@ -227,37 +284,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/pt/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/pt/header.js" defer></script>
+<script src="/assets/js/pt/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/pt/newsletter.js" defer></script>
+<script src="/assets/js/pt/consent.js" defer></script>
 </body>
 </html>

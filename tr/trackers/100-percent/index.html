@@ -37,6 +37,13 @@
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
 <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,114 +75,117 @@
 }
 </script>
 <script>
-/* No-flash theme guard. DEFAULT_THEME is the single named constant:
-   light-first on first visit (COMPONENT-SYSTEM §3). A saved tw-theme
-   choice always wins. Runs before any stylesheet, before first paint. */
-(function(){var DEFAULT_THEME="light";var t=null;try{t=localStorage.getItem("tw-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=DEFAULT_THEME}document.documentElement.dataset.theme=t;document.documentElement.classList.toggle("dark",t==="dark");})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
 </script>
-<link rel="stylesheet" href="/assets/css/trackers.css">
-<style>
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body)}
-.wrap{max-width:var(--content-max);margin:0 auto;padding:0 20px}
-a{color:var(--color-accent-text)}
-a:hover{color:var(--color-accent-text)}
-header.site{position:sticky;top:0;z-index:var(--z-sticky);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
-.site-inner{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
-.wordmark{font-family:var(--font-display);font-weight:800;color:var(--color-text);text-decoration:none;font-size:20px;letter-spacing:.02em;white-space:nowrap}
-.wordmark em{font-style:normal;color:var(--color-accent-text)}
-nav.main{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;align-items:center}
-nav.main a{color:var(--color-text);text-decoration:none;padding:10px 10px;border-radius:var(--radius-md);font-size:var(--text-nav);font-weight:600;min-height:44px;display:inline-flex;align-items:center}
-nav.main a[aria-current="page"]{color:var(--color-accent-text)}
-.theme-toggle{flex:none;width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-.theme-toggle svg{width:20px;height:20px}
-main{padding:32px 0 64px}
-.breadcrumbs{font-size:var(--text-body-sm);color:var(--color-text-secondary);margin:0 0 16px}
-.breadcrumbs a{color:var(--color-text-secondary)}
-.eyebrow{font-size:var(--text-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-text);margin:0 0 8px}
-h1{font-family:var(--font-display);font-size:var(--text-h1);line-height:var(--text-h1-line);letter-spacing:-.02em;margin:0 0 12px;overflow-wrap:anywhere}
-h2{font-family:var(--font-display);font-size:var(--text-h2);line-height:var(--text-h2-line);margin:0 0 8px;overflow-wrap:anywhere}
-h3{font-family:var(--font-display);font-size:var(--text-h3);line-height:var(--text-h3-line);margin:0 0 8px;overflow-wrap:anywhere}
-.dek{color:var(--color-text-secondary);max-width:var(--measure-body);margin:0 0 8px}
-.dek strong{color:var(--color-text)}
-section{margin-top:40px}
-.note{border:1px solid var(--color-border);border-left:4px solid var(--color-accent);background:var(--color-surface);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0}
-.note p{margin:0 0 8px}
-.note p:last-child{margin-bottom:0}
-.note h2{font-size:var(--text-h4);margin:0 0 8px}
-.conf-legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 0}
-.conf-legend span.legend-label{font-size:var(--text-body-sm);color:var(--color-text-secondary);font-weight:600}
-.conf-pill{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap;max-width:100%}
-.conf-confirmed{color:var(--color-success-text);background:var(--color-success-bg);border-color:var(--color-success-border)}
-.conf-implied{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.conf-community{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-pill{display:inline-flex;align-items:center;font-size:var(--text-label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:var(--radius-pill);border:1px solid;white-space:nowrap}
-.tier-platinum{color:var(--color-info-text);background:var(--color-info-bg);border-color:var(--color-info-border)}
-.tier-gold{color:var(--color-warning-text);background:var(--color-warning-bg);border-color:var(--color-warning-border)}
-.tier-silver{color:var(--color-text);background:var(--color-surface);border-color:var(--color-border-strong)}
-.tier-bronze{color:var(--color-text-secondary);background:var(--color-bg-secondary);border-color:var(--color-border-strong)}
-.progress-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin:24px 0;box-shadow:var(--shadow-sm)}
-.progress-text{font-weight:700;font-size:18px;margin:0 0 8px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.progress-track{height:12px;border-radius:var(--radius-pill);background:var(--color-bg-secondary);overflow:hidden}
-.progress-fill{height:100%;background:var(--color-accent);border-radius:var(--radius-pill);width:0%;transition:width var(--duration-fast) var(--ease-out)}
-.progress-note{color:var(--color-text-secondary);font-size:var(--text-body-sm);margin:12px 0 0}
-.progress-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.done-banner{display:none;border:1px solid var(--color-success-border);background:var(--color-success-bg);color:var(--color-success-text);border-radius:var(--radius-lg);padding:16px 20px;margin:24px 0;font-weight:600}
-.done-banner.show{display:block}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;border-radius:var(--radius-pill);font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;text-decoration:none;font-family:inherit}
-.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
-.btn-primary:hover{background:var(--color-accent-hover)}
-.btn-primary:active{transform:translateY(1px)}
-.btn-secondary{background:transparent;border-color:var(--color-border-strong);color:var(--color-text)}
-.btn-secondary:hover{border-color:var(--color-border-hover)}
-.check-list{list-style:none;margin:0;padding:0}
-.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--color-border);min-height:44px}
-.check-item input[type="checkbox"]{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--color-accent);cursor:pointer}
-.check-item label{cursor:pointer;flex:1;min-width:0}
-.item-name{display:block;font-weight:600;overflow-wrap:anywhere}
-.item-desc{display:block;color:var(--color-text-secondary);font-size:var(--text-body-sm);overflow-wrap:anywhere}
-.item-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.chapter-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.chapter-count{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;color:var(--color-text-secondary);white-space:nowrap}
-.tracker-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.tracker-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
-.tracker-card h2{margin:0}
-.tracker-card p{margin:0;color:var(--color-text-secondary)}
-.tracker-card .card-icon{width:32px;height:32px;color:var(--color-accent-text)}
-.tracker-card .progress-track{margin-top:4px}
-.card-link{font-weight:700}
-.counter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.counter-row label{font-weight:600}
-input[type="number"]{font:inherit;padding:10px 12px;border:1.5px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);width:96px;min-height:44px}
-.type-progress{font-weight:700;font-variant-numeric:tabular-nums}
-.spot-list{margin:8px 0 0;padding-left:20px;color:var(--color-text-secondary)}
-details.spoiler{border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);padding:16px 20px;margin:24px 0}
-details.spoiler summary{cursor:pointer;min-height:44px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
-details.spoiler summary::-webkit-details-marker{display:none}
-details.spoiler summary::before{content:"\25B6";font-size:12px;color:var(--color-accent-text)}
-details.spoiler[open ] summary::before{content:"\25BC"}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-li{overflow-wrap:anywhere}
-footer.site{border-top:1px solid var(--color-border);padding:32px 0;color:var(--color-text-secondary);font-size:var(--text-body-sm)}
-footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
-@media (max-width:768px){.tracker-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.chapter-count{margin-left:0}}
-</style>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-trackers-tr.css">
+<link rel="stylesheet" href="/assets/css/print.css" media="print">
 </head>
 <body>
 <a class="skip-link sr-only" href="#main">İçeriğe atla</a>
-<header class="site">
-  <div class="wrap site-inner">
-    <a class="wordmark" href="/tr/trackers">TOOL<em>WOOLS</em></a>
-    <nav class="main" aria-label="Takipçiler"><a href="/tr/trackers">Takipçiler</a><a href="/tr/trackers/missions">Görevler</a><a href="/tr/trackers/collectibles">Koleksiyonlar</a><a href="/tr/trackers/100-percent" aria-current="page">100% Kontrol Listesi</a><a href="/tr/trackers/trophies">Kupalar</a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-      </button>
-    </nav>
+<a class="skip-link" href="#main">İçeriğe atla</a>
+
+<header class="site-header" aria-label="Site">
+  <div class="site-header-bar" data-header-bar>
+    <div class="container site-header-inner">
+      <div class="site-header-left">
+        <a href="/tr/" class="logo-link">
+          <span class="logo">
+            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+            <span class="logo-word">
+              <span class="logo-name">TOOLWOOLS</span>
+              <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
+            </span>
+          </span>
+        </a>
+        <nav class="nav-primary" aria-label="Birincil">
+          <a href="/tr/">Ana Sayfa</a>
+          <a href="/tr/tools">Araçlar</a>
+          <a href="/tr/trackers" aria-current="page">Takipçiler</a>
+          <a href="/tr/generators">Oluşturucular</a>
+          <a href="/tr/news">Haberler</a>
+          <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
+        </nav>
+      </div>
+      <div class="site-header-actions">
+        <div class="header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <div class="header-divider" aria-hidden="true"></div>
+        <details class="lang-menu">
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="lang-menu-list">
+            <a href="/trackers/100-percent">İngilizce</a>
+            <a href="/es/trackers/100-percent">Español</a>
+            <a href="/pt/trackers/100-percent">Português</a>
+            <a href="/de/trackers/100-percent">Deutsch</a>
+            <a href="/fr/trackers/100-percent">Français</a>
+            <a href="/tr/trackers/100-percent" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Türkçe</a>
+            <a href="/ar/trackers/100-percent">العربية</a>
+          </div>
+        </details>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">
+          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-nav">
+          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="mobile-nav-search header-search">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <div class="search-results" data-search-results role="listbox" hidden></div>
+        </div>
+        <nav class="mobile-nav-links" aria-label="Mobil">
+          <a href="/tr/">Ana Sayfa</a>
+          <a href="/tr/tools">Araçlar</a>
+          <a href="/tr/trackers" aria-current="page">Takipçiler</a>
+          <a href="/tr/generators">Oluşturucular</a>
+          <a href="/tr/news">Haberler</a>
+          <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
+        </nav>
+        <div class="mobile-lang">
+          <a href="/trackers/100-percent" lang="en">EN</a><a href="/es/trackers/100-percent" lang="es">ES</a><a href="/pt/trackers/100-percent" lang="pt">PT</a><a href="/de/trackers/100-percent" lang="de">DE</a><a href="/fr/trackers/100-percent" lang="fr">FR</a><a href="/tr/trackers/100-percent" lang="tr" aria-current="true">TR</a><a href="/ar/trackers/100-percent" lang="ar">AR</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1"><div class="wrap"><nav aria-label="Sayfa yolu" class="breadcrumbs"><a href="/tr/">Ana Sayfa</a><span aria-hidden="true"> / </span><a href="/tr/trackers">Takipçiler</a><span aria-hidden="true"> / </span><span aria-current="page">100% Kontrol Listesi</span></nav><div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="gereksinimler"><p class="eyebrow">100% kontrol listesi</p><h1>100% tamamlama: 35 gereksinim</h1><div class="note" role="note"><h2>100% şu demek: tanım, yayımlandı</h2><p><strong>100% şu demek: hikâyeyi bitir, sonra aşağıdaki 35 satırı tamamla.</strong> Kontrol listesi oyunda Progress > Stats > 100% Completion altında ve ancak hikâyeden sonra görünür; hikâye sırasındaki ilerleme zaten sayılır. Bitirmek Altın kupayı kazandırır <strong>A Long Road</strong>.</p><p>35 satır üç gruba ayrılıyor: Hikâye ve Görevler (12 satır, %45), Keşif ve Etkinlikler (20 satır, %45), Keşif (3 satır, %10). Yüzdeler GTABase'in bölüm payları. Kontrol listesindeki hiçbir şey kaçırılamaz: her şey hikâyeden sonra serbest dolaşımda yapılabilir.</p><p><strong>100%, her şeyi bulmakla aynı şey değil.</strong> Çoğu satır bir kategorinin yalnızca bir kısmını istiyor (397 dublörden 300'ü, 91 soygundan 50'si, 277 araçtan 200'ü). PowerPyx kontrol listesini gerçek oyun tamamlamasının yaklaşık %60'ı olarak görüyor. Yan görevlerin ve yabancıların çoğu hiç gerekli değil.</p></div><p class="conf-legend"><span class="legend-label">Güven:</span><span class="conf-pill conf-confirmed">Doğrulandı</span><span class="conf-pill conf-implied">Güçlü şekilde ima ediliyor</span><span class="conf-pill conf-community">Topluluktan çıkarılmış</span><span class="legend-label">Doğrulandı: resmi Rockstar materyalinde adı geçiyor ya da gösteriliyor. Güçlü şekilde ima ediliyor: resmi materyalde güçlü şekilde ima ediliyor ya da birkaç bağımsız rehberle doğrulanıyor. Topluluktan çıkarılmış: rehber/topluluk aktarımı, tahmin olarak değerlendirin.</span></p>
-    <div class="progress-block" aria-labelledby="progress-heading">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title"><section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Sayfa yolu"><a href="/tr/">Ana Sayfa</a><span aria-hidden="true">/</span><a href="/tr/trackers">Takipçiler</a><span aria-hidden="true">/</span><span aria-current="page">100% Kontrol Listesi</span></div>
+      <div class="page-eyebrow"><span>100% kontrol listesi</span></div>
+      <h1 id="page-title" class="page-title">100% tamamlama: 35 gereksinim</h1>
+    </section>
+    <div data-tracker-kind="checkbox" data-tracker-key="tw-tracker-100-percent" data-tracker-label="gereksinimler"><section class="tracker-workspace" aria-labelledby="progress-heading">
+      <div class="note" role="note"><h2>100% şu demek: tanım, yayımlandı</h2><p><strong>100% şu demek: hikâyeyi bitir, sonra aşağıdaki 35 satırı tamamla.</strong> Kontrol listesi oyunda Progress > Stats > 100% Completion altında ve ancak hikâyeden sonra görünür; hikâye sırasındaki ilerleme zaten sayılır. Bitirmek Altın kupayı kazandırır <strong>A Long Road</strong>.</p><p>35 satır üç gruba ayrılıyor: Hikâye ve Görevler (12 satır, %45), Keşif ve Etkinlikler (20 satır, %45), Keşif (3 satır, %10). Yüzdeler GTABase'in bölüm payları. Kontrol listesindeki hiçbir şey kaçırılamaz: her şey hikâyeden sonra serbest dolaşımda yapılabilir.</p><p><strong>100%, her şeyi bulmakla aynı şey değil.</strong> Çoğu satır bir kategorinin yalnızca bir kısmını istiyor (397 dublörden 300'ü, 91 soygundan 50'si, 277 araçtan 200'ü). PowerPyx kontrol listesini gerçek oyun tamamlamasının yaklaşık %60'ı olarak görüyor. Yan görevlerin ve yabancıların çoğu hiç gerekli değil.</p></div>
+      <p class="conf-legend"><span class="legend-label">Güven:</span><span class="conf-pill conf-confirmed">Doğrulandı</span><span class="conf-pill conf-implied">Güçlü şekilde ima ediliyor</span><span class="conf-pill conf-community">Topluluktan çıkarılmış</span><span class="legend-label">Doğrulandı: resmi Rockstar materyalinde adı geçiyor ya da gösteriliyor. Güçlü şekilde ima ediliyor: resmi materyalde güçlü şekilde ima ediliyor ya da birkaç bağımsız rehberle doğrulanıyor. Topluluktan çıkarılmış: rehber/topluluk aktarımı, tahmin olarak değerlendirin.</span></p>
+      <div class="progress-block" aria-labelledby="progress-heading">
       <h2 id="progress-heading" class="sr-only">İlerlemen</h2>
       <p class="progress-text" id="progress-text" aria-live="polite">0 / 0 işaretli · 0%</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" role="progressbar" aria-label="İlerleme" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></div></div>
@@ -187,58 +197,108 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
       </div>
       <p class="progress-note" id="action-status" role="status"></p>
     </div>
-    <div class="done-banner" id="done-banner" role="status">Hepsi işaretli: Tamamı bu kadar. Tebrikler.</div>
-<section aria-labelledby="g-0"><h2 id="g-0">Hikâye ve Görevler (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">Hikâye Tamamlama</span><span class="item-desc">Gerekli: Hikâyeyi bitir · Oyunda: 100% olarak gösterilir</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">İsteğe Bağlı Görevler Tamamlandı</span><span class="item-desc">Gerekli: 100 · Oyunda: 200–300 tahmini</span><span class="item-desc">İsteğe bağlı görevler siyah zeminli / pembe harfli harita simgeleri ve mor simgelerdir. PowerPyx 200–300 tane olduğunu tahmin ediyor.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">Çete Operasyonları Temizlendi</span><span class="item-desc">Gerekli: 39 / 39 · Oyunda: 39</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">Banka İşleri Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 22 / 22 · Oyunda: 22</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">Maaş Avansı İşleri Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 7 / 7 · Oyunda: 7</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">Smash 'N' Grabs Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 34 / 35 · Oyunda: 35</span><span class="item-desc">Rehin dükkânları ve kuyumcular. Arka odaya gir ve kasayı yağmala, yoksa sayılmayabilir.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">Soygunlar Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 50 / 91 · Oyunda: 91</span><span class="item-desc">Marketler, fast food ve içki dükkânları.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">Uyuşturucu Satıldı</span><span class="item-desc">Gerekli: $100,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">Mücevher Satıldı</span><span class="item-desc">Gerekli: $100,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">İşaretli Paralar Satıldı</span><span class="item-desc">Gerekli: $250,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">Kasalar Vuruldu</span><span class="item-desc">Gerekli: 8 / 8 · Oyunda: 8</span><span class="item-desc">8 büyük bankada.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">Araçlar Satıldı</span><span class="item-desc">Gerekli: $200,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">Keşif ve Etkinlikler (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">Kenton Setleri Tamamlandı</span><span class="item-desc">Gerekli: 5 / 7 · Oyunda: 7</span><span class="item-desc">Kenton görev hattından hazine dalış setleri.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">Koleksiyon Kart Setleri Bulundu</span><span class="item-desc">Gerekli: 15 / 18 · Oyunda: 18</span><span class="item-desc">18 sette 480 benzersiz kart.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">WAiNK Konumları Tarandı</span><span class="item-desc">Gerekli: 100 · Oyunda: 100'den fazla</span><span class="item-desc">Simgesel yerler ve heykeller telefonla tarandı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">Su Altı Keşifleri Bulundu</span><span class="item-desc">Gerekli: 33 / 33 · Oyunda: 33</span><span class="item-desc">Batık gemi enkazları, Kenton görev hattının parçası.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">Dergiler, Kitaplar ve Çizgi Romanlar Bulundu</span><span class="item-desc">Gerekli: 30 / 34 · Oyunda: 34</span><span class="item-desc">27 dergi artı 7 kitap takası.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">Meditasyon Noktaları Tamamlandı</span><span class="item-desc">Gerekli: 15 / 18 · Oyunda: 18</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">Kokain Flamingoları Yok Edildi</span><span class="item-desc">Gerekli: 100 / 125 · Oyunda: 125</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">Benzersiz Çalma Listeleri Tamamlandı</span><span class="item-desc">Gerekli: 2 / 2 · Oyunda: 2</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">Keşfedilen Stiller</span><span class="item-desc">Gerekli: 70 / 79 · Oyunda: 79</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">Benzersiz Yarışlar Kazanıldı</span><span class="item-desc">Gerekli: 30 / 40 · Oyunda: 40</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">Yarış Mücadelesi Altın Madalyaları</span><span class="item-desc">Gerekli: 10 / 13 · Oyunda: 13</span><span class="item-desc">TARTIŞMALI SAYI: MapDex bu gerekli sayıyı karşılaştırdığı üç kaynak (Press Start, PowerPyx, Push Square) arasındaki tek tartışmalı sayı olarak işaretliyor.</span><span class="item-meta"><span class="conf-pill conf-community">Tartışmalı sayı</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">Atış Poligonu Altın Madalyaları</span><span class="item-desc">Gerekli: 42 / 42 · Oyunda: 42</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">Oynanan Video Oyunları</span><span class="item-desc">Gerekli: 4 / 4 · Oyunda: 4</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">Bilardo Rakipleri Yenildi</span><span class="item-desc">Gerekli: 5 / 7 · Oyunda: 7</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">Mini Golf Alanları Oynandı</span><span class="item-desc">Gerekli: 2 / 3 · Oyunda: 3</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">Basketbol Potaları</span><span class="item-desc">Gerekli: 90 / 100 · Oyunda: 100</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">Drone Zaman Denemeleri Tamamlandı</span><span class="item-desc">Gerekli: 42 / 42 · Oyunda: 42</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">Dublörler Tamamlandı</span><span class="item-desc">Gerekli: 300 / 397 · Oyunda: 397</span><span class="item-desc">130 dublör atlayışı, 202 köprü altı, 40 bıçak uçuşu, 25 base jump.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">Meydan Okumalar Tamamlandı</span><span class="item-desc">Gerekli: 70 / 80 · Oyunda: 80</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">Bret'in Hedef Desteleri</span><span class="item-desc">Gerekli: 15 / 15 · Oyunda: 15</span><span class="item-desc">Bret'in av görev hattı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">Keşif (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">Temel Model Araçlar Tarandı</span><span class="item-desc">Gerekli: 200 / 277 · Oyunda: 277</span><span class="item-desc">Toplam 557 araçtan 277 temel model (280'i Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">Standart Silahlar Bulundu</span><span class="item-desc">Gerekli: 50 / 66 · Oyunda: 66</span><span class="item-desc">53 ateşli silah, 9 yakın dövüş, 4 patlayıcı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">İncelenen Hayvanlar</span><span class="item-desc">Gerekli: 100 / 255 · Oyunda: 255</span><span class="item-desc">Dürbünden bakarak incele; bu satır için avlanmak gerekli değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section><section aria-labelledby="notcovered"><h2 id="notcovered">Bu kontrol listesinin kapsamadıkları</h2><ul><li>Çoğu yabancı / yan görev hattı: Strangers &amp; Freaks kupası için yalnızca 8'i gerekli ve 100% listesi 100 isteğe bağlı görevin ötesinde onları istemiyor.</li><li>Tam koleksiyon setleri: çoğu tür yalnızca kısmen gerekli (18 kart setinden 15'i, 7 Kenton setinden 5'i, 125 flamingodan 100'ü). Bir kategorideki her öğeyi bulmak 100%'ün ötesinde.</li><li>Garajlar ve işletmeler: 8 garajın tamamına sahip olmak Little Boxes kupasını kazandırır ama garajlar 100% kontrol listesinde bir satır değil. Hikâye modunda işletme satın alınamaz.</li><li>Hileler (61 tane var) ve 55 kupalık tam liste: kontrol listesi bir kupa kazandırır, A Long Road; diğer 54'ü şu sayfada takip ediliyor: <a href="/tr/trackers/trophies">kupa takipçisi</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">Kaynaklar: 100% tanımı</h2><ul><li>PowerPyx, “GTA 6 100% Completion Checklist &amp; Guide”: 35 satırın tamamı oyun içi Progress > Stats > 100% Completion kontrol listesinden aktarıldı. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa, 18 Nov 2026: aynı 35 satır; bölüm payları Hikâye ve Görevler %45 / Keşif ve Etkinlikler %45 / Keşif %10; PowerPyx ve GTABase'in aynı gereksinimleri satır satır listelediğini belirtiyor. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex, “GTA 6 100% Completion Checklist: 35 Requirements”: aynı üç grupta 35 satır; Press Start, PowerPyx ve Push Square'i karşılaştırıyor ve bir gerekli sayıyı tartışmalı olarak işaretliyor (Yarış Mücadelesi Altın Madalyaları, 10 / 13), yukarıda öyle işaretlendi. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>Kontrol listesine dair Rockstar belgesi bulunamadı; yukarıdaki tanım, çıkış sonrası rehberlerin oyun içi kontrol listesini aktarımıdır, resmi Rockstar yayını değil. Tüm kaynaklara 24 Nov 2026 tarihinde erişildi.</li></ul></section></div></div></main>
-<footer class="site-footer">
-  <div class="footer-top"><div class="wrap">GTA 6 çıktı: Nov 19, 2026 &middot; <a href="/tr/tools">Araçlara göz at <span aria-hidden="true">&rarr;</span></a></div></div>
-  <div class="wrap footer-grid">
-    <div class="footer-col footer-brand">
-      <a class="wordmark" href="/tr/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
-      <p>Araçlar. Rehberler. GTA 6.</p>
+      <div class="done-banner" id="done-banner" role="status">Hepsi işaretli: Tamamı bu kadar. Tebrikler.</div>
+    </section>
+<div class="tracker-groups">
+      <section aria-labelledby="g-0"><h2 id="g-0">Hikâye ve Görevler (12)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-00" data-track-id="h-00"><label for="h-00"><span class="item-name">Hikâye Tamamlama</span><span class="item-desc">Gerekli: Hikâyeyi bitir · Oyunda: 100% olarak gösterilir</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-01" data-track-id="h-01"><label for="h-01"><span class="item-name">İsteğe Bağlı Görevler Tamamlandı</span><span class="item-desc">Gerekli: 100 · Oyunda: 200–300 tahmini</span><span class="item-desc">İsteğe bağlı görevler siyah zeminli / pembe harfli harita simgeleri ve mor simgelerdir. PowerPyx 200–300 tane olduğunu tahmin ediyor.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-02" data-track-id="h-02"><label for="h-02"><span class="item-name">Çete Operasyonları Temizlendi</span><span class="item-desc">Gerekli: 39 / 39 · Oyunda: 39</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-03" data-track-id="h-03"><label for="h-03"><span class="item-name">Banka İşleri Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 22 / 22 · Oyunda: 22</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-04" data-track-id="h-04"><label for="h-04"><span class="item-name">Maaş Avansı İşleri Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 7 / 7 · Oyunda: 7</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-05" data-track-id="h-05"><label for="h-05"><span class="item-name">Smash 'N' Grabs Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 34 / 35 · Oyunda: 35</span><span class="item-desc">Rehin dükkânları ve kuyumcular. Arka odaya gir ve kasayı yağmala, yoksa sayılmayabilir.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-06" data-track-id="h-06"><label for="h-06"><span class="item-name">Soygunlar Tamamen Tamamlandı</span><span class="item-desc">Gerekli: 50 / 91 · Oyunda: 91</span><span class="item-desc">Marketler, fast food ve içki dükkânları.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-07" data-track-id="h-07"><label for="h-07"><span class="item-name">Uyuşturucu Satıldı</span><span class="item-desc">Gerekli: $100,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-08" data-track-id="h-08"><label for="h-08"><span class="item-name">Mücevher Satıldı</span><span class="item-desc">Gerekli: $100,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-09" data-track-id="h-09"><label for="h-09"><span class="item-name">İşaretli Paralar Satıldı</span><span class="item-desc">Gerekli: $250,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-10" data-track-id="h-10"><label for="h-10"><span class="item-name">Kasalar Vuruldu</span><span class="item-desc">Gerekli: 8 / 8 · Oyunda: 8</span><span class="item-desc">8 büyük bankada.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-11" data-track-id="h-11"><label for="h-11"><span class="item-name">Araçlar Satıldı</span><span class="item-desc">Gerekli: $200,000 · Oyunda: nakit hedef</span><span class="item-desc">Satılan değer, ürün sayısı değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section><section aria-labelledby="g-1"><h2 id="g-1">Keşif ve Etkinlikler (20)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-12" data-track-id="h-12"><label for="h-12"><span class="item-name">Kenton Setleri Tamamlandı</span><span class="item-desc">Gerekli: 5 / 7 · Oyunda: 7</span><span class="item-desc">Kenton görev hattından hazine dalış setleri.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-13" data-track-id="h-13"><label for="h-13"><span class="item-name">Koleksiyon Kart Setleri Bulundu</span><span class="item-desc">Gerekli: 15 / 18 · Oyunda: 18</span><span class="item-desc">18 sette 480 benzersiz kart.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-14" data-track-id="h-14"><label for="h-14"><span class="item-name">WAiNK Konumları Tarandı</span><span class="item-desc">Gerekli: 100 · Oyunda: 100'den fazla</span><span class="item-desc">Simgesel yerler ve heykeller telefonla tarandı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-15" data-track-id="h-15"><label for="h-15"><span class="item-name">Su Altı Keşifleri Bulundu</span><span class="item-desc">Gerekli: 33 / 33 · Oyunda: 33</span><span class="item-desc">Batık gemi enkazları, Kenton görev hattının parçası.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-16" data-track-id="h-16"><label for="h-16"><span class="item-name">Dergiler, Kitaplar ve Çizgi Romanlar Bulundu</span><span class="item-desc">Gerekli: 30 / 34 · Oyunda: 34</span><span class="item-desc">27 dergi artı 7 kitap takası.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-17" data-track-id="h-17"><label for="h-17"><span class="item-name">Meditasyon Noktaları Tamamlandı</span><span class="item-desc">Gerekli: 15 / 18 · Oyunda: 18</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-18" data-track-id="h-18"><label for="h-18"><span class="item-name">Kokain Flamingoları Yok Edildi</span><span class="item-desc">Gerekli: 100 / 125 · Oyunda: 125</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-19" data-track-id="h-19"><label for="h-19"><span class="item-name">Benzersiz Çalma Listeleri Tamamlandı</span><span class="item-desc">Gerekli: 2 / 2 · Oyunda: 2</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-20" data-track-id="h-20"><label for="h-20"><span class="item-name">Keşfedilen Stiller</span><span class="item-desc">Gerekli: 70 / 79 · Oyunda: 79</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-21" data-track-id="h-21"><label for="h-21"><span class="item-name">Benzersiz Yarışlar Kazanıldı</span><span class="item-desc">Gerekli: 30 / 40 · Oyunda: 40</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-22" data-track-id="h-22"><label for="h-22"><span class="item-name">Yarış Mücadelesi Altın Madalyaları</span><span class="item-desc">Gerekli: 10 / 13 · Oyunda: 13</span><span class="item-desc">TARTIŞMALI SAYI: MapDex bu gerekli sayıyı karşılaştırdığı üç kaynak (Press Start, PowerPyx, Push Square) arasındaki tek tartışmalı sayı olarak işaretliyor.</span><span class="item-meta"><span class="conf-pill conf-community">Tartışmalı sayı</span></span></label></li><li class="check-item"><input type="checkbox" id="h-23" data-track-id="h-23"><label for="h-23"><span class="item-name">Atış Poligonu Altın Madalyaları</span><span class="item-desc">Gerekli: 42 / 42 · Oyunda: 42</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-24" data-track-id="h-24"><label for="h-24"><span class="item-name">Oynanan Video Oyunları</span><span class="item-desc">Gerekli: 4 / 4 · Oyunda: 4</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-25" data-track-id="h-25"><label for="h-25"><span class="item-name">Bilardo Rakipleri Yenildi</span><span class="item-desc">Gerekli: 5 / 7 · Oyunda: 7</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-26" data-track-id="h-26"><label for="h-26"><span class="item-name">Mini Golf Alanları Oynandı</span><span class="item-desc">Gerekli: 2 / 3 · Oyunda: 3</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-27" data-track-id="h-27"><label for="h-27"><span class="item-name">Basketbol Potaları</span><span class="item-desc">Gerekli: 90 / 100 · Oyunda: 100</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-28" data-track-id="h-28"><label for="h-28"><span class="item-name">Drone Zaman Denemeleri Tamamlandı</span><span class="item-desc">Gerekli: 42 / 42 · Oyunda: 42</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-29" data-track-id="h-29"><label for="h-29"><span class="item-name">Dublörler Tamamlandı</span><span class="item-desc">Gerekli: 300 / 397 · Oyunda: 397</span><span class="item-desc">130 dublör atlayışı, 202 köprü altı, 40 bıçak uçuşu, 25 base jump.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-30" data-track-id="h-30"><label for="h-30"><span class="item-name">Meydan Okumalar Tamamlandı</span><span class="item-desc">Gerekli: 70 / 80 · Oyunda: 80</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-31" data-track-id="h-31"><label for="h-31"><span class="item-name">Bret'in Hedef Desteleri</span><span class="item-desc">Gerekli: 15 / 15 · Oyunda: 15</span><span class="item-desc">Bret'in av görev hattı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section><section aria-labelledby="g-2"><h2 id="g-2">Keşif (3)</h2><ul class="check-list"><li class="check-item"><input type="checkbox" id="h-32" data-track-id="h-32"><label for="h-32"><span class="item-name">Temel Model Araçlar Tarandı</span><span class="item-desc">Gerekli: 200 / 277 · Oyunda: 277</span><span class="item-desc">Toplam 557 araçtan 277 temel model (280'i Standout Vehicles).</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-33" data-track-id="h-33"><label for="h-33"><span class="item-name">Standart Silahlar Bulundu</span><span class="item-desc">Gerekli: 50 / 66 · Oyunda: 66</span><span class="item-desc">53 ateşli silah, 9 yakın dövüş, 4 patlayıcı.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li><li class="check-item"><input type="checkbox" id="h-34" data-track-id="h-34"><label for="h-34"><span class="item-name">İncelenen Hayvanlar</span><span class="item-desc">Gerekli: 100 / 255 · Oyunda: 255</span><span class="item-desc">Dürbünden bakarak incele; bu satır için avlanmak gerekli değil.</span><span class="item-meta"><span class="conf-pill conf-community">Topluluktan çıkarılmış</span></span></label></li></ul></section>
+    </div><section aria-labelledby="notcovered"><h2 id="notcovered">Bu kontrol listesinin kapsamadıkları</h2><ul><li>Çoğu yabancı / yan görev hattı: Strangers &amp; Freaks kupası için yalnızca 8'i gerekli ve 100% listesi 100 isteğe bağlı görevin ötesinde onları istemiyor.</li><li>Tam koleksiyon setleri: çoğu tür yalnızca kısmen gerekli (18 kart setinden 15'i, 7 Kenton setinden 5'i, 125 flamingodan 100'ü). Bir kategorideki her öğeyi bulmak 100%'ün ötesinde.</li><li>Garajlar ve işletmeler: 8 garajın tamamına sahip olmak Little Boxes kupasını kazandırır ama garajlar 100% kontrol listesinde bir satır değil. Hikâye modunda işletme satın alınamaz.</li><li>Hileler (61 tane var) ve 55 kupalık tam liste: kontrol listesi bir kupa kazandırır, A Long Road; diğer 54'ü şu sayfada takip ediliyor: <a href="/tr/trackers/trophies">kupa takipçisi</a>.</li></ul></section><section aria-labelledby="sources"><h2 id="sources">Kaynaklar: 100% tanımı</h2><ul><li>PowerPyx, “GTA 6 100% Completion Checklist &amp; Guide”: 35 satırın tamamı oyun içi Progress > Stats > 100% Completion kontrol listesinden aktarıldı. https://www.powerpyx.com/gta-6-100-completion-checklist-guide/</li><li>gamemapa, 18 Nov 2026: aynı 35 satır; bölüm payları Hikâye ve Görevler %45 / Keşif ve Etkinlikler %45 / Keşif %10; PowerPyx ve GTABase'in aynı gereksinimleri satır satır listelediğini belirtiyor. https://gamemapa.com/en/gta-6/guides/gta-6-100-percent-completion-checklist/</li><li>MapDex, “GTA 6 100% Completion Checklist: 35 Requirements”: aynı üç grupta 35 satır; Press Start, PowerPyx ve Push Square'i karşılaştırıyor ve bir gerekli sayıyı tartışmalı olarak işaretliyor (Yarış Mücadelesi Altın Madalyaları, 10 / 13), yukarıda öyle işaretlendi. https://mapdex.io/gta-6/guides/100-percent-completion-explained</li><li>Kontrol listesine dair Rockstar belgesi bulunamadı; yukarıdaki tanım, çıkış sonrası rehberlerin oyun içi kontrol listesini aktarımıdır, resmi Rockstar yayını değil. Tüm kaynaklara 24 Nov 2026 tarihinde erişildi.</li></ul></section></div></article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
     </div>
-    <nav class="footer-col" aria-label="Hızlı bağlantılar">
-      <h3>Hızlı Bağlantılar</h3>
-      <ul>
-        <li><a href="/tr/">Ana Sayfa</a></li>
-        <li><a href="/tr/tools">Araçlar</a></li>
-        <li><a href="/tr/news">Haberler</a></li>
-        <li><a href="/tr/trailers">Fragmanlar</a></li>
-        <li><a href="/tr/guides">Rehberler</a></li><li><a href="/tr/sitemap">Site haritası</a></li><li><a href="/tr/trending">Trend</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Kategoriler">
-      <h3>Kategoriler</h3>
-      <ul>
-        <li><a href="/tr/tools?category=release">Çıkış Araçları</a></li>
-        <li><a href="/tr/tools?category=pc">PC Araçları</a></li>
-        <li><a href="/tr/tools?category=performance">Performans</a></li>
-        <li><a href="/tr/tools?category=comparison">Karşılaştırma</a></li>
-        <li><a href="/tr/tools?category=trackers">Takipçiler</a></li>
-        <li><a href="/tr/tools?category=planners">Planlayıcılar</a></li>
-        <li><a href="/tr/generators">Oluşturucular</a></li>
-        <li><a href="/tr/guides">Rehberler</a></li>
-        <li><a href="/tr/tools?category=economy">Ekonomi</a></li>
-        <li><a href="/tr/tools?category=map">Harita</a></li>
-      </ul>
-    </nav>
-    <nav class="footer-col" aria-label="Hakkında">
-      <h3>Hakkında</h3>
-      <ul>
-        <li><a href="/tr/about">ToolWools Hakkında</a></li>
-        <li><a href="/tr/contact">İletişim</a></li>
-        <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-        <li><a href="/tr/terms">Kullanım Şartları</a></li>
-        <li><a href="/tr/disclaimer">Sorumluluk Reddi</a></li><li><a href="/tr/methodology">Metodoloji</a></li><li><a href="/editorial-policy">Yayın Politikası</a></li><li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
-      </ul>
-    </nav>
   </div>
-  <div class="wrap footer-bottom">
-    <span>&copy; 2026 ToolWools. Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile ilişkili değildir.</span>
-    <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><button type="button" data-consent-open>Çerez ayarları</button></span>
-    <span>GTA Topluluğu için yapıldı &hearts;</span>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-card surface-card">
+      <a href="/tr/tools" class="footer-strip">
+        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="cta">Araçlara göz at →</span>
+      </a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/tr/" class="logo-link">
+            <span class="logo">
+              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
+              <span class="logo-word">
+                <span class="logo-name">TOOLWOOLS</span>
+                <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
+              </span>
+            </span>
+          </a>
+          <p>GTA 6 araçları, hesaplayıcıları, izleyicileri, planlayıcıları ve kılavuzları için nihai adres. İhtiyacınız olan her şey, tek yerde, reklam öncelikli değil, şişkinlik yok.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <h3>En İyi Araçlar</h3>
+            <ul>
+              <li><a href="/tr/tools/system-requirements">Bilgisayarım GTA 6'yı Çalıştırır mı?</a></li>
+              <li><a href="/tr/tools/fps-calculator">FPS Hesaplayıcı</a></li>
+              <li><a href="/tr/tools/download-time">İndirme Süresi Hesaplayıcı</a></li>
+              <li><a href="/tr/tools/system-requirements">Sistem Gereksinimleri</a></li>
+              <li><a href="/tr/tools/settings-optimizer">Ayar Optimizasyon Aracı</a></li>
+              <li><a href="/tr/tools/hardware-comparison">Donanım Karşılaştırması</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-pink">
+            <h3>Keşfet</h3>
+            <ul>
+              <li><a href="/tr/tools">Tüm Araçlar</a></li>
+              <li><a href="/tr/trending">Trend</a></li>
+              <li><a href="/tr/trackers">Takipçiler</a></li>
+              <li><a href="/tr/generators">Oluşturucular</a></li>
+              <li><a href="/tr/news">Haberler</a></li>
+              <li><a href="/tr/trailers">Fragmanlar</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-blue">
+            <h3>Kaynaklar</h3>
+            <ul>
+              <li><a href="/tr/tools/interactive-map">Etkileşimli Harita</a> <span class="footer-col-badge">Yeni</span></li>
+              <li><a href="/tr/about">Hakkında</a></li>
+              <li><a href="/tr/methodology">Metodoloji</a></li>
+              <li><a href="/tr/contact">İletişim</a></li>
+              <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
+              <li><a href="/tr/sitemap">Site haritası</a></li>
+              <li><a href="/editorial-policy">Yayın Politikası</a></li>
+              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+              <li><a href="/tr/terms">Kullanım Şartları</a></li>
+              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <div class="footer-bottom">
+        <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
+        <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
+          <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
+        </div>
+      </div>
+    </div>
   </div>
 </footer>
-<!-- Consent banner (Phase 6 fix — live hub parity; live assets/js/consent.js behaviour, inline) -->
 <div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
   <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
   <div class="consent-actions">
@@ -247,37 +307,10 @@ footer.site p{margin:0 0 8px;max-width:var(--measure-body)}
   </div>
 </div>
 <script src="/assets/js/tr/trackers.js" defer></script>
-<script>
-/* Consent banner (Phase 6 fix — live assets/js/consent.js behaviour, inline on tracker pages) */
-(function () {
-  var CONSENT_KEY = "tw-consent";
-  var banner = document.getElementById("consent-banner");
-  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
-  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
-  function consentShow() { if (banner) banner.hidden = false; }
-  function consentHide() { if (banner) banner.hidden = true; }
-  if (banner) {
-    if (!consentStored()) {
-      var consentShown = false;
-      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
-      window.setTimeout(showSoon, 1800);
-      window.addEventListener("scroll", showSoon, { once: true, passive: true });
-    }
-    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
-      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
-    });
-    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        consentShow();
-        var f = banner.querySelector("[data-consent-accept]");
-        if (f) f.focus();
-      });
-    });
-  }
-})();
-</script>
+<script src="/assets/js/tr/header.js" defer></script>
+<script src="/assets/js/tr/search.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/tr/newsletter.js" defer></script>
+<script src="/assets/js/tr/consent.js" defer></script>
 </body>
 </html>
