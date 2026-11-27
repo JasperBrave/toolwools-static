@@ -1,6 +1,6 @@
 // theme.js — ToolWools theme toggle.
 // Key and values match the TanStack source (localStorage "tw-theme").
-// L6: no stored preference -> follow prefers-color-scheme (task decision).
+// L6: no stored preference -> light-first default (task decision).
 (function () {
   var KEY = "tw-theme";
   var TW_THEME_DEFAULT = "light"; // staging: light-first (see map-en.html guard)

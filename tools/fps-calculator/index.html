@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +27,12 @@
     <meta name="twitter:title" content="GTA 6 FPS Calculator">
     <meta name="twitter:description" content="Estimate GTA 6 FPS for any GPU + CPU at 1080p, 1440p and 4K, Low to Ultra — with DLSS, FSR and frame-gen math, honest 1% lows, and a verdict on your fps target.">
     <meta name="twitter:image" content="https://toolwools.com/og/fps-calculator.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="canonical" href="https://toolwools.com/tools/fps-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/fps-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/fps-calculator" hreflang="es">
@@ -43,27 +45,41 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-fps-en.css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print">
   </head>
 <body>
   <div class="site-shell">
 
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -75,26 +91,27 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/fps-calculator" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
-            <a href="/es/tools/fps-calculator">Español</a>
-            <a href="/pt/tools/fps-calculator">Português</a>
-            <a href="/de/tools/fps-calculator">Deutsch</a>
-            <a href="/fr/tools/fps-calculator">Français</a>
-            <a href="/tr/tools/fps-calculator">Türkçe</a>
-            <a href="/ar/tools/fps-calculator">العربية</a>
+            <a href="/es/tools/fps-calculator" lang="es">Español</a>
+            <a href="/pt/tools/fps-calculator" lang="pt">Português</a>
+            <a href="/de/tools/fps-calculator" lang="de">Deutsch</a>
+            <a href="/fr/tools/fps-calculator" lang="fr">Français</a>
+            <a href="/tr/tools/fps-calculator" lang="tr">Türkçe</a>
+            <a href="/ar/tools/fps-calculator" lang="ar">العربية</a>
           </div>
         </details>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
@@ -110,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -120,7 +137,11 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/fps-calculator" aria-current="true">EN</a><a href="/es/tools/fps-calculator" lang="es">ES</a><a href="/pt/tools/fps-calculator" lang="pt">PT</a><a href="/de/tools/fps-calculator" lang="de">DE</a><a href="/fr/tools/fps-calculator" lang="fr">FR</a><a href="/tr/tools/fps-calculator" lang="tr">TR</a><a href="/ar/tools/fps-calculator" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -137,39 +158,12 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">FPS Calculator</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
-        <span>Performance</span>
-      </div>
+      <div class="page-eyebrow"><span>Performance</span></div>
       <h1 id="page-title" class="page-title">GTA 6 FPS Calculator</h1>
-      <p class="page-subtitle">Estimate GTA 6 frame rate for your GPU + CPU pairing at 1080p, 1440p or 4K on Low → Ultra. Adds DLSS / FSR / XeSS upscalers and DLSS 3 / FSR 3 frame generation, applies a VRAM-stutter penalty, and returns both an average FPS and an honest 1% low — with a verdict versus your 30 / 60 / 120 / 144 target.</p>
-      <dl class="hero-badges">
-        <div><dt>Engine</dt><dd>FPS model</dd></div>
-        <div><dt>Runtime</dt><dd>Instant, in-browser</dd></div>
-        <div><dt>Platforms</dt><dd>PC</dd></div>
-        <div><dt>Updated</dt><dd><time datetime="2026-11-17">Nov 17, 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Every GPU review site publishes a static FPS chart. This is a live one. Plug in your GPU, CPU, RAM, resolution and preset — the calculator runs the same model we use for the bottleneck and VRAM tools, layers upscalers and frame generation on top, and returns an estimate you can share as a URL. The 1% low is the honest number: DLSS 3 frame gen pushes the average up, but 1% lows stay tied to the real input frame rate. That's the framerate you feel.</p>
-          </div>
-<section class="byline" aria-label="About this page">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, founder of ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">By <span class="byline-seg"><a href="/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Founder, ToolWools&nbsp;· PC performance analysis</p>
-        <p class="byline-note">Model: <a href="/methodology">GTA 6 FPS model</a></p>
-      </div>
-      <p class="byline-dates">Published <time datetime="2026-07-23">Jul 23, 2026</time>&nbsp;· Last reviewed <time datetime="2026-11-17">November 17, 2026</time></p>
+      <p class="page-subtitle">Estimate frame rate for your GPU at 1080p, 1440p and 4K across presets.</p>
+      <p class="hero-meta"><span>Engine: FPS model</span><span>Runtime: Instant, in-browser</span><span>Platforms: PC</span><span>Updated <time datetime="2026-11-17">Nov 17, 2026</time></span><span>By <a href="/about">Jasper Bravo</a> (<a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>), Founder, ToolWools</span><span>PC performance analysis</span><span>Model: <a href="/methodology">GTA 6 FPS model</a></span><span>Published <time datetime="2026-07-23">Jul 23, 2026</time></span><span>Last reviewed <time datetime="2026-11-17">Nov 17, 2026</time></span></p>
     </section>
 <div class="sr-only" data-live-region aria-live="polite">Estimated 71 average frames per second, 51 1 percent low, at 1440p High. Hits 60 fps.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Hits 60 fps · TL;DR</span></p>
-        <p class="tldr-text"><span data-tldr-text>Yes, GeForce RTX 4070 + Ryzen 5 7600X / 7600 hits 60 fps at 1440p High: about 71 fps average, 51 fps 1% low.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Hits 60 fps — 71 avg fps</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculator</h2>
       <div class="workspace-grid">
@@ -179,6 +173,7 @@
 <div>
             <label class="field-label" for="gpu-select"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>Graphics Card (GPU)</label>
             <select class="input" id="gpu-select" data-gpu-select aria-label="Graphics card"></select>
+            <p class="field-hint">Model score out of 100, higher is faster.</p>
           </div>
 <div>
             <label class="field-label" for="cpu-select"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>Processor (CPU)</label>
@@ -215,7 +210,7 @@
 <div>
             <label class="field-label" for="upscaler-select"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>Upscaler</label>
             <select class="input" id="upscaler-select" data-upscaler-select aria-label="Upscaler"><option value="off" selected>Native (off)</option><option value="dlss-quality">DLSS Quality</option><option value="dlss-balanced">DLSS Balanced</option><option value="dlss-performance">DLSS Performance</option><option value="fsr-quality">FSR 3 Quality</option><option value="fsr-balanced">FSR 3 Balanced</option><option value="xess-quality">XeSS Quality</option></select>
-            <p class="field-hint">DLSS / FSR render at a lower internal resolution and upscale — free frames, slight softness.</p>
+            <p class="field-hint">DLSS / FSR render at a lower internal resolution and upscale, free frames, slight softness.</p>
           </div>
 <div>
             <label class="field-label" for="framegen-select"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>Frame generation</label>
@@ -239,10 +234,10 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted">Verdict</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Hits 60 fps</p><h3 class="verdict-title">71<span class="unit"> avg fps</span></h3><p class="verdict-desc">61–82 fps band (±15%), 51 fps 1% low. GPU-bound at 1440p High.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">Average FPS</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><p class="verdict-desc">VRAM clears: 7.8 GB needed at these settings, your card has 12 GB.</p><div class="upgrade-box"><p class="eyebrow-muted">Ways to gain frames</p><ul><li><strong>Enable DLSS 3 Frame Gen</strong> (+70%) — Doubles perceived smoothness — 1% low unchanged.</li><li><strong>Enable DLSS / FSR Quality</strong> (+31%) — Estimated 93 fps (was 71).</li><li><strong>Drop preset to Medium</strong> (+25%) — Estimated 89 fps (was 71).</li></ul></div><dl class="stat-grid"><div><dt>GPU-bound FPS</dt><dd>71</dd></div><div><dt>CPU cap</dt><dd>109</dd></div><div><dt>VRAM needed</dt><dd>7.8 GB</dd></div><div><dt>Target gap</dt><dd>+11 fps</dd></div></dl><div class="share-row">
+          <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Hits 60 fps</p><h3 class="verdict-title">71<span class="unit"> avg fps</span></h3><p class="verdict-desc">61–82 fps band (±15%), 51 fps 1% low. GPU-bound at 1440p High.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">Average FPS</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><p class="verdict-desc">VRAM clears: 7.8 GB needed at these settings, your card has 12 GB.</p><div class="upgrade-box"><p class="eyebrow-muted">Ways to gain frames</p><ul><li><strong>Enable DLSS 3 Frame Gen</strong> (+70%), Doubles perceived smoothness, 1% low unchanged.</li><li><strong>Enable DLSS / FSR Quality</strong> (+31%), Estimated 93 fps (was 71).</li><li><strong>Drop preset to Medium</strong> (+25%), Estimated 89 fps (was 71).</li></ul></div><dl class="stat-grid"><div><dt>GPU-bound FPS</dt><dd>71</dd></div><div><dt>CPU cap</dt><dd>109</dd></div><div><dt>VRAM needed</dt><dd>7.8 GB</dd></div><div><dt>Target gap</dt><dd>+11 fps</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low)&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Share on X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%E2%80%94%2071%20avg%20fps%20(GTA%206)&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low)&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Share on X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%E2%80%94%2071%20avg%20fps%20(GTA%206)&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -251,7 +246,7 @@
     <section class="share-panel" aria-labelledby="share-heading">
       <div>
         <h2 id="share-heading">Share this result</h2>
-        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup — no fake share tokens.</p>
+        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup, no fake share tokens.</p>
       </div>
       <div class="share-link-row">
         <label class="sr-only" for="share-link">Shareable link for this result</label>
@@ -259,15 +254,15 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copy link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low).%20GTA%206%20FPS%20estimate%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Share on X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low).%20GTA%206%20FPS%20estimate%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low).%20GTA%206%20FPS%20estimate%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Share on X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20%40%201440p%20High%20%C2%B7%2071%20avg%20fps%20(51%201%25%20low).%20GTA%206%20FPS%20estimate%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
       </div>
     </section>
 
     <section aria-labelledby="preset-ladder">
-      <h2 id="preset-ladder">FPS by preset — RTX 4070 + Ryzen 5 7600X at 1440p</h2>
+      <h2 id="preset-ladder">FPS by preset, RTX 4070 + Ryzen 5 7600X at 1440p</h2>
       <p class="section-dek">Same rig, every preset. The ladder follows your GPU, CPU and resolution live.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="FPS by preset — scrollable table">
+      <div class="table-scroll" tabindex="0" role="region" aria-label="FPS by preset, scrollable table">
       <table class="data-table" id="ladder-table">
         <caption class="sr-only">Estimated FPS by preset for the current rig.</caption>
         <thead><tr><th scope="col">Preset</th><th scope="col">Avg FPS</th><th scope="col">1% low</th><th scope="col">Band</th></tr></thead>
@@ -277,30 +272,25 @@
     </section>
 
     <section aria-labelledby="fps-by-gpu">
-      <h2 id="fps-by-gpu">GTA 6 estimated FPS by GPU — 1440p High, Ryzen 7 7800X3D reference CPU</h2>
+      <h2 id="fps-by-gpu">GTA 6 estimated FPS by GPU, 1440p High, Ryzen 7 7800X3D reference CPU</h2>
       <p class="section-dek">GTA 6 estimated average FPS and 1% low at 1440p High, DLSS / FSR off, DLSS 3 frame generation off, 32 GB DDR5 with a Ryzen 7 7800X3D reference CPU. Model calibrated to RDR2 launch-driver GPU scaling.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Estimated FPS by GPU — scrollable table">
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Estimated FPS by GPU, scrollable table">
       <table class="data-table" id="by-gpu-table">
         <caption class="sr-only">GTA 6 estimated average FPS and 1% low at 1440p High, DLSS / FSR off, DLSS 3 frame generation off, 32 GB DDR5 with a Ryzen 7 7800X3D reference CPU. Model calibrated to RDR2 launch-driver GPU scaling.</caption>
         <thead><tr><th scope="col">GPU</th><th scope="col">Avg FPS</th><th scope="col">1% low</th><th scope="col">Verdict</th></tr></thead>
         <tbody><tr><td><strong>RTX 4090</strong></td><td class="mono">102 fps</td><td class="mono">73 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4080</strong></td><td class="mono">92 fps</td><td class="mono">66 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4070 Ti</strong></td><td class="mono">82 fps</td><td class="mono">59 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4070</strong></td><td class="mono">71 fps</td><td class="mono">51 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 4060 Ti</strong></td><td class="mono">59 fps</td><td class="mono">43 fps</td><td class="muted">Just short of 60 fps</td></tr><tr><td><strong>RTX 4060</strong></td><td class="mono">51 fps</td><td class="mono">37 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr><tr><td><strong>RTX 3080</strong></td><td class="mono">69 fps</td><td class="mono">50 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RTX 3070</strong></td><td class="mono">61 fps</td><td class="mono">44 fps</td><td class="muted">Just clears 60 fps</td></tr><tr><td><strong>RTX 3060</strong></td><td class="mono">45 fps</td><td class="mono">32 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr><tr><td><strong>RX 7900 XTX</strong></td><td class="mono">94 fps</td><td class="mono">68 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RX 7800 XT</strong></td><td class="mono">73 fps</td><td class="mono">53 fps</td><td class="muted">Well past 60 fps</td></tr><tr><td><strong>RX 6700 XT</strong></td><td class="mono">55 fps</td><td class="mono">40 fps</td><td class="muted">Drop to Medium for 60 fps</td></tr></tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Numbers are model estimates with a ±15% band vs launch-day drivers. Enable DLSS Quality for a ~30% uplift, DLSS 3 frame generation for a ~70% uplift on the average (1% low unchanged). This table is computed with the same ToolWools engine as the live calculator above, for the stated scenario.</p>
+      <p class="field-hint table-footnote">Numbers are model estimates with a ±15% band vs launch-day drivers. Enable DLSS Quality for a ~30% uplift, DLSS 3 frame generation for a ~70% uplift on the average (1% low unchanged). This table is computed with the same ToolWools engine as the live calculator above, for the stated scenario.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Keep planning your GTA 6 rig</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check CPU-GPU balance with the <a href="/tools/bottleneck-calculator">GTA 6 bottleneck calculator</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check VRAM headroom with the <a href="/tools/vram-calculator">GTA 6 VRAM calculator</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Full <a href="/tools/system-requirements">GTA 6 PC requirements checker</a> — minimum, recommended and Ultra tiers.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Grade the whole rig with the <a href="/tools/readiness-score">GTA 6 readiness score</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check CPU-GPU balance with the <a href="/tools/bottleneck-calculator">GTA 6 bottleneck calculator</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check VRAM headroom with the <a href="/tools/vram-calculator">GTA 6 VRAM calculator</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Full <a href="/tools/system-requirements">GTA 6 PC requirements checker</a>, minimum, recommended and Ultra tiers.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Grade the whole rig with the <a href="/tools/readiness-score">GTA 6 readiness score</a>.</span></li></ul>
     </section>
-
-    <aside class="assumptions-strip" aria-label="Assumptions">
-      <p><strong>Assumptions</strong> <span>FPS model calibrated from RDR2 launch-driver GPU scaling (Digital Foundry, Hardware Unboxed), Cyberpunk 2077 avg / 1% low ratios across presets, and measured DLSS 3 / FSR 3 upscaler + frame-generation multipliers on Alan Wake 2 and Cyberpunk. Reference: RTX 4090 + Ryzen 7 7800X3D at 1440p High = 100 fps. Uncertainty band ±15% versus launch-day drivers.</span> <a href="/methodology">Read the full methodology</a></p>
-      <p class="updated-line">Updated <time datetime="2026-11-17">November 17, 2026</time></p>
-    </aside>
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">How GTA 6 FPS is estimated for your GPU and CPU</h2>
@@ -308,7 +298,7 @@
       <ol class="steps-grid cols-3"><li>
         <span class="step-number">01</span>
         <h3 class="step-title">Pick your GPU + CPU</h3>
-        <p class="step-text">Choose from the same 34-GPU catalog as the bottleneck calculator (21 CPUs). Scores are normalised so RTX 4090 = 100 and i9-14900K / Ryzen 7 7800X3D = 100. We compute a GPU-bound FPS and a CPU cap separately, then take the minimum.</p>
+        <p class="step-text">Choose from the same 34-GPU catalog as the bottleneck calculator (21 CPUs). Scores are normalised so RTX 4090 = 100, i9-14900K = 100 and Ryzen 7 7800X3D = 98. We compute a GPU-bound FPS and a CPU cap separately, then take the minimum.</p>
       </li>
 <li>
         <span class="step-number">02</span>
@@ -323,7 +313,7 @@
 <li>
         <span class="step-number">04</span>
         <h3 class="step-title">Add frame generation, if your card has it</h3>
-        <p class="step-text">DLSS 3 and FSR 3 insert a generated frame between two real ones, multiplying average fps by roughly 1.7×. Crucially it leaves 1% lows — and input latency — untouched, so we never let it move the low figure.</p>
+        <p class="step-text">DLSS 3 and FSR 3 insert a generated frame between two real ones, multiplying average fps by roughly 1.7×. Crucially it leaves 1% lows, and input latency, untouched, so we never let it move the low figure.</p>
       </li>
 <li>
         <span class="step-number">05</span>
@@ -337,30 +327,30 @@
       <p class="section-dek">Load any of these into the calculator with one click.</p>
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="use-case-1">
-          <h3 id="use-case-1">RTX 4060 + Ryzen 5 7600X @ 1080p High — 60 fps budget build</h3>
-          <p>Comfortably hits 60 fps at 1080p High native (about 66 fps), clears 85 with DLSS Quality. 8 GB VRAM is fine at 1080p; avoid the HD texture pack.</p>
-          <a href="/tools/fps-calculator?gpu=rtx-4060&amp;cpu=r5-7600x&amp;ram=16&amp;res=1080p&amp;preset=high&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 4060 + Ryzen 5 7600X @ 1080p High — 60 fps budget build">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <h3 id="use-case-1">RTX 4060 + Ryzen 5 7600X @ 1080p High, 60 fps budget build</h3>
+          <p>Comfortably hits 60 fps at 1080p High native (about 66 fps), clears 86 with DLSS Quality. 8 GB VRAM is fine at 1080p; avoid the HD texture pack.</p>
+          <a href="/tools/fps-calculator?gpu=rtx-4060&amp;cpu=r5-7600x&amp;ram=16&amp;res=1080p&amp;preset=high&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 4060 + Ryzen 5 7600X @ 1080p High, 60 fps budget build">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li>
 <li>
         <article class="usecase-card" aria-labelledby="use-case-2">
-          <h3 id="use-case-2">RTX 4070 + Ryzen 5 7600X @ 1440p High — 1440p sweet spot</h3>
+          <h3 id="use-case-2">RTX 4070 + Ryzen 5 7600X @ 1440p High, 1440p sweet spot</h3>
           <p>About 71 fps at 1440p High native (51 fps 1% low). Enable DLSS Quality for about 93 fps. VRAM 12 GB clears 1440p Ultra without stutter.</p>
-          <a href="/tools/fps-calculator?gpu=rtx-4070&amp;cpu=r5-7600x&amp;ram=16&amp;res=1440p&amp;preset=high&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 4070 + Ryzen 5 7600X @ 1440p High — 1440p sweet spot">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="/tools/fps-calculator?gpu=rtx-4070&amp;cpu=r5-7600x&amp;ram=16&amp;res=1440p&amp;preset=high&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 4070 + Ryzen 5 7600X @ 1440p High, 1440p sweet spot">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li>
 <li>
         <article class="usecase-card" aria-labelledby="use-case-3">
-          <h3 id="use-case-3">RTX 4090 + Ryzen 7 7800X3D @ 4K Ultra — flagship</h3>
+          <h3 id="use-case-3">RTX 4090 + Ryzen 7 7800X3D @ 4K Ultra, flagship</h3>
           <p>About 42 fps at 4K Ultra native (30 fps 1% low); DLSS Quality + frame generation lifts the average to about 93 fps, though 1% lows stay near 39. Not CPU-bound at 4K.</p>
-          <a href="/tools/fps-calculator?gpu=rtx-4090&amp;cpu=r7-7800x3d&amp;ram=32&amp;res=4K&amp;preset=ultra&amp;up=dlss-quality&amp;fg=dlss3-fg&amp;target=60" aria-label="Load preset: RTX 4090 + Ryzen 7 7800X3D @ 4K Ultra — flagship">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="/tools/fps-calculator?gpu=rtx-4090&amp;cpu=r7-7800x3d&amp;ram=32&amp;res=4K&amp;preset=ultra&amp;up=dlss-quality&amp;fg=dlss3-fg&amp;target=60" aria-label="Load preset: RTX 4090 + Ryzen 7 7800X3D @ 4K Ultra, flagship">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li>
 <li>
         <article class="usecase-card" aria-labelledby="use-case-4">
-          <h3 id="use-case-4">RTX 3070 + i5-12400F @ 1440p Ultra — 8 GB caveat</h3>
+          <h3 id="use-case-4">RTX 3070 + i5-12400F @ 1440p Ultra, 8 GB caveat</h3>
           <p>The GPU alone would reach about 42 fps, but the 8 GB card is 4 GB short of the 12 GB pool at 1440p Ultra, so the VRAM stutter penalty cuts it to about 31 fps (15 fps 1% low). Drop to 1440p High + DLSS Quality for about 80 fps.</p>
-          <a href="/tools/fps-calculator?gpu=rtx-3070&amp;cpu=i5-12400&amp;ram=16&amp;res=1440p&amp;preset=ultra&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 3070 + i5-12400F @ 1440p Ultra — 8 GB caveat">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="/tools/fps-calculator?gpu=rtx-3070&amp;cpu=i5-12400&amp;ram=16&amp;res=1440p&amp;preset=ultra&amp;up=off&amp;fg=off&amp;target=60" aria-label="Load preset: RTX 3070 + i5-12400F @ 1440p Ultra, 8 GB caveat">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li></ul>
     </section>
@@ -378,18 +368,22 @@ if vramNeeded &gt; cardVram: avg × 0.75, low × 0.50, limiter = VRAM
 avg         = avg × frameGenMult             // FG lifts avg only
 low         = avg × (cpuBound ? 0.62 : 0.72)  // 1% low
 band        = [avg × 0.85, avg × 1.15]</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>GPU/CPU scores use the same 0–100 scale as the bottleneck calculator; RTX 4090 = 100, i9-14900K / Ryzen 7 7800X3D = 100.</li>
-<li>BASE_FPS at 1440p High for a score-100 GPU + score-100 CPU is 102 fps — anchored to measured RDR2 4090 numbers and adjusted for GTA 6's denser Vice City streaming.</li>
+          <ul class="list-disc list-outside"><li>GPU/CPU scores use the same 0–100 scale as the bottleneck calculator; RTX 4090 = 100, i9-14900K = 100 and Ryzen 7 7800X3D = 98.</li>
+<li>BASE_FPS at 1440p High for a score-100 GPU + score-100 CPU is 102 fps, anchored to measured RDR2 4090 numbers and adjusted for GTA 6's denser Vice City streaming.</li>
 <li>Preset multipliers (Low ×1.55, Medium ×1.25, High 1.00, Very High ×0.82, Ultra ×0.68) match Cyberpunk 2077 and RDR2 preset-scaling curves.</li>
 <li>Upscaler multipliers are the gain over native at matched target resolution (DLSS-Q ×1.30, DLSS-B ×1.50, DLSS-P ×1.75, FSR-Q ×1.28, XeSS-Q ×1.25).</li>
 <li>Frame generation multiplies avg by 1.7× (DLSS 3) or 1.6× (FSR 3); 1% lows are left unchanged because interpolated frames don't reduce real frame-time variance.</li>
-<li>VRAM shortage triggers a 25% avg FPS penalty and a 50% 1% low penalty — the driver spillover behaviour measured in Cyberpunk 2077 at over-budget VRAM configurations.</li></ul>
+<li>VRAM shortage triggers a 25% avg FPS penalty and a 50% 1% low penalty, the driver spillover behaviour measured in Cyberpunk 2077 at over-budget VRAM configurations.</li></ul>
+          <div class="assumptions-block">
+            <p><strong>Assumptions.</strong> FPS model calibrated from RDR2 launch-driver GPU scaling (Digital Foundry, Hardware Unboxed), Cyberpunk 2077 avg / 1% low ratios across presets, and measured DLSS 3 / FSR 3 upscaler + frame-generation multipliers on Alan Wake 2 and Cyberpunk. Reference: RTX 4090 + Ryzen 7 7800X3D at 1440p High = 102 fps. Uncertainty band ±15% versus launch-day drivers.</p>
+            <p class="updated-line">Updated <time datetime="2026-11-17">November 17, 2026</time></p>
+          </div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
+      <header>
         <h2 id="faq" class="h2-lg">GTA 6 frame rate questions</h2>
         <p class="section-dek">Upscaling, frame generation, VRAM stutter and target fps.</p>
       </header>
@@ -399,7 +393,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-1" class="faq-answer" data-faq-answer hidden>
-          <p>It depends on GPU, CPU, resolution and preset. As a rough ladder: at 1440p High on 2026 mid-range hardware (RTX 4070 / RX 7800 XT, mid-tier Ryzen 5 or Core i5), expect about 70 fps native. 1080p High gives roughly 90 fps on the same build. 4K Ultra drops to about 42 fps native on a flagship, about 93 fps with DLSS Quality + Frame Gen. Enter your exact parts above for a live estimate.</p>
+          <p>It depends on GPU, CPU, resolution and preset. As a rough ladder: at 1440p High on 2026 mid-range hardware (RTX 4070 / RX 7800 XT, mid-tier Ryzen 5 or Core i5), expect about 70 fps native. 1080p High gives roughly 92 fps on the same build. 4K Ultra drops to about 42 fps native on a flagship, about 93 fps with DLSS Quality + Frame Gen. Enter your exact parts above for a live estimate.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -408,7 +402,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-2" class="faq-answer" data-faq-answer hidden>
-          <p>Yes on almost any 2020-and-newer discrete GPU at 1080p. At 1080p Medium, an RTX 3060 / RX 6600 clears 60 fps comfortably. At 1440p High you'll need an RTX 4060 Ti / RX 7700 XT or better. At 4K Ultra, 60 fps native is not realistic on any current card — even a 4090 lands near 42 fps. DLSS Quality + Frame Gen is the way to 60+ at 4K Ultra.</p>
+          <p>Yes on almost any 2020-and-newer discrete GPU at 1080p. At 1080p Medium, an RTX 3060 / RX 6600 clears 60 fps comfortably. At 1440p High you'll need an RTX 4060 Ti / RX 7700 XT or better. At 4K Ultra, 60 fps native is not realistic on any current card, even a 4090 lands near 42 fps. DLSS Quality + Frame Gen is the way to 60+ at 4K Ultra.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -417,7 +411,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-3" class="faq-answer" data-faq-answer hidden>
-          <p>At 1080p on a modern flagship (4090, 7900 XTX, 5080+) — yes, natively. At 1440p, 120 fps needs a 4080 / 7900 XT paired with DLSS Quality. At 4K, 120 fps typically requires DLSS Balanced + Frame Generation on a 4090-class card.</p>
+          <p>At 1080p on a modern flagship (4090, 7900 XTX, 5080+), yes, natively. At 1440p, 120 fps needs a 4080 / 7900 XT paired with DLSS Quality. At 4K, 120 fps typically requires DLSS Balanced + Frame Generation on a 4090-class card.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -426,7 +420,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-4" class="faq-answer" data-faq-answer hidden>
-          <p>DLSS Quality typically adds 25–35% FPS by rendering internally at 67% resolution. DLSS Balanced adds 45–55% (rendering at ~58%). DLSS Performance adds 65–80% (rendering at 50%). These are GPU-side multipliers only — a CPU-bound scene won't benefit as much because the CPU cap is unaffected.</p>
+          <p>DLSS Quality typically adds 25–35% FPS by rendering internally at 67% resolution. DLSS Balanced adds 45–55% (rendering at ~58%). DLSS Performance adds 65–80% (rendering at 50%). These are GPU-side multipliers only, a CPU-bound scene won't benefit as much because the CPU cap is unaffected.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -435,7 +429,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-5" class="faq-answer" data-faq-answer hidden>
-          <p>Not exactly. DLSS 3 / FSR 3 Frame Gen inserts a synthetic frame between real ones, so avg FPS roughly ×1.7. Motion feels smoother, but input latency is tied to the underlying real FPS. 1% lows don't improve. Use FG when your real FPS is already 50+ — below that, latency feels sluggish.</p>
+          <p>Not exactly. DLSS 3 / FSR 3 Frame Gen inserts a synthetic frame between real ones, so avg FPS roughly ×1.7. Motion feels smoother, but input latency is tied to the underlying real FPS. 1% lows don't improve. Use FG when your real FPS is already 50+, below that, latency feels sluggish.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -444,7 +438,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-6" class="faq-answer" data-faq-answer hidden>
-          <p>The 1% low is the average of the slowest 1% of frames — the number that captures the felt stutter. A game at 100 fps avg / 80 fps 1% low feels smooth; 100 fps avg / 45 fps 1% low feels stuttery. VRAM shortage and CPU bottlenecks tank 1% lows first. This calculator reports both so you can spot the difference.</p>
+          <p>The 1% low is the average of the slowest 1% of frames, the number that captures the felt stutter. A game at 100 fps avg / 80 fps 1% low feels smooth; 100 fps avg / 45 fps 1% low feels stuttery. VRAM shortage and CPU bottlenecks tank 1% lows first. This calculator reports both so you can spot the difference.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -453,7 +447,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-7" class="faq-answer" data-faq-answer hidden>
-          <p>60 fps is the baseline for a modern action game. 90 fps or 120 fps is the sweet spot for smooth camera panning on OLED / high-refresh monitors. 144 fps at 1440p is realistic on RTX 4070+ class with DLSS. GTA 6 doesn't require a specific FPS — pick a target your monitor supports and match hardware to it.</p>
+          <p>60 fps is the baseline for a modern action game. 90 fps or 120 fps is the sweet spot for smooth camera panning on OLED / high-refresh monitors. 144 fps at 1440p is realistic on RTX 4070+ class with DLSS. GTA 6 doesn't require a specific FPS, pick a target your monitor supports and match hardware to it.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -462,7 +456,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-8" class="faq-answer" data-faq-answer hidden>
-          <p>Yes at 1080p. Estimated 60–75 fps at 1080p High native, about 86 with DLSS Quality. Not enough for 1440p Ultra — the 8 GB VRAM triggers a stutter penalty at Ultra + HD textures. For 1440p target, the RTX 4060 Ti 16GB or RTX 4070 is the safer buy.</p>
+          <p>Yes at 1080p. Estimated 60–75 fps at 1080p High native, about 86 with DLSS Quality. Not enough for 1440p Ultra, the 8 GB VRAM triggers a stutter penalty at Ultra + HD textures. For 1440p target, the RTX 4060 Ti 16GB or RTX 4070 is the safer buy.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -471,7 +465,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-9" class="faq-answer" data-faq-answer hidden>
-          <p>Yes at 1440p. Estimated about 69 fps at 1440p High native, about 90 with DLSS Quality. The 10 GB VRAM is adequate but not comfortable — you'll be Adequate at 1440p Very High, Insufficient at 1440p Ultra + HD textures. Drop textures a notch to sidestep it.</p>
+          <p>Yes at 1440p. Estimated about 69 fps at 1440p High native, about 90 with DLSS Quality. The 10 GB VRAM is adequate but not comfortable, you'll be Adequate at 1440p Very High, Insufficient at 1440p Ultra + HD textures. Drop textures a notch to sidestep it.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -480,7 +474,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-10" class="faq-answer" data-faq-answer hidden>
-          <p>For upscaling, FSR 3 Quality is within 5% of DLSS Quality on avg FPS gain (measured on Cyberpunk 2077 and Alan Wake 2). Image quality lags DLSS slightly, especially in motion. FSR 3 Frame Generation applies the same ~1.7× multiplier as DLSS 3 FG but runs on non-RTX cards — that's its real advantage.</p>
+          <p>For upscaling, FSR 3 Quality is within 5% of DLSS Quality on avg FPS gain (measured on Cyberpunk 2077 and Alan Wake 2). Image quality lags DLSS slightly, especially in motion. FSR 3 Frame Generation applies the same ~1.7× multiplier as DLSS 3 FG but runs on non-RTX cards, that's its real advantage.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -489,7 +483,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-11" class="faq-answer" data-faq-answer hidden>
-          <p>Yes — 16 GB is the calculator's baseline. Below 16 GB the model applies an 18% avg FPS penalty and a 40% 1% low penalty, because Windows plus GTA 6 will hit the pagefile and cause streaming stalls. Going to 32 GB buys headroom for streaming, Discord and a browser open.</p>
+          <p>Yes, 16 GB is the calculator's baseline. Below 16 GB the model applies an 18% avg FPS penalty and a 40% 1% low penalty, because Windows plus GTA 6 will hit the pagefile and cause streaming stalls. Going to 32 GB buys headroom for streaming, Discord and a browser open.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -498,7 +492,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-12" class="faq-answer" data-faq-answer hidden>
-          <p>GTA Online's 30-player lobbies and physics simulation are CPU-bound. This calculator doesn't split by mode — assume 10–15% lower FPS in busy lobbies on the same hardware, and rougher 1% lows. The bottleneck calculator does split by workload if you want a per-mode read.</p>
+          <p>GTA Online's 30-player lobbies and physics simulation are CPU-bound. This calculator doesn't split by mode, assume 10–15% lower FPS in busy lobbies on the same hardware, and rougher 1% lows. The bottleneck calculator does split by workload if you want a per-mode read.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -516,7 +510,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-14" class="faq-answer" data-faq-answer hidden>
-          <p>No — ray tracing costs FPS. This calculator doesn't include an RT toggle because RT overhead varies wildly per implementation (reflections only vs full path tracing). If path tracing is enabled, expect 30–50% lower avg FPS with it on. Use the VRAM calculator for RT VRAM overhead.</p>
+          <p>No, ray tracing costs FPS. This calculator doesn't include an RT toggle because RT overhead varies wildly per implementation (reflections only vs full path tracing). If path tracing is enabled, expect 30–50% lower avg FPS with it on. Use the VRAM calculator for RT VRAM overhead.</p>
         </div>
       </li></ul>
     </section>
@@ -529,7 +523,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       </div>
 <div id="term-1-low">
         <dt>1% low</dt>
-        <dd>Average of the slowest 1% of frames. Captures felt stutter — a low 1% low means uneven pacing even when avg looks fine.</dd>
+        <dd>Average of the slowest 1% of frames. Captures felt stutter, a low 1% low means uneven pacing even when avg looks fine.</dd>
       </div>
 <div id="term-gpu-bound">
         <dt>GPU-bound</dt>
@@ -552,31 +546,31 @@ band        = [avg × 0.85, avg × 1.15]</pre>
     <section aria-labelledby="related-content">
       <h2 id="related-content">Tools that pair with this FPS estimate</h2>
       <h3 class="related-sub">Related tools</h3>
-      <ul class="related-tools-grid"><li><a href="/tools/bottleneck-calculator" class="tool-card" data-accent="purple" aria-label="GTA 6 Bottleneck Calculator — Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Bottleneck Calculator</h3><p>Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tools/vram-calculator" class="tool-card" data-accent="blue" aria-label="GTA 6 VRAM Requirements Checker — Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>GTA 6 VRAM Requirements Checker</h3><p>Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="GTA 6 System Requirements Checker — Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tools/bottleneck-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Bottleneck Calculator</h3><p>Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tools/vram-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>GTA 6 VRAM Requirements Checker</h3><p>Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
       <h3 class="related-sub">Companion guides</h3>
-      <ul class="guide-cards"><li><a href="/guides/how-fps-is-estimated" class="tool-card" data-accent="blue" aria-label="How we estimate GTA 6 FPS — The exact model behind the FPS calculator — GPU scores, upscaler multipliers, frame-gen caps and the VRAM stutter penalty."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Performance</span><h3>How we estimate GTA 6 FPS</h3><p>The exact model behind the FPS calculator — GPU scores, upscaler multipliers, frame-gen caps and the VRAM stutter penalty.</p><span class="link-cta">Read guide <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink" aria-label="CPU-GPU pairing for GTA 6 — 12 common CPU + GPU pairings with the honest verdict — balanced, GPU-starved, or CPU-bound — and why 1% lows fall off first."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>CPU-GPU pairing for GTA 6</h3><p>12 common CPU + GPU pairings with the honest verdict — balanced, GPU-starved, or CPU-bound — and why 1% lows fall off first.</p><span class="link-cta">Read guide <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="guide-cards"><li><a href="/guides/how-fps-is-estimated" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Performance</span><h3>How we estimate GTA 6 FPS</h3><p>The exact model behind the FPS calculator, GPU scores, upscaler multipliers, frame-gen caps and the VRAM stutter penalty.</p><span class="link-cta">Read guide <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>CPU-GPU pairing for GTA 6</h3><p>12 common CPU + GPU pairings with the honest verdict, balanced, GPU-starved, or CPU-bound, and why 1% lows fall off first.</p><span class="link-cta">Read guide <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
       <h2 id="sources">Sources & methodology references</h2>
       <ol class="sources-list"><li>
-        <a href="https://www.eurogamer.net/digitalfoundry-2019-red-dead-redemption-2-pc-tech-review-vulkan-dx12-benchmarks-1080p-1440p-4k" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 PC tech review — Vulkan vs DX12 1080p / 1440p / 4K benchmarks</a>
-        <span class="src-meta">Digital Foundry · Eurogamer · Published Nov 5, 2019 · Accessed Jul 24, 2026 · RAGE-engine (RDR2) FPS scaling across GPU tiers — anchor for BASE_FPS at each resolution.</span>
+        <a href="https://www.eurogamer.net/digitalfoundry-2019-red-dead-redemption-2-pc-tech-review-vulkan-dx12-benchmarks-1080p-1440p-4k" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 PC tech review, Vulkan vs DX12 1080p / 1440p / 4K benchmarks</a>
+        <span class="src-meta">Digital Foundry · Eurogamer · Published Nov 5, 2019 · Accessed Jul 24, 2026 · RAGE-engine (RDR2) FPS scaling across GPU tiers, anchor for BASE_FPS at each resolution.</span>
       </li>
 <li>
-        <a href="https://www.techpowerup.com/review/cyberpunk-2077-benchmark-test-performance-analysis/" target="_blank" rel="noopener noreferrer">Cyberpunk 2077 benchmark test — performance analysis (preset &amp; upscaler ladder)</a>
+        <a href="https://www.techpowerup.com/review/cyberpunk-2077-benchmark-test-performance-analysis/" target="_blank" rel="noopener noreferrer">Cyberpunk 2077 benchmark test, performance analysis (preset &amp; upscaler ladder)</a>
         <span class="src-meta">TechPowerUp · Published Dec 10, 2020 · Accessed Jul 24, 2026 · Preset multipliers, DLSS Quality / Balanced / Performance gains, RT-on / off deltas.</span>
       </li>
 <li>
-        <a href="https://www.youtube.com/@hardwareunboxed/videos" target="_blank" rel="noopener noreferrer">DLSS 3 Frame Generation vs FSR 3 — avg vs 1% low measurement</a>
+        <a href="https://www.youtube.com/@hardwareunboxed/videos" target="_blank" rel="noopener noreferrer">DLSS 3 Frame Generation vs FSR 3, avg vs 1% low measurement</a>
         <span class="src-meta">Hardware Unboxed · Published Oct 1, 2023 · Accessed Jul 24, 2026 · Frame-gen avg / 1% low ratios used to size FG multipliers on avg only.</span>
       </li>
 <li>
-        <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">GTA VI — official target hardware page</a>
-        <span class="src-meta">Rockstar Games · Published May 1, 2025 · Accessed Jul 24, 2026 · Official target-spec pass — anchor for launch-day BASE_FPS re-calibration.</span>
+        <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">GTA VI, official target hardware page</a>
+        <span class="src-meta">Rockstar Games · Published May 1, 2025 · Accessed Jul 24, 2026 · Official target-spec pass, anchor for launch-day BASE_FPS re-calibration.</span>
       </li></ol>
     </section>
 
@@ -595,7 +589,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
 <li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-07-23">Jul 23, 2026</time>
-        <p>Launch: 34-GPU catalog (shared with bottleneck), Low → Ultra preset math, DLSS / FSR / XeSS + DLSS 3 / FSR 3 FG multipliers, 1% low estimate, VRAM stutter penalty, shareable URL state, dynamic OG image, stacked JSON-LD (SoftwareApplication + HowTo + FAQ + Article + Breadcrumb).</p>
+        <p>Launch: 34-GPU catalog (shared with bottleneck), Low → Ultra preset math, DLSS / FSR / XeSS + DLSS 3 / FSR 3 FG multipliers, 1% low estimate, VRAM stutter penalty, shareable URL state, dynamic OG image, stacked JSON-LD (SoftwareApplication + HowTo + FAQPage + BreadcrumbList).</p>
       </li></ul>
     </section>
 
@@ -605,33 +599,51 @@ band        = [avg × 0.85, avg × 1.15]</pre>
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
+          <a href="/" class="logo-link">
+              <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -666,14 +678,18 @@ band        = [avg × 0.85, avg × 1.15]</pre>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms &amp; Conditions</a></li>
+              <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
@@ -682,10 +698,20 @@ band        = [avg × 0.85, avg × 1.15]</pre>
 </footer>
 
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
+  </div>
+</div>
   <script src="/assets/js/theme.js" defer></script>
   <script src="/assets/js/header.js" defer></script>
   <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
   <script type="module" src="/assets/js/fps-calculator.js"></script>
   <script type="application/ld+json">
 {
@@ -743,7 +769,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           "@type": "HowToStep",
           "position": 1,
           "name": "Pick your GPU + CPU",
-          "text": "Choose from the same 34-GPU catalog as the bottleneck calculator (21 CPUs). Scores are normalised so RTX 4090 = 100 and i9-14900K / Ryzen 7 7800X3D = 100. We compute a GPU-bound FPS and a CPU cap separately, then take the minimum."
+          "text": "Choose from the same 34-GPU catalog as the bottleneck calculator (21 CPUs). Scores are normalised so RTX 4090 = 100, i9-14900K = 100 and Ryzen 7 7800X3D = 98. We compute a GPU-bound FPS and a CPU cap separately, then take the minimum."
         },
         {
           "@type": "HowToStep",
@@ -761,7 +787,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           "@type": "HowToStep",
           "position": 4,
           "name": "Add frame generation, if your card has it",
-          "text": "DLSS 3 and FSR 3 insert a generated frame between two real ones, multiplying average fps by roughly 1.7×. Crucially it leaves 1% lows — and input latency — untouched, so we never let it move the low figure."
+          "text": "DLSS 3 and FSR 3 insert a generated frame between two real ones, multiplying average fps by roughly 1.7×. Crucially it leaves 1% lows, and input latency, untouched, so we never let it move the low figure."
         },
         {
           "@type": "HowToStep",
@@ -784,7 +810,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "What FPS will I get in GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It depends on GPU, CPU, resolution and preset. As a rough ladder: at 1440p High on 2026 mid-range hardware (RTX 4070 / RX 7800 XT, mid-tier Ryzen 5 or Core i5), expect about 70 fps native. 1080p High gives roughly 90 fps on the same build. 4K Ultra drops to about 42 fps native on a flagship, about 93 fps with DLSS Quality + Frame Gen. Enter your exact parts above for a live estimate."
+        "text": "It depends on GPU, CPU, resolution and preset. As a rough ladder: at 1440p High on 2026 mid-range hardware (RTX 4070 / RX 7800 XT, mid-tier Ryzen 5 or Core i5), expect about 70 fps native. 1080p High gives roughly 92 fps on the same build. 4K Ultra drops to about 42 fps native on a flagship, about 93 fps with DLSS Quality + Frame Gen. Enter your exact parts above for a live estimate."
       }
     },
     {
@@ -792,7 +818,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Can I run GTA 6 at 60 fps?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes on almost any 2020-and-newer discrete GPU at 1080p. At 1080p Medium, an RTX 3060 / RX 6600 clears 60 fps comfortably. At 1440p High you'll need an RTX 4060 Ti / RX 7700 XT or better. At 4K Ultra, 60 fps native is not realistic on any current card — even a 4090 lands near 42 fps. DLSS Quality + Frame Gen is the way to 60+ at 4K Ultra."
+        "text": "Yes on almost any 2020-and-newer discrete GPU at 1080p. At 1080p Medium, an RTX 3060 / RX 6600 clears 60 fps comfortably. At 1440p High you'll need an RTX 4060 Ti / RX 7700 XT or better. At 4K Ultra, 60 fps native is not realistic on any current card, even a 4090 lands near 42 fps. DLSS Quality + Frame Gen is the way to 60+ at 4K Ultra."
       }
     },
     {
@@ -800,7 +826,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Can I run GTA 6 at 120 fps?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "At 1080p on a modern flagship (4090, 7900 XTX, 5080+) — yes, natively. At 1440p, 120 fps needs a 4080 / 7900 XT paired with DLSS Quality. At 4K, 120 fps typically requires DLSS Balanced + Frame Generation on a 4090-class card."
+        "text": "At 1080p on a modern flagship (4090, 7900 XTX, 5080+), yes, natively. At 1440p, 120 fps needs a 4080 / 7900 XT paired with DLSS Quality. At 4K, 120 fps typically requires DLSS Balanced + Frame Generation on a 4090-class card."
       }
     },
     {
@@ -808,7 +834,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "How much does DLSS boost GTA 6 FPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "DLSS Quality typically adds 25–35% FPS by rendering internally at 67% resolution. DLSS Balanced adds 45–55% (rendering at ~58%). DLSS Performance adds 65–80% (rendering at 50%). These are GPU-side multipliers only — a CPU-bound scene won't benefit as much because the CPU cap is unaffected."
+        "text": "DLSS Quality typically adds 25–35% FPS by rendering internally at 67% resolution. DLSS Balanced adds 45–55% (rendering at ~58%). DLSS Performance adds 65–80% (rendering at 50%). These are GPU-side multipliers only, a CPU-bound scene won't benefit as much because the CPU cap is unaffected."
       }
     },
     {
@@ -816,7 +842,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Does frame generation actually feel like double FPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not exactly. DLSS 3 / FSR 3 Frame Gen inserts a synthetic frame between real ones, so avg FPS roughly ×1.7. Motion feels smoother, but input latency is tied to the underlying real FPS. 1% lows don't improve. Use FG when your real FPS is already 50+ — below that, latency feels sluggish."
+        "text": "Not exactly. DLSS 3 / FSR 3 Frame Gen inserts a synthetic frame between real ones, so avg FPS roughly ×1.7. Motion feels smoother, but input latency is tied to the underlying real FPS. 1% lows don't improve. Use FG when your real FPS is already 50+, below that, latency feels sluggish."
       }
     },
     {
@@ -824,7 +850,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "What is a 1% low and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The 1% low is the average of the slowest 1% of frames — the number that captures the felt stutter. A game at 100 fps avg / 80 fps 1% low feels smooth; 100 fps avg / 45 fps 1% low feels stuttery. VRAM shortage and CPU bottlenecks tank 1% lows first. This calculator reports both so you can spot the difference."
+        "text": "The 1% low is the average of the slowest 1% of frames, the number that captures the felt stutter. A game at 100 fps avg / 80 fps 1% low feels smooth; 100 fps avg / 45 fps 1% low feels stuttery. VRAM shortage and CPU bottlenecks tank 1% lows first. This calculator reports both so you can spot the difference."
       }
     },
     {
@@ -832,7 +858,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "How much FPS does GTA 6 need? What's a good target?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "60 fps is the baseline for a modern action game. 90 fps or 120 fps is the sweet spot for smooth camera panning on OLED / high-refresh monitors. 144 fps at 1440p is realistic on RTX 4070+ class with DLSS. GTA 6 doesn't require a specific FPS — pick a target your monitor supports and match hardware to it."
+        "text": "60 fps is the baseline for a modern action game. 90 fps or 120 fps is the sweet spot for smooth camera panning on OLED / high-refresh monitors. 144 fps at 1440p is realistic on RTX 4070+ class with DLSS. GTA 6 doesn't require a specific FPS, pick a target your monitor supports and match hardware to it."
       }
     },
     {
@@ -840,7 +866,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Is RTX 4060 enough for GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes at 1080p. Estimated 60–75 fps at 1080p High native, about 86 with DLSS Quality. Not enough for 1440p Ultra — the 8 GB VRAM triggers a stutter penalty at Ultra + HD textures. For 1440p target, the RTX 4060 Ti 16GB or RTX 4070 is the safer buy."
+        "text": "Yes at 1080p. Estimated 60–75 fps at 1080p High native, about 86 with DLSS Quality. Not enough for 1440p Ultra, the 8 GB VRAM triggers a stutter penalty at Ultra + HD textures. For 1440p target, the RTX 4060 Ti 16GB or RTX 4070 is the safer buy."
       }
     },
     {
@@ -848,7 +874,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Is RTX 3080 still good for GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes at 1440p. Estimated about 69 fps at 1440p High native, about 90 with DLSS Quality. The 10 GB VRAM is adequate but not comfortable — you'll be Adequate at 1440p Very High, Insufficient at 1440p Ultra + HD textures. Drop textures a notch to sidestep it."
+        "text": "Yes at 1440p. Estimated about 69 fps at 1440p High native, about 90 with DLSS Quality. The 10 GB VRAM is adequate but not comfortable, you'll be Adequate at 1440p Very High, Insufficient at 1440p Ultra + HD textures. Drop textures a notch to sidestep it."
       }
     },
     {
@@ -856,7 +882,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Is FSR 3 as good as DLSS 3?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For upscaling, FSR 3 Quality is within 5% of DLSS Quality on avg FPS gain (measured on Cyberpunk 2077 and Alan Wake 2). Image quality lags DLSS slightly, especially in motion. FSR 3 Frame Generation applies the same ~1.7× multiplier as DLSS 3 FG but runs on non-RTX cards — that's its real advantage."
+        "text": "For upscaling, FSR 3 Quality is within 5% of DLSS Quality on avg FPS gain (measured on Cyberpunk 2077 and Alan Wake 2). Image quality lags DLSS slightly, especially in motion. FSR 3 Frame Generation applies the same ~1.7× multiplier as DLSS 3 FG but runs on non-RTX cards, that's its real advantage."
       }
     },
     {
@@ -864,7 +890,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Will 16 GB of RAM be enough for GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes — 16 GB is the calculator's baseline. Below 16 GB the model applies an 18% avg FPS penalty and a 40% 1% low penalty, because Windows plus GTA 6 will hit the pagefile and cause streaming stalls. Going to 32 GB buys headroom for streaming, Discord and a browser open."
+        "text": "Yes, 16 GB is the calculator's baseline. Below 16 GB the model applies an 18% avg FPS penalty and a 40% 1% low penalty, because Windows plus GTA 6 will hit the pagefile and cause streaming stalls. Going to 32 GB buys headroom for streaming, Discord and a browser open."
       }
     },
     {
@@ -872,7 +898,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Why is my CPU limiting GTA Online more than story mode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "GTA Online's 30-player lobbies and physics simulation are CPU-bound. This calculator doesn't split by mode — assume 10–15% lower FPS in busy lobbies on the same hardware, and rougher 1% lows. The bottleneck calculator does split by workload if you want a per-mode read."
+        "text": "GTA Online's 30-player lobbies and physics simulation are CPU-bound. This calculator doesn't split by mode, assume 10–15% lower FPS in busy lobbies on the same hardware, and rougher 1% lows. The bottleneck calculator does split by workload if you want a per-mode read."
       }
     },
     {
@@ -888,7 +914,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Should I turn on ray tracing for FPS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No — ray tracing costs FPS. This calculator doesn't include an RT toggle because RT overhead varies wildly per implementation (reflections only vs full path tracing). If path tracing is enabled, expect 30–50% lower avg FPS with it on. Use the VRAM calculator for RT VRAM overhead."
+        "text": "No, ray tracing costs FPS. This calculator doesn't include an RT toggle because RT overhead varies wildly per implementation (reflections only vs full path tracing). If path tracing is enabled, expect 30–50% lower avg FPS with it on. Use the VRAM calculator for RT VRAM overhead."
       }
     }
   ]

@@ -651,6 +651,9 @@ system-requirements, vram).
   two noindex pages (line 255); pages-on-disk expectation stays 40.
 - **S3 — robots.txt** gains `Disallow: /_partials/` and `Disallow:
   /api/` (source + built tree, via `build_sitemaps.py` `robots()`).
+  NOTE (Round 1, 27 Nov 2026): `_partials/` is deleted, so the
+  `Disallow: /_partials/` line in robots.txt is now vestigial (harmless;
+  left in place, no file to protect).
 - **S4 — sitemap.xsl.** New styled XSL (XSLT 1.0: title, intro, table
   with URL / lastmod / changefreq / priority / hreflang alternates;
   handles urlset + sitemapindex), referenced from ALL 8 sitemaps with

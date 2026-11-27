@@ -25,8 +25,7 @@ toolwools-static/
   assets/fonts/                  # Inter + Space Grotesk, self-hosted woff2
   assets/img/                    # src/assets images
   og/  favicon*.png  robots.txt  site.webmanifest  llms.txt   # public/ as-is
-  _partials/header.html          # copy-paste header (see §3)
-  _partials/footer.html          # copy-paste footer (see §3)
+  _partials/                      # DELETED in Round 1 (27 Nov 2026); shell is inline — see §3
 ```
 
 Rules:
@@ -80,8 +79,11 @@ Order in `<head>`:
 
 ## 3. Header and footer
 
-- Copy `_partials/header.html` and `_partials/footer.html` verbatim into
-  each page. Move `aria-current="page"` to the nav link of the current page
+- NOTE (Round 1, 27 Nov 2026): `_partials/header.html` and `_partials/footer.html`
+  are DELETED (0 pages referenced them; plan D-03: inline headers/footers).
+  Copy the header/footer shell inline from the FPS template page
+  (`tools/fps-calculator/index.html` + its locale copies) into each page.
+  Move `aria-current="page"` to the nav link of the current page
   (both desktop and mobile navs) and update the language-switcher links so
   the English entry points at the current page (e.g.
   `/tools/bottleneck-calculator`) and the locale entries at the matching

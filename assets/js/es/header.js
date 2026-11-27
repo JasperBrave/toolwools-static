@@ -40,11 +40,23 @@
     });
   }
 
-  // Ctrl/Cmd+K focuses the header search from anywhere.
+  // Ctrl/Cmd+K focuses the header search from anywhere. The first
+  // [data-header-search-input] in DOM order is the desktop input, which is
+  // display:none below 1280px, so focusing it there was a no-op. Mirror the
+  // homepage inline handler: on narrow screens open the mobile menu first
+  // and focus its search input instead. (FPS template shell fix, 27 Nov 2026.)
   document.addEventListener("keydown", function (e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-      var input = document.querySelector("[data-header-search-input]");
-      if (input) { e.preventDefault(); input.focus(); }
+      e.preventDefault();
+      var input = window.innerWidth >= 1280
+        ? document.querySelector("#header-search")
+        : document.querySelector(".mobile-menu [data-header-search-input]");
+      if (window.innerWidth < 1280 && nav && nav.hidden) {
+        nav.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Cerrar menú");
+      }
+      if (input) input.focus();
     }
   });
 

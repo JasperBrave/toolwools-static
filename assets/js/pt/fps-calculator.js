@@ -185,7 +185,7 @@ function render() {
       : "Curto, " + gpu.label + " + " + cpu.label + " chega a cerca de " + result.avgFps + " fps médios (" + displayLow + " fps de 1% mínimo) em " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + ", " + Math.abs(result.targetGap) + " fps abaixo da meta de " + state.target + " fps." + fgNote;
     if (label) label.textContent = verdictText + " · TL;DR";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = verdictText + " — " + result.avgFps + " fps médios";
+    if (verdictEl) verdictEl.textContent = verdictText + " · " + result.avgFps + " fps médios";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -193,7 +193,7 @@ function render() {
   if (out) {
     var tweaks = suggestTweaks(input, result);
     var tweaksHtml = tweaks.length
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">Formas de ganhar quadros</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%) — " + t.detail + "</li>"; }).join("") + "</ul></div>"
+      ? '<div class="tweaks-list"><p class="eyebrow-muted">Formas de ganhar quadros</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%), " + t.detail + "</li>"; }).join("") + "</ul></div>"
       : "";
     var vramNote = result.vramShortGB > 0
       ? '<p class="verdict-desc">Limite de VRAM: sua placa de ' + input.cardVramGB + ' GB está ' + result.vramShortGB + ' GB abaixo dos ' + result.vramNeededGB + ' GB necessários, então uma penalidade de engasgo é aplicada.' + uwNote + '</p>'
@@ -215,7 +215,7 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps médios (" + displayLow + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + " " + L(PRESET_META[state.preset].label) + " · " + result.avgFps + " fps médios (" + displayLow + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " fps médios (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);

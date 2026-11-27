@@ -51,7 +51,7 @@
     fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
       method: "POST",
       headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "en" })
+      body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "ar" })
     }).then(function (res) {
       if (res.status === 409) { showSuccess("أنت موجود بالفعل على القائمة، ولا حاجة إلى أي إجراء آخر."); return; }
       if (!res.ok) throw new Error("http " + res.status);

@@ -51,7 +51,7 @@
     fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
       method: "POST",
       headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "en" })
+      body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "tr" })
     }).then(function (res) {
       if (res.status === 409) { showSuccess("Zaten listedesiniz, yapmanız gereken başka bir şey yok."); return; }
       if (!res.ok) throw new Error("http " + res.status);

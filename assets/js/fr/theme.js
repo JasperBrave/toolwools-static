@@ -1,9 +1,10 @@
 // theme.js — ToolWools theme toggle.
 // Key and values match the TanStack source (localStorage "tw-theme").
-// L6: no stored preference -> follow prefers-color-scheme (task decision).
+// L6: no stored preference -> light-first default (task decision).
 (function () {
   var KEY = "tw-theme";
   function apply(theme) {
+    document.documentElement.dataset.theme = theme;
     document.documentElement.classList.toggle("dark", theme === "dark");
     document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
       btn.setAttribute("aria-label", theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre");
@@ -16,7 +17,8 @@
   function save(theme) {
     try { window.localStorage.setItem(KEY, theme); } catch (e) { /* private mode: theme lasts for the session */ }
   }
-  var current = stored() || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  var TW_THEME_DEFAULT = "light"; // merge gate N2 (27 Nov 2026): light-first, as the homepage guard + shared theme.js
+  var current = stored() || TW_THEME_DEFAULT;
   apply(current);
   document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
     btn.addEventListener("click", function () {

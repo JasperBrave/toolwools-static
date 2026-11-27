@@ -1,4 +1,4 @@
-// fps-calculator.js — GTA 6 FPS Calculator page logic.
+// fps-calculator.js: GTA 6 FPS Calculator page logic.
 // Uses the ported FPS engine (assets/js/engines/fps-engine.js), which shares
 // the bottleneck-engine GPU/CPU catalog (now including RTX 5060 / 5060 Ti,
 // RX 9070 / 9070 XT and Intel Arc B580, AUDIT FIX H4).
@@ -184,7 +184,7 @@ function render() {
       : "دون الهدف، " + gpu.label + " + " + cpu.label + " يصل إلى نحو " + result.avgFps + " إطار/ث في المتوسط (" + displayLow + " إطار/ث كأدنى 1%) عند " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + "، أي أقل من هدف " + state.target + " إطار/ث بمقدار " + Math.abs(result.targetGap) + " إطار/ث." + fgNote;
     if (label) label.textContent = verdictText + " · ملخّص";
     if (text) text.textContent = tldrText;
-    if (verdictEl) verdictEl.textContent = verdictText + " — " + result.avgFps + " متوسط fps";
+    if (verdictEl) verdictEl.textContent = verdictText + ", " + result.avgFps + " متوسط fps";
     if (iconSlot) iconSlot.innerHTML = iconFor(tone);
   }
 
@@ -192,7 +192,7 @@ function render() {
   if (out) {
     var tweaks = suggestTweaks(input, result);
     var tweaksHtml = tweaks.length
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">طرق لزيادة الإطارات</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%) — " + t.detail + "</li>"; }).join("") + "</ul></div>"
+      ? '<div class="tweaks"><p class="tweaks-title eyebrow-muted">طرق لزيادة الإطارات</p><ul class="tweaks-list">' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%), " + t.detail + "</li>"; }).join("") + "</ul></div>"
       : "";
     var vramNote = result.vramShortGB > 0
       ? '<p class="verdict-desc">محدود بالذاكرة: بطاقتك بسعة ' + input.cardVramGB + ' غيغابايت تنقصها ' + result.vramShortGB + ' غيغابايت عن ' + result.vramNeededGB + ' غيغابايت المطلوبة، لذلك تُطبَّق عقوبة التقطّع.' + uwNote + '</p>'
@@ -214,8 +214,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " متوسط fps (" + displayLow + " أدنى 1%)") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " متوسط fps (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " متوسط fps (" + displayLow + " أدنى 1%)") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " · " + result.avgFps + " متوسط fps (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

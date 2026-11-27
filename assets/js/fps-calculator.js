@@ -192,7 +192,7 @@ function render() {
   if (out) {
     var tweaks = suggestTweaks(input, result);
     var tweaksHtml = tweaks.length
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">Ways to gain frames</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%) — " + t.detail + "</li>"; }).join("") + "</ul></div>"
+      ? '<div class="upgrade-box"><p class="eyebrow-muted">Ways to gain frames</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%), " + t.detail.replace(/ — /g, ", ") + "</li>"; }).join("") + "</ul></div>"
       : "";
     var vramNote = result.vramShortGB > 0
       ? '<p class="verdict-desc">VRAM-limited: your ' + input.cardVramGB + ' GB card is ' + result.vramShortGB + ' GB short of the ' + result.vramNeededGB + ' GB needed, so a stutter penalty is applied.' + uwNote + '</p>'
@@ -214,8 +214,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + displayLow + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " avg fps (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + " " + PRESET_META[state.preset].label + " · " + result.avgFps + " avg fps (" + displayLow + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + result.avgFps + " avg fps (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

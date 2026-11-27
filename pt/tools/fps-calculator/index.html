@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,15 +22,17 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Calculadora de FPS do GTA 6">
     <meta name="twitter:description" content="Estime o FPS de GTA 6 para qualquer GPU + CPU em 1080p, 1440p e 4K, de Baixo a Ultra, com matemática de DLSS, FSR e geração de quadros, mínimos de 1% honestos e um veredito sobre sua meta de FPS.">
     <meta name="twitter:image" content="https://toolwools.com/og/fps-calculator.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="canonical" href="https://toolwools.com/pt/tools/fps-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/fps-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/fps-calculator" hreflang="es">
@@ -43,85 +45,94 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-fps-pt.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
-    <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
-    </script>
+
   </head>
 <body>
-  <div class="site-shell">
-
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
-<header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
-  <div class="site-header-bar" data-header-bar>
-    <div class="container site-header-inner">
-      <div class="site-header-left">
-        <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
-          <span class="logo">
-            <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-            <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-              <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
-            </span>
-          </span>
-        </a>
-        <nav class="nav-primary" aria-label="Principal">
-          <a href="/pt/">Início</a>
-          <a href="/pt/tools" aria-current="page">Ferramentas</a>
-          <a href="/pt/trackers">Rastreadores</a>
-          <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
-          <a href="/pt/trailers">Trailers</a>
-        </nav>
+
+<!-- ================= §01 — NAVIGATION ================= -->
+<header class="site-header" data-header-bar>
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/pt/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+    <nav class="main-nav" aria-label="Principal">
+            <ul>
+        <li><a href="/pt/">Início</a></li>
+        <li><a href="/pt/tools" aria-current="page">Ferramentas <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/trackers">Rastreadores <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/generators">Geradores <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a></li>
+        <li><a href="/pt/news">Notícias</a></li>
+        <li><a href="/pt/trailers">Trailers</a></li>
+        <li><a href="/pt/guides">Guias</a></li>
+      </ul>
+    </nav>
+    <div class="header-spacer"></div>
+    <div class="header-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="header-search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">⌘K</kbd>
       </div>
-      <div class="site-header-actions">
-        <div class="header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
-          <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
-          <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <div class="header-divider" aria-hidden="true"></div>
-        <details class="lang-menu">
-          <summary aria-label="Selecionar idioma">PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-          <div class="lang-menu-list">
-            <a href="/tools/fps-calculator">English</a>
-            <a href="/es/tools/fps-calculator">Español</a>
-            <a href="/pt/tools/fps-calculator" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Português</a>
-            <a href="/de/tools/fps-calculator">Deutsch</a>
-            <a href="/fr/tools/fps-calculator">Français</a>
-            <a href="/tr/tools/fps-calculator">Türkçe</a>
-            <a href="/ar/tools/fps-calculator">العربية</a>
-          </div>
-        </details>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Mudar para o tema escuro" aria-pressed="false">
-          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        </button>
-        <button type="button" class="menu-toggle" data-menu-toggle aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-        </button>
-      </div>
+      <div class="search-results" id="search-results" data-search-results role="listbox" aria-label="Resultados da busca" hidden></div>
     </div>
-    <div class="container">
-      <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
-        <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
-          <div class="search-results" data-search-results role="listbox" hidden></div>
-        </div>
-        <nav class="mobile-nav-links" aria-label="Móvel">
-          <a href="/pt/">Início</a>
-          <a href="/pt/tools" aria-current="page">Ferramentas</a>
-          <a href="/pt/trackers">Rastreadores</a>
-          <a href="/pt/generators">Geradores</a>
-          <a href="/pt/news">Notícias</a>
-          <a href="/pt/trailers">Trailers</a>
-        </nav>
+    <details class="lang-menu">
+      <summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>PT <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="lang-menu-list">
+        <a href="/pt/tools/fps-calculator" lang="pt" aria-current="true">Português <span aria-hidden="true">✓</span></a>
+        <a href="/es/tools/fps-calculator" lang="es">Español</a><a href="/tools/fps-calculator" lang="en">English</a><a href="/de/tools/fps-calculator" lang="de">Deutsch</a>
+        <a href="/fr/tools/fps-calculator" lang="fr">Français</a><a href="/tr/tools/fps-calculator" lang="tr">Türkçe</a><a href="/ar/tools/fps-calculator" lang="ar">العربية</a>
       </div>
+    </details>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Mudar para o tema escuro">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="icon-btn hamburger" type="button" id="menu-btn" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" style="display:none"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-nav hidden>
+    <nav aria-label="Móvel">
+      <a href="/pt/">Início</a><a href="/pt/tools" aria-current="page">Ferramentas</a><a href="/pt/trackers">Rastreadores</a>
+      <a href="/pt/generators">Geradores</a><a href="/pt/news">Notícias</a><a href="/pt/trailers">Trailers</a><a href="/pt/guides">Guias</a>
+    </nav>
+    <div class="mobile-search mobile-nav-search">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" data-header-search-input role="combobox" aria-expanded="false" aria-controls="search-results-mobile" aria-autocomplete="list" placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="search-results" id="search-results-mobile" data-search-results role="listbox" aria-label="Resultados da busca" hidden></div>
+    </div>
+    <div class="mobile-lang">
+      <a href="/tools/fps-calculator" lang="en">EN</a><a href="/es/tools/fps-calculator" lang="es">ES</a><a href="/pt/tools/fps-calculator" lang="pt" aria-current="true">PT</a>
+      <a href="/de/tools/fps-calculator" lang="de">DE</a><a href="/fr/tools/fps-calculator" lang="fr">FR</a><a href="/tr/tools/fps-calculator" lang="tr">TR</a><a href="/ar/tools/fps-calculator" lang="ar">AR</a>
+    </div>
+    <div class="mobile-menu-row"><span>Tema</span>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Mudar para o tema escuro">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -137,39 +148,15 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Calculadora de FPS</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
-        <span>Desempenho</span>
-      </div>
+      <p class="page-eyebrow">Desempenho</p>
       <h1 id="page-title" class="page-title">Calculadora de FPS do GTA 6</h1>
-      <p class="page-subtitle">Estime a taxa de quadros de GTA 6 para sua combinação de GPU + CPU em 1080p, 1440p ou 4K de Baixo a Ultra. Adiciona upscalers DLSS / FSR / XeSS e geração de quadros DLSS 3 / FSR 3, aplica uma penalidade por engasgos de VRAM e devolve tanto o FPS médio quanto um mínimo de 1% honesto, com um veredito em relação à sua meta de 30 / 60 / 120 / 144.</p>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Modelo FPS</dd></div>
-        <div><dt>Execução</dt><dd>Instantâneo, no navegador</dd></div>
-        <div><dt>Plataformas</dt><dd>PC</dd></div>
-        <div><dt>Atualizado</dt><dd><time datetime="2026-11-17">17 de nov de 2026</time></dd></div>
-      </dl>
+      <p class="page-subtitle">Estime a taxa de quadros da sua GPU em 1080p, 1440p e 4K em cada ajuste.</p>
+      <p class="page-meta">Por <a href="/pt/about">Jasper Bravo</a> ·  <a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a> ·  Fundador da ToolWools ·  Análise de desempenho de PC · Modelo: <a href="/pt/methodology">Modelo de FPS de GTA 6</a> · Publicado <time datetime="2026-07-23">23 de jul de 2026</time> ·  Última revisão <time datetime="2026-11-17">17 de novembro de 2026</time> · Execução: Instantâneo, no navegador</p>
     </section>
-          <div class="tool-intro-callout">
-            <p>Cada site de análise de GPU publica uma tabela estática de FPS. Esta é ao vivo. Digite sua GPU, CPU, RAM, resolução e predefinição, a calculadora usa o mesmo modelo que usamos para as ferramentas de gargalo e VRAM, adiciona upscalers e geração de quadros, e devolve uma estimativa que você pode compartilhar como URL. O mínimo de 1% é o número honesto: a geração de quadros DLSS 3 empurra a média para cima, mas os mínimos de 1% continuam ligados à taxa real de quadros de entrada. Essa é a taxa que você sente.</p>
-          </div>
-<section class="byline" aria-label="Sobre esta página">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, fundador da ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">Por <span class="byline-seg"><a href="/pt/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Fundador da ToolWools&nbsp;· Análise de desempenho de PC</p>
-        <p class="byline-note">Modelo: <a href="/pt/methodology">Modelo de FPS de GTA 6</a></p>
-      </div>
-      <p class="byline-dates">Publicado <time datetime="2026-07-23">23 de jul de 2026</time>&nbsp;· Última revisão <time datetime="2026-11-17">17 de novembro de 2026</time></p>
-    </section>
+          
+
 <div class="sr-only" data-live-region aria-live="polite">Estimativa de 71 quadros por segundo em média, 51 de mínimo de 1%, em 1440p Alto. Atinge 60 fps.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Atinge 60 fps · Resumo</span></p>
-        <p class="tldr-text"><span data-tldr-text>Sim, GeForce RTX 4070 + Ryzen 5 7600X / 7600 atinge 60 fps em 1440p Alto: cerca de 71 fps em média, 51 fps de mínimo de 1%.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Atinge 60 fps, 71 fps méd.</p>
-    </section>
+
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculadora</h2>
       <div class="workspace-grid">
@@ -239,9 +226,9 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted">Veredito</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Atinge 60 fps</p><h3 class="verdict-title">71<span class="unit"> fps médios</span></h3><p class="verdict-desc">Faixa de 61–82 fps (±15%), 51 fps de mínimo de 1%. Limitado pela GPU em 1440p Alto.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">FPS médios</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">FPS de 1% mínimo</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><p class="verdict-desc">VRAM suficiente: precisa de 7,8 GB nestas configurações, sua placa tem 12 GB.</p><div class="upgrade-box"><p class="eyebrow-muted">Formas de ganhar quadros</p><ul><li><strong>Ative DLSS 3 Frame Gen</strong> (+70%), dobra a suavidade percebida, mínimo de 1% sem mudanças.</li><li><strong>Ative DLSS / FSR Qualidade</strong> (+31%), estimativa de 93 fps (antes 71).</li><li><strong>Baixe a predefinição para Médio</strong> (+25%), estimativa de 89 fps (antes 71).</li></ul></div><dl class="stat-grid"><div><dt>FPS limitado pela GPU</dt><dd>71</dd></div><div><dt>Limite de CPU</dt><dd>109</dd></div><div><dt>VRAM necessária</dt><dd>7,8 GB</dd></div><div><dt>Diferença da meta</dt><dd>+11 fps</dd></div></dl><div class="share-row">
+          <div data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Atinge 60 fps</p><h3 class="verdict-title">71<span class="unit"> fps médios</span></h3><p class="verdict-desc">Faixa de 61–82 fps (±15%), 51 fps de mínimo de 1%. Limitado pela GPU em 1440p Alto.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">FPS médios</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">FPS de 1% mínimo</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><p class="verdict-desc">VRAM suficiente: precisa de 7,8 GB nestas configurações, sua placa tem 12 GB.</p><div class="tweaks-list"><p class="eyebrow-muted">Formas de ganhar quadros</p><ul><li><strong>Ative DLSS 3 Frame Gen</strong> (+70%), dobra a suavidade percebida, mínimo de 1% sem mudanças.</li><li><strong>Ative DLSS / FSR Qualidade</strong> (+31%), estimativa de 93 fps (antes 71).</li><li><strong>Baixe a predefinição para Médio</strong> (+25%), estimativa de 89 fps (antes 71).</li></ul></div><dl class="stat-grid"><div><dt>FPS limitado pela GPU</dt><dd>71</dd></div><div><dt>Limite de CPU</dt><dd>109</dd></div><div><dt>VRAM necessária</dt><dd>7,8 GB</dd></div><div><dt>Diferença da meta</dt><dd>+11 fps</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20em%201440p%20Alto%20%C2%B7%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Compartilhar no X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20em%201440p%20Alto%20%C2%B7%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Compartilhar no X</a>
       <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%2C%2071%20FPS%20m%C3%A9dios%20%28GTA%206%29&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
     </div></div>
         </div>
@@ -259,7 +246,7 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copiar link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20em%201440p%20Alto%20%C2%B7%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Estimativa%20de%20FPS%20do%20GTA%206%20no%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Compartilhar no X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20em%201440p%20Alto%20%C2%B7%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Estimativa%20de%20FPS%20do%20GTA%206%20no%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Compartilhar no X</a>
         <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%2F%207600%20em%201440p%20Alto%20%C2%B7%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Estimativa%20de%20FPS%20do%20GTA%206%20no%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Ffps-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26preset%3Dhigh%26up%3Doff%26fg%3Doff%26target%3D60">Reddit</a>
       </div>
     </section>
@@ -267,40 +254,37 @@
     <section aria-labelledby="preset-ladder">
       <h2 id="preset-ladder">FPS por predefinição, RTX 4070 + Ryzen 5 7600X em 1440p</h2>
       <p class="section-dek">Mesma máquina, cada predefinição. A escala segue sua GPU, CPU e resolução ao vivo.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="FPS por predefinição, tabela rolável">
+      <div class="table-fade"><div class="table-scroll" tabindex="0" role="region" aria-label="FPS por predefinição, tabela rolável">
       <table class="data-table" id="ladder-table">
         <caption class="sr-only">FPS estimados por predefinição para a máquina atual.</caption>
         <thead><tr><th scope="col">Predefinição</th><th scope="col">FPS médios</th><th scope="col">1% mínimo</th><th scope="col">Faixa</th></tr></thead>
         <tbody data-preset-ladder><tr><td><strong>Baixo</strong></td><td class="mono">109 fps</td><td class="mono">78 fps</td><td class="muted">92–125</td></tr><tr><td><strong>Médio</strong></td><td class="mono">89 fps</td><td class="mono">64 fps</td><td class="muted">76–103</td></tr><tr><td><strong>Alto</strong></td><td class="mono">71 fps</td><td class="mono">51 fps</td><td class="muted">61–82</td></tr><tr><td><strong>Muito alto</strong></td><td class="mono">59 fps</td><td class="mono">42 fps</td><td class="muted">50–67</td></tr><tr><td><strong>Ultra</strong></td><td class="mono">49 fps</td><td class="mono">35 fps</td><td class="muted">41–56</td></tr></tbody>
       </table>
-    </div>
+    </div></div>
     </section>
 
     <section aria-labelledby="fps-by-gpu">
       <h2 id="fps-by-gpu">FPS estimado de GTA 6 por GPU, 1440p Alto, CPU de referência Ryzen 7 7800X3D</h2>
       <p class="section-dek">FPS médio estimado de GTA 6 e mínimo de 1% em 1440p Alto, DLSS / FSR desligado, geração de quadros DLSS 3 desligada, 32 GB DDR5 com CPU de referência Ryzen 7 7800X3D. Modelo calibrado com o escalado de GPU de RDR2 com drivers de lançamento.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="FPS estimado por GPU, tabela rolável">
+      <div class="table-fade"><div class="table-scroll" tabindex="0" role="region" aria-label="FPS estimado por GPU, tabela rolável">
       <table class="data-table" id="by-gpu-table">
         <caption class="sr-only">FPS médio estimado de GTA 6 e mínimo de 1% em 1440p Alto, DLSS / FSR desligado, geração de quadros DLSS 3 desligada, 32 GB DDR5 com CPU de referência Ryzen 7 7800X3D. Modelo calibrado com o escalado de GPU de RDR2 com drivers de lançamento.</caption>
         <thead><tr><th scope="col">GPU</th><th scope="col">FPS médios</th><th scope="col">1% mínimo</th><th scope="col">Veredito</th></tr></thead>
         <tbody><tr><td><strong>RTX 4090</strong></td><td class="mono">102 fps</td><td class="mono">73 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RTX 4080</strong></td><td class="mono">92 fps</td><td class="mono">66 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RTX 4070 Ti</strong></td><td class="mono">82 fps</td><td class="mono">59 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RTX 4070</strong></td><td class="mono">71 fps</td><td class="mono">51 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RTX 4060 Ti</strong></td><td class="mono">59 fps</td><td class="mono">43 fps</td><td class="muted">Um pouco abaixo de 60 fps</td></tr><tr><td><strong>RTX 4060</strong></td><td class="mono">51 fps</td><td class="mono">37 fps</td><td class="muted">Baixe para Médio para 60 fps</td></tr><tr><td><strong>RTX 3080</strong></td><td class="mono">69 fps</td><td class="mono">50 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RTX 3070</strong></td><td class="mono">61 fps</td><td class="mono">44 fps</td><td class="muted">Apenas passa de 60 fps</td></tr><tr><td><strong>RTX 3060</strong></td><td class="mono">45 fps</td><td class="mono">32 fps</td><td class="muted">Baixe para Médio para 60 fps</td></tr><tr><td><strong>RX 7900 XTX</strong></td><td class="mono">94 fps</td><td class="mono">68 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RX 7800 XT</strong></td><td class="mono">73 fps</td><td class="mono">53 fps</td><td class="muted">Bem acima de 60 fps</td></tr><tr><td><strong>RX 6700 XT</strong></td><td class="mono">55 fps</td><td class="mono">40 fps</td><td class="muted">Baixe para Médio para 60 fps</td></tr></tbody>
       </table>
-    </div>
-      <p class="field-hint" style="margin-top:0.75rem">Os números são estimativas do modelo com uma faixa de ±15% em relação aos drivers do dia do lançamento. Ative DLSS Qualidade para um aumento de ~30%, geração de quadros DLSS 3 para um aumento de ~70% na média (mínimo de 1% sem mudanças). Esta tabela é calculada com o mesmo motor da ToolWools da calculadora ao vivo acima, para o cenário indicado.</p>
+    </div></div>
+      <p class="table-footnote">Os números são estimativas do modelo com uma faixa de ±15% em relação aos drivers do dia do lançamento. Ative DLSS Qualidade para um aumento de ~30%, geração de quadros DLSS 3 para um aumento de ~70% na média (mínimo de 1% sem mudanças). Esta tabela é calculada com o mesmo motor da ToolWools da calculadora ao vivo acima, para o cenário indicado.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Continue planejando seu PC para GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique o equilíbrio CPU-GPU com a <a href="/pt/tools/bottleneck-calculator">calculadora de gargalo de GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique a margem de VRAM com a <a href="/pt/tools/vram-calculator">calculadora de VRAM de GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Completo <a href="/pt/tools/system-requirements">Verificador de requisitos de PC de GTA 6</a> — mínimo, recomendado e Ultra.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Avalie o PC inteiro com a <a href="/pt/tools/readiness-score">pontuação de preparação de GTA 6</a>.</span></li></ul>
+      <ul class="related-inline-list"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique o equilíbrio CPU-GPU com a <a href="/pt/tools/bottleneck-calculator">calculadora de gargalo de GTA 6</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique a margem de VRAM com a <a href="/pt/tools/vram-calculator">calculadora de VRAM de GTA 6</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Completo <a href="/pt/tools/system-requirements">Verificador de requisitos de PC de GTA 6</a>, mínimo, recomendado e Ultra.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Avalie o PC inteiro com a <a href="/pt/tools/readiness-score">pontuação de preparação de GTA 6</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Suposições">
-      <p><strong>Suposições</strong> <span>Modelo de FPS calibrado com o escalado de GPU de RDR2 com drivers de lançamento (Digital Foundry, Hardware Unboxed), as razões de média / mínimo de 1% de Cyberpunk 2077 nas predefinições e os multiplicadores medidos de upscaling e geração de quadros DLSS 3 / FSR 3 em Alan Wake 2 e Cyberpunk. Referência: RTX 4090 + Ryzen 7 7800X3D em 1440p Alto = 100 fps. Faixa de incerteza ±15% em relação aos drivers do dia do lançamento.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
-      <p class="updated-line">Atualizado <time datetime="2026-11-17">17 de novembro de 2026</time></p>
-    </aside>
+    
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Como o FPS de GTA 6 é estimado para sua GPU e CPU</h2>
@@ -308,7 +292,7 @@
       <ol class="steps-grid cols-3"><li>
         <span class="step-number">01</span>
         <h3 class="step-title">Escolha sua GPU + CPU</h3>
-        <p class="step-text">Escolha do mesmo catálogo de 34 placas que a calculadora de gargalo (21 CPUs). As pontuações são normalizadas para que RTX 4090 = 100 e i9-14900K / Ryzen 7 7800X3D = 100. Calculamos um FPS limitado pela GPU e um limite de CPU separadamente, e pegamos o mínimo.</p>
+        <p class="step-text">Escolha do mesmo catálogo de 34 placas que a calculadora de gargalo (21 CPUs). As pontuações são normalizadas para que RTX 4090 = 100, i9-14900K = 100 e Ryzen 7 7800X3D = 98. Calculamos um FPS limitado pela GPU e um limite de CPU separadamente, e pegamos o mínimo.</p>
       </li>
 <li>
         <span class="step-number">02</span>
@@ -338,7 +322,7 @@
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="use-case-1">
           <h3 id="use-case-1">RTX 4060 + Ryzen 5 7600X em 1080p Alto, PC econômico de 60 fps</h3>
-          <p>Atinge 60 fps com conforto em 1080p Alto nativo (cerca de 66 fps), chega a 85 com DLSS Qualidade. 8 GB de VRAM está bom em 1080p; evite o pacote de texturas HD.</p>
+          <p>Atinge 60 fps com conforto em 1080p Alto nativo (cerca de 66 fps), chega a 86 com DLSS Qualidade. 8 GB de VRAM está bom em 1080p; evite o pacote de texturas HD.</p>
           <a href="/pt/tools/fps-calculator?gpu=rtx-4060&amp;cpu=r5-7600x&amp;ram=16&amp;res=1080p&amp;preset=high&amp;up=off&amp;fg=off&amp;target=60" aria-label="Carregar predefinição: RTX 4060 + Ryzen 5 7600X em 1080p Alto, PC econômico de 60 fps">Carregar predefinição <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li>
@@ -378,7 +362,7 @@ if vramNeeded &gt; cardVram: avg × 0.75, low × 0.50, limiter = VRAM
 avg         = avg × frameGenMult             // FG lifts avg only
 low         = avg × (cpuBound ? 0.62 : 0.72)  // 1% mínimo
 band        = [avg × 0.85, avg × 1.15]</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>As pontuações de GPU/CPU usam a mesma escala de 0 a 100 que a calculadora de gargalo; RTX 4090 = 100, i9-14900K / Ryzen 7 7800X3D = 100.</li>
+          <ul class="list-disc list-outside"><li>As pontuações de GPU/CPU usam a mesma escala de 0 a 100 que a calculadora de gargalo; RTX 4090 = 100, i9-14900K = 100 e Ryzen 7 7800X3D = 98.</li>
 <li>BASE_FPS em 1440p Alto para uma GPU de pontuação 100 + CPU de pontuação 100 é 102 fps, ancorado nos números medidos de RDR2 com 4090 e ajustado para o streaming mais denso de Vice City em GTA 6.</li>
 <li>Os multiplicadores de predefinição (Baixo ×1,55, Médio ×1,25, Alto 1,00, Muito alto ×0,82, Ultra ×0,68) coincidem com as curvas de escalado de predefinições de Cyberpunk 2077 e RDR2.</li>
 <li>Os multiplicadores de upscaler são o ganho sobre o nativo com a mesma resolução alvo (DLSS-Q ×1,30, DLSS-B ×1,50, DLSS-P ×1,75, FSR-Q ×1,28, XeSS-Q ×1,25).</li>
@@ -386,11 +370,15 @@ band        = [avg × 0.85, avg × 1.15]</pre>
 <li>A falta de VRAM dispara uma penalidade de 25% no FPS médio e de 50% no mínimo de 1%, o comportamento de transbordamento do driver medido em Cyberpunk 2077 com configurações de VRAM acima do orçamento.</li></ul>
         </div>
       </details>
+      <aside class="assumptions-strip" aria-label="Suposições">
+      <p><strong>Suposições</strong> <span>Modelo de FPS calibrado com o escalado de GPU de RDR2 com drivers de lançamento (Digital Foundry, Hardware Unboxed), as razões de média / mínimo de 1% de Cyberpunk 2077 nas predefinições e os multiplicadores medidos de upscaling e geração de quadros DLSS 3 / FSR 3 em Alan Wake 2 e Cyberpunk. Referência: RTX 4090 + Ryzen 7 7800X3D em 1440p Alto = 102 fps. Faixa de incerteza ±15% em relação aos drivers do dia do lançamento.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
+      <p class="updated-line">Atualizado <time datetime="2026-11-17">17 de novembro de 2026</time></p>
+    </aside>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Perguntas sobre a taxa de quadros de GTA 6</h2>
+      <header>
+        <h2 id="faq">Perguntas sobre a taxa de quadros de GTA 6</h2>
         <p class="section-dek">Upscaling, geração de quadros, engasgos por VRAM e FPS alvo.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -399,7 +387,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-1" class="faq-answer" data-faq-answer hidden>
-          <p>Depende da GPU, CPU, resolução e predefinição. Como uma escada aproximada: em 1440p Alto com hardware intermediário de 2026 (RTX 4070 / RX 7800 XT, Ryzen 5 ou Core i5 intermediário), espere cerca de 70 fps nativos. 1080p Alto dá cerca de 90 fps no mesmo PC. 4K Ultra cai para cerca de 42 fps nativos em um topo de linha, cerca de 93 fps com DLSS Qualidade + Frame Gen. Digite suas peças exatas acima para uma estimativa ao vivo.</p>
+          <p>Depende da GPU, CPU, resolução e predefinição. Como uma escada aproximada: em 1440p Alto com hardware intermediário de 2026 (RTX 4070 / RX 7800 XT, Ryzen 5 ou Core i5 intermediário), espere cerca de 70 fps nativos. 1080p Alto dá cerca de 92 fps no mesmo PC. 4K Ultra cai para cerca de 42 fps nativos em um topo de linha, cerca de 93 fps com DLSS Qualidade + Frame Gen. Digite suas peças exatas acima para uma estimativa ao vivo.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -552,12 +540,12 @@ band        = [avg × 0.85, avg × 1.15]</pre>
     <section aria-labelledby="related-content">
       <h2 id="related-content">Ferramentas que combinam com esta estimativa de FPS</h2>
       <h3 class="related-sub">Ferramentas relacionadas</h3>
-      <ul class="related-tools-grid"><li><a href="/pt/tools/bottleneck-calculator" class="tool-card" data-accent="purple" aria-label="Calculadora de gargalos do GTA 6 — Verifique o equilíbrio CPU vs GPU para GTA 6 em 1080p, 1440p e 4K. Porcentagem de gargalo ao vivo, faixa de FPS e o menor upgrade que reequilibra sua máquina."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>Calculadora de gargalos do GTA 6</h3><p>Verifique o equilíbrio CPU vs GPU para GTA 6 em 1080p, 1440p e 4K. Porcentagem de gargalo ao vivo, faixa de FPS e o menor upgrade que reequilibra sua máquina.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/tools/vram-calculator" class="tool-card" data-accent="blue" aria-label="Verificador de requisitos de VRAM do GTA 6 — Verifique a VRAM mínima que você precisa para GTA 6 em 1080p, 1440p e 4K. Veredicto para placas de 6 GB, 8 GB, 12 GB e 16 GB."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>Verificador de requisitos de VRAM do GTA 6</h3><p>Verifique a VRAM mínima que você precisa para GTA 6 em 1080p, 1440p e 4K. Veredicto para placas de 6 GB, 8 GB, 12 GB e 16 GB.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="Verificador de requisitos do sistema do GTA 6 — Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/pt/tools/bottleneck-calculator" class="tool-card"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>Calculadora de gargalos do GTA 6</h3><p>Verifique o equilíbrio CPU vs GPU para GTA 6 em 1080p, 1440p e 4K. Porcentagem de gargalo ao vivo, faixa de FPS e o menor upgrade que reequilibra sua máquina.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/vram-calculator" class="tool-card"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>Verificador de requisitos de VRAM do GTA 6</h3><p>Verifique a VRAM mínima que você precisa para GTA 6 em 1080p, 1440p e 4K. Veredicto para placas de 6 GB, 8 GB, 12 GB e 16 GB.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/system-requirements" class="tool-card"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
       <h3 class="related-sub">Guias complementares</h3>
-      <ul class="guide-cards"><li><a href="/pt/guides/how-fps-is-estimated" class="tool-card" data-accent="blue" aria-label="Como estimamos o FPS de GTA 6 — O modelo exato por trás da calculadora de FPS, pontuações de GPU, multiplicadores de upscaler, limites de geração de quadros e a penalidade de engasgo por VRAM."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Desempenho</span><h3>Como estimamos o FPS de GTA 6</h3><p>O modelo exato por trás da calculadora de FPS, pontuações de GPU, multiplicadores de upscaler, limites de geração de quadros e a penalidade de engasgo por VRAM.</p><span class="link-cta">Ler guia <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink" aria-label="Pareamento CPU-GPU para o GTA 6 — 12 emparelhamentos comuns de CPU + GPU com o veredicto honesto, equilibrado, com GPU limitada ou com CPU limitada, e por que os 1% mínimos caem primeiro."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>Pareamento CPU-GPU para o GTA 6</h3><p>12 emparelhamentos comuns de CPU + GPU com o veredicto honesto, equilibrado, com GPU limitada ou com CPU limitada, e por que os 1% mínimos caem primeiro.</p><span class="link-cta">Ler guia <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="guide-cards"><li><a href="/pt/guides/how-fps-is-estimated" class="tool-card"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Desempenho</span><h3>Como estimamos o FPS de GTA 6</h3><p>O modelo exato por trás da calculadora de FPS, pontuações de GPU, multiplicadores de upscaler, limites de geração de quadros e a penalidade de engasgo por VRAM.</p><span class="link-cta">Ler guia <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/guides/cpu-gpu-pairing" class="tool-card"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>Pareamento CPU-GPU para o GTA 6</h3><p>12 emparelhamentos comuns de CPU + GPU com o veredicto honesto, equilibrado, com GPU limitada ou com CPU limitada, e por que os 1% mínimos caem primeiro.</p><span class="link-cta">Ler guia <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
@@ -595,7 +583,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
 <li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-07-23">23 de jul de 2026</time>
-        <p>Lançamento: catálogo de 34 placas (compartilhado com gargalo), matemática de predefinição de Baixo a Ultra, multiplicadores DLSS / FSR / XeSS + DLSS 3 / FSR 3 FG, estimativa de mínimo de 1%, penalidade por engasgos de VRAM, estado compartilhável por URL, imagem OG dinâmica, JSON-LD empilhado (SoftwareApplication + HowTo + FAQ + Article + Trilha de navegação).</p>
+        <p>Lançamento: catálogo de 34 placas (compartilhado com gargalo), matemática de predefinição de Baixo a Ultra, multiplicadores DLSS / FSR / XeSS + DLSS 3 / FSR 3 FG, estimativa de mínimo de 1%, penalidade por engasgos de VRAM, estado compartilhável por URL, imagem OG dinâmica, JSON-LD empilhado (SoftwareApplication + HowTo + FAQPage + Trilha de navegação).</p>
       </li></ul>
     </section>
 
@@ -605,88 +593,203 @@ band        = [avg × 0.85, avg × 1.15]</pre>
     </aside>
         </article>
       </div>
-    </main>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
-      <a href="/pt/tools" class="footer-strip">
-        <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 já está disponível — 19 de novembro de 2026</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="cta">Explorar ferramentas →</span>
-      </a>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
-            <span class="logo">
-              <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
-              <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
-                <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
-              </span>
-            </span>
-          </a>
-          <p>O destino definitivo para ferramentas, calculadoras, rastreadores, planejadores e guias de GTA 6. Tudo o que você precisa em um só lugar, sem publicidade invasiva nem conteúdo desnecessário.</p>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
         </div>
-        <div class="footer-cols">
-          <div>
-            <h3>Principais ferramentas</h3>
-            <ul>
-              <li><a href="/pt/tools/system-requirements">Meu PC roda GTA 6?</a></li>
-              <li><a href="/pt/tools/fps-calculator">Calculadora de FPS</a></li>
-              <li><a href="/pt/tools/download-time">Calculadora de tempo de download</a></li>
-              <li><a href="/pt/tools/system-requirements">Requisitos do sistema</a></li>
-              <li><a href="/pt/tools/settings-optimizer">Otimizador de configurações</a></li>
-              <li><a href="/pt/tools/hardware-comparison">Comparação de hardware</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-pink">
-            <h3>Explorar</h3>
-            <ul>
-              <li><a href="/pt/tools">Todas as Ferramentas</a></li>
-              <li><a href="/pt/trending">Em alta</a></li>
-              <li><a href="/pt/trackers">Rastreadores</a></li>
-              <li><a href="/pt/generators">Geradores</a></li>
-              <li><a href="/pt/news">Notícias</a></li>
-              <li><a href="/pt/trailers">Trailers</a></li>
-            </ul>
-          </div>
-          <div class="footer-col-blue">
-            <h3>Recursos</h3>
-            <ul>
-              <li><a href="/pt/tools/interactive-map">Mapa interativo</a> <span class="footer-col-badge">Novo</span></li>
-              <li><a href="/pt/about">Sobre</a></li>
-              <li><a href="/pt/methodology">Metodologia</a></li>
-              <li><a href="/pt/contact">Contato</a></li>
-              <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
-              <li><a href="/pt/sitemap">Mapa do site</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-divider" aria-hidden="true"></div>
-      <div class="footer-bottom">
-        <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
-        <div class="footer-bottom-links">
-          <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
         </div>
       </div>
     </div>
   </div>
+</section>
+    </main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <a class="wordmark" href="/pt/"><span class="wmark" aria-hidden="true">W</span>TOOLWOOLS</a>
+      <p>Ferramentas. Guias. GTA 6.</p>
+    </div>
+    <nav class="footer-col" aria-label="Links rápidos">
+      <h3>Links rápidos</h3>
+      
+      <ul>
+        <li><a href="/pt/">Início</a></li>
+        <li><a href="/pt/tools">Ferramentas</a></li>
+        <li><a href="/pt/news">Notícias</a></li>
+        <li><a href="/pt/trailers">Trailers</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Categorias">
+      <h3>Categorias</h3>
+      
+      <ul>
+        <li><a href="/pt/tools?category=release">Ferramentas de lançamento</a></li>
+        <li><a href="/pt/tools?category=pc">Ferramentas de PC</a></li>
+        <li><a href="/pt/tools?category=performance">Desempenho</a></li>
+        <li><a href="/pt/tools?category=comparison">Comparação</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-label="Sobre">
+      <h3>Sobre</h3>
+      
+      <ul>
+        <li><a href="/pt/about">Sobre a ToolWools</a></li>
+        <li><a href="/pt/contact">Contato</a></li>
+        <li><a href="/pt/privacy">Política de privacidade</a></li>
+        <li><a href="/pt/terms">Termos de serviço</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 ToolWools. Todos os direitos reservados.</span>
+    <span>Não afiliado à Rockstar Games nem à Take-Two Interactive.</span>
+    <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
+    <span>Feito para a comunidade de GTA &hearts;</span>
+  </div>
 </footer>
 
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
+  <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceitar analytics</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Recusar</button>
   </div>
+</div>
+
   <script src="/assets/js/pt/theme.js" defer></script>
   <script src="/assets/js/pt/header.js" defer></script>
   <script src="/assets/js/pt/search.js" defer></script>
   <script src="/assets/js/pt/faq.js" defer></script>
   <script type="module" src="/assets/js/pt/fps-calculator.js"></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script>
+/* Newsletter + consent wiring, copied from the homepage inline
+   script (same Supabase wiring; TW_NEWSLETTER_STAGING_DEMO = false, so
+   the real Supabase submit runs). No secrets are embedded here: the
+   real submit reads window.TOOLWOOLS_SUPABASE, which supabase.js
+   provides. */
+(function () {
+  "use strict";
+
+  /* ---- Staging flag: newsletter demo mode --------------------------------
+     TW_NEWSLETTER_STAGING_DEMO = false → the real Supabase submit runs (demo mode off)
+     and a LABELLED demo success is shown ("Demo only — nothing was sent or
+     stored"). No email leaves the browser in staging.
+     PHASE 10: set to false at deploy (or remove the flag and this branch) to
+     enable the real Supabase PostgREST submit below. The real path is the
+     live code from assets/js/newsletter.js (audit 04 §7.3): POST
+     {cfg.url}/rest/v1/newsletter_subscribers, Prefer: return=minimal,
+     body {email (lowercased), source: "homepage", locale: "pt"},
+     HTTP 409 → "Você já está na lista, não há mais nada a fazer."
+     Never fake success: unconfigured/unreachable endpoint → honest error.
+     ------------------------------------------------------------------------ */
+  var TW_NEWSLETTER_STAGING_DEMO = false;
+
+  var nlForm = document.getElementById("nl-form");
+  if (nlForm) {
+    var nlEmail = document.getElementById("nl-email");
+    var nlErr = document.getElementById("nl-error");
+    var nlOk = document.getElementById("nl-success");
+    var nlOkMsg = nlOk ? nlOk.querySelector("[data-newsletter-success-msg]") : null;
+    var nlBtn = document.getElementById("nl-submit");
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function nlShowError(msg) {
+      nlErr.hidden = false; nlOk.hidden = true;
+      nlErr.textContent = msg;
+      nlEmail.setAttribute("aria-invalid", "true");
+    }
+    function nlShowSuccess(msg) {
+      nlForm.hidden = true; nlOk.hidden = false;
+      if (nlOkMsg) nlOkMsg.textContent = msg;
+      nlOk.focus();
+    }
+    nlForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var value = nlEmail.value.trim();
+      if (!EMAIL_RE.test(value)) {
+        nlShowError("Digite um endereço de e-mail válido.");
+        nlEmail.focus();
+        return;
+      }
+      nlEmail.removeAttribute("aria-invalid"); nlErr.hidden = true;
+      nlBtn.disabled = true; nlBtn.textContent = "Assinando…";
+      if (TW_NEWSLETTER_STAGING_DEMO) {
+        /* Staging only: no network, no storage. Labelled demo success. */
+        window.setTimeout(function () {
+          nlBtn.disabled = false; nlBtn.textContent = "Assinar";
+          nlShowSuccess("Só demonstração: você já está na lista. Nada foi enviado nem salvo.");
+        }, 400);
+        return;
+      }
+      /* ---- Real submit (live assets/js/newsletter.js, Phase 10 only) ---- */
+      var cfg = window.TOOLWOOLS_SUPABASE || {};
+      if (!cfg.url || !cfg.key) {
+        nlBtn.disabled = false; nlBtn.textContent = "Assinar";
+        nlShowError("A inscrição na newsletter não está conectada no momento, então nada foi enviado. Tente novamente mais tarde.");
+        nlEmail.focus();
+        return;
+      }
+      fetch(cfg.url + "/rest/v1/newsletter_subscribers", {
+        method: "POST",
+        headers: { apikey: cfg.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ email: value.toLowerCase(), source: "homepage", locale: "pt" })
+      }).then(function (res) {
+        nlBtn.disabled = false; nlBtn.textContent = "Assinar";
+        if (res.status === 409) { nlShowSuccess("Você já está na lista, não há mais nada a fazer."); return; }
+        if (!res.ok) { throw new Error("http " + res.status); }
+        nlShowSuccess("Você entrou. Fique de olho na sua caixa de entrada para a próxima novidade.");
+      }).catch(function () {
+        nlBtn.disabled = false; nlBtn.textContent = "Assinar";
+        nlShowError("Não conseguimos salvar isso agora, então nada foi enviado. Tente novamente em um momento.");
+        nlEmail.focus();
+      });
+    });
+  }
+
+  /* ---- Consent banner (live assets/js/consent.js behaviour) ------------- */
+  var CONSENT_KEY = "tw-consent";
+  var banner = document.getElementById("consent-banner");
+  function consentStored() { try { return window.localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } }
+  function consentSave(v) { try { window.localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* private mode */ } }
+  function consentShow() { if (banner) banner.hidden = false; }
+  function consentHide() { if (banner) banner.hidden = true; }
+  if (banner) {
+    if (!consentStored()) {
+      var consentShown = false;
+      var showSoon = function () { if (!consentShown) { consentShown = true; consentShow(); } };
+      window.setTimeout(showSoon, 1800);
+      window.addEventListener("scroll", showSoon, { once: true, passive: true });
+    }
+    document.querySelectorAll("[data-consent-accept]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("granted"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-decline]").forEach(function (b) {
+      b.addEventListener("click", function () { consentSave("denied"); consentHide(); });
+    });
+    document.querySelectorAll("[data-consent-open]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        consentShow();
+        var f = banner.querySelector("[data-consent-accept]");
+        if (f) f.focus();
+      });
+    });
+  }
+})();
+</script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -743,7 +846,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
           "@type": "HowToStep",
           "position": 1,
           "name": "Escolha sua GPU + CPU",
-          "text": "Escolha do mesmo catálogo de 34 placas que a calculadora de gargalo (21 CPUs). As pontuações são normalizadas para que RTX 4090 = 100 e i9-14900K / Ryzen 7 7800X3D = 100. Calculamos um FPS limitado pela GPU e um limite de CPU separadamente, e pegamos o mínimo."
+          "text": "Escolha do mesmo catálogo de 34 placas que a calculadora de gargalo (21 CPUs). As pontuações são normalizadas para que RTX 4090 = 100, i9-14900K = 100 e Ryzen 7 7800X3D = 98. Calculamos um FPS limitado pela GPU e um limite de CPU separadamente, e pegamos o mínimo."
         },
         {
           "@type": "HowToStep",
@@ -784,7 +887,7 @@ band        = [avg × 0.85, avg × 1.15]</pre>
       "name": "Quantos FPS vou ter em GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Depende da GPU, CPU, resolução e predefinição. Como uma escada aproximada: em 1440p Alto com hardware intermediário de 2026 (RTX 4070 / RX 7800 XT, Ryzen 5 ou Core i5 intermediário), espere cerca de 70 fps nativos. 1080p Alto dá cerca de 90 fps no mesmo PC. 4K Ultra cai para cerca de 42 fps nativos em um topo de linha, cerca de 93 fps com DLSS Qualidade + Frame Gen. Digite suas peças exatas acima para uma estimativa ao vivo."
+        "text": "Depende da GPU, CPU, resolução e predefinição. Como uma escada aproximada: em 1440p Alto com hardware intermediário de 2026 (RTX 4070 / RX 7800 XT, Ryzen 5 ou Core i5 intermediário), espere cerca de 70 fps nativos. 1080p Alto dá cerca de 92 fps no mesmo PC. 4K Ultra cai para cerca de 42 fps nativos em um topo de linha, cerca de 93 fps com DLSS Qualidade + Frame Gen. Digite suas peças exatas acima para uma estimativa ao vivo."
       }
     },
     {
