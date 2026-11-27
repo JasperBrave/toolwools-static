@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,8 +25,8 @@
 <meta name="twitter:title" content="GTA 6 Darboğaz Hesaplayıcı">
 <meta name="twitter:description" content="1080p, 1440p ve 4K&#x27;da GTA 6 için CPU ve GPU dengesini kontrol edin. Canlı darboğaz yüzdesi, FPS aralığı ve sisteminizi yeniden dengeleyen en küçük yükseltme.">
 <meta name="twitter:image" content="https://toolwools.com/og/bottleneck.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/tr/tools/bottleneck-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/bottleneck-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/bottleneck-calculator" hreflang="es">
@@ -40,11 +40,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hardware-tr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var t=localStorage.getItem('tw-theme')||'light';document.documentElement.classList.toggle('dark',t==='dark');}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -86,7 +106,8 @@
         "priceCurrency": "USD"
       },
       "datePublished": "2026-07-23",
-      "dateModified": "2026-07-23"
+      "dateModified": "2026-07-23",
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",
@@ -132,16 +153,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -153,18 +172,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/bottleneck-calculator">İngilizce</a>
             <a href="/es/tools/bottleneck-calculator">Español</a>
@@ -188,7 +208,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -198,60 +218,38 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/bottleneck-calculator" lang="en">EN</a><a href="/es/tools/bottleneck-calculator" lang="es">ES</a><a href="/pt/tools/bottleneck-calculator" lang="pt">PT</a><a href="/de/tools/bottleneck-calculator" lang="de">DE</a><a href="/fr/tools/bottleneck-calculator" lang="fr">FR</a><a href="/tr/tools/bottleneck-calculator" aria-current="true">TR</a><a href="/ar/tools/bottleneck-calculator" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="tool-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Sayfa yolu" class="breadcrumbs">
-        <a href="/tr/">Ana Sayfa</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/tr/tools">Araçlar</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">GTA 6 Darboğaz Hesaplayıcı</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-        Performans
-      </span>
-      <h1 id="tool-hero-heading">GTA 6 Darboğaz Hesaplayıcı</h1>
-      <p class="page-hero-sub">GTA 6 için geliştirilmiş PC darboğaz hesaplayıcı. Herhangi bir CPU'yu herhangi bir GPU ile eşleştirin, canlı CPU-GPU denge kararı, 1080p, 1440p veya 4K için FPS tahmini ve sisteminizi ±%7 içinde tutan tek en küçük yükseltmeyi alın.</p>
-    </div>
-  </header>
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Darboğaz Hesaplayıcı</span>
+        </div>
+        <div class="page-eyebrow"><span>Performans</span></div>
+        <h1 id="page-title">GTA 6 Darboğaz Hesaplayıcı</h1>
+        <p class="page-subtitle">GTA 6 için geliştirilmiş PC darboğaz hesaplayıcı. Herhangi bir CPU'yu herhangi bir GPU ile eşleştirin, canlı CPU-GPU denge kararı, 1080p, 1440p veya 4K için FPS tahmini ve sisteminizi ±%7 içinde tutan tek en küçük yükseltmeyi alın.</p>
+        <p class="hero-meta">
+          <span>Yazan <a href="/about#hardware-desk">ToolWools Donanım Masası</a></span><span>PC performans analizi</span><span>İnceleyen <a href="/about#benchmark-reviewers">Bağımsız GTA kıyaslama incelemecileri</a></span><span>Son inceleme <time datetime="2026-07-23">23 Temmuz 2026</time></span><span><a href="/tr/methodology">Metodoloji</a></span>
+        </p>
+      </section>
 
-  <div class="container tool-body">
-    <div class="intro-callout">
-      <p>2010'da takılı kalmamış bir PC darboğaz hesaplayıcı. Genel CPU GPU darboğaz hesaplayıcıları çözünürlük veya oyundan bağımsız tek bir sayı verir, bu GTA 6 darboğaz denetleyici ise GTA Online lobileri için CPU talebini, 4K için GPU talebini ölçeklendirir ve sisteminizi ±%7 denge içinde tutan tam yükseltme yolunu gösterir. "GTA 6 bilgisayarımda çalışır mı" veya "bilgisayarım GTA 6 için yeterli mi" diye aradıysanız, yukarıdaki karar bunu tek satırda yanıtlıyor.</p>
-    </div>
 
-    <div class="byline" aria-label="Yazar ve inceleme künyesi">
-      <span class="byline-item">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>Yazan <a href="/about#hardware-desk">ToolWools Donanım Masası</a> <span aria-hidden="true">·</span> PC performans analizi</span>
-      </span>
-      <span class="byline-item">İnceleyen <a href="/about#benchmark-reviewers">Bağımsız GTA kıyaslama incelemecileri</a></span>
-      <span class="byline-item">Son inceleme <time datetime="2026-07-23">23 Temmuz 2026</time></span>
-      <a class="method-link" href="/tr/methodology"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg> Metodoloji</a>
-    </div>
 
     <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-live-region data-testid="bottleneck-live-region">%23 CPU darboğazı. GTA Online'da 1440p'de saniyede tahmini 44 ila 63 kare.</div>
 
-    <section class="tldr-card" id="tldr" data-speakable="tldr" data-tldr-card data-tone="upgrade" aria-labelledby="tldr-heading">
-      <div class="tldr-inner">
-        <span data-tldr-icon><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <div>
-          <h2 class="tldr-label" id="tldr-heading" data-tldr-label>Yükseltme önerilir · Özet</h2>
-          <p class="tldr-text" data-tldr-text>Yükseltme önerilir, GeForce RTX 4070 + Ryzen 5 5600 / 5600X, GTA Online'da 1440p'de %23 CPU darboğazı gösteriyor (yaklaşık 55 fps). Bir parça diğerini geride tutuyor.</p>
-          <p class="tldr-verdict">Denge kararı: <strong data-tldr-verdict>CPU darboğazı %23</strong></p>
-        </div>
-      </div>
-    </section>
 
     <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Hesaplayıcı</h2>
@@ -278,9 +276,9 @@
           <div>
             <span class="field-label" id="mode-label"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>İş yükü</span>
             <div class="workload-grid" role="group" aria-labelledby="mode-label">
-              <button type="button" class="workload-btn" data-mode-button="story" aria-pressed="false"><span class="w-label">Hikâye Modu</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">Tek oyunculu, akış yok</span></button>
-              <button type="button" class="workload-btn" data-mode-button="online" aria-pressed="true"><span class="w-label">GTA Online</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">30 oyunculu lobi</span></button>
-              <button type="button" class="workload-btn" data-mode-button="stream" aria-pressed="false"><span class="w-label">Akış + Kayıt</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">OBS x264 + game capture</span></button>
+              <button type="button" class="workload-btn" data-mode-button="story" aria-pressed="false"><span class="w-label">Hikâye Modu</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">Tek oyunculu, akış yok</span></button>
+              <button type="button" class="workload-btn" data-mode-button="online" aria-pressed="true"><span class="w-label">GTA Online</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">30 oyunculu lobi</span></button>
+              <button type="button" class="workload-btn" data-mode-button="stream" aria-pressed="false"><span class="w-label">Akış + Kayıt</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">OBS x264 + game capture</span></button>
             </div>
           </div>
           <div>
@@ -339,8 +337,8 @@
         <button type="button" class="btn-chip" data-copy-link><span data-copy-link-label>Bağlantıyı kopyala</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20%2523%20CPU%20darbo%C4%9Faz%C4%B1%20%E2%80%94%20ToolWools%20GTA%206%20darbo%C4%9Faz%20hesaplay%C4%B1c%C4%B1s%C4%B1&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">X'te paylaş</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20%2523%20CPU%20darbo%C4%9Faz%C4%B1%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20%2523%20CPU%20darbo%C4%9Faz%C4%B1%20%E2%80%94%20ToolWools%20GTA%206%20darbo%C4%9Faz%20hesaplay%C4%B1c%C4%B1s%C4%B1&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">X'te paylaş</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20%2523%20CPU%20darbo%C4%9Faz%C4%B1%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
       </div>
     </section>
 
@@ -361,7 +359,7 @@
         <a class="pairing-card" href="/tr/tools/bottleneck-calculator?gpu=rtx-2060&amp;cpu=i5-9400&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RTX 2060 + i5-9400F</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="upgrade">Dengeli</span><span>30–44 fps</span></span></a>
         <a class="pairing-card" href="/tr/tools/bottleneck-calculator?gpu=rx-7900-xt&amp;cpu=r7-7700x&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RX 7900 XT + Ryzen 7 7700X</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="borderline">%9 CPU sınırlı</span><span>66–94 fps</span></span></a>
       </div>
-      <p class="tool-dek" style="margin-top:1rem;font-size:0.75rem">Eşleşme kararları ve FPS aralıkları, kaynak sayfanın referans ayarlarındaki önceden hesaplanmış değerleridir. Yukarıdaki canlı hesaplayıcı her zaman tam girdilerinizden hesaplar.</p>
+      <p class="tool-dek" style="margin-top:1rem;font-size:0.8125rem">Eşleşme kararları ve FPS aralıkları, kaynak sayfanın referans ayarlarındaki önceden hesaplanmış değerleridir. Yukarıdaki canlı hesaplayıcı her zaman tam girdilerinizden hesaplar.</p>
     </section>
 
     <section aria-labelledby="tier-reference">
@@ -413,37 +411,33 @@
       </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
-      <h2 id="related-tools-inline" style="text-align:left;font-size:1rem">GTA 6 sisteminizi planlamaya devam edin</h2>
-      <ul>
-        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tam <a href="/tr/tools/system-requirements" style="color:var(--accent-purple)">GTA 6 PC gereksinimleri denetleyicisi</a> , minimum, önerilen ve Ultra hedefler.</span></li>
-        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Her hazır ayarda FPS tahmini için <a href="/tr/tools" style="color:var(--accent-blue)">GTA 6 FPS hesaplayıcı</a>.</span></li>
-        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>1440p ve 4K'da VRAM payını kontrol etmek için <a href="/tr/tools" style="color:var(--accent-pink)">VRAM hesaplayıcı</a>.</span></li>
-        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>En sonuncuyu okuyun <a href="/tr/news" style="color:var(--accent-purple)">GTA 6 PC haberleri</a> ve Rockstar özellik güncellemeleri.</span></li>
+    <section class="tier-read" aria-labelledby="related-tools-inline">
+      <h2 id="related-tools-inline">GTA 6 sisteminizi planlamaya devam edin</h2>
+      <ul class="inline-links">
+        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tam <a href="/tr/tools/system-requirements">GTA 6 PC gereksinimleri denetleyicisi</a> , minimum, önerilen ve Ultra hedefler.</span></li>
+        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Her hazır ayarda FPS tahmini için <a href="/tr/tools">GTA 6 FPS hesaplayıcı</a>.</span></li>
+        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>1440p ve 4K'da VRAM payını kontrol etmek için <a href="/tr/tools">VRAM hesaplayıcı</a>.</span></li>
+        <li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>En sonuncuyu okuyun <a href="/tr/news">GTA 6 PC haberleri</a> ve Rockstar özellik güncellemeleri.</span></li>
       </ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Veri kaynakları ve varsayımlar">
-      <span class="label"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Varsayımlar</span>
-      <span class="text">Denge modeli, GTA V ve RDR2 CPU/GPU ölçekleme verilerinden, topluluk kıyaslamalarından ve sızan GTA 6 hedef donanımından türetildi. Referans katman RTX 4090 + Core i9-14900K'dir. Rakamlar, Rockstar'ın resmi özellik duyurusundan saatler içinde yenilenir.</span>
-      <span class="updated">Güncellendi <time datetime="2026-07-23">23 Tem 2026</time></span>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">GTA 6 CPU ve GPU darboğazının nasıl hesaplandığı</h2>
       <p class="tool-dek">Beş girdi, tek denge sayısı.</p>
       <ol class="steps-grid cols-3">
-        <li class="step-card surface-card"><span class="step-num">01</span><h3>GPU'nuzu seçin</h3><p>GTX 10 serisinden RTX 50 serisine ve RX 5000'den RX 8000'e kadar 34 kart arasından seçin. Her birinin 0-100 arası GTA 6 katman puanı vardır.</p></li>
-        <li class="step-card surface-card"><span class="step-num">02</span><h3>CPU'nuzu seçin</h3><p>21 işlemci arasından seçin (Intel 8. ila 15. nesil, Ryzen 2000 ila 9000, X3D çeşitleri dahil). Her biri 0-100 katmanına karşılık gelir.</p></li>
-        <li class="step-card surface-card"><span class="step-num">03</span><h3>Hedef çözünürlüğünüzü ayarlayın</h3><p>1080p CPU'ya yüklenir, 4K GPU'ya yüklenir. Aynı eşleştirme 4K'da mükemmel dengeli olabilirken 1080p'de %15 CPU sınırlı olabilir.</p></li>
-        <li class="step-card surface-card"><span class="step-num">04</span><h3>Oynadığınız iş yükünü seçin</h3><p>Hikâye Modu, 30 oyunculu GTA Online lobisi veya yayın yaparken Online. Yoğun lobiler ve kodlama, GPU'nun hiç görmediği CPU tarafı maliyet ekler.</p></li>
-        <li class="step-card surface-card"><span class="step-num">05</span><h3>Denge sayısını karşılaştırın</h3><p>İşaretli bir darboğaz yüzdesi, tahmini bir FPS aralığı ve o çözünürlükte ve iş yükünde hangi parçanın diğerini geride tuttuğunu öğrenirsiniz.</p></li>
-        <li class="step-card surface-card"><span class="step-num">06</span><h3>Onu düzelten en küçük yükseltmeyi yapın</h3><p>Genel bir 'CPU'nuzu yükseltin' önerisi yerine, eşleşmeyi %10 dengesizliğin altına çeken en ucuz tek parçayı ve kazandırdığı FPS farkını alırsınız.</p></li>
+        <li><span class="step-number">01</span><h3 class="step-title">GPU'nuzu seçin</h3><p class="step-text">GTX 10 serisinden RTX 50 serisine ve RX 5000'den RX 8000'e kadar 34 kart arasından seçin. Her birinin 0-100 arası GTA 6 katman puanı vardır.</p></li>
+        <li><span class="step-number">02</span><h3 class="step-title">CPU'nuzu seçin</h3><p class="step-text">21 işlemci arasından seçin (Intel 8. ila 15. nesil, Ryzen 2000 ila 9000, X3D çeşitleri dahil). Her biri 0-100 katmanına karşılık gelir.</p></li>
+        <li><span class="step-number">03</span><h3 class="step-title">Hedef çözünürlüğünüzü ayarlayın</h3><p class="step-text">1080p CPU'ya yüklenir, 4K GPU'ya yüklenir. Aynı eşleştirme 4K'da mükemmel dengeli olabilirken 1080p'de %15 CPU sınırlı olabilir.</p></li>
+        <li><span class="step-number">04</span><h3 class="step-title">Oynadığınız iş yükünü seçin</h3><p class="step-text">Hikâye Modu, 30 oyunculu GTA Online lobisi veya yayın yaparken Online. Yoğun lobiler ve kodlama, GPU'nun hiç görmediği CPU tarafı maliyet ekler.</p></li>
+        <li><span class="step-number">05</span><h3 class="step-title">Denge sayısını karşılaştırın</h3><p class="step-text">İşaretli bir darboğaz yüzdesi, tahmini bir FPS aralığı ve o çözünürlükte ve iş yükünde hangi parçanın diğerini geride tuttuğunu öğrenirsiniz.</p></li>
+        <li><span class="step-number">06</span><h3 class="step-title">Onu düzelten en küçük yükseltmeyi yapın</h3><p class="step-text">Genel bir 'CPU'nuzu yükseltin' önerisi yerine, eşleşmeyi %10 dengesizliğin altına çeken en ucuz tek parçayı ve kazandırdığı FPS farkını alırsınız.</p></li>
       </ol>
     </section>
 
     <section aria-labelledby="use-cases">
-      <h2 id="use-cases" class="h2-lg">Gerçek CPU + GPU eşleşmeleri, baştan sona puanlandı</h2>
+      <h2 id="use-cases">Gerçek CPU + GPU eşleşmeleri, baştan sona puanlandı</h2>
       <p class="tool-dek">İnsanların gerçekten sahip olduğu dört sistem, aynı modelden geçirildi.</p>
       <ul class="usecases-grid">
         <li><article class="usecase-card" aria-labelledby="use-case-0"><h3 id="use-case-0">Eski CPU, yeni GPU, RTX 4070 + i5-9400</h3><p>Klasik dengesizlik. 1080p Online'da %55 CPU darboğazı (40–57 fps), 4K'da hâlâ %32. Çözüm: Ryzen 5 7600 veya i5-13400F'e geçin.</p><a href="/tr/tools/bottleneck-calculator?gpu=rtx-4070&amp;cpu=i5-9400&amp;res=1080p&amp;mode=online" aria-label="Hazır ayarı yükle: Eski CPU, yeni GPU, RTX 4070 + i5-9400">Hazır ayarı yükle <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
@@ -454,13 +448,14 @@
     </section>
 
     <section aria-labelledby="methodology">
-      <details class="methodology-details">
+      <details class="methodology-details" open>
         <summary>
           <h2 id="methodology">Darboğaz puanlama formülü ve kalibrasyonu</h2>
           <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
+        <div class="methodology-body">
         <p>Her parça, 4090 + 14900K'ye göre kıyaslanmış 0-100 GTA 6 katman puanı alır. Talep, çözünürlükle (4K'da GPU ağırlıklı) ve iş yüküyle (Online lobiler ve yayın CPU ağırlıklı) ölçeklenir. Her parça için bir pay oranı hesaplarız ve fark, darboğaz yüzdesi olur. %7'nin altındaki fark dengeli sayılır, hiçbir şey gerçekten sıfır darboğaz değildir.</p>
-        <pre>gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
+        <pre class="methodology-formula">gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
 cpuDemand = 100 × workloadFactor  // story=0.70, online=1.00, stream=1.15
 
 headroomGpu = gpuScore / gpuDemand
@@ -472,12 +467,14 @@ delta       = headroomGpu − headroomCpu
   otherwise      →  Balanced (±7%)
 
 fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
+          <div class="assumptions-block"><p><strong>Varsayımlar</strong> <span>Denge modeli, GTA V ve RDR2 CPU/GPU ölçekleme verilerinden, topluluk kıyaslamalarından ve sızan GTA 6 hedef donanımından türetildi. Referans katman RTX 4090 + Core i9-14900K'dir. Rakamlar, Rockstar'ın resmi özellik duyurusundan saatler içinde yenilenir.</span></p><p class="updated-line">Güncellendi <time datetime="2026-07-23">23 Tem 2026</time></p></div>
+        </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 için CPU ve GPU darboğaz soruları</h2>
+      <header>
+        <h2 id="faq">GTA 6 için CPU ve GPU darboğaz soruları</h2>
         <p class="tool-dek">Eşleşmeye özel yanıtlar, genel tavsiye değil.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -503,7 +500,7 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     </section>
 
     <section aria-labelledby="glossary">
-      <h2 id="glossary" class="h2-lg">Darboğaz terminolojisi</h2>
+      <h2 id="glossary">Darboğaz terminolojisi</h2>
       <p class="tool-dek">Araçta ve SSS bölümünde geçen kelimeler.</p>
       <dl class="glossary-grid">
         <div id="term-bottleneck"><dt>Darboğaz</dt><dd>Bir bileşen her karenin işini diğerinden daha hızlı bitirdiğinde. Daha hızlı olan parça boşta bekler, kare hızı daha yavaş parça tarafından sınırlandırılır.</dd></div>
@@ -518,18 +515,18 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
       <h2 id="related-content">Bu sistem için sonraki adımlar</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
       <ul class="related-tools-grid" role="list">
-        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/tr/tools/system-requirements" data-accent="purple" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi: Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><h3 id="rel-sysreq">GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/tr/tools/vram-calculator" data-accent="blue" aria-label="GTA 6 VRAM Gereksinimleri Denetleyicisi, 1080p, 1440p ve 4K&#x27;da GTA 6 için ihtiyacınız olan minimum VRAM&#x27;i kontrol edin. 6 GB, 8 GB, 12 GB ve 16 GB kartlar için karar."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><h3 id="rel-vram">GTA 6 VRAM Gereksinimleri Denetleyicisi</h3><p>1080p, 1440p ve 4K'da GTA 6 için ihtiyacınız olan minimum VRAM'i kontrol edin. 6 GB, 8 GB, 12 GB ve 16 GB kartlar için karar.</p><span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/tr/tools/fps-calculator" data-accent="pink" aria-label="GTA 6 FPS Hesaplayıcı, 1080p, 1440p ve 4K&#x27;da Düşük, Orta, Yüksek ve Ultra genelinde GPU&#x27;nuz için kare hızını tahmin edin."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><h3 id="rel-fps">GTA 6 FPS Hesaplayıcı</h3><p>GPU'nuz için 1080p, 1440p ve 4K'da Düşük, Orta, Yüksek ve Ultra ayarlarında kare hızını tahmin edin.</p><span class="tool-card-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/tr/tools/system-requirements" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3 id="rel-sysreq">GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/tr/tools/vram-calculator" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3 id="rel-vram">GTA 6 VRAM Gereksinimleri Denetleyicisi</h3><p>1080p, 1440p ve 4K'da GTA 6 için ihtiyacınız olan minimum VRAM'i kontrol edin. 6 GB, 8 GB, 12 GB ve 16 GB kartlar için karar.</p><span class="link-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/tr/tools/fps-calculator" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3 id="rel-fps">GTA 6 FPS Hesaplayıcı</h3><p>GPU'nuz için 1080p, 1440p ve 4K'da Düşük, Orta, Yüksek ve Ultra ayarlarında kare hızını tahmin edin.</p><span class="link-cta">Aracı Keşfet <svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
       </ul>
       <h3 class="related-sub">Eşlik eden kılavuzlar</h3>
       <ul class="guide-cards" role="list">
-        <li><a class="guide-card surface-card" href="/tr/guides/how-fps-is-estimated">
+        <li><a class="guide-card" href="/tr/guides/how-fps-is-estimated">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="guide-card-tag">Performans</span><svg class="icon icon-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>GTA 6 FPS'sini nasıl tahmin ediyoruz</h4>
           <p>FPS hesaplayıcının arkasındaki tam model, GPU puanları, yükseltici çarpanları, kare üretim sınırları ve VRAM takılma cezası.</p>
         </a></li>
-        <li><a class="guide-card surface-card" href="/tr/guides/cpu-gpu-pairing">
+        <li><a class="guide-card" href="/tr/guides/cpu-gpu-pairing">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="guide-card-tag">Donanım</span><svg class="icon icon-arrow" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>GTA 6 için CPU-GPU eşleştirme</h4>
           <p>12 yaygın CPU + GPU eşleşmesi ve dürüst kararı, dengeli, GPU açlığı çeken veya CPU sınırlı, ve en düşük %1 değerlerinin neden önce düştüğü.</p>
@@ -562,29 +559,47 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     <aside class="disclaimer" role="note" aria-label="Tahmin sorumluluk reddi">
       <strong>Uyarı:</strong> GTA 6, PS5 ve Xbox'ta çıktı, ancak PC'de henüz çıkmadı. Puanlar, GTA V, RDR2 ve Cyberpunk 2077 CPU/GPU ölçeklemesi, topluluk kıyaslamaları ve Rockstar'ın kamuya açıkladığı hedefler üzerine modellenmiş mühendislik tahminleridir. Gerçek konsol performansına kıyasla ±%10 sapma bekleyin. FPS aralıkları, ışın izleme olmadan Yüksek hazır ayarı, stok saat hızları, 32 GB RAM ve NVMe SSD varsayar. Sonuçlar yükseltme planlaması için rehberdir, performans garantisi değildir. Puanları, resmi PC özellikleri ve kıyaslamalar geldikçe yeniliyoruz.
     </aside>
-  </div>
 </article>
+  </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -624,9 +639,9 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="#">Gizlilik Politikası</a></li>
-              <li><a href="#">Kullanım Şartları</a></li>
-              <li><a href="#">Yasal Uyarı</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -635,9 +650,7 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="#">Gizlilik</a>
-          <a href="#">Şartlar</a>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
@@ -645,11 +658,22 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
   </div>
 </footer>
 </div>
-<script src="/assets/js/tr/theme.js" defer></script>
-<script src="/assets/js/tr/header.js" defer></script>
-<script src="/assets/js/tr/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
 <script type="module" src="/assets/js/tr/bottleneck.js"></script>
+
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",

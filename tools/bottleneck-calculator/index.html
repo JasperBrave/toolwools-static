@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA 6 Bottleneck Calculator — CPU vs GPU Balance</title>
+<title>GTA 6 Bottleneck Calculator, CPU vs GPU Balance</title>
 <meta name="description" content="Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig.">
 <meta name="keywords" content="gta 6 bottleneck calculator, pc bottleneck calculator, cpu gpu bottleneck calculator, bottleneck checker, bottleneck my pc, is my pc good enough for gta 6, gta 6 cpu bottleneck, gta 6 gpu bottleneck, gta vi bottleneck, fps calculator gta 6, will gta 6 run on my pc">
 <meta name="author" content="ToolWools">
@@ -20,13 +20,13 @@
     <meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:url" content="https://toolwools.com/tools/bottleneck-calculator">
 <meta property="og:image" content="https://toolwools.com/og/bottleneck.jpg">
-<meta property="og:image:alt" content="GTA 6 Bottleneck Calculator — CPU vs GPU balance for GTA VI on ToolWools">
+<meta property="og:image:alt" content="GTA 6 Bottleneck Calculator, CPU vs GPU balance for GTA VI on ToolWools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GTA 6 Bottleneck Calculator">
 <meta name="twitter:description" content="Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig.">
 <meta name="twitter:image" content="https://toolwools.com/og/bottleneck.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/tools/bottleneck-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/bottleneck-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/bottleneck-calculator" hreflang="es">
@@ -40,11 +40,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hardware-en.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var t=localStorage.getItem('tw-theme')||'light';document.documentElement.classList.toggle('dark',t==='dark');}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -68,7 +88,8 @@
       "description": "Check CPU vs GPU balance for GTA 6 at 1080p, 1440p and 4K. Live bottleneck percentage, FPS band and the smallest upgrade that rebalances your rig.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "datePublished": "2026-07-23",
-      "dateModified": "2026-07-23"
+      "dateModified": "2026-07-23",
+      "inLanguage": "en"
     },
     {
       "@type": "HowTo",
@@ -91,16 +112,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -112,18 +131,19 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/bottleneck-calculator" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
             <a href="/es/tools/bottleneck-calculator">Español</a>
@@ -147,7 +167,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -157,60 +177,38 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/bottleneck-calculator" aria-current="true">EN</a><a href="/es/tools/bottleneck-calculator" lang="es">ES</a><a href="/pt/tools/bottleneck-calculator" lang="pt">PT</a><a href="/de/tools/bottleneck-calculator" lang="de">DE</a><a href="/fr/tools/bottleneck-calculator" lang="fr">FR</a><a href="/tr/tools/bottleneck-calculator" lang="tr">TR</a><a href="/ar/tools/bottleneck-calculator" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="tool-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Breadcrumb" class="breadcrumbs">
-        <a href="/">Home</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/tools">Tools</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">GTA 6 Bottleneck Calculator</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-        Performance
-      </span>
-      <h1 id="tool-hero-heading">GTA 6 Bottleneck Calculator</h1>
-      <p class="page-hero-sub">The PC bottleneck calculator built for GTA 6. Pair any CPU with any GPU, get a live CPU-vs-GPU balance verdict, an FPS estimate for 1080p, 1440p or 4K, and the single smallest upgrade that lands your rig within ±7%.</p>
-    </div>
-  </header>
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Bottleneck Calculator</span>
+        </div>
+        <div class="page-eyebrow"><span>Performance</span></div>
+        <h1 id="page-title">GTA 6 Bottleneck Calculator</h1>
+        <p class="page-subtitle">The PC bottleneck calculator built for GTA 6. Pair any CPU with any GPU, get a live CPU-vs-GPU balance verdict, an FPS estimate for 1080p, 1440p or 4K, and the single smallest upgrade that lands your rig within ±7%.</p>
+        <p class="hero-meta">
+          <span>By <a href="/about#hardware-desk">ToolWools Hardware Desk</a></span><span>PC performance analysis</span><span>Reviewed by <a href="/about#benchmark-reviewers">Independent GTA benchmark reviewers</a></span><span>Last reviewed <time datetime="2026-07-23">July 23, 2026</time></span><span><a href="/methodology">Methodology</a></span>
+        </p>
+      </section>
 
-  <div class="container tool-body">
-    <div class="intro-callout">
-      <p>A PC bottleneck calculator that isn't stuck in 2010. Generic CPU GPU bottleneck calculators spit out one number regardless of resolution or game — this GTA 6 bottleneck checker scales CPU demand for GTA Online lobbies, GPU demand for 4K, and returns the exact upgrade path that lands your rig within ±7% balance. If you searched "will GTA 6 run on my PC" or "is my PC good enough for GTA 6", the verdict above answers it in one line.</p>
-    </div>
 
-    <div class="byline" aria-label="Author and review byline">
-      <span class="byline-item">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>By <a href="/about#hardware-desk">ToolWools Hardware Desk</a> <span aria-hidden="true">·</span> PC performance analysis</span>
-      </span>
-      <span class="byline-item">Reviewed by <a href="/about#benchmark-reviewers">Independent GTA benchmark reviewers</a></span>
-      <span class="byline-item">Last reviewed <time datetime="2026-07-23">July 23, 2026</time></span>
-      <a class="method-link" href="/methodology"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg> Methodology</a>
-    </div>
 
     <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-live-region data-testid="bottleneck-live-region">CPU bottleneck 23%. Estimated 44 to 63 frames per second at 1440p on GTA Online.</div>
 
-    <section class="tldr-card" id="tldr" data-speakable="tldr" data-tldr-card data-tone="upgrade" aria-labelledby="tldr-heading">
-      <div class="tldr-inner">
-        <span data-tldr-icon><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <div>
-          <h2 class="tldr-label" id="tldr-heading" data-tldr-label>Upgrade recommended · TL;DR</h2>
-          <p class="tldr-text" data-tldr-text>Upgrade recommended — GeForce RTX 4070 + Ryzen 5 5600 / 5600X shows a 23% CPU bottleneck at 1440p on GTA Online (~55 fps). One part is dragging the other down.</p>
-          <p class="tldr-verdict">Balance verdict: <strong data-tldr-verdict>CPU bottleneck 23%</strong></p>
-        </div>
-      </div>
-    </section>
 
     <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculator</h2>
@@ -237,9 +235,9 @@
           <div>
             <span class="field-label" id="mode-label"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Workload</span>
             <div class="workload-grid" role="group" aria-labelledby="mode-label">
-              <button type="button" class="workload-btn" data-mode-button="story" aria-pressed="false"><span class="w-label">Story Mode</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">Single-player, no streaming</span></button>
-              <button type="button" class="workload-btn" data-mode-button="online" aria-pressed="true"><span class="w-label">GTA Online</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">30-player lobby, physics-heavy</span></button>
-              <button type="button" class="workload-btn" data-mode-button="stream" aria-pressed="false"><span class="w-label">Streaming + Rec</span><span class="w-dash" aria-hidden="true"> — </span><span class="w-hint">OBS x264 + game capture</span></button>
+              <button type="button" class="workload-btn" data-mode-button="story" aria-pressed="false"><span class="w-label">Story Mode</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">Single-player, no streaming</span></button>
+              <button type="button" class="workload-btn" data-mode-button="online" aria-pressed="true"><span class="w-label">GTA Online</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">30-player lobby, physics-heavy</span></button>
+              <button type="button" class="workload-btn" data-mode-button="stream" aria-pressed="false"><span class="w-label">Streaming + Rec</span><span class="w-dash" aria-hidden="true"> · </span><span class="w-hint">OBS x264 + game capture</span></button>
             </div>
           </div>
           <div>
@@ -250,11 +248,11 @@
           </div>
           <div data-compare-inputs hidden>
             <div>
-              <label class="field-label" for="gpu2-select">Rig B — Graphics Card (GPU)</label>
+              <label class="field-label" for="gpu2-select">Rig B: Graphics Card (GPU)</label>
               <select class="input" id="gpu2-select" data-gpu2-select aria-label="Rig B graphics card"></select>
             </div>
             <div style="margin-top:1.25rem">
-              <label class="field-label" for="cpu2-select">Rig B — Processor (CPU)</label>
+              <label class="field-label" for="cpu2-select">Rig B: Processor (CPU)</label>
               <select class="input" id="cpu2-select" data-cpu2-select aria-label="Rig B processor"></select>
             </div>
           </div>
@@ -298,13 +296,13 @@
         <button type="button" class="btn-chip" data-copy-link><span data-copy-link-label>Copy link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share on X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20CPU%20bottleneck%2023%25%20on%20ToolWools%20GTA%206%20bottleneck%20calculator&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Share on X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20CPU%20bottleneck%2023%25%20(GTA%206)&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20CPU%20bottleneck%2023%25%20on%20ToolWools%20GTA%206%20bottleneck%20calculator&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Share on X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20CPU%20bottleneck%2023%25%20(GTA%206)&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
       </div>
     </section>
 
     <section aria-labelledby="common-pairings">
-      <h2 id="common-pairings">Bottleneck checker — common GTA 6 pairings</h2>
+      <h2 id="common-pairings">Bottleneck checker: common GTA 6 pairings</h2>
       <p class="tool-dek">Tap a pairing to load it into the calculator above.</p>
       <div class="pairings-grid mt-8">
         <a class="pairing-card" href="/tools/bottleneck-calculator?gpu=rtx-4090&amp;cpu=i9-14900k&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RTX 4090 + i9-14900K</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="borderline">11% CPU limited</span><span>80–115 fps</span></span></a>
@@ -320,7 +318,7 @@
         <a class="pairing-card" href="/tools/bottleneck-calculator?gpu=rtx-2060&amp;cpu=i5-9400&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RTX 2060 + i5-9400F</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="upgrade">Balanced</span><span>30–44 fps</span></span></a>
         <a class="pairing-card" href="/tools/bottleneck-calculator?gpu=rx-7900-xt&amp;cpu=r7-7700x&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RX 7900 XT + Ryzen 7 7700X</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="borderline">9% CPU limited</span><span>66–94 fps</span></span></a>
       </div>
-      <p class="tool-dek" style="margin-top:1rem;font-size:0.75rem">Pairing verdicts and FPS bands are the source page's pre-computed values at its reference settings. The live calculator above always computes from your exact inputs.</p>
+      <p class="tool-dek" style="margin-top:1rem;font-size:0.8125rem">Pairing verdicts and FPS bands are the source page's pre-computed values at its reference settings. The live calculator above always computes from your exact inputs.</p>
     </section>
 
     <section aria-labelledby="tier-reference">
@@ -329,7 +327,7 @@
       <div class="tier-grid">
         <div class="tier-table-card">
           <h3>GPU tiers for GTA 6</h3>
-          <div class="table-scroll" tabindex="0" role="region" aria-label="GPU tiers for GTA 6 — scrollable table">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="GPU tiers for GTA 6, scrollable table">
             <table class="data-table">
               <thead><tr><th scope="col">Tier</th><th scope="col">Score</th><th scope="col">Examples</th><th scope="col">GTA 6 verdict</th></tr></thead>
               <tbody>
@@ -346,11 +344,11 @@
         </div>
         <div class="tier-table-card">
           <h3>CPU tiers for GTA 6</h3>
-          <div class="table-scroll" tabindex="0" role="region" aria-label="CPU tiers for GTA 6 — scrollable table">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="CPU tiers for GTA 6, scrollable table">
             <table class="data-table">
               <thead><tr><th scope="col">Tier</th><th scope="col">Score</th><th scope="col">Examples</th><th scope="col">GTA 6 verdict</th></tr></thead>
               <tbody>
-                <tr><td class="mono">S+</td><td class="mono">95–100</td><td>i9-14900K, Ryzen 9 7950X3D, 7800X3D</td><td class="muted">Top tier — still limits a flagship GPU at 1080p Online</td></tr>
+                <tr><td class="mono">S+</td><td class="mono">95–100</td><td>i9-14900K, Ryzen 9 7950X3D, 7800X3D</td><td class="muted">Top tier, still limits a flagship GPU at 1080p Online</td></tr>
                 <tr><td class="mono">S</td><td class="mono">80–94</td><td>i7-14700K, i5-14600K, Ryzen 9 7900X, R7 7700X</td><td class="muted">GTA Online friendly</td></tr>
                 <tr><td class="mono">A</td><td class="mono">65–79</td><td>i5-13400F, R5 7600X, R7 5800X3D, i7-12700K</td><td class="muted">Recommended tier</td></tr>
                 <tr><td class="mono">B</td><td class="mono">50–64</td><td>R7 5800X, R5 5600X, i5-12400F, i7-11700</td><td class="muted">Story Mode fine</td></tr>
@@ -372,54 +370,51 @@
       </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
-      <h2 id="related-tools-inline" style="text-align:left;font-size:1rem">Keep planning your GTA 6 rig</h2>
-      <ul>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Full <a href="/tools/system-requirements" style="color:var(--accent-purple)">GTA 6 PC requirements checker</a> — minimum, recommended and Ultra targets.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Estimate FPS at every preset with the <a href="/tools" style="color:var(--accent-blue)">GTA 6 FPS calculator</a>.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check VRAM headroom at 1440p and 4K with the <a href="/tools" style="color:var(--accent-pink)">VRAM calculator</a>.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Read the latest <a href="/news" style="color:var(--accent-purple)">GTA 6 PC news</a> and Rockstar spec updates.</span></li>
+    <section class="tier-read" aria-labelledby="related-tools-inline">
+      <h2 id="related-tools-inline">Keep planning your GTA 6 rig</h2>
+      <ul class="inline-links">
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Full <a href="/tools/system-requirements">GTA 6 PC requirements checker</a>, minimum, recommended and Ultra targets.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Estimate FPS at every preset with the <a href="/tools">GTA 6 FPS calculator</a>.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check VRAM headroom at 1440p and 4K with the <a href="/tools">VRAM calculator</a>.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Read the latest <a href="/news">GTA 6 PC news</a> and Rockstar spec updates.</span></li>
       </ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Data sources and assumptions">
-      <span class="label"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Assumptions</span>
-      <span class="text">Balance model derived from GTA V and RDR2 CPU/GPU scaling data, community benchmarks, and leaked GTA 6 target hardware. Reference tier is RTX 4090 + Core i9-14900K. Figures refresh within hours of Rockstar's official spec drop.</span>
-      <span class="updated">Updated <time datetime="2026-07-23">Jul 23, 2026</time></span>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">How the GTA 6 CPU vs GPU bottleneck is worked out</h2>
       <p class="tool-dek">Five inputs, one balance number.</p>
       <ol class="steps-grid cols-3">
-        <li class="step-card surface-card"><span class="step-num">01</span><h3>Pick your GPU</h3><p>Choose from 34 cards spanning GTX 10-series to RTX 50-series and RX 5000 to RX 8000. Each has a 0–100 GTA 6 tier score.</p></li>
-        <li class="step-card surface-card"><span class="step-num">02</span><h3>Pick your CPU</h3><p>Select from 21 chips (Intel 8th → 15th gen, Ryzen 2000 → 9000, X3D variants included). Each maps to a 0–100 tier.</p></li>
-        <li class="step-card surface-card"><span class="step-num">03</span><h3>Set your target resolution</h3><p>1080p leans on the CPU, 4K leans on the GPU. The same pairing can be perfectly balanced at 4K and 15% CPU-limited at 1080p.</p></li>
-        <li class="step-card surface-card"><span class="step-num">04</span><h3>Choose the workload you play</h3><p>Story Mode, a 30-player GTA Online lobby, or Online while streaming. Dense lobbies and encoding both add CPU-side cost the GPU never sees.</p></li>
-        <li class="step-card surface-card"><span class="step-num">05</span><h3>Compare the balance number</h3><p>You get a signed bottleneck percentage, an estimated FPS band, and which part is holding the other back at that exact resolution and workload.</p></li>
-        <li class="step-card surface-card"><span class="step-num">06</span><h3>Take the smallest upgrade that fixes it</h3><p>Instead of a generic 'upgrade your CPU', you get the cheapest single part that pulls the pairing back under 10% imbalance, with the FPS delta it buys.</p></li>
+        <li><span class="step-number">01</span><h3 class="step-title">Pick your GPU</h3><p class="step-text">Choose from 34 cards spanning GTX 10-series to RTX 50-series and RX 5000 to RX 8000. Each has a 0–100 GTA 6 tier score.</p></li>
+        <li><span class="step-number">02</span><h3 class="step-title">Pick your CPU</h3><p class="step-text">Select from 21 chips (Intel 8th → 15th gen, Ryzen 2000 → 9000, X3D variants included). Each maps to a 0–100 tier.</p></li>
+        <li><span class="step-number">03</span><h3 class="step-title">Set your target resolution</h3><p class="step-text">1080p leans on the CPU, 4K leans on the GPU. The same pairing can be perfectly balanced at 4K and 15% CPU-limited at 1080p.</p></li>
+        <li><span class="step-number">04</span><h3 class="step-title">Choose the workload you play</h3><p class="step-text">Story Mode, a 30-player GTA Online lobby, or Online while streaming. Dense lobbies and encoding both add CPU-side cost the GPU never sees.</p></li>
+        <li><span class="step-number">05</span><h3 class="step-title">Compare the balance number</h3><p class="step-text">You get a signed bottleneck percentage, an estimated FPS band, and which part is holding the other back at that exact resolution and workload.</p></li>
+        <li><span class="step-number">06</span><h3 class="step-title">Take the smallest upgrade that fixes it</h3><p class="step-text">Instead of a generic 'upgrade your CPU', you get the cheapest single part that pulls the pairing back under 10% imbalance, with the FPS delta it buys.</p></li>
       </ol>
     </section>
 
     <section aria-labelledby="use-cases">
-      <h2 id="use-cases" class="h2-lg">Real CPU + GPU pairings, scored end to end</h2>
+      <h2 id="use-cases">Real CPU + GPU pairings, scored end to end</h2>
       <p class="tool-dek">Four builds people actually own, run through the same model.</p>
       <ul class="usecases-grid">
-        <li><article class="usecase-card" aria-labelledby="use-case-0"><h3 id="use-case-0">Old CPU, new GPU — RTX 4070 + i5-9400</h3><p>Classic imbalance. 55% CPU bottleneck at 1080p Online (40–57 fps), still 32% at 4K. Fix: jump to a Ryzen 5 7600 or i5-13400F.</p><a href="/tools/bottleneck-calculator?gpu=rtx-4070&amp;cpu=i5-9400&amp;res=1080p&amp;mode=online" aria-label="Load preset: Old CPU, new GPU — RTX 4070 + i5-9400">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
-        <li><article class="usecase-card" aria-labelledby="use-case-1"><h3 id="use-case-1">New CPU, old GPU — 7700X + GTX 1070</h3><p>Heavy GPU bottleneck (53% at 1440p Online, 47–56% across resolutions). CPU has plenty of headroom. Only a GPU upgrade (RTX 4070 tier) helps.</p><a href="/tools/bottleneck-calculator?gpu=gtx-1070&amp;cpu=r7-7700x&amp;res=1440p&amp;mode=online" aria-label="Load preset: New CPU, old GPU — 7700X + GTX 1070">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
-        <li><article class="usecase-card" aria-labelledby="use-case-2"><h3 id="use-case-2">Balanced budget — RX 7600 + Ryzen 5 7600</h3><p>24% GPU bottleneck at 1440p Online. The RX 7600 caps this build, so a GPU step-up is the fix that matters.</p><a href="/tools/bottleneck-calculator?gpu=rx-7600&amp;cpu=r5-7600x&amp;res=1440p&amp;mode=online" aria-label="Load preset: Balanced budget — RX 7600 + Ryzen 5 7600">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
-        <li><article class="usecase-card" aria-labelledby="use-case-3"><h3 id="use-case-3">4K flagship — RTX 4090 + 14900K</h3><p>Balanced at 4K (52–75 fps Online), but 33% CPU bottleneck at 1080p Online (104–150 fps). At 1080p the flagship GPU waits on the CPU.</p><a href="/tools/bottleneck-calculator?gpu=rtx-4090&amp;cpu=i9-14900k&amp;res=4K&amp;mode=online" aria-label="Load preset: 4K flagship — RTX 4090 + 14900K">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
+        <li><article class="usecase-card" aria-labelledby="use-case-0"><h3 id="use-case-0">Old CPU, new GPU: RTX 4070 + i5-9400</h3><p>Classic imbalance. 55% CPU bottleneck at 1080p Online (40–57 fps), still 32% at 4K. Fix: jump to a Ryzen 5 7600 or i5-13400F.</p><a href="/tools/bottleneck-calculator?gpu=rtx-4070&amp;cpu=i5-9400&amp;res=1080p&amp;mode=online" aria-label="Load preset: Old CPU, new GPU, RTX 4070 + i5-9400">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
+        <li><article class="usecase-card" aria-labelledby="use-case-1"><h3 id="use-case-1">New CPU, old GPU: 7700X + GTX 1070</h3><p>Heavy GPU bottleneck (53% at 1440p Online, 47–56% across resolutions). CPU has plenty of headroom. Only a GPU upgrade (RTX 4070 tier) helps.</p><a href="/tools/bottleneck-calculator?gpu=gtx-1070&amp;cpu=r7-7700x&amp;res=1440p&amp;mode=online" aria-label="Load preset: New CPU, old GPU, 7700X + GTX 1070">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
+        <li><article class="usecase-card" aria-labelledby="use-case-2"><h3 id="use-case-2">Balanced budget: RX 7600 + Ryzen 5 7600</h3><p>24% GPU bottleneck at 1440p Online. The RX 7600 caps this build, so a GPU step-up is the fix that matters.</p><a href="/tools/bottleneck-calculator?gpu=rx-7600&amp;cpu=r5-7600x&amp;res=1440p&amp;mode=online" aria-label="Load preset: Balanced budget, RX 7600 + Ryzen 5 7600">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
+        <li><article class="usecase-card" aria-labelledby="use-case-3"><h3 id="use-case-3">4K flagship: RTX 4090 + 14900K</h3><p>Balanced at 4K (52–75 fps Online), but 33% CPU bottleneck at 1080p Online (104–150 fps). At 1080p the flagship GPU waits on the CPU.</p><a href="/tools/bottleneck-calculator?gpu=rtx-4090&amp;cpu=i9-14900k&amp;res=4K&amp;mode=online" aria-label="Load preset: 4K flagship, RTX 4090 + 14900K">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
       </ul>
     </section>
 
     <section aria-labelledby="methodology">
-      <details class="methodology-details">
+      <details class="methodology-details" open>
         <summary>
           <h2 id="methodology">Bottleneck scoring formula and calibration</h2>
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p>Every part gets a 0–100 GTA 6 tier score benchmarked against a 4090 + 14900K. Demand scales with resolution (GPU-heavier at 4K) and workload (Online lobbies and streaming are CPU-heavier). We compute a headroom ratio for each part, and the delta becomes the bottleneck percentage. A delta under 7% is considered balanced — nothing is truly zero-bottleneck.</p>
-        <pre>gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
+        <div class="methodology-body">
+        <p>Every part gets a 0–100 GTA 6 tier score benchmarked against a 4090 + 14900K. Demand scales with resolution (GPU-heavier at 4K) and workload (Online lobbies and streaming are CPU-heavier). We compute a headroom ratio for each part, and the delta becomes the bottleneck percentage. A delta under 7% is considered balanced, nothing is truly zero-bottleneck.</p>
+        <pre class="methodology-formula">gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
 cpuDemand = 100 × workloadFactor  // story=0.70, online=1.00, stream=1.15
 
 headroomGpu = gpuScore / gpuDemand
@@ -431,45 +426,47 @@ delta       = headroomGpu − headroomCpu
   otherwise      →  Balanced (±7%)
 
 fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
+          <div class="assumptions-block"><p><strong>Assumptions</strong> <span>Balance model derived from GTA V and RDR2 CPU/GPU scaling data, community benchmarks, and leaked GTA 6 target hardware. Reference tier is RTX 4090 + Core i9-14900K. Figures refresh within hours of Rockstar's official spec drop.</span></p><p class="updated-line">Updated <time datetime="2026-07-23">Jul 23, 2026</time></p></div>
+        </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">CPU and GPU bottleneck questions for GTA 6</h2>
+      <header>
+        <h2 id="faq">CPU and GPU bottleneck questions for GTA 6</h2>
         <p class="tool-dek">Pairing-specific answers, not generic advice.</p>
       </header>
       <ul class="faq-list" role="list">
         <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">Will my CPU bottleneck GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Only if your GPU has more headroom than your CPU at your target resolution. At 1080p, CPU bottlenecks are common because the GPU renders fewer pixels and waits on the CPU. At 4K, the GPU works harder and CPU bottlenecks shrink. Pick your exact GPU and CPU above for the specific number.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">How much bottleneck is acceptable for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Under 7% is functionally balanced — you won't feel it. 7–15% is noticeable in CPU-heavy scenes but fine overall. 15%+ means one part is dragging the other down and an upgrade will unlock real frame rate.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">Are bottleneck calculators accurate?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Directionally accurate — not laboratory-exact. Any bottleneck calculator (this one included) predicts a range because real-world FPS depends on drivers, RAM speed, storage, background load, and thermal headroom. Our GTA 6 model targets ±10% versus launch-day benchmarks. Treat the verdict as a shopping guide, not a benchmark.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Is my PC good enough for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Enter your CPU and GPU above and read the Readiness badge. Ready means Balanced or ≤7% bottleneck at your resolution. Borderline is 8–15% — playable but noticeable. Upgrade means 15%+ — one part is dragging the other down and you'll lose FPS you paid for. Below the RTX 3060 / Ryzen 5 5600 tier, expect 1080p only.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">How much bottleneck is acceptable for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Under 7% is functionally balanced, you won't feel it. 7–15% is noticeable in CPU-heavy scenes but fine overall. 15%+ means one part is dragging the other down and an upgrade will unlock real frame rate.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">Are bottleneck calculators accurate?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Directionally accurate, not laboratory-exact. Any bottleneck calculator (this one included) predicts a range because real-world FPS depends on drivers, RAM speed, storage, background load, and thermal headroom. Our GTA 6 model targets ±10% versus launch-day benchmarks. Treat the verdict as a shopping guide, not a benchmark.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">Is my PC good enough for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Enter your CPU and GPU above and read the Readiness badge. Ready means Balanced or ≤7% bottleneck at your resolution. Borderline is 8–15%, playable but noticeable. Upgrade means 15%+, one part is dragging the other down and you'll lose FPS you paid for. Below the RTX 3060 / Ryzen 5 5600 tier, expect 1080p only.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Does 1440p or 4K reduce CPU bottleneck?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">Yes. Higher resolutions push more work to the GPU per frame, so the CPU has more time to prepare the next one. A CPU that bottlenecks at 1080p often disappears at 1440p and is invisible at 4K.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">Does GTA Online use more CPU than Story Mode?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">Significantly more. Networked lobbies, dozens of AI-controlled players, and physics for every car add CPU load. Our model applies a 1.0× multiplier for Online vs 0.70× for Story — that alone can flip a balanced rig into a CPU bottleneck.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-6"><details><summary aria-controls="faq-a-6"><h3 id="faq-q-6">Will DLSS or FSR reduce my bottleneck?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-6" role="region" aria-labelledby="faq-q-6"><p class="faq-answer">DLSS and FSR upscaling reduce the internal render resolution, so the GPU works less. That helps a GPU bottleneck but makes a CPU bottleneck worse — the CPU still processes the same physics and draw calls while the GPU renders faster.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">Does GTA Online use more CPU than Story Mode?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">Significantly more. Networked lobbies, dozens of AI-controlled players, and physics for every car add CPU load. Our model applies a 1.0× multiplier for Online vs 0.70× for Story, that alone can flip a balanced rig into a CPU bottleneck.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-6"><details><summary aria-controls="faq-a-6"><h3 id="faq-q-6">Will DLSS or FSR reduce my bottleneck?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-6" role="region" aria-labelledby="faq-q-6"><p class="faq-answer">DLSS and FSR upscaling reduce the internal render resolution, so the GPU works less. That helps a GPU bottleneck but makes a CPU bottleneck worse, the CPU still processes the same physics and draw calls while the GPU renders faster.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-7"><details><summary aria-controls="faq-a-7"><h3 id="faq-q-7">How is this different from a generic PC bottleneck calculator?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-7" role="region" aria-labelledby="faq-q-7"><p class="faq-answer">Generic calculators return one flat percentage regardless of the game or resolution. This tool models GTA 6 specifically: it scales GPU demand for 4K, adds CPU multipliers for Online lobbies and streaming, and treats X3D CPUs the way GTA's engine actually rewards them. Same inputs, GTA-6-accurate output.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-8"><details><summary aria-controls="faq-a-8"><h3 id="faq-q-8">Does GTA 6 need an X3D CPU?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-8" role="region" aria-labelledby="faq-q-8"><p class="faq-answer">No — but a 7800X3D or 7950X3D adds roughly 10–15% headroom in GTA Online at 1080p and 1440p versus a same-price non-X3D chip, because the RAGE engine benefits from L3 cache in dense lobbies. If your target is 4K Story Mode, a Ryzen 7 7700X or i5-13400F is a better value.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-9"><details><summary aria-controls="faq-a-9"><h3 id="faq-q-9">RTX 4070 with i5-12400 — bottleneck or fine?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-9" role="region" aria-labelledby="faq-q-9"><p class="faq-answer">Fine at 1440p and 4K (under 5% delta). At 1080p in GTA Online you'll see ~10% CPU bottleneck, which is on the edge of noticeable. If you play mostly Story Mode, don't upgrade. If you play Online at high refresh rates, step up to a 13400F or 7600.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-8"><details><summary aria-controls="faq-a-8"><h3 id="faq-q-8">Does GTA 6 need an X3D CPU?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-8" role="region" aria-labelledby="faq-q-8"><p class="faq-answer">No, but a 7800X3D or 7950X3D adds roughly 10–15% headroom in GTA Online at 1080p and 1440p versus a same-price non-X3D chip, because the RAGE engine benefits from L3 cache in dense lobbies. If your target is 4K Story Mode, a Ryzen 7 7700X or i5-13400F is a better value.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-9"><details><summary aria-controls="faq-a-9"><h3 id="faq-q-9">RTX 4070 with i5-12400: bottleneck or fine?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-9" role="region" aria-labelledby="faq-q-9"><p class="faq-answer">Fine at 1440p and 4K (under 5% delta). At 1080p in GTA Online you'll see ~10% CPU bottleneck, which is on the edge of noticeable. If you play mostly Story Mode, don't upgrade. If you play Online at high refresh rates, step up to a 13400F or 7600.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-10"><details><summary aria-controls="faq-a-10"><h3 id="faq-q-10">What GPU do I need for 4K GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-10" role="region" aria-labelledby="faq-q-10"><p class="faq-answer">For 4K High 60 fps aim for an RTX 4070 Ti Super, RTX 4080 or RX 7900 XT (S-tier). For 4K Ultra with ray tracing you want RTX 4090 / 5090. An RTX 4070 or RX 7800 XT will hit 4K Medium 60 or 1440p Ultra 90+.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-11"><details><summary aria-controls="faq-a-11"><h3 id="faq-q-11">How to fix a CPU bottleneck in GTA 6 without upgrading?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-11" role="region" aria-labelledby="faq-q-11"><p class="faq-answer">You can shrink a CPU bottleneck by 3–8% before spending money: enable frame generation (DLSS 3 / FSR 3), close background apps and browser tabs, cap the frame rate 5 fps below your average, disable Windows Game Bar / recording overlays, and set the game to High-Performance power plan. None of these fix a 15%+ bottleneck — that needs new silicon.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-12"><details><summary aria-controls="faq-a-12"><h3 id="faq-q-12">How accurate are bottleneck calculators now that GTA 6 has launched?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-12" role="region" aria-labelledby="faq-q-12"><p class="faq-answer">Within about ten percent, which is enough to choose parts. Our tier scores are based on GTA V, RDR2 and Cyberpunk scaling — engines that share DNA with GTA 6. Expect predictions within ±10% of launch-day reality. We refresh scores within hours of Rockstar's official numbers and the first independent benchmarks.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-13"><details><summary aria-controls="faq-a-13"><h3 id="faq-q-13">How do I check my PC's bottleneck for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-13" role="region" aria-labelledby="faq-q-13"><p class="faq-answer">Pick your exact GPU and CPU in the panel above, set the resolution you actually play at (1080p, 1440p or 4K) and the workload (Story, Online or Streaming). The verdict reads live: a CPU or GPU bottleneck percentage, an estimated FPS band, and the single smallest upgrade that lands your rig within ±7%. No sign-up, no download — the calculation runs in your browser.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-14"><details><summary aria-controls="faq-a-14"><h3 id="faq-q-14">Will GTA 6 run on my PC without a bottleneck?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-14" role="region" aria-labelledby="faq-q-14"><p class="faq-answer">Very few real-world builds are bottleneck-free — even a 4090 + 14900K shows a 33% CPU-side delta at 1080p Online (balanced only at 4K). What matters is staying under 7%, where the imbalance is invisible in play. If your pairing shows Balanced or Ready above, you're inside GTA 6's usable envelope. Anything over 15% is where you actually lose frames you paid for.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-11"><details><summary aria-controls="faq-a-11"><h3 id="faq-q-11">How to fix a CPU bottleneck in GTA 6 without upgrading?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-11" role="region" aria-labelledby="faq-q-11"><p class="faq-answer">You can shrink a CPU bottleneck by 3–8% before spending money: enable frame generation (DLSS 3 / FSR 3), close background apps and browser tabs, cap the frame rate 5 fps below your average, disable Windows Game Bar / recording overlays, and set the game to High-Performance power plan. None of these fix a 15%+ bottleneck, that needs new silicon.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-12"><details><summary aria-controls="faq-a-12"><h3 id="faq-q-12">How accurate are bottleneck calculators now that GTA 6 has launched?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-12" role="region" aria-labelledby="faq-q-12"><p class="faq-answer">Within about ten percent, which is enough to choose parts. Our tier scores are based on GTA V, RDR2 and Cyberpunk scaling, engines that share DNA with GTA 6. Expect predictions within ±10% of launch-day reality. We refresh scores within hours of Rockstar's official numbers and the first independent benchmarks.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-13"><details><summary aria-controls="faq-a-13"><h3 id="faq-q-13">How do I check my PC's bottleneck for GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-13" role="region" aria-labelledby="faq-q-13"><p class="faq-answer">Pick your exact GPU and CPU in the panel above, set the resolution you actually play at (1080p, 1440p or 4K) and the workload (Story, Online or Streaming). The verdict reads live: a CPU or GPU bottleneck percentage, an estimated FPS band, and the single smallest upgrade that lands your rig within ±7%. No sign-up, no download, the calculation runs in your browser.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-14"><details><summary aria-controls="faq-a-14"><h3 id="faq-q-14">Will GTA 6 run on my PC without a bottleneck?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-14" role="region" aria-labelledby="faq-q-14"><p class="faq-answer">Very few real-world builds are bottleneck-free, even a 4090 + 14900K shows a 33% CPU-side delta at 1080p Online (balanced only at 4K). What matters is staying under 7%, where the imbalance is invisible in play. If your pairing shows Balanced or Ready above, you're inside GTA 6's usable envelope. Anything over 15% is where you actually lose frames you paid for.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-15"><details><summary aria-controls="faq-a-15"><h3 id="faq-q-15">Does RAM cause a bottleneck in GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-15" role="region" aria-labelledby="faq-q-15"><p class="faq-answer">It can, but not in the CPU-vs-GPU sense this calculator models. GTA 6 will want 16 GB minimum and prefers 32 GB for Online lobbies. Slow RAM (DDR4-2400, single-channel, or mismatched sticks) shows up as a CPU-side bottleneck in benchmarks because the CPU waits on memory. If your calculator verdict looks worse than expected, check that RAM is running in dual-channel at its rated XMP/EXPO speed.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-16"><details><summary aria-controls="faq-a-16"><h3 id="faq-q-16">What's the best CPU + GPU combo for GTA 6 in 2026?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-16" role="region" aria-labelledby="faq-q-16"><p class="faq-answer">For 1440p High 90+ fps, a Ryzen 7 7800X3D + RTX 4070 Ti Super is the sweet-spot pairing — L3-cache-heavy CPU that GTA's RAGE engine rewards, matched to a GPU that isn't left waiting. For 4K Ultra 60, step up to a 7800X3D or 14700K with an RTX 4080 Super / RX 7900 XTX. For a pure budget balanced build, Ryzen 5 7600 + RX 7700 XT stays under 7% delta at 1440p.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-16"><details><summary aria-controls="faq-a-16"><h3 id="faq-q-16">What's the best CPU + GPU combo for GTA 6 in 2026?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-16" role="region" aria-labelledby="faq-q-16"><p class="faq-answer">For 1440p High 90+ fps, a Ryzen 7 7800X3D + RTX 4070 Ti Super is the sweet-spot pairing, L3-cache-heavy CPU that GTA's RAGE engine rewards, matched to a GPU that isn't left waiting. For 4K Ultra 60, step up to a 7800X3D or 14700K with an RTX 4080 Super / RX 7900 XTX. For a pure budget balanced build, Ryzen 5 7600 + RX 7700 XT stays under 7% delta at 1440p.</p></div></details></article></li>
         <li><article aria-labelledby="faq-q-17"><details><summary aria-controls="faq-a-17"><h3 id="faq-q-17">Can I run GTA 6 at 60 fps on a mid-range PC?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-17" role="region" aria-labelledby="faq-q-17"><p class="faq-answer">Yes. An RTX 4060 or RX 7600 paired with a Ryzen 5 5600 / i5-12400F is the current 1080p High 60 fps floor for GTA 6 on our model. At 1440p the same rig lands in the 45–55 fps band on High, which upscaling (DLSS Quality / FSR Quality) pushes back over 60. Below that tier, plan for 1080p Medium.</p></div></details></article></li>
       </ul>
     </section>
 
     <section aria-labelledby="glossary">
-      <h2 id="glossary" class="h2-lg">Bottleneck terminology</h2>
+      <h2 id="glossary">Bottleneck terminology</h2>
       <p class="tool-dek">Vocabulary that shows up across the tool and the FAQs.</p>
       <dl class="glossary-grid">
-        <div id="term-bottleneck"><dt>Bottleneck</dt><dd>When one component finishes each frame's work faster than the other. The faster part sits idle waiting — frame rate is capped by the slower part.</dd></div>
+        <div id="term-bottleneck"><dt>Bottleneck</dt><dd>When one component finishes each frame's work faster than the other. The faster part sits idle waiting, frame rate is capped by the slower part.</dd></div>
         <div id="term-cpu-bound"><dt>CPU-bound</dt><dd>The CPU is the limiting factor. Common at 1080p, in dense simulation (GTA Online), and when streaming or recording.</dd></div>
         <div id="term-gpu-bound"><dt>GPU-bound</dt><dd>The GPU is the limiting factor. Common at 4K, with ray tracing on, or when using an older GPU with a modern CPU.</dd></div>
         <div id="term-frame-pacing"><dt>Frame pacing</dt><dd>How evenly frames are delivered. A perfectly balanced rig has smooth pacing; a bottleneck causes uneven frame times even at the same average FPS.</dd></div>
-        <div id="term-1-low-fps"><dt>1% low FPS</dt><dd>The frame rate of the slowest 1% of frames — a better measure of feel than average FPS. Bottlenecks hurt 1% lows more than averages.</dd></div>
+        <div id="term-1-low-fps"><dt>1% low FPS</dt><dd>The frame rate of the slowest 1% of frames, a better measure of feel than average FPS. Bottlenecks hurt 1% lows more than averages.</dd></div>
       </dl>
     </section>
 
@@ -477,21 +474,21 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
       <h2 id="related-content">Next steps for this build</h2>
       <h3 class="related-sub">Related tools</h3>
       <ul class="related-tools-grid" role="list">
-        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/tools/system-requirements" data-accent="purple" aria-label="GTA 6 System Requirements Checker — Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><h3 id="rel-sysreq">GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/tools/vram-calculator" data-accent="blue" aria-label="GTA 6 VRAM Requirements Checker — Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><h3 id="rel-vram">GTA 6 VRAM Requirements Checker</h3><p>Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards.</p><span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/tools/fps-calculator" data-accent="pink" aria-label="GTA 6 FPS Calculator — Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><h3 id="rel-fps">GTA 6 FPS Calculator</h3><p>Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra.</p><span class="tool-card-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/tools/system-requirements" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3 id="rel-sysreq">GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/tools/vram-calculator" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3 id="rel-vram">GTA 6 VRAM Requirements Checker</h3><p>Check the minimum VRAM you need for GTA 6 at 1080p, 1440p and 4K. Verdict for 6 GB, 8 GB, 12 GB and 16 GB cards.</p><span class="link-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/tools/fps-calculator" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3 id="rel-fps">GTA 6 FPS Calculator</h3><p>Estimate frame rate for your GPU at 1080p, 1440p and 4K across Low, Medium, High and Ultra.</p><span class="link-cta">Explore Tool <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
       </ul>
       <h3 class="related-sub">Companion guides</h3>
       <ul class="guide-cards" role="list">
-        <li><a class="guide-card surface-card" href="/guides/how-fps-is-estimated">
+        <li><a class="guide-card" href="/guides/how-fps-is-estimated">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="guide-card-tag">Performance</span><svg class="icon icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>How we estimate GTA 6 FPS</h4>
-          <p>The exact model behind the FPS calculator — GPU scores, upscaler multipliers, frame-gen caps and the VRAM stutter penalty.</p>
+          <p>The exact model behind the FPS calculator: GPU scores, upscaler multipliers, frame-gen caps and the VRAM stutter penalty.</p>
         </a></li>
-        <li><a class="guide-card surface-card" href="/guides/cpu-gpu-pairing">
+        <li><a class="guide-card" href="/guides/cpu-gpu-pairing">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="guide-card-tag">Hardware</span><svg class="icon icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>CPU-GPU pairing for GTA 6</h4>
-          <p>12 common CPU + GPU pairings with the honest verdict — balanced, GPU-starved, or CPU-bound — and why 1% lows fall off first.</p>
+          <p>12 common CPU + GPU pairings with the honest verdict: balanced, GPU-starved, or CPU-bound, and why 1% lows fall off first.</p>
         </a></li>
       </ul>
     </section>
@@ -499,10 +496,10 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     <section aria-labelledby="sources">
       <h2 id="sources">Sources &amp; methodology references</h2>
       <ul class="sources-list">
-        <li><a href="https://www.techpowerup.com/review/grand-theft-auto-v-benchmark-test-graphics-card-performance-analysis/" target="_blank" rel="noopener noreferrer">Grand Theft Auto V PC — benchmark &amp; CPU scaling coverage</a><span class="src-meta">TechPowerUp · Published Apr 14, 2015 · Accessed Jul 24, 2026 · Cross-GPU frame-rate scaling used to calibrate resolution factors.</span></li>
-        <li><a href="https://www.eurogamer.net/digitalfoundry-2019-red-dead-redemption-2-pc-tech-review-vulkan-dx12-benchmarks-1080p-1440p-4k" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 PC — tech review and CPU/GPU scaling</a><span class="src-meta">Digital Foundry · Eurogamer · Published Nov 5, 2019 · Accessed Jul 24, 2026 · RAGE-engine (RDR2) CPU-vs-GPU balance across 1080p / 1440p / 4K.</span></li>
-        <li><a href="https://www.youtube.com/@hardwareunboxed/videos" target="_blank" rel="noopener noreferrer">Cyberpunk 2077 CPU scaling — 1% low deltas across the CPU stack</a><span class="src-meta">Hardware Unboxed · Published Sep 15, 2022 · Accessed Jul 24, 2026 · Cross-CPU 1% low deltas used to size the CPU workload multipliers.</span></li>
-        <li><a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">GTA VI — official target hardware page</a><span class="src-meta">Rockstar Games · Published May 1, 2025 · Accessed Jul 24, 2026 · Official target-spec pass — anchor for tier-score refresh at launch.</span></li>
+        <li><a href="https://www.techpowerup.com/review/grand-theft-auto-v-benchmark-test-graphics-card-performance-analysis/" target="_blank" rel="noopener noreferrer">Grand Theft Auto V PC: benchmark &amp; CPU scaling coverage</a><span class="src-meta">TechPowerUp · Published Apr 14, 2015 · Accessed Jul 24, 2026 · Cross-GPU frame-rate scaling used to calibrate resolution factors.</span></li>
+        <li><a href="https://www.eurogamer.net/digitalfoundry-2019-red-dead-redemption-2-pc-tech-review-vulkan-dx12-benchmarks-1080p-1440p-4k" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 PC: tech review and CPU/GPU scaling</a><span class="src-meta">Digital Foundry · Eurogamer · Published Nov 5, 2019 · Accessed Jul 24, 2026 · RAGE-engine (RDR2) CPU-vs-GPU balance across 1080p / 1440p / 4K.</span></li>
+        <li><a href="https://www.youtube.com/@hardwareunboxed/videos" target="_blank" rel="noopener noreferrer">Cyberpunk 2077 CPU scaling: 1% low deltas across the CPU stack</a><span class="src-meta">Hardware Unboxed · Published Sep 15, 2022 · Accessed Jul 24, 2026 · Cross-CPU 1% low deltas used to size the CPU workload multipliers.</span></li>
+        <li><a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">GTA VI: official target hardware page</a><span class="src-meta">Rockstar Games · Published May 1, 2025 · Accessed Jul 24, 2026 · Official target-spec pass: anchor for tier-score refresh at launch.</span></li>
       </ul>
     </section>
 
@@ -521,34 +518,52 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     <aside class="disclaimer" role="note" aria-label="Estimate disclaimer">
       <strong>Disclaimer:</strong> GTA 6 has launched on PS5 and Xbox, but not on PC. Scores are engineering estimates modeled on GTA V, RDR2, and Cyberpunk 2077 CPU/GPU scaling, community benchmarks, and Rockstar's publicly stated targets. Expect ±10% variance versus real console performance. FPS bands assume the High preset without ray tracing, stock clocks, 32 GB RAM, and an NVMe SSD. Results are guidance for upgrade planning, not a guarantee of performance. We refresh scores as official PC specifications and benchmarks appear.
     </aside>
-  </div>
 </article>
+  </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -583,20 +598,18 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Disclaimer</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
@@ -604,33 +617,44 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
   </div>
 </footer>
 </div>
-<script src="/assets/js/theme.js" defer></script>
-<script src="/assets/js/header.js" defer></script>
-<script src="/assets/js/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
 <script type="module" src="/assets/js/bottleneck.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Will my CPU bottleneck GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Only if your GPU has more headroom than your CPU at your target resolution. At 1080p, CPU bottlenecks are common because the GPU renders fewer pixels and waits on the CPU. At 4K, the GPU works harder and CPU bottlenecks shrink. Pick your exact GPU and CPU above for the specific number." } },
-    { "@type": "Question", "name": "How much bottleneck is acceptable for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Under 7% is functionally balanced — you won't feel it. 7–15% is noticeable in CPU-heavy scenes but fine overall. 15%+ means one part is dragging the other down and an upgrade will unlock real frame rate." } },
-    { "@type": "Question", "name": "Are bottleneck calculators accurate?", "acceptedAnswer": { "@type": "Answer", "text": "Directionally accurate — not laboratory-exact. Any bottleneck calculator (this one included) predicts a range because real-world FPS depends on drivers, RAM speed, storage, background load, and thermal headroom. Our GTA 6 model targets ±10% versus launch-day benchmarks. Treat the verdict as a shopping guide, not a benchmark." } },
-    { "@type": "Question", "name": "Is my PC good enough for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your CPU and GPU above and read the Readiness badge. Ready means Balanced or ≤7% bottleneck at your resolution. Borderline is 8–15% — playable but noticeable. Upgrade means 15%+ — one part is dragging the other down and you'll lose FPS you paid for. Below the RTX 3060 / Ryzen 5 5600 tier, expect 1080p only." } },
+    { "@type": "Question", "name": "How much bottleneck is acceptable for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Under 7% is functionally balanced, you won't feel it. 7–15% is noticeable in CPU-heavy scenes but fine overall. 15%+ means one part is dragging the other down and an upgrade will unlock real frame rate." } },
+    { "@type": "Question", "name": "Are bottleneck calculators accurate?", "acceptedAnswer": { "@type": "Answer", "text": "Directionally accurate, not laboratory-exact. Any bottleneck calculator (this one included) predicts a range because real-world FPS depends on drivers, RAM speed, storage, background load, and thermal headroom. Our GTA 6 model targets ±10% versus launch-day benchmarks. Treat the verdict as a shopping guide, not a benchmark." } },
+    { "@type": "Question", "name": "Is my PC good enough for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your CPU and GPU above and read the Readiness badge. Ready means Balanced or ≤7% bottleneck at your resolution. Borderline is 8–15%, playable but noticeable. Upgrade means 15%+, one part is dragging the other down and you'll lose FPS you paid for. Below the RTX 3060 / Ryzen 5 5600 tier, expect 1080p only." } },
     { "@type": "Question", "name": "Does 1440p or 4K reduce CPU bottleneck?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Higher resolutions push more work to the GPU per frame, so the CPU has more time to prepare the next one. A CPU that bottlenecks at 1080p often disappears at 1440p and is invisible at 4K." } },
-    { "@type": "Question", "name": "Does GTA Online use more CPU than Story Mode?", "acceptedAnswer": { "@type": "Answer", "text": "Significantly more. Networked lobbies, dozens of AI-controlled players, and physics for every car add CPU load. Our model applies a 1.0× multiplier for Online vs 0.70× for Story — that alone can flip a balanced rig into a CPU bottleneck." } },
-    { "@type": "Question", "name": "Will DLSS or FSR reduce my bottleneck?", "acceptedAnswer": { "@type": "Answer", "text": "DLSS and FSR upscaling reduce the internal render resolution, so the GPU works less. That helps a GPU bottleneck but makes a CPU bottleneck worse — the CPU still processes the same physics and draw calls while the GPU renders faster." } },
+    { "@type": "Question", "name": "Does GTA Online use more CPU than Story Mode?", "acceptedAnswer": { "@type": "Answer", "text": "Significantly more. Networked lobbies, dozens of AI-controlled players, and physics for every car add CPU load. Our model applies a 1.0× multiplier for Online vs 0.70× for Story, that alone can flip a balanced rig into a CPU bottleneck." } },
+    { "@type": "Question", "name": "Will DLSS or FSR reduce my bottleneck?", "acceptedAnswer": { "@type": "Answer", "text": "DLSS and FSR upscaling reduce the internal render resolution, so the GPU works less. That helps a GPU bottleneck but makes a CPU bottleneck worse, the CPU still processes the same physics and draw calls while the GPU renders faster." } },
     { "@type": "Question", "name": "How is this different from a generic PC bottleneck calculator?", "acceptedAnswer": { "@type": "Answer", "text": "Generic calculators return one flat percentage regardless of the game or resolution. This tool models GTA 6 specifically: it scales GPU demand for 4K, adds CPU multipliers for Online lobbies and streaming, and treats X3D CPUs the way GTA's engine actually rewards them. Same inputs, GTA-6-accurate output." } },
-    { "@type": "Question", "name": "Does GTA 6 need an X3D CPU?", "acceptedAnswer": { "@type": "Answer", "text": "No — but a 7800X3D or 7950X3D adds roughly 10–15% headroom in GTA Online at 1080p and 1440p versus a same-price non-X3D chip, because the RAGE engine benefits from L3 cache in dense lobbies. If your target is 4K Story Mode, a Ryzen 7 7700X or i5-13400F is a better value." } },
-    { "@type": "Question", "name": "RTX 4070 with i5-12400 — bottleneck or fine?", "acceptedAnswer": { "@type": "Answer", "text": "Fine at 1440p and 4K (under 5% delta). At 1080p in GTA Online you'll see ~10% CPU bottleneck, which is on the edge of noticeable. If you play mostly Story Mode, don't upgrade. If you play Online at high refresh rates, step up to a 13400F or 7600." } },
+    { "@type": "Question", "name": "Does GTA 6 need an X3D CPU?", "acceptedAnswer": { "@type": "Answer", "text": "No, but a 7800X3D or 7950X3D adds roughly 10–15% headroom in GTA Online at 1080p and 1440p versus a same-price non-X3D chip, because the RAGE engine benefits from L3 cache in dense lobbies. If your target is 4K Story Mode, a Ryzen 7 7700X or i5-13400F is a better value." } },
+    { "@type": "Question", "name": "RTX 4070 with i5-12400, bottleneck or fine?", "acceptedAnswer": { "@type": "Answer", "text": "Fine at 1440p and 4K (under 5% delta). At 1080p in GTA Online you'll see ~10% CPU bottleneck, which is on the edge of noticeable. If you play mostly Story Mode, don't upgrade. If you play Online at high refresh rates, step up to a 13400F or 7600." } },
     { "@type": "Question", "name": "What GPU do I need for 4K GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "For 4K High 60 fps aim for an RTX 4070 Ti Super, RTX 4080 or RX 7900 XT (S-tier). For 4K Ultra with ray tracing you want RTX 4090 / 5090. An RTX 4070 or RX 7800 XT will hit 4K Medium 60 or 1440p Ultra 90+." } },
-    { "@type": "Question", "name": "How to fix a CPU bottleneck in GTA 6 without upgrading?", "acceptedAnswer": { "@type": "Answer", "text": "You can shrink a CPU bottleneck by 3–8% before spending money: enable frame generation (DLSS 3 / FSR 3), close background apps and browser tabs, cap the frame rate 5 fps below your average, disable Windows Game Bar / recording overlays, and set the game to High-Performance power plan. None of these fix a 15%+ bottleneck — that needs new silicon." } },
-    { "@type": "Question", "name": "How accurate are bottleneck calculators now that GTA 6 has launched?", "acceptedAnswer": { "@type": "Answer", "text": "Within about ten percent, which is enough to choose parts. Our tier scores are based on GTA V, RDR2 and Cyberpunk scaling — engines that share DNA with GTA 6. Expect predictions within ±10% of launch-day reality. We refresh scores within hours of Rockstar's official numbers and the first independent benchmarks." } },
-    { "@type": "Question", "name": "How do I check my PC's bottleneck for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Pick your exact GPU and CPU in the panel above, set the resolution you actually play at (1080p, 1440p or 4K) and the workload (Story, Online or Streaming). The verdict reads live: a CPU or GPU bottleneck percentage, an estimated FPS band, and the single smallest upgrade that lands your rig within ±7%. No sign-up, no download — the calculation runs in your browser." } },
-    { "@type": "Question", "name": "Will GTA 6 run on my PC without a bottleneck?", "acceptedAnswer": { "@type": "Answer", "text": "Very few real-world builds are bottleneck-free — even a 4090 + 14900K shows a 33% CPU-side delta at 1080p Online (balanced only at 4K). What matters is staying under 7%, where the imbalance is invisible in play. If your pairing shows Balanced or Ready above, you're inside GTA 6's usable envelope. Anything over 15% is where you actually lose frames you paid for." } },
+    { "@type": "Question", "name": "How to fix a CPU bottleneck in GTA 6 without upgrading?", "acceptedAnswer": { "@type": "Answer", "text": "You can shrink a CPU bottleneck by 3–8% before spending money: enable frame generation (DLSS 3 / FSR 3), close background apps and browser tabs, cap the frame rate 5 fps below your average, disable Windows Game Bar / recording overlays, and set the game to High-Performance power plan. None of these fix a 15%+ bottleneck, that needs new silicon." } },
+    { "@type": "Question", "name": "How accurate are bottleneck calculators now that GTA 6 has launched?", "acceptedAnswer": { "@type": "Answer", "text": "Within about ten percent, which is enough to choose parts. Our tier scores are based on GTA V, RDR2 and Cyberpunk scaling, engines that share DNA with GTA 6. Expect predictions within ±10% of launch-day reality. We refresh scores within hours of Rockstar's official numbers and the first independent benchmarks." } },
+    { "@type": "Question", "name": "How do I check my PC's bottleneck for GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "Pick your exact GPU and CPU in the panel above, set the resolution you actually play at (1080p, 1440p or 4K) and the workload (Story, Online or Streaming). The verdict reads live: a CPU or GPU bottleneck percentage, an estimated FPS band, and the single smallest upgrade that lands your rig within ±7%. No sign-up, no download, the calculation runs in your browser." } },
+    { "@type": "Question", "name": "Will GTA 6 run on my PC without a bottleneck?", "acceptedAnswer": { "@type": "Answer", "text": "Very few real-world builds are bottleneck-free, even a 4090 + 14900K shows a 33% CPU-side delta at 1080p Online (balanced only at 4K). What matters is staying under 7%, where the imbalance is invisible in play. If your pairing shows Balanced or Ready above, you're inside GTA 6's usable envelope. Anything over 15% is where you actually lose frames you paid for." } },
     { "@type": "Question", "name": "Does RAM cause a bottleneck in GTA 6?", "acceptedAnswer": { "@type": "Answer", "text": "It can, but not in the CPU-vs-GPU sense this calculator models. GTA 6 will want 16 GB minimum and prefers 32 GB for Online lobbies. Slow RAM (DDR4-2400, single-channel, or mismatched sticks) shows up as a CPU-side bottleneck in benchmarks because the CPU waits on memory. If your calculator verdict looks worse than expected, check that RAM is running in dual-channel at its rated XMP/EXPO speed." } },
-    { "@type": "Question", "name": "What's the best CPU + GPU combo for GTA 6 in 2026?", "acceptedAnswer": { "@type": "Answer", "text": "For 1440p High 90+ fps, a Ryzen 7 7800X3D + RTX 4070 Ti Super is the sweet-spot pairing — L3-cache-heavy CPU that GTA's RAGE engine rewards, matched to a GPU that isn't left waiting. For 4K Ultra 60, step up to a 7800X3D or 14700K with an RTX 4080 Super / RX 7900 XTX. For a pure budget balanced build, Ryzen 5 7600 + RX 7700 XT stays under 7% delta at 1440p." } },
+    { "@type": "Question", "name": "What's the best CPU + GPU combo for GTA 6 in 2026?", "acceptedAnswer": { "@type": "Answer", "text": "For 1440p High 90+ fps, a Ryzen 7 7800X3D + RTX 4070 Ti Super is the sweet-spot pairing, L3-cache-heavy CPU that GTA's RAGE engine rewards, matched to a GPU that isn't left waiting. For 4K Ultra 60, step up to a 7800X3D or 14700K with an RTX 4080 Super / RX 7900 XTX. For a pure budget balanced build, Ryzen 5 7600 + RX 7700 XT stays under 7% delta at 1440p." } },
     { "@type": "Question", "name": "Can I run GTA 6 at 60 fps on a mid-range PC?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. An RTX 4060 or RX 7600 paired with a Ryzen 5 5600 / i5-12400F is the current 1080p High 60 fps floor for GTA 6 on our model. At 1440p the same rig lands in the 45–55 fps band on High, which upscaling (DLSS Quality / FSR Quality) pushes back over 60. Below that tier, plan for 1080p Medium." } }
   ]
 }

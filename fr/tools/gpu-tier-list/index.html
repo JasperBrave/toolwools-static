@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="de_DE">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
     <meta property="og:image" content="https://toolwools.com/og/gpu-tier-list.jpg">
     <meta property="og:image:alt" content="Liste des GPU GTA 6 : chaque carte graphique classée de S à F sur ToolWools">
     <meta property="og:image:width" content="1200">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="Classement des GPU GTA 6">
     <meta name="twitter:description" content="Chaque GPU classé de S à F pour GTA 6. Filtrez par résolution, fabricant, VRAM ou budget. Notation déterministe calibrée sur Digital Foundry et TechPowerUp.">
     <meta name="twitter:image" content="https://toolwools.com/og/gpu-tier-list.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/fr/tools/gpu-tier-list">
 <link rel="alternate" href="https://toolwools.com/tools/gpu-tier-list" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/gpu-tier-list" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hardware-fr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Aller au contenu</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/fr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="RECHERCHER" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Choisir la langue">FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/gpu-tier-list">English</a>
             <a href="/es/tools/gpu-tier-list">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -119,7 +136,11 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/gpu-tier-list" lang="en">EN</a><a href="/es/tools/gpu-tier-list" lang="es">ES</a><a href="/pt/tools/gpu-tier-list" lang="pt">PT</a><a href="/de/tools/gpu-tier-list" lang="de">DE</a><a href="/fr/tools/gpu-tier-list" aria-current="true">FR</a><a href="/tr/tools/gpu-tier-list" lang="tr">TR</a><a href="/ar/tools/gpu-tier-list" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -127,40 +148,24 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Fil d&#x27;Ariane">
-        <a href="/fr/">Accueil</a>
-        <span aria-hidden="true">/</span>
-        <a href="/fr/tools">Outils</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Liste des GPU</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
-        <span>Comparaison</span>
-      </div>
-      <h1 id="page-title" class="page-title">Classement des GPU GTA 6</h1>
-      <p class="page-subtitle">Chaque GPU grand public classé de S à F pour GTA 6, avec filtres par résolution et budget. Les scores sont déterministes, performance + VRAM + RT moins âge, donc les relances correspondent au point près.</p>
-      <ul class="hero-badges" aria-label="En un coup d&#x27;œil">
-        <li class="chip">34 GPUs · NVIDIA · AMD · INTEL</li><li class="chip">Performance calibrée sur DF RDR2 / CP77</li><li class="chip">Score déterministe pondéré par l'âge</li>
-      </ul>
-    </section><div class="tool-intro-callout"><p>Ceci est le tableau des classements, pas un autre article 'meilleur GPU'. Chaque carte de l'enquête Steam grand public est notée par la même formule et placée dans une lettre de niveau, S pour les modèles phares qui poussent le 4K Ultra, F pour le matériel en dessous du plancher probable de Rockstar. Filtrez par résolution, VRAM ou budget et passez directement au calculateur de FPS avec votre choix préchargé.</p></div>
-<div class="byline" aria-label="Ligne d&#x27;auteur et de révision">
-      <span class="byline-item">Par <a href="/fr/about#hardware-desk">Équipe matériel ToolWools</a> <span aria-hidden="true">·</span> Analyse des performances PC</span>
-      <span class="byline-item">Vérifié par <a href="/fr/about#benchmark-reviewers">Testeurs indépendants de benchmarks GTA</a> <span aria-hidden="true">·</span> Référence de notation pour la fenêtre de lancement</span>
-      <span class="byline-item">Publié <time datetime="2026-07-28">28 juil. 2026</time> · Dernière vérification <time datetime="2026-11-17">17 novembre 2026</time></span>
-      <a class="method-link" href="/fr/methodology">Méthodologie</a>
-    </div><div class="sr-only" data-live-region aria-live="polite">34 GPU correspondent aux filtres. Affichage des FPS en 1440p Ultra natif.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Aperçu · En bref</span></p>
-        <p class="tldr-text"><span data-tldr-text>34 GPU classés de S à F pour GTA 6 en 1440p Ultra.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>34 GPU, RTX 5090 en tête du niveau S</p>
-    </section><section aria-labelledby="tool-workspace">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Fil d&#x27;Ariane">
+          <a href="/fr/">Accueil</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/fr/tools">Outils</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Liste des GPU</span>
+        </div>
+        <div class="page-eyebrow"><span>Comparaison</span></div>
+        <h1 id="page-title">Classement des GPU GTA 6</h1>
+        <p class="page-subtitle">Chaque GPU grand public classé de S à F pour GTA 6, avec filtres par résolution et budget. Les scores sont déterministes, performance + VRAM + RT moins âge, donc les relances correspondent au point près.</p>
+        <p class="hero-meta">
+          <span>34 GPUs · NVIDIA · AMD · INTEL</span><span>Performance calibrée sur DF RDR2 / CP77</span><span>Score déterministe pondéré par l'âge</span><span>Par <a href="/fr/about#hardware-desk">Équipe matériel ToolWools</a></span><span>Analyse des performances PC</span><span>Vérifié par <a href="/fr/about#benchmark-reviewers">Testeurs indépendants de benchmarks GTA</a></span><span>Référence de notation pour la fenêtre de lancement</span><span>Publié <time datetime="2026-07-28">28 juil. 2026</time></span><span>Dernière vérification <time datetime="2026-11-17">17 novembre 2026</time></span>
+        </p>
+      </section><div class="sr-only" data-live-region aria-live="polite">34 GPU correspondent aux filtres. Affichage des FPS en 1440p Ultra natif.</div>
+<section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Liste des niveaux</h2>
-      <div class="workspace-grid">
+      <div class="workspace-grid workspace-tier">
         <form class="input-panel" aria-label="Filtres" id="gpu-form">
           <div class="input-panel-head"><h3 class="eyebrow-muted">Filtres</h3></div>
           <div class="input-notice" data-input-notice role="alert"></div>
@@ -174,7 +179,7 @@
               <table class="data-table">
                 <caption class="sr-only">Liste des GPU GTA 6, filtrée. FPS affichés en 1440p Ultra natif.</caption>
                 <thead><tr><th scope="col">Niveau</th><th scope="col">GPU</th><th scope="col">VRAM</th><th scope="col">PDSF</th><th scope="col" data-res-head>1440p Ultra</th><th scope="col">Ouvrir</th></tr></thead>
-                <tbody data-tier-tbody><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 5090</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">32 GB</td><td class="num muted-cell">$1999</td><td class="num"><strong>82 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5090" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5090 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 5080</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>73 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5080" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5080 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 4090</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">24 GB</td><td class="num muted-cell">$1599</td><td class="num"><strong>69 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4090" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4090 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RX 7900 XTX</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">24 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>64 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7900-xtx" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 7900 XTX présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RX 9070 XT</div><div class="gpu-sub">amd · RDNA 4</div></td><td class="num">16 GB</td><td class="num muted-cell">$599</td><td class="num"><strong>65 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-9070-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 9070 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5070 Ti</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$749</td><td class="num"><strong>61 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5070-ti" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5070 Ti présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4080</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">16 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>62 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4080" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4080 / Super présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 9070</div><div class="gpu-sub">amd · RDNA 4</div></td><td class="num">16 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>58 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-9070" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 9070 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 7900 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">20 GB</td><td class="num muted-cell">$899</td><td class="num"><strong>57 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7900-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 7900 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5070</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">12 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>54 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5070" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5070 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4070 Ti</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">12 GB</td><td class="num muted-cell">$799</td><td class="num"><strong>55 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4070-ti" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4070 Ti / Super présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 7800 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">16 GB</td><td class="num muted-cell">$499</td><td class="num"><strong>50 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7800-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 7800 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4070</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">12 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>49 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4070" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4070 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5060 Ti 16GB</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$429</td><td class="num"><strong>43 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060-ti-16" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5060 Ti 16GB présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 6800 XT</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">16 GB</td><td class="num muted-cell">$649</td><td class="num"><strong>46 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6800-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 6800 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3080</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">10 GB</td><td class="num muted-cell">$699</td><td class="num"><strong>35 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3080" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 3080 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RX 7700 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">12 GB</td><td class="num muted-cell">$449</td><td class="num"><strong>43 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7700-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 7700 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 5060 Ti 8GB</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">8 GB</td><td class="num muted-cell">$379</td><td class="num"><strong>32 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060-ti-8" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5060 Ti 8GB présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">Arc B580</div><div class="gpu-sub">intel · Battlemage</div></td><td class="num">12 GB</td><td class="num muted-cell">$249</td><td class="num"><strong>37 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=arc-b580" aria-label="Ouvrir le calculateur de FPS avec Intel Arc B580 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 4060 Ti</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">8 GB</td><td class="num muted-cell">$399</td><td class="num"><strong>30 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4060-ti" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4060 Ti présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3070</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">8 GB</td><td class="num muted-cell">$499</td><td class="num"><strong>31 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3070" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 3070 / Ti présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RX 6700 XT</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">12 GB</td><td class="num muted-cell">$479</td><td class="num"><strong>37 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6700-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 6700 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 5060</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">8 GB</td><td class="num muted-cell">$299</td><td class="num"><strong>27 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 5060 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 4060</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">8 GB</td><td class="num muted-cell">$299</td><td class="num"><strong>26 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4060" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 4060 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3060 Ti</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">8 GB</td><td class="num muted-cell">$399</td><td class="num"><strong>27 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3060-ti" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 3060 Ti présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RX 7600</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">8 GB</td><td class="num muted-cell">$269</td><td class="num"><strong>24 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7600" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 7600 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RTX 3060</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">12 GB</td><td class="num muted-cell">$329</td><td class="num"><strong>31 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3060" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 3060 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RX 6600</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">8 GB</td><td class="num muted-cell">$329</td><td class="num"><strong>21 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6600" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 6600 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RTX 2060</div><div class="gpu-sub">nvidia · Turing</div></td><td class="num">6 GB</td><td class="num muted-cell">$349</td><td class="num"><strong>20 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-2060" aria-label="Ouvrir le calculateur de FPS avec GeForce RTX 2060 / Super présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="D">D</span></td><td><div class="gpu-name">RX 5600 XT</div><div class="gpu-sub">amd · RDNA 1</div></td><td class="num">6 GB</td><td class="num muted-cell">$279</td><td class="num"><strong>16 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-5600-xt" aria-label="Ouvrir le calculateur de FPS avec Radeon RX 5600 XT présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="D">D</span></td><td><div class="gpu-name">GTX 1660 Super</div><div class="gpu-sub">nvidia · Turing</div></td><td class="num">6 GB</td><td class="num muted-cell">$229</td><td class="num"><strong>16 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1660-super" aria-label="Ouvrir le calculateur de FPS avec GeForce GTX 1660 Super présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1070</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">8 GB</td><td class="num muted-cell">$379</td><td class="num"><strong>14 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1070" aria-label="Ouvrir le calculateur de FPS avec GeForce GTX 1070 / Ti présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1060</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">6 GB</td><td class="num muted-cell">$249</td><td class="num"><strong>10 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1060" aria-label="Ouvrir le calculateur de FPS avec GeForce GTX 1060 6GB / RX 580 présélectionnée">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1050 Ti</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">4 GB</td><td class="num muted-cell">$139</td><td class="num"><strong>5 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1050-ti" aria-label="Ouvrir le calculateur de FPS avec GeForce GTX 1050 Ti ou plus ancienne présélectionnée">FPS →</a></td></tr></tbody>
+                <tbody data-tier-tbody><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 5090</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">32 GB</td><td class="num muted-cell">$1999</td><td class="num"><strong>82 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5090">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 5080</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>73 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5080">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RTX 4090</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">24 GB</td><td class="num muted-cell">$1599</td><td class="num"><strong>69 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4090">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RX 7900 XTX</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">24 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>64 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7900-xtx">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><div class="gpu-name">RX 9070 XT</div><div class="gpu-sub">amd · RDNA 4</div></td><td class="num">16 GB</td><td class="num muted-cell">$599</td><td class="num"><strong>65 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-9070-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5070 Ti</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$749</td><td class="num"><strong>61 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5070-ti">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4080</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">16 GB</td><td class="num muted-cell">$999</td><td class="num"><strong>62 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4080">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 9070</div><div class="gpu-sub">amd · RDNA 4</div></td><td class="num">16 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>58 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-9070">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 7900 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">20 GB</td><td class="num muted-cell">$899</td><td class="num"><strong>57 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7900-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5070</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">12 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>54 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5070">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4070 Ti</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">12 GB</td><td class="num muted-cell">$799</td><td class="num"><strong>55 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4070-ti">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 7800 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">16 GB</td><td class="num muted-cell">$499</td><td class="num"><strong>50 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7800-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 4070</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">12 GB</td><td class="num muted-cell">$549</td><td class="num"><strong>49 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4070">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RTX 5060 Ti 16GB</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">16 GB</td><td class="num muted-cell">$429</td><td class="num"><strong>43 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060-ti-16">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><div class="gpu-name">RX 6800 XT</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">16 GB</td><td class="num muted-cell">$649</td><td class="num"><strong>46 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6800-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3080</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">10 GB</td><td class="num muted-cell">$699</td><td class="num"><strong>35 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3080">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RX 7700 XT</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">12 GB</td><td class="num muted-cell">$449</td><td class="num"><strong>43 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7700-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 5060 Ti 8GB</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">8 GB</td><td class="num muted-cell">$379</td><td class="num"><strong>32 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060-ti-8">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">Arc B580</div><div class="gpu-sub">intel · Battlemage</div></td><td class="num">12 GB</td><td class="num muted-cell">$249</td><td class="num"><strong>37 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=arc-b580">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 4060 Ti</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">8 GB</td><td class="num muted-cell">$399</td><td class="num"><strong>30 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4060-ti">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3070</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">8 GB</td><td class="num muted-cell">$499</td><td class="num"><strong>31 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3070">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RX 6700 XT</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">12 GB</td><td class="num muted-cell">$479</td><td class="num"><strong>37 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6700-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 5060</div><div class="gpu-sub">nvidia · Blackwell</div></td><td class="num">8 GB</td><td class="num muted-cell">$299</td><td class="num"><strong>27 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-5060">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 4060</div><div class="gpu-sub">nvidia · Ada</div></td><td class="num">8 GB</td><td class="num muted-cell">$299</td><td class="num"><strong>26 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-4060">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><div class="gpu-name">RTX 3060 Ti</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">8 GB</td><td class="num muted-cell">$399</td><td class="num"><strong>27 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3060-ti">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RX 7600</div><div class="gpu-sub">amd · RDNA 3</div></td><td class="num">8 GB</td><td class="num muted-cell">$269</td><td class="num"><strong>24 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-7600">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RTX 3060</div><div class="gpu-sub">nvidia · Ampere</div></td><td class="num">12 GB</td><td class="num muted-cell">$329</td><td class="num"><strong>31 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-3060">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RX 6600</div><div class="gpu-sub">amd · RDNA 2</div></td><td class="num">8 GB</td><td class="num muted-cell">$329</td><td class="num"><strong>21 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-6600">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><div class="gpu-name">RTX 2060</div><div class="gpu-sub">nvidia · Turing</div></td><td class="num">6 GB</td><td class="num muted-cell">$349</td><td class="num"><strong>20 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rtx-2060">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="D">D</span></td><td><div class="gpu-name">RX 5600 XT</div><div class="gpu-sub">amd · RDNA 1</div></td><td class="num">6 GB</td><td class="num muted-cell">$279</td><td class="num"><strong>16 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=rx-5600-xt">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="D">D</span></td><td><div class="gpu-name">GTX 1660 Super</div><div class="gpu-sub">nvidia · Turing</div></td><td class="num">6 GB</td><td class="num muted-cell">$229</td><td class="num"><strong>16 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1660-super">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1070</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">8 GB</td><td class="num muted-cell">$379</td><td class="num"><strong>14 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1070">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1060</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">6 GB</td><td class="num muted-cell">$249</td><td class="num"><strong>10 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1060">FPS →</a></td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><div class="gpu-name">GTX 1050 Ti</div><div class="gpu-sub">nvidia · Pascal</div></td><td class="num">4 GB</td><td class="num muted-cell">$139</td><td class="num"><strong>5 FPS</strong></td><td class="num"><a href="/fr/tools/fps-calculator?gpu=gtx-1050-ti">FPS →</a></td></tr></tbody>
               </table>
             </div>
           </div>
@@ -191,8 +196,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copier le lien</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager ce résultat sur X" data-share-x href="https://twitter.com/intent/tweet?text=Classement%20des%20GPU%20GTA%206%20%E2%80%94%20RTX%205090%20%28niveau%20S%29.%20Tous%20les%20GPU%20class%C3%A9s%20de%20S%20%C3%A0%20F%20sur%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fgpu-tier-list%3Fres%3D1440p">Partager sur X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager ce résultat sur Reddit" data-share-reddit href="https://www.reddit.com/submit?title=Classement%20des%20GPU%20GTA%206%20%E2%80%94%20RTX%205090%20%28niveau%20S%29%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fgpu-tier-list%3Fres%3D1440p">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Classement%20des%20GPU%20GTA%206%20%E2%80%94%20RTX%205090%20%28niveau%20S%29.%20Tous%20les%20GPU%20class%C3%A9s%20de%20S%20%C3%A0%20F%20sur%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fgpu-tier-list%3Fres%3D1440p">Partager sur X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Classement%20des%20GPU%20GTA%206%20%E2%80%94%20RTX%205090%20%28niveau%20S%29%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fgpu-tier-list%3Fres%3D1440p">Reddit</a>
       </div>
     </section><section id="anchor-table" aria-labelledby="anchor-heading" data-speakable="anchor">
       <h2 id="anchor-heading">Le GPU de référence pour chaque niveau</h2>
@@ -204,10 +209,7 @@
           <tbody><tr><td><span class="tier-pill" data-tier="S">S</span></td><td><strong>RTX 5090</strong></td><td class="num">106</td><td class="num">82</td><td class="num">50</td><td>4K Ultra avec ray tracing en vue. 1440p Ultra à 82 FPS natif.</td></tr><tr><td><span class="tier-pill" data-tier="A">A</span></td><td><strong>RTX 5070 Ti</strong></td><td class="num">79</td><td class="num">61</td><td class="num">28</td><td>1440p Ultra natif à 60+ FPS. 4K Élevé avec DLSS/FSR Qualité est réaliste.</td></tr><tr><td><span class="tier-pill" data-tier="B">B</span></td><td><strong>RTX 3080</strong></td><td class="num">61</td><td class="num">35</td><td class="num">22</td><td>1080p Ultra ou 1440p Élevé à 60+ FPS. La base pour un lancement GTA 6 fluide.</td></tr><tr><td><span class="tier-pill" data-tier="C">C</span></td><td><strong>RX 7600</strong></td><td class="num">31</td><td class="num">24</td><td class="num">15</td><td>1080p Élevé/Moyen à 60 FPS. Baissez les paramètres ou appuyez-vous sur l'upscaling, la VRAM est souvent juste.</td></tr><tr><td><span class="tier-pill" data-tier="D">D</span></td><td><strong>RX 5600 XT</strong></td><td class="num">20</td><td class="num">16</td><td class="num">9</td><td>1080p Bas à environ 61 FPS en moyenne (1 % bas de 44 FPS). En dessous du niveau minimum probable de Rockstar, une mise à niveau est à envisager.</td></tr><tr><td><span class="tier-pill" data-tier="F">F</span></td><td><strong>GTX 1070</strong></td><td class="num">18</td><td class="num">14</td><td class="num">8</td><td>Ne respectera pas le minimum GTA 6 sur aucun préréglage. Prévoyez une mise à niveau du GPU pour jouer dès maintenant.</td></tr></tbody>
         </table>
       </div>
-    </section><aside class="assumptions-strip" aria-label="Hypothèses">
-      <p><strong>Hypothèses</strong> <span>Le score de performance réutilise le moteur FPS (RTX 4090 = 100), mesuré en 1080p Ultra natif avec un CPU haut de gamme pour que le niveau reflète la capacité du GPU, pas la limite du CPU. VRAM pondérée à 0,8× Go, capacité RT +6, pénalité d'âge −1,2 par an depuis la sortie (à partir de 2026). Bandes de niveau réglées pour que RTX 4090 → S, 4070 → A, 4060 → B, 3060 → C, GTX 1660 Super → D, GTX 1060 → F.</span> <a href="/fr/methodology">Lire la méthodologie complète</a></p>
-      <p class="updated-line">Mis à jour <time datetime="2026-11-17">17 novembre 2026</time></p>
-    </aside><section aria-labelledby="how-it-works">
+    </section><section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Comment lire la liste des GPU GTA 6</h2>
       <p class="section-dek">Le tableau est l'outil, les filtres le resserrent, les lignes renvoient en profondeur.</p>
       <ol class="steps-grid cols-3"><li>
@@ -269,12 +271,14 @@ tier =
   raw ≥ 40  → C
   raw ≥ 25  → D
   else       → F</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>La partie performance est le même score de 0 à 118 utilisé par les calculateurs de FPS et de goulot, RTX 4090 = 100, RTX 5090 = 118, calibré sur les tests de lancement RDR2 et Cyberpunk 2077 patch 2.0 de Digital Foundry.</li><li>Le poids VRAM (0,8× Go) a été réglé pour que les cartes 12 Go dépassent les cartes 8 Go de même performance d'environ 3 points, assez pour compter, pas assez pour renverser un niveau de performance complet.</li><li>Le bonus RT est un +6 fixe plutôt que proportionnel parce que le moteur de Rockstar (RAGE 9) expose le RT comme un interrupteur de préréglage, pas comme un curseur par effet.</li><li>La pénalité d'âge plafonne à 12 points (cartes de 10 ans), tout ce qui est plus ancien est déjà au niveau F sur la performance brute seule.</li><li>Calibration des ancres : RTX 4090 → S, RTX 4070 → A, RTX 4060 → B, RTX 3060 → C, GTX 1660 Super → D, GTX 1060 → F. Tout changement de seuil qui casse une ancre est rejeté.</li></ul>
+          <ul class="list-disc list-outside"><li>La partie performance est le même score de 0 à 118 utilisé par les calculateurs de FPS et de goulot, RTX 4090 = 100, RTX 5090 = 118, calibré sur les tests de lancement RDR2 et Cyberpunk 2077 patch 2.0 de Digital Foundry.</li><li>Le poids VRAM (0,8× Go) a été réglé pour que les cartes 12 Go dépassent les cartes 8 Go de même performance d'environ 3 points, assez pour compter, pas assez pour renverser un niveau de performance complet.</li><li>Le bonus RT est un +6 fixe plutôt que proportionnel parce que le moteur de Rockstar (RAGE 9) expose le RT comme un interrupteur de préréglage, pas comme un curseur par effet.</li><li>La pénalité d'âge plafonne à 12 points (cartes de 10 ans), tout ce qui est plus ancien est déjà au niveau F sur la performance brute seule.</li><li>Calibration des ancres : RTX 4090 → S, RTX 4070 → A, RTX 4060 → B, RTX 3060 → C, GTX 1660 Super → D, GTX 1060 → F. Tout changement de seuil qui casse une ancre est rejeté.</li></ul>
+    <div class="assumptions-block"><p><strong>Hypothèses</strong> <span>Le score de performance réutilise le moteur FPS (RTX 4090 = 100), mesuré en 1080p Ultra natif avec un CPU haut de gamme pour que le niveau reflète la capacité du GPU, pas la limite du CPU. VRAM pondérée à 0,8× Go, capacité RT +6, pénalité d'âge −1,2 par an depuis la sortie (à partir de 2026). Bandes de niveau réglées pour que RTX 4090 → S, 4070 → A, 4060 → B, 3060 → C, GTX 1660 Super → D, GTX 1060 → F.</span> <a href="/fr/methodology">Lire la méthodologie complète</a></p>
+      <p class="updated-line">Mis à jour <time datetime="2026-11-17">17 novembre 2026</time></p></div>
         </div>
       </details>
     </section><section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Meilleur GPU pour GTA 6, questions d'acheteurs</h2>
+      <header>
+        <h2 id="faq">Meilleur GPU pour GTA 6, questions d'acheteurs</h2>
         <p class="section-dek">Réponses carte par carte, liées aux scores ci-dessus.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -396,7 +400,7 @@ tier =
     </section><section aria-labelledby="related-content">
       <h2 id="related-content">Allez plus loin avec votre sélection</h2>
       <h3 class="related-sub">Outils associés</h3>
-      <ul class="related-tools-grid"><li><a href="/fr/tools/fps-calculator" class="tool-card" data-accent="blue" aria-label="Calculateur de FPS GTA 6 : estimez la fréquence d&#x27;images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculateur de FPS GTA 6</h3><p>Estimez la fréquence d'images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/bottleneck-calculator" class="tool-card" data-accent="purple" aria-label="Calculateur de goulot d&#x27;étranglement GTA 6 : choisissez GPU + CPU. Nous détectons le goulot pour GTA 6 et suggérons la plus petite mise à niveau pour le corriger."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculateur de goulot d'étranglement GTA 6</h3><p>Choisissez GPU + CPU. Nous détectons le goulot pour GTA 6 et suggérons la plus petite mise à niveau pour le corriger.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/vram-calculator" class="tool-card" data-accent="pink" aria-label="Vérificateur de VRAM requise pour GTA 6 : choisissez la résolution et le préréglage de qualité. L&#x27;outil montre la VRAM minimale nécessaire et si votre GPU passe."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Vérificateur de VRAM requise pour GTA 6</h3><p>Choisissez la résolution et le préréglage de qualité. L'outil montre la VRAM minimale nécessaire et si votre GPU passe.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="Score de préparation GTA 6 : un score de préparation au lancement de 0 à 100 sur les performances, la VRAM, le stockage et internet. Note F à S avec une correction du maillon le plus faible."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Score de préparation GTA 6</h3><p>Un score de préparation au lancement de 0 à 100 sur les performances, la VRAM, le stockage et internet. Note F à S avec une correction du maillon le plus faible.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/fr/tools/fps-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculateur de FPS GTA 6</h3><p>Estimez la fréquence d'images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/bottleneck-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculateur de goulot d'étranglement GTA 6</h3><p>Choisissez GPU + CPU. Nous détectons le goulot pour GTA 6 et suggérons la plus petite mise à niveau pour le corriger.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/vram-calculator" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Vérificateur de VRAM requise pour GTA 6</h3><p>Choisissez la résolution et le préréglage de qualité. L'outil montre la VRAM minimale nécessaire et si votre GPU passe.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/readiness-score" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Score de préparation GTA 6</h3><p>Un score de préparation au lancement de 0 à 100 sur les performances, la VRAM, le stockage et internet. Note F à S avec une correction du maillon le plus faible.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section><section aria-labelledby="sources">
       <h2 id="sources">Sources et références méthodologiques</h2>
       <ol class="sources-list"><li>
@@ -429,27 +433,45 @@ tier =
       <p>GTA 6 n'est pas sorti sur PC. La liste des niveaux utilise le même moteur FPS que le calculateur et le matériel cible probable de Rockstar. Bande d'incertitude ±15 % par rapport aux pilotes du jour de lancement. Nous actualisons les poids dans les heures qui suivent la publication des spécifications.</p>
     </aside>        </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Restez dans la boucle</h2>
+          <p>Obtenez les dernières actualités, outils et guides GTA 6 dans votre boîte de réception.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Adresse e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">S'abonner</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/fr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 est disponible — 19 novembre 2026</span>
+        <span class="eyebrow-muted">GTA 6 est disponible, 19 novembre 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorer les outils →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/fr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
               </span>
             </span>
@@ -488,10 +510,10 @@ tier =
               <li><a href="/fr/contact">Contact</a></li>
               <li><a href="/fr/email-preferences">Préférences e-mail</a></li>
               <li><a href="/fr/sitemap">Plan du site</a></li>
-              <li><a href="/fr/privacy">Politique de confidentialité</a></li>
-              <li><a href="/fr/terms">Conditions d'utilisation</a></li>
               <li><a href="/editorial-policy">Politique éditoriale</a></li>
-              <li><a href="/fr/disclaimer">Avertissement</a></li>
+          <li><a href="/fr/privacy">Politique de confidentialité</a></li>
+          <li><a href="/fr/terms">Conditions d'utilisation</a></li>
+          <li><a href="/fr/disclaimer">Avertissement</a></li>
             </ul>
           </div>
         </div>
@@ -500,33 +522,30 @@ tier =
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Tous droits réservés. Non affilié à Rockstar Games ou Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/fr/privacy">Confidentialité</a>
-          <a href="/fr/terms">Conditions</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Paramètres des cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/fr/privacy">Confidentialité</a><a href="/fr/terms">Conditions</a><a href="/fr/disclaimer">Avertissement</a><button type="button" data-consent-open>Paramètres des cookies</button></span>
           <span>Fait avec <span class="heart">♥</span> pour les fans de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentement aux statistiques">
-  <div class="consent-inner">
-    <p><strong>Statistiques, seulement avec votre accord.</strong> Nous utilisons Google Analytics agrégé pour voir quels outils sont utilisés. Les données saisies dans les outils ne quittent jamais votre appareil, aucun profil n'est créé et rien n'est vendu. Acceptez pour l'activer, ou refusez et naviguez sans. Vous pouvez changer d'avis à tout moment depuis les paramètres des cookies en pied de page.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accepter les statistiques</button>
-      <button type="button" class="btn-outline" data-consent-decline>Refuser</button>
-      <a href="/fr/privacy">Politique de confidentialité</a>
-    </div>
+  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentement aux statistiques" hidden>
+  <p>Nous utilisons Google Analytics agrégé pour améliorer le site. Aucun profil, rien n'est vendu. Accepter ou refuser ; le choix est enregistré dans ce navigateur.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accepter les statistiques</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Refuser</button>
   </div>
 </div>
-  </div>
-  <script src="/assets/js/fr/theme.js" defer></script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/fr/newsletter.js" defer></script>
   <script src="/assets/js/fr/consent.js" defer></script>
-  <script src="/assets/js/fr/header.js" defer></script>
-  <script src="/assets/js/fr/search.js" defer></script>
-  <script src="/assets/js/fr/faq.js" defer></script>
   <script type="module" src="/assets/js/fr/gpu-tier-list.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -573,7 +592,7 @@ tier =
       },
       "datePublished": "2026-07-28",
       "dateModified": "2026-11-17",
-      "inLanguage": "en"
+      "inLanguage": "fr"
     },
     {
       "@type": "HowTo",

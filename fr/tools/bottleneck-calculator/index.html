@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,18 +15,18 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="de_DE">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og/bottleneck.jpg">
 <meta property="og:image:alt" content="Calculateur de goulot d&#x27;étranglement GTA 6 | Équilibre CPU-GPU pour GTA VI sur ToolWools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Calculateur de goulot d&#x27;étranglement GTA 6">
 <meta name="twitter:description" content="Vérifiez l&#x27;équilibre CPU-GPU pour GTA 6 en 1080p, 1440p et 4K. Pourcentage de goulot en direct, plage de FPS et la plus petite mise à niveau qui rééquilibre votre PC.">
 <meta name="twitter:image" content="https://toolwools.com/og/bottleneck.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/fr/tools/bottleneck-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/bottleneck-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/bottleneck-calculator" hreflang="es">
@@ -40,11 +40,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-hardware-fr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var t=localStorage.getItem('tw-theme')||'light';document.documentElement.classList.toggle('dark',t==='dark');}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -87,7 +107,8 @@
         "priceCurrency": "USD"
       },
       "datePublished": "2026-07-23",
-      "dateModified": "2026-07-23"
+      "dateModified": "2026-07-23",
+      "inLanguage": "fr"
     },
     {
       "@type": "HowTo",
@@ -134,16 +155,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Aller au contenu</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/fr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
             </span>
           </span>
@@ -155,18 +174,19 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="RECHERCHER" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Choisir la langue">FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/bottleneck-calculator">English</a>
             <a href="/es/tools/bottleneck-calculator">Español</a>
@@ -190,7 +210,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -200,60 +220,38 @@
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/bottleneck-calculator" lang="en">EN</a><a href="/es/tools/bottleneck-calculator" lang="es">ES</a><a href="/pt/tools/bottleneck-calculator" lang="pt">PT</a><a href="/de/tools/bottleneck-calculator" lang="de">DE</a><a href="/fr/tools/bottleneck-calculator" aria-current="true">FR</a><a href="/tr/tools/bottleneck-calculator" lang="tr">TR</a><a href="/ar/tools/bottleneck-calculator" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="tool-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Fil d&#x27;Ariane" class="breadcrumbs">
-        <a href="/fr/">Accueil</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/fr/tools">Outils</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">Calculateur de goulot d'étranglement GTA 6</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-        Performance
-      </span>
-      <h1 id="tool-hero-heading">Calculateur de goulot d'étranglement GTA 6</h1>
-      <p class="page-hero-sub">Le calculateur de goulot d'étranglement PC conçu pour GTA 6. Associez n'importe quel CPU à n'importe quel GPU, obtenez un verdict d'équilibre CPU-GPU en direct, une estimation de FPS en 1080p, 1440p ou 4K, et la plus petite mise à niveau qui ramène votre PC dans une marge de ±7 %.</p>
-    </div>
-  </header>
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Fil d&#x27;Ariane">
+          <a href="/fr/">Accueil</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/fr/tools">Outils</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Calculateur de goulot d'étranglement GTA 6</span>
+        </div>
+        <div class="page-eyebrow"><span>Performance</span></div>
+        <h1 id="page-title">Calculateur de goulot d'étranglement GTA 6</h1>
+        <p class="page-subtitle">Le calculateur de goulot d'étranglement PC conçu pour GTA 6. Associez n'importe quel CPU à n'importe quel GPU, obtenez un verdict d'équilibre CPU-GPU en direct, une estimation de FPS en 1080p, 1440p ou 4K, et la plus petite mise à niveau qui ramène votre PC dans une marge de ±7 %.</p>
+        <p class="hero-meta">
+          <span>Par <a href="/fr/about#hardware-desk">Équipe matériel ToolWools</a></span><span>Analyse des performances PC</span><span>Vérifié par <a href="/fr/about#benchmark-reviewers">Testeurs indépendants de benchmarks GTA</a></span><span>Dernière vérification <time datetime="2026-07-23">23 juillet 2026</time></span><span><a href="/fr/methodology">Méthodologie</a></span>
+        </p>
+      </section>
 
-  <div class="container tool-body">
-    <div class="intro-callout">
-      <p>Un calculateur de goulot d'étranglement PC qui n'est pas resté bloqué en 2010. Les calculateurs génériques crachent un seul chiffre, quelle que soit la résolution ou le jeu. Ce vérificateur GTA 6 adapte la charge CPU aux lobbys GTA Online et la charge GPU à la 4K, et donne le chemin de mise à niveau exact qui ramène votre PC dans une marge de ±7 %. Si vous avez cherché « GTA 6 tournera-t-il sur mon PC » ou « mon PC est-il assez puissant pour GTA 6 », le verdict ci-dessus y répond en une ligne.</p>
-    </div>
 
-    <div class="byline" aria-label="Ligne d&#x27;auteur et de révision">
-      <span class="byline-item">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>Par <a href="/fr/about#hardware-desk">Équipe matériel ToolWools</a> <span aria-hidden="true">·</span> Analyse des performances PC</span>
-      </span>
-      <span class="byline-item">Vérifié par <a href="/fr/about#benchmark-reviewers">Testeurs indépendants de benchmarks GTA</a></span>
-      <span class="byline-item">Dernière vérification <time datetime="2026-07-23">23 juillet 2026</time></span>
-      <a class="method-link" href="/fr/methodology"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg> Méthodologie</a>
-    </div>
 
     <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-live-region data-testid="bottleneck-live-region">Goulot d'étranglement CPU 23 %. Estimation de 44 à 63 images par seconde en 1440p sur GTA Online.</div>
 
-    <section class="tldr-card" id="tldr" data-speakable="tldr" data-tldr-card data-tone="upgrade" aria-labelledby="tldr-heading">
-      <div class="tldr-inner">
-        <span data-tldr-icon><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <div>
-          <h2 class="tldr-label" id="tldr-heading" data-tldr-label>Mise à niveau recommandée · En bref</h2>
-          <p class="tldr-text" data-tldr-text>Mise à niveau recommandée : GeForce RTX 4070 + Ryzen 5 5600 / 5600X présente un goulot d'étranglement CPU de 23 % en 1440p sur GTA Online (environ 55 FPS). Un composant freine l'autre.</p>
-          <p class="tldr-verdict">Verdict d'équilibre : <strong data-tldr-verdict>Goulot d'étranglement CPU 23 %</strong></p>
-        </div>
-      </div>
-    </section>
 
     <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculateur</h2>
@@ -341,8 +339,8 @@
         <button type="button" class="btn-chip" data-copy-link><span data-copy-link-label>Copier le lien</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager sur X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20Goulot%20d%27%C3%A9tranglement%20CPU%2023%20%25%20sur%20le%20calculateur%20de%20goulot%20d%27%C3%A9tranglement%20GTA%206%20de%20ToolWools&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Partager sur X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager sur Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20Goulot%20d%27%C3%A9tranglement%20CPU%2023%20%25%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%40%201440p%20%C2%B7%20Goulot%20d%27%C3%A9tranglement%20CPU%2023%20%25%20sur%20le%20calculateur%20de%20goulot%20d%27%C3%A9tranglement%20GTA%206%20de%20ToolWools&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Partager sur X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%204070%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20Goulot%20d%27%C3%A9tranglement%20CPU%2023%20%25%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ffr%2Ftools%2Fbottleneck-calculator%3Fgpu%3Drtx-4070%26cpu%3Dr5-5600x%26res%3D1440p%26mode%3Donline">Reddit</a>
       </div>
     </section>
 
@@ -363,7 +361,7 @@
         <a class="pairing-card" href="/fr/tools/bottleneck-calculator?gpu=rtx-2060&amp;cpu=i5-9400&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RTX 2060 + i5-9400F</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="upgrade">Équilibré</span><span>30 à 44 FPS</span></span></a>
         <a class="pairing-card" href="/fr/tools/bottleneck-calculator?gpu=rx-7900-xt&amp;cpu=r7-7700x&amp;res=1440p&amp;mode=online"><span class="pairing-card-title">RX 7900 XT + Ryzen 7 7700X</span><span class="pairing-card-meta"><span class="pairing-tone" data-tone="borderline">Limité à 9 % par le CPU</span><span>66 à 94 FPS</span></span></a>
       </div>
-      <p class="tool-dek" style="margin-top:1rem;font-size:0.75rem">Les verdicts d'association et les plages de FPS sont les valeurs précalculées de la page source avec ses réglages de référence. Le calculateur en direct ci-dessus calcule toujours à partir de vos paramètres exacts.</p>
+      <p class="tool-dek" style="margin-top:1rem;font-size:0.8125rem">Les verdicts d'association et les plages de FPS sont les valeurs précalculées de la page source avec ses réglages de référence. Le calculateur en direct ci-dessus calcule toujours à partir de vos paramètres exacts.</p>
     </section>
 
     <section aria-labelledby="tier-reference">
@@ -415,37 +413,33 @@
       </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
-      <h2 id="related-tools-inline" style="text-align:left;font-size:1rem">Continuez à planifier votre PC GTA 6</h2>
-      <ul>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Complet <a href="/fr/tools/system-requirements" style="color:var(--accent-purple)">Vérificateur de configuration PC GTA 6</a> pour les objectifs minimum, recommandé et ultra.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Estimez les FPS pour chaque préréglage avec le <a href="/fr/tools" style="color:var(--accent-blue)">calculateur de FPS GTA 6</a>.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Vérifiez la marge VRAM en 1440p et 4K avec le <a href="/fr/tools" style="color:var(--accent-pink)">Calculateur de VRAM</a>.</span></li>
-        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Lisez les dernières <a href="/fr/news" style="color:var(--accent-purple)">actualités PC de GTA 6</a> et les mises à jour des specs Rockstar.</span></li>
+    <section class="tier-read" aria-labelledby="related-tools-inline">
+      <h2 id="related-tools-inline">Continuez à planifier votre PC GTA 6</h2>
+      <ul class="inline-links">
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Complet <a href="/fr/tools/system-requirements">Vérificateur de configuration PC GTA 6</a> pour les objectifs minimum, recommandé et ultra.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Estimez les FPS pour chaque préréglage avec le <a href="/fr/tools">calculateur de FPS GTA 6</a>.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Vérifiez la marge VRAM en 1440p et 4K avec le <a href="/fr/tools">Calculateur de VRAM</a>.</span></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Lisez les dernières <a href="/fr/news">actualités PC de GTA 6</a> et les mises à jour des specs Rockstar.</span></li>
       </ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Sources de données et hypothèses">
-      <span class="label"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>Hypothèses</span>
-      <span class="text">Modèle d'équilibre dérivé des données de mise à l'échelle CPU/GPU de GTA V et RDR2, des benchmarks communautaires et du matériel cible GTA 6 divulgué. Le niveau de référence est RTX 4090 + Core i9-14900K. Les chiffres sont actualisés dans les heures qui suivent la publication des specs officielles par Rockstar.</span>
-      <span class="updated">Mis à jour <time datetime="2026-07-23">23 juil. 2026</time></span>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Comment le goulot d'étranglement CPU-GPU de GTA 6 est calculé</h2>
       <p class="tool-dek">Cinq entrées, un chiffre d'équilibre.</p>
       <ol class="steps-grid cols-3">
-        <li class="step-card surface-card"><span class="step-num">01</span><h3>Choisissez votre GPU</h3><p>Choisissez parmi 34 cartes, de la série GTX 10 à la série RTX 50 et de RX 5000 à RX 8000. Chacune a un score de niveau GTA 6 de 0 à 100.</p></li>
-        <li class="step-card surface-card"><span class="step-num">02</span><h3>Choisissez votre CPU</h3><p>Sélectionnez parmi 21 puces (Intel 8e à 15e génération, Ryzen 2000 à 9000, variantes X3D incluses). Chacune correspond à un niveau de 0 à 100.</p></li>
-        <li class="step-card surface-card"><span class="step-num">03</span><h3>Définissez votre résolution cible</h3><p>Le 1080p s'appuie sur le CPU, le 4K sur le GPU. La même combinaison peut être parfaitement équilibrée en 4K et limitée à 15 % par le CPU en 1080p.</p></li>
-        <li class="step-card surface-card"><span class="step-num">04</span><h3>Choisissez la charge de travail que vous jouez</h3><p>Mode Histoire, un lobby GTA Online à 30 joueurs, ou Online en streaming. Les lobbys denses et l'encodage ajoutent tous deux une charge CPU que le GPU ne voit jamais.</p></li>
-        <li class="step-card surface-card"><span class="step-num">05</span><h3>Comparez le chiffre d'équilibre</h3><p>Vous obtenez un pourcentage de goulot signé, une plage de FPS estimée, et quel composant freine l'autre à cette résolution et cette charge de travail précises.</p></li>
-        <li class="step-card surface-card"><span class="step-num">06</span><h3>Prenez la plus petite mise à niveau qui corrige le problème</h3><p>Au lieu d'un générique « améliorez votre CPU », vous obtenez la pièce unique la moins chère qui ramène la combinaison sous 10 % de déséquilibre, avec le delta de FPS qu'elle achète.</p></li>
+        <li><span class="step-number">01</span><h3 class="step-title">Choisissez votre GPU</h3><p class="step-text">Choisissez parmi 34 cartes, de la série GTX 10 à la série RTX 50 et de RX 5000 à RX 8000. Chacune a un score de niveau GTA 6 de 0 à 100.</p></li>
+        <li><span class="step-number">02</span><h3 class="step-title">Choisissez votre CPU</h3><p class="step-text">Sélectionnez parmi 21 puces (Intel 8e à 15e génération, Ryzen 2000 à 9000, variantes X3D incluses). Chacune correspond à un niveau de 0 à 100.</p></li>
+        <li><span class="step-number">03</span><h3 class="step-title">Définissez votre résolution cible</h3><p class="step-text">Le 1080p s'appuie sur le CPU, le 4K sur le GPU. La même combinaison peut être parfaitement équilibrée en 4K et limitée à 15 % par le CPU en 1080p.</p></li>
+        <li><span class="step-number">04</span><h3 class="step-title">Choisissez la charge de travail que vous jouez</h3><p class="step-text">Mode Histoire, un lobby GTA Online à 30 joueurs, ou Online en streaming. Les lobbys denses et l'encodage ajoutent tous deux une charge CPU que le GPU ne voit jamais.</p></li>
+        <li><span class="step-number">05</span><h3 class="step-title">Comparez le chiffre d'équilibre</h3><p class="step-text">Vous obtenez un pourcentage de goulot signé, une plage de FPS estimée, et quel composant freine l'autre à cette résolution et cette charge de travail précises.</p></li>
+        <li><span class="step-number">06</span><h3 class="step-title">Prenez la plus petite mise à niveau qui corrige le problème</h3><p class="step-text">Au lieu d'un générique « améliorez votre CPU », vous obtenez la pièce unique la moins chère qui ramène la combinaison sous 10 % de déséquilibre, avec le delta de FPS qu'elle achète.</p></li>
       </ol>
     </section>
 
     <section aria-labelledby="use-cases">
-      <h2 id="use-cases" class="h2-lg">De vraies associations CPU et GPU, notées de bout en bout</h2>
+      <h2 id="use-cases">De vraies associations CPU et GPU, notées de bout en bout</h2>
       <p class="tool-dek">Quatre configurations que les gens possèdent vraiment, passées par le même modèle.</p>
       <ul class="usecases-grid">
         <li><article class="usecase-card" aria-labelledby="use-case-0"><h3 id="use-case-0">Vieux CPU, nouveau GPU : RTX 4070 + i5-9400</h3><p>Déséquilibre classique. Goulot CPU de 22 % en 1080p, qui tombe à 9 % en 4K. Solution : passez à un Ryzen 5 7600 ou un i5-13400F.</p><a href="/fr/tools/bottleneck-calculator?gpu=rtx-4070&amp;cpu=i5-9400&amp;res=1080p&amp;mode=online" aria-label="Charger le préréglage : vieux CPU, nouveau GPU, RTX 4070 + i5-9400">Charger le préréglage <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li>
@@ -456,13 +450,14 @@
     </section>
 
     <section aria-labelledby="methodology">
-      <details class="methodology-details">
+      <details class="methodology-details" open>
         <summary>
           <h2 id="methodology">Formule de calcul du goulot et calibrage</h2>
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
+        <div class="methodology-body">
         <p>Chaque composant reçoit un score de niveau GTA 6 de 0 à 100, mesuré par rapport à une 4090 + 14900K. La demande évolue avec la résolution (plus lourde pour le GPU en 4K) et la charge de travail (les lobbys Online et le streaming sont plus lourds pour le CPU). Nous calculons un ratio de marge pour chaque composant, et l'écart devient le pourcentage de goulot. Un écart sous 7 % est considéré comme équilibré, rien n'est vraiment sans goulot.</p>
-        <pre>gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
+        <pre class="methodology-formula">gpuDemand = 100 × resFactor       // 1080p=0.75, 1440p=0.90, 4K=1.00
 cpuDemand = 100 × workloadFactor  // story=0.70, online=1.00, stream=1.15
 
 headroomGpu = gpuScore / gpuDemand
@@ -474,12 +469,14 @@ delta       = headroomGpu − headroomCpu
   otherwise      →  Balanced (±7%)
 
 fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
+          <div class="assumptions-block"><p><strong>Hypothèses</strong> <span>Modèle d'équilibre dérivé des données de mise à l'échelle CPU/GPU de GTA V et RDR2, des benchmarks communautaires et du matériel cible GTA 6 divulgué. Le niveau de référence est RTX 4090 + Core i9-14900K. Les chiffres sont actualisés dans les heures qui suivent la publication des specs officielles par Rockstar.</span></p><p class="updated-line">Mis à jour <time datetime="2026-07-23">23 juil. 2026</time></p></div>
+        </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Questions sur le goulot CPU et GPU pour GTA 6</h2>
+      <header>
+        <h2 id="faq">Questions sur le goulot CPU et GPU pour GTA 6</h2>
         <p class="tool-dek">Des réponses spécifiques aux associations, pas des conseils génériques.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -505,7 +502,7 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     </section>
 
     <section aria-labelledby="glossary">
-      <h2 id="glossary" class="h2-lg">Terminologie du goulot</h2>
+      <h2 id="glossary">Terminologie du goulot</h2>
       <p class="tool-dek">Vocabulaire présent dans l'outil et les FAQ.</p>
       <dl class="glossary-grid">
         <div id="term-bottleneck"><dt>Goulot d'étranglement</dt><dd>Quand un composant termine le travail de chaque image plus vite que l'autre. Le plus rapide attend sans rien faire, la fréquence d'images est plafonnée par le plus lent.</dd></div>
@@ -520,18 +517,18 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
       <h2 id="related-content">Prochaines étapes pour cette configuration</h2>
       <h3 class="related-sub">Outils associés</h3>
       <ul class="related-tools-grid" role="list">
-        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/fr/tools/system-requirements" data-accent="purple" aria-label="Vérificateur de configuration requise pour GTA 6 : verdict instantané par rapport aux niveaux Minimum, Recommandé et Ultra estimés par la communauté. GPU, CPU, RAM et stockage."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><h3 id="rel-sysreq">Vérificateur de configuration requise pour GTA 6</h3><p>Verdict instantané par rapport aux niveaux Minimum, Recommandé et Ultra estimés par la communauté. GPU, CPU, RAM et stockage.</p><span class="tool-card-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/fr/tools/vram-calculator" data-accent="blue" aria-label="Vérificateur de VRAM requise pour GTA 6 : vérifiez le minimum de VRAM nécessaire pour GTA 6 en 1080p, 1440p et 4K. Verdict pour les cartes 6 Go, 8 Go, 12 Go et 16 Go."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg></span><h3 id="rel-vram">Vérificateur de VRAM requise pour GTA 6</h3><p>Vérifiez le minimum de VRAM nécessaire pour GTA 6 en 1080p, 1440p et 4K. Verdict pour les cartes 6 Go, 8 Go, 12 Go et 16 Go.</p><span class="tool-card-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
-        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/fr/tools/fps-calculator" data-accent="pink" aria-label="Calculateur de FPS GTA 6 : estimez la fréquence d&#x27;images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra."><span class="tool-card-glow" aria-hidden="true"></span><span class="tool-card-icon" aria-hidden="true"><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><h3 id="rel-fps">Calculateur de FPS GTA 6</h3><p>Estimez la fréquence d'images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra.</p><span class="tool-card-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-sysreq"><a class="tool-card" href="/fr/tools/system-requirements" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3 id="rel-sysreq">Vérificateur de configuration requise pour GTA 6</h3><p>Verdict instantané par rapport aux niveaux Minimum, Recommandé et Ultra estimés par la communauté. GPU, CPU, RAM et stockage.</p><span class="link-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-vram"><a class="tool-card" href="/fr/tools/vram-calculator" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3 id="rel-vram">Vérificateur de VRAM requise pour GTA 6</h3><p>Vérifiez le minimum de VRAM nécessaire pour GTA 6 en 1080p, 1440p et 4K. Verdict pour les cartes 6 Go, 8 Go, 12 Go et 16 Go.</p><span class="link-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
+        <li><article aria-labelledby="rel-fps"><a class="tool-card" href="/fr/tools/fps-calculator" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3 id="rel-fps">Calculateur de FPS GTA 6</h3><p>Estimez la fréquence d'images de votre GPU en 1080p, 1440p et 4K pour les réglages Faible, Moyen, Élevé et Ultra.</p><span class="link-cta">Explorer l'outil <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></article></li>
       </ul>
       <h3 class="related-sub">Guides associés</h3>
       <ul class="guide-cards" role="list">
-        <li><a class="guide-card surface-card" href="/fr/guides/how-fps-is-estimated">
+        <li><a class="guide-card" href="/fr/guides/how-fps-is-estimated">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="guide-card-tag">Performance</span><svg class="icon icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>Comment nous estimons les FPS de GTA 6</h4>
           <p>Le modèle exact derrière le calculateur de FPS : scores GPU, multiplicateurs d'upscaling, plafonds de génération d'images et pénalité de saccades VRAM.</p>
         </a></li>
-        <li><a class="guide-card surface-card" href="/fr/guides/cpu-gpu-pairing">
+        <li><a class="guide-card" href="/fr/guides/cpu-gpu-pairing">
           <span class="guide-card-head"><span class="guide-card-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span><span class="guide-card-tag">Matériel</span><svg class="icon icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span>
           <h4>Association CPU-GPU pour GTA 6</h4>
           <p>12 associations CPU et GPU courantes avec un verdict honnête, équilibré, limité par le GPU ou par le CPU, et pourquoi les 1 % faibles chutent en premier.</p>
@@ -564,29 +561,47 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
     <aside class="disclaimer" role="note" aria-label="Avertissement sur l&#x27;estimation">
       <strong>Avertissement :</strong> GTA 6 est sorti sur PS5 et Xbox, mais pas encore sur PC. Les scores sont des estimations techniques modélisées sur la mise à l'échelle CPU/GPU de GTA V, RDR2 et Cyberpunk 2077, les benchmarks communautaires et les objectifs publiquement annoncés par Rockstar. Prévoyez ±10 % d'écart par rapport aux performances réelles sur console. Les plages de FPS supposent le préréglage Élevé sans ray tracing, des fréquences d'origine, 32 Go de RAM et un SSD NVMe. Les résultats sont une aide à la planification des mises à niveau, pas une garantie de performance. Nous actualisons les scores à mesure que paraissent les specs officielles de PC et les tests indépendants.
     </aside>
-  </div>
 </article>
+  </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Restez dans la boucle</h2>
+          <p>Obtenez les dernières actualités, outils et guides GTA 6 dans votre boîte de réception.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Adresse e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">S'abonner</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/fr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 est disponible — 19 novembre 2026</span>
+        <span class="eyebrow-muted">GTA 6 est disponible, 19 novembre 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorer les outils →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/fr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
               </span>
             </span>
@@ -626,9 +641,9 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
               <li><a href="/fr/email-preferences">Préférences e-mail</a></li>
               <li><a href="/fr/sitemap">Plan du site</a></li>
               <li><a href="/editorial-policy">Politique éditoriale</a></li>
-              <li><a href="#">Politique de confidentialité</a></li>
-              <li><a href="#">Conditions d'utilisation</a></li>
-              <li><a href="#">Avertissement</a></li>
+          <li><a href="/fr/privacy">Politique de confidentialité</a></li>
+          <li><a href="/fr/terms">Conditions d'utilisation</a></li>
+          <li><a href="/fr/disclaimer">Avertissement</a></li>
             </ul>
           </div>
         </div>
@@ -637,9 +652,7 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Tous droits réservés. Non affilié à Rockstar Games ou Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="#">Confidentialité</a>
-          <a href="#">Conditions</a>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/fr/privacy">Confidentialité</a><a href="/fr/terms">Conditions</a><a href="/fr/disclaimer">Avertissement</a><button type="button" data-consent-open>Paramètres des cookies</button></span>
           <span>Fait avec <span class="heart">♥</span> pour les fans de GTA 6</span>
         </div>
       </div>
@@ -647,11 +660,22 @@ fps ≈ min(headroomGpu, headroomCpu) × baseFps[res]</pre>
   </div>
 </footer>
 </div>
-<script src="/assets/js/fr/theme.js" defer></script>
-<script src="/assets/js/fr/header.js" defer></script>
-<script src="/assets/js/fr/search.js" defer></script>
-<script src="/assets/js/fr/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentement aux statistiques" hidden>
+  <p>Nous utilisons Google Analytics agrégé pour améliorer le site. Aucun profil, rien n'est vendu. Accepter ou refuser ; le choix est enregistré dans ce navigateur.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accepter les statistiques</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Refuser</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/fr/newsletter.js" defer></script>
+  <script src="/assets/js/fr/consent.js" defer></script>
 <script type="module" src="/assets/js/fr/bottleneck.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

@@ -179,14 +179,14 @@ function render() {
     var cardB = $("[data-compare-card-b]", compareSection);
     if (cardA) {
       cardA.classList.toggle("winner", winner === "A");
-      $("[data-compare-title]", cardA).textContent = "الجهاز A — " + gpu.label + " + " + cpu.label;
+      $("[data-compare-title]", cardA).textContent = "الجهاز A: " + gpu.label + " + " + cpu.label;
       $("[data-compare-verdict]", cardA).textContent = verdictLabelOf(result);
       $("[data-compare-fps]", cardA).innerHTML = "~" + result.fpsLow + "–" + result.fpsHigh + " إطار/ث · متوسط <strong>" + result.avgFps + "</strong>";
       $("[data-compare-pill]", cardA).hidden = winner !== "A";
     }
     if (cardB) {
       cardB.classList.toggle("winner", winner === "B");
-      $("[data-compare-title]", cardB).textContent = "الجهاز B — " + gpuB.label + " + " + cpuB.label;
+      $("[data-compare-title]", cardB).textContent = "الجهاز B: " + gpuB.label + " + " + cpuB.label;
       $("[data-compare-verdict]", cardB).textContent = verdictLabelOf(resultB);
       $("[data-compare-fps]", cardB).innerHTML = "~" + resultB.fpsLow + "–" + resultB.fpsHigh + " إطار/ث · متوسط <strong>" + resultB.avgFps + "</strong>";
       $("[data-compare-pill]", cardB).hidden = winner !== "B";

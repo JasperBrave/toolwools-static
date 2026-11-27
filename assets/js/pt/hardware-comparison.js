@@ -149,8 +149,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpuA.label + " + " + cpuA.label + " @ " + state.res + " " + workload + " · " + labelA + " (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpuA.label + " + " + cpuA.label + " vs " + gpuB.label + " + " + cpuB.label + ", GTA 6 comparação de hardware") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpuA.label + " + " + cpuA.label + " @ " + state.res + " " + workload + " · " + labelA + " (" + ra.fpsLow + "–" + ra.fpsHigh + " fps)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpuA.label + " + " + cpuA.label + " vs " + gpuB.label + " + " + cpuB.label + ", GTA 6 comparação de hardware") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(gpuA, cpuA, ra, rb), copyBtn, "[data-copy-verdict-label]"); });

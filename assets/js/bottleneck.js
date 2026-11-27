@@ -143,7 +143,7 @@ function render() {
     var kicker = result.verdict === "balanced" ? "Balanced ±7%" : result.verdict === "cpu" ? "CPU limited" : "GPU limited";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
-      ? '<div class="upgrade-box"><p class="eyebrow-muted">Smallest fix</p><p>Swap your ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' to <strong>' + upgrade.part.label + '</strong> — drops bottleneck from <span class="mono">' + upgrade.fromPct + '%</span> to <span class="mono">' + upgrade.toPct + '%</span>.</p></div>'
+      ? '<div class="upgrade-box"><p class="eyebrow-muted">Smallest fix</p><p>Swap your ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' to <strong>' + upgrade.part.label + '</strong>, drops bottleneck from <span class="mono">' + upgrade.fromPct + '%</span> to <span class="mono">' + upgrade.toPct + '%</span>.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
@@ -161,8 +161,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span data-copy-verdict-label>Copy verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + state.res + " · " + verdictLabel + " on ToolWools GTA 6 bottleneck calculator") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + verdictLabel + " (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + state.res + " · " + verdictLabel + " on ToolWools GTA 6 bottleneck calculator") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " — " + verdictLabel + " (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -179,14 +179,14 @@ function render() {
     var cardB = $("[data-compare-card-b]", compareSection);
     if (cardA) {
       cardA.classList.toggle("winner", winner === "A");
-      $("[data-compare-title]", cardA).textContent = "Rig A — " + gpu.label + " + " + cpu.label;
+      $("[data-compare-title]", cardA).textContent = "Rig A: " + gpu.label + " + " + cpu.label;
       $("[data-compare-verdict]", cardA).textContent = verdictLabelOf(result);
       $("[data-compare-fps]", cardA).innerHTML = "~" + result.fpsLow + "–" + result.fpsHigh + " fps · avg <strong>" + result.avgFps + "</strong>";
       $("[data-compare-pill]", cardA).hidden = winner !== "A";
     }
     if (cardB) {
       cardB.classList.toggle("winner", winner === "B");
-      $("[data-compare-title]", cardB).textContent = "Rig B — " + gpuB.label + " + " + cpuB.label;
+      $("[data-compare-title]", cardB).textContent = "Rig B: " + gpuB.label + " + " + cpuB.label;
       $("[data-compare-verdict]", cardB).textContent = verdictLabelOf(resultB);
       $("[data-compare-fps]", cardB).innerHTML = "~" + resultB.fpsLow + "–" + resultB.fpsHigh + " fps · avg <strong>" + resultB.avgFps + "</strong>";
       $("[data-compare-pill]", cardB).hidden = winner !== "B";
