@@ -1635,3 +1635,633 @@ footer.site-footer .wordmark .wmark { width: 54px; height: 31px; font-size: 20px
    white in light mode. The EN template leaves the h3 colour to inherit
    --color-text; this override restores that (correct in both themes). */
 .footer-cols h3 { color: var(--color-text); }
+
+/* ==========================================================================
+   DESIGN-QUALITY PHASE 2 — FPS calculator (DQ-05, fixes 1–17)
+   Appended 2026-11-28. One block, same content in all 7 tool-fps-<loc>.css.
+   Specificity notes: base h2 is (0,0,1) / .tool-body h2 is (0,1,1), so the
+   h2 rules below use .tool-body article h2 (0,1,2). #nl-h2 is an ID (1,0,0)
+   and is overridden by an equal-specificity ID rule. The TR/AR verdict bug
+   (.tool-body h3 1.25rem beating .verdict-title) is beaten by
+   .tool-body .verdict-title (0,2,0). Dark rules carry BOTH
+   [data-theme="dark"] and html.dark because the locale files differ in
+   which form their base dark rules use.
+   ========================================================================== */
+
+/* --- Fix 2/16: hierarchy — one H2 size per breakpoint -------------------- */
+.tool-body .page-title {
+  font-size: 40px;
+}
+@media (max-width: 1023px) {
+  .tool-body .page-title {
+    font-size: 32px;
+  }
+}
+.tool-body article h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  .tool-body article h2 {
+    font-size: 24px;
+  }
+}
+/* Utility/admin H2s: Share, Changelog, Sources (fix 2 + 8 + 16). */
+.tool-body article h2#share-heading,
+.tool-body article h2#changelog,
+.tool-body article h2#sources {
+  font-size: 24px;
+}
+@media (max-width: 767px) {
+  .tool-body article h2#share-heading,
+  .tool-body article h2#changelog,
+  .tool-body article h2#sources {
+    font-size: 20px;
+  }
+}
+/* Newsletter H2: ID rule (1,0,0) — same sizes as the utility H2s. */
+#nl-h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  #nl-h2 {
+    font-size: 24px;
+  }
+}
+
+/* --- Fix 1: panel labels — one canonical treatment (EN's eyebrow-muted) -- */
+.tool-body .eyebrow-muted,
+.tool-body .input-panel-head h3,
+.tool-body .output-panel-label {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-text);
+}
+
+/* --- Fix 2: verdict number — the single largest element on the page ------ */
+.tool-body .verdict-title {
+  font-size: 68px;
+  line-height: 1.1;
+}
+.tool-body .verdict-title .unit {
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+/* --- Fix 6: hero meta — one line, spacing not "·" separators -------------
+   Inline flow (NOT flex): flex items keep their max-content width and wrap
+   as whole fragments, which cost lines (DE 6->9 @375). Inline spans pack
+   at word boundaries like the original paragraph, with a 24px
+   margin-inline-end between fragments instead of the "·" separators. */
+.tool-body .hero-meta {
+  margin-top: 12px;
+}
+.tool-body .hero-meta span {
+  margin-inline-end: 24px;
+}
+.tool-body .hero-meta span:last-child {
+  margin-inline-end: 0;
+}
+.tool-body .hero-meta span + span::before {
+  content: none;
+  margin: 0;
+}
+
+/* --- Fix 5: gaps by job --------------------------------------------------- */
+/* DE/FR base sets `main { display: flex; flex-direction: column; gap: 96px }`,
+   which adds 96px between .tool-body and #sec-newsletter on top of the
+   newsletter's own margin-top (144px measured). Zero it; the DQ gap system
+   supplies the spacing. Harmless elsewhere (MAIN is block or gapless). */
+main.tool-main {
+  gap: 0;
+}
+.tool-body > article {
+  gap: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article {
+    gap: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article {
+    gap: 24px;
+  }
+}
+/* ES/PT base also spaces article children with a * + * margin-top on top
+   of the flex gap (double spacing: 48 + 96 = 144 @1280). Zero it; the flex
+   gap above is the only spacing now. TR/AR use margin-top as their ONLY
+   spacing (block article) — their overrides at the end of their blocks
+   retune it to the same totals. */
+.tool-body > article > * + * {
+  margin-top: 0;
+}
+/* Major acts (+48 over the 48px base = 96px @>=1280; +32 = 64px @1024–1279;
+   +24 = 48px @<=1023). */
+.tool-body > article > section[aria-labelledby="preset-ladder"],
+.tool-body > article > section[aria-labelledby="how-it-works"] {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="how-it-works"] {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="how-it-works"] {
+    margin-top: 24px;
+  }
+}
+/* Utility/share bands (+16 = 64px @>=1280; +16 = 48px @1024–1279;
+   +8 = 32px @<=1023). */
+.tool-body > article > section[aria-labelledby="sources"] {
+  margin-top: 16px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="sources"] {
+    margin-top: 16px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="sources"] {
+    margin-top: 8px;
+  }
+}
+/* Closing band: disclaimer + newsletter, one deliberate gap (fix 5). */
+#sec-newsletter {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #sec-newsletter {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  #sec-newsletter {
+    margin-top: 24px;
+  }
+}
+/* 24px inside the workspace (fix 5). */
+.tool-body .input-panel {
+  gap: 24px;
+}
+.tool-body [data-output-panel] > * + * {
+  margin-top: 24px;
+}
+
+/* --- Fix 4: card registers ------------------------------------------------ */
+.tool-body .input-panel,
+.tool-body .output-panel {
+  background: var(--dq-surface-raised);
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+}
+.tool-body .usecase-card,
+.tool-body .tool-card,
+.tool-body .steps-grid li {
+  border-radius: var(--dq-radius-secondary);
+  box-shadow: var(--shadow-sm);
+}
+/* Methodology bare, like the other explanation sections (fix 4). */
+.tool-body .methodology-details {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* --- Fix 7/8: share demoted — flat row inside the workspace grid --------
+   The share section moves into the workspace grid's right column (grid
+   row 2), filling the freed space under the verdict panel. No card chrome.
+   At <=1023px the grid is one column, so the share block resets to
+   grid-column 1 and stacks below the verdict panel. */
+.tool-body .workspace-grid > .share-panel {
+  grid-column: 2;
+}
+@media (max-width: 1023px) {
+  .tool-body .workspace-grid > .share-panel {
+    grid-column: 1;
+  }
+}
+.tool-body .share-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.tool-body .share-panel > div:first-child {
+  /* Own row: flex: 0 0 auto sized this block to the sub paragraph's
+     max-content width (~797px EN) and blew the page out to 813px @375.
+     flex: 1 1 100% keeps the heading on its own row at full width (text
+     wraps normally) and the link/share rows on the next row(s). */
+  flex: 1 1 100%;
+  min-width: 0;
+}
+.tool-body .share-panel .share-link-row {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.tool-body .share-panel .share-row {
+  flex: 0 0 auto;
+}
+.tool-body .share-panel .sub {
+  margin-top: 2px;
+}
+
+/* --- Fix 3: table cue — DE/FR gradient cue, all locales, RTL-aware -------
+   Symmetric 4-layer scroll-shadow (DE light values). The two 32px
+   surface masks ride with the content (attachment local) and hide the
+   shadow on the edge with no more content; the two 14px fades stay fixed
+   (attachment scroll). Because the layers are symmetric, the cue mirrors
+   automatically in RTL: at rest the fade shows on the leading (hidden)
+   edge. Verified at 375px in EN and AR after the fix. The EN inset
+   box-shadow and the ES/PT/TR/AR inset shadows are replaced by this. */
+.tool-body .table-scroll {
+  box-shadow: none;
+  background-image:
+    linear-gradient(to right, var(--color-surface), var(--color-surface)),
+    linear-gradient(to left, var(--color-surface), var(--color-surface)),
+    linear-gradient(to right, rgba(21, 23, 25, 0.22), rgba(21, 23, 25, 0)),
+    linear-gradient(to left, rgba(21, 23, 25, 0.22), rgba(21, 23, 25, 0));
+  background-position: left center, right center, left center, right center;
+  background-repeat: no-repeat;
+  background-size: 32px 100%, 32px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+[data-theme="dark"] .tool-body .table-scroll,
+html.dark .tool-body .table-scroll {
+  background-image:
+    linear-gradient(to right, var(--color-surface), var(--color-surface)),
+    linear-gradient(to left, var(--color-surface), var(--color-surface)),
+    linear-gradient(to right, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)),
+    linear-gradient(to left, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}
+/* First column is NOT frozen (fix 3 decision): the gradient cue alone
+   signals scrollability; freezing would narrow the visible area at 375px
+   and risk sticky-cell paint bugs. Recorded with the 375px measurements. */
+
+/* --- Fix 9: active table-row highlight ------------------------------------
+   Tint + an inline dot before the row label. (An inset box-shadow edge
+   stripe was tried first and Impeccable flags it as a "side-tab" — the dot
+   is the same marker without the stripe.) margin-inline-end flips the dot
+   to the leading side in RTL automatically. */
+.tool-body .data-table tr.is-current {
+  background: var(--color-accent-soft);
+}
+.tool-body .data-table tr.is-current td:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  margin-inline-end: 8px;
+  vertical-align: 1px;
+}
+
+/* --- Fix 10: steps 5-across on desktop, with a connecting rule ------------ */
+@media (min-width: 1280px) {
+  .tool-body .steps-grid.cols-3 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid.cols-3::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: var(--color-border);
+    z-index: 1;
+  }
+  .tool-body .steps-grid.cols-3 li {
+    position: relative;
+  }
+  .tool-body .steps-grid.cols-3 .step-number {
+    position: relative;
+    z-index: 2;
+    background: var(--color-surface);
+    padding: 0 6px;
+    margin-left: -6px;
+  }
+}
+.tool-body .steps-grid {
+  position: relative;
+}
+
+/* --- Fix 11: 68ch measure for changelog + disclaimer ---------------------- */
+.tool-body .changelog-list {
+  padding-left: 20px;
+}
+.tool-body .changelog-list li > p:last-child {
+  max-width: 68ch;
+}
+.tool-body .disclaimer {
+  border: 0;
+  border-radius: var(--dq-radius-tertiary);
+}
+.tool-body .disclaimer p {
+  max-width: 68ch;
+}
+
+/* --- Fix 12: "New" footer badge 11px -> 12px ------------------------------ */
+.site-footer .footer-col-badge {
+  font-size: 0.75rem;
+}
+
+/* --- Fix 13: tells census -------------------------------------------------- */
+.tool-body .guide-tag {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.tool-body .data-table td.mono {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+.tool-body .balance-bar-head .lbl {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.tool-body .balance-bar-head .val {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Fix 14: dark mode — distinct elevations + themed newsletter input ---- */
+[data-theme="dark"] .tool-body .input-panel,
+[data-theme="dark"] .tool-body .output-panel,
+html.dark .tool-body .input-panel,
+html.dark .tool-body .output-panel {
+  background: var(--dq-surface-raised);
+  border-color: var(--dq-border-strong);
+}
+/* NOTE: #sec-newsletter sits OUTSIDE .tool-body (sibling in MAIN), so these
+   selectors must not be scoped under .tool-body — the scoped form matched
+   nothing in EN/ES/DE and the input stayed white in dark mode. */
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}
+
+/* --- Fix 15: verdict bars — meaning-named classes, one palette, legend --- */
+.tool-body .balance-bar-track {
+  border: 0;
+}
+.tool-body .balance-bar-fill {
+  height: 100%;
+}
+.tool-body .balance-bar-fill.fill-avg {
+  background: var(--dq-accent);
+}
+.tool-body .balance-bar-fill.fill-low {
+  background: var(--color-success-fill);
+}
+/* Legacy class safety-net (the controller is the only writer, and it now
+   emits fill-avg/fill-low; these keep any cached/older markup on-palette). */
+.tool-body .balance-bar-fill.purple {
+  background: var(--dq-accent);
+}
+.tool-body .balance-bar-fill.blue {
+  background: var(--color-success-fill);
+}
+[data-theme="dark"] .tool-body .balance-bar-fill.purple,
+html.dark .tool-body .balance-bar-fill.purple {
+  background: var(--dq-accent);
+}
+[data-theme="dark"] .tool-body .balance-bar-fill.blue,
+html.dark .tool-body .balance-bar-fill.blue {
+  background: var(--color-success-fill);
+}
+.tool-body .balance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+.tool-body .balance-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tool-body .balance-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  flex: none;
+}
+.tool-body .balance-swatch.fill-avg {
+  background: var(--dq-accent);
+}
+.tool-body .balance-swatch.fill-low {
+  background: var(--color-success-fill);
+}
+
+/* --- Fix 4 (footer): de-carded, canonical home footer --------------------- */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the FPS brand paragraph is verbatim copy
+     (~145 chars) and at 1.4fr it wraps to 4 lines ending with "bloat."
+     alone — Impeccable flags that straggler. At 1.6fr it sits on 3 lines
+     with a full last line. Nav columns lose ~10px each; geometry otherwise
+     identical to home. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}
+
+/* --- Fix 17: 375px nits ---------------------------------------------------- */
+/* Grid items default to min-width:auto (min-content); the panels' content
+   (longest select option / share URL) forced all three grid children to
+   366px in ES @375 (7px overflow). min-width:0 lets them shrink to the
+   track. The share-link row stacks at <=639 (EN base already does this;
+   the other locales lack the rule). */
+.tool-body .workspace-grid > * {
+  min-width: 0;
+}
+@media (max-width: 639px) {
+  .tool-body .segmented.cols-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tool-body .share-panel .share-link-row {
+    flex-direction: column;
+  }
+  .tool-body .share-row .btn-chip {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   DESIGN-QUALITY PHASE 2 — TR/AR APPENDIX (appended after the shared block)
+   TR/AR base has NO flex gap: the article is display:block and section
+   spacing comes only from `.tool-body article > * + * { margin-top:
+   var(--tool-gap) }` (96/64/48). The shared block zeroes that margin (it
+   double-counts where a flex gap exists), so this appendix re-establishes
+   the spacing as TOTALS — the same 48/32/24 base, 96/64/48 major and
+   64/48/32 utility gaps the flex locales get from gap + margin-top.
+   The newsletter rule needs `.tool-body >` because TR/AR base sets its
+   margin-top with that (1,1,1) selector.
+   ========================================================================== */
+.tool-body article > * + * {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body article > * + * {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body article > * + * {
+    margin-top: 24px;
+  }
+}
+.tool-body > article > section[aria-labelledby="preset-ladder"],
+.tool-body > article > section[aria-labelledby="how-it-works"] {
+  margin-top: 96px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="how-it-works"] {
+    margin-top: 64px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="how-it-works"] {
+    margin-top: 48px;
+  }
+}
+.tool-body > article > section[aria-labelledby="sources"] {
+  margin-top: 64px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="sources"] {
+    margin-top: 48px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="sources"] {
+    margin-top: 32px;
+  }
+}
+.tool-body > #sec-newsletter {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > #sec-newsletter {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > #sec-newsletter {
+    margin-top: 24px;
+  }
+}

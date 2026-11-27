@@ -203,9 +203,9 @@ function render() {
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> avg fps</span></h3>' +
       '<p class="verdict-desc">' + result.bandLo + '–' + result.bandHi + ' fps band (±15%), ' + displayLow + ' fps 1% low. ' + LIMITER_LABEL[result.limiter] + ' at ' + RES_META[state.res].label + ' ' + PRESET_META[state.preset].label + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">Average FPS</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">' + displayLow + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((displayLow / 144) * 100)) + '%"></div></div></div>' +
-      '</div>' + vramNote + tweaksHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">Average FPS</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-avg" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">1% low FPS</span><span class="val">' + displayLow + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-low" style="width:' + Math.min(100, Math.round((displayLow / 144) * 100)) + '%"></div></div></div>' +
+      '</div>' + '<p class=\"balance-legend\"><span class=\"balance-legend-item\"><span class=\"balance-swatch fill-avg\" aria-hidden=\"true\"></span>Average FPS</span><span class=\"balance-legend-item\"><span class=\"balance-swatch fill-low\" aria-hidden=\"true\"></span>1% low FPS</span></p>' + vramNote + tweaksHtml +
       '<dl class="stat-grid">' +
       '<div><dt>GPU-bound FPS</dt><dd>' + result.gpuFps + '</dd></div>' +
       '<div><dt>CPU cap</dt><dd>' + result.cpuCapFps + '</dd></div>' +
@@ -227,7 +227,7 @@ function render() {
     ladder.innerHTML = PRESET_LIST.map(function (p, i) {
       var r = ladderResults[i];
       var fgTag = r.fgApplied ? " (interpolated)" : "";
-      return "<tr><td><strong>" + PRESET_META[p].label + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
+      return "<tr" + (p === state.preset ? " class=\"is-current\" aria-current=\"true\"" : "") + "><td><strong>" + PRESET_META[p].label + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
   }
   // Preset-ladder heading follows the selected rig and resolution: the rows

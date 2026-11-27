@@ -203,9 +203,9 @@ function render() {
       '<h3 class="verdict-title">' + result.avgFps + '<span class="unit"> متوسط fps</span></h3>' +
       '<p class="verdict-desc">نطاق ' + result.bandLo + '–' + result.bandHi + ' إطار/ث (±15%)، و' + displayLow + ' إطار/ث كأدنى 1%. ' + LIMITER_LABEL[result.limiter] + ' عند ' + RES_META[state.res].label + ' ' + PRESET_META[state.preset].label + '.' + fgNote + '</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">متوسط الإطارات</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">أدنى 1% من الإطارات</span><span class="val">' + displayLow + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round((displayLow / 144) * 100)) + '%"></div></div></div>' +
-      '</div>' + vramNote + tweaksHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">متوسط الإطارات</span><span class="val">' + result.avgFps + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-avg" style="width:' + Math.min(100, Math.round((result.avgFps / 144) * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">أدنى 1% من الإطارات</span><span class="val">' + displayLow + '</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-low" style="width:' + Math.min(100, Math.round((displayLow / 144) * 100)) + '%"></div></div></div>' +
+      '</div>' + '<p class=\"balance-legend\"><span class=\"balance-legend-item\"><span class=\"balance-swatch fill-avg\" aria-hidden=\"true\"></span>متوسط الإطارات</span><span class=\"balance-legend-item\"><span class=\"balance-swatch fill-low\" aria-hidden=\"true\"></span>أدنى 1% من الإطارات</span></p>' + vramNote + tweaksHtml +
       '<dl class="stat-grid">' +
       '<div><dt>إطارات محدودة بوحدة معالجة الرسومات</dt><dd>' + result.gpuFps + '</dd></div>' +
       '<div><dt>حد وحدة المعالجة المركزية</dt><dd>' + result.cpuCapFps + '</dd></div>' +
@@ -227,7 +227,7 @@ function render() {
     ladder.innerHTML = PRESET_LIST.map(function (p, i) {
       var r = ladderResults[i];
       var fgTag = r.fgApplied ? " (مُستنتَج بالاستيفاء)" : "";
-      return "<tr><td><strong>" + PRESET_META[p].label + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
+      return "<tr" + (p === state.preset ? " class=\"is-current\" aria-current=\"true\"" : "") + "><td><strong>" + PRESET_META[p].label + "</strong></td><td class=\"mono\">" + r.avgFps + " fps" + fgTag + "</td><td class=\"mono\">" + r.lowFps + " fps</td><td class=\"muted\">" + r.bandLo + "–" + r.bandHi + "</td></tr>";
     }).join("");
   }
   // Preset-ladder heading follows the selected rig and resolution: the rows
