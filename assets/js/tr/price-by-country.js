@@ -86,7 +86,7 @@ function copyText(text, btn, labelSel) {
 }
 
 function shortAnswer(price) {
-  var s = "GTA 6, Standard sürümü için " + formatUsd(EDITIONS.standard.usd) + " USD; Ultimate 99,99 $ — ikisi de Rockstar tarafından doğrulandı. "
+  var s = "GTA 6, Standard sürümü için " + formatUsd(EDITIONS.standard.usd) + " USD; Ultimate 99,99 $, ikisi de Rockstar tarafından doğrulandı. "
     + price.market.country + " için bu, " + EDITIONS[state.edition].label + " sürümünde " + formatLocal(price.totalLocal, price.market) + " olarak modelleniyor, yani yaklaşık "
     + formatUsd(price.usdEquivalent) + " (" + price.market.taxLabel.toLowerCase() + " dahil). "
     + "Bu, " + BAND_LABEL[price.band].toLowerCase();
@@ -98,8 +98,8 @@ function shareRowHtml(text, title) {
   var url = shareUrl();
   return '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + "&url=" + encodeURIComponent(url) + '">X\'te paylaş</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent(title) + "&url=" + encodeURIComponent(url) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + "&url=" + encodeURIComponent(url) + '">X\'te paylaş</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(title) + "&url=" + encodeURIComponent(url) + '">Reddit</a>'
     + "</div>";
 }
 function countryTabHtml(price) {
@@ -229,8 +229,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Bu sonucu X\'te paylaş"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Bu sonucu Reddit\'te paylaş"]');
+  var xLink = document.querySelector('.share-panel a[href*="twitter.com"]');
+  var rLink = document.querySelector('.share-panel a[href*="reddit.com"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Ülkelere Göre Fiyat">
     <meta name="twitter:description" content="44 ülkede GTA 6 fiyatı, yerel para birimi ve ABD doları cinsinden, vergi ayrı gösterilerek. Her pazarda Standart ve Ultimate sürümlerini karşılaştırın.">
     <meta name="twitter:image" content="https://toolwools.com/og/price-by-country.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tr/tools/price-by-country">
 <link rel="alternate" href="https://toolwools.com/tools/price-by-country" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/price-by-country" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-price-by-country-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/price-by-country">İngilizce</a>
             <a href="/es/tools/price-by-country">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,51 +136,34 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/price-by-country" lang="en">EN</a><a href="/es/tools/price-by-country" lang="es">ES</a><a href="/pt/tools/price-by-country" lang="pt">PT</a><a href="/de/tools/price-by-country" lang="de">DE</a><a href="/fr/tools/price-by-country" lang="fr">FR</a><a href="/tr/tools/price-by-country" aria-current="true">TR</a><a href="/ar/tools/price-by-country" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header><main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Sayfa yolu">
-        <a href="/tr/">Ana Sayfa</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tr/tools">Araçlar</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA 6 Ülkelere Göre Fiyat</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        <span>Takipçiler</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Ülkelere Göre Fiyat</h1>
-      <p class="page-subtitle">ABD'de doğrulanmış tek bir fiyat, 79,99 $, 44 pazara dönüştürüldü ve yerel tüketim vergisi ayrı bir satır olarak gösterildi. Ülkenizi seçin, sürüm merdivenini karşılaştırın ve ithalatın gerçekten değerli olup olmadığını görün.</p>
-      <ul class="hero-badges" aria-label="Bir bakışta">
-        <li class="chip">44 pazar · 34 para birimi</li><li class="chip">Vergi ayrı gösterilir, gizlenmez</li><li class="chip">Referans kurlar tarihli, kazınmış değil</li>
-      </ul>
-    </section>
-          <div class="intro-callout">
-            <p>Rockstar tek bir sayıyı doğruladı: ABD'de Standard sürüm için 79,99 $. Diğer her şey ya bir vitrinin bölgesel fiyatı ya da bir para birimi dönüşümüdür ve ikisi çok farklı cevaplar üretir. Bu sayfa onları ayrı tutar. Yayıncıların tarihsel olarak kasıtlı olarak daha düşük yerel fiyat belirlediği pazarlar (Hindistan, Brezilya, Türkiye, Japonya, Çin) bölgesel fiyatlı olarak işaretlenir; diğer her yerde temiz bir dönüşüm ve o ülkenin KDV, GST veya satış vergisi ayrı bir satır olarak verilir, böylece makbuzda gerçekte neyin yer aldığını görebilirsiniz.</p>
-          </div>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Ülkelere Göre Fiyat</span>
+        </div>
+        <div class="page-eyebrow"><span>Takipçiler</span></div>
+        <h1 id="page-title">GTA 6 Ülkelere Göre Fiyat</h1>
+        <p class="page-subtitle">ABD'de doğrulanmış tek bir fiyat, 79,99 $, 44 pazara dönüştürüldü ve yerel tüketim vergisi ayrı bir satır olarak gösterildi. Ülkenizi seçin, sürüm merdivenini karşılaştırın ve ithalatın gerçekten değerli olup olmadığını görün.</p>
+        <p class="hero-meta">
+          <span>44 pazar · 34 para birimi</span><span>Vergi ayrı gösterilir, gizlenmez</span><span>Referans kurlar tarihli, kazınmış değil</span><span>Yazan <a href="/about#release-desk">ToolWools Çıkış Masası</a></span><span>Fiyatlandırma ve lansman takibi</span><span>İnceleyen <a href="/about#editorial">ToolWools Editoryal</a></span><span>İddia ve kaynak incelemesi</span><span>Model: <a href="/tr/methodology">79,99$ çıpa fiyatlandırma modeli</a></span><span>Yayınlanma <time datetime="2026-08-01">1 Ağu 2026</time></span><span>Son inceleme <time datetime="2026-11-20">20 Kasım 2026</time></span>
+        </p>
+      </section>
 <p class="rates-banner" role="note"><strong>Referans döviz kurları 20 Kasım 2026 tarihli (2026-11-20).</strong> ABD Standard (79,99 $) ve Ultimate (99,99 $) fiyatları doğrulanmıştır. Bölgesel liste fiyatları bildirilmiştir, doğrulanmış mağaza fiyatları değildir; Deluxe sürümü yoktur.</p>
-<section class="byline" aria-label="Bu sayfa hakkında">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/about#release-desk">ToolWools Çıkış Masası</a>&nbsp;·</span> Fiyatlandırma ve lansman takibi&nbsp;· İnceleyen <span class="byline-seg"><a href="/about#editorial">ToolWools Editoryal</a>&nbsp;·</span> İddia ve kaynak incelemesi</p>
-        <p class="byline-note">Model: <a href="/tr/methodology">79,99$ çıpa fiyatlandırma modeli</a></p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2026-08-01">1 Ağu 2026</time>&nbsp;· Son inceleme <time datetime="2026-11-20">20 Kasım 2026</time></p>
-    </section>
 <div class="sr-only" data-live-region aria-live="polite">GTA 6, Rockstar'ın doğruladığı tek fiyat olan Standart sürüm için 79,99 ABD dolarıdır. Amerika Birleşik Devletleri'nde bu, Standart Sürüm için 85,59$'a modellenir veya satış vergisi (ort.) sayıldığında yaklaşık 85,59$ olur. Bu, aşağıdaki referans kur üzerinden dönüştürülmüş ABD fiyatıyla uyumludur.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label" id="price-answer">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Fiyat kontrolü · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>GTA 6, Rockstar'ın doğruladığı tek fiyat olan Standart sürüm için 79,99 ABD dolarıdır. Amerika Birleşik Devletleri'nde bu, Standart Sürüm için 85,59$'a modellenir veya satış vergisi (ort.) sayıldığında yaklaşık 85,59$ olur. Bu, aşağıdaki referans kur üzerinden dönüştürülmüş ABD fiyatıyla uyumludur.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Amerika Birleşik Devletleri · 85,59 $ makbuz toplamı</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Hesaplayıcı</h2>
       <div class="workspace-grid">
@@ -191,7 +191,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted">Amerika Birleşik Devletleri'nde GTA 6 fiyatı</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">ABD fiyatıyla uyumlu</p><h3 class="verdict-title">$85.59</h3><p class="verdict-desc">ABD fiyatıyla uyumlu · ABD makbuz toplamına göre %0</p></div></div><dl class="stat-grid"><div><dt>Raf fiyatı</dt><dd>$79.99</dd></div><div><dt>Satış vergisi (ort.)</dt><dd>$5.60</dd></div><div><dt>Makbuz toplamı</dt><dd>$85.59</dd></div><div><dt>ABD doları karşılığı</dt><dd>$85.59</dd></div></dl><p class="verdict-desc">Satış vergisi öncesi (ort.). Tarihli referans kur üzerinden doğrulanmış ABD fiyatından dönüştürüldü.</p><p class="verdict-desc">Referans döviz kurları 20 Kasım 2026 (2026-11-20) tarihli. ABD Standard (79,99 $) ve Ultimate (99,99 $) fiyatları doğrulanmıştır.</p><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%20Standart%20S%C3%BCr%C3%BCm%20i%C3%A7in%2085%2C59%20%24%20%2885%2C59%20%24%29.%20ToolWools%27ta%2044%20pazar%20kar%C5%9F%C4%B1la%C5%9Ft%C4%B1r%C4%B1ld%C4%B1.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%2085%2C59%20%24%20%28Standart%20S%C3%BCr%C3%BCm%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">ABD fiyatıyla uyumlu</p><h3 class="verdict-title">$85.59</h3><p class="verdict-desc">ABD fiyatıyla uyumlu · ABD makbuz toplamına göre %0</p></div></div><dl class="stat-grid"><div><dt>Raf fiyatı</dt><dd>$79.99</dd></div><div><dt>Satış vergisi (ort.)</dt><dd>$5.60</dd></div><div><dt>Makbuz toplamı</dt><dd>$85.59</dd></div><div><dt>ABD doları karşılığı</dt><dd>$85.59</dd></div></dl><p class="verdict-desc">Satış vergisi öncesi (ort.). Tarihli referans kur üzerinden doğrulanmış ABD fiyatından dönüştürüldü.</p><p class="verdict-desc">Referans döviz kurları 20 Kasım 2026 (2026-11-20) tarihli. ABD Standard (79,99 $) ve Ultimate (99,99 $) fiyatları doğrulanmıştır.</p><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%20Standart%20S%C3%BCr%C3%BCm%20i%C3%A7in%2085%2C59%20%24%20%2885%2C59%20%24%29.%20ToolWools%27ta%2044%20pazar%20kar%C5%9F%C4%B1la%C5%9Ft%C4%B1r%C4%B1ld%C4%B1.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%2085%2C59%20%24%20%28Standart%20S%C3%BCr%C3%BCm%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a></div></div>
         </div>
       </div>
     </section>
@@ -206,8 +206,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Bağlantıyı kopyala</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%20Standart%20S%C3%BCr%C3%BCm%20i%C3%A7in%2085%2C59%20%24%20%2879%2C99%20%24%20art%C4%B1%20sat%C4%B1%C5%9F%20vergisi%29.%20ToolWools%27ta%2044%20pazar%20kar%C5%9F%C4%B1la%C5%9Ft%C4%B1r%C4%B1ld%C4%B1.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">X'te paylaş</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%2085%2C59%20%24%20%28Standart%20S%C3%BCr%C3%BCm%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%20Standart%20S%C3%BCr%C3%BCm%20i%C3%A7in%2085%2C59%20%24%20%2879%2C99%20%24%20art%C4%B1%20sat%C4%B1%C5%9F%20vergisi%29.%20ToolWools%27ta%2044%20pazar%20kar%C5%9F%C4%B1la%C5%9Ft%C4%B1r%C4%B1ld%C4%B1.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">X'te paylaş</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=ABD%27de%20GTA%206%20fiyat%C4%B1%3A%2085%2C59%20%24%20%28Standart%20S%C3%BCr%C3%BCm%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a>
       </div>
     </section>
 <div data-price-table-slot>
@@ -238,14 +238,11 @@
       <p class="field-hint" style="margin-top:0.75rem">Standart (79,99 $) ve Ultimate (99,99 $) fiyatları doğrulandı. Ultimate'ın paketlenmiş GTA$ rakamı modellenmiştir, doğrulanmış değildir.</p>
     </section>
     </div>
-<section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+<section class="tier-read">
       <h2 id="related-tools-inline">Ön sipariş vermeden önce bunları kontrol edin</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/add-to-calendar">GTA 6 Çıkış Tarihi Hatırlatıcısı</a> · GTA 6 çıktı — yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</span></li><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/economy-calculator">GTA 6 Para ve İşletme ROI Hesaplayıcı</a> · Para yöntemlerini net $/saat ile sıralayın, herhangi bir birikim hedefini zamanlayın, işletme geri ödeme saatlerini karşılaştırın ve Shark Card'ları grind'e karşı fiyatlandırın.</span></li><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/system-requirements">GTA 6 Sistem Gereksinimleri Denetleyicisi</a> · Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</span></li><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/storage-planner">GTA 6 Depolama Planlayıcı</a> · Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/add-to-calendar">GTA 6 Çıkış Tarihi Hatırlatıcısı</a> · GTA 6 çıktı, yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</span></li><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/economy-calculator">GTA 6 Para ve İşletme ROI Hesaplayıcı</a> · Para yöntemlerini net $/saat ile sıralayın, herhangi bir birikim hedefini zamanlayın, işletme geri ödeme saatlerini karşılaştırın ve Shark Card'ları grind'e karşı fiyatlandırın.</span></li><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/system-requirements">GTA 6 Sistem Gereksinimleri Denetleyicisi</a> · Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</span></li><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/storage-planner">GTA 6 Depolama Planlayıcı</a> · Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</span></li></ul>
     </section>
-<aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Neyin doğrulandığı ve bu sayfanın neyi modellediği</strong> <span>Standard sürüm = 79,99 ABD doları ve Ultimate sürüm = 99,99 ABD doları (ikisi de Rockstar tarafından doğrulandı). Deluxe sürümü yoktur. Ultimate'ın paketlenmiş GTA$ ve bonus içerikleri modellenmiştir, doğrulanmış değildir. Döviz kurları 2026-11-20 tarihli statik referans değerlerdir, canlı akış yok, bu yüzden bugün okuduğunuz sayı gelecek hafta okuduğunuz sayıyla eşleşir ve tarih her zaman ekrandadır. Bölgesel fiyatlı pazarlar, ham dönüşüm yerine o bölgenin vitrin kuralını kullanır. Vergi, ülkenin standart tüketim vergisi oranında uygulanır; ABD satış vergisi eyalete göre değiştiği için %7 ulusal ortalama kullanır.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
-      <p class="updated-line">Güncellendi <time datetime="2026-11-20">20 Kasım 2026</time></p>
-    </aside>
+
 <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Ülkenizde GTA 6 fiyatını nasıl bulursunuz</h2>
       <p class="section-dek">Ülkenizden makbuz doğruluğunda bir sayıya beş adım.</p>
@@ -335,13 +332,15 @@ band =
   vsUs% <  8  → typical
   vsUs% < 30  → above average
   else         → most expensive</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Yalnızca 79,99 $ ABD Standard ve 99,99 $ ABD Ultimate fiyatları gerçek olarak ele alınır. Diğer her rakam ya tarihli bir dönüşüm ya da modellenmiş bir bölgesel fiyattır ve ikisi de yalnızca küçük yazıda değil, arayüzde bu şekilde etiketlenir.</li><li>Bölgesel fiyat düzeyleri, bir sızıntıdan veya söylenti listesinden değil, bu vitrinlerin her pazarda 59,99-79,99 $ sürümler için kullandığı mevcut liste fiyatlarından gelir.</li><li>Döviz kurları 2026-11-20'de dondurulmuştur, böylece sonuçlar yeniden üretilebilir; tarih her dönüştürülen rakamın yanında gösterilir.</li><li>Sıfır ondalıklı para birimleri (JPY, KRW, IDR, VND, CLP, COP, ARS, NGN, PKR, BDT, PHP) tam birimlere yuvarlanır, mağazaların onları gerçekten nasıl listelediğiyle eşleşir.</li><li>ABD satış vergisi, eyalet ve ilçe düzeyinde belirlendiği için %7 ulusal ortalama kullanır; ABD makbuz toplamını kesin değil, ±%3 olarak görün.</li><li>Deluxe sürümü yoktur. Ultimate basamağı 99,99 $'dır (Rockstar tarafından doğrulandı); paketlenmiş GTA$ rakamı modellenmiştir.</li></ul>
+          <ul class="list-disc list-outside"><li>Yalnızca 79,99 $ ABD Standard ve 99,99 $ ABD Ultimate fiyatları gerçek olarak ele alınır. Diğer her rakam ya tarihli bir dönüşüm ya da modellenmiş bir bölgesel fiyattır ve ikisi de yalnızca küçük yazıda değil, arayüzde bu şekilde etiketlenir.</li><li>Bölgesel fiyat düzeyleri, bir sızıntıdan veya söylenti listesinden değil, bu vitrinlerin her pazarda 59,99-79,99 $ sürümler için kullandığı mevcut liste fiyatlarından gelir.</li><li>Döviz kurları 2026-11-20'de dondurulmuştur, böylece sonuçlar yeniden üretilebilir; tarih her dönüştürülen rakamın yanında gösterilir.</li><li>Sıfır ondalıklı para birimleri (JPY, KRW, IDR, VND, CLP, COP, ARS, NGN, PKR, BDT, PHP) tam birimlere yuvarlanır, mağazaların onları gerçekten nasıl listelediğiyle eşleşir.</li><li>ABD satış vergisi, eyalet ve ilçe düzeyinde belirlendiği için %7 ulusal ortalama kullanır; ABD makbuz toplamını kesin değil, ±%3 olarak görün.</li><li>Deluxe sürümü yoktur. Ultimate basamağı 99,99 $'dır (Rockstar tarafından doğrulandı); paketlenmiş GTA$ rakamı modellenmiştir.</li></ul>
+    <div class="assumptions-block"><p><strong>Neyin doğrulandığı ve bu sayfanın neyi modellediği</strong> <span>Standard sürüm = 79,99 ABD doları ve Ultimate sürüm = 99,99 ABD doları (ikisi de Rockstar tarafından doğrulandı). Deluxe sürümü yoktur. Ultimate'ın paketlenmiş GTA$ ve bonus içerikleri modellenmiştir, doğrulanmış değildir. Döviz kurları 2026-11-20 tarihli statik referans değerlerdir, canlı akış yok, bu yüzden bugün okuduğunuz sayı gelecek hafta okuduğunuz sayıyla eşleşir ve tarih her zaman ekrandadır. Bölgesel fiyatlı pazarlar, ham dönüşüm yerine o bölgenin vitrin kuralını kullanır. Vergi, ülkenin standart tüketim vergisi oranında uygulanır; ABD satış vergisi eyalete göre değiştiği için %7 ulusal ortalama kullanır.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+      <p class="updated-line">Güncellendi <time datetime="2026-11-20">20 Kasım 2026</time></p></div>
         </div>
       </details>
     </section>
 <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 ne kadar? Ülke ve sürüm soruları</h2>
+      <header>
+        <h2 id="faq">GTA 6 ne kadar? Ülke ve sürüm soruları</h2>
         <p class="section-dek">Fiyat, vergi, sürümler ve bölge değiştirme hakkında doğrudan yanıtlar.</p>
       </header>
       <ul class="faq-list" role="list"><li><details class="faq-item" id="faq-q-1">
@@ -407,7 +406,7 @@ band =
 <section aria-labelledby="related-content">
       <h2 id="related-content">Ön sipariş vermeden önce bunları kontrol edin</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA 6 Çıkış Tarihi Hatırlatıcısı · GTA 6 çıktı — yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun."><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>GTA 6 çıktı — yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/economy-calculator" class="tool-card" data-accent="blue" aria-label="GTA 6 Para ve İş ROI Hesaplayıcı · Para yöntemlerini net $/saat ile sıralayın, herhangi bir birikim hedefini zamanlayın, iş geri ödeme saatlerini karşılaştırın ve Shark Card&#x27;ları grind ile fiyatlandırın."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg><h3>GTA 6 Para ve İşletme ROI Hesaplayıcı</h3><p>Para yöntemlerini net $/saat bazında sıralayın, herhangi bir birikim hedefini zamanlayın, işletme geri ödeme saatlerini karşılaştırın ve Shark Kartları çabaya göre fiyatlandırın.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi · Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA 6 Depolama Planlayıcı · Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay."><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>GTA 6 çıktı, yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/economy-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg><h3>GTA 6 Para ve İşletme ROI Hesaplayıcı</h3><p>Para yöntemlerini net $/saat bazında sıralayın, herhangi bir birikim hedefini zamanlayın, işletme geri ödeme saatlerini karşılaştırın ve Shark Kartları çabaya göre fiyatlandırın.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 <section aria-labelledby="sources">
       <h2 id="sources">Kaynaklar ve metodoloji referansları</h2>
@@ -430,7 +429,7 @@ band =
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.2</p>
         <time datetime="2026-11-20">20 Kasım 2026</time>
-        <p>Döviz kurları 2026-11-20'ye güncellendi. Deluxe sürümü kaldırıldı — böyle bir sürüm yoktur. Ultimate fiyatı 99,99 $ olarak düzeltildi ve Rockstar tarafından doğrulandı; paketlenmiş GTA$ rakamı modellenmiş olarak kalır.</p>
+        <p>Döviz kurları 2026-11-20'ye güncellendi. Deluxe sürümü kaldırıldı, böyle bir sürüm yoktur. Ultimate fiyatı 99,99 $ olarak düzeltildi ve Rockstar tarafından doğrulandı; paketlenmiş GTA$ rakamı modellenmiş olarak kalır.</p>
       </li><li>
         <p class="changelog-version">v1.1</p>
         <time datetime="2026-11-17">17 Kas 2026</time>
@@ -447,27 +446,45 @@ band =
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -506,10 +523,10 @@ band =
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-              <li><a href="/tr/terms">Kullanım Şartları</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -518,31 +535,30 @@ band =
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
   </div>
-</div>  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
+  </div>
+</div>
   <script src="/assets/js/tr/theme.js" defer></script>
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
   <script type="module" src="/assets/js/tr/price-by-country.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -588,7 +604,7 @@ band =
       },
       "datePublished": "2026-08-01",
       "dateModified": "2026-11-20",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

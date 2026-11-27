@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="ar_SA">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="tr_TR">
@@ -27,8 +27,8 @@
     <meta name="twitter:title" content="محسن إعدادات GTA 6">
     <meta name="twitter:description" content="اضبط أفضل إعدادات رسومات GTA 6، وأي الخيارات تكلف أكبر قدر من معدل الإطارات، وأيها شبه مجاني، ومن أين تبدأ بدقة 1080p و1440p و4K.">
     <meta name="twitter:image" content="https://toolwools.com/og/settings-optimizer.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/ar/tools/settings-optimizer">
 <link rel="alternate" href="https://toolwools.com/tools/settings-optimizer" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/settings-optimizer" hreflang="es">
@@ -41,12 +41,28 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-settings-optimizer-ar.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +70,14 @@
 
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools، الصفحة الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -75,6 +89,7 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -86,7 +101,7 @@
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/settings-optimizer">الإنجليزية</a>
             <a href="/es/tools/settings-optimizer">Español</a>
@@ -120,7 +135,11 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/settings-optimizer" lang="en">EN</a><a href="/es/tools/settings-optimizer" lang="es">ES</a><a href="/pt/tools/settings-optimizer" lang="pt">PT</a><a href="/de/tools/settings-optimizer" lang="de">DE</a><a href="/fr/tools/settings-optimizer" lang="fr">FR</a><a href="/tr/tools/settings-optimizer" lang="tr">TR</a><a href="/ar/tools/settings-optimizer" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,46 +148,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="مسار التنقل">
-        <a href="/ar/">الرئيسية</a>
-        <span aria-hidden="true">/</span>
-        <a href="/ar/tools">الأدوات</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">محسن الإعدادات</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-        <span>الأداء</span>
-      </div>
-      <h1 id="page-title" class="page-title">محسن إعدادات GTA 6</h1>
-      <p class="page-subtitle">اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية ومعدل الإطارات المستهدف. واحصل على إعداد مسبق لكل إعداد يعظم الصور دون إسقاط إطارات.</p>
-      <dl class="hero-badges">
-        <div><dt>المحرك</dt><dd>نموذج معدل الإطارات</dd></div>
-        <div><dt>زمن التشغيل</dt><dd>فوري، داخل المتصفح</dd></div>
-        <div><dt>المنصات</dt><dd>PC</dd></div>
-        <div><dt>تم التحديث</dt><dd><time datetime="2026-07-31">31 يوليو 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>مصنفة حسب تكلفة معدل الإطارات المقاسة لخفض خطوة واحدة، منمذجة على RDR2 و GTA V على الحاسوب، وهي خيارات محرك RAGE نفسها التي تشحنها GTA 6. ويشغل المحسن أدناه نموذج معدل الإطارات المشترك مباشرة: فيختار أعلى إعداد مسبق يحقق معدل الإطارات المستهدف، ثم يتراجع إلى جودة DLSS، ثم إلى توليد الإطارات.</p>
-          </div>
-<section class="byline" aria-label="حول هذه الصفحة">
-      <div>
-        <p class="byline-meta">بقلم <span class="byline-seg"><a href="/about#hardware-desk">مكتب أجهزة ToolWools</a>&nbsp;·</span> إعدادات الرسومات وتحليل زمن الإطار</p>
-        <p class="byline-note">راجعه <span class="byline-seg"><a href="/about#benchmark-reviewers">مراجعو قياسات GTA المستقلون</a>&nbsp;·</span> فُحص مقابل قياس RDR2 و GTA V على الحاسوب</p>
-      </div>
-      <p class="byline-dates">نُشر <time datetime="2026-02-10">10 فبراير 2026</time>&nbsp;· آخر مراجعة <time datetime="2026-07-31">31 يوليو 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="مسار التنقل">
+          <a href="/ar/">الرئيسية</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/ar/tools">الأدوات</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">محسن الإعدادات</span>
+        </div>
+        <div class="page-eyebrow"><span>الأداء</span></div>
+        <h1 id="page-title">محسن إعدادات GTA 6</h1>
+        <p class="page-subtitle">اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية ومعدل الإطارات المستهدف. واحصل على إعداد مسبق لكل إعداد يعظم الصور دون إسقاط إطارات.</p>
+        <p class="hero-meta">
+          <span>المحرك: نموذج معدل الإطارات</span><span>زمن التشغيل: فوري، داخل المتصفح</span><span>المنصات: PC</span><span>تم التحديث: <time datetime="2026-07-31">31 يوليو 2026</time></span><span>بقلم <a href="/about#hardware-desk">مكتب أجهزة ToolWools</a></span><span>إعدادات الرسومات وتحليل زمن الإطار</span><span>راجعه <a href="/about#benchmark-reviewers">مراجعو قياسات GTA المستقلون</a></span><span>فُحص مقابل قياس RDR2 و GTA V على الحاسوب</span><span>نُشر <time datetime="2026-02-10">10 فبراير 2026</time></span><span>آخر مراجعة <time datetime="2026-07-31">31 يوليو 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">يحقق 60 إطارا في الثانية. وتقدير 71 إطارا متوسطا في الثانية، و51 أدنى 1%، بدقة 1440p العالية.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>يحقق 60 إطارا في الثانية · باختصار</span></p>
-        <p class="tldr-text"><span data-tldr-text>نعم، بطاقة GeForce RTX 4070 + Ryzen 5 7600X تحقق 60 إطارا في الثانية بدقة 1440p على العالية: نحو 71 إطارا متوسطا في الثانية و51 إطارا أدنى 1%. وتصل الفائقة الأصلية إلى 49 إطارا في الثانية، والفائقة مع جودة DLSS تصل إلى 63 إطارا في الثانية.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>يحقق 60 إطارا في الثانية، 71 إطارا متوسطا في الثانية</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">المحسن</h2>
       <div class="workspace-grid">
@@ -216,8 +211,8 @@
           <div class="output-panel-label eyebrow-muted">الإعدادات الموصى بها</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">يحقق 60 إطارا في الثانية</p><h3 class="verdict-title">71<span class="unit"> متوسط معدل الإطارات</span></h3><p class="verdict-desc">نطاق 61 إلى 82 إطارا في الثانية (±15%)، و51 إطارا أدنى 1%. والإعداد المسبق العالي، أصلي، بدقة 1440p.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">متوسط معدل الإطارات</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">أدنى 1% لمعدل الإطارات</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><div class="upgrade-box"><p class="eyebrow-muted">الإعدادات الموصى بها</p><ul><li><strong>الإعداد المسبق: عال (أصلي)</strong>، أعلى إعداد مسبق يحقق 60 إطارا في الثانية على هذا الجهاز.</li><li><strong>الانعكاسات بتتبع الأشعة: متوقفة</strong>، 18 إلى 30%، أغلى خيار مفرد.</li><li><strong>الحجميات: متوسطة، الظلال: عالية</strong>، الخفضان التاليان، 8 إلى 14% و7 إلى 12%.</li><li><strong>القوام: أقصى، و AF 16x، و AO يعمل</strong>، شبه مجاني. ويلزم 7.8 غيغابايت، وبطاقتك بها 12 غيغابايت.</li></ul></div><dl class="stat-grid"><div><dt>الفائقة الأصلية</dt><dd>49 إطارا في الثانية</dd></div><div><dt>الموصى به</dt><dd>71 إطارا في الثانية</dd></div><div><dt>ذاكرة الفيديو المطلوبة</dt><dd>7.8 GB</dd></div><div><dt>فجوة الهدف</dt><dd>+11 fps</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%40%201440p%D8%8C%20%D8%A7%D9%84%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB%3A%20%D9%85%D8%B1%D8%AA%D9%81%D8%B9%D8%A9%20%C2%B7%2071%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7%20fps%20%2851%20%D8%A3%D8%AF%D9%86%D9%89%201%25%29.%20%D9%85%D9%8F%D8%AD%D8%B3%D9%90%D9%91%D9%86%20%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">مشاركة على X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206%20%D9%84%D9%80%20RTX%204070%20%2B%20Ryzen%205%207600X%20%D8%A8%D8%AF%D9%82%D8%A9%201440p%D8%8C%20%D8%A8%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%40%201440p%D8%8C%20%D8%A7%D9%84%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB%3A%20%D9%85%D8%B1%D8%AA%D9%81%D8%B9%D8%A9%20%C2%B7%2071%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7%20fps%20%2851%20%D8%A3%D8%AF%D9%86%D9%89%201%25%29.%20%D9%85%D9%8F%D8%AD%D8%B3%D9%90%D9%91%D9%86%20%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">مشاركة على X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206%20%D9%84%D9%80%20RTX%204070%20%2B%20Ryzen%205%207600X%20%D8%A8%D8%AF%D9%82%D8%A9%201440p%D8%8C%20%D8%A8%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -234,8 +229,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>نسخ الرابط</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%40%201440p%D8%8C%20%D8%A7%D9%84%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB%3A%20%D9%85%D8%B1%D8%AA%D9%81%D8%B9%D8%A9%20%C2%B7%2071%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7%20fps%20%2851%20%D8%A3%D8%AF%D9%86%D9%89%201%25%29.%20%D9%85%D9%8F%D8%AD%D8%B3%D9%90%D9%91%D9%86%20%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">مشاركة على X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على Reddit" href="https://www.reddit.com/submit?title=%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206%20%D9%84%D9%80%20RTX%204070%20%2B%20Ryzen%205%207600X%20%D8%A8%D8%AF%D9%82%D8%A9%201440p%D8%8C%20%D8%A8%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20%40%201440p%D8%8C%20%D8%A7%D9%84%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB%3A%20%D9%85%D8%B1%D8%AA%D9%81%D8%B9%D8%A9%20%C2%B7%2071%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7%20fps%20%2851%20%D8%A3%D8%AF%D9%86%D9%89%201%25%29.%20%D9%85%D9%8F%D8%AD%D8%B3%D9%90%D9%91%D9%86%20%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">مشاركة على X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20GTA%206%20%D9%84%D9%80%20RTX%204070%20%2B%20Ryzen%205%207600X%20%D8%A8%D8%AF%D9%82%D8%A9%201440p%D8%8C%20%D8%A8%D9%87%D8%AF%D9%81%2060%20%D8%A5%D8%B7%D8%A7%D8%B1%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
       </div>
     </section>
 
@@ -265,31 +260,28 @@
         <caption class="sr-only">إعدادات رسومات GTA 6 مصنفة حسب تكلفة معدل الإطارات المقدرة، مع توصية لكل منها</caption>
         <thead><tr><th scope="col">الإعداد</th><th scope="col">تكلفة معدل الإطارات</th><th scope="col">الحكم</th></tr></thead>
         <tbody>
-<tr class="align-top"><th scope="row">الانعكاسات بتتبع الأشعة<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">الخيار المفرد الأغلى في ألعاب RAGE. وتبدو انعكاسات مساحة الشاشة قريبة في الحركة وتكلف شبه لا شيء.</span></th><td class="mono">18–30%</td><td>اخفض أولا</td></tr>
-<tr class="align-top"><th scope="row">الضباب / السحب الحجمية<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">ضباب رطوبة Vice City ثقيل على المؤثرات الحجمية. ويحافظ Medium على المظهر ويعيد معظم الإطارات.</span></th><td class="mono">8–14%</td><td>اخفض إلى المتوسطة</td></tr>
-<tr class="align-top"><th scope="row">جودة الظلال<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">الظلال الفائقة تمد في الغالب مسافة التتابع. وبدقة 1080p لن ترى الفرق أثناء القيادة.</span></th><td class="mono">7–12%</td><td>عالية وليست فائقة</td></tr>
-<tr class="align-top"><th scope="row">محاكاة الماء / المحيط<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">تعض فقط قرب الساحل و Everglades، وهي معظم الخريطة، فعاملها كتكلفة حقيقية.</span></th><td class="mono">5–9%</td><td>يعتمد على المشهد</td></tr>
-<tr class="align-top"><th scope="row">MSAA للانعكاس<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">إعداد قديم من GTA V يعاقب البطاقات متوسطة المدى مقابل مكسب بالكاد يُرى. وتوقع الشيء نفسه هنا.</span></th><td class="mono">5–8%</td><td>متوقف</td></tr>
-<tr class="align-top"><th scope="row">جودة القوام<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">إطارات مجانية حتى تتجاوز ميزانية ذاكرة الفيديو، وعندها تنهار أدنى 1% إلى تقطع.</span></th><td class="mono">0 إلى 3% (حتى نفاد ذاكرة الفيديو)</td><td>اجعله أقصى إذا سمحت ذاكرة الفيديو</td></tr>
-<tr class="align-top"><th scope="row">الترشيح متباين الخواص<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">مجاني فعليا على أي وحدة معالجة رسومات من العقد الماضي. ولا تخفضه أبدا.</span></th><td class="mono">1–2%</td><td>16x دائما</td></tr>
-<tr class="align-top"><th scope="row">الاحتجاب المحيطي<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">تأريض رخيص لمدينة مليئة بالدعائم. ويستحق الخفض فقط على وحدات معالجة الرسومات دون المستوى الموصى به.</span></th><td class="mono">3–5%</td><td>أبقه يعمل</td></tr>
+<tr class="align-top"><th scope="row">الانعكاسات بتتبع الأشعة<span class="cell-note">الخيار المفرد الأغلى في ألعاب RAGE. وتبدو انعكاسات مساحة الشاشة قريبة في الحركة وتكلف شبه لا شيء.</span></th><td class="mono">18–30%</td><td>اخفض أولا</td></tr>
+<tr class="align-top"><th scope="row">الضباب / السحب الحجمية<span class="cell-note">ضباب رطوبة Vice City ثقيل على المؤثرات الحجمية. ويحافظ Medium على المظهر ويعيد معظم الإطارات.</span></th><td class="mono">8–14%</td><td>اخفض إلى المتوسطة</td></tr>
+<tr class="align-top"><th scope="row">جودة الظلال<span class="cell-note">الظلال الفائقة تمد في الغالب مسافة التتابع. وبدقة 1080p لن ترى الفرق أثناء القيادة.</span></th><td class="mono">7–12%</td><td>عالية وليست فائقة</td></tr>
+<tr class="align-top"><th scope="row">محاكاة الماء / المحيط<span class="cell-note">تعض فقط قرب الساحل و Everglades، وهي معظم الخريطة، فعاملها كتكلفة حقيقية.</span></th><td class="mono">5–9%</td><td>يعتمد على المشهد</td></tr>
+<tr class="align-top"><th scope="row">MSAA للانعكاس<span class="cell-note">إعداد قديم من GTA V يعاقب البطاقات متوسطة المدى مقابل مكسب بالكاد يُرى. وتوقع الشيء نفسه هنا.</span></th><td class="mono">5–8%</td><td>متوقف</td></tr>
+<tr class="align-top"><th scope="row">جودة القوام<span class="cell-note">إطارات مجانية حتى تتجاوز ميزانية ذاكرة الفيديو، وعندها تنهار أدنى 1% إلى تقطع.</span></th><td class="mono">0 إلى 3% (حتى نفاد ذاكرة الفيديو)</td><td>اجعله أقصى إذا سمحت ذاكرة الفيديو</td></tr>
+<tr class="align-top"><th scope="row">الترشيح متباين الخواص<span class="cell-note">مجاني فعليا على أي وحدة معالجة رسومات من العقد الماضي. ولا تخفضه أبدا.</span></th><td class="mono">1–2%</td><td>16x دائما</td></tr>
+<tr class="align-top"><th scope="row">الاحتجاب المحيطي<span class="cell-note">تأريض رخيص لمدينة مليئة بالدعائم. ويستحق الخفض فقط على وحدات معالجة الرسومات دون المستوى الموصى به.</span></th><td class="mono">3–5%</td><td>أبقه يعمل</td></tr>
         </tbody>
       </table>
     </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">واصل تخطيط جهاز GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>توقع معدل إطاراتك قبل أن تبدأ بخفض الإعدادات باستخدام <a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>اعثر على مستوى القوام الذي تستطيع بطاقتك تحمله دون تقطع في <a href="/ar/tools/vram-calculator">حاسبة ذاكرة الفيديو</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجها لوجه في <a href="/ar/tools/hardware-comparison">مقارنة الأجهزة</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>للتحقق من جهازك مقابل المستويات الدنيا والموصى بها والفائقة في <a href="/ar/tools/system-requirements">مدقق متطلبات النظام</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>توقع معدل إطاراتك قبل أن تبدأ بخفض الإعدادات باستخدام <a href="/ar/tools/fps-calculator">حاسبة معدل الإطارات</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>اعثر على مستوى القوام الذي تستطيع بطاقتك تحمله دون تقطع في <a href="/ar/tools/vram-calculator">حاسبة ذاكرة الفيديو</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قارن وحدتي معالجة رسومات أو وحدتي معالجة مركزية وجها لوجه في <a href="/ar/tools/hardware-comparison">مقارنة الأجهزة</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>للتحقق من جهازك مقابل المستويات الدنيا والموصى بها والفائقة في <a href="/ar/tools/system-requirements">مدقق متطلبات النظام</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="الافتراضات">
-      <p><strong>الافتراضات</strong> <span>تكاليف معدل الإطارات لكل إعداد هي فرق معدل الإطارات المتوسط المقاس لخفض خطوة واحدة (من الفائقة إلى العالية)، منمذجة على RDR2 و GTA V على الحاسوب حيث توجد خيارات محرك RAGE نفسها. والتكاليف ليست معدلات إطارات مطلقة. ويشغل المحسن نموذج معدل الإطارات المشترك مباشرة. وحتى تشحن Rockstar نسخة الحاسوب وقائمة الرسومات، يكون كل رقم منمذجا، ونعيد القياس وإعادة النشر خلال 48 ساعة من إصدار الحاسوب.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
-      <p class="updated-line">تم التحديث <time datetime="2026-07-31">31 يوليو 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">اضبطه يدويا في خمس جولات</h2>
@@ -326,17 +318,19 @@ recommended = highest preset where avg >= target, native first
 إذا لم يناسب أي إعداد: أعد المحاولة مع DLSS Quality (x1.30)، ثم frame gen (المتوسط x1.70 فقط)
 low         = avg x 0.72 (0.62 when CPU-bound)
 band        = [avg x 0.85, avg x 1.15]</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>مضاعفات الإعداد المسبق: منخفضة x1.55 ومتوسطة x1.25 وعالية 1.00 وعالية جدا x0.82 وفائقة x0.68. و BASE_FPS على العالية: 1080p 132 و1440p 102 و1440p فائقة العرض 84 و4K 62.</li>
+          <ul class="list-disc list-outside"><li>مضاعفات الإعداد المسبق: منخفضة x1.55 ومتوسطة x1.25 وعالية 1.00 وعالية جدا x0.82 وفائقة x0.68. و BASE_FPS على العالية: 1080p 132 و1440p 102 و1440p فائقة العرض 84 و4K 62.</li>
 <li>يأتي ترتيب التكلفة لكل إعداد من الجدول أعلاه: الانعكاسات بتتبع الأشعة 18 إلى 30% والحجميات 8 إلى 14% والظلال 7 إلى 12%. وكل شيء آخر أرقام أحادية حتى نفاد ذاكرة الفيديو.</li>
 <li>يؤدي نقص ذاكرة الفيديو إلى عقوبة 25% على متوسط معدل الإطارات وعقوبة 50% على أدنى 1%، وهو سلوك فيض برنامج التشغيل المقاس في Cyberpunk 2077 عند تكوينات ذاكرة فيديو فوق الميزانية. وتبقى القوام في أقصاها فقط بينما تتجاوز البطاقة التجمع.</li>
 <li>يضاعف توليد الإطارات المتوسط بـ1.7x (DLSS 3) أو 1.6x (FSR 3)، وتبقى أدنى 1% دون تغيير لأن الإطارات المستنتجة لا تقلل التباين الحقيقي لزمن الإطار.</li></ul>
+    <div class="assumptions-block"><p><strong>الافتراضات</strong> <span>تكاليف معدل الإطارات لكل إعداد هي فرق معدل الإطارات المتوسط المقاس لخفض خطوة واحدة (من الفائقة إلى العالية)، منمذجة على RDR2 و GTA V على الحاسوب حيث توجد خيارات محرك RAGE نفسها. والتكاليف ليست معدلات إطارات مطلقة. ويشغل المحسن نموذج معدل الإطارات المشترك مباشرة. وحتى تشحن Rockstar نسخة الحاسوب وقائمة الرسومات، يكون كل رقم منمذجا، ونعيد القياس وإعادة النشر خلال 48 ساعة من إصدار الحاسوب.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
+      <p class="updated-line">تم التحديث <time datetime="2026-07-31">31 يوليو 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">أسئلة إعدادات GTA 6، أجوبة</h2>
+      <header>
+        <h2 id="faq">أسئلة إعدادات GTA 6، أجوبة</h2>
         <p class="section-dek">أسئلة الضبط التي يبحث عنها الناس فعلا الآن بعد صدور اللعبة.</p>
       </header>
 <ul class="faq-list" role="list">
@@ -381,10 +375,10 @@ band        = [avg x 0.85, avg x 1.15]</pre>
       <h2 id="related-content">أدوات تقترن بهذه الإعدادات</h2>
       <h3 class="related-sub">أدوات ذات صلة</h3>
 <ul class="related-tools-grid">
-<li><a href="/ar/tools/hardware-comparison" class="tool-card" data-accent="purple" aria-label="مقارنة أجهزة GTA 6، قارن وحدات معالجة الرسومات ووحدات المعالجة المركزية وجهًا لوجه لـ GTA 6، ومعدلات الإطارات المتوقعة عند 1440p وهامش ذاكرة الفيديو واستهلاك الطاقة والتكلفة لكل إطار عبر كل مستوى حالي."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مقارنة أجهزة GTA 6</h3><p>قارن وحدات معالجة الرسومات ووحدات المعالجة المركزية وجها لوجه للعبة GTA 6، ومعدلات إطارات 1440p المتوقعة وهامش ذاكرة الفيديو واستهلاك الطاقة والتكلفة لكل إطار عبر كل مستوى حالي.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="blue" aria-label="مدقق متطلبات نظام GTA 6، حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/fps-calculator" class="tool-card" data-accent="pink" aria-label="حاسبة معدل إطارات GTA 6، قدّر معدل الإطارات لوحدة معالجة الرسومات الخاصة بك عند 1080p و1440p و4K عبر Low و Medium و High و Ultra."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>حاسبة معدل إطارات GTA 6</h3><p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/vram-calculator" class="tool-card" data-accent="purple" aria-label="مدقق متطلبات ذاكرة فيديو GTA 6، تحقق من الحد الأدنى لذاكرة الفيديو التي تحتاجها للعبة GTA 6 بدقة 1080p و1440p و4K. حكم لبطاقات 6 غيغابايت و8 غيغابايت و12 غيغابايت و16 غيغابايت."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مدقق متطلبات ذاكرة فيديو GTA 6</h3><p>اختر الدقة وإعداد الجودة المسبق. وتعرض الأداة الحد الأدنى من ذاكرة الفيديو المطلوبة وما إذا كانت وحدة معالجة الرسومات لديك تجتاز.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/hardware-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مقارنة أجهزة GTA 6</h3><p>قارن وحدات معالجة الرسومات ووحدات المعالجة المركزية وجها لوجه للعبة GTA 6، ومعدلات إطارات 1440p المتوقعة وهامش ذاكرة الفيديو واستهلاك الطاقة والتكلفة لكل إطار عبر كل مستوى حالي.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/fps-calculator" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>حاسبة معدل إطارات GTA 6</h3><p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/vram-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>مدقق متطلبات ذاكرة فيديو GTA 6</h3><p>اختر الدقة وإعداد الجودة المسبق. وتعرض الأداة الحد الأدنى من ذاكرة الفيديو المطلوبة وما إذا كانت وحدة معالجة الرسومات لديك تجتاز.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
 </ul>
     </section>
 
@@ -420,29 +414,47 @@ band        = [avg x 0.85, avg x 1.15]</pre>
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools، الصفحة الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -482,6 +494,9 @@ band        = [avg x 0.85, avg x 1.15]</pre>
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -490,6 +505,7 @@ band        = [avg x 0.85, avg x 1.15]</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
@@ -497,11 +513,22 @@ band        = [avg x 0.85, avg x 1.15]</pre>
   </div>
 </footer>
   </div>
-  <script src="/assets/js/ar/theme.js" defer></script>
-  <script src="/assets/js/ar/header.js" defer></script>
-  <script src="/assets/js/ar/search.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/consent.js" defer></script>
   <script type="module" src="/assets/js/ar/settings-optimizer.js"></script>
+
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -547,7 +574,7 @@ band        = [avg x 0.85, avg x 1.15]</pre>
       },
       "datePublished": "2026-02-10",
       "dateModified": "2026-07-31",
-      "inLanguage": "en"
+      "inLanguage": "ar"
     },
     {
       "@type": "HowTo",

@@ -34,7 +34,7 @@ var tzSelect = $("[data-tz-select]");
 if (tzSelect) {
   var utcOpt = document.createElement("option");
   utcOpt.value = "UTC";
-  utcOpt.textContent = "UTC — التوقيت العالمي المنسق";
+  utcOpt.textContent = "UTC, التوقيت العالمي المنسق";
   tzSelect.appendChild(utcOpt);
   REGIONS.forEach(function (r) {
     var opt = document.createElement("option");
@@ -68,7 +68,7 @@ function renderLaunchLocal() {
   var local = tz === "UTC"
     ? "19 نوفمبر 2026، 05:00 UTC"
     : formatInTz(LAUNCH_UTC, tz);
-  el.textContent = "الإطلاق: 19 نوفمبر 2026، 05:00 UTC — " + local + " (بتوقيت " + regionLabel(tz) + ").";
+  el.textContent = "الإطلاق: 19 نوفمبر 2026، 05:00 UTC, " + local + " (بتوقيت " + regionLabel(tz) + ").";
 }
 
 var lastAnnouncedMinute = null;

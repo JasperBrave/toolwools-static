@@ -86,7 +86,7 @@ function copyText(text, btn, labelSel) {
 }
 
 function shortAnswer(price) {
-  var s = "GTA 6 costs " + formatUsd(EDITIONS.standard.usd) + " USD for the Standard edition; Ultimate is $99.99 — both confirmed by Rockstar. "
+  var s = "GTA 6 costs " + formatUsd(EDITIONS.standard.usd) + " USD for the Standard edition; Ultimate is $99.99, both confirmed by Rockstar. "
     + "In " + price.market.country + " that models out to " + formatLocal(price.totalLocal, price.market) + " for " + EDITIONS[state.edition].label + ", or about "
     + formatUsd(price.usdEquivalent) + " once " + price.market.taxLabel.toLowerCase() + " is counted. "
     + "That is " + BAND_LABEL[price.band].toLowerCase();
@@ -98,8 +98,8 @@ function shareRowHtml(text, title) {
   var url = shareUrl();
   return '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + "&url=" + encodeURIComponent(url) + '">Share on X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(title) + "&url=" + encodeURIComponent(url) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + "&url=" + encodeURIComponent(url) + '">Share on X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(title) + "&url=" + encodeURIComponent(url) + '">Reddit</a>'
     + "</div>";
 }
 function countryTabHtml(price) {
@@ -229,8 +229,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Share this result on X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Share this result on Reddit"]');
+  var xLink = document.querySelector('.share-panel a[href*="twitter.com"]');
+  var rLink = document.querySelector('.share-panel a[href*="reddit.com"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());
 

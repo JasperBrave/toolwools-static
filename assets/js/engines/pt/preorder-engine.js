@@ -67,7 +67,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "O melhor equilíbrio entre proteção de preço e cancelamento; verifique quando o código chega — o prazo de entrega varia.",
+    note: "O melhor equilíbrio entre proteção de preço e cancelamento; verifique quando o código chega, o prazo de entrega varia.",
     terms: [
       "Os códigos são emitidos com frequência perto do lançamento, o que pode deixar pouco tempo para baixar antes de você querer jogar.",
       "A maioria dos grandes varejistas aplica garantias de preço: você paga o menor preço visto antes do lançamento.",

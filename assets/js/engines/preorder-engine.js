@@ -66,7 +66,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Best balance of price protection and cancellability; check when the code arrives — delivery timing varies.",
+    note: "Best balance of price protection and cancellability; check when the code arrives, delivery timing varies.",
     terms: [
       "Codes are frequently issued close to launch, which can leave too little time to download before you want to play.",
       "Most large retailers apply price guarantees: you pay the lowest price seen before release.",
@@ -240,7 +240,7 @@ export function rankChannels(input) {
   ].filter(Boolean);
   const priorities = wanted.length === 0 ? "no strong preference beyond value" : wanted.length === 1 ? wanted[0] : `${wanted.slice(0, -1).join(", ")} and ${wanted.at(-1)}`;
   const headline = `${best.channel.short} on ${platform.label}`;
-  const reason = `Because you told us ${priorities} matters, ${best.channel.label.toLowerCase()} scores ${best.score} of 100 for a ${edition.label} order in ${region.label} — leading on ${best.strengths.join(" and ").toLowerCase() || "overall balance"}${runnerUp ? `, ahead of ${runnerUp.channel.short.toLowerCase()} at ${runnerUp.score}` : ""}.`;
+  const reason = `Because you told us ${priorities} matters, ${best.channel.label.toLowerCase()} scores ${best.score} of 100 for a ${edition.label} order in ${region.label}, leading on ${best.strengths.join(" and ").toLowerCase() || "overall balance"}${runnerUp ? `, ahead of ${runnerUp.channel.short.toLowerCase()} at ${runnerUp.score}` : ""}.`;
   return {
     platform,
     region,

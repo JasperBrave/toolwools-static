@@ -108,7 +108,7 @@ function verdictHtml(result) {
     if (!e.available) desc += " غير معروض للبيع على " + result.platformLabel + ".";
     else if (e.overBudget) desc += " فوق السقف الذي حددته.";
     desc += " الثقة: " + CONFIDENCE_LABEL[e.confidence] + ".";
-    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
+    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + ": " + e.score + "/100</strong>, " + esc(desc) + "</li>";
   }).join("");
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">أفضل قيمة \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
@@ -121,14 +121,14 @@ function verdictHtml(result) {
     + "<div><dt>السقف الذي حددته</dt><dd>" + result.upliftTolerance + "%</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="' + xUrl(result) + '">مشاركة على X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">مشاركة على X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function matrixHtml(result) {
   var items = result.best.bonuses.map(function (b) {
-    return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
+    return "<li><strong>" + esc(b.label) + ": " + b.utility + " pts</strong>, " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">جديد في هذا المستوى: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
@@ -137,20 +137,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " مكافآت</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="' + xUrl(result) + '">مشاركة على X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">مشاركة على X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">حساب الترقية</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="' + xUrl(result) + '">مشاركة على X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">مشاركة على X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -178,13 +178,13 @@ function render() {
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 ملخّص";
     if (tText) tText.textContent = result.best.edition.label + " هو أفضل قيمة للاعب " + buyerPhrase(result.profile) + " على " + result.platformLabel + " بسقف " + result.upliftTolerance + "%: " + result.best.score + "/100، ويضيف " + result.best.utilityDelta + " نقاط مرجحة فوق Standard مقابل زيادة " + result.best.edition.upliftPercent + "%.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 قيمة " + result.best.score + "/100 مقابل الزيادة";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + ": قيمة " + result.best.score + "/100 مقابل الزيادة";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "كل إصدار من GTA 6 يشمل حملة القصة الكاملة والوضع الأونلاين الكامل \u2014 صدرت اللعبة في 19 نوفمبر 2026 الساعة 05:00 UTC ولا يبيع أي مستوى قصة إضافية. على " + esc(result.platformLabel) + "، للاعب " + esc(buyerPhrase(result.profile)) + " بسقف " + result.upliftTolerance + "% فوق Standard، أفضل قيمة هي <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "كل إصدار من GTA 6 يشمل حملة القصة الكاملة والوضع الأونلاين الكامل, صدرت اللعبة في 19 نوفمبر 2026 الساعة 05:00 UTC ولا يبيع أي مستوى قصة إضافية. على " + esc(result.platformLabel) + "، للاعب " + esc(buyerPhrase(result.profile)) + " بسقف " + result.upliftTolerance + "% فوق Standard، أفضل قيمة هي <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

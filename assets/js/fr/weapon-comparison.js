@@ -3212,16 +3212,16 @@ function ratingBar(label, a, b) {
     else if (Number(b) > Number(a)) pill = '<span class="winner-pill">B gagne</span>';
     else pill = '<span class="winner-pill">Égalité</span>';
   }
-  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
+  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + aw + '%"></div></div></div>' +
-    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
+    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + bw + '%"></div></div></div>' +
     '<p class="field-hint">' + pill + '</p></div>';
 }
 
 function detailRow(label, a, b) {
-  return '<div><dt>' + esc(label) + ' — A</dt><dd>' + a + '</dd></div>' +
-    '<div><dt>' + esc(label) + ' — B</dt><dd>' + b + '</dd></div>';
+  return '<div><dt>' + esc(label) + ': A</dt><dd>' + a + '</dd></div>' +
+    '<div><dt>' + esc(label) + ': B</dt><dd>' + b + '</dd></div>';
 }
 
 function renderCompare() {

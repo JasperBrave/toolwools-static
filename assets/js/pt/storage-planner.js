@@ -11,7 +11,7 @@ var PLATFORMS = {
   xsx: { label: "Xbox Series X", usableGB: 802, note: "O SSD de 1 TB do Xbox reporta 802 GB utilizáveis após a reserva do sistema." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC (planejamento)", drive: "Seu SSD NVMe / SATA", reserve: "—", usable: 0 },
+  { p: "PC (planejamento)", drive: "Seu SSD NVMe / SATA", reserve: "n/a", usable: 0 },
   { p: "PS5 (825 GB)", drive: "SSD personalizado da Sony", reserve: "158 GB de sistema", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "SSD personalizado da Sony", reserve: "158 GB de sistema", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "Cartão de expansão NVMe", reserve: "198 GB de sistema", usable: 802 },
@@ -180,8 +180,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 precisa de cerca de " + fmt1(r.total) + " GB livres") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

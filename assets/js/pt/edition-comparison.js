@@ -109,7 +109,7 @@ function verdictHtml(result) {
     if (!e.available) desc += " Não vendido em " + result.platformLabel + ".";
     else if (e.overBudget) desc += " Acima do teto que você definiu.";
     desc += " Confiança: " + L(CONFIDENCE_LABEL[e.confidence]) + ".";
-    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
+    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + ": " + e.score + "/100</strong>, " + esc(desc) + "</li>";
   }).join("");
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">Melhor valor \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
@@ -122,14 +122,14 @@ function verdictHtml(result) {
     + "<div><dt>Seu teto</dt><dd>" + result.upliftTolerance + "%</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="' + xUrl(result) + '">Compartilhar no X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartilhar no X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function matrixHtml(result) {
   var items = result.best.bonuses.map(function (b) {
-    return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(L(CATEGORY_LABEL[b.category])) + " \u00b7 " + esc(L(CONFIDENCE_LABEL[b.confidence])) + ". " + esc(b.detail) + "</li>";
+    return "<li><strong>" + esc(b.label) + ": " + b.utility + " pts</strong>, " + esc(L(CATEGORY_LABEL[b.category])) + " \u00b7 " + esc(L(CONFIDENCE_LABEL[b.confidence])) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">Novo neste nível: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
@@ -138,20 +138,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bónus</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="' + xUrl(result) + '">Compartilhar no X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartilhar no X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">Matemática de upgrade</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="' + xUrl(result) + '">Compartilhar no X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartilhar no X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -179,7 +179,7 @@ function render() {
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 TL;DR";
     if (tText) tText.textContent = result.best.edition.label + " é a melhor opção para um " + buyerPhrase(result.profile) + " em " + result.platformLabel + " com um teto de " + result.upliftTolerance + "%: " + result.best.score + "/100, adicionando " + result.best.utilityDelta + " pontos ponderados sobre o Standard por um " + result.best.edition.upliftPercent + "% de acréscimo.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 valor pelo acréscimo";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + ": " + result.best.score + "/100 valor pelo acréscimo";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 

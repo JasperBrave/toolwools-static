@@ -148,7 +148,7 @@ function renderSchedule() {
     var size = "";
     if (row.ps5) size += "PS5 " + row.ps5;
     if (row.xbox) size += (size ? " · " : "") + "Xbox " + row.xbox;
-    if (!size) size = row.size || "—";
+    if (!size) size = row.size || "–";
     sizeTd.textContent = size;
     tr.appendChild(sizeTd);
     var srcTd = document.createElement("td");

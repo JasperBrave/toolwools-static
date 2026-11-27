@@ -4847,16 +4847,16 @@ function ratingBar(label, a, b) {
     else if (Number(b) > Number(a)) pill = '<span class="winner-pill">B vence</span>';
     else pill = '<span class="winner-pill">Empate</span>';
   }
-  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
+  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + aw + '%"></div></div></div>' +
-    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
+    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + bw + '%"></div></div></div>' +
     '<p class="field-hint">' + pill + '</p></div>';
 }
 
 function detailRow(label, a, b) {
-  return '<div><dt>' + esc(label) + ' — A</dt><dd>' + a + '</dd></div>' +
-    '<div><dt>' + esc(label) + ' — B</dt><dd>' + b + '</dd></div>';
+  return '<div><dt>' + esc(label) + ': A</dt><dd>' + a + '</dd></div>' +
+    '<div><dt>' + esc(label) + ': B</dt><dd>' + b + '</dd></div>';
 }
 
 function renderCompare() {
@@ -4872,7 +4872,7 @@ function renderCompare() {
   }
   var html = '<div class="verdict-body"><div><p class="verdict-kicker">' + esc(classLabel(a["class"])) + ' vs ' + esc(classLabel(b["class"])) + '</p>' +
     '<h3 class="verdict-title">' + esc(a.name) + ' <span class="unit">vs</span> ' + esc(b.name) + '</h3>' +
-    '<p class="verdict-desc">Velocidade, Aceleração, Manuseio no asfalto, Manuseio off-road e Força são as avaliações próprias do jogo de 10 — não velocidades máximas medidas. ' + esc(a.name) + ': ' + badge(a) + '. ' + esc(b.name) + ': ' + badge(b) + '.</p></div></div>' +
+    '<p class="verdict-desc">Velocidade, Aceleração, Manuseio no asfalto, Manuseio off-road e Força são as avaliações próprias do jogo de 10, não velocidades máximas medidas. ' + esc(a.name) + ': ' + badge(a) + '. ' + esc(b.name) + ': ' + badge(b) + '.</p></div></div>' +
     ratingBar("Velocidade", a.stats.speed, b.stats.speed) +
     ratingBar("Aceleração", a.stats.acceleration, b.stats.acceleration) +
     ratingBar("Manuseio no asfalto", a.stats.asphaltHandling, b.stats.asphaltHandling) +

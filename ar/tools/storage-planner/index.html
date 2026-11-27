@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="ar_SA">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="tr_TR">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="مخطط تخزين GTA 6">
     <meta name="twitter:description" content="خطط لمساحة القرص الحرة للعبة GTA 6، التثبيت الأساسي وتصحيح الإطلاق والمحتوى القابل للتنزيل وهامش تحديث آمن في رقم واحد صادق. حساب الحاسوب ووحدة التحكم جنبًا إلى جنب، بالإضافة إلى تقدير حاسوب مخطط له.">
     <meta name="twitter:image" content="https://toolwools.com/og/storage-planner.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/ar/tools/storage-planner">
 <link rel="alternate" href="https://toolwools.com/tools/storage-planner" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/storage-planner" hreflang="es">
@@ -43,26 +41,42 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-storage-planner-ar.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -74,6 +88,7 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -85,7 +100,7 @@
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/storage-planner">الإنجليزية</a>
             <a href="/es/tools/storage-planner">Español</a>
@@ -119,7 +134,11 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/storage-planner" lang="en">EN</a><a href="/es/tools/storage-planner" lang="es">ES</a><a href="/pt/tools/storage-planner" lang="pt">PT</a><a href="/de/tools/storage-planner" lang="de">DE</a><a href="/fr/tools/storage-planner" lang="fr">FR</a><a href="/tr/tools/storage-planner" lang="tr">TR</a><a href="/ar/tools/storage-planner" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -128,47 +147,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="مسار التنقل">
-        <a href="/ar/">الرئيسية</a>
-        <span aria-hidden="true">/</span>
-        <a href="/ar/tools">الأدوات</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">مخطط التخزين</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>
-        <span>المخططات</span>
-      </div>
-      <h1 id="page-title" class="page-title">مخطط تخزين GTA 6</h1>
-      <p class="page-subtitle">خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات.</p>
-      <dl class="hero-badges">
-        <div><dt>المحرك</dt><dd>حساب المساحة</dd></div>
-        <div><dt>زمن التشغيل</dt><dd>فوري، داخل المتصفح</dd></div>
-        <div><dt>المنصات</dt><dd>PC (تخطيط) · PS5 · Xbox</dd></div>
-        <div><dt>تم التحديث</dt><dd><time datetime="2026-11-22">22 نوفمبر 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>تحتاج GTA 6 إلى نحو 212 غيغابايت قبل تصحيح اليوم الأول و 244.8 غيغابايت بعد إضافته وإضافة محتوى السنة الأولى القابل للتنزيل. ويضيف هذا المخطط هامشك ويعرض المجموع، ثم يقارنه بالمساحة القابلة للاستخدام على PS5 و Xbox Series X/S — ولم يُعلن عن نسخة للحاسوب بعد، لذا فإن صف الحاسوب للتخطيط فقط — فتعرف ما إذا كنت بحاجة إلى تحرير مساحة قبل التثبيت.</p>
-          </div>
-<section class="byline" aria-label="حول هذه الصفحة">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="جاسبر برافو، مؤسس ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">بقلم <span class="byline-seg"><a href="/ar/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> مؤسس ToolWools&nbsp;· تحليل التخزين والتحميل المسبق</p>
-        <p class="byline-note">النموذج: <a href="/ar/methodology">حساب تخزين GTA 6</a></p>
-      </div>
-      <p class="byline-dates">نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time>&nbsp;· آخر مراجعة <time datetime="2026-11-22">22 نوفمبر 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="مسار التنقل">
+          <a href="/ar/">الرئيسية</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/ar/tools">الأدوات</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">مخطط التخزين</span>
+        </div>
+        <div class="page-eyebrow"><span>المخططات</span></div>
+        <h1 id="page-title">مخطط تخزين GTA 6</h1>
+        <p class="page-subtitle">خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات.</p>
+        <p class="hero-meta">
+          <span>المحرك: حساب المساحة</span><span>زمن التشغيل: فوري، داخل المتصفح</span><span>المنصات: PC (تخطيط) · PS5 · Xbox</span><span>تم التحديث: <time datetime="2026-11-22">22 نوفمبر 2026</time></span><span>بقلم <a href="/ar/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>مؤسس ToolWools</span><span>تحليل التخزين والتحميل المسبق</span><span>النموذج: <a href="/ar/methodology">حساب تخزين GTA 6</a></span><span>نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time></span><span>آخر مراجعة <time datetime="2026-11-22">22 نوفمبر 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">المساحة الحرة الموصى بها 293.8 غيغابايت: تثبيت 212 غيغابايت، وتصحيح 2.8 غيغابايت، ومحتوى قابل للتنزيل 30 غيغابايت، وهامش 49 غيغابايت.</div>
-<section class="tldr-card" data-tldr-card data-tone="borderline" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-borderline" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>اترك 293.8 غيغابايت حرة · باختصار</span></p>
-        <p class="tldr-text"><span data-tldr-text>اترك 293.8 غيغابايت حرة للعبة GTA 6 على PS5: تثبيت 212 غيغابايت + تصحيح 2.8 غيغابايت + محتوى قابل للتنزيل 30 غيغابايت + هامش 49 غيغابايت.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>293.8 غيغابايت مساحة حرة موصى بها</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">الحاسبة</h2>
       <div class="workspace-grid">
@@ -186,17 +180,17 @@
 <div>
             <label class="field-label" for="base-range">التثبيت الأساسي: <span data-base-value>212 غيغابايت</span></label>
             <input class="range-input" type="range" id="base-range" data-base-range min="50" max="300" step="1" value="212" aria-label="حجم التثبيت الأساسي، حاليا 212 غيغابايت">
-            
+
           </div>
 <div>
             <label class="field-label" for="patch-range">تصحيح اليوم الأول: <span data-patch-value>2.8 غيغابايت</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-valuetext="2.8 غيغابايت" aria-label="حجم تصحيح اليوم الأول، حاليا 2.8 غيغابايت">
-            
+
           </div>
 <div>
             <label class="field-label" for="dlc-range">المحتوى القابل للتنزيل + المحتوى الموسمي: <span data-dlc-value>30 غيغابايت</span></label>
             <input class="range-input" type="range" id="dlc-range" data-dlc-range min="0" max="200" step="5" value="30" aria-label="المحتوى القابل للتنزيل والمحتوى الموسمي، حاليا 30 غيغابايت">
-            
+
           </div>
 <div>
             <label class="field-label" for="buffer-range">هامش الأمان: <span data-buffer-value>20%</span></label>
@@ -208,8 +202,8 @@
           <div class="output-panel-label eyebrow-muted">الحكم</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-borderline" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><div><p class="verdict-kicker tone-borderline">المساحة الحرة الموصى بها</p><h3 class="verdict-title">293.8<span class="unit"> غيغابايت</span></h3><p class="verdict-desc">244.8 غيغابايت من المحتوى + 49 غيغابايت هامش آمن للتصحيحات المستقبلية.</p><p class="verdict-desc">يُظهر قرص Sony SSD بسعة 825 غيغابايت 667 غيغابايت قابلة للاستخدام بعد احتياطي النظام. هذا يترك لك <strong>373.2 غيغابايت</strong> لألعاب أخرى بعد GTA 6.</p></div></div><div><div class="stack-bar" role="img" aria-label="التكوين: التثبيت الأساسي 212 غيغابايت، وتصحيح اليوم الأول 2.8 غيغابايت، والمحتوى القابل للتنزيل والمحتوى الموسمي 30 غيغابايت، وهامش التحديث 49 غيغابايت"><span class="seg-purple" style="width:72.2%"></span><span class="seg-pink" style="width:1%"></span><span class="seg-blue" style="width:10.2%"></span><span class="seg-muted" style="width:16.7%"></span></div></div><dl class="stat-grid"><div><dt>التثبيت الأساسي</dt><dd>212 غيغابايت</dd></div><div><dt>تصحيح اليوم الأول</dt><dd>2.8 غيغابايت</dd></div><div><dt>المحتوى القابل للتنزيل + الموسمي</dt><dd>30 غيغابايت</dd></div><div><dt>هامش التحديث</dt><dd>49 غيغابايت</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">مشاركة على X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">مشاركة على X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -226,8 +220,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>نسخ الرابط</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على X" href="https://twitter.com/intent/tweet?text=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9.%20%D8%AE%D8%B7%D8%B7%20%D9%84%D9%85%D8%B3%D8%A7%D8%AD%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">مشاركة على X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على Reddit" href="https://www.reddit.com/submit?title=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9.%20%D8%AE%D8%B7%D8%B7%20%D9%84%D9%85%D8%B3%D8%A7%D8%AD%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9.%20%D8%AE%D8%B7%D8%B7%20%D9%84%D9%85%D8%B3%D8%A7%D8%AD%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">مشاركة على X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=%D8%AA%D8%AD%D8%AA%D8%A7%D8%AC%20GTA%206%20%D8%A5%D9%84%D9%89%20%D9%86%D8%AD%D9%88%20293.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D8%A7%D8%B1%D8%BA%D8%A9.%20%D8%AE%D8%B7%D8%B7%20%D9%84%D9%85%D8%B3%D8%A7%D8%AD%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
       </div>
     </section>
 
@@ -238,23 +232,20 @@
         <table class="data-table">
           <caption class="sr-only">مساحة القرص القابلة للاستخدام وما يتبقى بعد GTA 6.</caption>
           <thead><tr><th scope="col">المنصة</th><th scope="col">القرص</th><th scope="col">احتياطي النظام</th><th scope="col">بعد GTA 6</th></tr></thead>
-          <tbody data-platform-table><tr><th scope="row" class="mono">PC (للتخطيط)</th><td>قرص NVMe / SATA SSD الخاص بك</td><td>—</td><td class="mono">يعتمد على القرص</td></tr><tr><th scope="row" class="mono">PS5 (825 غيغابايت)</th><td>قرص SSD مخصص من Sony</td><td>158 غيغابايت للنظام</td><td class="mono">373.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 تيرابايت)</th><td>قرص SSD مخصص من Sony</td><td>158 غيغابايت للنظام</td><td class="mono">548.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 تيرابايت)</th><td>بطاقة توسعة NVMe</td><td>198 غيغابايت للنظام</td><td class="mono">508.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 غيغابايت)</th><td>بطاقة توسعة NVMe</td><td>148 غيغابايت للنظام</td><td class="mono">70.2 غيغابايت حرة</td></tr></tbody>
+          <tbody data-platform-table><tr><th scope="row" class="mono">PC (للتخطيط)</th><td>قرص NVMe / SATA SSD الخاص بك</td><td>n/a</td><td class="mono">يعتمد على القرص</td></tr><tr><th scope="row" class="mono">PS5 (825 غيغابايت)</th><td>قرص SSD مخصص من Sony</td><td>158 غيغابايت للنظام</td><td class="mono">373.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 تيرابايت)</th><td>قرص SSD مخصص من Sony</td><td>158 غيغابايت للنظام</td><td class="mono">548.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 تيرابايت)</th><td>بطاقة توسعة NVMe</td><td>198 غيغابايت للنظام</td><td class="mono">508.2 غيغابايت حرة</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 غيغابايت)</th><td>بطاقة توسعة NVMe</td><td>148 غيغابايت للنظام</td><td class="mono">70.2 غيغابايت حرة</td></tr></tbody>
         </table>
       </div>
       <p class="field-hint" data-platform-note>كم من المساحة تترك لك GTA 6 للألعاب الأخرى، مع خطتك الحالية البالغة 293.8 غيغابايت.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">واصل تخطيط جهاز GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>شاهد كم يستغرق التنزيل باستخدام <a href="/ar/tools/download-time">حاسبة وقت تنزيل GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من الجهاز كله باستخدام <a href="/ar/tools/system-requirements">مدقق متطلبات نظام GTA 6</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>شاهد كم يستغرق التنزيل باستخدام <a href="/ar/tools/download-time">حاسبة وقت تنزيل GTA 6</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من الجهاز كله باستخدام <a href="/ar/tools/system-requirements">مدقق متطلبات نظام GTA 6</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="الافتراضات">
-      <p><strong>الافتراضات</strong> <span>تفترض المجاميع تثبيتا أساسيا قدره 212 غيغابايت وتصحيح يوم أول قدره 2.8 غيغابايت ومحتوى أول سنة قابل للتنزيل قدره 30 غيغابايت. وتأتي أرقام المساحة القابلة للاستخدام على وحدة التحكم من صفحات دعم Sony (667 غيغابايت من 825 غيغابايت على PS5) و Microsoft (802 غيغابايت من 1 تيرابايت على Xbox Series X).</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
-      <p class="updated-line">تم التحديث <time datetime="2026-11-22">22 نوفمبر 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">كيفية استخدام مخطط تخزين GTA 6</h2>
@@ -277,7 +268,7 @@
 <li>
         <span class="step-number">04</span>
         <h3 class="step-title">اختر المنصة</h3>
-        <p class="step-text">اختر منصتك (كمبيوتر أو PS5 أو Xbox Series X)، لأن المساحة الحرة القابلة للاستخدام تختلف من منصة لأخرى. ولم يُعلن عن نسخة للحاسوب بعد — فخيار الحاسوب للتخطيط فقط.</p>
+        <p class="step-text">اختر منصتك (كمبيوتر أو PS5 أو Xbox Series X)، لأن المساحة الحرة القابلة للاستخدام تختلف من منصة لأخرى. ولم يُعلن عن نسخة للحاسوب بعد, فخيار الحاسوب للتخطيط فقط.</p>
       </li>
 <li>
         <span class="step-number">05</span>
@@ -296,17 +287,19 @@ headroom = subtotal × (bufferPct / 100)  // هامش الأمان
 total = subtotal + headroom  // المجموع الموصى به
 remaining = usableSpace − total  // المساحة الحرة المتبقية
 PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 غيغابايت · Xbox Series S 364 غيغابايت</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت.</li>
+          <ul class="list-disc list-outside"><li>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت.</li>
 <li>المساحة القابلة للاستخدام هي ما يتبقى بعد نظام التشغيل واحتياطيات النظام: PS5 بواقع 667 غيغابايت من 825 غيغابايت، و PS5 Slim بواقع 842 غيغابايت من 1 تيرابايت، و Xbox Series X بواقع 802 غيغابايت من 1 تيرابايت، و Xbox Series S بواقع 364 غيغابايت من 512 غيغابايت.</li>
 <li>هامش <span data-method-buffer-pct>20%</span> يترك مساحة لفك ضغط التصحيحات ويمنع أقراص SSD من العمل وهي ممتلئة تقريبا.</li>
 <li>حجم المحتوى القابل للتنزيل تقدير تخطيطي للسنة الأولى وليس إعلانا من Rockstar.</li></ul>
+    <div class="assumptions-block"><p><strong>الافتراضات</strong> <span>تفترض المجاميع تثبيتا أساسيا قدره 212 غيغابايت وتصحيح يوم أول قدره 2.8 غيغابايت ومحتوى أول سنة قابل للتنزيل قدره 30 غيغابايت. وتأتي أرقام المساحة القابلة للاستخدام على وحدة التحكم من صفحات دعم Sony (667 غيغابايت من 825 غيغابايت على PS5) و Microsoft (802 غيغابايت من 1 تيرابايت على Xbox Series X).</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
+      <p class="updated-line">تم التحديث <time datetime="2026-11-22">22 نوفمبر 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">الأسئلة الشائعة</h2>
+      <header>
+        <h2 id="faq">الأسئلة الشائعة</h2>
         <p class="section-dek">إجابات صادقة على الأسئلة التي يطرحها الناس فعلا حول تخزين GTA 6 الآن بعد إطلاقها.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -386,10 +379,10 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
     <section aria-labelledby="related-content">
       <h2 id="related-content">أدوات ذات صلة</h2>
       <h3 class="related-sub">أدوات ذات صلة</h3>
-      <ul class="related-tools-grid"><li><a href="/ar/tools/download-time" class="tool-card" data-accent="purple" aria-label="حاسبة وقت تنزيل GTA 6: قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>حاسبة وقت تنزيل GTA 6</h3><p>قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="نتيجة جاهزية GTA 6: نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="مدقق متطلبات نظام GTA 6: حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/ar/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3><p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/ar/tools/download-time" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>حاسبة وقت تنزيل GTA 6</h3><p>قدّر كم سيستغرق تثبيت اللعبة البالغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/ar/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3><p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
@@ -432,27 +425,45 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -492,6 +503,9 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -500,6 +514,7 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
@@ -508,11 +523,22 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
 </footer>
 
   </div>
-  <script src="/assets/js/ar/theme.js" defer></script>
-  <script src="/assets/js/ar/header.js" defer></script>
-  <script src="/assets/js/ar/search.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/consent.js" defer></script>
   <script type="module" src="/assets/js/ar/storage-planner.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -558,7 +584,7 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
       },
       "datePublished": "2025-11-01",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "ar"
     },
     {
       "@type": "HowTo",
@@ -586,7 +612,7 @@ PS5 667 غيغابايت · PS5 Slim 842 غيغابايت · Xbox Series X 802 �
           "@type": "HowToStep",
           "position": 4,
           "name": "اختر المنصة",
-          "text": "اختر منصتك (كمبيوتر أو PS5 أو Xbox Series X)، لأن المساحة الحرة القابلة للاستخدام تختلف من منصة لأخرى. ولم يُعلن عن نسخة للحاسوب بعد — فخيار الحاسوب للتخطيط فقط."
+          "text": "اختر منصتك (كمبيوتر أو PS5 أو Xbox Series X)، لأن المساحة الحرة القابلة للاستخدام تختلف من منصة لأخرى. ولم يُعلن عن نسخة للحاسوب بعد, فخيار الحاسوب للتخطيط فقط."
         },
         {
           "@type": "HowToStep",

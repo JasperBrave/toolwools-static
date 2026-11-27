@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
     <meta property="og:image" content="https://toolwools.com/og/edition-comparison.jpg">
     <meta property="og:image:alt" content="GTA-6-Editions-Picker, der die Edition mit dem besten Wert für ein Spieler-Profil zeigt">
     <meta property="og:image:width" content="1200">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA-6-Editions-Picker">
     <meta name="twitter:description" content="Standard vs Ultimate: what each GTA 6 edition adds, scored for how you actually play, with the uplift math.">
     <meta name="twitter:image" content="https://toolwools.com/og/edition-comparison.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/de/tools/edition-comparison">
 <link rel="alternate" href="https://toolwools.com/tools/edition-comparison" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/edition-comparison" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-edition-comparison-de.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/edition-comparison">English</a>
             <a href="/es/tools/edition-comparison">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,7 +136,11 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/edition-comparison" lang="en">EN</a><a href="/es/tools/edition-comparison" lang="es">ES</a><a href="/pt/tools/edition-comparison" lang="pt">PT</a><a href="/de/tools/edition-comparison" aria-current="true">DE</a><a href="/fr/tools/edition-comparison" lang="fr">FR</a><a href="/tr/tools/edition-comparison" lang="tr">TR</a><a href="/ar/tools/edition-comparison" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -127,48 +148,24 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Brotkrumen">
-        <a href="/de/">Startseite</a>
-        <span aria-hidden="true">/</span>
-        <a href="/de/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA-6-Editions-Picker</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
-        <span>Vergleich</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA-6-Editions-Picker</h1>
-      <p class="page-subtitle">Standard oder Ultimate, bewertet nach dem, was jede Stufe wirklich für deinen Spielstil hinzufügt, und ob der Aufpreis gegenüber Standard das verdient.</p>
-      <p class="field-hint">Jede Edition enthält die volle Story · Aufpreis als % gegenüber Standard gezeigt, keine Preise · Vertrauen pro Bonus gekennzeichnet</p>
-      <div class="tool-intro-callout"><p><strong>Korrektur — 20. Nov. 2026:</strong> GTA 6 erschien am 19. November 2026 auf PlayStation 5 und Xbox Series X|S. Rockstars bestätigte Auswahl ist Standard (79,99 $) und Ultimate (99,99 $), nur digital. Es gibt keine Deluxe-Edition und kein boxed Collector's-Edition-Spiel — Rockstar verkauft eine “Goodtime State, Vice City Collection”-Merchandise-Box für 399,99 $ ohne Spiel. Keine PC-Version wurde angekündigt.</p></div>
-      <dl class="hero-badges">
-        <div><dt>Engine</dt><dd>Editions-Modell</dd></div>
-        <div><dt>Laufzeit</dt><dd>Sofort, im Browser</dd></div>
-        <div><dt>Plattformen</dt><dd>PS5, Xbox</dd></div>
-        <div><dt>Aktualisiert</dt><dd><time datetime="2026-11-21">21. Nov. 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Jede GTA-6-Edition enthält die komplette Kampagne und den kompletten Online-Modus. Nichts über Standard verkauft dir Story. Was die höhere Stufe verkauft, ist ein Vorsprung, Währung, ein Fahrzeug, eine Immobilie, Kosmetik. Das bedeutet, der einzige vernünftige Weg, Editionen zu vergleichen, ist, diese Boni gegen deine persönliche Spielweise zu gewichten und dann den Aufpreis zu prüfen, den du dafür zahlst.</p>
-          </div>
-<section class="byline" aria-label="Über diese Seite">
-      <div>
-        <p class="byline-meta">Von <span class="byline-seg"><a href="/de/about#people">Marcus Vela</a>&nbsp;&middot;</span> Kauf- und Preis-Analyst&nbsp;· Geprüft von <a href="/de/about#people">Dana Reyes</a>, redaktionelle Standards</p>
-        <p class="byline-note">Modell: <a href="/de/methodology">GTA-6-Editions-Bewertungs-Modell</a></p>
-      </div>
-      <p class="byline-dates">Veröffentlicht <time datetime="2026-08-24">24. Aug. 2026</time>&nbsp;· Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Brotkrumen">
+          <a href="/de/">Startseite</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/de/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA-6-Editions-Picker</span>
+        </div>
+        <div class="page-eyebrow"><span>Vergleich</span></div>
+        <h1 id="page-title">GTA-6-Editions-Picker</h1>
+        <p class="page-subtitle">Standard oder Ultimate, bewertet nach dem, was jede Stufe wirklich für deinen Spielstil hinzufügt, und ob der Aufpreis gegenüber Standard das verdient.</p>
+        <p class="field-hint">Jede Edition enthält die volle Story · Aufpreis als % gegenüber Standard gezeigt, keine Preise · Vertrauen pro Bonus gekennzeichnet</p>
+        <p class="hero-meta">
+          <span>Engine: Editions-Modell</span><span>Laufzeit: Sofort, im Browser</span><span>Plattformen: PS5, Xbox</span><span>Aktualisiert: <time datetime="2026-11-21">21. Nov. 2026</time></span><span>Von <a href="/de/about#people">Marcus Vela</a>&nbsp;&middot; Kauf- und Preis-Analyst</span><span>Geprüft von <a href="/de/about#people">Dana Reyes</a>, redaktionelle Standards</span><span>Modell: <a href="/de/methodology">GTA-6-Editions-Bewertungs-Modell</a></span><span>Veröffentlicht <time datetime="2026-08-24">24. Aug. 2026</time></span><span>Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></span>
+        </p>
+      </section>
+      <aside class="correction-note" role="note"><p><strong>Korrektur, 20. Nov. 2026:</strong> GTA 6 erschien am 19. November 2026 auf PlayStation 5 und Xbox Series X|S. Rockstars bestätigte Auswahl ist Standard (79,99 $) und Ultimate (99,99 $), nur digital. Es gibt keine Deluxe-Edition und kein boxed Collector's-Edition-Spiel, Rockstar verkauft eine “Goodtime State, Vice City Collection”-Merchandise-Box für 399,99 $ ohne Spiel. Keine PC-Version wurde angekündigt.</p></aside>
 <div class="sr-only" data-live-region aria-live="polite">Bester Wert: Ultimate Edition, 99 von 100, für einen Spieler, der Story und gelegentlich online spielt, auf PlayStation 5 bei einer 30-prozentigen Obergrenze über Standard.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Ultimate Edition · Kurzfassung</span></p>
-        <p class="tldr-text"><span data-tldr-text>Ultimate Edition ist der beste Wert für einen Spieler, der Story und gelegentlich online spielt, auf PlayStation 5 bei einer 30%-Obergrenze: 99/100, fügt 21.5 gewichtete Punkte über Standard hinzu für einen 25%-Aufpreis.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Ultimate Edition, 99/100 Wert für Aufpreis</p>
-    </section>
 <section aria-labelledby="edition-answer-heading">
       <h2 id="edition-answer-heading" class="sr-only">Die kurze Antwort</h2>
       <div id="edition-answer" data-speakable data-short-answer>
@@ -214,7 +211,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted" data-output-label>Editionen auf PlayStation 5</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Bester Wert · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">Der größte digitale Stack: eine größere Währungs-Grant, extra Immobilien- oder Fahrzeug-Unlocks und die frühesten Zugangs-Perks, wenn eine Stufe sie bietet.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Gerankte Editionen</p><ul><li><strong>1. Ultimate Edition, 99/100</strong> +25 % gegenüber Standard · fügt 21,5 gewichtete Punkte hinzu (8,6 pro 10 % ausgegeben). Vertrauen: Gemeldet / gelistet, nicht voll detailliert.</li><li><strong>2. Standard Edition, 84/100</strong> Basispreis. Komplettes Spiel. Vertrauen: Von Rockstar bestätigt.</li></ul></div><dl class="stat-grid"><div><dt>Wert-Score</dt><dd>99/100</dd></div><div><dt>Aufpreis gegenüber Standard</dt><dd>+25 %</dd></div><div><dt>Hinzugefügte Nützlichkeit</dt><dd>+21,5 Pkt.</dd></div><div><dt>Deine Obergrenze</dt><dd>30 %</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=Beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%3A%20Ultimate%20Edition%20%2899%2F100%29.%20GTA-6-Editions-Picker%20auf%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Auf X teilen</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=Ultimate%20Edition%20%E2%80%94%20beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%20%28GTA%206%29&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Bester Wert · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">Der größte digitale Stack: eine größere Währungs-Grant, extra Immobilien- oder Fahrzeug-Unlocks und die frühesten Zugangs-Perks, wenn eine Stufe sie bietet.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Gerankte Editionen</p><ul><li><strong>1. Ultimate Edition, 99/100</strong> +25 % gegenüber Standard · fügt 21,5 gewichtete Punkte hinzu (8,6 pro 10 % ausgegeben). Vertrauen: Gemeldet / gelistet, nicht voll detailliert.</li><li><strong>2. Standard Edition, 84/100</strong> Basispreis. Komplettes Spiel. Vertrauen: Von Rockstar bestätigt.</li></ul></div><dl class="stat-grid"><div><dt>Wert-Score</dt><dd>99/100</dd></div><div><dt>Aufpreis gegenüber Standard</dt><dd>+25 %</dd></div><div><dt>Hinzugefügte Nützlichkeit</dt><dd>+21,5 Pkt.</dd></div><div><dt>Deine Obergrenze</dt><dd>30 %</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%3A%20Ultimate%20Edition%20%2899%2F100%29.%20GTA-6-Editions-Picker%20auf%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Auf X teilen</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20Edition%20%E2%80%94%20beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%20%28GTA%206%29&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
         </div>
       </div>
     </section>
@@ -246,8 +243,8 @@
 
     <section class="tier-read" aria-labelledby="context-links">
       <h2 id="context-links">Die zwei Fragen, die diese Seite bewusst nicht beantwortet</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/de/tools/price-by-country">Was jede GTA-6-Edition kostet, wo du lebst</a> Regionale Preisgestaltung, Steuer-Behandlung und Editions-Deltas über 44 Märkte.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/de/tools/pre-order-tracker">Wo man GTA 6 kauft</a> Stornierungs-Bedingungen, Preis-Schutz, Download-Timing und Bonus-Erhalt pro Kanal.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/de/tools/price-by-country">Was jede GTA-6-Edition kostet, wo du lebst</a> Regionale Preisgestaltung, Steuer-Behandlung und Editions-Deltas über 44 Märkte.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/de/tools/pre-order-tracker">Wo man GTA 6 kauft</a> Stornierungs-Bedingungen, Preis-Schutz, Download-Timing und Bonus-Erhalt pro Kanal.</span></li></ul>
     </section>
 
     <section aria-labelledby="for-agents">
@@ -269,15 +266,12 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Link kopieren</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf X teilen" href="https://twitter.com/intent/tweet?text=Beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%3A%20Ultimate%20Edition%20%2899%2F100%29.%20GTA-6-Editions-Picker%20auf%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Auf X teilen</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf Reddit teilen" href="https://www.reddit.com/submit?title=Ultimate%20Edition%20%E2%80%94%20beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%3A%20Ultimate%20Edition%20%2899%2F100%29.%20GTA-6-Editions-Picker%20auf%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Auf X teilen</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20Edition%20%E2%80%94%20beste%20GTA-6-Edition%20f%C3%BCr%20einen%20Spieler%2C%20der%20Story%20und%20gelegentlich%20online%20spielt%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
       </div>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Annahmen">
-      <p><strong>Annahmen</strong> <span>GTA 6 erschien am 19. November 2026. Diese Seite vergleicht, was jede Edition hinzufügt und wie viel extra sie als Prozentsatz gegenüber Standard kostet, nie eine Währungs-Zahl, weil regionale Preisgestaltung auf dem Preis-nach-Land-Tool lebt. Bonus-Inhalte sind gekennzeichnet als bestätigt, gemeldet oder Präzedenz, alles, was aus dem Bau von GTA-V- und Red-Dead-Redemption-2-Editionen gezogen ist, ist als Präzedenz markiert, nicht als Fakt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
-      <p class="updated-line">Aktualisiert <time datetime="2026-11-21">21. November 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Wie man GTA-6-Editionen vergleicht, ohne zu viel zu zahlen</h2>
@@ -301,14 +295,16 @@ utilityDelta = utility(edition) − utility(standard)
 efficiency = clamp(utilityDelta ÷ (upliftPercent ÷ 12), 0, 1.3)
 coverage = prioritised categories present in tier ÷ prioritised categories chosen
 score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budgetPenalty) × 100</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Kein Editions-Preis, keine Währungs-Zahl oder Händler-Listing wird hier gelesen oder gezeigt. Aufpreis ist ein Prozentsatz gegenüber Standard, gezogen aus den bestätigten Preisen von Standard (79,99 $) und Ultimate (99,99 $).</li><li>Bonus-Inhalte, die Rockstar nicht aufgeschlüsselt hat, werden nach Rolle bewertet, Vorsprung, Kosmetik, statt nach einer erfundenen Menge.</li><li>Währungs-Umrechnung, Steuer-Behandlung und regionale Preis-Lücken werden von /tools/price-by-country beantwortet. Stornierungs-Bedingungen, Download-Timing und wo zu bestellen ist, werden von /tools/pre-order-tracker beantwortet. Diese Seite dupliziert keines von beiden.</li></ul>
+          <ul class="list-disc list-outside"><li>Kein Editions-Preis, keine Währungs-Zahl oder Händler-Listing wird hier gelesen oder gezeigt. Aufpreis ist ein Prozentsatz gegenüber Standard, gezogen aus den bestätigten Preisen von Standard (79,99 $) und Ultimate (99,99 $).</li><li>Bonus-Inhalte, die Rockstar nicht aufgeschlüsselt hat, werden nach Rolle bewertet, Vorsprung, Kosmetik, statt nach einer erfundenen Menge.</li><li>Währungs-Umrechnung, Steuer-Behandlung und regionale Preis-Lücken werden von /tools/price-by-country beantwortet. Stornierungs-Bedingungen, Download-Timing und wo zu bestellen ist, werden von /tools/pre-order-tracker beantwortet. Diese Seite dupliziert keines von beiden.</li></ul>
+    <div class="assumptions-block"><p><strong>Annahmen</strong> <span>GTA 6 erschien am 19. November 2026. Diese Seite vergleicht, was jede Edition hinzufügt und wie viel extra sie als Prozentsatz gegenüber Standard kostet, nie eine Währungs-Zahl, weil regionale Preisgestaltung auf dem Preis-nach-Land-Tool lebt. Bonus-Inhalte sind gekennzeichnet als bestätigt, gemeldet oder Präzedenz, alles, was aus dem Bau von GTA-V- und Red-Dead-Redemption-2-Editionen gezogen ist, ist als Präzedenz markiert, nicht als Fakt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
+      <p class="updated-line">Aktualisiert <time datetime="2026-11-21">21. November 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA-6-Editions-Fragen, klar beantwortet</h2>
+      <header>
+        <h2 id="faq">GTA-6-Editions-Fragen, klar beantwortet</h2>
         <p class="section-dek">Standard versus Ultimate, Upgrades und Vorbestell-Boni.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item"><button id="faq-q-1" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-1"><span>Welche GTA-6-Edition soll ich kaufen?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-1" class="faq-answer" data-faq-answer hidden><p>Wenn du die Kampagne und wenig sonst spielst, Standard, es enthält die ganze Story und den ganzen Online-Modus, und jede höhere Stufe fügt nur Online-Vorsprungs-Items hinzu. Wenn du beim Launch direkt online gehst, kann die Top-Stufe sich durch gespartes Grinden amortisieren, und der Picker oben quantifiziert das gegen den Aufpreis, den du tolerieren würdest.</p></div></li><li class="faq-item"><button id="faq-q-2" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-2"><span>Enthält irgendeine GTA-6-Edition extra Story-Inhalte?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-2" class="faq-answer" data-faq-answer hidden><p>Nein. Das ist der wichtigste Fakt auf der Seite: Die Kampagne ist identisch über jede Edition. Boni sind Online-Währung, Fahrzeuge, Immobilien und Kosmetik. Niemand wird von Story-Missionen, Charakteren oder Enden ausgeschlossen, weil er Standard kauft.</p></div></li><li class="faq-item"><button id="faq-q-3" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-3"><span>Was bekommst du mit der GTA-6-Ultimate-Edition?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-3" class="faq-answer" data-faq-answer hidden><p>Basierend darauf, wie Rockstar Top-Stufen bisher strukturiert hat, erwarte einen größeren Ingame-Währungs-Zuschuss, eine zusätzliche Immobilien- oder Fahrzeug-Freischaltung, stufen-exklusive Kosmetik und, wenn angeboten, das früheste Access-Fenster. Rockstar hat diese für GTA 6 nicht aufgeschlüsselt, sodass diese Seite sie nach Rolle bewertet statt Beträge zu zitieren, die sie nicht belegen kann.</p></div></li><li class="faq-item"><button id="faq-q-4" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-4"><span>Wird es eine GTA-6-Collector's-Edition geben?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-4" class="faq-answer" data-faq-answer hidden><p>Nein. Es gibt kein boxed GTA-6-Collector's-Edition-Spiel. Rockstar verkauft eine “Goodtime State, Vice City Collection”-Merchandise-Box für 399,99 $ ohne Spiel. Sowohl GTA V als auch Red Dead Redemption 2 lieferten boxed Collector's Editions mit einer gedruckten Karte, Artbook, Steelbook und Ausstellungs-Stücken, und beide waren limitierte konsolen-exklusive Runs, die vor dem Launch ausverkauft waren.</p></div></li><li class="faq-item"><button id="faq-q-5" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-5"><span>Kann ich später von Standard auf eine höhere Edition upgraden?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-5" class="faq-answer" data-faq-answer hidden><p>Digitale Stufen-Upgrades werden normalerweise im Store zum Preis-Unterschied auf beiden Konsolen verkauft, sodass Standard jetzt zu kaufen und später hochzustufen meist insgesamt gleich viel kostet. Die Ausnahme ist alles Zeitlich-Begrenzte, Launch-Bonus-Wochen und jedes Early-Access-Fenster, das nicht nachträglich beansprucht werden kann.</p></div></li><li class="faq-item"><button id="faq-q-6" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-6"><span>Unterscheiden sich Vorbestell-Boni von Editions-Boni?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-6" class="faq-answer" data-faq-answer hidden><p>Ja, und sie werden ständig vermischt. Vorbestell-Boni hängen davon ab, wann und wo du bestellst, und sind meist klein, Editions-Boni hängen davon ab, welche Stufe du kaufst, und reisen mit der Lizenz. Diese Seite bewertet nur Editions-Boni, die Wo-zu-bestellen-Frage, inklusive Stornierungs-Bedingungen und Download-Timing, wird von GTA 6 kaufen: Editionen und Kanäle im Vergleich behandelt.</p></div></li><li class="faq-item"><button id="faq-q-7" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-7"><span>Sind die exklusiven Kosmetika wirklich exklusiv?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-7" class="faq-answer" data-faq-answer hidden><p>Behandle Exklusivität als wahrscheinlich, aber nicht permanent. Einige stufen-exklusive Items in früheren Rockstar-Titeln wurden später ingame erreichbar, weshalb Kosmetik hier ein niedrigeres Gewicht trägt als Währung oder Immobilien, es sei denn, du priorisierst sie explizit.</p></div></li><li class="faq-item"><button id="faq-q-8" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-8"><span>Warum zeigt diese Seite keine Preise?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-8" class="faq-answer" data-faq-answer hidden><p>Weil ein einzelner Preis für fast jeden falsch ist, der ihn liest. Editionen kosten in jedem Markt unterschiedlich viel, mit unterschiedlicher Steuer-Behandlung, und dieser Vergleich wird richtig auf dem Preis-nach-Land-Tool gemacht. Hier ist der Aufpreis ein Prozentsatz gegenüber Standard, der unabhängig von deiner Währung gilt.</p></div></li><li class="faq-item"><button id="faq-q-9" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-9"><span>Ist eine höhere Edition zu kaufen besserer Wert, als später Ingame-Währung zu kaufen?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-9" class="faq-answer" data-faq-answer hidden><p>Für einen Grinder ist das der echte Vergleich, und er kann nicht allein von dieser Seite entschieden werden: Prüfe GTA-6s Ingame-Preise und Währungs-Pack-Raten im Spiel. Wenn Währung dein einziger Grund zum Upgraden ist, kaufe Standard, spiele eine Woche, dann entscheide mit echten Zahlen.</p></div></li></ul>
@@ -322,7 +318,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
     <section aria-labelledby="related-content">
       <h2 id="related-content">Rechne den Preis aus, dann wo zu bestellen ist</h2>
       <h3 class="related-sub">Verwandte Tools</h3>
-      <ul class="related-tools-grid"><li><a href="/de/tools/price-by-country" class="tool-card" data-accent="purple" aria-label="GTA-6-Preis nach Land: GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Preis nach Land</h3><p>GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/pre-order-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 kaufen: Editionen und Kanäle im Vergleich: Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 kaufen: Editionen und Kanäle im Vergleich</h3><p>Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA-6-Release-Date-Erinnerung: Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Release-Date-Erinnerung</h3><p>Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA-6-Systemanforderungs-Checker: Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Systemanforderungs-Checker</h3><p>Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="purple" aria-label="GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis: Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="purple" aria-label="GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert: Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="purple" aria-label="GTA-6-Server-Status: Sind die Server down?: GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/de/tools/price-by-country" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Preis nach Land</h3><p>GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/pre-order-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 kaufen: Editionen und Kanäle im Vergleich</h3><p>Drei Kauf-Kanäle, bewertet nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf, für deine Plattform und Region.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Release-Date-Erinnerung</h3><p>Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. GTA 6 ist jetzt erhältlich: Erinnerungen an Patches, DLCs und Events.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Systemanforderungs-Checker</h3><p>Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Waffenvergleich: Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite, den vier Ingame-Werten von 10, plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Fahrzeugvergleich: Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10, Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke, plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten, es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
@@ -335,7 +331,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.1</p>
         <time datetime="2026-11-17">17. Nov. 2026</time>
-        <p>Als statische Seite neu aufgebaut. Ultimate-Aufpreis auf +25,0 % aus den bestätigten Preisen korrigiert (99,99 $ / 79,99 $); Deluxe- und Collector's-Stufen entfernt — die bestätigte Auswahl ist Standard und Ultimate, nur digital; Vertrauens-Labels auf jedem Bonus gezeigt, Share-State zu URL-Query-Parametern verschoben.</p>
+        <p>Als statische Seite neu aufgebaut. Ultimate-Aufpreis auf +25,0 % aus den bestätigten Preisen korrigiert (99,99 $ / 79,99 $); Deluxe- und Collector's-Stufen entfernt, die bestätigte Auswahl ist Standard und Ultimate, nur digital; Vertrauens-Labels auf jedem Bonus gezeigt, Share-State zu URL-Query-Parametern verschoben.</p>
       </li><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-08-24">24. Aug. 2026</time>
@@ -349,27 +345,45 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -408,10 +422,10 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
-              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
               <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
-              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -420,31 +434,29 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
+
+  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
   </div>
 </div>
-  </div>
   <script src="/assets/js/de/theme.js" defer></script>
   <script src="/assets/js/de/header.js" defer></script>
   <script src="/assets/js/de/search.js" defer></script>
   <script src="/assets/js/de/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/de/newsletter.js" defer></script>
+  <script src="/assets/js/de/consent.js" defer></script>
   <script type="module" src="/assets/js/de/edition-comparison.js"></script>
   <script type="application/ld+json">
 {
@@ -492,7 +504,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       },
       "datePublished": "2026-08-24",
       "dateModified": "2026-11-21",
-      "inLanguage": "en"
+      "inLanguage": "de"
     },
     {
       "@type": "HowTo",

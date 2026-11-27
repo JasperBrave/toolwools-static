@@ -108,7 +108,7 @@ function verdictHtml(result) {
     if (!e.available) desc += " " + result.platformLabel + " üzerinde satılmıyor.";
     else if (e.overBudget) desc += " Belirlediğiniz tavanın üzerinde.";
     desc += " Güven: " + CONFIDENCE_LABEL[e.confidence] + ".";
-    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
+    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + ": " + e.score + "/100</strong>, " + esc(desc) + "</li>";
   }).join("");
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">En iyi değer \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
@@ -121,14 +121,14 @@ function verdictHtml(result) {
     + "<div><dt>Tavanınız</dt><dd>" + result.upliftTolerance + "%</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="' + xUrl(result) + '">X\'te paylaş</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">X\'te paylaş</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function matrixHtml(result) {
   var items = result.best.bonuses.map(function (b) {
-    return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
+    return "<li><strong>" + esc(b.label) + ": " + b.utility + " pts</strong>, " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">Bu kademede yeni: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
@@ -137,20 +137,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonusları</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="' + xUrl(result) + '">X\'te paylaş</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">X\'te paylaş</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">Yükseltme hesabı</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="' + xUrl(result) + '">X\'te paylaş</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">X\'te paylaş</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -178,13 +178,13 @@ function render() {
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 Özet";
     if (tText) tText.textContent = result.best.edition.label + ", " + result.platformLabel + " üzerinde bir " + buyerPhrase(result.profile) + " için %" + result.upliftTolerance + " tavanla en iyi değerdir: " + result.best.score + "/100, Standard'a göre %" + result.best.edition.upliftPercent + " artış karşılığında " + result.best.utilityDelta + " ağırlıklı puan ekler.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 artış karşılığı değer";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + ": " + result.best.score + "/100 artış karşılığı değer";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir \u2014 oyun 19 Kasım 2026'da 05:00 UTC'de çıktı ve hiçbir kademe ekstra hikâye satmaz. " + esc(result.platformLabel) + " üzerinde, Standard'a göre %" + result.upliftTolerance + " tavanı olan bir " + esc(buyerPhrase(result.profile)) + " için en iyi değer <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir, oyun 19 Kasım 2026'da 05:00 UTC'de çıktı ve hiçbir kademe ekstra hikâye satmaz. " + esc(result.platformLabel) + " üzerinde, Standard'a göre %" + result.upliftTolerance + " tavanı olan bir " + esc(buyerPhrase(result.profile)) + " için en iyi değer <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

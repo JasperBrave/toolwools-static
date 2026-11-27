@@ -6,12 +6,12 @@
 // registry copy). State lives in the URL (?base=&patch=&dlc=&buffer=&platform=).
 var DEFAULTS = { base: 212, patch: 2.8, dlc: 30, buffer: 20, platform: "ps5" };
 var PLATFORMS = {
-  pc: { label: "PC", usableGB: 0, note: "Your drive, your rules — the number below is exactly what GTA 6 needs." },
+  pc: { label: "PC", usableGB: 0, note: "Your drive, your rules, the number below is exactly what GTA 6 needs." },
   ps5: { label: "PS5", usableGB: 667, note: "Sony's 825 GB SSD reports 667 GB usable after the system reserve." },
   xsx: { label: "Xbox Series X", usableGB: 802, note: "Xbox's 1 TB SSD reports 802 GB usable after the system reserve." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC", drive: "Your NVMe / SATA SSD", reserve: "—", usable: 0 },
+  { p: "PC", drive: "Your NVMe / SATA SSD", reserve: "n/a", usable: 0 },
   { p: "PS5 (825 GB)", drive: "Custom Sony SSD", reserve: "158 GB system", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "Custom Sony SSD", reserve: "158 GB system", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "NVMe expansion card", reserve: "198 GB system", usable: 802 },
@@ -180,8 +180,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB free") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB free") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB free") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 needs about " + fmt1(r.total) + " GB free") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
@@ -196,7 +196,7 @@ function render() {
     }).join("");
   }
   var tableNote = $("[data-platform-note]");
-  if (tableNote) tableNote.textContent = "How much room GTA 6 leaves you for other games — with your current " + fmt1(r.total) + " GB plan.";
+  if (tableNote) tableNote.textContent = "How much room GTA 6 leaves you for other games, with your current " + fmt1(r.total) + " GB plan.";
   // Iter 10: free-space subtitle and buffer helper follow the live total / %.
   var dekTotal = $("[data-free-space-total]");
   if (dekTotal) { var dekText = fmtLike(freeSpaceTotalTemplate, fmt1(r.total)); if (dekText) dekTotal.textContent = dekText; }

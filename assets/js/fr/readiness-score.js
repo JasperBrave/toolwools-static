@@ -112,7 +112,7 @@ function iconFor(tone) {
       : '<svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>';
 }
 function dialColor(tone) {
-  return tone === "ready" ? "var(--accent-blue)" : tone === "borderline" ? "var(--amber)" : "var(--accent-pink)";
+  return tone === "ready" ? "var(--color-success-fill)" : tone === "borderline" ? "var(--color-warning-fill)" : "var(--color-error-fill)";
 }
 
 function render() {
@@ -160,7 +160,7 @@ function render() {
     out.innerHTML =
       '<div style="text-align:center">' +
       '<div class="score-dial" role="img" aria-label="Score de préparation ' + result.score + ' sur 100, note ' + result.grade + '">' +
-      '<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--muted)" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="' + dialColor(tone) + '" stroke-width="9" stroke-linecap="round" stroke-dasharray="' + dash.toFixed(1) + ' ' + circ.toFixed(1) + '"/></svg>' +
+      '<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--color-border)" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="' + dialColor(tone) + '" stroke-width="9" stroke-linecap="round" stroke-dasharray="' + dash.toFixed(1) + ' ' + circ.toFixed(1) + '"/></svg>' +
       '<div class="score-dial-center"><div><div class="big">' + result.score + '</div><div class="small">/ 100 · Note ' + result.grade + '</div></div></div>' +
       '</div>' +
       '<p class="verdict-kicker tone-' + tone + '" style="margin-top:0.75rem">Note ' + result.grade + ' · ' + result.gradeLabel + '</p>' +
@@ -181,8 +181,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " · Préparation GTA 6 " + result.score + "/100, note " + result.grade) + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " | Préparation GTA 6 " + result.score + "/100 (note " + result.grade + ')') + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " · Préparation GTA 6 " + result.score + "/100, note " + result.grade) + '&url=' + encodeURIComponent(shareUrl()) + '">Partager sur X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " | Préparation GTA 6 " + result.score + "/100 (note " + result.grade + ')') + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

@@ -170,6 +170,14 @@ function render() {
       ? "<li><strong>Ray-traced reflections: Off</strong>, 18–30%, the most expensive single option, if you want headroom.</li>"
       : "<li><strong>Ray-traced reflections: Off</strong>, 18–30%, the most expensive single option.</li><li><strong>Volumetrics: Medium, Shadows: High</strong>, the next two cuts, 8–14% and 7–12%.</li>";
     var tweaks = suggestTweaks(inputFor(plan.preset, plan.upscaler, plan.frameGen), result);
+    // The shared fps-engine's frame-gen tweak detail carries an em-dash;
+    // the engine is shared with the FPS page, so map it at render time
+    // (the DE/FR pages do the same in their mapTweak wrappers).
+    tweaks = tweaks.map(function (t) {
+      return t.detail === "Doubles perceived smoothness \u2014 1% low unchanged."
+        ? { action: t.action, gainPct: t.gainPct, detail: "Doubles perceived smoothness, 1% low unchanged." }
+        : t;
+    });
     var tweaksHtml = tweaks.length
       ? '<div class="upgrade-box"><p class="eyebrow-muted">Ways to gain frames</p><ul>' + tweaks.map(function (t) { return "<li><strong>" + t.action + "</strong> (+" + t.gainPct + "%), " + t.detail + "</li>"; }).join("") + "</ul></div>"
       : "";
@@ -195,8 +203,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " avg fps (" + result.lowFps + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 settings for " + gpu.label + " + " + cpu.label + " at " + RES_META[state.res].short + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " avg fps (" + result.lowFps + " 1% low)") + '&url=' + encodeURIComponent(shareUrl()) + '">Share on X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 settings for " + gpu.label + " + " + cpu.label + " at " + RES_META[state.res].short + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

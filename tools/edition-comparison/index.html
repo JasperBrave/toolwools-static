@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Edition Picker">
     <meta name="twitter:description" content="Standard vs Ultimate: what each GTA 6 edition adds, scored for how you actually play, with the uplift math.">
     <meta name="twitter:image" content="https://toolwools.com/og/edition-comparison.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tools/edition-comparison">
 <link rel="alternate" href="https://toolwools.com/tools/edition-comparison" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/edition-comparison" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-edition-comparison-en.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/edition-comparison" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
             <a href="/es/tools/edition-comparison">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -119,7 +136,11 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/edition-comparison" aria-current="true">EN</a><a href="/es/tools/edition-comparison" lang="es">ES</a><a href="/pt/tools/edition-comparison" lang="pt">PT</a><a href="/de/tools/edition-comparison" lang="de">DE</a><a href="/fr/tools/edition-comparison" lang="fr">FR</a><a href="/tr/tools/edition-comparison" lang="tr">TR</a><a href="/ar/tools/edition-comparison" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -127,53 +148,29 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA 6 Edition Picker</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
-        <span>Comparison</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Edition Picker</h1>
-      <p class="page-subtitle">Standard or Ultimate — scored on what each tier actually adds for the way you play, and whether the uplift over Standard earns it.</p>
-      <p class="field-hint">Every edition includes the full story · Uplift shown as % over Standard, not prices · Confidence labelled per bonus</p>
-      <div class="tool-intro-callout"><p><strong>Correction — Nov 20, 2026:</strong> GTA 6 launched Nov 19, 2026 on PlayStation 5 and Xbox Series X|S. Rockstar's confirmed lineup is Standard ($79.99) and Ultimate ($99.99), digital-only. There is no Deluxe edition and no boxed Collector's Edition game — Rockstar sells a $399.99 “Goodtime State, Vice City Collection” merchandise box with no game included. No PC version has been announced.</p></div>
-      <dl class="hero-badges">
-        <div><dt>Engine</dt><dd>Edition model</dd></div>
-        <div><dt>Runtime</dt><dd>Instant, in-browser</dd></div>
-        <div><dt>Platforms</dt><dd>PS5, Xbox</dd></div>
-        <div><dt>Updated</dt><dd><time datetime="2026-11-21">Nov 21, 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Every GTA 6 edition contains the complete campaign and the complete online mode. Nothing above Standard sells you story. What the higher tier sells is a head start — currency, a vehicle, a property, cosmetics. That means the only sane way to compare editions is to weight those bonuses against how you personally intend to play, then check the uplift you are paying for them.</p>
-          </div>
-<section class="byline" aria-label="About this page">
-      <div>
-        <p class="byline-meta">By <span class="byline-seg"><a href="/about#people">Marcus Vela</a>&nbsp;&middot;</span> Purchase and pricing analyst&nbsp;&middot; Reviewed by <a href="/about#people">Dana Reyes</a>, Editorial standards</p>
-        <p class="byline-note">Model: <a href="/methodology">GTA 6 edition scoring model</a></p>
-      </div>
-      <p class="byline-dates">Published <time datetime="2026-08-24">Aug 24, 2026</time>&nbsp;&middot; Last reviewed <time datetime="2026-11-21">November 21, 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Edition Picker</span>
+        </div>
+        <div class="page-eyebrow"><span>Comparison</span></div>
+        <h1 id="page-title">GTA 6 Edition Picker</h1>
+        <p class="page-subtitle">Standard or Ultimate, scored on what each tier actually adds for the way you play, and whether the uplift over Standard earns it.</p>
+        <p class="field-hint">Every edition includes the full story · Uplift shown as % over Standard, not prices · Confidence labelled per bonus</p>
+        <p class="hero-meta">
+          <span>Engine: Edition model</span><span>Runtime: Instant, in-browser</span><span>Platforms: PS5, Xbox</span><span>Updated: <time datetime="2026-11-21">Nov 21, 2026</time></span><span>By <a href="/about#people">Marcus Vela</a>&nbsp;&middot; Purchase and pricing analyst&nbsp;&middot; Reviewed by <a href="/about#people">Dana Reyes</a>, Editorial standards</span><span>Model: <a href="/methodology">GTA 6 edition scoring model</a></span><span>Published <time datetime="2026-08-24">Aug 24, 2026</time>&nbsp;&middot; Last reviewed <time datetime="2026-11-21">November 21, 2026</time></span>
+        </p>
+      </section>
+      <aside class="correction-note" role="note"><p><strong>Correction, Nov 20, 2026:</strong> GTA 6 launched Nov 19, 2026 on PlayStation 5 and Xbox Series X|S. Rockstar's confirmed lineup is Standard ($79.99) and Ultimate ($99.99), digital-only. There is no Deluxe edition and no boxed Collector's Edition game, Rockstar sells a $399.99 “Goodtime State, Vice City Collection” merchandise box with no game included. No PC version has been announced.</p></aside>
 <div class="sr-only" data-live-region aria-live="polite">Best value: Ultimate Edition, 99 out of 100, for a story plus casual online buyer on PlayStation 5 at a 30 percent ceiling over Standard.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Ultimate Edition · TL;DR</span></p>
-        <p class="tldr-text"><span data-tldr-text>Ultimate Edition is the best value for a story plus casual online buyer on PlayStation 5 at a 30% ceiling: 99/100, adding 21.5 weighted points over Standard for a 25% uplift.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Ultimate Edition — 99/100 value for uplift</p>
-    </section>
 <section aria-labelledby="edition-answer-heading">
       <h2 id="edition-answer-heading" class="sr-only">The short answer</h2>
       <div id="edition-answer" data-speakable data-short-answer>
         <p class="eyebrow-muted">The short answer</p>
-        <p data-short-answer-text>Every GTA 6 edition includes the full story campaign and the full online mode — the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On PlayStation 5, for a story plus casual online buyer with a 30% ceiling over Standard, the best value is <strong>Ultimate Edition</strong>. It adds about 21.5 points of weighted usefulness over Standard for a 25% uplift — roughly 8.6 points per 10% you spend — which is the best return of any tier available on PlayStation 5 within your 30% ceiling.</p>
+        <p data-short-answer-text>Every GTA 6 edition includes the full story campaign and the full online mode, the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On PlayStation 5, for a story plus casual online buyer with a 30% ceiling over Standard, the best value is <strong>Ultimate Edition</strong>. It adds about 21.5 points of weighted usefulness over Standard for a 25% uplift, roughly 8.6 points per 10% you spend, which is the best return of any tier available on PlayStation 5 within your 30% ceiling.</p>
       </div>
     </section>
 
@@ -214,7 +211,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted" data-output-label>Editions on PlayStation 5</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Best value · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">The largest digital stack: a bigger currency grant, extra property or vehicle unlocks and the earliest-access perks when a tier offers them.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Ranked editions</p><ul><li><strong>1. Ultimate Edition — 99/100</strong> — +25% over Standard · adds 21.5 weighted points (8.6 per 10% spent). Confidence: Reported / listed, not fully detailed.</li><li><strong>2. Standard Edition — 84/100</strong> — Baseline price. Complete game. Confidence: Confirmed by Rockstar.</li></ul></div><dl class="stat-grid"><div><dt>Value score</dt><dd>99/100</dd></div><div><dt>Uplift over Standard</dt><dd>+25%</dd></div><div><dt>Added usefulness</dt><dd>+21.5 pts</dd></div><div><dt>Your ceiling</dt><dd>30%</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=Best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%3A%20Ultimate%20Edition%20%2899/100%29.%20GTA%206%20edition%20picker%20on%20ToolWools.&url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Share on X</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=Ultimate%20Edition%20-%20best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%20%28GTA%206%29&url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Best value · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">The largest digital stack: a bigger currency grant, extra property or vehicle unlocks and the earliest-access perks when a tier offers them.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Ranked editions</p><ul><li><strong>1. Ultimate Edition, 99/100</strong>, +25% over Standard · adds 21.5 weighted points (8.6 per 10% spent). Confidence: Reported / listed, not fully detailed.</li><li><strong>2. Standard Edition, 84/100</strong>, Baseline price. Complete game. Confidence: Confirmed by Rockstar.</li></ul></div><dl class="stat-grid"><div><dt>Value score</dt><dd>99/100</dd></div><div><dt>Uplift over Standard</dt><dd>+25%</dd></div><div><dt>Added usefulness</dt><dd>+21.5 pts</dd></div><div><dt>Your ceiling</dt><dd>30%</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%3A%20Ultimate%20Edition%20%2899/100%29.%20GTA%206%20edition%20picker%20on%20ToolWools.&url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Share on X</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20Edition%20-%20best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%20%28GTA%206%29&url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
         </div>
       </div>
     </section>
@@ -222,17 +219,17 @@
     <section aria-labelledby="ed-unknowns">
       <h2 id="ed-unknowns">What Rockstar has not confirmed yet</h2>
       <p class="section-dek">A high score never reads as a promise. These are the open questions behind it.</p>
-      <ul class="usecases-grid"><li class="usecase-card"><article aria-labelledby="unknown-0"><h3 id="unknown-0">The exact currency amounts</h3><p>Tier currency grants have not been itemised for GTA 6. We score them by role — day-one head start — not by figure, and we do not quote amounts we cannot cite.</p><p><span class="conf-pill" data-conf="reported">Reported</span></p></article></li><li class="usecase-card"><article aria-labelledby="unknown-1"><h3 id="unknown-1">Whether Ultimate unlocks early</h3><p>Early access for top tiers is a publisher pattern, not a GTA 6 commitment. If early access is your only reason to buy Ultimate, wait for Rockstar to confirm it.</p><p><span class="conf-pill" data-conf="precedent">Precedent</span></p></article></li><li class="usecase-card"><article aria-labelledby="unknown-2"><h3 id="unknown-2">Whether tier-exclusive cosmetics stay exclusive</h3><p>Historically some tier items later appeared in-game. Treat exclusivity as likely-but-not-permanent, which is why cosmetics are weighted below currency and property here.</p><p><span class="conf-pill" data-conf="precedent">Precedent</span></p></article></li></ul>
+      <ul class="usecases-grid"><li class="usecase-card"><article aria-labelledby="unknown-0"><h3 id="unknown-0">The exact currency amounts</h3><p>Tier currency grants have not been itemised for GTA 6. We score them by role, day-one head start, not by figure, and we do not quote amounts we cannot cite.</p><p><span class="conf-pill" data-conf="reported">Reported</span></p></article></li><li class="usecase-card"><article aria-labelledby="unknown-1"><h3 id="unknown-1">Whether Ultimate unlocks early</h3><p>Early access for top tiers is a publisher pattern, not a GTA 6 commitment. If early access is your only reason to buy Ultimate, wait for Rockstar to confirm it.</p><p><span class="conf-pill" data-conf="precedent">Precedent</span></p></article></li><li class="usecase-card"><article aria-labelledby="unknown-2"><h3 id="unknown-2">Whether tier-exclusive cosmetics stay exclusive</h3><p>Historically some tier items later appeared in-game. Treat exclusivity as likely-but-not-permanent, which is why cosmetics are weighted below currency and property here.</p><p><span class="conf-pill" data-conf="precedent">Precedent</span></p></article></li></ul>
     </section>
 
     <section aria-labelledby="bonus-matrix">
       <h2 id="bonus-matrix">Every GTA 6 edition bonus, and which tier grants it</h2>
       <p class="section-dek">One row per bonus. Confidence is labelled so precedent never reads as fact.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 edition bonus matrix — scrollable table">
+      <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 edition bonus matrix, scrollable table">
       <table class="data-table">
         <caption class="sr-only">GTA 6 edition bonuses mapped to the Standard and Ultimate editions, with bonus category and how firmly each item is established.</caption>
         <thead><tr><th scope="col">Bonus</th><th scope="col">Category</th><th scope="col">Standard</th><th scope="col">Ultimate</th><th scope="col">Confidence</th></tr></thead>
-        <tbody><tr><th scope="row">Full story campaign<br><span class="field-hint">Every edition contains the complete single-player campaign. No edition gates story missions, characters or endings — this is the single most important thing to know before paying more.</span></th><td>Story-mode extras</td><td>Yes</td><td>Yes</td><td><span class="conf-pill" data-conf="confirmed">Confirmed</span></td></tr><tr><th scope="row">Full online access<br><span class="field-hint">The online mode is included in the base game on every platform. Higher tiers accelerate your start; they do not unlock content that Standard players cannot reach by playing.</span></th><td>Story-mode extras</td><td>Yes</td><td>Yes</td><td><span class="conf-pill" data-conf="confirmed">Confirmed</span></td></tr><tr><th scope="row">Online cash injection<br><span class="field-hint">A one-off in-game currency grant to the online character. Real on day one, irrelevant within weeks for anyone who plays regularly — and worth nothing at all in story mode.</span></th><td>In-game currency</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="reported">Reported</span></td></tr><tr><th scope="row">Larger currency grant<br><span class="field-hint">The top tier&#x27;s currency grant is the main reason grinders buy up. Compare it against what the same uplift buys as a currency pack later, because the in-game economy is where it is spent.</span></th><td>In-game currency</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="reported">Reported</span></td></tr><tr><th scope="row">Starter vehicle pack<br><span class="field-hint">A car or two granted to the online garage at first login. GTA V and RDR2 both did this. Genuinely useful for the first ten hours of online play, cosmetic thereafter.</span></th><td>Vehicles & property</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Property or business head start<br><span class="field-hint">Top tiers have historically included a property or business that would otherwise take several sessions to afford. This is the bonus with the longest useful life for online players.</span></th><td>Vehicles & property</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Outfit and livery pack<br><span class="field-hint">Clothing, tattoos and vehicle liveries exclusive to the paid tiers. No gameplay effect. Value here is entirely a matter of whether you care how your character looks.</span></th><td>Cosmetics & customisation</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Tier-exclusive cosmetic set<br><span class="field-hint">Items that are not sold in-game afterwards. The only bonus category that stays genuinely unobtainable later, which is why buyers who care about exclusivity weight it highly.</span></th><td>Cosmetics & customisation</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Early access window<br><span class="field-hint">Some Rockstar-published top tiers have unlocked ahead of the standard release. Rockstar has not said whether GTA 6 does this; treat it as possible, not promised.</span></th><td>Early access & head start</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Bonus reward weeks<br><span class="field-hint">A temporary boost to online earnings or rewards for the first weeks. Time-limited by design, so it only pays off if you play heavily at launch.</span></th><td>Early access & head start</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr></tbody>
+        <tbody><tr><th scope="row">Full story campaign<br><span class="field-hint">Every edition contains the complete single-player campaign. No edition gates story missions, characters or endings, this is the single most important thing to know before paying more.</span></th><td>Story-mode extras</td><td>Yes</td><td>Yes</td><td><span class="conf-pill" data-conf="confirmed">Confirmed</span></td></tr><tr><th scope="row">Full online access<br><span class="field-hint">The online mode is included in the base game on every platform. Higher tiers accelerate your start; they do not unlock content that Standard players cannot reach by playing.</span></th><td>Story-mode extras</td><td>Yes</td><td>Yes</td><td><span class="conf-pill" data-conf="confirmed">Confirmed</span></td></tr><tr><th scope="row">Online cash injection<br><span class="field-hint">A one-off in-game currency grant to the online character. Real on day one, irrelevant within weeks for anyone who plays regularly, and worth nothing at all in story mode.</span></th><td>In-game currency</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="reported">Reported</span></td></tr><tr><th scope="row">Larger currency grant<br><span class="field-hint">The top tier&#x27;s currency grant is the main reason grinders buy up. Compare it against what the same uplift buys as a currency pack later, because the in-game economy is where it is spent.</span></th><td>In-game currency</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="reported">Reported</span></td></tr><tr><th scope="row">Starter vehicle pack<br><span class="field-hint">A car or two granted to the online garage at first login. GTA V and RDR2 both did this. Genuinely useful for the first ten hours of online play, cosmetic thereafter.</span></th><td>Vehicles & property</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Property or business head start<br><span class="field-hint">Top tiers have historically included a property or business that would otherwise take several sessions to afford. This is the bonus with the longest useful life for online players.</span></th><td>Vehicles & property</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Outfit and livery pack<br><span class="field-hint">Clothing, tattoos and vehicle liveries exclusive to the paid tiers. No gameplay effect. Value here is entirely a matter of whether you care how your character looks.</span></th><td>Cosmetics & customisation</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Tier-exclusive cosmetic set<br><span class="field-hint">Items that are not sold in-game afterwards. The only bonus category that stays genuinely unobtainable later, which is why buyers who care about exclusivity weight it highly.</span></th><td>Cosmetics & customisation</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Early access window<br><span class="field-hint">Some Rockstar-published top tiers have unlocked ahead of the standard release. Rockstar has not said whether GTA 6 does this; treat it as possible, not promised.</span></th><td>Early access & head start</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr><tr><th scope="row">Bonus reward weeks<br><span class="field-hint">A temporary boost to online earnings or rewards for the first weeks. Time-limited by design, so it only pays off if you play heavily at launch.</span></th><td>Early access & head start</td><td>—</td><td>Yes</td><td><span class="conf-pill" data-conf="precedent">Precedent</span></td></tr></tbody>
       </table>
     </div>
       <p class="field-hint">Confirmed means Rockstar has stated it. Reported means it appears in listings without full detail. Precedent means it is drawn from GTA V and Red Dead Redemption 2 editions and may not apply to GTA 6.</p>
@@ -246,8 +243,8 @@
 
     <section class="tier-read" aria-labelledby="context-links">
       <h2 id="context-links">The two questions this page deliberately does not answer</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/price-by-country">What each GTA 6 edition costs where you live</a> — regional pricing, tax treatment and edition deltas across 44 markets.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/pre-order-tracker">Where to buy</a> — cancellation terms, price protection, download timing and bonus retention by channel.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/price-by-country">What each GTA 6 edition costs where you live</a>, regional pricing, tax treatment and edition deltas across 44 markets.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/pre-order-tracker">Where to buy</a>, cancellation terms, price protection, download timing and bonus retention by channel.</span></li></ul>
     </section>
 
     <section aria-labelledby="for-agents">
@@ -261,7 +258,7 @@
     <section class="share-panel" aria-labelledby="share-heading">
       <div>
         <h2 id="share-heading">Share this result</h2>
-        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup — no fake share tokens.</p>
+        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup, no fake share tokens.</p>
       </div>
       <div class="share-link-row">
         <label class="sr-only" for="share-link">Shareable link for this result</label>
@@ -269,15 +266,12 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copy link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on X" href="https://twitter.com/intent/tweet?text=Best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%3A%20Ultimate%20Edition%20%2899/100%29.%20GTA%206%20edition%20picker%20on%20ToolWools.&amp;url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Share on X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on Reddit" href="https://www.reddit.com/submit?title=Ultimate%20Edition%20-%20best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%20%28GTA%206%29&amp;url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%3A%20Ultimate%20Edition%20%2899/100%29.%20GTA%206%20edition%20picker%20on%20ToolWools.&amp;url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Share on X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20Edition%20-%20best%20GTA%206%20edition%20for%20story%20plus%20casual%20online%20players%20%28GTA%206%29&amp;url=https%3A//toolwools.com/tools/edition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
       </div>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Assumptions">
-      <p><strong>Assumptions</strong> <span>GTA 6 released 19 November 2026. This page compares what each edition adds and how much extra it costs as a percentage over Standard — never a currency figure, because regional pricing lives on the price-by-country tool. Bonus contents are labelled confirmed, reported or precedent; anything drawn from how GTA V and Red Dead Redemption 2 editions were built is marked as precedent, not fact.</span> <a href="/methodology">Read the full methodology</a></p>
-      <p class="updated-line">Updated <time datetime="2026-11-21">November 21, 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">How to compare GTA 6 editions without overpaying</h2>
@@ -288,46 +282,48 @@
     <section aria-labelledby="use-cases">
       <h2 id="use-cases">Which GTA 6 edition suits which kind of player</h2>
       <p class="section-dek">Four buyer situations, each with a preset link.</p>
-      <ul class="usecases-grid"><li><article class="usecase-card" aria-labelledby="use-case-1"><h3 id="use-case-1">You only want the campaign</h3><p>Select story mode only. Every bonus above Standard is online-facing, so the tool will tell you to buy Standard and stop — the outcome most edition comparisons bury under an affiliate-friendly recommendation.</p><a href="/tools/edition-comparison?profile=story-only&amp;uplift=15" aria-label="Load preset: You only want the campaign">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-2"><h3 id="use-case-2">You are grinding online in launch week</h3><p>Select online from day one and prioritise currency. The currency grant and the property head start are worth real hours to you, and the tool shows how much usefulness each 10% of uplift returns.</p><a href="/tools/edition-comparison?profile=online-grinder&amp;uplift=60&amp;p=cash" aria-label="Load preset: You are grinding online in launch week">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-3"><h3 id="use-case-3">You are buying a gift and do not know their habits</h3><p>Leave the profile on not sure yet. The neutral weighting leans on what is certain — the base game is complete — and flags the bonuses that expire so nobody pays for a launch-week boost that is gone by the time the gift is opened.</p><a href="/tools/edition-comparison?profile=undecided" aria-label="Load preset: You are buying a gift and do not know their habits">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-4"><h3 id="use-case-4">You already own Standard and are wondering about upgrading</h3><p>Check the upgrade math block. Digital tier upgrades are normally sold at the price difference, so the total is usually identical — except for launch-window perks, which cannot be claimed retroactively.</p><a href="/tools/edition-comparison?profile=online-casual&amp;uplift=45" aria-label="Load preset: You already own Standard and are wondering about upgrading">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li></ul>
+      <ul class="usecases-grid"><li><article class="usecase-card" aria-labelledby="use-case-1"><h3 id="use-case-1">You only want the campaign</h3><p>Select story mode only. Every bonus above Standard is online-facing, so the tool will tell you to buy Standard and stop, the outcome most edition comparisons bury under an affiliate-friendly recommendation.</p><a href="/tools/edition-comparison?profile=story-only&amp;uplift=15" aria-label="Load preset: You only want the campaign">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-2"><h3 id="use-case-2">You are grinding online in launch week</h3><p>Select online from day one and prioritise currency. The currency grant and the property head start are worth real hours to you, and the tool shows how much usefulness each 10% of uplift returns.</p><a href="/tools/edition-comparison?profile=online-grinder&amp;uplift=60&amp;p=cash" aria-label="Load preset: You are grinding online in launch week">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-3"><h3 id="use-case-3">You are buying a gift and do not know their habits</h3><p>Leave the profile on not sure yet. The neutral weighting leans on what is certain, the base game is complete, and flags the bonuses that expire so nobody pays for a launch-week boost that is gone by the time the gift is opened.</p><a href="/tools/edition-comparison?profile=undecided" aria-label="Load preset: You are buying a gift and do not know their habits">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li><li><article class="usecase-card" aria-labelledby="use-case-4"><h3 id="use-case-4">You already own Standard and are wondering about upgrading</h3><p>Check the upgrade math block. Digital tier upgrades are normally sold at the price difference, so the total is usually identical, except for launch-window perks, which cannot be claimed retroactively.</p><a href="/tools/edition-comparison?profile=online-casual&amp;uplift=45" aria-label="Load preset: You already own Standard and are wondering about upgrading">Load preset <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></article></li></ul>
     </section>
 
     <section aria-labelledby="methodology">
       <details class="methodology-details" open>
         <summary><h2 id="methodology">How each edition bonus is scored and weighted</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="methodology-body">
-          <p>Each bonus carries an intrinsic usefulness out of ten and a confidence factor — confirmed bonuses count fully, reported ones at 0.8, and precedent-based ones at 0.55. Your player profile supplies a weight per category, and any category you explicitly prioritise gains a further 0.7. An edition&#x27;s utility is the sum of its weighted, confidence-discounted bonuses. The score combines two things: how much usefulness the tier adds over Standard per point of uplift, and whether it actually contains the bonus categories you prioritised — then it penalises anything above the ceiling you set. Standard is scored on the fact that it is complete, not on bonuses it does not have.</p>
+          <p>Each bonus carries an intrinsic usefulness out of ten and a confidence factor, confirmed bonuses count fully, reported ones at 0.8, and precedent-based ones at 0.55. Your player profile supplies a weight per category, and any category you explicitly prioritise gains a further 0.7. An edition&#x27;s utility is the sum of its weighted, confidence-discounted bonuses. The score combines two things: how much usefulness the tier adds over Standard per point of uplift, and whether it actually contains the bonus categories you prioritised, then it penalises anything above the ceiling you set. Standard is scored on the fact that it is complete, not on bonuses it does not have.</p>
           <pre class="methodology-formula">utility = Σ (bonusValue × categoryWeight × confidenceFactor)
 utilityDelta = utility(edition) − utility(standard)
 efficiency = clamp(utilityDelta ÷ (upliftPercent ÷ 12), 0, 1.3)
 coverage = prioritised categories present in tier ÷ prioritised categories chosen
 score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budgetPenalty) × 100</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>No edition price, currency figure or retailer listing is read or displayed here. Uplift is a percentage over Standard drawn from the confirmed Standard ($79.99) and Ultimate ($99.99) prices.</li><li>Bonus contents that Rockstar has not itemised are scored by role — head start or cosmetic — rather than by an invented quantity.</li><li>Currency conversion, tax treatment and regional price gaps are answered by /tools/price-by-country. Cancellation terms, download timing and where to order are answered by /tools/pre-order-tracker. This page never duplicates either.</li></ul>
+          <ul class="list-disc list-outside"><li>No edition price, currency figure or retailer listing is read or displayed here. Uplift is a percentage over Standard drawn from the confirmed Standard ($79.99) and Ultimate ($99.99) prices.</li><li>Bonus contents that Rockstar has not itemised are scored by role, head start or cosmetic, rather than by an invented quantity.</li><li>Currency conversion, tax treatment and regional price gaps are answered by /tools/price-by-country. Cancellation terms, download timing and where to order are answered by /tools/pre-order-tracker. This page never duplicates either.</li></ul>
+    <div class="assumptions-block"><p><strong>Assumptions</strong> <span>GTA 6 released 19 November 2026. This page compares what each edition adds and how much extra it costs as a percentage over Standard, never a currency figure, because regional pricing lives on the price-by-country tool. Bonus contents are labelled confirmed, reported or precedent; anything drawn from how GTA V and Red Dead Redemption 2 editions were built is marked as precedent, not fact.</span> <a href="/methodology">Read the full methodology</a></p>
+      <p class="updated-line">Updated <time datetime="2026-11-21">November 21, 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 edition questions, answered plainly</h2>
+      <header>
+        <h2 id="faq">GTA 6 edition questions, answered plainly</h2>
         <p class="section-dek">Standard versus Ultimate, upgrades and pre-order bonuses.</p>
       </header>
-      <ul class="faq-list" role="list"><li class="faq-item"><button id="faq-q-1" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-1"><span>Which GTA 6 edition should I buy?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-1" class="faq-answer" data-faq-answer hidden><p>If you play the campaign and little else, Standard — it contains the whole story and the whole online mode, and every higher tier only adds online head-start items. If you are going straight into online at launch, the top tier can pay for itself in saved grinding, and the picker above quantifies that against the uplift you said you would tolerate.</p></div></li><li class="faq-item"><button id="faq-q-2" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-2"><span>Does any GTA 6 edition include extra story content?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-2" class="faq-answer" data-faq-answer hidden><p>No. This is the single most important fact on the page: the campaign is identical across every edition. Bonuses are online currency, vehicles, property and cosmetics. Nobody is locked out of story missions, characters or endings by buying Standard.</p></div></li><li class="faq-item"><button id="faq-q-3" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-3"><span>What do you get with the GTA 6 Ultimate Edition?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-3" class="faq-answer" data-faq-answer hidden><p>Based on how Rockstar has structured top tiers before, expect a larger in-game currency grant, an additional property or vehicle unlock, tier-exclusive cosmetics and — if offered — the earliest access window. Rockstar has not itemised these for GTA 6, so this page scores them by role rather than quoting amounts it cannot cite.</p></div></li><li class="faq-item"><button id="faq-q-4" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-4"><span>Will there be a GTA 6 Collector&#x27;s Edition?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-4" class="faq-answer" data-faq-answer hidden><p>No. There is no boxed GTA 6 collector's edition game. Rockstar sells a $399.99 'Goodtime State, Vice City Collection' merchandise box with no game included. Both GTA V and Red Dead Redemption 2 shipped boxed collector's editions with a printed map, artbook, steelbook and display pieces, and both were limited console-only runs that sold out before launch.</p></div></li><li class="faq-item"><button id="faq-q-5" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-5"><span>Can I upgrade from Standard to a higher edition later?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-5" class="faq-answer" data-faq-answer hidden><p>Digital tier upgrades are normally sold in-store at the price difference on both consoles, so buying Standard now and stepping up later usually costs the same in total. The exception is anything time-limited — launch bonus weeks and any early-access window — which cannot be claimed after the fact.</p></div></li><li class="faq-item"><button id="faq-q-6" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-6"><span>Do pre-order bonuses differ from edition bonuses?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-6" class="faq-answer" data-faq-answer hidden><p>Yes, and they get conflated constantly. Pre-order bonuses depend on when and where you order and are usually small; edition bonuses depend on which tier you buy and travel with the licence. This page scores edition bonuses only — the where-to-order question, including cancellation terms and download timing, is handled by Where to Buy GTA 6: Editions &amp; Channels Compared.</p></div></li><li class="faq-item"><button id="faq-q-7" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-7"><span>Are the exclusive cosmetics really exclusive?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-7" class="faq-answer" data-faq-answer hidden><p>Treat exclusivity as likely but not permanent. Some tier-exclusive items in previous Rockstar titles later became obtainable in-game, which is why cosmetics carry a lower weight here than currency or property unless you explicitly prioritise them.</p></div></li><li class="faq-item"><button id="faq-q-8" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-8"><span>Why does this page not show prices?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-8" class="faq-answer" data-faq-answer hidden><p>Because a single price is wrong for almost everyone reading it. Editions cost different amounts in every market, with different tax treatment, and that comparison is done properly on the price-by-country tool. Here the uplift is a percentage over Standard, which holds true regardless of your currency.</p></div></li><li class="faq-item"><button id="faq-q-9" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-9"><span>Is buying a higher edition better value than buying in-game currency later?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-9" class="faq-answer" data-faq-answer hidden><p>For a grinder that is the real comparison, and it cannot be settled from this page alone: check GTA 6's in-game prices and currency-pack rates in the game. If currency is your only reason to upgrade, buy Standard, play a week, then decide with real numbers.</p></div></li></ul>
+      <ul class="faq-list" role="list"><li class="faq-item"><button id="faq-q-1" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-1"><span>Which GTA 6 edition should I buy?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-1" class="faq-answer" data-faq-answer hidden><p>If you play the campaign and little else, Standard, it contains the whole story and the whole online mode, and every higher tier only adds online head-start items. If you are going straight into online at launch, the top tier can pay for itself in saved grinding, and the picker above quantifies that against the uplift you said you would tolerate.</p></div></li><li class="faq-item"><button id="faq-q-2" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-2"><span>Does any GTA 6 edition include extra story content?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-2" class="faq-answer" data-faq-answer hidden><p>No. This is the single most important fact on the page: the campaign is identical across every edition. Bonuses are online currency, vehicles, property and cosmetics. Nobody is locked out of story missions, characters or endings by buying Standard.</p></div></li><li class="faq-item"><button id="faq-q-3" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-3"><span>What do you get with the GTA 6 Ultimate Edition?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-3" class="faq-answer" data-faq-answer hidden><p>Based on how Rockstar has structured top tiers before, expect a larger in-game currency grant, an additional property or vehicle unlock, tier-exclusive cosmetics and, if offered, the earliest access window. Rockstar has not itemised these for GTA 6, so this page scores them by role rather than quoting amounts it cannot cite.</p></div></li><li class="faq-item"><button id="faq-q-4" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-4"><span>Will there be a GTA 6 Collector&#x27;s Edition?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-4" class="faq-answer" data-faq-answer hidden><p>No. There is no boxed GTA 6 collector's edition game. Rockstar sells a $399.99 'Goodtime State, Vice City Collection' merchandise box with no game included. Both GTA V and Red Dead Redemption 2 shipped boxed collector's editions with a printed map, artbook, steelbook and display pieces, and both were limited console-only runs that sold out before launch.</p></div></li><li class="faq-item"><button id="faq-q-5" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-5"><span>Can I upgrade from Standard to a higher edition later?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-5" class="faq-answer" data-faq-answer hidden><p>Digital tier upgrades are normally sold in-store at the price difference on both consoles, so buying Standard now and stepping up later usually costs the same in total. The exception is anything time-limited, launch bonus weeks and any early-access window, which cannot be claimed after the fact.</p></div></li><li class="faq-item"><button id="faq-q-6" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-6"><span>Do pre-order bonuses differ from edition bonuses?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-6" class="faq-answer" data-faq-answer hidden><p>Yes, and they get conflated constantly. Pre-order bonuses depend on when and where you order and are usually small; edition bonuses depend on which tier you buy and travel with the licence. This page scores edition bonuses only, the where-to-order question, including cancellation terms and download timing, is handled by Where to Buy GTA 6: Editions &amp; Channels Compared.</p></div></li><li class="faq-item"><button id="faq-q-7" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-7"><span>Are the exclusive cosmetics really exclusive?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-7" class="faq-answer" data-faq-answer hidden><p>Treat exclusivity as likely but not permanent. Some tier-exclusive items in previous Rockstar titles later became obtainable in-game, which is why cosmetics carry a lower weight here than currency or property unless you explicitly prioritise them.</p></div></li><li class="faq-item"><button id="faq-q-8" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-8"><span>Why does this page not show prices?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-8" class="faq-answer" data-faq-answer hidden><p>Because a single price is wrong for almost everyone reading it. Editions cost different amounts in every market, with different tax treatment, and that comparison is done properly on the price-by-country tool. Here the uplift is a percentage over Standard, which holds true regardless of your currency.</p></div></li><li class="faq-item"><button id="faq-q-9" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-9"><span>Is buying a higher edition better value than buying in-game currency later?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-9" class="faq-answer" data-faq-answer hidden><p>For a grinder that is the real comparison, and it cannot be settled from this page alone: check GTA 6's in-game prices and currency-pack rates in the game. If currency is your only reason to upgrade, buy Standard, play a week, then decide with real numbers.</p></div></li></ul>
     </section>
 
     <section aria-labelledby="glossary">
       <h2 id="glossary">Edition terminology used on this page</h2>
-      <dl class="glossary-grid"><div><dt id="term-uplift">Uplift</dt><dd>The extra you pay for an edition, expressed as a percentage over the Standard edition in the same market. Currency-neutral, so it stays accurate everywhere.</dd></div><div><dt id="term-weighted-usefulness">Weighted usefulness</dt><dd>A bonus&#x27;s intrinsic value multiplied by how much your player profile cares about that category and discounted by how firmly the bonus is established.</dd></div><div><dt id="term-confidence-label">Confidence label</dt><dd>Confirmed means Rockstar has stated it. Reported means it appears in listings without full detail. Precedent means it is drawn from GTA V and RDR2 editions and may not apply to GTA 6.</dd></div><div><dt id="term-head-start">Head start</dt><dd>Any bonus that only saves you time you would otherwise spend earning the same thing in-game — currency, starter vehicles, an early property.</dd></div><div><dt id="term-tier-upgrade">Tier upgrade</dt><dd>An in-store purchase that converts an owned edition to a higher one at the price difference, rather than rebuying the game.</dd></div></dl>
+      <dl class="glossary-grid"><div><dt id="term-uplift">Uplift</dt><dd>The extra you pay for an edition, expressed as a percentage over the Standard edition in the same market. Currency-neutral, so it stays accurate everywhere.</dd></div><div><dt id="term-weighted-usefulness">Weighted usefulness</dt><dd>A bonus&#x27;s intrinsic value multiplied by how much your player profile cares about that category and discounted by how firmly the bonus is established.</dd></div><div><dt id="term-confidence-label">Confidence label</dt><dd>Confirmed means Rockstar has stated it. Reported means it appears in listings without full detail. Precedent means it is drawn from GTA V and RDR2 editions and may not apply to GTA 6.</dd></div><div><dt id="term-head-start">Head start</dt><dd>Any bonus that only saves you time you would otherwise spend earning the same thing in-game, currency, starter vehicles, an early property.</dd></div><div><dt id="term-tier-upgrade">Tier upgrade</dt><dd>An in-store purchase that converts an owned edition to a higher one at the price difference, rather than rebuying the game.</dd></div></dl>
     </section>
 
     <section aria-labelledby="related-content">
       <h2 id="related-content">Work out the price, then where to order</h2>
       <h3 class="related-sub">Related tools</h3>
-      <ul class="related-tools-grid"><li><a href="/tools/price-by-country" class="tool-card" data-accent="purple" aria-label="GTA 6 Price by Country — GTA 6 price in 44 markets, local currency and USD, tax split out. Includes the Standard vs Ultimate edition ladder."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Price by Country</h3><p>GTA 6 price in 44 markets, local currency and USD, tax split out. Includes the Standard vs Ultimate edition ladder.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/pre-order-tracker" class="tool-card" data-accent="pink" aria-label="Where to Buy GTA 6: Editions &amp; Channels Compared — Three buying channels scored on cancellability, price protection, download timing, bonuses and resale — for your platform and region."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>Where to Buy GTA 6: Editions &amp; Channels Compared</h3><p>Three buying channels scored on cancellability, price protection, download timing, bonuses and resale — for your platform and region.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA 6 Release Date Reminder — One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now — reminders for patches, DLC and events."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Release Date Reminder</h3><p>One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now — reminders for patches, DLC and events.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA 6 System Requirements Checker — Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/weapon-comparison" class="tool-card" data-accent="purple" aria-label="GTA 6 Weapon Comparison — Ratings, Magazine &amp; Price — Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Weapon Comparison — Ratings, Magazine &amp; Price</h3><p>Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range — the four in-game ratings out of 10 — plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/vehicle-comparison" class="tool-card" data-accent="purple" aria-label="GTA 6 Vehicle Comparison — Ratings, Register Cost &amp; Sell Value — Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 — Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength — plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Vehicle Comparison — Ratings, Register Cost &amp; Sell Value</h3><p>Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10 — Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength — plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/server-status" class="tool-card" data-accent="purple" aria-label="GTA 6 Server Status — Are the Servers Down? — GTA 6 has no servers to go down — it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Server Status — Are the Servers Down?</h3><p>GTA 6 has no servers to go down — it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tools/price-by-country" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Price by Country</h3><p>GTA 6 price in 44 markets, local currency and USD, tax split out. Includes the Standard vs Ultimate edition ladder.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/pre-order-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>Where to Buy GTA 6: Editions &amp; Channels Compared</h3><p>Three buying channels scored on cancellability, price protection, download timing, bonuses and resale, for your platform and region.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Release Date Reminder</h3><p>One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now, reminders for patches, DLC and events.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/weapon-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Weapon Comparison: Ratings, Magazine &amp; Price</h3><p>Compare the 53 base GTA 6 guns on Damage, Accuracy, Handling and Range, the four in-game ratings out of 10, plus magazine size, fire mode and price. No fire-rate stat exists in the game; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/vehicle-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Vehicle Comparison: Ratings, Register Cost &amp; Sell Value</h3><p>Compare GTA 6 vehicles head-to-head on the five in-game ratings out of 10, Speed, Acceleration, Asphalt Handling, Off-Road Handling, Strength, plus cost to register and sell value. No measured top speed exists yet; this tool shows the numbers the game shows. Last checked 24 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/server-status" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Server Status: Are the Servers Down?</h3><p>GTA 6 has no servers to go down, it launched 19 Nov 2026 as a single-player game with no online mode. Check the three services it depends on: Rockstar Authentication, PlayStation Network and Xbox network, hand-checked 24 Nov 2026, with the official pages linked.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
       <h2 id="sources">Sources &amp; methodology references</h2>
-      <ol class="sources-list"><li><a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">Grand Theft Auto VI — official game page</a><span class="src-meta">Rockstar Games &middot; Accessed Aug 24, 2026 &middot; Release date and the edition structure Rockstar has published.</span></li><li><a href="https://www.playstation.com/en-us/support/store/ps-store-digital-upgrade/" target="_blank" rel="noopener noreferrer">PlayStation Store — game and add-on upgrade purchases</a><span class="src-meta">Sony Interactive Entertainment &middot; Accessed Aug 24, 2026 &middot; How digital tier upgrades are priced at the difference.</span></li><li><a href="https://support.xbox.com/help/games-apps/game-setup-and-play/pre-order-and-preload-games" target="_blank" rel="noopener noreferrer">Xbox — game editions, upgrades and pre-order bonuses</a><span class="src-meta">Microsoft &middot; Accessed Aug 24, 2026 &middot; Edition upgrade behaviour and pre-order bonus grants.</span></li><li><a href="https://www.rockstargames.com/newswire/article/13o5a3k9k2a58a/red-dead-redemption-2-special-edition-ultimate-edition-and-collec" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 special and ultimate editions</a><span class="src-meta">Rockstar Games &middot; Accessed Aug 24, 2026 &middot; The precedent used for tier structure and bonus categories.</span></li></ol>
+      <ol class="sources-list"><li><a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">Grand Theft Auto VI: official game page</a><span class="src-meta">Rockstar Games &middot; Accessed Aug 24, 2026 &middot; Release date and the edition structure Rockstar has published.</span></li><li><a href="https://www.playstation.com/en-us/support/store/ps-store-digital-upgrade/" target="_blank" rel="noopener noreferrer">PlayStation Store: game and add-on upgrade purchases</a><span class="src-meta">Sony Interactive Entertainment &middot; Accessed Aug 24, 2026 &middot; How digital tier upgrades are priced at the difference.</span></li><li><a href="https://support.xbox.com/help/games-apps/game-setup-and-play/pre-order-and-preload-games" target="_blank" rel="noopener noreferrer">Xbox: game editions, upgrades and pre-order bonuses</a><span class="src-meta">Microsoft &middot; Accessed Aug 24, 2026 &middot; Edition upgrade behaviour and pre-order bonus grants.</span></li><li><a href="https://www.rockstargames.com/newswire/article/13o5a3k9k2a58a/red-dead-redemption-2-special-edition-ultimate-edition-and-collec" target="_blank" rel="noopener noreferrer">Red Dead Redemption 2 special and ultimate editions</a><span class="src-meta">Rockstar Games &middot; Accessed Aug 24, 2026 &middot; The precedent used for tier structure and bonus categories.</span></li></ol>
     </section>
 
     <section aria-labelledby="changelog">
@@ -335,7 +331,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.1</p>
         <time datetime="2026-11-17">Nov 17, 2026</time>
-        <p>Rebuilt as a static page. Ultimate uplift corrected to +25.0% from the confirmed prices ($99.99 / $79.99); Deluxe and Collector's tiers removed — the confirmed lineup is Standard and Ultimate, digital-only; confidence labels shown on every bonus; share state moved to URL query parameters.</p>
+        <p>Rebuilt as a static page. Ultimate uplift corrected to +25.0% from the confirmed prices ($99.99 / $79.99); Deluxe and Collector's tiers removed, the confirmed lineup is Standard and Ultimate, digital-only; confidence labels shown on every bonus; share state moved to URL query parameters.</p>
       </li><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-08-24">Aug 24, 2026</time>
@@ -349,32 +345,50 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -408,43 +422,41 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
               <li><a href="/contact">Contact</a></li>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
-              <li><a href="/disclaimer">Disclaimer</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics consent">
-  <div class="consent-inner">
-    <p><strong>Analytics, only with your OK.</strong> We use aggregate Google Analytics to see which tools get used. Tool inputs never leave your device, no profile is built, and nothing is sold. Accept to load it, or decline and browse without it. You can change your mind anytime from Cookie settings in the footer.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accept analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Decline</button>
-      <a href="/privacy">Privacy policy</a>
-    </div>
+
+  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
   </div>
 </div>
-  </div>
   <script src="/assets/js/theme.js" defer></script>
   <script src="/assets/js/header.js" defer></script>
   <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
   <script type="module" src="/assets/js/edition-comparison.js"></script>
   <script type="application/ld+json">
 {
@@ -595,7 +607,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       "name": "Which GTA 6 edition should I buy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you play the campaign and little else, Standard — it contains the whole story and the whole online mode, and every higher tier only adds online head-start items. If you are going straight into online at launch, the top tier can pay for itself in saved grinding, and the picker above quantifies that against the uplift you said you would tolerate."
+        "text": "If you play the campaign and little else, Standard, it contains the whole story and the whole online mode, and every higher tier only adds online head-start items. If you are going straight into online at launch, the top tier can pay for itself in saved grinding, and the picker above quantifies that against the uplift you said you would tolerate."
       }
     },
     {
@@ -611,7 +623,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       "name": "What do you get with the GTA 6 Ultimate Edition?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Based on how Rockstar has structured top tiers before, expect a larger in-game currency grant, an additional property or vehicle unlock, tier-exclusive cosmetics and — if offered — the earliest access window. Rockstar has not itemised these for GTA 6, so this page scores them by role rather than quoting amounts it cannot cite."
+        "text": "Based on how Rockstar has structured top tiers before, expect a larger in-game currency grant, an additional property or vehicle unlock, tier-exclusive cosmetics and, if offered, the earliest access window. Rockstar has not itemised these for GTA 6, so this page scores them by role rather than quoting amounts it cannot cite."
       }
     },
     {
@@ -627,7 +639,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       "name": "Can I upgrade from Standard to a higher edition later?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Digital tier upgrades are normally sold in-store at the price difference on both consoles, so buying Standard now and stepping up later usually costs the same in total. The exception is anything time-limited — launch bonus weeks and any early-access window — which cannot be claimed after the fact."
+        "text": "Digital tier upgrades are normally sold in-store at the price difference on both consoles, so buying Standard now and stepping up later usually costs the same in total. The exception is anything time-limited, launch bonus weeks and any early-access window, which cannot be claimed after the fact."
       }
     },
     {
@@ -635,7 +647,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       "name": "Do pre-order bonuses differ from edition bonuses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, and they get conflated constantly. Pre-order bonuses depend on when and where you order and are usually small; edition bonuses depend on which tier you buy and travel with the licence. This page scores edition bonuses only — the where-to-order question, including cancellation terms and download timing, is handled by Where to Buy GTA 6: Editions & Channels Compared."
+        "text": "Yes, and they get conflated constantly. Pre-order bonuses depend on when and where you order and are usually small; edition bonuses depend on which tier you buy and travel with the licence. This page scores edition bonuses only, the where-to-order question, including cancellation terms and download timing, is handled by Where to Buy GTA 6: Editions & Channels Compared."
       }
     },
     {

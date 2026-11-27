@@ -103,7 +103,7 @@ function verdictHtml(result) {
     if (!e.available) desc += " Not sold on " + result.platformLabel + ".";
     else if (e.overBudget) desc += " Above the ceiling you set.";
     desc += " Confidence: " + CONFIDENCE_LABEL[e.confidence] + ".";
-    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
+    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + ": " + e.score + "/100</strong>, " + esc(desc) + "</li>";
   }).join("");
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">Best value \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
@@ -116,14 +116,14 @@ function verdictHtml(result) {
     + "<div><dt>Your ceiling</dt><dd>" + result.upliftTolerance + "%</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="' + xUrl(result) + '">Share on X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Share on X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function matrixHtml(result) {
   var items = result.best.bonuses.map(function (b) {
-    return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
+    return "<li><strong>" + esc(b.label) + ": " + b.utility + " pts</strong>, " + esc(CATEGORY_LABEL[b.category]) + " \u00b7 " + esc(CONFIDENCE_LABEL[b.confidence]) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">New in this tier: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
@@ -132,20 +132,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonuses</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="' + xUrl(result) + '">Share on X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Share on X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">Upgrade math</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="' + xUrl(result) + '">Share on X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Share on X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -173,13 +173,13 @@ function render() {
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 TL;DR";
     if (tText) tText.textContent = result.best.edition.label + " is the best value for a " + buyerPhrase(result.profile) + " on " + result.platformLabel + " at a " + result.upliftTolerance + "% ceiling: " + result.best.score + "/100, adding " + result.best.utilityDelta + " weighted points over Standard for a " + result.best.edition.upliftPercent + "% uplift.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 value for uplift";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + ": " + result.best.score + "/100 value for uplift";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode \u2014 the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode, the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
   }
 
   var out = $("[data-output-panel]");

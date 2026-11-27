@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,11 +27,13 @@
     <meta name="twitter:title" content="GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması">
     <meta name="twitter:description" content="GTA 6 satın alma kanallarının tamamını iptal edilebilirlik, fiyat koruması, indirme süresi, bonuslar ve yeniden satış açısından karşılaştırın — platformunuz ve bölgeniz için puanlanmıştır.">
     <meta name="twitter:image" content="https://toolwools.com/og/pre-order-tracker.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="canonical" href="https://toolwools.com/tr/tools/pre-order-tracker">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+            <link rel="canonical" href="https://toolwools.com/tr/tools/pre-order-tracker">
 <link rel="alternate" href="https://toolwools.com/tools/pre-order-tracker" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/pre-order-tracker" hreflang="es">
 <link rel="alternate" href="https://toolwools.com/pt/tools/pre-order-tracker" hreflang="pt">
@@ -43,26 +45,42 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-pre-order-tracker-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
-    </script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
+<a class="skip-link" href="#main">İçeriğe atla</a>
+
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -74,42 +92,43 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"><path d="m21 21-4.3-4.3"></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/pre-order-tracker">İngilizce</a>
             <a href="/es/tools/pre-order-tracker">Español</a>
             <a href="/pt/tools/pre-order-tracker">Português</a>
             <a href="/de/tools/pre-order-tracker">Deutsch</a>
             <a href="/fr/tools/pre-order-tracker">Français</a>
-            <a href="/tr/tools/pre-order-tracker" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></svg> Türkçe</a>
+            <a href="/tr/tools/pre-order-tracker" aria-current="true"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Türkçe</a>
             <a href="/ar/tools/pre-order-tracker">العربية</a>
           </div>
         </details>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">
-          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"><path d="M12 2v2"><path d="M12 20v2"><path d="m4.93 4.93 1.41 1.41"><path d="m17.66 17.66 1.41 1.41"><path d="M2 12h2"><path d="M20 12h2"><path d="m6.34 17.66-1.41 1.41"><path d="m19.07 4.93-1.41 1.41"></svg>
-          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></svg>
+          <svg class="icon icon-sun" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
         </button>
         <button type="button" class="menu-toggle" data-menu-toggle aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-nav">
-          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"><line x1="4" x2="20" y1="12" y2="12"><line x1="4" x2="20" y1="18" y2="18"></svg>
+          <svg class="icon icon-lg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
         </button>
       </div>
     </div>
     <div class="container">
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
-          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"><path d="m21 21-4.3-4.3"></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,12 +138,16 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/pre-order-tracker" lang="en">EN</a><a href="/es/tools/pre-order-tracker" lang="es">ES</a><a href="/pt/tools/pre-order-tracker" lang="pt">PT</a><a href="/de/tools/pre-order-tracker" lang="de">DE</a><a href="/fr/tools/pre-order-tracker" lang="fr">FR</a><a href="/tr/tools/pre-order-tracker" lang="tr" aria-current="true">TR</a><a href="/ar/tools/pre-order-tracker" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-    <main id="main" class="tool-main">
+    <main id="main" tabindex="-1" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
 <section class="page-hero" aria-labelledby="page-title">
@@ -135,30 +158,13 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Nereden Alınır</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"><path d="M3 6h18"><path d="M16 10a4 4 0 0 1-8 0"></svg>
-        <span>Takipçiler</span>
-      </div>
+      <div class="page-eyebrow"><span>Takipçiler</span></div>
       <h1 id="page-title" class="page-title">GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması</h1>
       <p class="page-subtitle">GTA 6, 19 Kasım 2026'da PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyunu satıyor. Farklı olan koşullar: iptal edip edemeyeceğiniz, fiyat düşüşünün iade edilip edilmeyeceği, ne kadar çabuk oynayabileceğiniz, bonusların kalıp kalmayacağı ve kopyayı sonradan satıp satamayacağınız. Beşini de platformunuz ve bölgeniz için puanlayın.</p>
-      <ul class="hero-badges" aria-label="Bir bakışta">
-        <li class="chip">3 satın alma kanalı puanlandı</li><li class="chip">7 bölge, 2 platform, 2 sürüm</li><li class="chip">Koşullar karşılaştırılır, fiyatlar asla</li>
-      </ul>
-    </section><div class="tool-intro-callout"><p>Neredeyse her «GTA 6 nereden alınır» sayfası, üç kanalın tamamını birbirinin yerine geçebilirmiş gibi gösteren bağlı kuruluş düğmelerinin listesidir. Öyle değiller. Bir platform mağazası hemen indirip oynamanızı sağlar ve size en kötü iptal konumunu verir. Bir perakendeci dijital kodu size fiyat garantisi verir, ancak kod geç gelebilir. Perakendeci kutulu kodu, içinde indirme kodu olan kutulu bir Standard kopyasıdır — disk yok. Kargoya verilene kadar fiyat garantisini ve iptal edilebilirliği korur, ancak teslimatı beklersiniz ve yine de oyunun tamamını indirirsiniz; kod kullanıldıktan sonra satılamaz veya ödünç verilemez. Bu masa, bu ödünleşimleri, gerçekten önem verdiğiniz şeye — hemen oynamak ya da bir çıkış yolunu korumak — göre eğebileceğiniz ağırlıklı bir puana dönüştürür ve ardından koşulları sade sözcüklerle gösterir, böylece para yatırmadan önce bunları kendiniz kontrol edebilirsiniz.</p></div>
-<div class="byline" aria-label="Yazar ve inceleme künyesi">
-      <span class="byline-item">Yazan <a href="/about#marcus-reyes">Marcus Reyes</a> <span aria-hidden="true">·</span> Donanım ve satın alma analisti</span>
-      <span class="byline-item">İnceleyen <a href="/about#priya-nandakumar">Priya Nandakumar</a> <span aria-hidden="true">·</span> Editoryal standartlar</span>
-      <span class="byline-item">Yayınlanma <time datetime="2026-08-16">16 Ağu 2026</time> · Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></span>
-      <a class="method-link" href="/tr/methodology">Metodoloji</a>
-    </div><div class="sr-only" data-live-region aria-live="polite">En iyi satın alma kanalı: PlayStation 5 üzerinde Perakendeci kodu, 100 üzerinden 58,1. Bize değerden başka güçlü bir tercihiniz olmadığını söylediğiniz için, perakendeci dijital kodu (Amazon, GameStop, Best Buy), ABD'de bir Standart sipariş için 100 üzerinden 58,1 puan alıyor; fiyat düşüşü koruması ve iptal edilebilirlik açısından önde, platform dijital 51,9 ile geride.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"><path d="m9 12 2 2 4-4"></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>En iyi kanal · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>PlayStation 5 üzerinde Perakendeci kodu, Amerika Birleşik Devletleri'nde Standart sipariş için 100 üzerinden 58,1 puan alıyor, fiyat düşüşü koruması ve iptal edilebilirlik açısından önde.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>En iyi: Perakendeci kodu, 58,1/100</p>
-    </section><div id="preorder-answer" data-speakable class="answer-card"><h2 class="eyebrow-muted">Kısa yanıt</h2><p data-preorder-answer>GTA 6, <time datetime="2026-11-19">19 Kasım 2026</time> tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan PlayStation 5 üzerinde Perakendeci kodu. Bize değerden başka güçlü bir tercihiniz olmadığını söylediğiniz için, perakendeci dijital kodu (Amazon, GameStop, Best Buy), ABD'de bir Standart sipariş için 100 üzerinden 58,1 puan alıyor; fiyat düşüşü koruması ve iptal edilebilirlik açısından önde, platform dijital 51,9 ile geride.</p></div>
+      <p class="hero-meta"><span>3 satın alma kanalı puanlandı</span><span>7 bölge, 2 platform, 2 sürüm</span><span>Koşullar karşılaştırılır, fiyatlar asla</span><span>Yazan <a href="/about#marcus-reyes">Marcus Reyes</a></span><span>İnceleyen <a href="/about#priya-nandakumar">Priya Nandakumar</a></span><span>Yayınlanma <time datetime="2026-08-16">16 Ağu 2026</time></span><span>Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></span><span><a href="/tr/methodology">Metodoloji</a></span></p>
+    </section>
+<div class="sr-only" data-live-region aria-live="polite">En iyi satın alma kanalı: PlayStation 5 üzerinde Perakendeci kodu, 100 üzerinden 58,1. Bize değerden başka güçlü bir tercihiniz olmadığını söylediğiniz için, perakendeci dijital kodu (Amazon, GameStop, Best Buy), ABD'de bir Standart sipariş için 100 üzerinden 58,1 puan alıyor; fiyat düşüşü koruması ve iptal edilebilirlik açısından önde, platform dijital 51,9 ile geride.</div>
+<div id="preorder-answer" data-speakable class="answer-card"><h2 class="eyebrow-muted">Kısa yanıt</h2><p data-preorder-answer>GTA 6, <time datetime="2026-11-19">19 Kasım 2026</time> tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan PlayStation 5 üzerinde Perakendeci kodu. Bize değerden başka güçlü bir tercihiniz olmadığını söylediğiniz için, perakendeci dijital kodu (Amazon, GameStop, Best Buy), ABD'de bir Standart sipariş için 100 üzerinden 58,1 puan alıyor; fiyat düşüşü koruması ve iptal edilebilirlik açısından önde, platform dijital 51,9 ile geride.</p></div>
 <div class="countdown-card" aria-label="GTA 6 çıktı" style="margin-inline:auto">
   <div class="countdown-label"><span class="dot live-dot" aria-hidden="true"></span><span>GTA 6 Şimdi Çıktı</span></div>
   <div class="countdown-meta"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"><path d="M16 2v4"><rect width="18" height="18" x="3" y="4" rx="2"><path d="M3 10h18"></svg>19 Kas 2026 • 00.00 ET</div>
@@ -198,7 +204,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted" data-output-label>PlayStation 5 için satın alma kanalları</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">En iyi kanal</p><h3 class="verdict-title">Perakendeci kodu<span class="unit"> / 100 üzerinden 58,1</span></h3><p class="verdict-desc">Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol edin — teslimat süresi değişir.</p></div></div><ol class="milestone-list"><li><div class="milestone-row"><span><strong>1. Perakendeci dijital kodu (Amazon, GameStop, Best Buy)</strong><br><span class="field-hint">Fiyat düşüşü koruması ve iptal edilebilirlik güçlü. Yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">58.1/100</span></div></li><li><div class="milestone-row"><span><strong>2. Platform mağazası (PS Store / Xbox Store)</strong><br><span class="field-hint">İndirme hazırlığı ve bonus tutma güçlü. Fiyat düşüşü koruması ve yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">51.9/100</span></div></li><li><div class="milestone-row"><span><strong>3. Perakendeci kutulu kod (yalnızca Standard)</strong><br><span class="field-hint">İptal edilebilirlik ve fiyat düşüşü koruması güçlü. İndirme hazırlığı ve yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">50.8/100</span></div></li></ol><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=PlayStation%205%27te%20GTA%206%20sat%C4%B1n%20almak%20i%C3%A7in%20en%20iyi%20yer%3A%20Perakendeci%20kodu%20%2858%2C1%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=PlayStation%205%27te%20GTA%206%20sat%C4%B1n%20almak%20i%C3%A7in%20en%20iyi%20yer%3A%20Perakendeci%20kodu%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">En iyi kanal</p><h3 class="verdict-title">Perakendeci kodu<span class="unit"> / 100 üzerinden 58,1</span></h3><p class="verdict-desc">Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol edin, teslimat süresi değişir.</p></div></div><ol class="milestone-list"><li><div class="milestone-row"><span><strong>1. Perakendeci dijital kodu (Amazon, GameStop, Best Buy)</strong><br><span class="field-hint">Fiyat düşüşü koruması ve iptal edilebilirlik güçlü. Yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">58.1/100</span></div></li><li><div class="milestone-row"><span><strong>2. Platform mağazası (PS Store / Xbox Store)</strong><br><span class="field-hint">İndirme hazırlığı ve bonus tutma güçlü. Fiyat düşüşü koruması ve yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">51.9/100</span></div></li><li><div class="milestone-row"><span><strong>3. Perakendeci kutulu kod (yalnızca Standard)</strong><br><span class="field-hint">İptal edilebilirlik ve fiyat düşüşü koruması güçlü. İndirme hazırlığı ve yeniden satış değeri zayıf. Güven: Platform normu.</span></span><span class="axis-score">50.8/100</span></div></li></ol><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=PlayStation%205%27te%20GTA%206%20sat%C4%B1n%20almak%20i%C3%A7in%20en%20iyi%20yer%3A%20Perakendeci%20kodu%20%2858%2C1%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=PlayStation%205%27te%20GTA%206%20sat%C4%B1n%20almak%20i%C3%A7in%20en%20iyi%20yer%3A%20Perakendeci%20kodu%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Reddit</a></div></div>
         </div>
       </div>
     </section><section data-risk-flags aria-label="Bu seçimde ne ters gidebilir" hidden></section><section class="share-panel" aria-labelledby="share-heading">
@@ -222,7 +228,7 @@
         <table class="data-table">
           <caption class="sr-only">Platform kullanılabilirliği ve iptal edilebilirlik, fiyat düşüşü koruması, indirme hazırlığı, bonus tutma ve yeniden satış değeri için on üzerinden ham puanlarla üç GTA 6 satın alma kanalı.</caption>
           <thead><tr><th scope="col">Kanal</th><th scope="col">Platformlar</th><th scope="col">İptal edilebilirlik</th><th scope="col">Fiyat düşüşü koruması</th><th scope="col">İndirme hazırlığı</th><th scope="col">Bonus tutma</th><th scope="col">Yeniden satış değeri</th></tr></thead>
-          <tbody><tr id="channel-platform-digital"><th scope="row">Platform mağazası (PS Store / Xbox Store)<br><span class="field-hint">Varsayılan yol. Oynamaya başlamanın en hızlı yolu, sıfır yeniden satış değeri ve iade penceresi indirme başladığı anda kapanır.</span></th><td>PlayStation, Xbox</td><td>5/10</td><td>3/10</td><td>10/10</td><td>9/10</td><td>0/10</td></tr><tr id="channel-retailer-code"><th scope="row">Perakendeci dijital kodu (Amazon, GameStop, Best Buy)<br><span class="field-hint">Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol edin — teslimat süreleri değişir.</span></th><td>PlayStation, Xbox</td><td>7/10</td><td>8/10</td><td>6/10</td><td>6/10</td><td>2/10</td></tr><tr id="channel-retailer-code-in-box"><th scope="row">Perakendeci kutulu kod (yalnızca Standard)<br><span class="field-hint">İçinde indirme kodu olan kutulu bir Standard kopyası — disk yok. Kargoya verilene kadar iptal et ve fiyat garantisini koru, sonra kodu kullan ve oyunun tamamını indir.</span></th><td>PlayStation, Xbox</td><td>9/10</td><td>9/10</td><td>1/10</td><td>5/10</td><td>0/10</td></tr></tbody>
+          <tbody><tr id="channel-platform-digital"><th scope="row">Platform mağazası (PS Store / Xbox Store)<br><span class="field-hint">Varsayılan yol. Oynamaya başlamanın en hızlı yolu, sıfır yeniden satış değeri ve iade penceresi indirme başladığı anda kapanır.</span></th><td>PlayStation, Xbox</td><td>5/10</td><td>3/10</td><td>10/10</td><td>9/10</td><td>0/10</td></tr><tr id="channel-retailer-code"><th scope="row">Perakendeci dijital kodu (Amazon, GameStop, Best Buy)<br><span class="field-hint">Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol edin, teslimat süreleri değişir.</span></th><td>PlayStation, Xbox</td><td>7/10</td><td>8/10</td><td>6/10</td><td>6/10</td><td>2/10</td></tr><tr id="channel-retailer-code-in-box"><th scope="row">Perakendeci kutulu kod (yalnızca Standard)<br><span class="field-hint">İçinde indirme kodu olan kutulu bir Standard kopyası, disk yok. Kargoya verilene kadar iptal et ve fiyat garantisini koru, sonra kodu kullan ve oyunun tamamını indir.</span></th><td>PlayStation, Xbox</td><td>9/10</td><td>9/10</td><td>1/10</td><td>5/10</td><td>0/10</td></tr></tbody>
         </table>
       </div>
     </section><section aria-labelledby="for-agents">
@@ -235,7 +241,7 @@
       <h2 id="related-tools-inline">Para yatırmadan önce</h2>
       <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"><path d="M7 17 17 7"></svg><span>GTA 6'nın yaşadığınız yerde ne kadara mal olduğunu şununla görün <a href="/tr/tools/price-by-country">Ülkelere Göre Fiyat aracı</a>. 44 pazarda bölgesel fiyatlandırma, vergi muamelesi ve sürüm farkları.</span></li><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"><path d="M7 17 17 7"></svg><span><a href="/tr/tools/storage-planner">Depolama Planlayıcısı</a> ile 212 GB'lık kurulum için yeriniz olduğunu kontrol edin.</span></li></ul>
     </section><aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Varsayımlar</strong> <span>Doğrulandı: Grand Theft Auto VI, 19 Kasım 2026'da çıktı. Ön siparişler 25 Haziran 2026'da açıldı. Buradaki diğer her şey politikadır, fiyat değil. Kanal puanları <em>koşulları</em> tanımlar — iptal, fiyat koruması, indirme süresi, bonus verme güvenilirliği ve yeniden satış — canlı listelemelerden değil, köklü platform ve perakendeci politikalarından alınmıştır. İndirme ön süreleri platform normlarıydı, Rockstar tarafından doğrulanmış zamanlar değildi; ön yükleme penceresi çıkışta kapandı. Bölgesel iptal gücü, mevcut olduğu yerlerde yasal mesafeli satış haklarını yansıtır; bunlar normalde yalnızca dijital içerik indirilmediği sürece geçerlidir. Bu sayfada fiyatları alıntılamıyor veya dönüştürmüyoruz; bu, ülkelere göre fiyat aracının işidir ve bunu bilinçli olarak yinelemiyoruz. Sipariş vermeden önce her zaman mağazanın kendi koşullarını okuyun — politikalar değişir ve sizinki geçerlidir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+      <p><strong>Varsayımlar</strong> <span>Doğrulandı: Grand Theft Auto VI, 19 Kasım 2026'da çıktı. Ön siparişler 25 Haziran 2026'da açıldı. Buradaki diğer her şey politikadır, fiyat değil. Kanal puanları <em>koşulları</em> tanımlar, iptal, fiyat koruması, indirme süresi, bonus verme güvenilirliği ve yeniden satış, canlı listelemelerden değil, köklü platform ve perakendeci politikalarından alınmıştır. İndirme ön süreleri platform normlarıydı, Rockstar tarafından doğrulanmış zamanlar değildi; ön yükleme penceresi çıkışta kapandı. Bölgesel iptal gücü, mevcut olduğu yerlerde yasal mesafeli satış haklarını yansıtır; bunlar normalde yalnızca dijital içerik indirilmediği sürece geçerlidir. Bu sayfada fiyatları alıntılamıyor veya dönüştürmüyoruz; bu, ülkelere göre fiyat aracının işidir ve bunu bilinçli olarak yinelemiyoruz. Sipariş vermeden önce her zaman mağazanın kendi koşullarını okuyun, politikalar değişir ve sizinki geçerlidir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
       <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p>
     </aside><section aria-labelledby="how-it-works">
       <h2 id="how-it-works">GTA 6'yı nereden alacağınıza adım adım nasıl karar verilir</h2>
@@ -247,7 +253,7 @@
       </li><li>
         <span class="step-number">02</span>
         <h3 class="step-title">Neden vazgeçeceğinizi söyleyin</h3>
-        <p class="step-text">Hemen oynamak ve iptal seçeneğini korumak farklı yönlere çeker. Önemli olan ikisini açın, ağırlık kayar — iptal edilebilirlik ve anında indirme, dijital bir siparişte aynı anda en üst düzeye çıkarılamaz.</p>
+        <p class="step-text">Hemen oynamak ve iptal seçeneğini korumak farklı yönlere çeker. Önemli olan ikisini açın, ağırlık kayar, iptal edilebilirlik ve anında indirme, dijital bir siparişte aynı anda en üst düzeye çıkarılamaz.</p>
       </li><li>
         <span class="step-number">03</span>
         <h3 class="step-title">Kazanan kanalın puanını değil, koşullarını okuyun</h3>
@@ -255,11 +261,11 @@
       </li><li>
         <span class="step-number">04</span>
         <h3 class="step-title">Paraya mal olan iki kontrol noktasını denetleyin</h3>
-        <p class="step-text">Perakendecilerin fiyat sözleri eskiden çıkış tarihine kadar sürerdi; oyun çıktığına göre satın almadan önce listede güncel bir fiyat sözü olup olmadığını kontrol edin. İptal penceresi, indirmeniz başladığında veya paketiniz kargoya verildiğinde kapanır — önce ikisini de doğrulayın, çünkü ilki fiyat düşüşünün iade edilip edilmeyeceğini, ikincisi ise hâlâ vazgeçip geçemeyeceğinizi belirler.</p>
+        <p class="step-text">Perakendecilerin fiyat sözleri eskiden çıkış tarihine kadar sürerdi; oyun çıktığına göre satın almadan önce listede güncel bir fiyat sözü olup olmadığını kontrol edin. İptal penceresi, indirmeniz başladığında veya paketiniz kargoya verildiğinde kapanır, önce ikisini de doğrulayın, çünkü ilki fiyat düşüşünün iade edilip edilmeyeceğini, ikincisi ise hâlâ vazgeçip geçemeyeceğinizi belirler.</p>
       </li><li>
         <span class="step-number">05</span>
         <h3 class="step-title">Kurulumun gerçekten bitebileceğini doğrulayın</h3>
-        <p class="step-text">Oyunu satın almak hakkı garanti eder, oynayabileceğinizi değil. Satın almadan önce boş disk alanını ve gerçekçi indirme hızını kontrol edin — yalnızca kod veren bir kanal size yine de 212 GB'lık tam indirmeyi bırakır ve tıkanıklık test ettiğiniz hızı rutin olarak yarıya indirir.</p>
+        <p class="step-text">Oyunu satın almak hakkı garanti eder, oynayabileceğinizi değil. Satın almadan önce boş disk alanını ve gerçekçi indirme hızını kontrol edin, yalnızca kod veren bir kanal size yine de 212 GB'lık tam indirmeyi bırakır ve tıkanıklık test ettiğiniz hızı rutin olarak yarıya indirir.</p>
       </li><li>
         <span class="step-number">06</span>
         <h3 class="step-title">Aslında hangi bonus listesini satın aldığınızı kontrol edin</h3>
@@ -281,13 +287,13 @@
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-2">
           <h3 id="use-case-2">Fikrini değiştirebilecek Xbox alıcısı</h3>
-          <p>Xbox, oynanmamış ve indirilmemiş siparişlerde self servis iadeleri açık tutar, bu da onu en bağışlayıcı dijital platform yapar — ancak yalnızca indirmeye başlayana kadar.</p>
+          <p>Xbox, oynanmamış ve indirilmemiş siparişlerde self servis iadeleri açık tutar, bu da onu en bağışlayıcı dijital platform yapar, ancak yalnızca indirmeye başlayana kadar.</p>
           <a href="/tr/tools/pre-order-tracker?platform=xbox&amp;cancel=1" aria-label="Hazır ayarı yükle: Fikrini değiştirebilecek Xbox alıcısı">Hazır ayarı yükle <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></a>
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-3">
           <h3 id="use-case-3">Standard ile Ultimate arasında kalan alıcı</h3>
-          <p>Standard (79,99 $) temel oyundur; Ultimate (99,99 $) bonus paketini ekler. Platformdan emin değilseniz Standard ile başlayın — bonus paketi ne kadar büyükse kanal değiştirmek o kadar pahalıya mal olur, çünkü ödüller satın alan hesaba kilitlenir.</p>
+          <p>Standard (79,99 $) temel oyundur; Ultimate (99,99 $) bonus paketini ekler. Platformdan emin değilseniz Standard ile başlayın, bonus paketi ne kadar büyükse kanal değiştirmek o kadar pahalıya mal olur, çünkü ödüller satın alan hesaba kilitlenir.</p>
           <a href="/tr/tools/pre-order-tracker?platform=ps5&amp;edition=standard" aria-label="Hazır ayarı yükle: Standard ile Ultimate arasında kalan alıcı">Hazır ayarı yükle <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></a>
         </article>
       </li><li>
@@ -313,14 +319,14 @@
       <details class="methodology-details" open>
         <summary><h2 id="methodology">Her satın alma kanalı nasıl puanlanır</h2><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></summary>
         <div class="methodology-body">
-          <p>Platformunuzda bulunan her kanal, on üzerinden beş ham puan taşır — iptal edilebilirlik, fiyat düşüşü koruması, indirme hazırlığı, bonus tutma ve yeniden satış değeri. Bu ham puanlar daha sonra bağlama göre ayarlanır: bölgenizdeki yasal iptal hakları dijital iptal edilebilirliği artırır, geç gelen bir perakendeci kodu platform indirme penceresi uzun olduğunda daha kötü puan alır, daha büyük sürümler bonus verme güvenilirliğini her iki yönde de artırır ve bazı pazarlardaki ince fiziksel dağıtım kutulu kod puanlarını düşürür. Tercih anahtarlarınız seçtiğiniz eksenlere ağırlık ekler, ağırlıklar puanların karşılaştırılabilir kalması için 100'e yeniden normalize edilir ve ağırlıklı toplam kanalları sıralar.</p>
+          <p>Platformunuzda bulunan her kanal, on üzerinden beş ham puan taşır, iptal edilebilirlik, fiyat düşüşü koruması, indirme hazırlığı, bonus tutma ve yeniden satış değeri. Bu ham puanlar daha sonra bağlama göre ayarlanır: bölgenizdeki yasal iptal hakları dijital iptal edilebilirliği artırır, geç gelen bir perakendeci kodu platform indirme penceresi uzun olduğunda daha kötü puan alır, daha büyük sürümler bonus verme güvenilirliğini her iki yönde de artırır ve bazı pazarlardaki ince fiziksel dağıtım kutulu kod puanlarını düşürür. Tercih anahtarlarınız seçtiğiniz eksenlere ağırlık ekler, ağırlıklar puanların karşılaştırılabilir kalması için 100'e yeniden normalize edilir ve ağırlıklı toplam kanalları sıralar.</p>
           <pre class="methodology-formula">score = Σ (axis ÷ 10 × normalised weight), weights = base + 26 per selected preference, renormalised to 100</pre>
           <ul class="list-disc list-outside space-y-1.5"><li>Kanal eksen puanları koşulları tanımlar, fiyatları değil. Bu sayfada canlı liste, stok düzeyi veya para birimi rakamı okunmaz veya gösterilmez.</li><li>İndirme ön süreleri, son birinci taraf ve büyük üçüncü taraf sürümlerinde gözlemlenen platform normlarıdır, Rockstar'ın taahhütleri değildir.</li><li>Bölgesel iptal gücü, mevcut olduğu yerlerde yasal mesafeli satış haklarını yansıtır, vitrin politikası diğer her yerde geçerlidir ve uygulamada daha katı olabilir.</li><li>Fiyatlandırma, vergi ve para birimi soruları /tools/price-by-country tarafından yanıtlanır, böylece iki sayfa asla aynı sorgu için rekabet etmez.</li></ul>
         </div>
       </details>
     </section><section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 siparişini iptal edebilir misiniz ve bonuslar aktarılır mı?</h2>
+      <header>
+        <h2 id="faq">GTA 6 siparişini iptal edebilir misiniz ve bonuslar aktarılır mı?</h2>
         <p class="section-dek">İade pencereleri, indirme süresi, sürüm bonusları ve fiziksel kopya ile dijital.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -330,7 +336,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-1" class="faq-answer" role="region">
-            <p>Genellikle evet, ancak pencere insanların beklediğinden daha dardır. Dijital sipariş, oynanmadığı ve indirilmediği sürece iade edilebilir — iade uygunluğu, indirme başladığında sona erer, çıkış gününde değil. Fiziksel sipariş kargoya verilene kadar iptal edilebilir. AB ve Birleşik Krallık'ta 14 günlük yasal cayma hakkı mesafeli dijital satın alımlar için de geçerlidir; yine normalde yalnızca içerik indirilmediği sürece.</p>
+            <p>Genellikle evet, ancak pencere insanların beklediğinden daha dardır. Dijital sipariş, oynanmadığı ve indirilmediği sürece iade edilebilir, iade uygunluğu, indirme başladığında sona erer, çıkış gününde değil. Fiziksel sipariş kargoya verilene kadar iptal edilebilir. AB ve Birleşik Krallık'ta 14 günlük yasal cayma hakkı mesafeli dijital satın alımlar için de geçerlidir; yine normalde yalnızca içerik indirilmediği sürece.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -350,7 +356,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-3" class="faq-answer" role="region">
-            <p>Hayır. Sürüm bonusları, siparişi veren hesapta hak olarak verilir, bu nedenle PlayStation ile Xbox arasında taşınmaz ve iptal edip başka yerden yeniden satın alırsanız sizi izlemez. Perakendeciye özel öğeler platform bonuslarından ayrıdır ve her zaman onlarla birikmez. Bu nedenle platform kararı sürüm kararından önce gelmelidir — ve Ultimate alıcıları fikir değiştirmek için en fazla ödeyenlerdir.</p>
+            <p>Hayır. Sürüm bonusları, siparişi veren hesapta hak olarak verilir, bu nedenle PlayStation ile Xbox arasında taşınmaz ve iptal edip başka yerden yeniden satın alırsanız sizi izlemez. Perakendeciye özel öğeler platform bonuslarından ayrıdır ve her zaman onlarla birikmez. Bu nedenle platform kararı sürüm kararından önce gelmelidir, ve Ultimate alıcıları fikir değiştirmek için en fazla ödeyenlerdir.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -360,7 +366,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-4" class="faq-answer" role="region">
-            <p>Dijital, kolaylık açısından kazanır — teslimat beklemezsiniz ve hemen indirip oynayabilirsiniz; kutulu kod, iptal edilebilirlik ve fiyat koruması açısından kazanır, ancak yeniden satış değeri yoktur. Kutulu kod kargoya verilene kadar iptal edilebilir ve genellikle bir perakendeci fiyat garantisi kapsamındadır, ancak önceden hiçbir şey yüklemez ve yine de ilk gün yamasını çeker. Dijital, teslimat riskini tamamen ortadan kaldırır; karşılığında indirme başladığında kapanan bir iade penceresi ve sıfır yeniden satış değeri vardır.</p>
+            <p>Dijital, kolaylık açısından kazanır, teslimat beklemezsiniz ve hemen indirip oynayabilirsiniz; kutulu kod, iptal edilebilirlik ve fiyat koruması açısından kazanır, ancak yeniden satış değeri yoktur. Kutulu kod kargoya verilene kadar iptal edilebilir ve genellikle bir perakendeci fiyat garantisi kapsamındadır, ancak önceden hiçbir şey yüklemez ve yine de ilk gün yamasını çeker. Dijital, teslimat riskini tamamen ortadan kaldırır; karşılığında indirme başladığında kapanan bir iade penceresi ve sıfır yeniden satış değeri vardır.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -370,7 +376,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-5" class="faq-answer" role="region">
-            <p>Çıkıştan önce, büyük perakendeciler genellikle çıkıştan önce verilen siparişlere fiyat garantisi uygulardı: fiyat siparişiniz ile çıkış arasında düşerse, o pencerede görülen en düşük fiyatı öderdiniz. Oyun çıktığına göre bu ön sipariş penceresi kapandı — satın almadan önce listede güncel bir fiyat sözü olup olmadığını kontrol edin. Platform mağazaları genellikle fiyat indirimlerini otomatik olarak iade etmez; bu, konsol mağazası yerine perakendeci aracılığıyla sipariş vermenin en büyük finansal gerekçesidir. Büyük sürümlerde fiyat indirimleri genellikle çıkıştan sonraki haftalarda ortaya çıktığından, fiyatları düzenli olarak yeniden kontrol etmeye değer.</p>
+            <p>Çıkıştan önce, büyük perakendeciler genellikle çıkıştan önce verilen siparişlere fiyat garantisi uygulardı: fiyat siparişiniz ile çıkış arasında düşerse, o pencerede görülen en düşük fiyatı öderdiniz. Oyun çıktığına göre bu ön sipariş penceresi kapandı, satın almadan önce listede güncel bir fiyat sözü olup olmadığını kontrol edin. Platform mağazaları genellikle fiyat indirimlerini otomatik olarak iade etmez; bu, konsol mağazası yerine perakendeci aracılığıyla sipariş vermenin en büyük finansal gerekçesidir. Büyük sürümlerde fiyat indirimleri genellikle çıkıştan sonraki haftalarda ortaya çıktığından, fiyatları düzenli olarak yeniden kontrol etmeye değer.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -380,7 +386,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-6" class="faq-answer" role="region">
-            <p>Güvenlik vazgeçebilmek anlamına geliyorsa, perakendeci kutulu kodu en güvenlisidir — kargoya verilene kadar iptal edilebilir —; ardından perakendeci dijital kodu ve sonra platform mağazası gelir. Güvenlik, hakkın kesinlikle çalışması ve bonusların kesinlikle ulaşması anlamına geliyorsa, konsoldaki platform mağazası en güvenlisidir. Kaçınılması gereken tek kanal gri pazar anahtar satıcısıdır: iptal veya bölge kilidi normalde sizi oyunsuz, iadesiz ve desteksiz bırakır.</p>
+            <p>Güvenlik vazgeçebilmek anlamına geliyorsa, perakendeci kutulu kodu en güvenlisidir, kargoya verilene kadar iptal edilebilir, ; ardından perakendeci dijital kodu ve sonra platform mağazası gelir. Güvenlik, hakkın kesinlikle çalışması ve bonusların kesinlikle ulaşması anlamına geliyorsa, konsoldaki platform mağazası en güvenlisidir. Kaçınılması gereken tek kanal gri pazar anahtar satıcısıdır: iptal veya bölge kilidi normalde sizi oyunsuz, iadesiz ve desteksiz bırakır.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -410,7 +416,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-9" class="faq-answer" role="region">
-            <p>Artık verilecek bir ön sipariş kararı yok — oyun 19 Kasım 2026'da çıktı. Şimdi almak, mevcut fiyata şimdi oynamak demektir; indirim beklemek, daha sonra daha az ödemek ama o zamana kadar oynamamak demektir. Alırsanız, kanalı koşullara göre seçin: kutulu kod iptal edilebilirliği ve fiyat garantisini korurken, platform mağazasından alınan dijital kopya hemen indirilmeye hazırdır.</p>
+            <p>Artık verilecek bir ön sipariş kararı yok, oyun 19 Kasım 2026'da çıktı. Şimdi almak, mevcut fiyata şimdi oynamak demektir; indirim beklemek, daha sonra daha az ödemek ama o zamana kadar oynamamak demektir. Alırsanız, kanalı koşullara göre seçin: kutulu kod iptal edilebilirliği ve fiyat garantisini korurken, platform mağazasından alınan dijital kopya hemen indirilmeye hazırdır.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -430,7 +436,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></svg></span>
           </summary>
           <div id="faq-a-11" class="faq-answer" role="region">
-            <p>Hayır — Rockstar bir PC sürümü duyurmadı, bu nedenle satın alınacak bir PC sürümü ve bu sayfada bir PC kanalı yok. GTA 6 yalnızca PlayStation 5 ve Xbox Series X|S için mevcuttur.</p>
+            <p>Hayır, Rockstar bir PC sürümü duyurmadı, bu nedenle satın alınacak bir PC sürümü ve bu sayfada bir PC kanalı yok. GTA 6 yalnızca PlayStation 5 ve Xbox Series X|S için mevcuttur.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -448,7 +454,7 @@
       <h2 id="glossary">Ödemeden önce anlamaya değer satın alma koşulları</h2>
       <dl class="glossary-grid"><div id="term-preload">
         <dt>Ön yükleme</dt>
-        <dd>Oyunu, çıkışta oynanabilir olması için kilidi açılmadan önce indirmek ve hazırlamak. Ön yükleme çıkışta sona erdi — GTA 6 çıktı — ama kural hâlâ geçerli: indirmeyi başlatmak, dijital bir siparişte iade uygunluğunu normalde sona erdirir.</dd>
+        <dd>Oyunu, çıkışta oynanabilir olması için kilidi açılmadan önce indirmek ve hazırlamak. Ön yükleme çıkışta sona erdi, GTA 6 çıktı, ama kural hâlâ geçerli: indirmeyi başlatmak, dijital bir siparişte iade uygunluğunu normalde sona erdirir.</dd>
       </div><div id="term-price-protection-window">
         <dt>Fiyat koruma penceresi</dt>
         <dd>Siparişinizden sonraki, perakendecinin fiyat düşerse farkı iade ettiği dönem. Platform mağazaları bunu nadiren sunar.</dd>
@@ -468,7 +474,7 @@
     </section><section aria-labelledby="related-content">
       <h2 id="related-content">Satın almanın geri kalanını çözün</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/price-by-country" class="tool-card" data-accent="purple" aria-label="GTA 6 Ülkelere Göre Fiyat: 44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"><path d="M2 12h20"></svg><h3>GTA 6 Ülkelere Göre Fiyat</h3><p>44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA 6 Çıkış Tarihi Hatırlatıcısı: GTA 6 hatırlatmalarını tek tıkla Google, Apple veya Outlook takvimine ekleyin. Lansman hatırlatmaları saat diliminizde."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"><path d="M16 2v4"><rect width="18" height="18" x="3" y="4" rx="2"><path d="M3 10h18"></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>Tek tıklamayla GTA 6 hatırlatmalarını Google, Apple veya Outlook takvimine ekleyin. Lansman hatırlatmaları saat diliminizde.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/download-time" class="tool-card" data-accent="blue" aria-label="GTA 6 İndirme Süresi Hesaplayıcı: Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"><polyline points="7 10 12 15 17 10"><line x1="12" x2="12" y1="15" y2="3"></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA 6 Depolama Planlayıcı: Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı: GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/weapon-comparison" class="tool-card" data-accent="pink" aria-label="GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat: GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat</h3><p>GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/vehicle-comparison" class="tool-card" data-accent="pink" aria-label="GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri: GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri</h3><p>GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/server-status" class="tool-card" data-accent="pink" aria-label="GTA 6 Sunucu Durumu: Sunucular Çöktü mü?: GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Sunucu Durumu: Sunucular Çöktü mü?</h3><p>GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tr/tools/price-by-country" class="tool-card" data-accent="purple">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"><path d="M2 12h20"></svg><h3>GTA 6 Ülkelere Göre Fiyat</h3><p>44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"><path d="M16 2v4"><rect width="18" height="18" x="3" y="4" rx="2"><path d="M3 10h18"></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>Tek tıklamayla GTA 6 hatırlatmalarını Google, Apple veya Outlook takvimine ekleyin. Lansman hatırlatmaları saat diliminizde.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/download-time" class="tool-card" data-accent="blue">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"><polyline points="7 10 12 15 17 10"><line x1="12" x2="12" y1="15" y2="3"></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/weapon-comparison" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Silah Karşılaştırması, Puanlar, Şarjör ve Fiyat</h3><p>GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil, oyundaki 10 üzerinden dört puan, artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/vehicle-comparison" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Araç Karşılaştırması, Puanlar, Kayıt Ücreti ve Satış Değeri</h3><p>GTA 6 araçlarını oyundaki 10 üzerinden beş puan, Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık, artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li><li><a href="/tr/tools/server-status" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"><line x1="6" x2="6.01" y1="16" y2="16"><line x1="10" x2="10.01" y1="16" y2="16"></svg><h3>GTA 6 Sunucu Durumu: Sunucular Çöktü mü?</h3><p>GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"><path d="m12 5 7 7-7 7"></svg></span></a></li></ul>
     </section><section aria-labelledby="sources">
       <h2 id="sources">Kaynaklar ve metodoloji referansları</h2>
       <ol class="sources-list"><li>
@@ -490,7 +496,7 @@
       <ul class="changelog-list"><li>
         <span class="ver">1.3</span>
         <time datetime="2026-11-22">22 Kas 2026</time>
-        <span class="note">Disk kanalları kaldırıldı: GTA 6'nın diski yok — fiziksel ürün kutulu bir koddur (yalnızca Standard; Ultimate yalnızca dijitaldir). İki disk kanalı kaldırıldı ve bir perakendeci kutulu kod kanalı eklendi, üç kanal kaldı; kutulu kod yeniden satışta 0 puan alır ve kullanıldıktan sonra satılamaz veya ödünç verilemez. Varsayılan en iyi kanal artık perakendeci kodudur (58,1/100).</span>
+        <span class="note">Disk kanalları kaldırıldı: GTA 6'nın diski yok, fiziksel ürün kutulu bir koddur (yalnızca Standard; Ultimate yalnızca dijitaldir). İki disk kanalı kaldırıldı ve bir perakendeci kutulu kod kanalı eklendi, üç kanal kaldı; kutulu kod yeniden satışta 0 puan alır ve kullanıldıktan sonra satılamaz veya ödünç verilemez. Varsayılan en iyi kanal artık perakendeci kodudur (58,1/100).</span>
       </li><li>
         <span class="ver">1.2</span>
         <time datetime="2026-11-21">21 Kas 2026</time>
@@ -505,27 +511,45 @@
       <p>Kanal eksen puanları koşulları tanımlar, fiyatları değil. Bu sayfada canlı liste, stok düzeyi veya para birimi rakamı okunmaz veya gösterilmez.</p>
     </aside>        </article>
       </div>
-    </main>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -564,9 +588,9 @@
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
+              <li><a href="/editorial-policy">Yayın Politikası</a></li>
               <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
               <li><a href="/tr/terms">Kullanım Şartları</a></li>
-              <li><a href="/editorial-policy">Yayın Politikası</a></li>
               <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
@@ -576,24 +600,18 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
   </div>
@@ -602,6 +620,8 @@
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
   <script src="/assets/js/tr/launch.js" defer></script>
   <script type="module" src="/assets/js/tr/pre-order-tracker.js"></script>  <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -648,7 +668,7 @@
       },
       "datePublished": "2026-08-16",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

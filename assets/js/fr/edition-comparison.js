@@ -134,8 +134,8 @@ function verdictHtml(result) {
     + "<div><dt>Votre plafond</dt><dd>" + result.upliftTolerance + " %</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="' + xUrl(result) + '">Partager sur X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Partager sur X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -150,20 +150,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonus</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="' + xUrl(result) + '">Partager sur X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Partager sur X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">Calculs de mise à niveau</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="' + xUrl(result) + '">Partager sur X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Partager sur X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 

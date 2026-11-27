@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,15 +22,13 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Planificador de almacenamiento de GTA 6">
     <meta name="twitter:description" content="Planifica el espacio libre en disco para GTA 6, instalación base, parche de lanzamiento, DLC y margen seguro para actualizaciones en un solo número honesto. Matemáticas de consola lado a lado, más una estimación planificada para PC.">
     <meta name="twitter:image" content="https://toolwools.com/og/storage-planner.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/es/tools/storage-planner">
 <link rel="alternate" href="https://toolwools.com/tools/storage-planner" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/storage-planner" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-storage-planner-es.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" aria-label="Sitio">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/es/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Seleccionar idioma">ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/storage-planner">English</a>
             <a href="/es/tools/storage-planner" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvil">
@@ -119,7 +136,11 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/storage-planner" lang="en">EN</a><a href="/es/tools/storage-planner" aria-current="true">ES</a><a href="/pt/tools/storage-planner" lang="pt">PT</a><a href="/de/tools/storage-planner" lang="de">DE</a><a href="/fr/tools/storage-planner" lang="fr">FR</a><a href="/tr/tools/storage-planner" lang="tr">TR</a><a href="/ar/tools/storage-planner" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -128,47 +149,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Migas de pan">
-        <a href="/es/">Inicio</a>
-        <span aria-hidden="true">/</span>
-        <a href="/es/tools">Herramientas</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Planificador de almacenamiento</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>
-        <span>Planificadores</span>
-      </div>
-      <h1 id="page-title" class="page-title">Planificador de almacenamiento de GTA 6</h1>
-      <p class="page-subtitle">Presupuesta cada gigabyte: instalación base, parche del primer día, DLC de temporada y margen seguro para actualizaciones.</p>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Matemáticas de espacio</dd></div>
-        <div><dt>Ejecución</dt><dd>Instantáneo, en el navegador</dd></div>
-        <div><dt>Plataformas</dt><dd>PS5 · Xbox · PC (planificación)</dd></div>
-        <div><dt>Actualizado</dt><dd><time datetime="2026-11-22">22 nov 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>GTA 6 necesita unos 212 GB antes del parche del primer día y 244.8 GB cuando le sumas el parche y el primer año de DLC. Este planificador añade tu margen y muestra el total, y luego lo compara con el espacio usable en PS5 y Xbox Series X/S, y en PC solo para planificar (no hay versión para PC), para que sepas si necesitas liberar espacio antes de instalar.</p>
-          </div>
-<section class="byline" aria-label="Acerca de esta página">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, fundador de ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">Por <span class="byline-seg"><a href="/es/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Fundador de ToolWools&nbsp;· Análisis de almacenamiento y precarga</p>
-        <p class="byline-note">Modelo: <a href="/es/methodology">Matemáticas de almacenamiento de GTA 6</a></p>
-      </div>
-      <p class="byline-dates">Publicado <time datetime="2025-11-01">1 nov 2025</time>&nbsp;· Última revisión <time datetime="2026-11-22">22 de noviembre de 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Migas de pan">
+          <a href="/es/">Inicio</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/es/tools">Herramientas</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Planificador de almacenamiento</span>
+        </div>
+        <div class="page-eyebrow"><span>Planificadores</span></div>
+        <h1 id="page-title">Planificador de almacenamiento de GTA 6</h1>
+        <p class="page-subtitle">Presupuesta cada gigabyte: instalación base, parche del primer día, DLC de temporada y margen seguro para actualizaciones.</p>
+        <p class="hero-meta">
+          <span>Motor: Matemáticas de espacio</span><span>Ejecución: Instantáneo, en el navegador</span><span>Plataformas: PS5 · Xbox · PC (planificación)</span><span>Actualizado: <time datetime="2026-11-22">22 nov 2026</time></span><span>Por <a href="/es/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>Fundador de ToolWools</span><span>Análisis de almacenamiento y precarga</span><span>Modelo: <a href="/es/methodology">Matemáticas de almacenamiento de GTA 6</a></span><span>Publicado <time datetime="2025-11-01">1 nov 2025</time></span><span>Última revisión <time datetime="2026-11-22">22 de noviembre de 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Espacio libre recomendado de 293.8 gigabytes: instalación de 212 gigabytes, parche de 2.8 gigabytes, 30 gigabytes de DLC, 49 gigabytes de margen.</div>
-<section class="tldr-card" data-tldr-card data-tone="borderline" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Mantén 293.8 GB libres · Resumen</span></p>
-        <p class="tldr-text"><span data-tldr-text>Mantén 293.8 GB libres para GTA 6 en PS5: 212 GB de instalación + 2.8 GB de parche + 30 GB de DLC + 49 GB de margen.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>293.8 GB de espacio libre recomendado</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculadora</h2>
       <div class="workspace-grid">
@@ -186,17 +182,17 @@
 <div>
             <label class="field-label" for="base-range">Instalación base: <span data-base-value>212 GB</span></label>
             <input class="range-input" type="range" id="base-range" data-base-range min="50" max="300" step="1" value="212" aria-label="Tamaño de la instalación base, actualmente 212 gigabytes">
-            
+
           </div>
 <div>
             <label class="field-label" for="patch-range">Parche del primer día: <span data-patch-value>2.8 GB</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-valuetext="2.8 GB" aria-label="Tamaño del parche del primer día, actualmente 2.8 gigabytes">
-            
+
           </div>
 <div>
             <label class="field-label" for="dlc-range">DLC + contenido de temporada: <span data-dlc-value>30 GB</span></label>
             <input class="range-input" type="range" id="dlc-range" data-dlc-range min="0" max="200" step="5" value="30" aria-label="DLC y contenido de temporada, actualmente 30 gigabytes">
-            
+
           </div>
 <div>
             <label class="field-label" for="buffer-range">Margen de seguridad: <span data-buffer-value>20%</span></label>
@@ -208,8 +204,8 @@
           <div class="output-panel-label eyebrow-muted">Veredicto</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><div><p class="verdict-kicker tone-borderline">Espacio libre recomendado</p><h3 class="verdict-title">293.8<span class="unit"> GB</span></h3><p class="verdict-desc">244.8 GB de contenido + 49 GB de margen seguro para futuros parches.</p><p class="verdict-desc">El SSD de 825 GB de Sony reporta 667 GB utilizables tras la reserva del sistema. Eso te deja <strong>373.2 GB</strong> para otros juegos después de GTA 6.</p></div></div><div><div class="stack-bar" role="img" aria-label="Composition: Instalación base 212 GB, Parche del primer día 2.8 GB, DLC y contenido de temporada 30 GB, Margen para actualizaciones 49 GB"><span class="seg-purple" style="width:72.2%"></span><span class="seg-pink" style="width:1%"></span><span class="seg-blue" style="width:10.2%"></span><span class="seg-muted" style="width:16.7%"></span></div></div><dl class="stat-grid"><div><dt>Instalación base</dt><dd>212 GB</dd></div><div><dt>Parche del primer día</dt><dd>2.8 GB</dd></div><div><dt>DLC + temporada</dt><dd>30 GB</dd></div><div><dt>Margen para actualizaciones</dt><dd>49 GB</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=GTA%206%20necesita%20unos%20293.8%20GB%20libres&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Compartir en X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=GTA%206%20necesita%20unos%20293.8%20GB%20libres&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20necesita%20unos%20293.8%20GB%20libres&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Compartir en X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20necesita%20unos%20293.8%20GB%20libres&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -226,8 +222,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copiar enlace</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Comparte este resultado en X" href="https://twitter.com/intent/tweet?text=GTA%206%20necesita%20unos%20293.8%20GB%20libres.%20Planifica%20tu%20almacenamiento%20en%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Compartir en X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Comparte este resultado en Reddit" href="https://www.reddit.com/submit?title=GTA%206%20necesita%20unos%20293.8%20GB%20libres.%20Planifica%20tu%20almacenamiento%20en%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20necesita%20unos%20293.8%20GB%20libres.%20Planifica%20tu%20almacenamiento%20en%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Compartir en X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20necesita%20unos%20293.8%20GB%20libres.%20Planifica%20tu%20almacenamiento%20en%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
       </div>
     </section>
 
@@ -238,23 +234,20 @@
         <table class="data-table">
           <caption class="sr-only">Espacio usable de la unidad y lo que queda tras GTA 6.</caption>
           <thead><tr><th scope="col">Plataforma</th><th scope="col">Unidad</th><th scope="col">Reserva del sistema</th><th scope="col">Tras GTA 6</th></tr></thead>
-          <tbody data-platform-table><tr><th scope="row" class="mono">PC (planificación)</th><td>Tu SSD NVMe / SATA</td><td>—</td><td class="mono">Depende de la unidad</td></tr><tr><th scope="row" class="mono">PS5 (825 GB)</th><td>SSD personalizado de Sony</td><td>158 GB de sistema</td><td class="mono">373.2 GB libres</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 TB)</th><td>SSD personalizado de Sony</td><td>158 GB de sistema</td><td class="mono">548.2 GB libres</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 TB)</th><td>Tarjeta de expansión NVMe</td><td>198 GB de sistema</td><td class="mono">508.2 GB libres</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 GB)</th><td>Tarjeta de expansión NVMe</td><td>148 GB de sistema</td><td class="mono">70.2 GB libres</td></tr></tbody>
+          <tbody data-platform-table><tr><th scope="row" class="mono">PC (planificación)</th><td>Tu SSD NVMe / SATA</td><td>n/a</td><td class="mono">Depende de la unidad</td></tr><tr><th scope="row" class="mono">PS5 (825 GB)</th><td>SSD personalizado de Sony</td><td>158 GB de sistema</td><td class="mono">373.2 GB libres</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 TB)</th><td>SSD personalizado de Sony</td><td>158 GB de sistema</td><td class="mono">548.2 GB libres</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 TB)</th><td>Tarjeta de expansión NVMe</td><td>198 GB de sistema</td><td class="mono">508.2 GB libres</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 GB)</th><td>Tarjeta de expansión NVMe</td><td>148 GB de sistema</td><td class="mono">70.2 GB libres</td></tr></tbody>
         </table>
       </div>
       <p class="field-hint" data-platform-note>Cuánto espacio te deja GTA 6 para otros juegos, con tu plan actual de 293.8 GB.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Sigue planificando tu equipo para GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Mira cuánto tarda la descarga con la <a href="/es/tools/download-time">calculadora de tiempo de descarga de GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Evalúa todo el equipo con la <a href="/es/tools/readiness-score">puntuación de preparación de GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Revisa todo el equipo con el <a href="/es/tools/system-requirements">comprobador de requisitos del sistema de GTA 6</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Mira cuánto tarda la descarga con la <a href="/es/tools/download-time">calculadora de tiempo de descarga de GTA 6</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Evalúa todo el equipo con la <a href="/es/tools/readiness-score">puntuación de preparación de GTA 6</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Revisa todo el equipo con el <a href="/es/tools/system-requirements">comprobador de requisitos del sistema de GTA 6</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Suposiciones">
-      <p><strong>Suposiciones</strong> <span>Los totales asumen los valores predeterminados de instalación base de 212 GB, parche del primer día de 2.8 GB y DLC de primer año de 30 GB. Las cifras de espacio usable de consola vienen de las páginas de soporte de Sony (667 GB de 825 GB en PS5) y Microsoft (802 GB de 1 TB en Xbox Series X).</span> <a href="/es/methodology">Lee la metodología completa</a></p>
-      <p class="updated-line">Actualizado <time datetime="2026-11-22">22 de noviembre de 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Cómo usar el planificador de almacenamiento de GTA 6</h2>
@@ -296,17 +289,19 @@ headroom = subtotal × (bufferPct / 100)
 total = subtotal + headroom
 remaining = usableSpace − total
 PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>El tamaño de instalación es de 212 GB (base) más un parche del primer día de 1.7–3.8 GB.</li>
+          <ul class="list-disc list-outside"><li>El tamaño de instalación es de 212 GB (base) más un parche del primer día de 1.7–3.8 GB.</li>
 <li>El espacio usable es lo que queda tras el SO y las reservas del sistema: PS5 667 GB de 825 GB, PS5 Slim 842 GB de 1 TB, Xbox Series X 802 GB de 1 TB, Xbox Series S 364 GB de 512 GB.</li>
 <li>El margen del <span data-method-buffer-pct>20%</span> mantiene espacio para descomprimir parches y evita que los SSD funcionen casi llenos.</li>
 <li>El tamaño del DLC es una estimación de planificación para el primer año, no un anuncio de Rockstar.</li></ul>
+    <div class="assumptions-block"><p><strong>Suposiciones</strong> <span>Los totales asumen los valores predeterminados de instalación base de 212 GB, parche del primer día de 2.8 GB y DLC de primer año de 30 GB. Las cifras de espacio usable de consola vienen de las páginas de soporte de Sony (667 GB de 825 GB en PS5) y Microsoft (802 GB de 1 TB en Xbox Series X).</span> <a href="/es/methodology">Lee la metodología completa</a></p>
+      <p class="updated-line">Actualizado <time datetime="2026-11-22">22 de noviembre de 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Preguntas frecuentes</h2>
+      <header>
+        <h2 id="faq">Preguntas frecuentes</h2>
         <p class="section-dek">Respuestas honestas a las preguntas que la gente realmente hace sobre el almacenamiento de GTA 6 ahora que ya se lanzó.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -386,10 +381,10 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
     <section aria-labelledby="related-content">
       <h2 id="related-content">Herramientas relacionadas</h2>
       <h3 class="related-sub">Herramientas relacionadas</h3>
-      <ul class="related-tools-grid"><li><a href="/es/tools/download-time" class="tool-card" data-accent="purple" aria-label="Calculadora de tiempo de descarga de GTA 6 — Estima cuánto tardará la instalación del juego de 212 GB (más parches del primer día de 1,7–3,8 GB) en tu conexión."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>Calculadora de tiempo de descarga de GTA 6</h3><p>Estima cuánto tardará la instalación del juego de 212 GB (más parches del primer día de 1,7–3,8 GB) en tu conexión.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/es/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="Puntuación de preparación de GTA 6 — Una puntuación para todo tu equipo: rendimiento, VRAM, almacenamiento y red."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>Puntuación de preparación de GTA 6</h3><p>Una puntuación para todo tu equipo: rendimiento, VRAM, almacenamiento y red.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/es/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="Comprobador de requisitos del sistema de GTA 6 — Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Comprobador de requisitos del sistema de GTA 6</h3><p>Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="Historial de precarga y calendario de actualizaciones de GTA 6 — Historial de precarga y calendario de actualizaciones de GTA 6: la precarga del lanzamiento (10–19 nov 2026), actualizaciones de título 1.002.000, 1.002.001 y el primer parche posterior al lanzamiento 01.002.002 (23 nov, con notas oficiales). Sin DLC anunciado. Última revisión 23 nov 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Historial de precarga y calendario de actualizaciones de GTA 6</h3><p>Historial de precarga y calendario de actualizaciones de GTA 6: la precarga del lanzamiento (10–19 nov 2026), actualizaciones de título 1.002.000, 1.002.001 y el primer parche posterior al lanzamiento 01.002.002 (23 nov, con notas oficiales). Sin DLC anunciado. Última revisión 23 nov 2026.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/es/tools/download-time" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>Calculadora de tiempo de descarga de GTA 6</h3><p>Estima cuánto tardará la instalación del juego de 212 GB (más parches del primer día de 1,7–3,8 GB) en tu conexión.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/es/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>Puntuación de preparación de GTA 6</h3><p>Una puntuación para todo tu equipo: rendimiento, VRAM, almacenamiento y red.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/es/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Comprobador de requisitos del sistema de GTA 6</h3><p>Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>Historial de precarga y calendario de actualizaciones de GTA 6</h3><p>Historial de precarga y calendario de actualizaciones de GTA 6: la precarga del lanzamiento (10–19 nov 2026), actualizaciones de título 1.002.000, 1.002.001 y el primer parche posterior al lanzamiento 01.002.002 (23 nov, con notas oficiales). Sin DLC anunciado. Última revisión 23 nov 2026.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
@@ -413,7 +408,7 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.3</p>
         <time datetime="2026-11-22">22 nov 2026</time>
-        <p>Reverificación posterior al lanzamiento (22 nov 2026): el marco de PC se hace explícitamente hipotético — el planificador modela una instalación en PC si llega una versión para PC; sigue sin haber versión para PC de GTA 6. Tamaños reverificados con el juego lanzado; sin cambios.</p>
+        <p>Reverificación posterior al lanzamiento (22 nov 2026): el marco de PC se hace explícitamente hipotético, el planificador modela una instalación en PC si llega una versión para PC; sigue sin haber versión para PC de GTA 6. Tamaños reverificados con el juego lanzado; sin cambios.</p>
       </li><li>
         <p class="changelog-version">v1.2</p>
         <time datetime="2026-08-02">2 ago 2026</time>
@@ -432,27 +427,45 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Mantente al tanto</h2>
+          <p>Consigue las últimas noticias, herramientas y guías de GTA 6.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Dirección de correo</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Suscribirse</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/es/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ya está disponible — 19 de noviembre de 2026</span>
+        <span class="eyebrow-muted">GTA 6 ya está disponible, 19 de noviembre de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar herramientas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/es/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
               </span>
             </span>
@@ -492,6 +505,9 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
               <li><a href="/es/email-preferences">Preferencias de correo</a></li>
               <li><a href="/es/sitemap">Mapa del sitio</a></li>
               <li><a href="/editorial-policy">Política editorial</a></li>
+          <li><a href="/es/privacy">Política de privacidad</a></li>
+          <li><a href="/es/terms">Términos de servicio</a></li>
+          <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
             </ul>
           </div>
         </div>
@@ -500,6 +516,7 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><a href="/es/disclaimer">Descargo de responsabilidad</a><button type="button" data-consent-open>Configuración de cookies</button></span>
           <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
         </div>
       </div>
@@ -508,11 +525,22 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
 </footer>
 
   </div>
-  <script src="/assets/js/es/theme.js" defer></script>
-  <script src="/assets/js/es/header.js" defer></script>
-  <script src="/assets/js/es/search.js" defer></script>
-  <script src="/assets/js/es/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimiento de analítica" hidden>
+  <p>Usamos Google Analytics agregado para mejorar el sitio. Sin perfiles, nada se vende. Acepta o rechaza; la elección se guarda en este navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceptar analítica</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Rechazar</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/es/newsletter.js" defer></script>
+  <script src="/assets/js/es/consent.js" defer></script>
   <script type="module" src="/assets/js/es/storage-planner.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",

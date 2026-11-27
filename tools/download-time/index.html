@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTA 6 Download Time Calculator</title>
-    <meta name="description" content="Plug in your download speed and see exactly how long GTA 6 will take to install — base game plus patches.">
+    <meta name="description" content="Plug in your download speed and see exactly how long GTA 6 will take to install, base game plus patches.">
     <meta name="keywords" content="gta 6 download time calculator, how long will gta 6 take to download, gta 6 download time 100mbps, gta 6 download time 50mbps, gta 6 download time fibre">
     <meta name="author" content="ToolWools">
     <meta property="og:title" content="GTA 6 Download Time Calculator">
-    <meta property="og:description" content="Estimate how long GTA 6 takes to download on your connection — base install plus day-one patch, with real-world CDN losses.">
+    <meta property="og:description" content="Estimate how long GTA 6 takes to download on your connection, base install plus day-one patch, with real-world CDN losses.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://toolwools.com/tools/download-time">
     <meta property="og:image" content="https://toolwools.com/og/download-time.jpg">
@@ -25,12 +25,10 @@
     <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="GTA 6 Download Time Calculator">
-    <meta name="twitter:description" content="Estimate how long GTA 6 takes to download on your connection — base install plus day-one patch, with real-world CDN losses.">
+    <meta name="twitter:description" content="Estimate how long GTA 6 takes to download on your connection, base install plus day-one patch, with real-world CDN losses.">
     <meta name="twitter:image" content="https://toolwools.com/og/download-time.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tools/download-time">
 <link rel="alternate" href="https://toolwools.com/tools/download-time" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/download-time" hreflang="es">
@@ -43,10 +41,30 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-download-time-en.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +72,14 @@
 
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -75,18 +91,19 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/download-time" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
             <a href="/es/tools/download-time">Español</a>
@@ -110,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -120,7 +137,11 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/download-time" aria-current="true">EN</a><a href="/es/tools/download-time" lang="es">ES</a><a href="/pt/tools/download-time" lang="pt">PT</a><a href="/de/tools/download-time" lang="de">DE</a><a href="/fr/tools/download-time" lang="fr">FR</a><a href="/tr/tools/download-time" lang="tr">TR</a><a href="/ar/tools/download-time" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,47 +150,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Download Time</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-        <span>Planners</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Download Time Calculator</h1>
-      <p class="page-subtitle">Estimate how long the 212 GB game install (plus 1.7–3.8 GB day-one patches) will take on your connection.</p>
-      <dl class="hero-badges">
-        <div><dt>Engine</dt><dd>Time math</dd></div>
-        <div><dt>Runtime</dt><dd>Instant, in-browser</dd></div>
-        <div><dt>Platforms</dt><dd>PS5 · Xbox</dd></div>
-        <div><dt>Updated</dt><dd><time datetime="2026-11-22">Nov 22, 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>GTA 6's install is 212 GB before the day-one patch, and your ISP's headline speed is never what you actually get. This calculator turns your connection into a real finish time: base install plus patch, at the speed you really sustain, with the 80% efficiency default modelling CDN throttling, Wi-Fi loss and disk write speed.</p>
-          </div>
-<section class="byline" aria-label="About this page">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, founder of ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">By <span class="byline-seg"><a href="/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Founder, ToolWools&nbsp;· Broadband &amp; download analysis</p>
-        <p class="byline-note">Model: <a href="/methodology">GTA 6 download-time math</a></p>
-      </div>
-      <p class="byline-dates">Published <time datetime="2025-11-01">Nov 1, 2025</time>&nbsp;· Last reviewed <time datetime="2026-11-22">November 22, 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Download Time</span>
+        </div>
+        <div class="page-eyebrow"><span>Planners</span></div>
+        <h1 id="page-title">GTA 6 Download Time Calculator</h1>
+        <p class="page-subtitle">Estimate how long the 212 GB game install (plus 1.7–3.8 GB day-one patches) will take on your connection.</p>
+        <p class="hero-meta">
+          <span>Engine: Time math</span><span>Runtime: Instant, in-browser</span><span>Platforms: PS5 · Xbox</span><span>Updated: <time datetime="2026-11-22">Nov 22, 2026</time></span><span>By <a href="/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>Founder, ToolWools</span><span>Broadband &amp; download analysis</span><span>Model: <a href="/methodology">GTA 6 download-time math</a></span><span>Published <time datetime="2025-11-01">Nov 1, 2025</time></span><span>Last reviewed <time datetime="2026-11-22">November 22, 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Estimated download time 4 hours 35 minutes for 214.8 gigabytes at 100 megabits per second, 80 percent efficiency.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>About 5h 58m · TL;DR</span></p>
-        <p class="tldr-text"><span data-tldr-text>214.8 GB at 100 Mbps (80% efficiency, 80 Mbps effective) finishes in about 5h 58m. GTA 6 is out now — download the full game today.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>5h 58m for 214.8 GB</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculator</h2>
       <div class="workspace-grid">
@@ -177,19 +173,19 @@
           <div class="input-panel-head"><h3 class="eyebrow-muted">Your download</h3></div>
           <div class="input-notice" data-input-notice role="alert"></div>
 <div>
-            <label class="field-label" for="gb-range">Base install — <span data-gb-value>212 GB</span></label>
+            <label class="field-label" for="gb-range">Base install, <span data-gb-value>212 GB</span></label>
             <input class="range-input" type="range" id="gb-range" data-gb-range min="20" max="250" step="1" value="212" aria-label="Base install size, currently 212 gigabytes">
-            
+
           </div>
 <div>
-            <label class="field-label" for="patch-range">Day-one patch — <span data-patch-value>2.8 GB</span></label>
+            <label class="field-label" for="patch-range">Day-one patch, <span data-patch-value>2.8 GB</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-label="Day-one patch size, currently 2.8 gigabytes">
-            
+
           </div>
 <div>
-            <label class="field-label" for="mbps-range">Connection — <span data-mbps-value>100 Mbps</span></label>
+            <label class="field-label" for="mbps-range">Connection, <span data-mbps-value>100 Mbps</span></label>
             <input class="range-input" type="range" id="mbps-range" data-mbps-range min="5" max="1000" step="5" value="100" aria-label="Download speed, currently 100 megabits per second">
-            
+
           </div>
 <div>
             <span class="field-label" id="preset-label"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Connection presets</span>
@@ -202,7 +198,7 @@
             </div>
           </div>
 <div>
-            <label class="field-label" for="eff-range">Real-world efficiency — <span data-eff-value>80%</span></label>
+            <label class="field-label" for="eff-range">Real-world efficiency, <span data-eff-value>80%</span></label>
             <input class="range-input" type="range" id="eff-range" data-eff-range min="40" max="100" step="5" value="80" aria-label="Real-world efficiency, currently 80 percent">
             <p class="field-hint">CDN throttling, Wi-Fi loss and disk write speed rarely let you hit the full ISP number. 80% is a realistic default.</p>
           </div>
@@ -211,8 +207,8 @@
           <div class="output-panel-label eyebrow-muted">Verdict</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Estimated finish time</p><h3 class="verdict-title">5<span class="unit"> h</span> 58<span class="unit"> min</span></h3><p class="verdict-desc">214.8 GB total at 80 Mbps effective.</p></div></div><dl class="stat-grid"><div><dt>Base install</dt><dd>5h 53m</dd></div><div><dt>Day-one patch</dt><dd>5m</dd></div><div><dt>Base size</dt><dd>212 GB</dd></div><div><dt>Efficiency</dt><dd>80%</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=GTA%206%20download%20time%3A%205h%2058m%20at%20100%20Mbps%20for%20214.8%20GB&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Share on X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=GTA%206%20download%20time%3A%205h%2058m%20at%20100%20Mbps&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20download%20time%3A%205h%2058m%20at%20100%20Mbps%20for%20214.8%20GB&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Share on X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20download%20time%3A%205h%2058m%20at%20100%20Mbps&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -221,7 +217,7 @@
     <section class="share-panel" aria-labelledby="share-heading">
       <div>
         <h2 id="share-heading">Share this result</h2>
-        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup — no fake share tokens.</p>
+        <p class="sub">Send your exact inputs to a friend, or keep the link for later. The link carries the full setup, no fake share tokens.</p>
       </div>
       <div class="share-link-row">
         <label class="sr-only" for="share-link">Shareable link for this result</label>
@@ -229,15 +225,15 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copy link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on X" href="https://twitter.com/intent/tweet?text=214.8%20GB%20in%20~5h%2058m%20on%20your%20connection.%20Calculate%20your%20own%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Share on X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on Reddit" href="https://www.reddit.com/submit?title=214.8%20GB%20in%20~5h%2058m%20on%20your%20connection.%20Calculate%20your%20own%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=214.8%20GB%20in%20~5h%2058m%20on%20your%20connection.%20Calculate%20your%20own%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Share on X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=214.8%20GB%20in%20~5h%2058m%20on%20your%20connection.%20Calculate%20your%20own%20on%20ToolWools.&url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
       </div>
     </section>
 
     <section aria-labelledby="speed-table-heading">
       <h2 id="speed-table-heading">Download time by connection</h2>
-      <p class="section-dek">Same 214.8 GB total, every common connection — at 80% real-world efficiency.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Download time by connection — scrollable table">
+      <p class="section-dek">Same 214.8 GB total, every common connection, at 80% real-world efficiency.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Download time by connection, scrollable table">
         <table class="data-table">
           <caption class="sr-only">Download time for 214.8 GB at 80% efficiency by connection speed.</caption>
           <thead><tr><th scope="col">Connection</th><th scope="col">Speed</th><th scope="col">Est. finish</th></tr></thead>
@@ -247,22 +243,19 @@
       <p class="field-hint" data-speed-note>214.8 GB total (install + patch) at 80% real-world efficiency.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Keep planning your GTA 6 rig</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Budget the drive space with the <a href="/tools/storage-planner">GTA 6 storage planner</a> — base install, patch, DLC and headroom.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Grade the whole rig with the <a href="/tools/readiness-score">GTA 6 readiness score</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check the full rig with the <a href="/tools/system-requirements">GTA 6 system requirements checker</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Measure your line first with the <a href="/tools/internet-speed-check">internet speed check</a> — then bring the number back here.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Budget the drive space with the <a href="/tools/storage-planner">GTA 6 storage planner</a>, base install, patch, DLC and headroom.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Grade the whole rig with the <a href="/tools/readiness-score">GTA 6 readiness score</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Check the full rig with the <a href="/tools/system-requirements">GTA 6 system requirements checker</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Measure your line first with the <a href="/tools/internet-speed-check">internet speed check</a>, then bring the number back here.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Assumptions">
-      <p><strong>Assumptions</strong> <span>Install size is 212 GB (base) plus a 1.7–3.8 GB day-one patch. Math assumes a steady download at the effective speed for the whole file; real downloads vary with CDN load, Wi-Fi congestion and disk write speed, which the 80% efficiency default models.</span> <a href="/methodology">Read the full methodology</a></p>
-      <p class="updated-line">Updated <time datetime="2026-11-22">November 22, 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">How to use the GTA 6 Download Time Calculator</h2>
-      <p class="section-dek">Three numbers in, one finish time out — with the losses your ISP never mentions.</p>
+      <p class="section-dek">Three numbers in, one finish time out, with the losses your ISP never mentions.</p>
       <ol class="steps-grid cols-3"><li>
         <span class="step-number">01</span>
         <h3 class="step-title">Enter install and patch size</h3>
@@ -295,17 +288,19 @@ effectiveMbps = mbps × (efficiency / 100)
 seconds = totalGB × 8 × 1000 / effectiveMbps
 finish = baseSeconds + patchSeconds
 1 Gbps = 1000 Mbps; 1 GB = 8 Gb</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Install size is 212 GB (base) plus a 1.7–3.8 GB day-one patch.</li>
+          <ul class="list-disc list-outside"><li>Install size is 212 GB (base) plus a 1.7–3.8 GB day-one patch.</li>
 <li>The 80% efficiency default models CDN throttling, Wi-Fi loss and disk write speed.</li>
 <li>Speeds are measured in megabits per second (Mbps); file sizes in gigabytes (GB).</li>
 <li>At 100 Mbps and 80% efficiency, 214.8 GB takes 5 hours 58 minutes; at 1 Gbps it takes about 36 minutes.</li></ul>
+    <div class="assumptions-block"><p><strong>Assumptions</strong> <span>Install size is 212 GB (base) plus a 1.7–3.8 GB day-one patch. Math assumes a steady download at the effective speed for the whole file; real downloads vary with CDN load, Wi-Fi congestion and disk write speed, which the 80% efficiency default models.</span> <a href="/methodology">Read the full methodology</a></p>
+      <p class="updated-line">Updated <time datetime="2026-11-22">November 22, 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Frequently asked questions</h2>
+      <header>
+        <h2 id="faq">Frequently asked questions</h2>
         <p class="section-dek">Honest answers to the questions people actually ask about downloading GTA 6 now that it has launched.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -332,7 +327,7 @@ finish = baseSeconds + patchSeconds
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-3" class="faq-answer" data-faq-answer hidden>
-          <p>Real-world downloads are gated by CDN throttling, TCP overhead, Wi-Fi loss, and disk write speed. PlayStation and Xbox CDNs typically deliver 70–85% of your ISP number. The efficiency slider models this — 80% is the realistic default.</p>
+          <p>Real-world downloads are gated by CDN throttling, TCP overhead, Wi-Fi loss, and disk write speed. PlayStation and Xbox CDNs typically deliver 70–85% of your ISP number. The efficiency slider models this, 80% is the realistic default.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -341,7 +336,7 @@ finish = baseSeconds + patchSeconds
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-4" class="faq-answer" data-faq-answer hidden>
-          <p>T-Mobile and Verizon 5G home plans typically deliver 100–300 Mbps sustained, which finishes GTA 6 in about 1.5–4.5 hours. Latency isn't relevant for downloads; congestion during evening peak is — start the download in the early hours if you can.</p>
+          <p>T-Mobile and Verizon 5G home plans typically deliver 100–300 Mbps sustained, which finishes GTA 6 in about 1.5–4.5 hours. Latency isn't relevant for downloads; congestion during evening peak is, start the download in the early hours if you can.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -350,7 +345,7 @@ finish = baseSeconds + patchSeconds
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-5" class="faq-answer" data-faq-answer hidden>
-          <p>Your total pull equals base install + day-one patch. On a Comcast 1.2 TB monthly cap, a 214.8 GB GTA 6 download uses about 18% of the month — plan accordingly if you have other streaming and updates queued.</p>
+          <p>Your total pull equals base install + day-one patch. On a Comcast 1.2 TB monthly cap, a 214.8 GB GTA 6 download uses about 18% of the month, plan accordingly if you have other streaming and updates queued.</p>
         </div>
       </li>
 <li class="faq-item">
@@ -359,7 +354,7 @@ finish = baseSeconds + patchSeconds
           <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
         <div id="faq-a-6" class="faq-answer" data-faq-answer hidden>
-          <p>Not the download itself — that's network-bound. But installing / unpacking to an HDD is measurably slower than to an NVMe SSD because Rockstar's installer writes and verifies as it goes. Expect a 10–20% total time penalty on HDDs.</p>
+          <p>Not the download itself, that's network-bound. But installing / unpacking to an HDD is measurably slower than to an NVMe SSD because Rockstar's installer writes and verifies as it goes. Expect a 10–20% total time penalty on HDDs.</p>
         </div>
       </li></ul>
     </section>
@@ -367,16 +362,16 @@ finish = baseSeconds + patchSeconds
     <section aria-labelledby="related-content">
       <h2 id="related-content">Related tools</h2>
       <h3 class="related-sub">Related tools</h3>
-      <ul class="related-tools-grid"><li><a href="/tools/storage-planner" class="tool-card" data-accent="purple" aria-label="GTA 6 Storage Planner — Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA 6 Storage Planner</h3><p>Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="GTA 6 Readiness Score — One score for your whole rig: performance, VRAM, storage and network."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Readiness Score</h3><p>One score for your whole rig: performance, VRAM, storage and network.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="GTA 6 System Requirements Checker — Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 Preload History &amp; Update Schedule — GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Preload History &amp; Update Schedule</h3><p>GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/tools/storage-planner" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA 6 Storage Planner</h3><p>Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Readiness Score</h3><p>One score for your whole rig: performance, VRAM, storage and network.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Preload History &amp; Update Schedule</h3><p>GTA 6 preload history and update schedule: the launch preload (10–19 Nov 2026), title updates 1.002.000, 1.002.001 and the first post-launch patch 01.002.002 (23 Nov, with official notes). No DLC announced. Last checked 23 Nov 2026.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
       <h2 id="sources">Sources & methodology references</h2>
       <ol class="sources-list"><li>
-        <a href="/methodology">Console CDN throughput — model estimate against PlayStation and Xbox CDN throughput</a>
+        <a href="/methodology">Console CDN throughput: model estimate against PlayStation and Xbox CDN throughput</a>
         <span class="src-meta">ToolWools methodology · The 70–85% efficiency default is a model estimate, not a measured console CDN figure.</span>
       </li>
 <li>
@@ -394,7 +389,7 @@ finish = baseSeconds + patchSeconds
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.4</p>
         <time datetime="2026-11-22">Nov 22, 2026</time>
-        <p>Post-launch re-verification (Nov 22, 2026): copy re-checked against the released game — 212 GB base install, 2.8 GB day-one patch (1.7–3.8 GB range), 5h 58m for 214.8 GB at 100 Mbps / 80% efficiency. No changes needed.</p>
+        <p>Post-launch re-verification (Nov 22, 2026): copy re-checked against the released game, 212 GB base install, 2.8 GB day-one patch (1.7–3.8 GB range), 5h 58m for 214.8 GB at 100 Mbps / 80% efficiency. No changes needed.</p>
       </li><li>
         <p class="changelog-version">v1.3</p>
         <time datetime="2026-11-17">Nov 17, 2026</time>
@@ -408,7 +403,7 @@ finish = baseSeconds + patchSeconds
 <li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2025-11-01">Nov 1, 2025</time>
-        <p>Initial launch — base + patch model with efficiency slider and 3 presets.</p>
+        <p>Initial launch, base + patch model with efficiency slider and 3 presets.</p>
       </li></ul>
     </section>
 
@@ -418,33 +413,51 @@ finish = baseSeconds + patchSeconds
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -479,14 +492,18 @@ finish = baseSeconds + patchSeconds
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
@@ -495,11 +512,22 @@ finish = baseSeconds + patchSeconds
 </footer>
 
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
+  </div>
+</div>
   <script src="/assets/js/theme.js" defer></script>
   <script src="/assets/js/header.js" defer></script>
   <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
   <script type="module" src="/assets/js/download-time.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -533,7 +561,7 @@ finish = baseSeconds + patchSeconds
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Web browser",
       "url": "https://toolwools.com/tools/download-time",
-      "description": "Plug in your download speed and see exactly how long GTA 6 will take to install — base game plus patches.",
+      "description": "Plug in your download speed and see exactly how long GTA 6 will take to install, base game plus patches.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -607,7 +635,7 @@ finish = baseSeconds + patchSeconds
       "name": "Why does my ISP speed not match the download?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Real-world downloads are gated by CDN throttling, TCP overhead, Wi-Fi loss, and disk write speed. PlayStation and Xbox CDNs typically deliver 70–85% of your ISP number. The efficiency slider models this — 80% is the realistic default."
+        "text": "Real-world downloads are gated by CDN throttling, TCP overhead, Wi-Fi loss, and disk write speed. PlayStation and Xbox CDNs typically deliver 70–85% of your ISP number. The efficiency slider models this, 80% is the realistic default."
       }
     },
     {
@@ -615,7 +643,7 @@ finish = baseSeconds + patchSeconds
       "name": "Is a 5G home-internet plan fast enough for GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "T-Mobile and Verizon 5G home plans typically deliver 100–300 Mbps sustained, which finishes GTA 6 in about 1.5–4.5 hours. Latency isn't relevant for downloads; congestion during evening peak is — start the download in the early hours if you can."
+        "text": "T-Mobile and Verizon 5G home plans typically deliver 100–300 Mbps sustained, which finishes GTA 6 in about 1.5–4.5 hours. Latency isn't relevant for downloads; congestion during evening peak is, start the download in the early hours if you can."
       }
     },
     {
@@ -623,7 +651,7 @@ finish = baseSeconds + patchSeconds
       "name": "How much data will the download use against my cap?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Your total pull equals base install + day-one patch. On a Comcast 1.2 TB monthly cap, a 214.8 GB GTA 6 download uses about 18% of the month — plan accordingly if you have other streaming and updates queued."
+        "text": "Your total pull equals base install + day-one patch. On a Comcast 1.2 TB monthly cap, a 214.8 GB GTA 6 download uses about 18% of the month, plan accordingly if you have other streaming and updates queued."
       }
     },
     {
@@ -631,7 +659,7 @@ finish = baseSeconds + patchSeconds
       "name": "Does an SSD affect download speed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not the download itself — that's network-bound. But installing / unpacking to an HDD is measurably slower than to an NVMe SSD because Rockstar's installer writes and verifies as it goes. Expect a 10–20% total time penalty on HDDs."
+        "text": "Not the download itself, that's network-bound. But installing / unpacking to an HDD is measurably slower than to an NVMe SSD because Rockstar's installer writes and verifies as it goes. Expect a 10–20% total time penalty on HDDs."
       }
     }
   ]

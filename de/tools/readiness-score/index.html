@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
     <meta property="og:image" content="https://toolwools.com/og/readiness-score.jpg">
     <meta property="og:image:alt" content="GTA-6-Readiness-Score: gewichtete 0–100-Launch-Bereitschafts-Bewertung auf ToolWools">
     <meta property="og:image:width" content="1200">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA-6-Readiness-Score">
     <meta name="twitter:description" content="Bin ich bereit für GTA 6? Ein 0–100-Score über Leistung, VRAM, Speicher und Internet, mit einer Note (F bis S), einem Urteil und einem Upgrade-Plan.">
     <meta name="twitter:image" content="https://toolwools.com/og/readiness-score.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/de/tools/readiness-score">
 <link rel="alternate" href="https://toolwools.com/tools/readiness-score" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/readiness-score" hreflang="es">
@@ -43,10 +41,30 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-readiness-score-de.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +72,14 @@
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -75,18 +91,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/readiness-score">English</a>
             <a href="/es/tools/readiness-score">Español</a>
@@ -110,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -120,7 +137,11 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/readiness-score" lang="en">EN</a><a href="/es/tools/readiness-score" lang="es">ES</a><a href="/pt/tools/readiness-score" lang="pt">PT</a><a href="/de/tools/readiness-score" aria-current="true">DE</a><a href="/fr/tools/readiness-score" lang="fr">FR</a><a href="/tr/tools/readiness-score" lang="tr">TR</a><a href="/ar/tools/readiness-score" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,47 +150,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Brotkrumen">
-        <a href="/de/">Startseite</a>
-        <span aria-hidden="true">/</span>
-        <a href="/de/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Readiness-Score</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
-        <span>Release</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA-6-Readiness-Score</h1>
-      <p class="page-subtitle">Ein 0–100-Launch-Bereitschafts-Score über vier Signale: rohe Leistung, VRAM-Headroom, Speicher und Internet. Jeder Sub-Score verlinkt tief zu einem eigenen Rechner, sodass du genau weißt, welches Teil zu beheben ist.</p>
-      <dl class="hero-badges">
-        <div><dt>Engine</dt><dd>4-Signale-Modell</dd></div>
-        <div><dt>Laufzeit</dt><dd>Sofort, im Browser</dd></div>
-        <div><dt>Plattformen</dt><dd>PC</dd></div>
-        <div><dt>Aktualisiert</dt><dd><time datetime="2026-11-21">21. Nov. 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Das ist das Capstone-Tool. Statt die Bottleneck-, VRAM-, FPS- und Speicher-Tools einzeln zu laufen, stecke deinen Build einmal ein und sieh eine einzige Note (F bis S) mit einem expliziten Schwächstes-Glied-Hinweis. Leistung ist am schwersten gewichtet (55 %), weil geschmeidige 60 FPS jedes andere Problem begraben, Speicher und Internet zählen trotzdem, weil eine stotternde Installation die Launch-Nacht ruiniert.</p>
-          </div>
-<section class="byline" aria-label="Über diese Seite">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, Gründer von ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">Von <span class="byline-seg"><a href="/de/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Gründer, ToolWools&nbsp;· PC-Bereitschafts-Analyse</p>
-        <p class="byline-note">Modell: <a href="/de/methodology">GTA-6-Bereitschafts-Modell</a></p>
-      </div>
-      <p class="byline-dates">Veröffentlicht <time datetime="2026-07-25">25. Juli 2026</time>&nbsp;· Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Brotkrumen">
+          <a href="/de/">Startseite</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/de/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Readiness-Score</span>
+        </div>
+        <div class="page-eyebrow"><span>Release</span></div>
+        <h1 id="page-title">GTA-6-Readiness-Score</h1>
+        <p class="page-subtitle">Ein 0–100-Launch-Bereitschafts-Score über vier Signale: rohe Leistung, VRAM-Headroom, Speicher und Internet. Jeder Sub-Score verlinkt tief zu einem eigenen Rechner, sodass du genau weißt, welches Teil zu beheben ist.</p>
+        <p class="hero-meta">
+          <span>Engine: 4-Signale-Modell</span><span>Laufzeit: Sofort, im Browser</span><span>Plattformen: PC</span><span>Aktualisiert: <time datetime="2026-11-21">21. Nov. 2026</time></span><span>Von <a href="/de/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>Gründer, ToolWools</span><span>PC-Bereitschafts-Analyse</span><span>Modell: <a href="/de/methodology">GTA-6-Bereitschafts-Modell</a></span><span>Veröffentlicht <time datetime="2026-07-25">25. Juli 2026</time></span><span>Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Readiness-Score 97 von 100, Note S. Launch-Day-fehlerfrei. Schwächstes Glied: Speicher.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Note S · Launch-Day-fehlerfrei</span></p>
-        <p class="tldr-text"><span data-tldr-text>GeForce RTX 3060 + Ryzen 5 5600 / 5600X mit 16 GB RAM, 500 GB frei auf SATA-SSD und 150 Mbps Down erreicht 97/100 (Note S). Alles schafft es mit Headroom. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint. Schwächstes Glied: Speicher.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Note S: 97/100</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Rechner</h2>
       <div class="workspace-grid">
@@ -215,10 +211,10 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted">Urteil</div>
-          <div class="mt-8" data-output-panel><div style="text-align:center"><div class="score-dial" role="img" aria-label="Readiness-Score 97 von 100, Note S"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--muted)" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent-blue)" stroke-width="9" stroke-linecap="round" stroke-dasharray="316.9 326.7"/></svg><div class="score-dial-center"><div><div class="big">97</div><div class="small">/ 100 · Note S</div></div></div></div><p class="verdict-kicker tone-ready" style="margin-top:0.75rem">Note S · Launch-Day-fehlerfrei</p><p class="verdict-desc" style="max-width:24rem;margin-inline:auto">Alles schafft es mit Headroom. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint.</p><p class="field-hint">Projiziert, nicht datamined: Alle vier Sub-Scores sind Modell-Schätzungen, keine gemessenen Launch-Daten.</p></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">Leistung · 55 %</span><span class="val">97/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:97%"></div></div><p class="field-hint">58 Ø FPS · 42 1-%-Low bei 1080p Hoch nativ.</p></div><div><div class="balance-bar-head"><span class="lbl">VRAM · 20 %</span><span class="val">100/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill pink" style="width:100%"></div></div><p class="field-hint">12-GB-Karte schafft den geschätzten 6,1-GB-Bedarf.</p></div><div><div class="balance-bar-head"><span class="lbl">Speicher · 15 %</span><span class="val">90/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:90%"></div></div><p class="field-hint">500 GB frei auf SATA-SSD. Ziel: 212 GB.</p></div><div><div class="balance-bar-head"><span class="lbl">Netzwerk · 10 %</span><span class="val">100/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill cyan" style="width:100%"></div></div><p class="field-hint">150 Mbps Down, installiert 212 GB in ca. 3,1 Std.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Behebe das zuerst</p><p>Dein schwächster Sub-Score ist <strong>Speicher</strong> (90/100). Vertiefe ihn mit dem eigenen Rechner.</p><p><a href="/de/tools/storage-planner">Speicher-Planer öffnen →</a></p></div><dl class="stat-grid"><div><dt>Leistung</dt><dd>97/100</dd></div><div><dt>VRAM</dt><dd>100/100</dd></div><div><dt>Speicher</dt><dd>90/100</dd></div><div><dt>Netzwerk</dt><dd>100/100</dd></div></dl><div class="share-row">
+          <div class="mt-8" data-output-panel><div style="text-align:center"><div class="score-dial" role="img" aria-label="Readiness-Score 97 von 100, Note S"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--color-border)" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--color-success-fill)" stroke-width="9" stroke-linecap="round" stroke-dasharray="316.9 326.7"/></svg><div class="score-dial-center"><div><div class="big">97</div><div class="small">/ 100 · Note S</div></div></div></div><p class="verdict-kicker tone-ready" style="margin-top:0.75rem">Note S · Launch-Day-fehlerfrei</p><p class="verdict-desc" style="max-width:24rem;margin-inline:auto">Alles schafft es mit Headroom. Du könntest mit Max-Einstellungen spielen, sobald GTA 6 für PC erscheint.</p><p class="field-hint">Projiziert, nicht datamined: Alle vier Sub-Scores sind Modell-Schätzungen, keine gemessenen Launch-Daten.</p></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">Leistung · 55 %</span><span class="val">97/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:97%"></div></div><p class="field-hint">58 Ø FPS · 42 1-%-Low bei 1080p Hoch nativ.</p></div><div><div class="balance-bar-head"><span class="lbl">VRAM · 20 %</span><span class="val">100/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill pink" style="width:100%"></div></div><p class="field-hint">12-GB-Karte schafft den geschätzten 6,1-GB-Bedarf.</p></div><div><div class="balance-bar-head"><span class="lbl">Speicher · 15 %</span><span class="val">90/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:90%"></div></div><p class="field-hint">500 GB frei auf SATA-SSD. Ziel: 212 GB.</p></div><div><div class="balance-bar-head"><span class="lbl">Netzwerk · 10 %</span><span class="val">100/100</span></div><div class="balance-bar-track"><div class="balance-bar-fill cyan" style="width:100%"></div></div><p class="field-hint">150 Mbps Down, installiert 212 GB in ca. 3,1 Std.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Behebe das zuerst</p><p>Dein schwächster Sub-Score ist <strong>Speicher</strong> (90/100). Vertiefe ihn mit dem eigenen Rechner.</p><p><a href="/de/tools/storage-planner">Speicher-Planer öffnen →</a></p></div><dl class="stat-grid"><div><dt>Leistung</dt><dd>97/100</dd></div><div><dt>VRAM</dt><dd>100/100</dd></div><div><dt>Speicher</dt><dd>90/100</dd></div><div><dt>Netzwerk</dt><dd>100/100</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Auf X teilen</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20GTA-6-Readiness%2097%2F100%20%28Note%20S%29&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Auf X teilen</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%E2%80%94%20GTA-6-Readiness%2097%2F100%20%28Note%20S%29&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -235,13 +231,13 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Link kopieren</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf X teilen" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S.%20Pr%C3%BCfe%20deinen%20PC%3A%20https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Auf X teilen</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf Reddit teilen" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S.%20Pr%C3%BCfe%20deinen%20PC%3A%20https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S.%20Pr%C3%BCfe%20deinen%20PC%3A%20https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Auf X teilen</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Ryzen%205%205600%20%2F%205600X%20%C2%B7%20GTA-6-Readiness%2097%2F100%2C%20Note%20S.%20Pr%C3%BCfe%20deinen%20PC%3A%20https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150&url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Freadiness-score%3Fgpu%3Drtx-3060%26cpu%3Dr5-5600x%26ram%3D16%26storage%3D500%26drive%3Dssd%26mbps%3D150">Reddit</a>
       </div>
     </section>
 
     <section aria-labelledby="grade-ladder">
-      <header class="text-center">
+      <header>
         <h2 id="grade-ladder">Readiness-Noten-Leiter</h2>
         <p class="section-dek">Was jede Note für dein Launch-Day-Erlebnis bedeutet. Gewichteter Score entspricht einer Buchstaben-Note, keine erzwungene Positivität.</p>
       </header>
@@ -254,18 +250,15 @@
       </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Plane dein GTA-6-Rig weiter</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Vertiefe Bildrate mit dem <a href="/de/tools/fps-calculator">GTA-6-FPS-Rechner</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe VRAM-Headroom mit dem <a href="/de/tools/vram-calculator">GTA-6-VRAM-Rechner</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe CPU-GPU-Balance mit dem <a href="/de/tools/bottleneck-calculator">GTA-6-Bottleneck-Rechner</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Lies die <a href="/de/methodology">vollständige Methodik</a> Gewichtungen, Fehler-Bänder und das Referenz-Rig.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Vertiefe Bildrate mit dem <a href="/de/tools/fps-calculator">GTA-6-FPS-Rechner</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe VRAM-Headroom mit dem <a href="/de/tools/vram-calculator">GTA-6-VRAM-Rechner</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe CPU-GPU-Balance mit dem <a href="/de/tools/bottleneck-calculator">GTA-6-Bottleneck-Rechner</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Lies die <a href="/de/methodology">vollständige Methodik</a> Gewichtungen, Fehler-Bänder und das Referenz-Rig.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Annahmen">
-      <p><strong>Annahmen</strong> <span>Referenz-Ziele: 60 FPS Ø bei 1080p Hoch nativ, VRAM ≥ geschätzter 1080p-Hoch-Bedarf, 212 GB frei auf einer SSD, ca. 111 Mbps sustained. Gewichtungen abgeleitet aus RDR2-Launch-Beschwerde-Analyse: Bildrate überragte alles andere. HDD bekommt eine 65-%-Speicher-Strafe, weil Open-World-Streaming von rotierenden Disks stallt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
-      <p class="updated-line">Aktualisiert <time datetime="2026-11-21">21. November 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Wie deine GTA-6-Bereitschafts-Note zusammengesetzt wird</h2>
@@ -333,18 +326,20 @@ storage  = clamp(freeGB / 212 × 100) × driveMult
 network  = clamp(mbps / 111 × 100)
 
 grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Leistungs-Gewicht (0,55) spiegelt, dass Bildrate jede andere Launch-Beschwerde in den RDR2- und Cyberpunk-2077-Post-Launch-Subreddit-Analysen überragt.</li>
+          <ul class="list-disc list-outside"><li>Leistungs-Gewicht (0,55) spiegelt, dass Bildrate jede andere Launch-Beschwerde in den RDR2- und Cyberpunk-2077-Post-Launch-Subreddit-Analysen überragt.</li>
 <li>VRAM (0,20) ist von Leistung getrennt, weil VRAM-Knappheit Stottern verursacht, das rohe Ø-FPS-Zahlen verbergen, es verdient sein eigenes Signal.</li>
 <li>Speicher (0,15) wendet einen HDD-Multiplikator von 0,35 an: mechanische Laufwerke verursachen Open-World-Streaming-Stalls unabhängig von freiem Platz.</li>
 <li>Netzwerk (0,10) ist das kleinste Gewicht, weil es nur das Launch-Wochen-Erlebnis beeinflusst, aber ein gestallter Pre-Load ruiniert die Launch-Nacht für einen Voll-Punkte-Build.</li>
 <li>Noten-Schwellen (S 92 / A 82 / B 70 / C 55 / D 40) wurden so abgestimmt, dass ein Mainstream-2024-Mittelklasse-Build (RTX 3060 + Ryzen 5) mit 16 GB RAM, einer SSD und 150 Mbps 97 (Note S) unter diesem Modell erreicht, B (70+) ist die angestrebte Basis für einen geschmeidigen Launch.</li></ul>
+    <div class="assumptions-block"><p><strong>Annahmen</strong> <span>Referenz-Ziele: 60 FPS Ø bei 1080p Hoch nativ, VRAM ≥ geschätzter 1080p-Hoch-Bedarf, 212 GB frei auf einer SSD, ca. 111 Mbps sustained. Gewichtungen abgeleitet aus RDR2-Launch-Beschwerde-Analyse: Bildrate überragte alles andere. HDD bekommt eine 65-%-Speicher-Strafe, weil Open-World-Streaming von rotierenden Disks stallt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
+      <p class="updated-line">Aktualisiert <time datetime="2026-11-21">21. November 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Readiness-Score-Fragen</h2>
+      <header>
+        <h2 id="faq">Readiness-Score-Fragen</h2>
         <p class="section-dek">Was die Note bedeutet und was zuerst zu beheben ist.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -444,13 +439,13 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
     <section aria-labelledby="related-content">
       <h2 id="related-content">Vertiefe einen schwachen Sub-Score</h2>
       <h3 class="related-sub">Verwandte Tools</h3>
-      <ul class="related-tools-grid"><li><a href="/de/tools/bottleneck-calculator" class="tool-card" data-accent="purple" aria-label="GTA-6-Bottleneck-Rechner: Prüfe CPU-vs.-GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das dein Rig neu ausbalanciert."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Bottleneck-Rechner</h3><p>Prüfe CPU-vs.-GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das dein Rig neu ausbalanciert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/de/tools/vram-calculator" class="tool-card" data-accent="blue" aria-label="GTA-6-VRAM-Anforderungs-Checker: Prüfe das Minimum-VRAM, das du für GTA 6 bei 1080p, 1440p und 4K brauchst. Urteil für 6-GB-, 8-GB-, 12-GB- und 16-GB-Karten."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>GTA-6-VRAM-Anforderungs-Checker</h3><p>Prüfe das Minimum-VRAM, das du für GTA 6 bei 1080p, 1440p und 4K brauchst. Urteil für 6-GB-, 8-GB-, 12-GB- und 16-GB-Karten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/de/tools/fps-calculator" class="tool-card" data-accent="pink" aria-label="GTA-6-FPS-Rechner: Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA-6-FPS-Rechner</h3><p>Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/de/tools/storage-planner" class="tool-card" data-accent="purple" aria-label="GTA-6-Speicher-Planer: Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/de/tools/bottleneck-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA-6-Bottleneck-Rechner</h3><p>Prüfe CPU-vs.-GPU-Balance für GTA 6 bei 1080p, 1440p und 4K. Live-Bottleneck-Prozentsatz, FPS-Band und das kleinste Upgrade, das dein Rig neu ausbalanciert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/vram-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>GTA-6-VRAM-Anforderungs-Checker</h3><p>Prüfe das Minimum-VRAM, das du für GTA 6 bei 1080p, 1440p und 4K brauchst. Urteil für 6-GB-, 8-GB-, 12-GB- und 16-GB-Karten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/fps-calculator" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA-6-FPS-Rechner</h3><p>Schätze die Bildrate für deine GPU bei 1080p, 1440p und 4K über Niedrig, Mittel, Hoch und Ultra.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/tools/storage-planner" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
       <h3 class="related-sub">Begleit-Guides</h3>
-      <ul class="guide-cards"><li><a href="/de/guides/how-fps-is-estimated" class="tool-card" data-accent="blue" aria-label="Wie wir GTA-6-FPS schätzen: Das genaue Modell hinter dem FPS-Rechner, GPU-Scores, Upscaler-Multiplikatoren, Frame-Gen-Caps und die VRAM-Stotter-Strafe."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Leistung</span><h3>Wie wir GTA-6-FPS schätzen</h3><p>Das genaue Modell hinter dem FPS-Rechner, GPU-Punktzahlen, Upscaler-Multiplikatoren, Frame-Gen-Caps und die VRAM-Stotter-Strafe.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/de/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink" aria-label="CPU-GPU-Paarung für GTA 6: 12 gängige CPU- plus GPU-Paarungen mit dem ehrlichen Urteil, ausgewogen, GPU-ausgehungert oder CPU-limitiert, und warum 1-%-Lows zuerst abfallen."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>CPU-GPU-Paarung für GTA 6</h3><p>12 gängige CPU- plus GPU-Paarungen mit dem ehrlichen Urteil, ausgewogen, GPU-ausgehungert oder CPU-limitiert, und warum 1 %-Lows zuerst abfallen.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="guide-cards"><li><a href="/de/guides/how-fps-is-estimated" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">Leistung</span><h3>Wie wir GTA-6-FPS schätzen</h3><p>Das genaue Modell hinter dem FPS-Rechner, GPU-Punktzahlen, Upscaler-Multiplikatoren, Frame-Gen-Caps und die VRAM-Stotter-Strafe.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/de/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">Hardware</span><h3>CPU-GPU-Paarung für GTA 6</h3><p>12 gängige CPU- plus GPU-Paarungen mit dem ehrlichen Urteil, ausgewogen, GPU-ausgehungert oder CPU-limitiert, und warum 1 %-Lows zuerst abfallen.</p><span class="link-cta">Guide lesen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
@@ -498,28 +493,46 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt für PS5 und Xbox erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt für PS5 und Xbox erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -559,6 +572,9 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
               <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -567,6 +583,7 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
@@ -575,11 +592,22 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
 </footer>
 
   </div>
-  <script src="/assets/js/de/theme.js" defer></script>
-  <script src="/assets/js/de/header.js" defer></script>
-  <script src="/assets/js/de/search.js" defer></script>
-  <script src="/assets/js/de/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/de/newsletter.js" defer></script>
+  <script src="/assets/js/de/consent.js" defer></script>
   <script type="module" src="/assets/js/de/readiness-score.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -626,7 +654,7 @@ grade  = S 92+ · A 82 · B 70 · C 55 · D 40 · F &lt;40</pre>
       },
       "datePublished": "2026-07-25",
       "dateModified": "2026-11-21",
-      "inLanguage": "en"
+      "inLanguage": "de"
     },
     {
       "@type": "HowTo",

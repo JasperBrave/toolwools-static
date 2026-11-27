@@ -258,8 +258,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Partager ce résultat sur X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Partager ce résultat sur Reddit"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " atteint le seuil de rentabilité en " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
     + " et rapporte net " + money(A.net40) + " après 40 heures (Suivi des entreprises GTA 6 : votre hypothèse, valeurs par défaut de la référence GTA Online).";
   var shareTitle = state.biz + " atteint le seuil de rentabilité en " + (A.beDays === null ? STR.never : hoursFmt(A.beHours)) + " (Suivi des entreprises GTA 6)";

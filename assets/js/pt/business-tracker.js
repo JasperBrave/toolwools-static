@@ -207,21 +207,21 @@ function render() {
   var roiB = B.roi40 === null ? "—" : pctFmt(B.roi40 * 100);
   var crossText;
   if (tStar === null) {
-    crossText = STR.never + " — as duas entradas ganham à mesma taxa efetiva, ou a entrada de maior taxa já está à frente.";
+    crossText = STR.never + ", as duas entradas ganham à mesma taxa efetiva, ou a entrada de maior taxa já está à frente.";
   } else {
     var leader = A.eff > B.eff ? state.biz : state.biz2;
     var trailer = A.eff > B.eff ? state.biz2 : state.biz;
-    crossText = hoursFmt(tStar) + " — " + leader + " " + STR.overtakes + " " + trailer;
+    crossText = hoursFmt(tStar) + ": " + leader + " " + STR.overtakes + " " + trailer;
   }
 
-  var work = STR.showYourWork + " — " + state.biz + ": líquido diário = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
+  var work = STR.showYourWork + ": " + state.biz + ": líquido diário = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
     + " = " + money(A.dailyNet) + "/dia; ponto de equilíbrio = " + money(state.price) + " ÷ " + money(A.dailyNet)
-    + (A.beDays === null ? " — o líquido diário é zero ou negativo, então " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
+    + (A.beDays === null ? ", o líquido diário é zero ou negativo, então " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
     + "; líquido em 40 h = " + money(state.rate) + " × 40 − " + money(state.upkeep) + " × (40 ÷ " + state.hours + ") − " + money(state.price)
     + " = " + money(A.net40) + "; ROI em 40 h = " + money(A.net40) + " ÷ " + money(state.price) + " = " + roiA
     + "; tempo até a meta = " + money(state.goal) + " ÷ " + money(Math.round(A.eff)) + " = " + ttgA
     + ". " + STR.crossover + ": (" + money(state.price2) + " − " + money(state.price) + ") ÷ (" + money(Math.round(B.eff)) + " − " + money(Math.round(A.eff)) + ")"
-    + (tStar === null ? " — sem cruzamento" : " = " + hoursFmt(tStar))
+    + (tStar === null ? ", sem cruzamento" : " = " + hoursFmt(tStar))
     + ". Todas as entradas são " + STR.yourAssumption + ".";
 
   var tldr = state.biz + " atinge o ponto de equilíbrio em " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
@@ -231,19 +231,19 @@ function render() {
   var out = $("[data-output-panel]");
   if (out) {
     out.innerHTML = '<dl class="stat-grid">'
-      + "<div><dt>" + escapeHtml(state.biz) + " — ponto de equilíbrio</dt><dd>" + beA + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz) + " — líquido em 30 h</dt><dd>" + money(A.net30) + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz) + " — líquido em 40 h</dt><dd>" + money(A.net40) + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz) + " — ROI em 40 h</dt><dd>" + roiA + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz) + " — tempo até a meta de " + money(state.goal) + "</dt><dd>" + ttgA + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz2) + " — ponto de equilíbrio</dt><dd>" + beB + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz2) + " — líquido em 30 h</dt><dd>" + money(B.net30) + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz2) + " — líquido em 40 h</dt><dd>" + money(B.net40) + "</dd></div>"
-      + "<div><dt>" + escapeHtml(state.biz2) + " — ROI em 40 h</dt><dd>" + roiB + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz) + ": ponto de equilíbrio</dt><dd>" + beA + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz) + ": líquido em 30 h</dt><dd>" + money(A.net30) + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz) + ": líquido em 40 h</dt><dd>" + money(A.net40) + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz) + ": ROI em 40 h</dt><dd>" + roiA + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz) + ": tempo até a meta de " + money(state.goal) + "</dt><dd>" + ttgA + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz2) + ": ponto de equilíbrio</dt><dd>" + beB + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz2) + ": líquido em 30 h</dt><dd>" + money(B.net30) + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz2) + ": líquido em 40 h</dt><dd>" + money(B.net40) + "</dd></div>"
+      + "<div><dt>" + escapeHtml(state.biz2) + ": ROI em 40 h</dt><dd>" + roiB + "</dd></div>"
       + "<div><dt>" + STR.crossover + " (" + escapeHtml(state.biz2) + " " + STR.overtakes + " " + escapeHtml(state.biz) + ")</dt><dd>" + crossText + "</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + escapeHtml(work) + "</p>"
-      + '<p class="verdict-desc">Todas as entradas são ' + STR.yourAssumption + ' — nenhum preço, pagamento ou taxa do GTA 6 é usado.</p>';
+      + '<p class="verdict-desc">Todas as entradas são ' + STR.yourAssumption + ', nenhum preço, pagamento ou taxa do GTA 6 é usado.</p>';
   }
 
   var tldrCard = $("[data-tldr-card]");
@@ -258,8 +258,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Compartilhar este resultado no X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Compartilhar este resultado no Reddit"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " atinge o ponto de equilíbrio em " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
     + " e gera " + money(A.net40) + " líquidos em 40 horas (Rastreador de negócios do GTA 6 — sua suposição, valores de referência do GTA Online por padrão).";
   var shareTitle = state.biz + " atinge o ponto de equilíbrio em " + (A.beDays === null ? STR.never : hoursFmt(A.beHours)) + " (Rastreador de negócios do GTA 6)";

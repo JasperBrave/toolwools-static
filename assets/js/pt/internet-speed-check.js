@@ -108,7 +108,7 @@ var OP = { ping: "≤", jitter: "≤", loss: "≤", down: "≥", up: "≥" };
 function axesHtml(result) {
   return result.axes.map(function (a) {
     return '<div><div class="axis-row"><span class="axis-label">' + esc(a.label) + '</span><span class="axis-track"><span class="axis-fill" style="width:' + CREDIT[a.status] + '%"></span></span><span class="axis-score">' + esc(a.value) + " " + esc(a.unit) + '</span></div>' +
-      '<p class="verdict-desc"><span class="axis-status" data-status="' + a.status + '">' + STATUS_LABEL[a.status] + "</span> — Meta " + OP[a.id] + " " + esc(a.target) + " " + esc(a.unit) + ". " + esc(a.detail) + "</p></div>";
+      '<p class="verdict-desc"><span class="axis-status" data-status="' + a.status + '">' + STATUS_LABEL[a.status] + "</span>, Meta " + OP[a.id] + " " + esc(a.target) + " " + esc(a.unit) + ". " + esc(a.detail) + "</p></div>";
   }).join("");
 }
 function targetsHtml(result) {
@@ -179,7 +179,7 @@ function render() {
   var checkPanel = $("[data-tab-panel=\"check\"]");
   if (checkPanel) {
     var worst = result.axes.find(function (a) { return a.status === "fail"; }) || result.axes.find(function (a) { return a.status === "marginal"; });
-    var worstText = worst ? worst.label + " (" + STATUS_LABEL[worst.status].toLowerCase() + ")" : "Nenhum — todos os eixos passam";
+    var worstText = worst ? worst.label + " (" + STATUS_LABEL[worst.status].toLowerCase() + ")" : "Nenhum, todos os eixos passam";
     var pingPct = Math.min(100, Math.round((state.ping / 60) * 100));
     checkPanel.innerHTML =
       '<div class="verdict-body">' + iconFor(tone).replace("icon-lg", "verdict-icon tone-" + tone) +
@@ -199,7 +199,7 @@ function render() {
       "</dl>" +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="' + xUrl(result) + '">Compartilhar no X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartilhar no X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="' + redditUrl(result) + '">Reddit</a>' +
       "</div>";
     var copyBtn = $("[data-copy-verdict]", checkPanel);

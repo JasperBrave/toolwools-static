@@ -195,8 +195,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + ", hedef " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " ort. fps (" + result.lowFps + " en düşük %1)") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " için GTA 6 ayarları (" + RES_META[state.res].short + ", " + state.target + " fps hedefi)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + RES_META[state.res].short + ", hedef " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " ort. fps (" + result.lowFps + " en düşük %1)") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent(gpu.label + " + " + cpu.label + " için GTA 6 ayarları (" + RES_META[state.res].short + ", " + state.target + " fps hedefi)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

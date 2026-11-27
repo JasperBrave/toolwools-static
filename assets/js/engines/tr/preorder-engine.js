@@ -67,7 +67,7 @@ export const CHANNELS = [
     axes: { cancel: 7, priceProtection: 8, preload: 6, bonus: 6, resale: 2 },
     confidence: "platform-norm",
     sourceType: "retailer-policy",
-    note: "Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol et — teslimat süresi değişir.",
+    note: "Fiyat koruması ve iptal edilebilirlik arasında en iyi denge; kodun ne zaman geleceğini kontrol et, teslimat süresi değişir.",
     terms: [
       "Kodlar sıklıkla çıkışa yakın verilir, bu da oynamak istemeden önce indirmek için çok az zaman bırakabilir.",
       "Çoğu büyük perakendeci fiyat garantisi uygular: çıkıştan önce görülen en düşük fiyatı ödersin.",

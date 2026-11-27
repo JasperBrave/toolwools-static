@@ -54,7 +54,7 @@ export const BONUSES = [
     editions: ["standard", "ultimate"],
     value: 10,
     confidence: "confirmed",
-    detail: "Every edition contains the complete single-player campaign. No edition gates story missions, characters or endings — this is the single most important thing to know before paying more."
+    detail: "Every edition contains the complete single-player campaign. No edition gates story missions, characters or endings, this is the single most important thing to know before paying more."
   },
   {
     id: "full-online",
@@ -72,7 +72,7 @@ export const BONUSES = [
     editions: ["ultimate"],
     value: 6,
     confidence: "reported",
-    detail: "A one-off in-game currency grant to the online character. Real on day one, irrelevant within weeks for anyone who plays regularly — and worth nothing at all in story mode."
+    detail: "A one-off in-game currency grant to the online character. Real on day one, irrelevant within weeks for anyone who plays regularly, and worth nothing at all in story mode."
   },
   {
     id: "cash-large",
@@ -257,9 +257,9 @@ export function evaluateEditions(input) {
 }
 function buildReason(best, profile, tolerance, platform) {
   if (best.edition.id === "standard") {
-    return `For a ${profile.label.toLowerCase()} buyer, nothing above Standard adds enough usable value to justify the uplift at your ${tolerance}% ceiling — and Standard already contains the entire story and the whole online mode.`;
+    return `For a ${profile.label.toLowerCase()} buyer, nothing above Standard adds enough usable value to justify the uplift at your ${tolerance}% ceiling, and Standard already contains the entire story and the whole online mode.`;
   }
-  return `It adds about ${best.utilityDelta} points of weighted usefulness over Standard for a ${best.edition.upliftPercent}% uplift — roughly ${best.utilityPerUpliftPoint} points per 10% you spend — which is the best return of any tier available on ${PLATFORM_LABEL[platform]} within your ${tolerance}% ceiling.`;
+  return `It adds about ${best.utilityDelta} points of weighted usefulness over Standard for a ${best.edition.upliftPercent}% uplift, roughly ${best.utilityPerUpliftPoint} points per 10% you spend, which is the best return of any tier available on ${PLATFORM_LABEL[platform]} within your ${tolerance}% ceiling.`;
 }
 function buildUpgradeMath(all, tolerance) {
   const standard = all.find((e) => e.edition.id === "standard");
@@ -273,7 +273,7 @@ function buildUpgradeMath(all, tolerance) {
     },
     {
       title: "Standard now, upgrade later",
-      body: "Digital tier upgrades on console are normally sold as an in-store upgrade at the price difference, so buying Standard and stepping up later usually costs the same total — with one caveat: launch-window bonus weeks and any early-access perk expire, and you cannot claim them retroactively."
+      body: "Digital tier upgrades on console are normally sold as an in-store upgrade at the price difference, so buying Standard and stepping up later usually costs the same total, with one caveat: launch-window bonus weeks and any early-access perk expire, and you cannot claim them retroactively."
     },
     {
       title: "Buying currency instead of a tier",
@@ -288,7 +288,7 @@ function buildUpgradeMath(all, tolerance) {
 export const UNKNOWNS = [
   {
     title: "The exact currency amounts",
-    body: "Tier currency grants have not been itemised for GTA 6. We score them by role — day-one head start — not by figure, and we do not quote amounts we cannot cite.",
+    body: "Tier currency grants have not been itemised for GTA 6. We score them by role, day-one head start, not by figure, and we do not quote amounts we cannot cite.",
     confidence: "reported"
   },
   {

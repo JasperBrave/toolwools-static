@@ -252,7 +252,7 @@ function render() {
       "</dl>" +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copier le verdict</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur X" href="' + xUrl(result) + '">Partager sur X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Partager sur X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Partager le verdict sur Reddit" href="' + redditUrl(result) + '">Reddit</a>' +
       "</div>";
     var copyBtn = $("[data-copy-verdict]", checkPanel);

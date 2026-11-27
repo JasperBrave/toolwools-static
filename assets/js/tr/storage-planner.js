@@ -11,7 +11,7 @@ var PLATFORMS = {
   xsx: { label: "Xbox Series X", usableGB: 802, note: "Xbox'ın 1 TB SSD'si, sistem ayrımından sonra 802 GB kullanılabilir gösteriyor." },
 };
 var PLATFORM_ROWS = [
-  { p: "PC (planlama)", drive: "NVMe / SATA SSD'niz", reserve: "—", usable: 0 },
+  { p: "PC (planlama)", drive: "NVMe / SATA SSD'niz", reserve: "n/a", usable: 0 },
   { p: "PS5 (825 GB)", drive: "Özel Sony SSD", reserve: "158 GB sistem", usable: 667 },
   { p: "PS5 Slim (1 TB)", drive: "Özel Sony SSD", reserve: "158 GB sistem", usable: 842 },
   { p: "Xbox Series X (1 TB)", drive: "NVMe genişletme kartı", reserve: "198 GB sistem", usable: 802 },
@@ -180,8 +180,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 yaklaşık " + fmt1(r.total) + " GB boş alan") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

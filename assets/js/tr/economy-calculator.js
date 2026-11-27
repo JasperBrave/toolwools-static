@@ -80,8 +80,8 @@ function shareLinks(text, title) {
   var r = "https://www.reddit.com/submit?title=" + encodeURIComponent(title) + "&url=" + encodeURIComponent(url);
   return '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="' + x + '">X\'te paylaş</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="' + r + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + x + '">X\'te paylaş</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + r + '">Reddit</a>'
     + "</div>";
 }
 function copyText(text, btn, labelSel) {
@@ -280,8 +280,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Bu sonucu X\'te paylaş"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Bu sonucu Reddit\'te paylaş"]');
+  var xLink = document.querySelector('.share-panel a[href*="twitter.com"]');
+  var rLink = document.querySelector('.share-panel a[href*="reddit.com"]');
   if (xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText) + "&url=" + encodeURIComponent(shareUrl());
   if (rLink) rLink.href = "https://www.reddit.com/submit?title=" + encodeURIComponent(lastShareTitle) + "&url=" + encodeURIComponent(shareUrl());
 

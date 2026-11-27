@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,11 +27,13 @@
     <meta name="twitter:title" content="GTA 6 Çıkış Tarihi Hatırlatıcısı">
     <meta name="twitter:description" content="GTA 6, 19 Kas 2026&#x27;da çıktı. Lansman tarihini tek tıkla Google, Apple, Outlook veya Yahoo takvimine ekleyin. Çıkış durumu ve 14 şehir için yerel açılış saatleri.">
     <meta name="twitter:image" content="https://toolwools.com/og/add-to-calendar.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="canonical" href="https://toolwools.com/tr/tools/add-to-calendar">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+            <link rel="canonical" href="https://toolwools.com/tr/tools/add-to-calendar">
 <link rel="alternate" href="https://toolwools.com/tools/add-to-calendar" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/add-to-calendar" hreflang="es">
 <link rel="alternate" href="https://toolwools.com/pt/tools/add-to-calendar" hreflang="pt">
@@ -43,26 +45,42 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-add-to-calendar-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
-    </script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
+<a class="skip-link" href="#main">İçeriğe atla</a>
+
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -74,18 +92,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/add-to-calendar">İngilizce</a>
             <a href="/es/tools/add-to-calendar">Español</a>
@@ -109,7 +128,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,12 +138,16 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/add-to-calendar" lang="en">EN</a><a href="/es/tools/add-to-calendar" lang="es">ES</a><a href="/pt/tools/add-to-calendar" lang="pt">PT</a><a href="/de/tools/add-to-calendar" lang="de">DE</a><a href="/fr/tools/add-to-calendar" lang="fr">FR</a><a href="/tr/tools/add-to-calendar" lang="tr" aria-current="true">TR</a><a href="/ar/tools/add-to-calendar" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-    <main id="main" class="tool-main">
+    <main id="main" tabindex="-1" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
 <section class="page-hero" aria-labelledby="page-title">
@@ -135,30 +158,13 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Çıkış Tarihi Hatırlatıcısı</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-        <span>Çıkış</span>
-      </div>
+      <div class="page-eyebrow"><span>Çıkış</span></div>
       <h1 id="page-title" class="page-title">GTA 6 Çıkış Tarihi Hatırlatıcısı</h1>
-      <p class="page-subtitle">GTA 6, 19 Kas 2026'da çıktı — tarihi tek tıkla herhangi bir takvime ekleyin. Saat diliminizde çıkış durumu ve 14 şehirlik açılış tablosu, böylece GTA 6'nın bulunduğunuz yerde tam olarak ne zaman yayına girdiğini görürsünüz.</p>
-      <ul class="hero-badges" aria-label="Bir bakışta">
-        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Saat diliminizi otomatik algılar</li><li class="chip">14 şehirli açılış tablosu</li>
-      </ul>
-    </section><div class="tool-intro-callout"><p>Rockstar'ın doğruladığı pencere 19 Kas 2026'dır. Bu araç, lansmanı 00.00 America/New_York (05.00 UTC) olarak sabitler, Rockstar'ın önceki her GTA ve RDR lansmanında kullandığı model, ve 24 saatlik ve 1 saatlik hatırlatmalarla bir takvim etkinliği oluşturur. Takvim uygulamanızı seçin veya .ics dosyasını indirin, zamanlama, doğrulanan açılış saatine sabitlenmiştir.</p></div>
-<div class="byline" aria-label="Yazar ve inceleme künyesi">
-      <span class="byline-item">Yazan <a href="/about#release-desk">ToolWools Çıkış Masası</a> <span aria-hidden="true">·</span> Lansman penceresi takvim araçları</span>
-      <span class="byline-item">İnceleyen <a href="/about#benchmark-reviewers">Rockstar çıkış tarihi arşivcileri</a> <span aria-hidden="true">·</span> Tarihsel açılış saati referansı</span>
-      <span class="byline-item">Yayınlanma <time datetime="2026-07-25">25 Tem 2026</time> · Son inceleme <time datetime="2026-11-17">17 Kasım 2026</time></span>
-      <a class="method-link" href="/tr/methodology">Metodoloji</a>
-    </div><div class="sr-only" data-live-region aria-live="polite">GTA 6 yayında. Çıkış penceresi açıldı.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Lansman tarihi · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>GTA 6, Perşembe, 19 Kas 2026, 00.00 ET (05.00 UTC) çıktı. Tek tıkla takviminize ekleyin, 24 saatlik ve 1 saatlik hatırlatmalarla.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Çıktı — 19 Kas 2026</p>
-    </section><section aria-labelledby="tool-workspace">
+      <p class="page-subtitle">GTA 6, 19 Kas 2026'da çıktı, tarihi tek tıkla herhangi bir takvime ekleyin. Saat diliminizde çıkış durumu ve 14 şehirlik açılış tablosu, böylece GTA 6'nın bulunduğunuz yerde tam olarak ne zaman yayına girdiğini görürsünüz.</p>
+      <p class="hero-meta"><span>Google · Apple · Outlook · Yahoo</span><span>Saat diliminizi otomatik algılar</span><span>14 şehirli açılış tablosu</span><span>Yazan <a href="/about#release-desk">ToolWools Çıkış Masası</a></span><span>İnceleyen <a href="/about#benchmark-reviewers">Rockstar çıkış tarihi arşivcileri</a></span><span>Yayınlanma <time datetime="2026-07-25">25 Tem 2026</time></span><span>Son inceleme <time datetime="2026-11-17">17 Kasım 2026</time></span><span><a href="/tr/methodology">Metodoloji</a></span></p>
+    </section>
+<div class="sr-only" data-live-region aria-live="polite">GTA 6 yayında. Çıkış penceresi açıldı.</div>
+<section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Takvim</h2>
       <div class="workspace-grid">
         <div class="input-panel" aria-label="Lansman ayarlarınız">
@@ -252,25 +258,25 @@
         <article class="usecase-card" aria-labelledby="use-case-1">
           <h3 id="use-case-1">İndirme günü hatırlatıcısı</h3>
           <p>PSN veya Xbox'tan satın aldınız. Bir indirme günü hatırlatıcısı, konsolun 212 GB'lık kurulumu siz hâlâ işteyken çekmeye başlaması demektir: eve geldiğiniz an oynarsınız.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-2">
           <h3 id="use-case-2">Lansman gecesi izleme partisi</h3>
           <p>Saat dilimleri arasında arkadaşlarla koordinasyon. .ics dosyasını paylaşın veya herkese takvim bağlantısını gönderin.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-3">
           <h3 id="use-case-3">İzin talebi</h3>
           <p>19-20 Kas için işten izin ayarlama. Takvim girişi iş Outlook'unuza düşer, böylece yöneticiler bloğu görür.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-4">
           <h3 id="use-case-4">Yayın programı</h3>
           <p>Lansman günü Twitch/YouTube yayını planlama. Yayına başlamayı yerel 00.00 açılışınıza uydurun.</p>
-          
+
         </article>
       </li></ul>
     </section><section aria-labelledby="methodology">
@@ -286,8 +292,8 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
         </div>
       </details>
     </section><section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 çıkış tarihi hatırlatıcısı soruları</h2>
+      <header>
+        <h2 id="faq">GTA 6 çıkış tarihi hatırlatıcısı soruları</h2>
         <p class="section-dek">Lansman zamanlaması, açılış saatleri ve takvim etkinliği.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -439,7 +445,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
     </section><section aria-labelledby="related-content">
       <h2 id="related-content">Daha fazla GTA 6 lansman günü aracı</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="GTA 6 Hazırlık Puanı: Performans, VRAM, depolama ve internet genelinde 0-100 arası tek bir lansman hazırlık puanı. En zayıf halka düzeltmesiyle F → S notu."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Performans, VRAM, depolama ve internet genelinde tek bir 0-100 çıkış hazırlık puanı. F'den S'ye not, en zayıf halka düzeltmesiyle.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/download-time" class="tool-card" data-accent="blue" aria-label="GTA 6 İndirme Süresi Hesaplayıcı: Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA 6 Depolama Planlayıcı: Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi: Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="purple">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Performans, VRAM, depolama ve internet genelinde tek bir 0-100 çıkış hazırlık puanı. F'den S'ye not, en zayıf halka düzeltmesiyle.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/download-time" class="tool-card" data-accent="blue">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="pink">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple">><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section><section aria-labelledby="sources">
       <h2 id="sources">Kaynaklar ve metodoloji referansları</h2>
       <ol class="sources-list"><li>
@@ -469,27 +475,45 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       <p>Lansman saati, Rockstar'ın GTA V ve RDR2 lansman emsaline dayanarak 2026-11-19 00.00 America/New_York (05.00 UTC) olarak sabitlenmiştir. Bu araç, doğrulanmış açılış saatine sabitlenmiştir.</p>
     </aside>        </article>
       </div>
-    </main>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -528,9 +552,9 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
+              <li><a href="/editorial-policy">Yayın Politikası</a></li>
               <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
               <li><a href="/tr/terms">Kullanım Şartları</a></li>
-              <li><a href="/editorial-policy">Yayın Politikası</a></li>
               <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
@@ -540,24 +564,18 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
   </div>
@@ -567,6 +585,8 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
   <script type="module" src="/assets/js/tr/add-to-calendar.js"></script>
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -613,7 +633,7 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       },
       "datePublished": "2026-07-25",
       "dateModified": "2026-11-17",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

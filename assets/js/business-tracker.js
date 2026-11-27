@@ -207,21 +207,21 @@ function render() {
   var roiB = B.roi40 === null ? "—" : pctFmt(B.roi40 * 100);
   var crossText;
   if (tStar === null) {
-    crossText = STR.never + " — the two entries earn at the same effective rate, or the higher-rate entry is already ahead.";
+    crossText = STR.never + ", the two entries earn at the same effective rate, or the higher-rate entry is already ahead.";
   } else {
     var leader = A.eff > B.eff ? state.biz : state.biz2;
     var trailer = A.eff > B.eff ? state.biz2 : state.biz;
-    crossText = hoursFmt(tStar) + " — " + leader + " " + STR.overtakes + " " + trailer;
+    crossText = hoursFmt(tStar) + ": " + leader + " " + STR.overtakes + " " + trailer;
   }
 
-  var work = STR.showYourWork + " — " + state.biz + ": daily net = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
+  var work = STR.showYourWork + ": " + state.biz + ": daily net = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
     + " = " + money(A.dailyNet) + "/day; break-even = " + money(state.price) + " ÷ " + money(A.dailyNet)
-    + (A.beDays === null ? " — daily net is zero or negative, so " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
+    + (A.beDays === null ? ", daily net is zero or negative, so " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
     + "; net @ 40 h = " + money(state.rate) + " × 40 − " + money(state.upkeep) + " × (40 ÷ " + state.hours + ") − " + money(state.price)
     + " = " + money(A.net40) + "; ROI @ 40 h = " + money(A.net40) + " ÷ " + money(state.price) + " = " + roiA
     + "; time to goal = " + money(state.goal) + " ÷ " + money(Math.round(A.eff)) + " = " + ttgA
     + ". " + STR.crossover + ": (" + money(state.price2) + " − " + money(state.price) + ") ÷ (" + money(Math.round(B.eff)) + " − " + money(Math.round(A.eff)) + ")"
-    + (tStar === null ? " — no crossover" : " = " + hoursFmt(tStar))
+    + (tStar === null ? ", no crossover" : " = " + hoursFmt(tStar))
     + ". All inputs are " + STR.yourAssumption + ".";
 
   var tldr = state.biz + " breaks even in " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
@@ -243,7 +243,7 @@ function render() {
       + "<div><dt>" + STR.crossover + " (" + escapeHtml(state.biz2) + " " + STR.overtakes + " " + escapeHtml(state.biz) + ")</dt><dd>" + crossText + "</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + escapeHtml(work) + "</p>"
-      + '<p class="verdict-desc">All inputs are ' + STR.yourAssumption + ' — no GTA 6 price, payout or rate is used.</p>';
+      + '<p class="verdict-desc">All inputs are ' + STR.yourAssumption + ', no GTA 6 price, payout or rate is used.</p>';
   }
 
   var tldrCard = $("[data-tldr-card]");
@@ -258,8 +258,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Share this result on X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Share this result on Reddit"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " breaks even in " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
     + " and nets " + money(A.net40) + " at 40 hours (GTA 6 Business Tracker — your assumption, GTA Online yardstick defaults).";
   var shareTitle = state.biz + " breaks even in " + (A.beDays === null ? STR.never : hoursFmt(A.beHours)) + " (GTA 6 Business Tracker)";

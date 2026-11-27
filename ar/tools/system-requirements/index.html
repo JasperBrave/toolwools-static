@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="ar_SA">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="tr_TR">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="متطلبات نظام GTA 6، هل يستطيع حاسوبي تشغيلها؟">
     <meta name="twitter:description" content="هل يستطيع حاسوبي تشغيل GTA 6؟ قارن وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين مع مستويات الحد الأدنى والموصى به والفائق، بحكم نجاح / فشل فوري.">
     <meta name="twitter:image" content="https://toolwools.com/og/system-requirements.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/ar/tools/system-requirements">
 <link rel="alternate" href="https://toolwools.com/tools/system-requirements" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/system-requirements" hreflang="es">
@@ -43,10 +41,28 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-system-requirements-ar.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +70,14 @@
 
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -75,6 +89,7 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -86,7 +101,7 @@
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/system-requirements">الإنجليزية</a>
             <a href="/es/tools/system-requirements">Español</a>
@@ -120,7 +135,11 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/system-requirements" lang="en">EN</a><a href="/es/tools/system-requirements" lang="es">ES</a><a href="/pt/tools/system-requirements" lang="pt">PT</a><a href="/de/tools/system-requirements" lang="de">DE</a><a href="/fr/tools/system-requirements" lang="fr">FR</a><a href="/tr/tools/system-requirements" lang="tr">TR</a><a href="/ar/tools/system-requirements" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,47 +148,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="مسار التنقل">
-        <a href="/ar/">الرئيسية</a>
-        <span aria-hidden="true">/</span>
-        <a href="/ar/tools">الأدوات</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">متطلبات النظام</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
-        <span>المواصفات</span>
-      </div>
-      <h1 id="page-title" class="page-title">متطلبات نظام GTA 6، هل يستطيع حاسوبي تشغيلها؟</h1>
-      <p class="page-subtitle">اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين. ونقيمها مقابل مستويات الحد الأدنى والموصى به والفائق المقدرة مجتمعيا ونعطيك الحكم الصادق.</p>
-      <dl class="hero-badges">
-        <div><dt>المحرك</dt><dd>النتيجة الموزونة</dd></div>
-        <div><dt>زمن التشغيل</dt><dd>فوري، داخل المتصفح</dd></div>
-        <div><dt>المنصات</dt><dd>PC</dd></div>
-        <div><dt>تم التحديث</dt><dd><time datetime="2026-11-17">17 نوفمبر 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>GTA 6 هي أكثر لعبة تطلبا أصدرتها Rockstar على الإطلاق. ويزن هذا المدقق وحدة معالجة الرسومات لديك (55%) ووحدة المعالجة المركزية (30%) والذاكرة (10%) ونوع التخزين (5%) في حكم مستوى واحد: أقل من الحد الأدنى أو يفي بالحد الأدنى أو يفي بالموصى به أو جاهز للفائقة، حتى تعرف بالضبط أين يقع جهازك الآن بعد صدور اللعبة.</p>
-          </div>
-<section class="byline" aria-label="حول هذه الصفحة">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="جاسبر برافو، مؤسس ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">بقلم <span class="byline-seg"><a href="/ar/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> مؤسس ToolWools&nbsp;· تحليل متطلبات الحاسوب</p>
-        <p class="byline-note">النموذج: <a href="/ar/methodology">نموذج متطلبات GTA 6</a></p>
-      </div>
-      <p class="byline-dates">نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time>&nbsp;· آخر مراجعة <time datetime="2026-11-17">17 نوفمبر 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="مسار التنقل">
+          <a href="/ar/">الرئيسية</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/ar/tools">الأدوات</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">متطلبات النظام</span>
+        </div>
+        <div class="page-eyebrow"><span>المواصفات</span></div>
+        <h1 id="page-title">متطلبات نظام GTA 6، هل يستطيع حاسوبي تشغيلها؟</h1>
+        <p class="page-subtitle">اختر وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين. ونقيمها مقابل مستويات الحد الأدنى والموصى به والفائق المقدرة مجتمعيا ونعطيك الحكم الصادق.</p>
+        <p class="hero-meta">
+          <span>المحرك: النتيجة الموزونة</span><span>زمن التشغيل: فوري، داخل المتصفح</span><span>المنصات: PC</span><span>تم التحديث: <time datetime="2026-11-17">17 نوفمبر 2026</time></span><span>بقلم <a href="/ar/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>مؤسس ToolWools</span><span>تحليل متطلبات الحاسوب</span><span>النموذج: <a href="/ar/methodology">نموذج متطلبات GTA 6</a></span><span>نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time></span><span>آخر مراجعة <time datetime="2026-11-17">17 نوفمبر 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">النتيجة 49 من 100. يفي بالموصى به. بطاقة GeForce RTX 3060 مع Core i5-10600K وذاكرة 16 غيغابايت وقرص SSD.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>يفي بالموصى به · باختصار</span></p>
-        <p class="tldr-text"><span data-tldr-text>نعم، GeForce RTX 3060 + Core i5-10600K مع ذاكرة 16 غيغابايت على SSD يسجل 49/100 ويلبي المستوى الموصى به لـ GTA 6.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>يفي بالموصى به، 49/100</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">الحاسبة</h2>
       <div class="workspace-grid">
@@ -187,7 +181,7 @@
 <div>
             <label class="field-label" for="ram-range">ذاكرة النظام: <span data-ram-value>16 غيغابايت</span></label>
             <input class="range-input" type="range" id="ram-range" data-ram-range min="8" max="64" step="8" value="16" aria-label="ذاكرة النظام، حاليا 16 غيغابايت">
-            
+
           </div>
 <div>
             <span class="field-label" id="storage-label"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>نوع التخزين</span>
@@ -201,8 +195,8 @@
           <div class="output-panel-label eyebrow-muted">الحكم</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">يفي بالموصى به</p><h3 class="verdict-title">49<span class="unit"> / 100</span></h3><p class="verdict-desc">60 إطارا في الثانية بارتياح بدقة 1080p العالية أو 1440p المتوسطة. والنقطة المثالية للعب السلس. يبدأ الموصى به من 48 نقطة (الحد الأدنى 35 · Ultra 82).</p></div></div><dl class="verdict-stats"><div><dt>مستوى وحدة معالجة الرسومات</dt><dd>44/100</dd></div><div><dt>مستوى وحدة المعالجة المركزية</dt><dd>48/100</dd></div><div><dt>الذاكرة</dt><dd>16 غيغابايت</dd></div></dl><dl class="stat-grid"><div><dt>التخزين</dt><dd>SSD</dd></div><div><dt>أضعف حلقة</dt><dd>GPU (44/100)</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Core%20i5-10600K%20%C2%B7%20%D8%AD%D9%83%D9%85%20GTA%206%3A%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%2849%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">مشاركة على X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Core%20i5-10600K%20%E2%80%94%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%203060%20%2B%20Core%20i5-10600K%20%C2%B7%20%D8%AD%D9%83%D9%85%20GTA%206%3A%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%2849%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">مشاركة على X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GeForce%20RTX%203060%20%2B%20Core%20i5-10600K%20%E2%80%94%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -219,8 +213,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>نسخ الرابط</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على X" href="https://twitter.com/intent/tweet?text=49%2F100%20%C2%B7%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87.%20%D8%AA%D8%AD%D9%82%D9%82%20%D9%85%D9%86%20%D8%AC%D9%87%D8%A7%D8%B2%D9%83%20%D9%85%D9%82%D8%A7%D8%B1%D9%86%D8%A9%20%D8%A8%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20GTA%206%20%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D8%B1%D9%8A%D8%A9%3A%20%D8%A7%D9%84%D8%AD%D8%AF%20%D8%A7%D9%84%D8%A3%D8%AF%D9%86%D9%89%20%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%D9%88Ultra%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">مشاركة على X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على Reddit" href="https://www.reddit.com/submit?title=49%2F100%20%C2%B7%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87.%20%D8%AA%D8%AD%D9%82%D9%82%20%D9%85%D9%86%20%D8%AC%D9%87%D8%A7%D8%B2%D9%83%20%D9%85%D9%82%D8%A7%D8%B1%D9%86%D8%A9%20%D8%A8%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20GTA%206%20%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D8%B1%D9%8A%D8%A9%3A%20%D8%A7%D9%84%D8%AD%D8%AF%20%D8%A7%D9%84%D8%A3%D8%AF%D9%86%D9%89%20%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%D9%88Ultra%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=49%2F100%20%C2%B7%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87.%20%D8%AA%D8%AD%D9%82%D9%82%20%D9%85%D9%86%20%D8%AC%D9%87%D8%A7%D8%B2%D9%83%20%D9%85%D9%82%D8%A7%D8%B1%D9%86%D8%A9%20%D8%A8%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20GTA%206%20%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D8%B1%D9%8A%D8%A9%3A%20%D8%A7%D9%84%D8%AD%D8%AF%20%D8%A7%D9%84%D8%A3%D8%AF%D9%86%D9%89%20%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%D9%88Ultra%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">مشاركة على X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=49%2F100%20%C2%B7%20%D9%8A%D9%81%D9%8A%20%D8%A8%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87.%20%D8%AA%D8%AD%D9%82%D9%82%20%D9%85%D9%86%20%D8%AC%D9%87%D8%A7%D8%B2%D9%83%20%D9%85%D9%82%D8%A7%D8%B1%D9%86%D8%A9%20%D8%A8%D9%85%D8%B3%D8%AA%D9%88%D9%8A%D8%A7%D8%AA%20GTA%206%20%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D8%B1%D9%8A%D8%A9%3A%20%D8%A7%D9%84%D8%AD%D8%AF%20%D8%A7%D9%84%D8%A3%D8%AF%D9%86%D9%89%20%D9%88%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%89%20%D8%A8%D9%87%20%D9%88Ultra%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fsystem-requirements%3Fgpu%3Drtx-3060%26cpu%3Di5-10600k%26ram%3D16%26ssd%3D1">Reddit</a>
       </div>
     </section>
 
@@ -236,18 +230,15 @@
     </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">واصل تخطيط جهاز GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>الكامل <a href="/ar/tools/bottleneck-calculator">حاسبة عنق زجاجة GTA 6</a> ، تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات بدقة 1080p و1440p و4K.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قدّر معدل الإطارات باستخدام <a href="/ar/tools/fps-calculator">حاسبة معدل إطارات GTA 6</a> ، 1080p و1440p و4K من المنخفضة إلى الفائقة.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من هامش ذاكرة الفيديو باستخدام <a href="/ar/tools/vram-calculator">حاسبة ذاكرة فيديو GTA 6</a> ، بطاقات 6 و8 و12 و16 غيغابايت.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله دفعة واحدة باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a> ، الأداء وذاكرة الفيديو والتخزين والشبكة في رقم واحد.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>الكامل <a href="/ar/tools/bottleneck-calculator">حاسبة عنق زجاجة GTA 6</a> ، تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات بدقة 1080p و1440p و4K.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قدّر معدل الإطارات باستخدام <a href="/ar/tools/fps-calculator">حاسبة معدل إطارات GTA 6</a> ، 1080p و1440p و4K من المنخفضة إلى الفائقة.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من هامش ذاكرة الفيديو باستخدام <a href="/ar/tools/vram-calculator">حاسبة ذاكرة فيديو GTA 6</a> ، بطاقات 6 و8 و12 و16 غيغابايت.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله دفعة واحدة باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a> ، الأداء وذاكرة الفيديو والتخزين والشبكة في رقم واحد.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="الافتراضات">
-      <p><strong>الافتراضات</strong> <span>تُشتق المستويات من القياس التاريخي لـRockstar في RDR2 و GTA V، إضافة إلى مواصفات هدف GTA 6 المسربة على الحاسوب. وتستند نتائج المكونات إلى قياسات Digital Foundry وجداول الأداء النسبي لوحدة معالجة الرسومات من TechPowerUp. وتتبدل الأرقام إلى مستويات Rockstar الرسمية خلال ساعات من الكشف.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
-      <p class="updated-line">تم التحديث <time datetime="2026-11-17">17 نوفمبر 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">كيف يعمل فحص متطلبات GTA 6</h2>
@@ -336,18 +327,20 @@ verdict = below   if score < 35
          min     if score < 48
          rec     if score < 82
          ultra   otherwise</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>يعكس وزن وحدة معالجة الرسومات (0.55) أن أداء التنقيط هو أقوى مؤشر مفرد لمعدل إطارات محرك GTA، وهو النتيجة نفسها التي أبلغت عنها Digital Foundry عبر قياسات RDR2 على الحاسوب.</li>
+          <ul class="list-disc list-outside"><li>يعكس وزن وحدة معالجة الرسومات (0.55) أن أداء التنقيط هو أقوى مؤشر مفرد لمعدل إطارات محرك GTA، وهو النتيجة نفسها التي أبلغت عنها Digital Foundry عبر قياسات RDR2 على الحاسوب.</li>
 <li>وزن وحدة المعالجة المركزية (0.30) منفصل لأن محرك Rockstar مقيد بوحدة المعالجة المركزية عند معدلات التحديث العالية: فحتى وحدة معالجة رسومات رائدة يجوعها Ryzen 5 1600.</li>
 <li>الذاكرة (0.10) محدودة عند 32 غيغابايت، فبعد ذلك تساعد الذاكرة الإضافية في التعديل والبث وليس في اللعبة الأساسية.</li>
 <li>يستخدم التخزين (0.05) ثنائيا بسيطا لأن الفجوة العملية بين HDD و SSD، وفرق SATA مقابل NVMe أقل من 3 إطارات في الثانية في اختبارات بث العالم المفتوح.</li>
 <li>ضُبطت عتبات المستوى (35 / 48 / 82) بحيث يقع جهاز RTX 3060 + Ryzen 5 5600X + 16 غيغابايت + SSD، وهو جهاز استطلاع Steam النمطي لعام 2024، في الموصى به (النتيجة 51)، وهو الأساس المقصود لإطلاق سلس.</li></ul>
+    <div class="assumptions-block"><p><strong>الافتراضات</strong> <span>تُشتق المستويات من القياس التاريخي لـRockstar في RDR2 و GTA V، إضافة إلى مواصفات هدف GTA 6 المسربة على الحاسوب. وتستند نتائج المكونات إلى قياسات Digital Foundry وجداول الأداء النسبي لوحدة معالجة الرسومات من TechPowerUp. وتتبدل الأرقام إلى مستويات Rockstar الرسمية خلال ساعات من الكشف.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
+      <p class="updated-line">تم التحديث <time datetime="2026-11-17">17 نوفمبر 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">أسئلة متطلبات GTA 6 على الحاسوب</h2>
+      <header>
+        <h2 id="faq">أسئلة متطلبات GTA 6 على الحاسوب</h2>
         <p class="section-dek">الدنيا مقابل الموصى بها وأجهزة الكمبيوتر المحمولة ووحدات التحكم والذاكرة.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -519,13 +512,13 @@ verdict = below   if score < 35
     <section aria-labelledby="related-content">
       <h2 id="related-content">تعمق في هذا الجهاز</h2>
       <h3 class="related-sub">أدوات ذات صلة</h3>
-      <ul class="related-tools-grid"><li><a href="/ar/tools/bottleneck-calculator" class="tool-card" data-accent="purple" aria-label="حاسبة عنق زجاجة GTA 6، تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K. نسبة عنق زجاجة مباشرة ونطاق معدل الإطارات وأصغر ترقية تعيد توازن جهازك."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>حاسبة عنق زجاجة GTA 6</h3><p>تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K. نسبة عنق زجاجة مباشرة ونطاق معدل الإطارات وأصغر ترقية تعيد توازن جهازك.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/vram-calculator" class="tool-card" data-accent="blue" aria-label="مدقق متطلبات ذاكرة فيديو GTA 6، تحقق من الحد الأدنى لذاكرة الفيديو التي تحتاجها للعبة GTA 6 بدقة 1080p و1440p و4K. حكم لبطاقات 6 غيغابايت و8 غيغابايت و12 غيغابايت و16 غيغابايت."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>مدقق متطلبات ذاكرة فيديو GTA 6</h3><p>تحقق من الحد الأدنى لذاكرة الفيديو التي تحتاجها للعبة GTA 6 بدقة 1080p و1440p و4K. حكم لبطاقات 6 غيغابايت و8 غيغابايت و12 غيغابايت و16 غيغابايت.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/fps-calculator" class="tool-card" data-accent="pink" aria-label="حاسبة معدل إطارات GTA 6، قدّر معدل الإطارات لوحدة معالجة الرسومات بدقة 1080p و1440p و4K عبر المنخفضة والمتوسطة والعالية والفائقة."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>حاسبة معدل إطارات GTA 6</h3><p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="نتيجة جاهزية GTA 6: نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/ar/tools/bottleneck-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>حاسبة عنق زجاجة GTA 6</h3><p>تحقق من توازن وحدة المعالجة المركزية ووحدة معالجة الرسومات للعبة GTA 6 بدقة 1080p و1440p و4K. نسبة عنق زجاجة مباشرة ونطاق معدل الإطارات وأصغر ترقية تعيد توازن جهازك.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/vram-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 19v3"/><path d="M10 19v3"/><path d="M14 19v3"/><path d="M18 19v3"/><path d="M8 11V9"/><path d="M16 11V9"/><path d="M12 11V9"/><path d="M2 15h20"/><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.1a2 2 0 0 0 0 3.8V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5.1a2 2 0 0 0 0-3.8Z"/></svg><h3>مدقق متطلبات ذاكرة فيديو GTA 6</h3><p>تحقق من الحد الأدنى لذاكرة الفيديو التي تحتاجها للعبة GTA 6 بدقة 1080p و1440p و4K. حكم لبطاقات 6 غيغابايت و8 غيغابايت و12 غيغابايت و16 غيغابايت.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/fps-calculator" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>حاسبة معدل إطارات GTA 6</h3><p>قدّر معدل الإطارات لوحدة معالجة الرسومات لديك بدقة 1080p و1440p و4K عبر إعدادات منخفضة ومتوسطة وعالية وفائقة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
       <h3 class="related-sub">أدلة مصاحبة</h3>
-      <ul class="guide-cards"><li><a href="/ar/guides/how-fps-is-estimated" class="tool-card" data-accent="blue" aria-label="كيف نقدر معدل إطارات GTA 6، النموذج الدقيق وراء حاسبة معدل الإطارات، نتائج وحدة معالجة الرسومات ومضاعفات رفع الدقة وحدود توليد الإطارات وعقوبة تقطع ذاكرة الفيديو."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">الأداء</span><h3>كيف نقدر معدل إطارات GTA 6</h3><p>النموذج الدقيق وراء حاسبة معدل الإطارات، نتائج وحدة معالجة الرسومات ومضاعفات رفع الدقة وحدود توليد الإطارات وعقوبة تقطع ذاكرة الفيديو.</p><span class="link-cta">اقرأ الدليل <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink" aria-label="إقران وحدة المعالجة المركزية ووحدة معالجة الرسومات للعبة GTA 6، 12 إقرانا شائعا لوحدة المعالجة المركزية + وحدة معالجة الرسومات مع الحكم الصادق، متوازن أو متعطش لوحدة معالجة الرسومات أو مقيد بوحدة المعالجة المركزية، ولماذا تنخفض أدنى 1% أولا."><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">الأجهزة</span><h3>إقران وحدة المعالجة المركزية بوحدة معالجة الرسومات لـ GTA 6</h3><p>12 مجموعة شائعة من وحدة المعالجة المركزية ووحدة معالجة الرسومات مع الحكم الصادق، متوازنة أو متعطشة لوحدة معالجة الرسومات أو مقيدة بوحدة المعالجة المركزية، ولماذا تنخفض أدنى 1% أولا.</p><span class="link-cta">اقرأ الدليل <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="guide-cards"><li><a href="/ar/guides/how-fps-is-estimated" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><span class="guide-tag">الأداء</span><h3>كيف نقدر معدل إطارات GTA 6</h3><p>النموذج الدقيق وراء حاسبة معدل الإطارات، نتائج وحدة معالجة الرسومات ومضاعفات رفع الدقة وحدود توليد الإطارات وعقوبة تقطع ذاكرة الفيديو.</p><span class="link-cta">اقرأ الدليل <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/guides/cpu-gpu-pairing" class="tool-card" data-accent="pink"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="4" height="4" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg><span class="guide-tag">الأجهزة</span><h3>إقران وحدة المعالجة المركزية بوحدة معالجة الرسومات لـ GTA 6</h3><p>12 مجموعة شائعة من وحدة المعالجة المركزية ووحدة معالجة الرسومات مع الحكم الصادق، متوازنة أو متعطشة لوحدة معالجة الرسومات أو مقيدة بوحدة المعالجة المركزية، ولماذا تنخفض أدنى 1% أولا.</p><span class="link-cta">اقرأ الدليل <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
@@ -583,28 +576,46 @@ verdict = below   if score < 35
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -644,6 +655,9 @@ verdict = below   if score < 35
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -652,6 +666,7 @@ verdict = below   if score < 35
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
@@ -660,11 +675,22 @@ verdict = below   if score < 35
 </footer>
 
   </div>
-  <script src="/assets/js/ar/theme.js" defer></script>
-  <script src="/assets/js/ar/header.js" defer></script>
-  <script src="/assets/js/ar/search.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/consent.js" defer></script>
   <script type="module" src="/assets/js/ar/system-requirements.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -710,7 +736,7 @@ verdict = below   if score < 35
       },
       "datePublished": "2025-11-01",
       "dateModified": "2026-11-17",
-      "inLanguage": "en"
+      "inLanguage": "ar"
     },
     {
       "@type": "HowTo",

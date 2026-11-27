@@ -34,7 +34,7 @@ var tzSelect = $("[data-tz-select]");
 if (tzSelect) {
   var utcOpt = document.createElement("option");
   utcOpt.value = "UTC";
-  utcOpt.textContent = "UTC — Eşgüdümlü Evrensel Saat";
+  utcOpt.textContent = "UTC, Eşgüdümlü Evrensel Saat";
   tzSelect.appendChild(utcOpt);
   REGIONS.forEach(function (r) {
     var opt = document.createElement("option");
@@ -68,7 +68,7 @@ function renderLaunchLocal() {
   var local = tz === "UTC"
     ? "19 Kas 2026, 05:00 UTC"
     : formatInTz(LAUNCH_UTC, tz);
-  el.textContent = "Çıkış: 19 Kas 2026, 05:00 UTC — " + local + " (" + regionLabel(tz) + " saatine göre).";
+  el.textContent = "Çıkış: 19 Kas 2026, 05:00 UTC, " + local + " (" + regionLabel(tz) + " saatine göre).";
 }
 
 var lastAnnouncedMinute = null;

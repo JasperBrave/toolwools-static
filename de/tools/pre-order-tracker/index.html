@@ -14,10 +14,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
     <meta property="og:image" content="https://toolwools.com/og/pre-order-tracker.jpg">
     <meta property="og:image:alt" content="GTA 6 kaufen: Kauf-Kanäle bewertet nach Stornierbarkeit, Preis-Schutz und Download-Timing auf ToolWools">
     <meta property="og:image:width" content="1200">
@@ -27,11 +27,13 @@
     <meta name="twitter:title" content="GTA 6 kaufen: Editionen und Kanäle im Vergleich">
     <meta name="twitter:description" content="Vergleiche jeden GTA-6-Kauf-Kanal nach Stornierbarkeit, Preis-Schutz, Download-Timing, Boni und Wiederverkauf — bewertet für deine Plattform und Region.">
     <meta name="twitter:image" content="https://toolwools.com/og/pre-order-tracker.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="canonical" href="https://toolwools.com/de/tools/pre-order-tracker">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+            <link rel="canonical" href="https://toolwools.com/de/tools/pre-order-tracker">
 <link rel="alternate" href="https://toolwools.com/tools/pre-order-tracker" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/pre-order-tracker" hreflang="es">
 <link rel="alternate" href="https://toolwools.com/pt/tools/pre-order-tracker" hreflang="pt">
@@ -43,26 +45,41 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-pre-order-tracker-de.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
-    </script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -74,18 +91,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/pre-order-tracker">English</a>
             <a href="/es/tools/pre-order-tracker">Español</a>
@@ -109,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,12 +137,16 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/pre-order-tracker" lang="en">EN</a><a href="/es/tools/pre-order-tracker" lang="es">ES</a><a href="/pt/tools/pre-order-tracker" lang="pt">PT</a><a href="/de/tools/pre-order-tracker" lang="de" aria-current="true">DE</a><a href="/fr/tools/pre-order-tracker" lang="fr">FR</a><a href="/tr/tools/pre-order-tracker" lang="tr">TR</a><a href="/ar/tools/pre-order-tracker" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-    <main id="main" class="tool-main">
+    <main id="main" tabindex="-1" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
 <section class="page-hero" aria-labelledby="page-title">
@@ -135,30 +157,13 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">GTA 6 kaufen</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span>Tracker</span>
-      </div>
+      <div class="page-eyebrow"><span>Tracker</span></div>
       <h1 id="page-title" class="page-title">GTA 6 kaufen: Editionen und Kanäle im Vergleich</h1>
       <p class="page-subtitle">GTA 6 erschien am 19. November 2026 für PlayStation 5 und Xbox Series X|S. Jeder Kanal verkauft das gleiche Spiel. Was sich unterscheidet, sind die Bedingungen: ob du stornieren kannst, ob eine Preissenkung erstattet wird, wie schnell du spielen kannst, ob Boni bleiben und ob du die Kopie danach verkaufen kannst. Bewerte alle fünf für deine Plattform und Region.</p>
-      <ul class="hero-badges" aria-label="Auf einen Blick">
-        <li class="chip">3 Kauf-Kanäle bewertet</li><li class="chip">7 Regionen, 2 Plattformen, 2 Editionen</li><li class="chip">Bedingungen verglichen, nie Preise</li>
-      </ul>
-    </section><div class="tool-intro-callout"><p>Fast jede «wo man GTA 6 kaufen kann»-Seite ist eine Liste von Affiliate-Buttons, die alle drei Kanäle als austauschbar behandelt. Sie sind es nicht. Ein Plattform-Store lässt dich sofort herunterladen und spielen und gibt dir die schlechteste Stornierungs-Position. Ein Händler-Digital-Code gibt dir eine Preis-Garantie, aber der Code kann spät ankommen. Ein Händler-Code in einer Box ist eine Standard-Kopie in der Box mit einem Download-Code darin — keine Disc. Er behält die Preis-Garantie und Stornierbarkeit bis zum Versand, aber du wartest auf die Lieferung und lädst trotzdem das volle Spiel herunter, und der Code kann nach dem Einlösen weder verkauft noch verliehen werden. Dieser Desk verwandelt diese Kompromisse in einen gewichteten Score, den du zu dem hinbiegen kannst, was dir wirklich wichtig ist — sofort spielen oder einen Ausstieg behalten — und zeigt dir dann die Bedingungen in einfachen Worten, damit du sie selbst prüfen kannst, bevor du Geld bindest.</p></div>
-<div class="byline" aria-label="Autoren- und Prüfungs-Byline">
-      <span class="byline-item">Von <a href="/de/about#marcus-reyes">Marcus Reyes</a> <span aria-hidden="true">·</span> Hardware- und Kauf-Analyst</span>
-      <span class="byline-item">Geprüft von <a href="/de/about#priya-nandakumar">Priya Nandakumar</a> <span aria-hidden="true">·</span> Redaktionelle Standards</span>
-      <span class="byline-item">Veröffentlicht <time datetime="2026-08-16">16. Aug. 2026</time> · Zuletzt geprüft <time datetime="2026-11-22">22. November 2026</time></span>
-      <a class="method-link" href="/de/methodology">Methodik</a>
-    </div><div class="sr-only" data-live-region aria-live="polite">Bester Kauf-Kanal: Händler-Code auf PlayStation 5, 58,1 von 100. Weil du uns gesagt hast, dass keine starke Präferenz außer Wert zählt, erzielt Händler-Digital-Code (Amazon, GameStop, Best Buy) 58,1 von 100 für eine Standard-Bestellung in den Vereinigten Staaten — führend bei Preis-Senkungs-Schutz und Stornierbarkeit, vor Plattform digital mit 51,9.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Bester Kanal · Kurzfassung</span></p>
-        <p class="tldr-text"><span data-tldr-text>Händler-Code auf PlayStation 5 erzielt 58,1 von 100 für eine Standard-Bestellung in den Vereinigten Staaten, führend bei Preis-Senkungs-Schutz und Stornierbarkeit.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Beste: Händler-Code, 58,1/100</p>
-    </section><div id="preorder-answer" data-speakable class="answer-card"><h2 class="eyebrow-muted">Die kurze Antwort</h2><p data-preorder-answer>GTA 6 erschien am <time datetime="2026-11-19">19. November 2026</time> für PlayStation 5 und Xbox Series X|S. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist Händler-Code auf PlayStation 5. Weil du uns gesagt hast, dass keine starke Präferenz außer Wert zählt, erzielt Händler-Digital-Code (Amazon, GameStop, Best Buy) 58,1 von 100 für eine Standard-Bestellung in den Vereinigten Staaten — führend bei Preis-Senkungs-Schutz und Stornierbarkeit, vor Plattform digital mit 51,9.</p></div>
+      <p class="hero-meta"><span>3 Kauf-Kanäle bewertet</span><span>7 Regionen, 2 Plattformen, 2 Editionen</span><span>Bedingungen verglichen, nie Preise</span><span>Von <a href="/de/about#marcus-reyes">Marcus Reyes</a></span><span>Geprüft von <a href="/de/about#priya-nandakumar">Priya Nandakumar</a></span><span>Veröffentlicht <time datetime="2026-08-16">16. Aug. 2026</time></span><span>Zuletzt geprüft <time datetime="2026-11-22">22. November 2026</time></span><span><a href="/de/methodology">Methodik</a></span></p>
+    </section>
+<div class="sr-only" data-live-region aria-live="polite">Bester Kauf-Kanal: Händler-Code auf PlayStation 5, 58,1 von 100. Weil du uns gesagt hast, dass keine starke Präferenz außer Wert zählt, erzielt Händler-Digital-Code (Amazon, GameStop, Best Buy) 58,1 von 100 für eine Standard-Bestellung in den Vereinigten Staaten, führend bei Preis-Senkungs-Schutz und Stornierbarkeit, vor Plattform digital mit 51,9.</div>
+<div id="preorder-answer" data-speakable class="answer-card"><h2 class="eyebrow-muted">Die kurze Antwort</h2><p data-preorder-answer>GTA 6 erschien am <time datetime="2026-11-19">19. November 2026</time> für PlayStation 5 und Xbox Series X|S. Jeder Kanal berechnet dasselbe Spiel, also kaufe nach Bedingungen: die beste Wahl für deine Eingaben ist Händler-Code auf PlayStation 5. Weil du uns gesagt hast, dass keine starke Präferenz außer Wert zählt, erzielt Händler-Digital-Code (Amazon, GameStop, Best Buy) 58,1 von 100 für eine Standard-Bestellung in den Vereinigten Staaten, führend bei Preis-Senkungs-Schutz und Stornierbarkeit, vor Plattform digital mit 51,9.</p></div>
 <div class="countdown-card" aria-label="GTA 6 wurde veröffentlicht" style="margin-inline:auto">
   <div class="countdown-label"><span class="dot live-dot" aria-hidden="true"></span><span>GTA 6 ist jetzt draußen</span></div>
   <div class="countdown-meta"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19. Nov. 2026 • 00:00 Uhr ET</div>
@@ -198,7 +203,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted" data-output-label>Kauf-Kanäle für PlayStation 5</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Bester Kanal</p><h3 class="verdict-title">Händler-Code<span class="unit"> / 58,1 von 100</span></h3><p class="verdict-desc">Bestes Gleichgewicht aus Preisschutz und Stornierbarkeit; prüfe, wann der Code ankommt — Lieferzeiten variieren.</p></div></div><ol class="milestone-list"><li><div class="milestone-row"><span><strong>1. Händler-Digital-Code (Amazon, GameStop, Best Buy)</strong><br><span class="field-hint">Stark bei Preis-Senkungs-Schutz und Stornierbarkeit. Schwach bei Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">58.1/100</span></div></li><li><div class="milestone-row"><span><strong>2. Plattform-Store (PS Store / Xbox Store)</strong><br><span class="field-hint">Stark bei Download-Bereitschaft und Bonus-Erhalt. Schwach bei Preis-Senkungs-Schutz und Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">51.9/100</span></div></li><li><div class="milestone-row"><span><strong>3. Händler-Code in einer Box (nur Standard)</strong><br><span class="field-hint">Stark bei Stornierbarkeit und Preis-Senkungs-Schutz. Schwach bei Download-Bereitschaft und Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">50.8/100</span></div></li></ol><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf X teilen" href="https://twitter.com/intent/tweet?text=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%2858%2C1%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Auf X teilen</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">Bester Kanal</p><h3 class="verdict-title">Händler-Code<span class="unit"> / 58,1 von 100</span></h3><p class="verdict-desc">Bestes Gleichgewicht aus Preisschutz und Stornierbarkeit; prüfe, wann der Code ankommt, Lieferzeiten variieren.</p></div></div><ol class="milestone-list"><li><div class="milestone-row"><span><strong>1. Händler-Digital-Code (Amazon, GameStop, Best Buy)</strong><br><span class="field-hint">Stark bei Preis-Senkungs-Schutz und Stornierbarkeit. Schwach bei Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">58.1/100</span></div></li><li><div class="milestone-row"><span><strong>2. Plattform-Store (PS Store / Xbox Store)</strong><br><span class="field-hint">Stark bei Download-Bereitschaft und Bonus-Erhalt. Schwach bei Preis-Senkungs-Schutz und Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">51.9/100</span></div></li><li><div class="milestone-row"><span><strong>3. Händler-Code in einer Box (nur Standard)</strong><br><span class="field-hint">Stark bei Stornierbarkeit und Preis-Senkungs-Schutz. Schwach bei Download-Bereitschaft und Wiederverkaufs-Wert. Vertrauen: Plattform-Norm.</span></span><span class="axis-score">50.8/100</span></div></li></ol><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Urteil kopieren</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%2858%2C1%2F100%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">>Auf X teilen</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Urteil auf Reddit teilen" href="https://www.reddit.com/submit?title=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Reddit</a></div></div>
         </div>
       </div>
     </section><section data-risk-flags aria-label="Was bei dieser Wahl schiefgehen kann" hidden></section><section class="share-panel" aria-labelledby="share-heading">
@@ -212,7 +217,7 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Link kopieren</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf X teilen" data-share-x href="https://twitter.com/intent/tweet?text=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%2858%2C1%2F100%29.%20GTA%206%20kaufen%3A%20Editionen%20und%20Kan%C3%A4le%20im%20Vergleich%20auf%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Auf X teilen</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%2858%2C1%2F100%29.%20GTA%206%20kaufen%3A%20Editionen%20und%20Kan%C3%A4le%20im%20Vergleich%20auf%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">>Auf X teilen</a>
         <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf Reddit teilen" data-share-reddit href="https://www.reddit.com/submit?title=Beste%20Kaufm%C3%B6glichkeit%20f%C3%BCr%20GTA%206%20auf%20PlayStation%205%3A%20H%C3%A4ndler-Code%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fpre-order-tracker%3Fplatform%3Dps5%26region%3Dus%26edition%3Dstandard%26tab%3Dranking">Reddit</a>
       </div>
     </section><section aria-labelledby="channel-terms">
@@ -222,7 +227,7 @@
         <table class="data-table">
           <caption class="sr-only">Drei GTA-6-Kauf-Kanäle mit Plattform-Verfügbarkeit und Roh-Scores von zehn für Stornierbarkeit, Preis-Senkungs-Schutz, Download-Bereitschaft, Bonus-Erhalt und Wiederverkaufs-Wert.</caption>
           <thead><tr><th scope="col">Kanal</th><th scope="col">Plattformen</th><th scope="col">Stornierbarkeit</th><th scope="col">Preis-Senkungs-Schutz</th><th scope="col">Download-Bereitschaft</th><th scope="col">Bonus-Erhalt</th><th scope="col">Wiederverkaufs-Wert</th></tr></thead>
-          <tbody><tr id="channel-platform-digital"><th scope="row">Plattform-Store (PS Store / Xbox Store)<br><span class="field-hint">Der Standard-Weg. Schnellster Weg, um zu spielen, null Wiederverkaufswert, und das Erstattungs-Fenster schließt in dem Moment, in dem der Download beginnt.</span></th><td>PlayStation, Xbox</td><td>5/10</td><td>3/10</td><td>10/10</td><td>9/10</td><td>0/10</td></tr><tr id="channel-retailer-code"><th scope="row">Händler-Digital-Code (Amazon, GameStop, Best Buy)<br><span class="field-hint">Bestes Gleichgewicht aus Preisschutz und Stornierbarkeit; prüfe, wann der Code ankommt — Lieferzeiten variieren.</span></th><td>PlayStation, Xbox</td><td>7/10</td><td>8/10</td><td>6/10</td><td>6/10</td><td>2/10</td></tr><tr id="channel-retailer-code-in-box"><th scope="row">Händler-Code in einer Box (nur Standard)<br><span class="field-hint">Eine Standard-Kopie in der Box mit einem Download-Code darin — keine Disc. Storniere bis zum Versand und behalte die Preisgarantie, löse dann den Code ein und lade das volle Spiel herunter.</span></th><td>PlayStation, Xbox</td><td>9/10</td><td>9/10</td><td>1/10</td><td>5/10</td><td>0/10</td></tr></tbody>
+          <tbody><tr id="channel-platform-digital"><th scope="row">Plattform-Store (PS Store / Xbox Store)<br><span class="field-hint">Der Standard-Weg. Schnellster Weg, um zu spielen, null Wiederverkaufswert, und das Erstattungs-Fenster schließt in dem Moment, in dem der Download beginnt.</span></th><td>PlayStation, Xbox</td><td>5/10</td><td>3/10</td><td>10/10</td><td>9/10</td><td>0/10</td></tr><tr id="channel-retailer-code"><th scope="row">Händler-Digital-Code (Amazon, GameStop, Best Buy)<br><span class="field-hint">Bestes Gleichgewicht aus Preisschutz und Stornierbarkeit; prüfe, wann der Code ankommt, Lieferzeiten variieren.</span></th><td>PlayStation, Xbox</td><td>7/10</td><td>8/10</td><td>6/10</td><td>6/10</td><td>2/10</td></tr><tr id="channel-retailer-code-in-box"><th scope="row">Händler-Code in einer Box (nur Standard)<br><span class="field-hint">Eine Standard-Kopie in der Box mit einem Download-Code darin, keine Disc. Storniere bis zum Versand und behalte die Preisgarantie, löse dann den Code ein und lade das volle Spiel herunter.</span></th><td>PlayStation, Xbox</td><td>9/10</td><td>9/10</td><td>1/10</td><td>5/10</td><td>0/10</td></tr></tbody>
         </table>
       </div>
     </section><section aria-labelledby="for-agents">
@@ -235,7 +240,7 @@
       <h2 id="related-tools-inline">Bevor du Geld verpflichtest</h2>
       <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Sieh, was GTA 6 kostet, wo du lebst, mit dem <a href="/de/tools/price-by-country">Preis-nach-Land-Tool</a>. Regionale Preisgestaltung, Steuer-Behandlung und Editions-Deltas über 44 Märkte.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Prüfe, ob du Platz für die Installation von 212 GB hast, mit dem <a href="/de/tools/storage-planner">Speicher-Planer</a>.</span></li></ul>
     </section><aside class="assumptions-strip" aria-label="Annahmen">
-      <p><strong>Annahmen</strong> <span>Bestätigt: Grand Theft Auto VI erschien am 19. November 2026. Vorbestellungen öffneten am 25. Juni 2026. Alles andere hier ist Politik, nicht Preis. Kanal-Scores beschreiben <em>Bedingungen</em> — Stornierung, Preis-Schutz, Download-Timing, Bonus-Vergabe-Zuverlässigkeit und Wiederverkauf — aus langjährigen Plattform- und Händler-Richtlinien, nicht aus Live-Listings. Download-Vorlaufzeiten waren Plattform-Normen, keine von Rockstar bestätigten Zeiten; das Pre-Load-Fenster schloss sich zum Launch. Regionale Stornierungs-Stärke spiegelt gesetzliche Fernabsatz-Widerrufs-Rechte, wo es sie gibt, die normalerweise nur gelten, solange digitale Inhalte nicht heruntergeladen wurden. Wir zitieren oder rechnen keine Preise auf dieser Seite um; das ist der Job des Preis-nach-Land-Tools, und wir duplizieren es bewusst nicht. Lies immer die eigenen Bedingungen des Storefronts vor dem Bestellen — Richtlinien ändern sich, und deine gilt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
+      <p><strong>Annahmen</strong> <span>Bestätigt: Grand Theft Auto VI erschien am 19. November 2026. Vorbestellungen öffneten am 25. Juni 2026. Alles andere hier ist Politik, nicht Preis. Kanal-Scores beschreiben <em>Bedingungen</em>, Stornierung, Preis-Schutz, Download-Timing, Bonus-Vergabe-Zuverlässigkeit und Wiederverkauf, aus langjährigen Plattform- und Händler-Richtlinien, nicht aus Live-Listings. Download-Vorlaufzeiten waren Plattform-Normen, keine von Rockstar bestätigten Zeiten; das Pre-Load-Fenster schloss sich zum Launch. Regionale Stornierungs-Stärke spiegelt gesetzliche Fernabsatz-Widerrufs-Rechte, wo es sie gibt, die normalerweise nur gelten, solange digitale Inhalte nicht heruntergeladen wurden. Wir zitieren oder rechnen keine Preise auf dieser Seite um; das ist der Job des Preis-nach-Land-Tools, und wir duplizieren es bewusst nicht. Lies immer die eigenen Bedingungen des Storefronts vor dem Bestellen, Richtlinien ändern sich, und deine gilt.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
       <p class="updated-line">Aktualisiert <time datetime="2026-11-22">22. November 2026</time></p>
     </aside><section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Wie du wählst, wo du GTA 6 kaufst, Schritt für Schritt</h2>
@@ -247,7 +252,7 @@
       </li><li>
         <span class="step-number">02</span>
         <h3 class="step-title">Sag, was du aufgeben würdest</h3>
-        <p class="step-text">Sofort spielen und die Option zu stornieren behalten ziehen in unterschiedliche Richtungen. Schalte die zwei um, die zählen, und die Gewichtung verschiebt sich — Stornierbarkeit und ein sofortiger Download lassen sich auf einer digitalen Bestellung nicht beide maximieren.</p>
+        <p class="step-text">Sofort spielen und die Option zu stornieren behalten ziehen in unterschiedliche Richtungen. Schalte die zwei um, die zählen, und die Gewichtung verschiebt sich, Stornierbarkeit und ein sofortiger Download lassen sich auf einer digitalen Bestellung nicht beide maximieren.</p>
       </li><li>
         <span class="step-number">03</span>
         <h3 class="step-title">Lies die Bedingungen des gewinnenden Kanals, nicht seinen Score</h3>
@@ -255,11 +260,11 @@
       </li><li>
         <span class="step-number">04</span>
         <h3 class="step-title">Prüfe die zwei Checkpoints, die Geld kosten</h3>
-        <p class="step-text">Preis-Versprechen von Händlern liefen früher bis zum Release-Datum; jetzt, wo das Spiel erschienen ist, prüfe das Listing auf ein aktuelles Preis-Versprechen, bevor du kaufst. Das Stornierungs-Fenster schließt sich, wenn dein Download startet oder dein Paket versendet wird — bestätige beides zuerst, denn das erste entscheidet, ob eine Preissenkung erstattet wird, und das zweite, ob du noch aussteigen kannst.</p>
+        <p class="step-text">Preis-Versprechen von Händlern liefen früher bis zum Release-Datum; jetzt, wo das Spiel erschienen ist, prüfe das Listing auf ein aktuelles Preis-Versprechen, bevor du kaufst. Das Stornierungs-Fenster schließt sich, wenn dein Download startet oder dein Paket versendet wird, bestätige beides zuerst, denn das erste entscheidet, ob eine Preissenkung erstattet wird, und das zweite, ob du noch aussteigen kannst.</p>
       </li><li>
         <span class="step-number">05</span>
         <h3 class="step-title">Bestätige, dass die Installation wirklich fertig werden kann</h3>
-        <p class="step-text">Ein Kauf des Spiels garantiert die Berechtigung, nicht dass du spielen kannst. Prüfe freien Laufwerks-Platz und realistischen Download-Durchsatz vor dem Kauf — ein Kanal, der nur einen Code liefert, lässt dir trotzdem den vollen Download von 212 GB, und Überlastung halbiert routinemäßig die Geschwindigkeit, die du getestet hast.</p>
+        <p class="step-text">Ein Kauf des Spiels garantiert die Berechtigung, nicht dass du spielen kannst. Prüfe freien Laufwerks-Platz und realistischen Download-Durchsatz vor dem Kauf, ein Kanal, der nur einen Code liefert, lässt dir trotzdem den vollen Download von 212 GB, und Überlastung halbiert routinemäßig die Geschwindigkeit, die du getestet hast.</p>
       </li><li>
         <span class="step-number">06</span>
         <h3 class="step-title">Prüfe, welche Bonus-Liste du wirklich kaufst</h3>
@@ -281,13 +286,13 @@
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-2">
           <h3 id="use-case-2">Xbox-Käufer, der seine Meinung ändern könnte</h3>
-          <p>Xbox hält Self-Service-Erstattungen auf ungespielten, nicht heruntergeladenen Bestellungen verfügbar, was es zur nachsichtigsten digitalen Plattform macht — aber nur, bis du mit dem Herunterladen beginnst.</p>
+          <p>Xbox hält Self-Service-Erstattungen auf ungespielten, nicht heruntergeladenen Bestellungen verfügbar, was es zur nachsichtigsten digitalen Plattform macht, aber nur, bis du mit dem Herunterladen beginnst.</p>
           <a href="/de/tools/pre-order-tracker?platform=xbox&amp;cancel=1" aria-label="Preset laden: Xbox-Käufer, der seine Meinung ändern könnte">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-3">
           <h3 id="use-case-3">Käufer, der zwischen Standard und Ultimate schwankt</h3>
-          <p>Standard (79,99 $) ist das Basis-Spiel; Ultimate (99,99 $) fügt den Bonus-Stack hinzu. Wenn du dir bei der Plattform unsicher bist, starte mit Standard — je größer der Bonus-Stack, desto mehr kostet ein Kanal-Wechsel, weil Belohnungen sich an den kaufenden Account sperren.</p>
+          <p>Standard (79,99 $) ist das Basis-Spiel; Ultimate (99,99 $) fügt den Bonus-Stack hinzu. Wenn du dir bei der Plattform unsicher bist, starte mit Standard, je größer der Bonus-Stack, desto mehr kostet ein Kanal-Wechsel, weil Belohnungen sich an den kaufenden Account sperren.</p>
           <a href="/de/tools/pre-order-tracker?platform=ps5&amp;edition=standard" aria-label="Preset laden: Käufer, der zwischen Standard und Ultimate schwankt">Preset laden <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </li><li>
@@ -313,14 +318,14 @@
       <details class="methodology-details" open>
         <summary><h2 id="methodology">Wie jeder Kauf-Kanal bewertet wird</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="methodology-body">
-          <p>Jeder Kanal, der auf deiner Plattform verfügbar ist, trägt fünf Roh-Scores von zehn — Stornierbarkeit, Preis-Senkungs-Schutz, Download-Bereitschaft, Bonus-Erhalt und Wiederverkaufs-Wert. Diese Roh-Scores werden dann kontext-adjustiert: Gesetzliche Stornierungs-Rechte in deiner Region heben digitale Stornierbarkeit, ein spät ankommender Händler-Code schneidet schlechter ab, wo das Plattform-Download-Fenster lang ist, größere Editionen verstärken Bonus-Vergabe-Zuverlässigkeit in beide Richtungen, und dünne physische Distribution in manchen Märkten zieht die Code-in-a-Box-Scores runter. Deine Präferenz-Schalter addieren Gewicht zu den Achsen, die du gewählt hast, die Gewichte werden auf 100 renormalisiert, damit Scores vergleichbar bleiben, und der gewichtete Gesamt-Score rankt die Kanäle.</p>
+          <p>Jeder Kanal, der auf deiner Plattform verfügbar ist, trägt fünf Roh-Scores von zehn, Stornierbarkeit, Preis-Senkungs-Schutz, Download-Bereitschaft, Bonus-Erhalt und Wiederverkaufs-Wert. Diese Roh-Scores werden dann kontext-adjustiert: Gesetzliche Stornierungs-Rechte in deiner Region heben digitale Stornierbarkeit, ein spät ankommender Händler-Code schneidet schlechter ab, wo das Plattform-Download-Fenster lang ist, größere Editionen verstärken Bonus-Vergabe-Zuverlässigkeit in beide Richtungen, und dünne physische Distribution in manchen Märkten zieht die Code-in-a-Box-Scores runter. Deine Präferenz-Schalter addieren Gewicht zu den Achsen, die du gewählt hast, die Gewichte werden auf 100 renormalisiert, damit Scores vergleichbar bleiben, und der gewichtete Gesamt-Score rankt die Kanäle.</p>
           <pre class="methodology-formula">score = Σ (axis ÷ 10 × normalised weight), weights = base + 26 per selected preference, renormalised to 100</pre>
           <ul class="list-disc list-outside space-y-1.5"><li>Kanal-Achsen-Scores beschreiben Bedingungen, nicht Preise. Kein Live-Listing, Lagerstand oder Währungs-Zahl wird auf dieser Seite gelesen oder gezeigt.</li><li>Download-Vorlaufzeiten sind Plattform-Normen, beobachtet über jüngste First-Party- und große Third-Party-Releases, keine Zusagen von Rockstar.</li><li>Regionale Stornierungs-Stärke spiegelt gesetzliche Fernabsatz-Rechte wider, wo sie existieren, Storefront-Politik regiert überall sonst und kann in der Praxis strenger sein.</li><li>Preis-, Steuer- und Währungs-Fragen werden von /tools/price-by-country beantwortet, sodass die zwei Seiten nie um die gleiche Anfrage konkurrieren.</li></ul>
         </div>
       </details>
     </section><section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Kannst du eine GTA-6-Bestellung stornieren, und übertragen sich Boni?</h2>
+      <header>
+        <h2 id="faq">Kannst du eine GTA-6-Bestellung stornieren, und übertragen sich Boni?</h2>
         <p class="section-dek">Erstattungs-Fenster, Download-Timing, Editions-Boni und physisch vs digital.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -330,7 +335,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-1" class="faq-answer" role="region">
-            <p>Meist ja, aber das Fenster ist enger, als Leute erwarten. Eine digitale Bestellung ist erstattbar, solange sie ungespielt und nicht heruntergeladen ist — Erstattungs-Berechtigung endet, wenn der Download startet, nicht am Release-Tag. Eine physische Bestellung ist stornierbar, bis sie versendet wird. In der EU und im UK gilt außerdem ein gesetzliches 14-Tage-Widerrufs-Recht für digitale Fern-Käufe, wiederum normalerweise nur, solange der Inhalt nicht heruntergeladen wurde.</p>
+            <p>Meist ja, aber das Fenster ist enger, als Leute erwarten. Eine digitale Bestellung ist erstattbar, solange sie ungespielt und nicht heruntergeladen ist, Erstattungs-Berechtigung endet, wenn der Download startet, nicht am Release-Tag. Eine physische Bestellung ist stornierbar, bis sie versendet wird. In der EU und im UK gilt außerdem ein gesetzliches 14-Tage-Widerrufs-Recht für digitale Fern-Käufe, wiederum normalerweise nur, solange der Inhalt nicht heruntergeladen wurde.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -350,7 +355,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-3" class="faq-answer" role="region">
-            <p>Nein. Editions-Boni werden als Berechtigungen auf dem Account gewährt, der die Bestellung platziert hat, also bewegen sie sich nicht zwischen PlayStation und Xbox, und sie folgen dir nicht, wenn du stornierst und woanders neu kaufst. Händler-exklusive Items sind getrennt von Plattform-Boni und stapeln sich nicht immer mit ihnen. Deshalb sollte die Plattform-Entscheidung vor der Editions-Entscheidung kommen — und deshalb zahlen Ultimate-Käufer am meisten, wenn sie ihre Meinung ändern.</p>
+            <p>Nein. Editions-Boni werden als Berechtigungen auf dem Account gewährt, der die Bestellung platziert hat, also bewegen sie sich nicht zwischen PlayStation und Xbox, und sie folgen dir nicht, wenn du stornierst und woanders neu kaufst. Händler-exklusive Items sind getrennt von Plattform-Boni und stapeln sich nicht immer mit ihnen. Deshalb sollte die Plattform-Entscheidung vor der Editions-Entscheidung kommen, und deshalb zahlen Ultimate-Käufer am meisten, wenn sie ihre Meinung ändern.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -360,7 +365,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-4" class="faq-answer" role="region">
-            <p>Digital gewinnt bei Bequemlichkeit — keine Liefer-Wartezeit, und du kannst sofort herunterladen und spielen; ein Code-in-a-Box gewinnt bei Stornierbarkeit und Preis-Schutz, hat aber keinen Wiederverkaufs-Wert. Ein Code-in-a-Box ist stornierbar, bis er versendet wird, und oft durch eine Händler-Preis-Garantie abgedeckt, aber er installiert nichts im Voraus und zieht trotzdem einen Day-One-Patch. Digital entfernt das Liefer-Risiko komplett, zum Preis eines Erstattungs-Fensters, das sich schließt, sobald der Download beginnt, und null Wiederverkaufs-Wert.</p>
+            <p>Digital gewinnt bei Bequemlichkeit, keine Liefer-Wartezeit, und du kannst sofort herunterladen und spielen; ein Code-in-a-Box gewinnt bei Stornierbarkeit und Preis-Schutz, hat aber keinen Wiederverkaufs-Wert. Ein Code-in-a-Box ist stornierbar, bis er versendet wird, und oft durch eine Händler-Preis-Garantie abgedeckt, aber er installiert nichts im Voraus und zieht trotzdem einen Day-One-Patch. Digital entfernt das Liefer-Risiko komplett, zum Preis eines Erstattungs-Fensters, das sich schließt, sobald der Download beginnt, und null Wiederverkaufs-Wert.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -370,7 +375,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-5" class="faq-answer" role="region">
-            <p>Vor dem Release wandten große Händler üblicherweise eine Preis-Garantie auf Bestellungen vor dem Release an: Wenn der Preis zwischen deiner Bestellung und dem Release fiel, zahltest du den niedrigsten Preis, der in diesem Fenster gesehen wurde. Dieses Vorbestell-Fenster ist jetzt, wo das Spiel erschienen ist, vorbei — prüfe das Listing auf ein aktuelles Preis-Versprechen, bevor du kaufst. Plattform-Stores erstatten Preissenkungen vor dem Release in der Regel nicht automatisch, was das größte finanzielle Argument ist, über einen Händler statt über den Konsolen-Store zu bestellen. Weil Preissenkungen bei großen Releases meist in den Wochen nach dem Launch auftauchen, lohnt es sich, die Preise regelmäßig erneut zu prüfen.</p>
+            <p>Vor dem Release wandten große Händler üblicherweise eine Preis-Garantie auf Bestellungen vor dem Release an: Wenn der Preis zwischen deiner Bestellung und dem Release fiel, zahltest du den niedrigsten Preis, der in diesem Fenster gesehen wurde. Dieses Vorbestell-Fenster ist jetzt, wo das Spiel erschienen ist, vorbei, prüfe das Listing auf ein aktuelles Preis-Versprechen, bevor du kaufst. Plattform-Stores erstatten Preissenkungen vor dem Release in der Regel nicht automatisch, was das größte finanzielle Argument ist, über einen Händler statt über den Konsolen-Store zu bestellen. Weil Preissenkungen bei großen Releases meist in den Wochen nach dem Launch auftauchen, lohnt es sich, die Preise regelmäßig erneut zu prüfen.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -380,7 +385,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-6" class="faq-answer" role="region">
-            <p>Wenn Sicherheit bedeutet, aussteigen zu können, ist ein Händler-Code in einer Box am sichersten — er ist stornierbar, bis er versendet wird —, gefolgt von einem Händler-Digital-Code und dann dem Plattform-Store. Wenn Sicherheit bedeutet, dass die Berechtigung definitiv funktioniert und die Boni definitiv ankommen, ist der Plattform-Store auf der Konsole am sichersten. Der eine Kanal, den du meiden solltest, ist ein Grey-Market-Key-Reseller: Eine Sperrung oder Regions-Sperre lässt dich normalerweise ohne Spiel, ohne Erstattung und ohne Support-Weg zurück.</p>
+            <p>Wenn Sicherheit bedeutet, aussteigen zu können, ist ein Händler-Code in einer Box am sichersten, er ist stornierbar, bis er versendet wird, , gefolgt von einem Händler-Digital-Code und dann dem Plattform-Store. Wenn Sicherheit bedeutet, dass die Berechtigung definitiv funktioniert und die Boni definitiv ankommen, ist der Plattform-Store auf der Konsole am sichersten. Der eine Kanal, den du meiden solltest, ist ein Grey-Market-Key-Reseller: Eine Sperrung oder Regions-Sperre lässt dich normalerweise ohne Spiel, ohne Erstattung und ohne Support-Weg zurück.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -410,7 +415,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-9" class="faq-answer" role="region">
-            <p>Es gibt keine Vorbestell-Entscheidung mehr zu treffen — das Spiel erschien am 19. November 2026. Jetzt kaufen heißt jetzt spielen zum aktuellen Preis; auf einen Sale zu warten heißt später weniger zahlen, aber bis dahin nicht spielen. Wenn du kaufst, wähle den Kanal nach Bedingungen: Ein Code-in-a-Box behält Stornierbarkeit und die Preis-Garantie, während eine digitale Kopie aus dem Plattform-Store sofort herunterladbar ist.</p>
+            <p>Es gibt keine Vorbestell-Entscheidung mehr zu treffen, das Spiel erschien am 19. November 2026. Jetzt kaufen heißt jetzt spielen zum aktuellen Preis; auf einen Sale zu warten heißt später weniger zahlen, aber bis dahin nicht spielen. Wenn du kaufst, wähle den Kanal nach Bedingungen: Ein Code-in-a-Box behält Stornierbarkeit und die Preis-Garantie, während eine digitale Kopie aus dem Plattform-Store sofort herunterladbar ist.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -430,7 +435,7 @@
             <span class="faq-chevron" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </summary>
           <div id="faq-a-11" class="faq-answer" role="region">
-            <p>Nein — Rockstar hat keine PC-Version angekündigt, also gibt es keine PC-Edition zu kaufen und keinen PC-Kanal auf dieser Seite. GTA 6 gibt es nur für PlayStation 5 und Xbox Series X|S.</p>
+            <p>Nein, Rockstar hat keine PC-Version angekündigt, also gibt es keine PC-Edition zu kaufen und keinen PC-Kanal auf dieser Seite. GTA 6 gibt es nur für PlayStation 5 und Xbox Series X|S.</p>
           </div>
         </details>
       </li><li class="faq-item">
@@ -448,7 +453,7 @@
       <h2 id="glossary">Kauf-Bedingungen, die du vor dem Bezahlen verstehen solltest</h2>
       <dl class="glossary-grid"><div id="term-preload">
         <dt>Pre-Load</dt>
-        <dd>Herunterladen und Bereitstellen des Spiels, bevor es freischaltete, sodass es beim Release spielbar war. Der Pre-Load endete mit dem Launch — GTA 6 ist erschienen — aber die Regel gilt weiterhin: Einen Download zu starten beendet normalerweise die Erstattungs-Berechtigung bei einer digitalen Bestellung.</dd>
+        <dd>Herunterladen und Bereitstellen des Spiels, bevor es freischaltete, sodass es beim Release spielbar war. Der Pre-Load endete mit dem Launch, GTA 6 ist erschienen, aber die Regel gilt weiterhin: Einen Download zu starten beendet normalerweise die Erstattungs-Berechtigung bei einer digitalen Bestellung.</dd>
       </div><div id="term-price-protection-window">
         <dt>Preis-Schutz-Fenster</dt>
         <dd>Das Fenster nach deiner Bestellung, in dem ein Händler die Differenz erstattet, wenn der Preis fällt. Plattform-Stores bieten ihn selten an.</dd>
@@ -468,7 +473,7 @@
     </section><section aria-labelledby="related-content">
       <h2 id="related-content">Rechne den Rest des Kaufs aus</h2>
       <h3 class="related-sub">Verwandte Tools</h3>
-      <ul class="related-tools-grid"><li><a href="/de/tools/price-by-country" class="tool-card" data-accent="purple" aria-label="GTA-6-Preis nach Land: GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><h3>GTA-6-Preis nach Land</h3><p>GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA-6-Release-Date-Erinnerung: Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. Launch-Erinnerungen in deiner Zeitzone."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><h3>GTA-6-Release-Date-Erinnerung</h3><p>Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. Launch-Erinnerungen in deiner Zeitzone.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/download-time" class="tool-card" data-accent="blue" aria-label="GTA-6-Download-Zeit-Rechner: Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA-6-Download-Zeit-Rechner</h3><p>Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA-6-Speicher-Planer: Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="GTA-6-Preload-Verlauf und Update-Zeitplan: GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Preload-Verlauf und Update-Zeitplan</h3><p>GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="pink" aria-label="GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis: Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="pink" aria-label="GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert: Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="pink" aria-label="GTA-6-Server-Status: Sind die Server down?: GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/de/tools/price-by-country" class="tool-card" data-accent="purple">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><h3>GTA-6-Preis nach Land</h3><p>GTA-6-Preis in 44 Märkten, lokale Währung und USD, Steuer aufgeschlüsselt. Enthält die Standard-vs-Ultimate-Editions-Leiter.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/add-to-calendar" class="tool-card" data-accent="blue">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><h3>GTA-6-Release-Date-Erinnerung</h3><p>Patch- und DLC-Erinnerungen mit einem Klick in deinen Google-, Apple- oder Outlook-Kalender. Launch-Erinnerungen in deiner Zeitzone.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/download-time" class="tool-card" data-accent="blue">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA-6-Download-Zeit-Rechner</h3><p>Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/storage-planner" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/preload-tracker" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Preload-Verlauf und Update-Zeitplan</h3><p>GTA-6-Preload-Verlauf und Update-Zeitplan: der Launch-Preload (10.–19. Nov. 2026), die Titel-Updates 1.002.000, 1.002.001 und der erste Post-Launch-Patch 01.002.002 (23. Nov., mit offiziellen Notizen). Kein DLC angekündigt. Zuletzt geprüft am 23. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Waffenvergleich, Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite, den vier Ingame-Werten von 10, plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Fahrzeugvergleich, Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10, Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke, plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten, es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section><section aria-labelledby="sources">
       <h2 id="sources">Quellen und Methodik-Referenzen</h2>
       <ol class="sources-list"><li>
@@ -490,7 +495,7 @@
       <ul class="changelog-list"><li>
         <span class="ver">1.3</span>
         <time datetime="2026-11-22">22. Nov. 2026</time>
-        <span class="note">Disc-Kanäle entfernt: GTA 6 hat keine Disc — das physische Produkt ist ein Code-in-a-Box (nur Standard; Ultimate ist nur digital). Die beiden Disc-Kanäle wurden entfernt und ein Händler-Code-in-einer-Box-Kanal hinzugefügt, es bleiben drei Kanäle; ein Code-in-a-Box erzielt 0 beim Wiederverkaufs-Wert, der nach dem Einlösen weder verkauft noch verliehen werden kann. Bester Standard-Kanal ist jetzt der Händler-Code (58,1/100).</span>
+        <span class="note">Disc-Kanäle entfernt: GTA 6 hat keine Disc, das physische Produkt ist ein Code-in-a-Box (nur Standard; Ultimate ist nur digital). Die beiden Disc-Kanäle wurden entfernt und ein Händler-Code-in-einer-Box-Kanal hinzugefügt, es bleiben drei Kanäle; ein Code-in-a-Box erzielt 0 beim Wiederverkaufs-Wert, der nach dem Einlösen weder verkauft noch verliehen werden kann. Bester Standard-Kanal ist jetzt der Händler-Code (58,1/100).</span>
       </li><li>
         <span class="ver">1.2</span>
         <time datetime="2026-11-21">21. Nov. 2026</time>
@@ -505,27 +510,45 @@
       <p>Kanal-Achsen-Scores beschreiben Bedingungen, nicht Preise. Kein Live-Listing, Lagerstand oder Währungs-Zahl wird auf dieser Seite gelesen oder gezeigt.</p>
     </aside>        </article>
       </div>
-    </main>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -564,9 +587,9 @@
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
+              <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
               <li><a href="/de/privacy">Datenschutzerklärung</a></li>
               <li><a href="/de/terms">Nutzungsbedingungen</a></li>
-              <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
               <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
@@ -576,24 +599,18 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
   </div>
 </div>
   </div>
@@ -602,6 +619,8 @@
   <script src="/assets/js/de/header.js" defer></script>
   <script src="/assets/js/de/search.js" defer></script>
   <script src="/assets/js/de/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/de/newsletter.js" defer></script>
   <script src="/assets/js/de/launch.js" defer></script>
   <script type="module" src="/assets/js/de/pre-order-tracker.js"></script>  <script type="application/ld+json">
 {
@@ -649,7 +668,7 @@
       },
       "datePublished": "2026-08-16",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "de"
     },
     {
       "@type": "HowTo",

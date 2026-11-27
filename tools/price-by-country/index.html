@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Price by Country">
     <meta name="twitter:description" content="GTA 6 price in 44 countries, in local currency and USD, with tax shown separately. Compare Standard and Ultimate editions per market.">
     <meta name="twitter:image" content="https://toolwools.com/og/price-by-country.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tools/price-by-country">
 <link rel="alternate" href="https://toolwools.com/tools/price-by-country" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/price-by-country" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-price-by-country-en.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/" aria-label="ToolWools — home" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">All GTA 6 Tools in One Place</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="SEARCH TOOLS" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Select language">EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>EN <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/price-by-country" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> English</a>
             <a href="/es/tools/price-by-country">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools" aria-label="Search tools" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Search tools..." aria-label="Search tools..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
@@ -119,51 +136,34 @@
           <a href="/generators">Generators</a>
           <a href="/news">News</a>
           <a href="/trailers">Trailers</a>
+          <a href="/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/price-by-country" aria-current="true">EN</a><a href="/es/tools/price-by-country" lang="es">ES</a><a href="/pt/tools/price-by-country" lang="pt">PT</a><a href="/de/tools/price-by-country" lang="de">DE</a><a href="/fr/tools/price-by-country" lang="fr">FR</a><a href="/tr/tools/price-by-country" lang="tr">TR</a><a href="/ar/tools/price-by-country" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header><main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA 6 Price by Country</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        <span>Trackers</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Price by Country</h1>
-      <p class="page-subtitle">One confirmed price, $79.99 in the US, converted into 44 markets with local consumption tax shown as its own line. Pick your country, compare the edition ladder, and see whether importing is actually worth it.</p>
-      <ul class="hero-badges" aria-label="At a glance">
-        <li class="chip">44 markets · 34 currencies</li><li class="chip">Tax shown separately, not hidden</li><li class="chip">Reference rates dated, not scraped</li>
-      </ul>
-    </section>
-          <div class="intro-callout">
-            <p>Rockstar has confirmed one number: $79.99 for the Standard edition in the United States. Everything else is either a storefront&#x27;s regional price or a currency conversion, and the two produce very different answers. This page keeps them apart. Markets where publishers historically set a deliberately lower local price (India, Brazil, Türkiye, Japan, China) are flagged as regionally priced; everywhere else you get a clean conversion plus that country&#x27;s VAT, GST or sales tax as a separate line, so you can see what actually lands on the receipt.</p>
-          </div>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Price by Country</span>
+        </div>
+        <div class="page-eyebrow"><span>Trackers</span></div>
+        <h1 id="page-title">GTA 6 Price by Country</h1>
+        <p class="page-subtitle">One confirmed price, $79.99 in the US, converted into 44 markets with local consumption tax shown as its own line. Pick your country, compare the edition ladder, and see whether importing is actually worth it.</p>
+        <p class="hero-meta">
+          <span>44 markets · 34 currencies</span><span>Tax shown separately, not hidden</span><span>Reference rates dated, not scraped</span><span>By <a href="/about#release-desk">ToolWools Release Desk</a></span><span>Pricing and launch tracking</span><span>Reviewed by <a href="/about#editorial">ToolWools Editorial</a></span><span>Claim and sourcing review</span><span>Model: <a href="/methodology">$79.99 anchor pricing model</a></span><span>Published <time datetime="2026-08-01">Aug 1, 2026</time></span><span>Last reviewed <time datetime="2026-11-20">November 20, 2026</time></span>
+        </p>
+      </section>
 <p class="rates-banner" role="note"><strong>Reference exchange rates dated 20 November 2026 (2026-11-20).</strong> Standard ($79.99) and Ultimate ($99.99) US prices are confirmed. Regional list prices are reported, not confirmed store prices; there is no Deluxe edition.</p>
-<section class="byline" aria-label="About this page">
-      <div>
-        <p class="byline-meta">By <span class="byline-seg"><a href="/about#release-desk">ToolWools Release Desk</a>&nbsp;·</span> Pricing and launch tracking&nbsp;· Reviewed by <span class="byline-seg"><a href="/about#editorial">ToolWools Editorial</a>&nbsp;·</span> Claim and sourcing review</p>
-        <p class="byline-note">Model: <a href="/methodology">$79.99 anchor pricing model</a></p>
-      </div>
-      <p class="byline-dates">Published <time datetime="2026-08-01">Aug 1, 2026</time>&nbsp;· Last reviewed <time datetime="2026-11-20">November 20, 2026</time></p>
-    </section>
 <div class="sr-only" data-live-region aria-live="polite">GTA 6 costs $79.99 USD for the Standard edition, the only price Rockstar has confirmed. In United States that models out to $85.59 for Standard Edition, or about $85.59 once sales tax (avg) is counted. That is in line with the us price, converted at the reference rate below.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label" id="price-answer">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Price check · TL;DR</span></p>
-        <p class="tldr-text"><span data-tldr-text>GTA 6 costs $79.99 USD for the Standard edition, the only price Rockstar has confirmed. In United States that models out to $85.59 for Standard Edition, or about $85.59 once sales tax (avg) is counted. That is in line with the us price, converted at the reference rate below.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>United States · $85.59 receipt total</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculator</h2>
       <div class="workspace-grid">
@@ -191,7 +191,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted">GTA 6 price in the United States</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">In line with the US price</p><h3 class="verdict-title">$85.59</h3><p class="verdict-desc">In line with the US price · 0% vs the US receipt total</p></div></div><dl class="stat-grid"><div><dt>Shelf price</dt><dd>$79.99</dd></div><div><dt>Sales tax (avg)</dt><dd>$5.60</dd></div><div><dt>Receipt total</dt><dd>$85.59</dd></div><div><dt>USD equivalent</dt><dd>$85.59</dd></div></dl><p class="verdict-desc">Before Sales tax (avg). Converted from the confirmed US price at the dated reference rate.</p><p class="verdict-desc">Reference exchange rates dated 20 November 2026 (2026-11-20). Standard ($79.99) and Ultimate ($99.99) US prices are confirmed.</p><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on X" href="https://twitter.com/intent/tweet?text=GTA%206%20price%20in%20United%20States%3A%20%2485.59%20for%20Standard%20Edition%20(%2485.59).%2044%20markets%20compared%20on%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Share on X</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share verdict on Reddit" href="https://www.reddit.com/submit?title=GTA%206%20price%20in%20United%20States%3A%20%2485.59%20(Standard%20Edition)&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">In line with the US price</p><h3 class="verdict-title">$85.59</h3><p class="verdict-desc">In line with the US price · 0% vs the US receipt total</p></div></div><dl class="stat-grid"><div><dt>Shelf price</dt><dd>$79.99</dd></div><div><dt>Sales tax (avg)</dt><dd>$5.60</dd></div><div><dt>Receipt total</dt><dd>$85.59</dd></div><div><dt>USD equivalent</dt><dd>$85.59</dd></div></dl><p class="verdict-desc">Before Sales tax (avg). Converted from the confirmed US price at the dated reference rate.</p><p class="verdict-desc">Reference exchange rates dated 20 November 2026 (2026-11-20). Standard ($79.99) and Ultimate ($99.99) US prices are confirmed.</p><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copy verdict</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20price%20in%20United%20States%3A%20%2485.59%20for%20Standard%20Edition%20(%2485.59).%2044%20markets%20compared%20on%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Share on X</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20price%20in%20United%20States%3A%20%2485.59%20(Standard%20Edition)&amp;url=https%3A%2F%2Ftoolwools.com%2Ftools%2Fprice-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a></div></div>
         </div>
       </div>
     </section>
@@ -206,8 +206,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copy link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on X" href="https://twitter.com/intent/tweet?text=GTA%206%20price%20in%20the%20United%20States%3A%20%2485.59%20for%20Standard%20Edition%20%28%2479.99%20plus%20sales%20tax%29.%2044%20markets%20compared%20on%20ToolWools.&amp;url=https%3A//toolwools.com/tools/price-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Share on X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Share this result on Reddit" href="https://www.reddit.com/submit?title=GTA%206%20price%20in%20the%20United%20States%3A%20%2485.59%20%28Standard%20Edition%29&amp;url=https%3A//toolwools.com/tools/price-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20price%20in%20the%20United%20States%3A%20%2485.59%20for%20Standard%20Edition%20%28%2479.99%20plus%20sales%20tax%29.%2044%20markets%20compared%20on%20ToolWools.&amp;url=https%3A//toolwools.com/tools/price-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Share on X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20price%20in%20the%20United%20States%3A%20%2485.59%20%28Standard%20Edition%29&amp;url=https%3A//toolwools.com/tools/price-by-country%3Fcountry%3DUS%26edition%3Dstandard%26tab%3Dcountry">Reddit</a>
       </div>
     </section>
 <div data-price-table-slot>
@@ -238,14 +238,11 @@
       <p class="field-hint" style="margin-top:0.75rem">Standard ($79.99) and Ultimate ($99.99) prices are confirmed. Ultimate's bundled GTA$ figure is modelled, not confirmed.</p>
     </section>
     </div>
-<section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+<section class="tier-read">
       <h2 id="related-tools-inline">Before you pre-order, check these</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/add-to-calendar">GTA 6 Release Date Reminder</a> · One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now — reminders for patches, DLC and events.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/economy-calculator">GTA 6 Money &amp; Business ROI Calculator</a> · Rank money methods by net $/hour, time any savings goal, compare business payback hours and price Shark Cards against the grind.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/system-requirements">GTA 6 System Requirements Checker</a> · Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/storage-planner">GTA 6 Storage Planner</a> · Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/add-to-calendar">GTA 6 Release Date Reminder</a> · One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now, reminders for patches, DLC and events.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/economy-calculator">GTA 6 Money &amp; Business ROI Calculator</a> · Rank money methods by net $/hour, time any savings goal, compare business payback hours and price Shark Cards against the grind.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/system-requirements">GTA 6 System Requirements Checker</a> · Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tools/storage-planner">GTA 6 Storage Planner</a> · Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</span></li></ul>
     </section>
-<aside class="assumptions-strip" aria-label="Assumptions">
-      <p><strong>What is confirmed, and what this page models</strong> <span>Standard edition = $79.99 USD and Ultimate edition = $99.99 USD (both confirmed by Rockstar). There is no Deluxe edition. Ultimate's bundled GTA$ and bonus contents are modelled, not confirmed. FX rates are static reference values dated 2026-11-20, no live feed, so a number you read today matches a number you read next week and the date is always on screen. Regionally-priced markets use the storefront convention for that region rather than a raw conversion. Tax is applied at the country&#x27;s standard consumption-tax rate; US sales tax uses a 7% national average because it varies by state.</span> <a href="/methodology">Read the full methodology</a></p>
-      <p class="updated-line">Updated <time datetime="2026-11-20">November 20, 2026</time></p>
-    </aside>
+
 <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">How to find the GTA 6 price in your country</h2>
       <p class="section-dek">Five steps from your country to a receipt-accurate number.</p>
@@ -335,13 +332,15 @@ band =
   vsUs% &lt;  8  → typical
   vsUs% &lt; 30  → above average
   else         → most expensive</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Only the $79.99 US Standard and $99.99 US Ultimate prices are treated as fact. Every other figure is either a dated conversion or a modelled regional price, and both are labelled as such in the interface, not just in the small print.</li><li>Regional price levels come from the standing list prices these storefronts have used for $59.99–$79.99 releases in each market, not from a leak or a rumoured listing.</li><li>FX rates are frozen at 2026-11-20 so results are reproducible; the date renders next to every converted figure.</li><li>Zero-decimal currencies (JPY, KRW, IDR, VND, CLP, COP, ARS, NGN, PKR, BDT, PHP) round to whole units, matching how storefronts actually list them.</li><li>US sales tax uses a 7% national average because it is set at state and county level; treat the US receipt total as ±3% rather than exact.</li><li>There is no Deluxe edition. The Ultimate rung costs $99.99 (confirmed by Rockstar); its bundled GTA$ figure is modelled.</li></ul>
+          <ul class="list-disc list-outside"><li>Only the $79.99 US Standard and $99.99 US Ultimate prices are treated as fact. Every other figure is either a dated conversion or a modelled regional price, and both are labelled as such in the interface, not just in the small print.</li><li>Regional price levels come from the standing list prices these storefronts have used for $59.99–$79.99 releases in each market, not from a leak or a rumoured listing.</li><li>FX rates are frozen at 2026-11-20 so results are reproducible; the date renders next to every converted figure.</li><li>Zero-decimal currencies (JPY, KRW, IDR, VND, CLP, COP, ARS, NGN, PKR, BDT, PHP) round to whole units, matching how storefronts actually list them.</li><li>US sales tax uses a 7% national average because it is set at state and county level; treat the US receipt total as ±3% rather than exact.</li><li>There is no Deluxe edition. The Ultimate rung costs $99.99 (confirmed by Rockstar); its bundled GTA$ figure is modelled.</li></ul>
+    <div class="assumptions-block"><p><strong>What is confirmed, and what this page models</strong> <span>Standard edition = $79.99 USD and Ultimate edition = $99.99 USD (both confirmed by Rockstar). There is no Deluxe edition. Ultimate's bundled GTA$ and bonus contents are modelled, not confirmed. FX rates are static reference values dated 2026-11-20, no live feed, so a number you read today matches a number you read next week and the date is always on screen. Regionally-priced markets use the storefront convention for that region rather than a raw conversion. Tax is applied at the country&#x27;s standard consumption-tax rate; US sales tax uses a 7% national average because it varies by state.</span> <a href="/methodology">Read the full methodology</a></p>
+      <p class="updated-line">Updated <time datetime="2026-11-20">November 20, 2026</time></p></div>
         </div>
       </details>
     </section>
 <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">How much does GTA 6 cost? Country and edition questions</h2>
+      <header>
+        <h2 id="faq">How much does GTA 6 cost? Country and edition questions</h2>
         <p class="section-dek">Direct answers on price, tax, editions and region switching.</p>
       </header>
       <ul class="faq-list" role="list"><li><details class="faq-item" id="faq-q-1">
@@ -407,7 +406,7 @@ band =
 <section aria-labelledby="related-content">
       <h2 id="related-content">Before you pre-order, check these</h2>
       <h3 class="related-sub">Related tools</h3>
-      <ul class="related-tools-grid"><li><a href="/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA 6 Release Date Reminder · One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now — reminders for patches, DLC and events."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Release Date Reminder</h3><p>One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now — reminders for patches, DLC and events.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/economy-calculator" class="tool-card" data-accent="blue" aria-label="GTA 6 Money &amp; Business ROI Calculator · Rank money methods by net $/hour, time any savings goal, compare business payback hours and price Shark Cards against the grind."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg><h3>GTA 6 Money &amp; Business ROI Calculator</h3><p>Rank money methods by net $/hour, time any savings goal, compare business payback hours and price Shark Cards against the grind.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA 6 System Requirements Checker · Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA 6 Storage Planner · Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Storage Planner</h3><p>Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Release Date Reminder</h3><p>One-click add GTA 6 reminders to Google, Apple or Outlook calendar. GTA 6 is out now, reminders for patches, DLC and events.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/economy-calculator" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg><h3>GTA 6 Money &amp; Business ROI Calculator</h3><p>Rank money methods by net $/hour, time any savings goal, compare business payback hours and price Shark Cards against the grind.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 System Requirements Checker</h3><p>Instant verdict against community-estimated Minimum, Recommended and Ultra tiers. GPU, CPU, RAM and storage.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tools/storage-planner" class="tool-card" data-accent="pink"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA 6 Storage Planner</h3><p>Budget every gigabyte: base install, day-one patch, seasonal DLC and safe headroom for updates.</p><span class="link-cta">Open tool <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 <section aria-labelledby="sources">
       <h2 id="sources">Sources &amp; methodology references</h2>
@@ -430,7 +429,7 @@ band =
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.2</p>
         <time datetime="2026-11-20">Nov 20, 2026</time>
-        <p>FX rates re-dated to 2026-11-20. Deluxe edition removed — no such edition exists. Ultimate price corrected to $99.99 and confirmed by Rockstar; its bundled GTA$ figure remains modelled.</p>
+        <p>FX rates re-dated to 2026-11-20. Deluxe edition removed, no such edition exists. Ultimate price corrected to $99.99 and confirmed by Rockstar; its bundled GTA$ figure remains modelled.</p>
       </li><li>
         <p class="changelog-version">v1.1</p>
         <time datetime="2026-11-17">Nov 17, 2026</time>
@@ -447,32 +446,50 @@ band =
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Stay in the Loop</h2>
+          <p>Get the latest GTA 6 news, tools and guides in your inbox.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Email address</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Subscribe</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 is out now — Nov 19, 2026</span>
+        <span class="eyebrow-muted">GTA 6 is out now, Nov 19, 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Browse tools →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/" aria-label="ToolWools — home" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">All GTA 6 Tools in One Place</span>
               </span>
             </span>
           </a>
-          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need — one place, no ads-first, no bloat.</p>
+          <p>The ultimate destination for GTA 6 tools, calculators, trackers, planners and guides. Everything you need, one place, no ads-first, no bloat.</p>
         </div>
         <div class="footer-cols">
           <div>
@@ -506,43 +523,42 @@ band =
               <li><a href="/contact">Contact</a></li>
               <li><a href="/email-preferences">Email Preferences</a></li>
               <li><a href="/sitemap">Sitemap</a></li>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
               <li><a href="/editorial-policy">Editorial Policy</a></li>
-              <li><a href="/disclaimer">Disclaimer</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-divider" aria-hidden="true"></div>
       <div class="footer-bottom">
-        <p>© 2026 toolwools.com — All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+        <p>© 2026 toolwools.com, All rights reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/disclaimer">Disclaimer</a><button type="button" data-consent-open>Cookie settings</button></span>
           <span>Made with <span class="heart">♥</span> for GTA 6 fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics consent">
-  <div class="consent-inner">
-    <p><strong>Analytics, only with your OK.</strong> We use aggregate Google Analytics to see which tools get used. Tool inputs never leave your device, no profile is built, and nothing is sold. Accept to load it, or decline and browse without it. You can change your mind anytime from Cookie settings in the footer.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accept analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Decline</button>
-      <a href="/privacy">Privacy policy</a>
-    </div>
   </div>
-</div>  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics consent" hidden>
+  <p>We use aggregate Google Analytics to improve the site. No profiling, nothing sold. Accept or decline; the choice is stored in this browser.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accept</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Decline</button>
+  </div>
+</div>
   <script src="/assets/js/theme.js" defer></script>
   <script src="/assets/js/header.js" defer></script>
   <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
   <script type="module" src="/assets/js/price-by-country.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",

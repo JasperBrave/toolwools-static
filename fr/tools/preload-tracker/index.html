@@ -14,10 +14,10 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="de_DE">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,8 +26,12 @@
 <meta name="twitter:title" content="Historique du préchargement et calendrier des mises à jour de GTA 6 | ToolWools">
 <meta name="twitter:description" content="Historique du préchargement et calendrier des mises à jour de GTA 6 : le préchargement de lancement (10–19 nov. 2026), les mises à jour du titre 1.002.000, 1.002.001 et le premier correctif post-lancement 01.002.002 (23 nov., avec notes officielles). Aucun DLC annoncé. Dernière vérification le 23 nov. 2026.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://toolwools.com/fr/tools/preload-tracker">
 <link rel="alternate" href="https://toolwools.com/tools/preload-tracker" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/preload-tracker" hreflang="es">
@@ -41,9 +45,26 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+<script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-preload-tracker-fr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
 <script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
 <script type="application/ld+json">
@@ -186,40 +207,40 @@
 <body>
 <div class="site-shell">
 <a class="skip-link" href="#main">Aller au contenu</a>
+<a class="skip-link" href="#main">Aller au contenu</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/fr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
             </span>
           </span>
         </a>
         <nav class="nav-primary" aria-label="Principal">
           <a href="/fr/">Accueil</a>
-          <a href="/fr/tools">Outils</a>
+          <a href="/fr/tools" aria-current="page">Outils</a>
           <a href="/fr/trackers">Suivi</a>
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="RECHERCHER" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Choisir la langue">FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>FR <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/preload-tracker">English</a>
             <a href="/es/tools/preload-tracker">Español</a>
@@ -243,76 +264,61 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils" aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Rechercher des outils..." aria-label="Rechercher des outils" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobile">
           <a href="/fr/">Accueil</a>
-          <a href="/fr/tools">Outils</a>
+          <a href="/fr/tools" aria-current="page">Outils</a>
           <a href="/fr/trackers">Suivi</a>
           <a href="/fr/generators">Générateurs</a>
           <a href="/fr/news">Actualités</a>
           <a href="/fr/trailers">Bandes-annonces</a>
+          <a href="/fr/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/preload-tracker" lang="en">EN</a><a href="/es/tools/preload-tracker" lang="es">ES</a><a href="/pt/tools/preload-tracker" lang="pt">PT</a><a href="/de/tools/preload-tracker" lang="de">DE</a><a href="/fr/tools/preload-tracker" lang="fr" aria-current="true">FR</a><a href="/tr/tools/preload-tracker" lang="tr">TR</a><a href="/ar/tools/preload-tracker" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Fil d&#x27;Ariane" class="breadcrumbs">
+<main id="main" tabindex="-1" class="tool-main">
+  <div class="tool-body">
+    <article aria-labelledby="page-title">
+  <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-breadcrumbs" aria-label="Fil d&#x27;Ariane">
         <a href="/fr/">Accueil</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <a href="/fr/tools">Outils</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        <span aria-hidden="true">/</span>
         <span aria-current="page">Historique du préchargement et calendrier des mises à jour de GTA 6</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">Historique du préchargement · Calendrier des mises à jour</span>
-      <h1 id="page-hero-heading">Historique du préchargement et calendrier des mises à jour de GTA 6</h1>
-      <p class="page-hero-sub">Le préchargement de lancement de GTA 6 a eu lieu du 10 au 19 nov. 2026 et il est terminé. Deux mises à jour du titre sont sorties avant le lancement, et le premier correctif post-lancement est arrivé le 23 nov. 2026. Cette page est le relevé — et la liste de suivi du prochain téléchargement daté.</p>
-      <ul class="hero-badges" aria-label="En un coup d&#x27;œil">
-        <li class="chip">Préchargement 10–19 nov. 2026 · terminé</li><li class="chip">3 mises à jour du titre enregistrées</li><li class="chip">Dernière vérification 23 nov. 2026</li>
-      </ul>
-    </div>
-  </header>
-  <div class="container tool-body">
-<section class="byline" aria-label="À propos de cette page">
-      <div>
-        <p class="byline-meta">Par <span class="byline-seg"><a href="/fr/about">ToolWools</a>&nbsp;·</span> Suivi des mises à jour GTA 6&nbsp;· Source et date pour chaque chiffre</p>
-        <p class="byline-note">Chaque chiffre ci-dessous porte sa source et sa date.</p>
       </div>
-      <p class="byline-dates">Publié <time datetime="2026-11-23">23 nov. 2026</time>&nbsp;· Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time></p>
+      <div class="page-eyebrow"><span>Historique du préchargement · Calendrier des mises à jour</span></div>
+      <h1 id="page-title">Historique du préchargement et calendrier des mises à jour de GTA 6</h1>
+      <p class="page-subtitle">Le préchargement de lancement de GTA 6 a eu lieu du 10 au 19 nov. 2026 et il est terminé. Deux mises à jour du titre sont sorties avant le lancement, et le premier correctif post-lancement est arrivé le 23 nov. 2026. Cette page est le relevé, et la liste de suivi du prochain téléchargement daté.</p>
+      <p class="hero-meta"><span>Préchargement 10–19 nov. 2026 · terminé</span><span>3 mises à jour du titre enregistrées</span><span>Dernière vérification 23 nov. 2026</span><span>Par <a href="/fr/about">ToolWools</a></span><span>Suivi des mises à jour GTA 6</span><span>Source et date pour chaque chiffre</span><span>Chaque chiffre ci-dessous porte sa source et sa date.</span><span>Publié <time datetime="2026-11-23">23 nov. 2026</time></span><span>Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time></span></p>
     </section>
+
 <div class="sr-only" data-live-region aria-live="polite">Le préchargement de lancement de GTA 6 a eu lieu du 10 au 19 nov. 2026 et il est terminé. Deux mises à jour du titre sont sorties avant le lancement ; le premier correctif post-lancement, 01.002.002, est arrivé le 23 nov. 2026 avec les premières notes de correctif officielles. Aucun DLC, mode en ligne ou version PC n'a été annoncé.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Suivi du préchargement · En bref</span></p>
-        <p class="tldr-text"><span data-tldr-text>Le préchargement de lancement de GTA 6 a eu lieu du 10 au 19 nov. 2026 et il est terminé. Deux mises à jour du titre sont sorties avant le lancement (1.002.000 le 13 nov., 1.002.001 le 16 nov.) ; le premier correctif post-lancement, 01.002.002, est arrivé le 23 nov. 2026 avec les premières notes de correctif officielles. Aucun DLC, mode en ligne ou version PC n'a été annoncé.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Préchargement terminé · 3 mises à jour enregistrées · Aucun DLC annoncé</p>
-    </section>
+
     <section class="hub-note" aria-labelledby="status">
-      <h2 id="status" style="font-size:0.875rem;font-weight:700">Statut : le préchargement de lancement est terminé</h2>
-      <p style="margin-top:0.5rem">GTA 6 est sorti le 19 nov. 2026. Il n'y a pas de préchargement en cours. Cette page est le relevé de ce qui s'est passé, et la liste de suivi du prochain téléchargement daté.</p>
-      <p style="margin-top:0.75rem">Premier correctif post-lancement : 01.002.002, 23 nov. 2026 — la première mise à jour avec des notes de correctif officielles. Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time>.</p>
-      <p style="margin-top:0.75rem"><a href="#schedule">Voir le calendrier à venir →</a></p>
+      <h2 id="status">Statut : le préchargement de lancement est terminé</h2>
+      <p>GTA 6 est sorti le 19 nov. 2026. Il n'y a pas de préchargement en cours. Cette page est le relevé de ce qui s'est passé, et la liste de suivi du prochain téléchargement daté.</p>
+      <p>Premier correctif post-lancement : 01.002.002, 23 nov. 2026, la première mise à jour avec des notes de correctif officielles. Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time>.</p>
+      <p><a href="#schedule">Voir le calendrier à venir →</a></p>
     </section>
 <section aria-labelledby="data-classes">
-      <h2 id="data-classes">Ce que cette page est — et ce qu'elle n'est pas</h2>
+      <h2 id="data-classes">Ce que cette page est, et ce qu'elle n'est pas</h2>
       <p class="section-dek">Un relevé et une liste de suivi, pas un flux. Chaque chiffre de cette page appartient à exactement une des trois classes de données, et les trois ne sont jamais mélangées dans un même tableau.</p>
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="class-verified">
           <h3 id="class-verified">Vérifié</h3>
-          <p>Déclarations du Newswire de Rockstar et relevé de sortie du jeu lui-même — toujours avec la source et la date à côté du chiffre.</p>
+          <p>Déclarations du Newswire de Rockstar et relevé de sortie du jeu lui-même, toujours avec la source et la date à côté du chiffre.</p>
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="class-reported">
-          <h3 id="class-reported">Signalé — non vérifié</h3>
+          <h3 id="class-reported">Signalé, non vérifié</h3>
           <p>Reportages des guides et du déploiement (tailles, vagues de déploiement), chacun avec sa source et sa date. La répétition par les agrégateurs n'est pas une confirmation indépendante.</p>
         </article>
       </li><li>
@@ -332,28 +338,28 @@
         <tbody>
         <tr><th scope="row">PlayStation 5 / PS5 Pro</th><td>Minuit heure locale, mar. 10 nov. 2026 (la propre minuit de chaque fuseau horaire)</td><td class="mono">Jusqu'à 212 Go</td><td>Précommandes numériques (Standard ou Ultimate)</td></tr>
         <tr><th scope="row">Xbox Series X|S</th><td>Un seul déblocage mondial : 12:00 AM GMT, mar. 10 nov. 2026 (lun. 9 nov. 7:00 PM ET / 4:00 PM PT ; 1:00 AM CET ; 9:00 AM JST ; 11:00 AM AEDT)</td><td class="mono">Jusqu'à 212 Go</td><td>Précommandes numériques (Standard ou Ultimate)</td></tr>
-        <tr><th scope="row">Code en boîte (physique)</th><td>Dès jeu. 12 nov. 2026 — le code dans la boîte débloque le préchargement</td><td class="mono">Jusqu'à 212 Go</td><td>Acheteurs de la boîte en magasin</td></tr>
-        <tr><th scope="row">Lancement (déblocage)</th><td>Jeu. 19 nov. 2026, minuit heure locale dans chaque région — premier déblocage en Nouvelle-Zélande, 11:00 UTC le 18 nov.</td><td class="mono">—</td><td>Tous ceux qui ont préchargé ; le jeu est resté verrouillé jusqu'au lancement</td></tr>
+        <tr><th scope="row">Code en boîte (physique)</th><td>Dès jeu. 12 nov. 2026, le code dans la boîte débloque le préchargement</td><td class="mono">Jusqu'à 212 Go</td><td>Acheteurs de la boîte en magasin</td></tr>
+        <tr><th scope="row">Lancement (déblocage)</th><td>Jeu. 19 nov. 2026, minuit heure locale dans chaque région, premier déblocage en Nouvelle-Zélande, 11:00 UTC le 18 nov.</td><td class="mono">, </td><td>Tous ceux qui ont préchargé ; le jeu est resté verrouillé jusqu'au lancement</td></tr>
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Sources : Newswire de Rockstar, « Le préchargement de Grand Theft Auto VI commence le 10 novembre », 3 nov. 2026 (PS5 minuit heure locale ; Xbox 12:00 AM GMT ; code en boîte dès le 12 nov. ; jusqu'à 212 Go) ; Rockstar Support, horaires de sortie (minuit heure locale le 19 nov. dans toutes les régions ; premier déblocage en Nouvelle-Zélande à 11:00 UTC le 18 nov.). La fiche boutique américaine montre un seul déblocage à minuit heure de l'Est ; la règle de Rockstar est minuit heure locale.</p>
+      <p class="field-hint">Sources : Newswire de Rockstar, « Le préchargement de Grand Theft Auto VI commence le 10 novembre », 3 nov. 2026 (PS5 minuit heure locale ; Xbox 12:00 AM GMT ; code en boîte dès le 12 nov. ; jusqu'à 212 Go) ; Rockstar Support, horaires de sortie (minuit heure locale le 19 nov. dans toutes les régions ; premier déblocage en Nouvelle-Zélande à 11:00 UTC le 18 nov.). La fiche boutique américaine montre un seul déblocage à minuit heure de l'Est ; la règle de Rockstar est minuit heure locale.</p>
     </section>
 <section aria-labelledby="title-updates">
       <h2 id="title-updates">Mises à jour du titre jusqu'ici : trois enregistrées</h2>
-      <p class="section-dek">Chaque mise à jour du titre de GTA 6 avec sa date, sa taille par console et le statut de ses notes de correctif. Aucune mise à jour pré-lancement n'est un « patch du premier jour » — Rockstar n'a jamais appelé aucune ainsi, et aucun correctif n'est sorti le jour du lancement (19 nov.).</p>
+      <p class="section-dek">Chaque mise à jour du titre de GTA 6 avec sa date, sa taille par console et le statut de ses notes de correctif. Aucune mise à jour pré-lancement n'est un « patch du premier jour », Rockstar n'a jamais appelé aucune ainsi, et aucun correctif n'est sorti le jour du lancement (19 nov.).</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Mises à jour du titre de GTA 6, tableau défilant">
       <table class="data-table" id="updates-table">
         <caption class="sr-only">Mises à jour du titre de GTA 6 : version, date, taille sur PS5 et Xbox, et statut des notes de correctif.</caption>
         <thead><tr><th scope="col">Version</th><th scope="col">Sortie</th><th scope="col">Taille PS5</th><th scope="col">Taille Xbox</th><th scope="col">Notes de correctif</th></tr></thead>
         <tbody>
-        <tr><th scope="row">1.002.000</th><td><time datetime="2026-11-13">13 nov. 2026</time></td><td class="mono">~1,07 Go</td><td class="mono">~2,18 Go (KeenGamer) / ~1,07 Go (Beebom) — contesté</td><td>Aucune publiée par Rockstar</td></tr>
+        <tr><th scope="row">1.002.000</th><td><time datetime="2026-11-13">13 nov. 2026</time></td><td class="mono">~1,07 Go</td><td class="mono">~2,18 Go (KeenGamer) / ~1,07 Go (Beebom), contesté</td><td>Aucune publiée par Rockstar</td></tr>
         <tr><th scope="row">1.002.001</th><td><time datetime="2026-11-16">16 nov. 2026</time></td><td class="mono">602,5 Mo</td><td class="mono">~1,59 Go</td><td>Aucune publiée par Rockstar</td></tr>
-        <tr><th scope="row">01.002.002</th><td><time datetime="2026-11-23">23 nov. 2026</time></td><td class="mono">~603,8 Mo</td><td class="mono">~1,6 Go</td><td>Publiées par Rockstar — premières notes officielles pour une mise à jour GTA VI (7 correctifs ; voir ci-dessous)</td></tr>
+        <tr><th scope="row">01.002.002</th><td><time datetime="2026-11-23">23 nov. 2026</time></td><td class="mono">~603,8 Mo</td><td class="mono">~1,6 Go</td><td>Publiées par Rockstar, premières notes officielles pour une mise à jour GTA VI (7 correctifs ; voir ci-dessous)</td></tr>
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Déploiement : 1.002.001 sur PS5 en trois vagues (33 % à 10:00 UTC le 16 nov., 66 % à 22:00 UTC le 16 nov., tout le monde vers 10:00 UTC le 17 nov.) ; Xbox d'un coup. 01.002.002 sur PS5 en trois vagues sur environ 6 heures (tous les utilisateurs vers 16:15 UTC) ; Xbox d'un coup. Sources : gta6box et hudwire (lignes pré-lancement) ; Rockstar Support via VGC, Dexerto et Insider Gaming (notes et tailles de 01.002.002) ; PlayStation Game Size via hudwire (vagues de 01.002.002).</p>
+      <p class="field-hint">Déploiement : 1.002.001 sur PS5 en trois vagues (33 % à 10:00 UTC le 16 nov., 66 % à 22:00 UTC le 16 nov., tout le monde vers 10:00 UTC le 17 nov.) ; Xbox d'un coup. 01.002.002 sur PS5 en trois vagues sur environ 6 heures (tous les utilisateurs vers 16:15 UTC) ; Xbox d'un coup. Sources : gta6box et hudwire (lignes pré-lancement) ; Rockstar Support via VGC, Dexerto et Insider Gaming (notes et tailles de 01.002.002) ; PlayStation Game Size via hudwire (vagues de 01.002.002).</p>
       <h3>Ce que 01.002.002 corrige (notes officielles, Rockstar Support, 23 nov. 2026)</h3>
       <ul>
         <li>Correction de plusieurs problèmes qui faisaient planter le jeu.</li>
@@ -364,48 +370,48 @@
         <li>Correction d'un problème qui faisait que le joueur ne pouvait pas utiliser la barre de soulevé de terre à la salle de sport.</li>
         <li>Correction d'un problème qui faisait que les partenaires ne remettaient pas les sacs pour que les joueurs puissent les vendre aux receleurs.</li>
       </ul>
-      <p class="field-hint">Les notes ne mentionnent ni le glitch d'argent infini ni l'erreur de plantage PS5 CE-108255-1 — leur silence ne confirme pas que l'un ou l'autre est corrigé. Le contenu de 1.002.000 et 1.002.001 reste inconnu : Rockstar n'a publié aucune note pour elles, et les affirmations tirées du datamining sur ce qu'elles ont changé ne sont pas vérifiées.</p>
+      <p class="field-hint">Les notes ne mentionnent ni le glitch d'argent infini ni l'erreur de plantage PS5 CE-108255-1, leur silence ne confirme pas que l'un ou l'autre est corrigé. Le contenu de 1.002.000 et 1.002.001 reste inconnu : Rockstar n'a publié aucune note pour elles, et les affirmations tirées du datamining sur ce qu'elles ont changé ne sont pas vérifiées.</p>
     </section>
 <section aria-labelledby="schedule-heading" id="schedule">
-      <h2 id="schedule-heading">Correctifs et DLC à venir — le calendrier</h2>
+      <h2 id="schedule-heading">Correctifs et DLC à venir, le calendrier</h2>
       <p class="section-dek">Rien d'annoncé. Cette section est mise à jour le jour où Rockstar en annonce un.</p>
       <div data-schedule-list>
       <p><strong>Rien d'annoncé.</strong> Rockstar n'a annoncé aucun correctif, mise à jour du titre, DLC d'histoire, extension, mode en ligne ou version PC, ni aucune date pour l'un d'eux. L'annonce paraîtra d'abord sur le Newswire de Rockstar, et cette section est mise à jour le jour où elle le fait. N'attendez pas de date ici tant que Rockstar n'en donne pas une.</p>
-      <p><strong>Daté mais pas un téléchargement :</strong> « Grand Theft Auto VI Original Score by Justice », 11 déc. 2026 — un album de musique (trente morceaux, streaming / CD / vinyle), pas un DLC, pas un correctif, pas un téléchargement. Annoncé sur le Newswire de Rockstar, 29 oct. 2026.</p>
-      <p class="field-hint">Quand Rockstar annonce un élément daté, cette section gagne une ligne avec son nom, sa date, sa taille par console et sa source — et un rappel dans l'outil calendrier. D'ici là, un calendrier vide avec une date de « dernière vérification » actuelle est l'état honnête. Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time>.</p>
+      <p><strong>Daté mais pas un téléchargement :</strong> « Grand Theft Auto VI Original Score by Justice », 11 déc. 2026, un album de musique (trente morceaux, streaming / CD / vinyle), pas un DLC, pas un correctif, pas un téléchargement. Annoncé sur le Newswire de Rockstar, 29 oct. 2026.</p>
+      <p class="field-hint">Quand Rockstar annonce un élément daté, cette section gagne une ligne avec son nom, sa date, sa taille par console et sa source, et un rappel dans l'outil calendrier. D'ici là, un calendrier vide avec une date de « dernière vérification » actuelle est l'état honnête. Dernière vérification <time datetime="2026-11-23" data-last-checked>23 novembre 2026</time>.</p>
       </div>
     </section>
 <section aria-labelledby="plan-download">
       <h2 id="plan-download">Planifiez votre prochain téléchargement</h2>
-      <p class="section-dek">Combien de temps prend chaque mise à jour à télécharger — le calculateur fait le calcul, cette page fournit les tailles.</p>
-      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=1.1&amp;eff=80"><h3>Téléchargement 1.002.000 : 212 Go + 1,1 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 13 nov. (PS5 ~1,07 Go ; taille Xbox contestée, ~2,18 Go ou ~1,07 Go). La mise à jour seule fait environ 1,1 Go.</p><span class="open-link">Ouvrir →</span></a></li><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=0.6&amp;eff=80"><h3>Téléchargement 1.002.001 : 212 Go + 0,6 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 16 nov. (PS5 602,5 Mo ; Xbox ~1,59 Go). La mise à jour seule fait environ 0,6 Go.</p><span class="open-link">Ouvrir →</span></a></li><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=0.6&amp;eff=80"><h3>Téléchargement 01.002.002 : 212 Go + 0,6 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 23 nov. (PS5 ~603,8 Mo ; Xbox ~1,6 Go). La mise à jour seule fait environ 0,6 Go.</p><span class="open-link">Ouvrir →</span></a></li></ul>
-      <p class="field-hint" style="margin-top:0.75rem">Ces liens ouvrent le calculateur de temps de téléchargement avec l'installation complète de 212 Go plus la mise à jour, parce que la plus petite taille de base du calculateur est de 20 Go — il ne peut pas prendre une taille de correctif seul. La taille de la mise à jour seule est indiquée sur chaque carte. Pour planifier l'espace, voir le <a href="/fr/tools/storage-planner">planificateur de stockage</a> ; pour savoir quoi acheter maintenant, voir le <a href="/fr/tools/pre-order-tracker">suivi de précommande</a> ; pour les jalons de lancement, voir le <a href="/fr/tools/gta-6-tracker">suivi de lancement</a>.</p>
+      <p class="section-dek">Combien de temps prend chaque mise à jour à télécharger, le calculateur fait le calcul, cette page fournit les tailles.</p>
+      <ul class="guide-cards"><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=1.1&amp;eff=80"><h3>Téléchargement 1.002.000 : 212 Go + 1,1 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 13 nov. (PS5 ~1,07 Go ; taille Xbox contestée, ~2,18 Go ou ~1,07 Go). La mise à jour seule fait environ 1,1 Go.</p><span class="open-link">Ouvrir →</span></a></li><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=0.6&amp;eff=80"><h3>Téléchargement 1.002.001 : 212 Go + 0,6 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 16 nov. (PS5 602,5 Mo ; Xbox ~1,59 Go). La mise à jour seule fait environ 0,6 Go.</p><span class="open-link">Ouvrir →</span></a></li><li><a class="guide-card" href="/fr/tools/download-time?mbps=100&amp;gb=212&amp;patch=0.6&amp;eff=80"><h3>Téléchargement 01.002.002 : 212 Go + 0,6 Go à 100 Mbps</h3><p>Nouveau téléchargement complet plus la mise à jour du 23 nov. (PS5 ~603,8 Mo ; Xbox ~1,6 Go). La mise à jour seule fait environ 0,6 Go.</p><span class="open-link">Ouvrir →</span></a></li></ul>
+      <p class="field-hint">Ces liens ouvrent le calculateur de temps de téléchargement avec l'installation complète de 212 Go plus la mise à jour, parce que la plus petite taille de base du calculateur est de 20 Go, il ne peut pas prendre une taille de correctif seul. La taille de la mise à jour seule est indiquée sur chaque carte. Pour planifier l'espace, voir le <a href="/fr/tools/storage-planner">planificateur de stockage</a> ; pour savoir quoi acheter maintenant, voir le <a href="/fr/tools/pre-order-tracker">suivi de précommande</a> ; pour les jalons de lancement, voir le <a href="/fr/tools/gta-6-tracker">suivi de lancement</a>.</p>
     </section>
 <section aria-labelledby="related-content">
       <h2 id="related-content">Plus d'outils pour les téléchargements GTA 6</h2>
       <h3 class="related-sub">Outils associés</h3>
-      <ul class="related-tools-grid"><li><a href="/fr/tools/gta-6-tracker" class="tool-card" data-accent="purple" aria-label="Jalons du lancement de GTA 6 · GTA 6 est sorti le 19 nov. 2026. Les fenêtres de préchargement terminées, les jalons de lancement et l&#x27;instant du lancement dans votre fuseau horaire."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Jalons du lancement de GTA 6</h3><p>GTA 6 est sorti le 19 nov. 2026. Les fenêtres de préchargement terminées, les jalons de lancement et l'instant du lancement dans votre fuseau horaire.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/download-time" class="tool-card" data-accent="blue" aria-label="Calculateur de temps de téléchargement GTA 6 · Estimez combien de temps prendra l&#x27;installation du jeu de 212 Go (plus les patchs du premier jour de 1,7–3,8 Go) sur votre connexion."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Calculateur de temps de téléchargement GTA 6</h3><p>Estimez combien de temps prendra l'installation du jeu de 212 Go (plus les patchs du premier jour de 1,7–3,8 Go) sur votre connexion.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="Rappel de la date de sortie de GTA 6 · Ajoutez en un clic des rappels GTA 6 à votre calendrier Google, Apple ou Outlook. Le lancement est passé — c&#x27;est l&#x27;historique du lancement, pas un rappel de correctif."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Rappel de la date de sortie de GTA 6</h3><p>Ajoutez en un clic des rappels GTA 6 à votre calendrier Google, Apple ou Outlook. Le lancement est passé — c'est l'historique du lancement, pas un rappel de correctif.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/fr/tools/gta-6-tracker" class="tool-card" data-accent="purple">><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Jalons du lancement de GTA 6</h3><p>GTA 6 est sorti le 19 nov. 2026. Les fenêtres de préchargement terminées, les jalons de lancement et l'instant du lancement dans votre fuseau horaire.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/download-time" class="tool-card" data-accent="blue">><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Calculateur de temps de téléchargement GTA 6</h3><p>Estimez combien de temps prendra l'installation du jeu de 212 Go (plus les patchs du premier jour de 1,7–3,8 Go) sur votre connexion.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/fr/tools/add-to-calendar" class="tool-card" data-accent="blue">><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Rappel de la date de sortie de GTA 6</h3><p>Ajoutez en un clic des rappels GTA 6 à votre calendrier Google, Apple ou Outlook. Le lancement est passé, c'est l'historique du lancement, pas un rappel de correctif.</p><span class="link-cta">Ouvrir l'outil <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Questions sur le préchargement et les mises à jour de GTA 6</h2>
+      <header>
+        <h2 id="faq">Questions sur le préchargement et les mises à jour de GTA 6</h2>
         <p class="section-dek">Le préchargement qui a eu lieu, les mises à jour sorties, et la suite.</p>
       </header>
       <ul class="faq-list" role="list"><li><details class="faq-item" id="faq-q-1">
         <summary aria-controls="faq-a-1"><h3>Y a-t-il un préchargement GTA 6 en ce moment ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-1" class="faq-answer" role="region"><p>Non. Le préchargement de lancement a eu lieu du 10 au 19 nov. 2026 et il est terminé. GTA 6 est sorti le 19 nov. 2026 ; les nouveaux acheteurs téléchargent l'installation complète de 212 Go à l'achat. Il n'y a pas de prochain préchargement à l'horizon annoncé — le prochain préchargement n'existerait que si Rockstar annonçait une version PC, ce qu'il n'a pas fait.</p></div>
+        <div id="faq-a-1" class="faq-answer" role="region"><p>Non. Le préchargement de lancement a eu lieu du 10 au 19 nov. 2026 et il est terminé. GTA 6 est sorti le 19 nov. 2026 ; les nouveaux acheteurs téléchargent l'installation complète de 212 Go à l'achat. Il n'y a pas de prochain préchargement à l'horizon annoncé, le prochain préchargement n'existerait que si Rockstar annonçait une version PC, ce qu'il n'a pas fait.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-2">
         <summary aria-controls="faq-a-2"><h3>Quelle était la date du préchargement de GTA 6 ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div id="faq-a-2" class="faq-answer" role="region"><p>PlayStation 5 : minuit heure locale, mar. 10 nov. 2026. Xbox Series X|S : un seul déblocage mondial à 12:00 AM GMT, mar. 10 nov. 2026. Code en boîte : dès jeu. 12 nov. 2026. L'installation faisait jusqu'à 212 Go, pour les précommandes numériques (Standard ou Ultimate).</p></div>
       </details></li><li><details class="faq-item" id="faq-q-3">
         <summary aria-controls="faq-a-3"><h3>Quelle est la dernière mise à jour de GTA 6 ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-3" class="faq-answer" role="region"><p>01.002.002, sortie le 23 nov. 2026 — le premier correctif post-lancement (PS5 ~603,8 Mo, Xbox ~1,6 Go), et la première mise à jour avec des notes de correctif officielles. Avant elle : 1.002.001 (16 nov.) et 1.002.000 (13 nov.), toutes deux pré-lancement, toutes deux sans notes. Dernière vérification le 23 nov. 2026.</p></div>
+        <div id="faq-a-3" class="faq-answer" role="region"><p>01.002.002, sortie le 23 nov. 2026, le premier correctif post-lancement (PS5 ~603,8 Mo, Xbox ~1,6 Go), et la première mise à jour avec des notes de correctif officielles. Avant elle : 1.002.001 (16 nov.) et 1.002.000 (13 nov.), toutes deux pré-lancement, toutes deux sans notes. Dernière vérification le 23 nov. 2026.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-4">
         <summary aria-controls="faq-a-4"><h3>Y a-t-il des notes de correctif pour GTA 6 ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-4" class="faq-answer" role="region"><p>Oui — pour 01.002.002 seulement. Rockstar a publié des notes officielles pour la mise à jour du 23 nov. 2026 (corrections de plantages, météo, sauvegarde automatique, appels téléphoniques, niveau de recherche, barre de soulevé de terre à la salle de sport, remise des sacs aux receleurs). Les deux mises à jour pré-lancement n'ont pas de notes, et leur contenu reste inconnu.</p></div>
+        <div id="faq-a-4" class="faq-answer" role="region"><p>Oui, pour 01.002.002 seulement. Rockstar a publié des notes officielles pour la mise à jour du 23 nov. 2026 (corrections de plantages, météo, sauvegarde automatique, appels téléphoniques, niveau de recherche, barre de soulevé de terre à la salle de sport, remise des sacs aux receleurs). Les deux mises à jour pré-lancement n'ont pas de notes, et leur contenu reste inconnu.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-5">
         <summary aria-controls="faq-a-5"><h3>Y a-t-il du DLC pour GTA 6 ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-5" class="faq-answer" role="region"><p>Non. Rockstar n'a annoncé aucun DLC d'histoire, extension, mode en ligne ou version PC, ni aucune date pour l'un d'eux. Le seul élément post-lancement daté est un album de musique (Original Score by Justice, 11 déc. 2026) — pas du contenu de jeu. Cette page est mise à jour le jour où Rockstar en annonce un.</p></div>
+        <div id="faq-a-5" class="faq-answer" role="region"><p>Non. Rockstar n'a annoncé aucun DLC d'histoire, extension, mode en ligne ou version PC, ni aucune date pour l'un d'eux. Le seul élément post-lancement daté est un album de musique (Original Score by Justice, 11 déc. 2026), pas du contenu de jeu. Cette page est mise à jour le jour où Rockstar en annonce un.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-6">
         <summary aria-controls="faq-a-6"><h3>Quand sort la prochaine mise à jour de GTA 6 ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div id="faq-a-6" class="faq-answer" role="region"><p>Inconnu. Aucune date n'a été annoncée. Cette page est la liste de suivi : la section calendrier ci-dessus reste vide, avec une date de « dernière vérification » actuelle, jusqu'à ce que Rockstar annonce un correctif ou un DLC daté.</p></div>
@@ -414,7 +420,7 @@
         <div id="faq-a-7" class="faq-answer" role="region"><p>L'installation de base fait jusqu'à 212 Go, plus les trois mises à jour du titre jusqu'ici (environ 1,07 Go + 602,5 Mo + 603,8 Mo sur PS5). Le calculateur de temps de téléchargement calcule combien de temps cela prend sur votre connexion ; le planificateur de stockage calcule l'espace.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-8">
         <summary aria-controls="faq-a-8"><h3>Puis-je être averti de la prochaine mise à jour ?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-8" class="faq-answer" role="region"><p>Pas encore. Aucun rappel de correctif ou de DLC n'existe — l'outil calendrier ne contient que le rappel de lancement. Le jour où Rockstar annonce un correctif ou un DLC daté, son rappel est intégré à l'outil calendrier, et cette page gagne sa ligne. La newsletter annonce les lancements d'outils.</p></div>
+        <div id="faq-a-8" class="faq-answer" role="region"><p>Pas encore. Aucun rappel de correctif ou de DLC n'existe, l'outil calendrier ne contient que le rappel de lancement. Le jour où Rockstar annonce un correctif ou un DLC daté, son rappel est intégré à l'outil calendrier, et cette page gagne sa ligne. La newsletter annonce les lancements d'outils.</p></div>
       </details></li></ul>
     </section>
 <section aria-labelledby="sources">
@@ -432,7 +438,7 @@
         <a href="https://www.dexerto.com/wikis/gta-6/update-patch-notes/" target="_blank" rel="noopener noreferrer">Notes de correctif de la mise à jour GTA 6 du 23 novembre</a>
         <span class="src-meta">Dexerto · 23 nov. 2026 · Notes de correctif 01.002.002 telles que partagées par Rockstar ; premières notes de correctif post-lancement pour GTA 6.</span>
       </li><li>
-        <a href="https://insider-gaming.com/gta-6-update-01-002-002-all-changes-download-size/" target="_blank" rel="noopener noreferrer">Mise à jour GTA 6 01.002.002 — Notes de correctif et taille de téléchargement</a>
+        <a href="https://insider-gaming.com/gta-6-update-01-002-002-all-changes-download-size/" target="_blank" rel="noopener noreferrer">Mise à jour GTA 6 01.002.002, Notes de correctif et taille de téléchargement</a>
         <span class="src-meta">Insider Gaming · 23 nov. 2026 · Tailles de 01.002.002 : PS5 603,8 Mo, Xbox 1,6 Go ; notes gracieuseté de Rockstar Support.</span>
       </li><li>
         <a href="https://www.gta6box.com/blog/gta-6-update/" target="_blank" rel="noopener noreferrer">Mise à jour GTA 6 : chaque correctif, chaque version et les notes de correctif</a>
@@ -450,36 +456,54 @@
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-11-23">23 nov. 2026</time>
-        <p>Première publication : le relevé du préchargement de lancement (PS5 à minuit heure locale le 10 nov., Xbox à 12:00 AM GMT le 10 nov., code en boîte dès le 12 nov., jusqu'à 212 Go) et le journal des mises à jour du titre — 1.002.000 (13 nov.), 1.002.001 (16 nov.) et le premier correctif post-lancement 01.002.002 (23 nov., avec les premières notes de correctif officielles). Calendrier à venir honnêtement vide (rien d'annoncé : aucun correctif, DLC, mode en ligne ou version PC). Ancre de lancement corrigée vers minuit heure locale glissant selon Rockstar Support ; l'heure 05:00 UTC n'est que la présentation de minuit heure de l'Est américaine. Corrections du même passage : jalons du suivi GTA 6 « GTA Online Integration Dec 2026 Expected » et « Day One Patch 19 Nov Complete » corrigés ; formulation du préchargement Xbox du suivi de précommande corrigée ; texte de la carte d'ajout au calendrier corrigé.</p>
+        <p>Première publication : le relevé du préchargement de lancement (PS5 à minuit heure locale le 10 nov., Xbox à 12:00 AM GMT le 10 nov., code en boîte dès le 12 nov., jusqu'à 212 Go) et le journal des mises à jour du titre, 1.002.000 (13 nov.), 1.002.001 (16 nov.) et le premier correctif post-lancement 01.002.002 (23 nov., avec les premières notes de correctif officielles). Calendrier à venir honnêtement vide (rien d'annoncé : aucun correctif, DLC, mode en ligne ou version PC). Ancre de lancement corrigée vers minuit heure locale glissant selon Rockstar Support ; l'heure 05:00 UTC n'est que la présentation de minuit heure de l'Est américaine. Corrections du même passage : jalons du suivi GTA 6 « GTA Online Integration Dec 2026 Expected » et « Day One Patch 19 Nov Complete » corrigés ; formulation du préchargement Xbox du suivi de précommande corrigée ; texte de la carte d'ajout au calendrier corrigé.</p>
       </li></ul>
     </section>
 <aside class="disclaimer" role="note" aria-label="Avertissement sur le relevé">
       <p class="eyebrow-muted">Avertissement sur le relevé</p>
-      <p>Chaque chiffre de cette page porte sa source et sa date. Les deux mises à jour pré-lancement n'ont pas de notes de correctif officielles et leur contenu est inconnu. La section calendrier est vide parce que Rockstar n'a rien annoncé — pas parce qu'une date a été omise. Dernière vérification le 23 novembre 2026.</p>
+      <p>Chaque chiffre de cette page porte sa source et sa date. Les deux mises à jour pré-lancement n'ont pas de notes de correctif officielles et leur contenu est inconnu. La section calendrier est vide parce que Rockstar n'a rien annoncé, pas parce qu'une date a été omise. Dernière vérification le 23 novembre 2026.</p>
     </aside>
-  </div>
 </article>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Restez dans la boucle</h2>
+          <p>Obtenez les dernières actualités, outils et guides GTA 6 dans votre boîte de réception.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Adresse e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">S'abonner</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/fr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 est disponible — 19 novembre 2026</span>
+        <span class="eyebrow-muted">GTA 6 est disponible, 19 novembre 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorer les outils →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/fr/" aria-label="ToolWools, accueil" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/fr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tous les outils GTA 6 au même endroit</span>
               </span>
             </span>
@@ -518,9 +542,9 @@
               <li><a href="/fr/contact">Contact</a></li>
               <li><a href="/fr/email-preferences">Préférences e-mail</a></li>
               <li><a href="/fr/sitemap">Plan du site</a></li>
+              <li><a href="/editorial-policy">Politique éditoriale</a></li>
               <li><a href="/fr/privacy">Politique de confidentialité</a></li>
               <li><a href="/fr/terms">Conditions d'utilisation</a></li>
-              <li><a href="/editorial-policy">Politique éditoriale</a></li>
               <li><a href="/fr/disclaimer">Avertissement</a></li>
             </ul>
           </div>
@@ -530,24 +554,18 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Tous droits réservés. Non affilié à Rockstar Games ou Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/fr/privacy">Confidentialité</a>
-          <a href="/fr/terms">Conditions</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Paramètres des cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/fr/privacy">Confidentialité</a><a href="/fr/terms">Conditions</a><a href="/fr/disclaimer">Avertissement</a><button type="button" data-consent-open>Paramètres des cookies</button></span>
           <span>Fait avec <span class="heart">♥</span> pour les fans de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentement aux statistiques">
-  <div class="consent-inner">
-    <p><strong>Statistiques, seulement avec votre accord.</strong> Nous utilisons Google Analytics agrégé pour voir quels outils sont utilisés. Les données saisies dans les outils ne quittent jamais votre appareil, aucun profil n'est créé et rien n'est vendu. Acceptez pour l'activer, ou refusez et naviguez sans. Vous pouvez changer d'avis à tout moment depuis les paramètres des cookies en pied de page.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Accepter les statistiques</button>
-      <button type="button" class="btn-outline" data-consent-decline>Refuser</button>
-      <a href="/fr/privacy">Politique de confidentialité</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentement aux statistiques" hidden>
+  <p>Nous utilisons Google Analytics agrégé pour améliorer le site. Aucun profil, rien n'est vendu. Accepter ou refuser ; le choix est enregistré dans ce navigateur.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Accepter les statistiques</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Refuser</button>
   </div>
 </div>
 </div>

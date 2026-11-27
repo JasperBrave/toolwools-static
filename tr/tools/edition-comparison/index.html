@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Sürüm Seçici">
     <meta name="twitter:description" content="Standart ve Ultimate karşılaştırması: her GTA 6 sürümünün ne eklediği, gerçek oyun tarzınıza göre puanlandı, artış hesabıyla.">
     <meta name="twitter:image" content="https://toolwools.com/og/edition-comparison.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tr/tools/edition-comparison">
 <link rel="alternate" href="https://toolwools.com/tools/edition-comparison" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/edition-comparison" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-edition-comparison-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/edition-comparison">İngilizce</a>
             <a href="/es/tools/edition-comparison">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,7 +136,11 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/edition-comparison" lang="en">EN</a><a href="/es/tools/edition-comparison" lang="es">ES</a><a href="/pt/tools/edition-comparison" lang="pt">PT</a><a href="/de/tools/edition-comparison" lang="de">DE</a><a href="/fr/tools/edition-comparison" lang="fr">FR</a><a href="/tr/tools/edition-comparison" aria-current="true">TR</a><a href="/ar/tools/edition-comparison" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -127,53 +148,29 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Sayfa yolu">
-        <a href="/tr/">Ana Sayfa</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tr/tools">Araçlar</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA 6 Sürüm Seçici</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg>
-        <span>Karşılaştırma</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Sürüm Seçici</h1>
-      <p class="page-subtitle">Standart veya Ultimate, her katmanın oyun tarzınıza gerçekten ne eklediğine göre puanlandı ve Standart'a göre artışın bunu hak edip etmediği.</p>
-      <p class="field-hint">Her sürüm tam hikâyeyi içerir · Artış, fiyat değil, Standart'a göre % olarak gösterilir · Güven, bonus başına etiketlenir</p>
-      <div class="tool-intro-callout"><p><strong>Düzeltme — 20 Kas 2026:</strong> GTA 6, 19 Kasım 2026'da PlayStation 5 ve Xbox Series X|S'te çıktı. Rockstar'ın doğruladığı seri yalnızca dijital Standard (79,99 $) ve Ultimate (99,99 $). Deluxe sürümü ve kutulu Koleksiyoncu Sürümü oyunu yok — Rockstar, oyun içermeyen 399,99 $'lık “Goodtime State, Vice City Collection” ürün kutusu satıyor. PC sürümü duyurulmadı.</p></div>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Sürüm modeli</dd></div>
-        <div><dt>Çalışma süresi</dt><dd>Anında, tarayıcıda</dd></div>
-        <div><dt>Platformlar</dt><dd>PS5, Xbox</dd></div>
-        <div><dt>Güncellendi</dt><dd><time datetime="2026-11-21">21 Kas 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Her GTA 6 sürümü tam hikâyeyi ve tam çevrimiçi modu içerir. Standart'ın üstünde hiçbir şey size hikâye satmaz. Yüksek katmanın sattığı şey bir başlangıç avantajıdır, para birimi, araç, mülk, kozmetik. Bu, sürümleri karşılaştırmanın tek akılcı yolunun, bu bonusları kişisel oyun niyetinize göre ağırlıklandırmak ve ardından onlar için ödediğiniz artışı kontrol etmek olduğu anlamına gelir.</p>
-          </div>
-<section class="byline" aria-label="Bu sayfa hakkında">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/about#people">Marcus Vela</a>&nbsp;·</span> Satın alma ve fiyatlandırma analisti&nbsp;· İnceleyen <a href="/about#people">Dana Reyes</a>, Editoryal standartlar</p>
-        <p class="byline-note">Model: <a href="/tr/methodology">GTA 6 sürüm puanlama modeli</a></p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2026-08-24">24 Ağu 2026</time>&nbsp;· Son inceleme <time datetime="2026-11-21">21 Kasım 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Sürüm Seçici</span>
+        </div>
+        <div class="page-eyebrow"><span>Karşılaştırma</span></div>
+        <h1 id="page-title">GTA 6 Sürüm Seçici</h1>
+        <p class="page-subtitle">Standart veya Ultimate, her katmanın oyun tarzınıza gerçekten ne eklediğine göre puanlandı ve Standart'a göre artışın bunu hak edip etmediği.</p>
+        <p class="field-hint">Her sürüm tam hikâyeyi içerir · Artış, fiyat değil, Standart'a göre % olarak gösterilir · Güven, bonus başına etiketlenir</p>
+        <p class="hero-meta">
+          <span>Motor: Sürüm modeli</span><span>Çalışma süresi: Anında, tarayıcıda</span><span>Platformlar: PS5, Xbox</span><span>Güncellendi: <time datetime="2026-11-21">21 Kas 2026</time></span><span>Yazan <a href="/about#people">Marcus Vela</a></span><span>Satın alma ve fiyatlandırma analisti</span><span>İnceleyen <a href="/about#people">Dana Reyes</a>, Editoryal standartlar</span><span>Model: <a href="/tr/methodology">GTA 6 sürüm puanlama modeli</a></span><span>Yayınlanma <time datetime="2026-08-24">24 Ağu 2026</time></span><span>Son inceleme <time datetime="2026-11-21">21 Kasım 2026</time></span>
+        </p>
+      </section>
+      <aside class="correction-note" role="note"><p><strong>Düzeltme, 20 Kas 2026:</strong> GTA 6, 19 Kasım 2026'da PlayStation 5 ve Xbox Series X|S'te çıktı. Rockstar'ın doğruladığı seri yalnızca dijital Standard (79,99 $) ve Ultimate (99,99 $). Deluxe sürümü ve kutulu Koleksiyoncu Sürümü oyunu yok, Rockstar, oyun içermeyen 399,99 $'lık “Goodtime State, Vice City Collection” ürün kutusu satıyor. PC sürümü duyurulmadı.</p></aside>
 <div class="sr-only" data-live-region aria-live="polite">En iyi değer: Ultimate Edition, 100 üzerinden 99, PlayStation 5 üzerinde bir hikâye ağırlıklı rahat çevrimiçi oyuncu için, Standard'a göre %30 tavanla.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Ultimate Edition · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>Ultimate Edition, PlayStation 5 üzerinde bir hikâye ağırlıklı rahat çevrimiçi oyuncu için %30 tavanla en iyi değerdir: 99/100, Standard'a göre %25 artış karşılığında 21.5 ağırlıklı puan ekler.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Ultimate Edition — 99/100 artış karşılığı değer</p>
-    </section>
 <section aria-labelledby="edition-answer-heading">
       <h2 id="edition-answer-heading" class="sr-only">Kısa yanıt</h2>
       <div id="edition-answer" data-speakable data-short-answer>
         <p class="eyebrow-muted">Kısa yanıt</p>
-        <p data-short-answer-text>Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir — oyun 19 Kasım 2026'da 05:00 UTC'de çıktı ve hiçbir kademe ekstra hikâye satmaz. PlayStation 5 üzerinde, Standard'a göre %30 tavanı olan bir hikâye ağırlıklı rahat çevrimiçi oyuncu için en iyi değer <strong>Ultimate Edition</strong>. Standard'a göre yaklaşık 21.5 puan ağırlıklı fayda katıyor, 25% artış karşılığında, harcadığın her %10 için yaklaşık 8.6 puan; bu, PlayStation 5 üzerinde 30% tavanın içinde mevcut kademeler arasında en iyi getiri.</p>
+        <p data-short-answer-text>Her GTA 6 sürümü tam hikâye modunu ve tam çevrimiçi modu içerir, oyun 19 Kasım 2026'da 05:00 UTC'de çıktı ve hiçbir kademe ekstra hikâye satmaz. PlayStation 5 üzerinde, Standard'a göre %30 tavanı olan bir hikâye ağırlıklı rahat çevrimiçi oyuncu için en iyi değer <strong>Ultimate Edition</strong>. Standard'a göre yaklaşık 21.5 puan ağırlıklı fayda katıyor, 25% artış karşılığında, harcadığın her %10 için yaklaşık 8.6 puan; bu, PlayStation 5 üzerinde 30% tavanın içinde mevcut kademeler arasında en iyi getiri.</p>
       </div>
     </section>
 
@@ -214,7 +211,7 @@
         </form>
         <div class="output-panel" aria-live="polite">
           <div class="output-panel-label eyebrow-muted" data-output-label>PlayStation 5'te sürümler</div>
-          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">En iyi değer · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">En büyük dijital paket: daha büyük para hibesi, ekstra mülk veya araç kilit açmaları ve kademe sunduğunda en erken erişim avantajları.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Sıralanmış sürümler</p><ul><li><strong>1. Ultimate Edition, 99/100</strong> , Standart'a göre +%25 · 21,5 ağırlıklı puan ekler (harcanan her %10 başına 8,6). Güven: Bildirilen / listelenen, tam ayrıntılı değil.</li><li><strong>2. Standard Edition, 84/100</strong> , Temel fiyat. Tam oyun. Güven: Rockstar tarafından doğrulandı.</li></ul></div><dl class="stat-grid"><div><dt>Değer puanı</dt><dd>99/100</dd></div><div><dt>Standart'a göre artış</dt><dd>+25%</dd></div><div><dt>Eklenen fayda</dt><dd>+21,5 puan</dd></div><div><dt>Tavanınız</dt><dd>30%</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=Hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%3A%20Ultimate%20S%C3%BCr%C3%BCm%20%2899%2F100%29.%20ToolWools%27ta%20GTA%206%20S%C3%BCr%C3%BCm%20Se%C3%A7ici.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=Ultimate%20S%C3%BCr%C3%BCm%20%E2%80%94%20hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
+          <div class="mt-8" data-output-panel><div class="verdict-body"><div><p class="verdict-kicker tone-ready">En iyi değer · 99/100</p><h3 class="verdict-title">Ultimate Edition</h3><p class="verdict-desc">En büyük dijital paket: daha büyük para hibesi, ekstra mülk veya araç kilit açmaları ve kademe sunduğunda en erken erişim avantajları.</p></div></div><div class="upgrade-box"><p class="eyebrow-muted">Sıralanmış sürümler</p><ul><li><strong>1. Ultimate Edition, 99/100</strong> , Standart'a göre +%25 · 21,5 ağırlıklı puan ekler (harcanan her %10 başına 8,6). Güven: Bildirilen / listelenen, tam ayrıntılı değil.</li><li><strong>2. Standard Edition, 84/100</strong> , Temel fiyat. Tam oyun. Güven: Rockstar tarafından doğrulandı.</li></ul></div><dl class="stat-grid"><div><dt>Değer puanı</dt><dd>99/100</dd></div><div><dt>Standart'a göre artış</dt><dd>+25%</dd></div><div><dt>Eklenen fayda</dt><dd>+21,5 puan</dd></div><div><dt>Tavanınız</dt><dd>30%</dd></div></dl><div class="share-row"><button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%3A%20Ultimate%20S%C3%BCr%C3%BCm%20%2899%2F100%29.%20ToolWools%27ta%20GTA%206%20S%C3%BCr%C3%BCm%20Se%C3%A7ici.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">X'te paylaş</a><a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20S%C3%BCr%C3%BCm%20%E2%80%94%20hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a></div></div>
         </div>
       </div>
     </section>
@@ -246,8 +243,8 @@
 
     <section class="tier-read" aria-labelledby="context-links">
       <h2 id="context-links">Bu sayfanın bilinçli olarak yanıtlamadığı iki soru</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/price-by-country">Her GTA 6 sürümünün yaşadığınız yerde ne kadara mal olduğu</a> , 44 pazarda bölgesel fiyatlandırma, vergi muamelesi ve sürüm farkları.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/pre-order-tracker">Nereye alınacağı</a> , kanala göre iptal koşulları, fiyat koruması, indirme zamanlaması ve bonus saklama.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/price-by-country">Her GTA 6 sürümünün yaşadığınız yerde ne kadara mal olduğu</a> , 44 pazarda bölgesel fiyatlandırma, vergi muamelesi ve sürüm farkları.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/tr/tools/pre-order-tracker">Nereye alınacağı</a> , kanala göre iptal koşulları, fiyat koruması, indirme zamanlaması ve bonus saklama.</span></li></ul>
     </section>
 
     <section aria-labelledby="for-agents">
@@ -269,15 +266,12 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Bağlantıyı kopyala</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=Hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%3A%20Ultimate%20S%C3%BCr%C3%BCm%20%2899%2F100%29.%20ToolWools%27ta%20GTA%206%20S%C3%BCr%C3%BCm%20Se%C3%A7ici.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">X'te paylaş</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=Ultimate%20S%C3%BCr%C3%BCm%20%E2%80%94%20hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%3A%20Ultimate%20S%C3%BCr%C3%BCm%20%2899%2F100%29.%20ToolWools%27ta%20GTA%206%20S%C3%BCr%C3%BCm%20Se%C3%A7ici.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">X'te paylaş</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Ultimate%20S%C3%BCr%C3%BCm%20%E2%80%94%20hik%C3%A2ye%20ve%20s%C4%B1radan%20%C3%A7evrimi%C3%A7i%20oyuncular%20i%C3%A7in%20en%20iyi%20GTA%206%20s%C3%BCr%C3%BCm%C3%BC%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fedition-comparison%3Fplatform%3Dps5%26profile%3Donline-casual%26uplift%3D30">Reddit</a>
       </div>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Varsayımlar</strong> <span>GTA 6, 19 Kasım 2026'da çıktı. Bu sayfa her sürümün ne eklediğini ve Standart'a göre yüzde olarak ne kadar ek maliyeti olduğunu karşılaştırır, asla para birimi rakamı değil, çünkü bölgesel fiyatlandırma ülkeye göre fiyat aracındadır. Bonus içerikleri doğrulandı, bildirildi veya emsal olarak etiketlenir; GTA V ve Red Dead Redemption 2 sürümlerinin nasıl yapıldığından alınan her şey gerçek değil emsal olarak işaretlenir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
-      <p class="updated-line">Güncellendi <time datetime="2026-11-21">21 Kasım 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Fazla ödemeden GTA 6 sürümleri nasıl karşılaştırılır</h2>
@@ -301,14 +295,16 @@ utilityDelta = utility(edition) − utility(standard)
 efficiency = clamp(utilityDelta ÷ (upliftPercent ÷ 12), 0, 1.3)
 coverage = prioritised categories present in tier ÷ prioritised categories chosen
 score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budgetPenalty) × 100</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Burada hiçbir sürüm fiyatı, para birimi rakamı veya perakendeci listesi okunmaz veya görüntülenmez. Artış, Standart (79,99 $) ve Ultimate (99,99 $) doğrulanmış fiyatlarından alınan Standart'a göre yüzdedir.</li><li>Rockstar'ın kalem kalem belirtmediği bonus içerikleri, uydurulmuş bir miktar yerine role göre puanlanır: önde başlama, kozmetik.</li><li>Para birimi dönüştürme, vergi muamelesi ve bölgesel fiyat farkları /tools/price-by-country ile yanıtlanır. İptal koşulları, indirme zamanlaması ve nereden sipariş verileceği /tools/pre-order-tracker ile yanıtlanır. Bu sayfa ikisini de asla tekrarlamaz.</li></ul>
+          <ul class="list-disc list-outside"><li>Burada hiçbir sürüm fiyatı, para birimi rakamı veya perakendeci listesi okunmaz veya görüntülenmez. Artış, Standart (79,99 $) ve Ultimate (99,99 $) doğrulanmış fiyatlarından alınan Standart'a göre yüzdedir.</li><li>Rockstar'ın kalem kalem belirtmediği bonus içerikleri, uydurulmuş bir miktar yerine role göre puanlanır: önde başlama, kozmetik.</li><li>Para birimi dönüştürme, vergi muamelesi ve bölgesel fiyat farkları /tools/price-by-country ile yanıtlanır. İptal koşulları, indirme zamanlaması ve nereden sipariş verileceği /tools/pre-order-tracker ile yanıtlanır. Bu sayfa ikisini de asla tekrarlamaz.</li></ul>
+    <div class="assumptions-block"><p><strong>Varsayımlar</strong> <span>GTA 6, 19 Kasım 2026'da çıktı. Bu sayfa her sürümün ne eklediğini ve Standart'a göre yüzde olarak ne kadar ek maliyeti olduğunu karşılaştırır, asla para birimi rakamı değil, çünkü bölgesel fiyatlandırma ülkeye göre fiyat aracındadır. Bonus içerikleri doğrulandı, bildirildi veya emsal olarak etiketlenir; GTA V ve Red Dead Redemption 2 sürümlerinin nasıl yapıldığından alınan her şey gerçek değil emsal olarak işaretlenir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+      <p class="updated-line">Güncellendi <time datetime="2026-11-21">21 Kasım 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 sürüm soruları, sade yanıtlandı</h2>
+      <header>
+        <h2 id="faq">GTA 6 sürüm soruları, sade yanıtlandı</h2>
         <p class="section-dek">Standart, Ultimate'a karşı, yükseltmeler ve ön sipariş bonusları.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item"><button id="faq-q-1" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-1"><span>Hangi GTA 6 sürümünü almalıyım?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-1" class="faq-answer" data-faq-answer hidden><p>Hikâyeyi ve çok azını oynuyorsanız Standart, tüm hikâyeyi ve tüm çevrimiçi modu içerir ve her yüksek katman yalnızca çevrimiçi başlangıç öğeleri ekler. Çıkışta doğrudan çevrimiçine giriyorsanız üst katman tasarruf edilen öğütmeyle kendini amorti edebilir ve yukarıdaki seçici bunu katlanacağınızı söylediğiniz artışa karşı nicelendirir.</p></div></li><li class="faq-item"><button id="faq-q-2" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-2"><span>Herhangi bir GTA 6 sürümü ek hikâye içeriği içerir mi?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-2" class="faq-answer" data-faq-answer hidden><p>Hayır. Bu, sayfadaki en önemli gerçektir: hikâye her sürümde aynıdır. Bonuslar çevrimiçi para birimi, araçlar, mülk ve kozmetiktir. Standart alarak kimse hikâye görevlerinden, karakterlerden veya sonlardan mahrum kalmaz.</p></div></li><li class="faq-item"><button id="faq-q-3" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-3"><span>GTA 6 Ultimate Sürüm ile ne alırsınız?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-3" class="faq-answer" data-faq-answer hidden><p>Rockstar'ın üst katmanları daha önce nasıl yapılandırdığına dayanarak, daha büyük bir oyun içi para birimi hibesi, ek mülk veya araç kilit açma, katmana özel kozmetik ve sunuluyorsa en erken erişim penceresini bekleyin. Rockstar bunları GTA 6 için kalem kalem açıklamadı, bu yüzden bu sayfa onları kaynak gösteremediği miktarları alıntılamak yerine role göre puanlar.</p></div></li><li class="faq-item"><button id="faq-q-4" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-4"><span>GTA 6 Collector's Edition olacak mı?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-4" class="faq-answer" data-faq-answer hidden><p>Hayır. Kutulu GTA 6 koleksiyoncu sürümü oyunu yok. Rockstar, oyun içermeyen 399,99 $'lık “Goodtime State, Vice City Collection” ürün kutusu satıyor. GTA V ve Red Dead Redemption 2'nin ikisi de basılı harita, sanat kitabı, steelbook ve sergileme parçalarıyla kutulu koleksiyoncu sürümleri gönderdi ve ikisi de çıkış öncesi tükenen sınırlı yalnızca konsol sürümlerdi.</p></div></li><li class="faq-item"><button id="faq-q-5" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-5"><span>Daha sonra Standart'tan daha yüksek bir sürüme yükseltebilir miyim?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-5" class="faq-answer" data-faq-answer hidden><p>Dijital katman yükseltmeleri normalde her iki konsolda da mağazada fiyat farkına satılır, bu yüzden şimdi Standart alıp sonra yükselmek toplamda genellikle aynı maliyettir. İstisna süre sınırlı her şeydir, çıkış bonus haftaları ve herhangi bir erken erişim penceresi, sonradan talep edilemez.</p></div></li><li class="faq-item"><button id="faq-q-6" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-6"><span>Ön sipariş bonusları sürüm bonuslarından farklı mı?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-6" class="faq-answer" data-faq-answer hidden><p>Evet ve sürekli karıştırılıyorlar. Ön sipariş bonusları ne zaman ve nereden sipariş verdiğinize bağlıdır ve genellikle küçüktür; sürüm bonusları hangi kademeyi satın aldığınıza bağlıdır ve lisansla birlikte gelir. Bu sayfa yalnızca sürüm bonuslarını puanlar, iptal koşulları ve indirme zamanlaması dahil nereden sipariş verileceği sorusu GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması tarafından ele alınır.</p></div></li><li class="faq-item"><button id="faq-q-7" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-7"><span>Özel kozmetikler gerçekten özel mi?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-7" class="faq-answer" data-faq-answer hidden><p>Münhasırlığı muhtemel ama kalıcı değil olarak değerlendirin. Önceki Rockstar oyunlarındaki bazı katmana özel öğeler daha sonra oyun içinde elde edilebilir hale geldi, bu yüzden kozmetikler burada, açıkça önceliklendirmediğiniz sürece para birimi veya mülkten daha düşük ağırlık taşır.</p></div></li><li class="faq-item"><button id="faq-q-8" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-8"><span>Bu sayfa neden fiyat göstermiyor?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-8" class="faq-answer" data-faq-answer hidden><p>Çünkü tek bir fiyat onu okuyan hemen herkes için yanlıştır. Sürümler her pazarda farklı tutarlara mal olur, farklı vergi muamelesiyle ve bu karşılaştırma ülkeye göre fiyat aracında düzgün yapılır. Burada artış Standart'a göre yüzdedir ve para biriminiz ne olursa olsun geçerlidir.</p></div></li><li class="faq-item"><button id="faq-q-9" class="faq-question" type="button" data-faq-button aria-expanded="false" aria-controls="faq-a-9"><span>Daha yüksek bir sürüm almak, daha sonra oyun içi para birimi almaktan daha iyi değer mi?</span><span class="faq-chevron" aria-hidden="true"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button><div id="faq-a-9" class="faq-answer" data-faq-answer hidden><p>Bir öğütücü için gerçek karşılaştırma budur ve yalnızca bu sayfadan karara bağlanamaz: GTA 6'nın oyun içi fiyatlarını ve para birimi paket oranlarını oyunun içinde kontrol edin. Para birimi yükseltmenizin tek nedeniyse Standart alın, bir hafta oynayın, sonra gerçek sayılarla karar verin.</p></div></li></ul>
@@ -322,7 +318,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
     <section aria-labelledby="related-content">
       <h2 id="related-content">Önce fiyatı hesaplayın, sonra nereden sipariş vereceğinizi</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/price-by-country" class="tool-card" data-accent="purple" aria-label="GTA 6 Ülkelere Göre Fiyat: 44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Ülkelere Göre Fiyat</h3><p>44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/pre-order-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması: İptal edilebilirlik, fiyat koruması, indirme zamanlaması, bonuslar ve yeniden satış açısından puanlanan üç satın alma kanalı, platformunuz ve bölgeniz için."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması</h3><p>İptal edilebilirlik, fiyat koruması, indirme zamanlaması, bonuslar ve yeniden satış açısından puanlanan üç satın alma kanalı, platformunuz ve bölgeniz için.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="GTA 6 Çıkış Tarihi Hatırlatıcısı: GTA 6 çıktı — yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>GTA 6 çıktı — yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi: Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/weapon-comparison" class="tool-card" data-accent="purple" aria-label="GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat: GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Silah Karşılaştırması — Puanlar, Şarjör ve Fiyat</h3><p>GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil — oyundaki 10 üzerinden dört puan — artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/vehicle-comparison" class="tool-card" data-accent="purple" aria-label="GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri: GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Araç Karşılaştırması — Puanlar, Kayıt Ücreti ve Satış Değeri</h3><p>GTA 6 araçlarını oyundaki 10 üzerinden beş puan — Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık — artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/server-status" class="tool-card" data-accent="purple" aria-label="GTA 6 Sunucu Durumu: Sunucular Çöktü mü?: GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Sunucu Durumu: Sunucular Çöktü mü?</h3><p>GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/tr/tools/price-by-country" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Ülkelere Göre Fiyat</h3><p>44 pazarda GTA 6 fiyatı, yerel para birimi ve USD, vergi ayrıştırılmış. Standart ve Ultimate sürüm merdiveni dahil.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/pre-order-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Nereden Alınır: Sürümler ve Kanallar Karşılaştırması</h3><p>İptal edilebilirlik, fiyat koruması, indirme zamanlaması, bonuslar ve yeniden satış açısından puanlanan üç satın alma kanalı, platformunuz ve bölgeniz için.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Çıkış Tarihi Hatırlatıcısı</h3><p>GTA 6 çıktı, yamalar, DLC ve etkinlikler için tek tıklamayla hatırlatma kurun.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/weapon-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Silah Karşılaştırması: Puanlar, Şarjör ve Fiyat</h3><p>GTA 6'nın 53 temel silahını Hasar, İsabet, Kullanım ve Menzil, oyundaki 10 üzerinden dört puan, artı şarjör boyutu, atış modu ve fiyat üzerinden karşılaştırın. Oyunda atış hızı istatistiği yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/vehicle-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Araç Karşılaştırması: Puanlar, Kayıt Ücreti ve Satış Değeri</h3><p>GTA 6 araçlarını oyundaki 10 üzerinden beş puan, Hız, Hızlanma, Asfalt Yol Tutuşu, Arazi Yol Tutuşu, Dayanıklılık, artı kayıt ücreti ve satış değeri üzerinden başa baş karşılaştırın. Henüz ölçülmüş bir azami hız yok; bu araç, oyunun gösterdiği rakamları gösteriyor. Son kontrol 24 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/server-status" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg><h3>GTA 6 Sunucu Durumu: Sunucular Çöktü mü?</h3><p>GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 24 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 
     <section aria-labelledby="sources">
@@ -335,7 +331,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.1</p>
         <time datetime="2026-11-17">17 Kas 2026</time>
-        <p>Statik sayfa olarak yeniden yapıldı. Ultimate artışı doğrulanan fiyatlardan +%25,0 olarak düzeltildi (99,99 $ / 79,99 $); Deluxe ve Koleksiyoncu katmanları kaldırıldı — doğrulanan seri Standart ve Ultimate, yalnızca dijital; güven etiketleri her bonusta gösteriliyor; paylaşım durumu URL sorgu parametrelerine taşındı.</p>
+        <p>Statik sayfa olarak yeniden yapıldı. Ultimate artışı doğrulanan fiyatlardan +%25,0 olarak düzeltildi (99,99 $ / 79,99 $); Deluxe ve Koleksiyoncu katmanları kaldırıldı, doğrulanan seri Standart ve Ultimate, yalnızca dijital; güven etiketleri her bonusta gösteriliyor; paylaşım durumu URL sorgu parametrelerine taşındı.</p>
       </li><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-08-24">24 Ağu 2026</time>
@@ -349,27 +345,45 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -408,10 +422,10 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-              <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -420,31 +434,29 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+
+  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
-  </div>
   <script src="/assets/js/tr/theme.js" defer></script>
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/newsletter.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
   <script type="module" src="/assets/js/tr/edition-comparison.js"></script>
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -491,7 +503,7 @@ score = clamp(0.30 + efficiency × 0.36 + coverage × 0.22, 0, 1) × (1 − budg
       },
       "datePublished": "2026-08-24",
       "dateModified": "2026-11-21",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GTA 6 Sunucu Durumu: Sunucular Çöktü mü? | ToolWools</title>
-<meta name="description" content="GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
+<meta name="description" content="GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
 <meta name="author" content="ToolWools">
 <meta property="og:title" content="GTA 6 Sunucu Durumu: Sunucular Çöktü mü? | ToolWools">
-<meta property="og:description" content="GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
+<meta property="og:description" content="GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolWools">
     <meta property="og:locale" content="tr_TR">
@@ -24,10 +24,10 @@
 <meta property="og:image:alt" content="GTA 6 Sunucu Durumu: Sunucular Çöktü mü? | ToolWools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GTA 6 Sunucu Durumu: Sunucular Çöktü mü? | ToolWools">
-<meta name="twitter:description" content="GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
+<meta name="twitter:description" content="GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.">
 <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/tr/tools/server-status">
 <link rel="alternate" href="https://toolwools.com/tools/server-status" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/server-status" hreflang="es">
@@ -41,11 +41,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-server-status-tr.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var s=null;try{s=localStorage.getItem('tw-theme')}catch(e){}var t=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,7 +100,8 @@
       "url": "https://toolwools.com/tr/tools/server-status",
       "applicationCategory": "GameApplication",
       "operatingSystem": "Web browser",
-      "description": "GTA 6'nın çökecek sunucusu yok — 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.",
+      "inLanguage": "tr",
+      "description": "GTA 6'nın çökecek sunucusu yok, 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Bağlı olduğu üç hizmeti kontrol edin: Rockstar Authentication, PlayStation Network ve Xbox ağı; 27 Kasım 2026'da el ile kontrol edildi, resmi sayfalar bağlantılı.",
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -97,7 +118,7 @@
                 "name": "GTA 6 çöktü mü?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Hayır — GTA 6'nın sunucusu yok, yani “çökemez”. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Oyun açılmıyorsa nedeni yukarıdaki üç hizmetten biridir: Rockstar Authentication, PlayStation Network veya Xbox ağı. Durumları el ile kontrol ediliyor ve her satır resmi sayfaya bağlanıyor."
+                        "text": "Hayır, GTA 6'nın sunucusu yok, yani “çökemez”. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Oyun açılmıyorsa nedeni yukarıdaki üç hizmetten biridir: Rockstar Authentication, PlayStation Network veya Xbox ağı. Durumları el ile kontrol ediliyor ve her satır resmi sayfaya bağlanıyor."
                 }
         },
         {
@@ -105,7 +126,7 @@
                 "name": "GTA 6'nın çevrimiçi sunucuları var mı?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Hayır. GTA 6, çevrimiçi modu olmayan tek oyunculu bir deneyim olarak çıktı ve Rockstar bir mod duyurmadı. Rockstar'ın kendi durum sayfasında GTA VI satırı yok. Gösterilecek bir GTA 6 sunucu durumu yok — yalnızca oyunun bağlı olduğu hizmetlerin durumu var."
+                        "text": "Hayır. GTA 6, çevrimiçi modu olmayan tek oyunculu bir deneyim olarak çıktı ve Rockstar bir mod duyurmadı. Rockstar'ın kendi durum sayfasında GTA VI satırı yok. Gösterilecek bir GTA 6 sunucu durumu yok, yalnızca oyunun bağlı olduğu hizmetlerin durumu var."
                 }
         },
         {
@@ -113,7 +134,7 @@
                 "name": "GTA 6 neden açılmıyor?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Genellikle bir lisans kontrolü ya da bir hizmet kesintisi, oyunun kendisi değil. Dijital kopya, açılırken lisansını PlayStation Network ya da Xbox ağıyla doğrular; o hizmet çökmüşse oyun açılmayabilir. Önce yukarıdaki üç durum satırına bakın, ardından konsolu yeniden başlatın ve lisansı kontrol edin. Kurulduktan sonra hikâye modunun kendisi çevrimdışı çalışır. Oyunun ilk açılışta Rockstar hesap girişi isteyip istemediği doğrulanmadı — Rockstar bu konuda bir şey söylemedi."
+                        "text": "Genellikle bir lisans kontrolü ya da bir hizmet kesintisi, oyunun kendisi değil. Dijital kopya, açılırken lisansını PlayStation Network ya da Xbox ağıyla doğrular; o hizmet çökmüşse oyun açılmayabilir. Önce yukarıdaki üç durum satırına bakın, ardından konsolu yeniden başlatın ve lisansı kontrol edin. Kurulduktan sonra hikâye modunun kendisi çevrimdışı çalışır. Oyunun ilk açılışta Rockstar hesap girişi isteyip istemediği doğrulanmadı, Rockstar bu konuda bir şey söylemedi."
                 }
         },
         {
@@ -121,7 +142,7 @@
                 "name": "PSN kesintisi bir GTA 6 kesintisi mi?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Hayır. Yukarıdaki zaman çizelgesindeki üç kesinti de PlayStation Network kesintisiydi — Gaming and Social bozuldu, giriş ve Mağaza sorunları yaşandı — ve oyuncuların giriş yapmasını ya da GTA 6'nın dijital kopyasını başlatmasını engelledi. Çökecek bir GTA 6 sunucusu yok, bu yüzden hiçbir kesinti “GTA 6 kesintisi” olamaz."
+                        "text": "Hayır. Yukarıdaki zaman çizelgesindeki üç kesinti de PlayStation Network kesintisiydi, Gaming and Social bozuldu, giriş ve Mağaza sorunları yaşandı, ve oyuncuların giriş yapmasını ya da GTA 6'nın dijital kopyasını başlatmasını engelledi. Çökecek bir GTA 6 sunucusu yok, bu yüzden hiçbir kesinti “GTA 6 kesintisi” olamaz."
                 }
         },
         {
@@ -129,7 +150,7 @@
                 "name": "Bu sayfa ne sıklıkla kontrol ediliyor?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "El ile. Üç resmi durum sayfası en son 27 Kasım 2026, 07:30 UTC'de kontrol edildi — bu damga her satırda var. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale — see official page” gösterir; böylece eski bir kontrol asla güncelmiş gibi gösterilmez. Yeni olaylar, hizmet sahibi doğruladığında zaman çizelgesine el ile eklenir."
+                        "text": "El ile. Üç resmi durum sayfası en son 27 Kasım 2026, 07:30 UTC'de kontrol edildi, bu damga her satırda var. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale, see official page” gösterir; böylece eski bir kontrol asla güncelmiş gibi gösterilmez. Yeni olaylar, hizmet sahibi doğruladığında zaman çizelgesine el ile eklenir."
                 }
         },
         {
@@ -137,7 +158,7 @@
                 "name": "Xbox satırı neden “check unavailable” diyordu?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Microsoft'un Xbox durum sayfasını 22 ve 24 Kasım 2026'da ilk elden kontrol etmemiz yalnızca bir yükleme ekranı döndürdü — sayfa JavaScript ile oluşturuluyor ve hizmet verisi okunamadı; bu yüzden satır, yeşil göstermek yerine “check unavailable — see official page” diyordu: okuyamadığımız bir durumu sağlıklıymış gibi gösteremeyiz. 26 Kasım 2026'da sayfayı canlı tarayıcıda doğruladık: “All services up and running” yazıyor, 11 hizmetin tamamı normal."
+                        "text": "Microsoft'un Xbox durum sayfasını 22 ve 24 Kasım 2026'da ilk elden kontrol etmemiz yalnızca bir yükleme ekranı döndürdü, sayfa JavaScript ile oluşturuluyor ve hizmet verisi okunamadı; bu yüzden satır, yeşil göstermek yerine “check unavailable, see official page” diyordu: okuyamadığımız bir durumu sağlıklıymış gibi gösteremeyiz. 26 Kasım 2026'da sayfayı canlı tarayıcıda doğruladık: “All services up and running” yazıyor, 11 hizmetin tamamı normal."
                 }
         },
         {
@@ -145,7 +166,7 @@
                 "name": "GTA 6 için Downdetector raporlarına güvenebilir miyim?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yalnızca kullanıcı raporu olarak, asla bir kesinti olarak değil. Downdetector'da bir Rockstar Games sayfası var, ama GTA 6 sayfası yok — GTA 6'nın raporlanacak sunucusu yok. Kullanıcı raporlarındaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil; Downdetector'ın şartları verisini yeniden yayımlamayı yasaklıyor, bu yüzden bu sayfa ona bağlanıyor ve verisini yeniden üretmiyor."
+                        "text": "Yalnızca kullanıcı raporu olarak, asla bir kesinti olarak değil. Downdetector'da bir Rockstar Games sayfası var, ama GTA 6 sayfası yok, GTA 6'nın raporlanacak sunucusu yok. Kullanıcı raporlarındaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil; Downdetector'ın şartları verisini yeniden yayımlamayı yasaklıyor, bu yüzden bu sayfa ona bağlanıyor ve verisini yeniden üretmiyor."
                 }
         },
         {
@@ -153,7 +174,7 @@
                 "name": "En son GTA 6 yaması nedir?",
                 "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "01.002.002, 23 Kasım 2026'da yayımlandı — ilk lansman sonrası yama; PS5'te 603,8 MB ve Xbox'ta 1,6 GB; Rockstar Support'tan çökmeler, otomatik kaydetme ve Aranma Seviyesi dahil yedi düzeltme içeriyor. Öncesinde: 01.002.000 (13 Kasım) ve 01.002.001 (16 Kasım), ikisi de bildirilen ve Rockstar notu yok. Daha yeni bir güncelleme yok — 24 Kasım 2026 itibarıyla 01.002.003 yok."
+                        "text": "01.002.002, 23 Kasım 2026'da yayımlandı, ilk lansman sonrası yama; PS5'te 603,8 MB ve Xbox'ta 1,6 GB; Rockstar Support'tan çökmeler, otomatik kaydetme ve Aranma Seviyesi dahil yedi düzeltme içeriyor. Öncesinde: 01.002.000 (13 Kasım) ve 01.002.001 (16 Kasım), ikisi de bildirilen ve Rockstar notu yok. Daha yeni bir güncelleme yok, 24 Kasım 2026 itibarıyla 01.002.003 yok."
                 }
         }
 
@@ -167,39 +188,38 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
         </a>
         <nav class="nav-primary" aria-label="Birincil">
           <a href="/tr/">Ana Sayfa</a>
-          <a href="/tr/tools">Araçlar</a>
+          <a href="/tr/tools" aria-current="page">Araçlar</a>
           <a href="/tr/trackers">Takipçiler</a>
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/server-status">İngilizce</a>
             <a href="/es/tools/server-status">Español</a>
@@ -223,59 +243,47 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
           <a href="/tr/">Ana Sayfa</a>
-          <a href="/tr/tools">Araçlar</a>
+          <a href="/tr/tools" aria-current="page">Araçlar</a>
           <a href="/tr/trackers">Takipçiler</a>
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/server-status" lang="en">EN</a><a href="/es/tools/server-status" lang="es">ES</a><a href="/pt/tools/server-status" lang="pt">PT</a><a href="/de/tools/server-status" lang="de">DE</a><a href="/fr/tools/server-status" lang="fr">FR</a><a href="/tr/tools/server-status" aria-current="true">TR</a><a href="/ar/tools/server-status" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="page-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Sayfa yolu" class="breadcrumbs">
-        <a href="/tr/">Ana Sayfa</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/tr/tools">Araçlar</a>
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">GTA 6 Sunucu Durumu</span>
-      </nav>
-      <h1 id="page-hero-heading">GTA 6 Sunucu Durumu</h1>
-      <p class="page-hero-sub">GTA 6'nın kendi sunucusu yok — tek oyunculu bir oyun ve kurulduktan sonra çevrimdışı oynanıyor. Bağlı olduğu üç hizmetin durumu aşağıda; el ile kontrol edildi ve resmi sayfalar bağlantılı.</p>
-    </div>
-  </header>
-  <div class="container tool-body">
-    <section class="byline" aria-label="About this page">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/tr/about">ToolWools</a>&nbsp;·</span> GTA 6 sunucu durumu&nbsp;· Her rakamın yanında kaynağı ve tarihi</p>
-        <p class="byline-note">Aşağıdaki her durum ifadesinin kaynağı ve kontrol saati var.</p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2026-11-24">24 Kas 2026</time>&nbsp;· Son doğrulama <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time></p>
-    </section>
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA 6 Sunucu Durumu</span>
+        </div>
+        <h1 id="page-title">GTA 6 Sunucu Durumu</h1>
+        <p class="page-subtitle">GTA 6'nın kendi sunucusu yok, tek oyunculu bir oyun ve kurulduktan sonra çevrimdışı oynanıyor. Bağlı olduğu üç hizmetin durumu aşağıda; el ile kontrol edildi ve resmi sayfalar bağlantılı.</p>
+        <p class="hero-meta">
+          <span>Yazan <a href="/tr/about">ToolWools</a></span><span>GTA 6 sunucu durumu</span><span>Her rakamın yanında kaynağı ve tarihi</span><span>Aşağıdaki her durum ifadesinin kaynağı ve kontrol saati var.</span><span>Yayınlanma <time datetime="2026-11-24">24 Kas 2026</time></span><span>Son doğrulama <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time></span><span>GTA 6 sunucusu yok · 3 hizmet kontrol edildi · Son kontrol 27 Kas 2026, 07:30 UTC</span>
+        </p>
+      </section>
     <div class="sr-only" data-live-region aria-live="polite">GTA 6'nın çökecek sunucusu yok. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Rockstar Authentication ve PlayStation Network, 24 Kasım 2026'da 07:30 UTC'de yapılan son el kontrolünde çalışır durumdaydı; Xbox ağı kontrolü mevcut değildi. Lansmandaki üç PlayStation Network kesintisi aşağıdaki zaman çizelgesinde kayıtlı.</div>
-    <section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>GTA 6 çöktü mü? · TL;DR</span></p>
-        <p class="tldr-text"><span data-tldr-text>Hayır — GTA 6'nın sunucusu yok, yani “çökemez”. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Oyun açılmıyorsa nedeni aşağıdaki üç hizmetten biridir — Rockstar Authentication, PlayStation Network veya Xbox ağı. Her satır, güncel yanıt için resmi sayfaya bağlanır.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>GTA 6 sunucusu yok · 3 hizmet kontrol edildi · Son kontrol 27 Kas 2026, 07:30 UTC</p>
-    </section>
     <section class="hub-note" aria-labelledby="status">
-      <h2 id="status" style="font-size:0.875rem;font-weight:700">GTA 6'nın çökecek sunucusu yok</h2>
-      <p style="margin-top:0.5rem">GTA 6'nın çökecek sunucusu yok. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı; gösterilecek bir GTA 6 sunucu durumu yok. Oynamanıza engel olabilecek şey aşağıdaki üç hizmetten biridir — durumları el ile kontrol ediliyor ve her satır güncel yanıt için resmi sayfaya bağlanır.</p>
-      <p style="margin-top:0.75rem">Bu sayfa kendi durum denetleyicisini çalıştırmıyor ve GTA 6 için yeşil ya da kırmızı ışık göstermiyor — ölçülecek bir şey yok. Üç karttaki ifadeler, 27 Kasım 2026, 07:30 UTC'de yapılan el kontrolünün sonucudur. Güncel yanıt için her zaman karttaki resmi sayfaya bakın.</p>
+      <h2 id="status">GTA 6'nın çökecek sunucusu yok</h2>
+      <p style="margin-top:0.5rem">GTA 6'nın çökecek sunucusu yok. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı; gösterilecek bir GTA 6 sunucu durumu yok. Oynamanıza engel olabilecek şey aşağıdaki üç hizmetten biridir, durumları el ile kontrol ediliyor ve her satır güncel yanıt için resmi sayfaya bağlanır.</p>
+      <p style="margin-top:0.75rem">Bu sayfa kendi durum denetleyicisini çalıştırmıyor ve GTA 6 için yeşil ya da kırmızı ışık göstermiyor, ölçülecek bir şey yok. Üç karttaki ifadeler, 27 Kasım 2026, 07:30 UTC'de yapılan el kontrolünün sonucudur. Güncel yanıt için her zaman karttaki resmi sayfaya bakın.</p>
     </section>
     <section aria-labelledby="services-heading">
       <h2 id="services-heading">GTA 6'nın bağlı olduğu üç hizmet</h2>
@@ -284,8 +292,8 @@
         <article class="usecase-card" aria-labelledby="service-rockstar">
           <h3 id="service-rockstar">Rockstar Authentication</h3>
           <p>Durum: <strong data-service="rockstar-auth" data-status-word data-status="operational">Operational</strong></p>
-          <p>Rockstar'ın durum sayfasında GTA 6'ya dokunan tek Rockstar satırı — Rockstar hesap girişi. Sayfada GTA VI satırı hiç yok.</p>
-          <p>Çöktüğünde: Rockstar hesap girişi çalışmaz. Yalnızca oyun isterse önemli — GTA 6'nın ilk açılışta Rockstar girişi isteyip istemediği bilinmiyor; Rockstar bu konuda bir şey söylemedi.</p>
+          <p>Rockstar'ın durum sayfasında GTA 6'ya dokunan tek Rockstar satırı, Rockstar hesap girişi. Sayfada GTA VI satırı hiç yok.</p>
+          <p>Çöktüğünde: Rockstar hesap girişi çalışmaz. Yalnızca oyun isterse önemli, GTA 6'nın ilk açılışta Rockstar girişi isteyip istemediği bilinmiyor; Rockstar bu konuda bir şey söylemedi.</p>
           <p><a href="https://support.rockstargames.com/servicestatus" target="_blank" rel="noopener noreferrer">Resmi sayfayı kontrol edin →</a></p>
           <p class="field-hint">Rockstar'ın durum sayfasında “All services operational” yazıyor. Son kontrol <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time>.</p>
         </article>
@@ -294,7 +302,7 @@
           <h3 id="service-psn">PlayStation Network</h3>
           <p>Durum: <strong data-service="psn" data-status-word data-status="operational">Operational</strong></p>
           <p>Sony'nin PlayStation Network durum sayfası: giriş, PlayStation Store, indirmeler ve lisans kontrolü.</p>
-          <p>Çöktüğünde: giriş çalışmaz, Mağaza ve indirmeler durur; dijital kopya açılmayabilir — açılırken lisansını PSN ile doğrular.</p>
+          <p>Çöktüğünde: giriş çalışmaz, Mağaza ve indirmeler durur; dijital kopya açılmayabilir, açılırken lisansını PSN ile doğrular.</p>
           <p><a href="https://status.playstation.com" target="_blank" rel="noopener noreferrer">Resmi sayfayı kontrol edin →</a></p>
           <p class="field-hint">Sony'nin durum sayfasında “All services are up and running” yazıyor. Son kontrol <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time>.</p>
         </article>
@@ -303,75 +311,75 @@
           <h3 id="service-xbox">Xbox ağı</h3>
           <p>Durum: <strong data-service="xbox" data-status-word data-status="operational">Operational</strong></p>
           <p>Microsoft'un Xbox ağı durum sayfası: giriş, Microsoft Store, indirmeler ve lisans kontrolü.</p>
-          <p>Çöktüğünde: giriş çalışmaz, Mağaza ve indirmeler durur; Home olmayan bir Xbox'ta dijital kopya açılmayabilir — açılırken lisansını Xbox ağıyla doğrular.</p>
+          <p>Çöktüğünde: giriş çalışmaz, Mağaza ve indirmeler durur; Home olmayan bir Xbox'ta dijital kopya açılmayabilir, açılırken lisansını Xbox ağıyla doğrular.</p>
           <p><a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener noreferrer">Resmi sayfayı kontrol edin →</a></p>
-          <p class="field-hint">Xbox'ın durum sayfasında “All services up and running” yazıyor — canlı tarayıcıda doğrulandı, 11 hizmetin tamamı normal. Son kontrol <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time>.</p>
+          <p class="field-hint">Xbox'ın durum sayfasında “All services up and running” yazıyor, canlı tarayıcıda doğrulandı, 11 hizmetin tamamı normal. Son kontrol <time datetime="2026-11-27T07:30:00Z" data-last-checked>27 Kasım 2026, 07:30 UTC</time>.</p>
         </article>
       </li></ul>
     </section>
 <section aria-labelledby="timeline-heading">
-      <h2 id="timeline-heading">Olay zaman çizelgesi — lansmanda gerçekte ne çöktü</h2>
+      <h2 id="timeline-heading">Olay zaman çizelgesi: lansmanda gerçekte ne çöktü</h2>
       <p class="section-dek">Üçü de Sony tarafından doğrulanan PlayStation Network kesintisi, hepsi lansmanda. Her biri ne olduğu belirtilerek etiketlendi: bir PlayStation Network kesintisi, GTA 6 sunucu kesintisi değil.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 lansman olay zaman çizelgesi, kaydırılabilir tablo">
       <table class="data-table" id="incident-timeline-table">
         <caption class="sr-only">GTA 6 lansmanındaki PlayStation Network kesintileri: ne zaman, oyuncular ne gördü, GTA 6 için ne anlama geldi ve kaynaklar.</caption>
         <thead><tr><th scope="col">Ne zaman (GMT)</th><th scope="col">Hizmet</th><th scope="col">Oyuncular ne gördü</th><th scope="col">GTA 6 için ne anlama geldi</th><th scope="col">Kaynaklar</th></tr></thead>
         <tbody>
-        <tr><th scope="row">18 Kas 2026, 18:58–19:43 GMT (~45 dk)</th><td>PlayStation Network kesintisi — GTA 6 sunucu kesintisi değil</td><td>Gaming and Social bozuldu; Birleşik Krallık ve Avrupa'da giriş ve PlayStation Store kesintileri. Oyuncular “Sony services are busy” ve “Too many failed connection attempts” mesajlarını gördü. WS-116449-5, CE-34861-2 ve WS-37505-0 hataları göründü.</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı — lisans kontrolü PSN gerektirir.</td><td><a href="https://gta6news.gg/is-gta-6-down/" target="_blank" rel="noopener noreferrer">gta6news.gg</a> · <a href="https://timesaver.gg/blog/gta-6-server-status" target="_blank" rel="noopener noreferrer">timesaver.gg</a></td></tr>
-        <tr><th scope="row">19 Kas 2026, 05:33–06:04 GMT (~31 dk)</th><td>PlayStation Network kesintisi — GTA 6 sunucu kesintisi değil</td><td>Gaming and Social, Amerika, Avrupa, Avustralya ve Yeni Zelanda'da bozuldu; Birleşik Krallık ve Avrupa'da PlayStation Store kesintisi. Sony'nin ifadesi: “You might have difficulty launching games, apps, or network features.”</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı — lisans kontrolü PSN gerektirir.</td><td><a href="https://gta6news.gg/is-gta-6-down/" target="_blank" rel="noopener noreferrer">gta6news.gg</a> · <a href="https://leonidaunlocked.com/guides/gta-6-server-status/" target="_blank" rel="noopener noreferrer">leonidaunlocked.com</a></td></tr>
-        <tr><th scope="row">19 Kas 2026, 17:41–17:57 GMT (Sony zaman damgalarına göre ~16 dk)</th><td>PlayStation Network kesintisi — GTA 6 sunucu kesintisi değil</td><td>PS5'te Gaming and Social bozuldu; Game Streaming de etkilendi. Sony'nin sayfası 12:41 PM ET'de güncellendi ve 12:57 PM ET'de temizlendi; ifadesi: “You might have difficulty launching games, apps, or network features.”</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı — lisans kontrolü PSN gerektirir.</td><td><a href="https://www.techjuice.pk/playstation-network-outage-hits-gamers-during-gta-6-launch/" target="_blank" rel="noopener noreferrer">TechJuice</a> · <a href="https://gadgetsnow.indiatimes.com/tech-news/playstation-network-outage-resolved-ps5-users-face-brief-service-disruption-login-issues/articleshow/135983856.cms" target="_blank" rel="noopener noreferrer">Gadgets Now</a> · <a href="https://houstonnewsnetwork.com/is-playstation-down-some-gamers-report-problems-with-playstation-servers-amid-gta-6-launch" target="_blank" rel="noopener noreferrer">Houston News Network</a></td></tr>
+        <tr><th scope="row">18 Kas 2026, 18:58–19:43 GMT (~45 dk)</th><td>PlayStation Network kesintisi, GTA 6 sunucu kesintisi değil</td><td>Gaming and Social bozuldu; Birleşik Krallık ve Avrupa'da giriş ve PlayStation Store kesintileri. Oyuncular “Sony services are busy” ve “Too many failed connection attempts” mesajlarını gördü. WS-116449-5, CE-34861-2 ve WS-37505-0 hataları göründü.</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı, lisans kontrolü PSN gerektirir.</td><td><a href="https://gta6news.gg/is-gta-6-down/" target="_blank" rel="noopener noreferrer">gta6news.gg</a> · <a href="https://timesaver.gg/blog/gta-6-server-status" target="_blank" rel="noopener noreferrer">timesaver.gg</a></td></tr>
+        <tr><th scope="row">19 Kas 2026, 05:33–06:04 GMT (~31 dk)</th><td>PlayStation Network kesintisi, GTA 6 sunucu kesintisi değil</td><td>Gaming and Social, Amerika, Avrupa, Avustralya ve Yeni Zelanda'da bozuldu; Birleşik Krallık ve Avrupa'da PlayStation Store kesintisi. Sony'nin ifadesi: “You might have difficulty launching games, apps, or network features.”</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı, lisans kontrolü PSN gerektirir.</td><td><a href="https://gta6news.gg/is-gta-6-down/" target="_blank" rel="noopener noreferrer">gta6news.gg</a> · <a href="https://leonidaunlocked.com/guides/gta-6-server-status/" target="_blank" rel="noopener noreferrer">leonidaunlocked.com</a></td></tr>
+        <tr><th scope="row">19 Kas 2026, 17:41–17:57 GMT (Sony zaman damgalarına göre ~16 dk)</th><td>PlayStation Network kesintisi, GTA 6 sunucu kesintisi değil</td><td>PS5'te Gaming and Social bozuldu; Game Streaming de etkilendi. Sony'nin sayfası 12:41 PM ET'de güncellendi ve 12:57 PM ET'de temizlendi; ifadesi: “You might have difficulty launching games, apps, or network features.”</td><td>Oyuncular giriş yapamadı ya da GTA 6'nın dijital kopyasını başlatamadı, lisans kontrolü PSN gerektirir.</td><td><a href="https://www.techjuice.pk/playstation-network-outage-hits-gamers-during-gta-6-launch/" target="_blank" rel="noopener noreferrer">TechJuice</a> · <a href="https://gadgetsnow.indiatimes.com/tech-news/playstation-network-outage-resolved-ps5-users-face-brief-service-disruption-login-issues/articleshow/135983856.cms" target="_blank" rel="noopener noreferrer">Gadgets Now</a> · <a href="https://houstonnewsnetwork.com/is-playstation-down-some-gamers-report-problems-with-playstation-servers-amid-gta-6-launch" target="_blank" rel="noopener noreferrer">Houston News Network</a></td></tr>
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Uyarılar: 18 Kasım'da PlayStation'ın kendi durum sayfası, giriş sıkıntısının başlarında yeşil kaldı — resmi sayfa, oyuncuların gördüğünün gerisindeydi. 19 Kasım akşamı süre, Sony'nin sayfa zaman damgalarına göre ~16 dk; Gadgets Now ~24 dk bildiriyor. 18–24 Kasım 2026 arasında Rockstar kesintisi ve Microsoft tarafından doğrulanan Xbox kesintisi bildirilmedi.</p>
+      <p class="field-hint" style="margin-top:0.75rem">Uyarılar: 18 Kasım'da PlayStation'ın kendi durum sayfası, giriş sıkıntısının başlarında yeşil kaldı, resmi sayfa, oyuncuların gördüğünün gerisindeydi. 19 Kasım akşamı süre, Sony'nin sayfa zaman damgalarına göre ~16 dk; Gadgets Now ~24 dk bildiriyor. 18–24 Kasım 2026 arasında Rockstar kesintisi ve Microsoft tarafından doğrulanan Xbox kesintisi bildirilmedi.</p>
     </section>
     <section aria-labelledby="what-breaks">
       <h2 id="what-breaks">Ne, neyi bozar</h2>
-      <p class="section-dek">GTA 6'nın kendi sunucusu yok. Sizi gerçekten oynamaktan alıkoyabilecek şeyler — ve alıkoyamayacak şeyler bunlar.</p>
+      <p class="section-dek">GTA 6'nın kendi sunucusu yok. Sizi gerçekten oynamaktan alıkoyabilecek şeyler, ve alıkoyamayacak şeyler bunlar.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 için ne neyi bozar, kaydırılabilir tablo">
       <table class="data-table" id="what-breaks-table">
         <caption class="sr-only">Her hizmet çöktüğünde ne bozulur ve GTA 6'yı ne etkilemez.</caption>
         <thead><tr><th scope="col">Bu çökerse</th><th scope="col">GTA 6 için ne bozulur</th></tr></thead>
         <tbody>
-        <tr><th scope="row">PlayStation Network</th><td>Dijital kopya açılmayabilir — açılırken lisansını PSN ile doğrular. İndirmeler durur ve PlayStation Store kullanılamaz.</td></tr>
+        <tr><th scope="row">PlayStation Network</th><td>Dijital kopya açılmayabilir, açılırken lisansını PSN ile doğrular. İndirmeler durur ve PlayStation Store kullanılamaz.</td></tr>
         <tr><th scope="row">Xbox ağı</th><td>Xbox'ta aynısı: Home olmayan bir Xbox'ta dijital kopya açılmayabilir, indirmeler durur ve Microsoft Store kullanılamaz.</td></tr>
-        <tr><th scope="row">Rockstar Authentication</th><td>Rockstar hesap girişi çalışmaz. Yalnızca oyun isterse önemli — GTA 6'nın ilk açılışta Rockstar girişi isteyip istemediği bilinmiyor; Rockstar bu konuda bir şey söylemedi.</td></tr>
-        <tr><th scope="row">Yama ve indirme sunucuları</th><td>Başlık güncellemesi indirmeleri durur. Yamalar platform sunucularında çalışır, Rockstar oyun sunucularında değil — indirilecek GTA 6 oyun sunucusu yok.</td></tr>
-        <tr><th scope="row">PS5 sistem yazılımı 14.23</th><td>PS5 sistem yazılımı 14.23 (1,267 GB, 17 Kasım 2026'da yayımlandı) zorunlu — konsol buna güncellenmeden GTA 6 çalışmaz.</td></tr>
-        <tr><th scope="row">Hikâye modunun kendisi</th><td>Hiçbir şey. Kurulduktan sonra hikâye modu konsolda çevrimdışı çalışır — oynamaya devam etmek için hiçbir hizmetin çalışması gerekmez.</td></tr>
+        <tr><th scope="row">Rockstar Authentication</th><td>Rockstar hesap girişi çalışmaz. Yalnızca oyun isterse önemli, GTA 6'nın ilk açılışta Rockstar girişi isteyip istemediği bilinmiyor; Rockstar bu konuda bir şey söylemedi.</td></tr>
+        <tr><th scope="row">Yama ve indirme sunucuları</th><td>Başlık güncellemesi indirmeleri durur. Yamalar platform sunucularında çalışır, Rockstar oyun sunucularında değil, indirilecek GTA 6 oyun sunucusu yok.</td></tr>
+        <tr><th scope="row">PS5 sistem yazılımı 14.23</th><td>PS5 sistem yazılımı 14.23 (1,267 GB, 17 Kasım 2026'da yayımlandı) zorunlu, konsol buna güncellenmeden GTA 6 çalışmaz.</td></tr>
+        <tr><th scope="row">Hikâye modunun kendisi</th><td>Hiçbir şey. Kurulduktan sonra hikâye modu konsolda çevrimdışı çalışır, oynamaya devam etmek için hiçbir hizmetin çalışması gerekmez.</td></tr>
         </tbody>
       </table>
     </div>
-      <p style="margin-top:0.75rem"><strong>GTA 6'yı etkilemez:</strong> GTA Online, Red Dead Online ve FiveM. Bunlardan birindeki kesinti GTA 6'yı durdurmaz — ayrı çevrimiçi hizmetlerdir ve GTA 6'nın çevrimiçi modu yoktur.</p>
+      <p style="margin-top:0.75rem"><strong>GTA 6'yı etkilemez:</strong> GTA Online, Red Dead Online ve FiveM. Bunlardan birindeki kesinti GTA 6'yı durdurmaz, ayrı çevrimiçi hizmetlerdir ve GTA 6'nın çevrimiçi modu yoktur.</p>
     </section>
     <section aria-labelledby="troubleshooting">
-      <h2 id="troubleshooting">Sorun giderme — lansman kesintilerindeki hatalar</h2>
+      <h2 id="troubleshooting">Sorun giderme: lansman kesintilerindeki hatalar</h2>
       <p class="section-dek">18 Kasım 2026 PlayStation Network kesintisinde oyuncuların gördüğü üç hata kodu. Her biri bir PlayStation hatasıdır, GTA 6 hatası değildir.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="GTA 6 lansman hata kodları, kaydırılabilir tablo">
       <table class="data-table" id="error-codes-table">
         <caption class="sr-only">18 Kasım 2026 kesintisindeki PlayStation hata kodları ve her biri için ne yapılacağı.</caption>
         <thead><tr><th scope="col">Hata</th><th scope="col">Sahibi</th><th scope="col">Ne yapmalı</th></tr></thead>
         <tbody>
-        <tr><th scope="row" class="mono">WS-116449-5</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin — hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
-        <tr><th scope="row" class="mono">CE-34861-2</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin — hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
-        <tr><th scope="row" class="mono">WS-37505-0</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin — hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
+        <tr><th scope="row" class="mono">WS-116449-5</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin, hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
+        <tr><th scope="row" class="mono">CE-34861-2</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin, hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
+        <tr><th scope="row" class="mono">WS-37505-0</th><td>PlayStation hatası, GTA 6 hatası değil</td><td>Yukarıdaki PlayStation Network durum satırına bakın, ardından konsolu yeniden başlatın, ardından oyun lisansını kontrol edin. PSN çökmüşse bekleyin, hiçbir konsol düzeltmesi işe yaramaz.</td></tr>
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Burada başka hata kodu listelenmiyor — yalnızca doğrulanan lansman kesintilerinde görülen kodlar. Bu sayfada olmayan bir kod, doğrulanan bir olayla karşılaştırılmadı.</p>
+      <p class="field-hint" style="margin-top:0.75rem">Burada başka hata kodu listelenmiyor, yalnızca doğrulanan lansman kesintilerinde görülen kodlar. Bu sayfada olmayan bir kod, doğrulanan bir olayla karşılaştırılmadı.</p>
     </section>
     <section aria-labelledby="regions">
-      <h2 id="regions">Bölgeler — dürüst hâli</h2>
+      <h2 id="regions">Bölgeler: dürüst hâli</h2>
       <p>Bu sayfada GTA 6 bölge haritası yok, çünkü bölgesel GTA 6 durumu yok. Olan şu:</p>
       <ul>
-        <li>PlayStation Network, durumu ülke ve bölgeye göre yayımlar — <a href="https://status.playstation.com" target="_blank" rel="noopener noreferrer">Sony'nin sayfasına bakın</a>.</li>
+        <li>PlayStation Network, durumu ülke ve bölgeye göre yayımlar, <a href="https://status.playstation.com" target="_blank" rel="noopener noreferrer">Sony'nin sayfasına bakın</a>.</li>
         <li>Rockstar'ın durum sayfasında bölgesel döküm yok.</li>
-        <li>Xbox'ın durum sayfası hizmete göre ayrılır, bölgeye göre değil — <a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener noreferrer">Microsoft'un sayfasına bakın</a>.</li>
+        <li>Xbox'ın durum sayfası hizmete göre ayrılır, bölgeye göre değil, <a href="https://support.xbox.com/en-US/xbox-live-status" target="_blank" rel="noopener noreferrer">Microsoft'un sayfasına bakın</a>.</li>
       </ul>
     </section>
     <section aria-labelledby="latest-patch">
       <h2 id="latest-patch">Son yama: 01.002.002 (23 Kasım 2026)</h2>
-      <p class="section-dek">İlk lansman sonrası yama — ve resmi yama notları olan ilk güncelleme. PS5'te 603,8 MB, Xbox'ta 1,6 GB.</p>
+      <p class="section-dek">İlk lansman sonrası yama, ve resmi yama notları olan ilk güncelleme. PS5'te 603,8 MB, Xbox'ta 1,6 GB.</p>
       <p>Rockstar Support'un 23 Kasım 2026 notları (“Grand Theft Auto VI Launch Updates (PS5 / XBOX Series X|S)”) yedi düzeltme listeliyor:</p>
       <ul>
         <li>Oyunun çökmesine neden olan birkaç sorun düzeltildi.</li>
@@ -382,31 +390,31 @@
         <li>Oyuncunun Spor Salonundaki deadlift barını kullanamamasına neden olan bir sorun düzeltildi.</li>
         <li>Ortakların, oyuncuların çalıntı mal alıcılarına satabilmesi için çantaları teslim etmemesine neden olan bir sorun düzeltildi.</li>
       </ul>
-      <p>Yama geçmişi: 01.002.000 (13 Kasım 2026) ve 01.002.001 (16 Kasım 2026), ikisi de bildirilen — hiçbiri için Rockstar notu yayımlanmadı. Daha yeni bir güncelleme yok: 24 Kasım 2026 itibarıyla duyurulan ya da bildirilen bir 01.002.003 yok.</p>
+      <p>Yama geçmişi: 01.002.000 (13 Kasım 2026) ve 01.002.001 (16 Kasım 2026), ikisi de bildirilen, hiçbiri için Rockstar notu yayımlanmadı. Daha yeni bir güncelleme yok: 24 Kasım 2026 itibarıyla duyurulan ya da bildirilen bir 01.002.003 yok.</p>
     </section>
     <section aria-labelledby="user-reports">
-      <h2 id="user-reports">Kullanıcı raporları — bir bağlantı, durum değil</h2>
-      <p>Downdetector'da Rockstar Games kullanıcı raporları sayfası var: <a href="https://downdetector.com/status/rockstar-games/" target="_blank" rel="noopener noreferrer">Rockstar Games, Downdetector'da →</a>. Bu, kullanıcı raporudur, resmi durum değil — oradaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil. Downdetector GTA 6 sayfası yok ve bu sayfa Downdetector verisini yeniden yayımlamıyor.</p>
+      <h2 id="user-reports">Kullanıcı raporları: bir bağlantı, durum değil</h2>
+      <p>Downdetector'da Rockstar Games kullanıcı raporları sayfası var: <a href="https://downdetector.com/status/rockstar-games/" target="_blank" rel="noopener noreferrer">Rockstar Games, Downdetector'da →</a>. Bu, kullanıcı raporudur, resmi durum değil, oradaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil. Downdetector GTA 6 sayfası yok ve bu sayfa Downdetector verisini yeniden yayımlamıyor.</p>
     </section>
     <section aria-labelledby="related">
       <h2 id="related">Beklerken bunları kullanın</h2>
       <p class="tool-dek">Bu soruya en yakın soruları yanıtlayan canlı araçlar.</p>
-      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/tr/tools/gta-6-tracker" aria-label="GTA 6 Lansman Kilometre Taşları · GTA 6, 19 Kas 2026&#x27;da çıktı. Tamamlanan ön yükleme pencereleri, lansman kilometre taşları ve lansman anı sizin saat diliminizde."><h3>GTA 6 Lansman Kilometre Taşları</h3><p>GTA 6, 19 Kas 2026'da çıktı. Tamamlanan ön yükleme pencereleri, lansman kilometre taşları ve lansman anı sizin saat diliminizde.</p><span class="open-link">Aç →</span></a></li><li><a class="guide-card" href="/tr/tools/download-time" aria-label="GTA 6 İndirme Süresi Hesaplayıcı · İndirme hızınızı girin ve GTA 6&#x27;nın kurulumunun tam olarak ne kadar süreceğini görün — temel oyun artı yamalar. Yama indirmeleri platform sunucularında çalışır."><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>İndirme hızınızı girin ve GTA 6'nın kurulumunun tam olarak ne kadar süreceğini görün — temel oyun artı yamalar. Yama indirmeleri platform sunucularında çalışır.</p><span class="open-link">Aç →</span></a></li><li><a class="guide-card" href="/tr/tools/internet-speed-check" aria-label="GTA 6 İnternet Hızı Danışmanı · Gecikme, titreşim, paket kaybı ve hızı bölgeniz ve cihazınız için gerçekçi bir hedefe göre derecelendirin."><h3>GTA 6 İnternet Hızı Danışmanı</h3><p>Gecikme, titreşim, paket kaybı ve hızı bölgeniz ve cihazınız için gerçekçi bir hedefe göre derecelendirin.</p><span class="open-link">Aç →</span></a></li></ul>
+      <ul class="guide-cards" style="margin-top:1.5rem"><li><a class="guide-card" href="/tr/tools/gta-6-tracker"><h3>GTA 6 Lansman Kilometre Taşları</h3><p>GTA 6, 19 Kas 2026'da çıktı. Tamamlanan ön yükleme pencereleri, lansman kilometre taşları ve lansman anı sizin saat diliminizde.</p><span class="link-cta">Aç →</span></a></li><li><a class="guide-card" href="/tr/tools/download-time"><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>İndirme hızınızı girin ve GTA 6'nın kurulumunun tam olarak ne kadar süreceğini görün: temel oyun artı yamalar. Yama indirmeleri platform sunucularında çalışır.</p><span class="link-cta">Aç →</span></a></li><li><a class="guide-card" href="/tr/tools/internet-speed-check"><h3>GTA 6 İnternet Hızı Danışmanı</h3><p>Gecikme, titreşim, paket kaybı ve hızı bölgeniz ve cihazınız için gerçekçi bir hedefe göre derecelendirin.</p><span class="link-cta">Aç →</span></a></li></ul>
     </section>
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA 6 sunucu durumu soruları</h2>
+      <header>
+        <h2 id="faq">GTA 6 sunucu durumu soruları</h2>
         <p class="tool-dek">GTA 6'nın çöküp çökmediği, başlamasını gerçekte neyin engelleyebileceği ve bu sayfanın nasıl kontrol edildiği.</p>
       </header>
       <ul class="faq-list" role="list">
-        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">GTA 6 çöktü mü?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Hayır — GTA 6'nın sunucusu yok, yani “çökemez”. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Oyun açılmıyorsa nedeni yukarıdaki üç hizmetten biridir: Rockstar Authentication, PlayStation Network veya Xbox ağı. Durumları el ile kontrol ediliyor ve her satır resmi sayfaya bağlanıyor.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">GTA 6'nın çevrimiçi sunucuları var mı?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Hayır. GTA 6, çevrimiçi modu olmayan tek oyunculu bir deneyim olarak çıktı ve Rockstar bir mod duyurmadı. Rockstar'ın kendi durum sayfasında GTA VI satırı yok. Gösterilecek bir GTA 6 sunucu durumu yok — yalnızca oyunun bağlı olduğu hizmetlerin durumu var.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">GTA 6 neden açılmıyor?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Genellikle bir lisans kontrolü ya da bir hizmet kesintisi, oyunun kendisi değil. Dijital kopya, açılırken lisansını PlayStation Network ya da Xbox ağıyla doğrular; o hizmet çökmüşse oyun açılmayabilir. Önce yukarıdaki üç durum satırına bakın, ardından konsolu yeniden başlatın ve lisansı kontrol edin. Kurulduktan sonra hikâye modunun kendisi çevrimdışı çalışır. Oyunun ilk açılışta Rockstar hesap girişi isteyip istemediği doğrulanmadı — Rockstar bu konuda bir şey söylemedi.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">PSN kesintisi bir GTA 6 kesintisi mi?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Hayır. Yukarıdaki zaman çizelgesindeki üç kesinti de PlayStation Network kesintisiydi — Gaming and Social bozuldu, giriş ve Mağaza sorunları yaşandı — ve oyuncuların giriş yapmasını ya da GTA 6'nın dijital kopyasını başlatmasını engelledi. Çökecek bir GTA 6 sunucusu yok, bu yüzden hiçbir kesinti “GTA 6 kesintisi” olamaz.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Bu sayfa ne sıklıkla kontrol ediliyor?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">El ile. Üç resmi durum sayfası en son 27 Kasım 2026, 07:30 UTC'de kontrol edildi — bu damga her satırda var. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale — see official page” gösterir; böylece eski bir kontrol asla güncelmiş gibi gösterilmez. Yeni olaylar, hizmet sahibi doğruladığında zaman çizelgesine el ile eklenir.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">Xbox satırı neden “check unavailable” diyordu?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">Microsoft'un Xbox durum sayfasını 22 ve 24 Kasım 2026'da ilk elden kontrol etmemiz yalnızca bir yükleme ekranı döndürdü — sayfa JavaScript ile oluşturuluyor ve hizmet verisi okunamadı; bu yüzden satır, yeşil göstermek yerine “check unavailable — see official page” diyordu: okuyamadığımız bir durumu sağlıklıymış gibi gösteremeyiz. 26 Kasım 2026'da sayfayı canlı tarayıcıda doğruladık: “All services up and running” yazıyor, 11 hizmetin tamamı normal.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-6"><details><summary aria-controls="faq-a-6"><h3 id="faq-q-6">GTA 6 için Downdetector raporlarına güvenebilir miyim?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-6" role="region" aria-labelledby="faq-q-6"><p class="faq-answer">Yalnızca kullanıcı raporu olarak, asla bir kesinti olarak değil. Downdetector'da bir Rockstar Games sayfası var, ama GTA 6 sayfası yok — GTA 6'nın raporlanacak sunucusu yok. Kullanıcı raporlarındaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil; Downdetector'ın şartları verisini yeniden yayımlamayı yasaklıyor, bu yüzden bu sayfa ona bağlanıyor ve verisini yeniden üretmiyor.</p></div></details></article></li>
-        <li><article aria-labelledby="faq-q-7"><details><summary aria-controls="faq-a-7"><h3 id="faq-q-7">En son GTA 6 yaması nedir?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-7" role="region" aria-labelledby="faq-q-7"><p class="faq-answer">01.002.002, 23 Kasım 2026'da yayımlandı — ilk lansman sonrası yama; PS5'te 603,8 MB ve Xbox'ta 1,6 GB; Rockstar Support'tan çökmeler, otomatik kaydetme ve Aranma Seviyesi dahil yedi düzeltme içeriyor. Öncesinde: 01.002.000 (13 Kasım) ve 01.002.001 (16 Kasım), ikisi de bildirilen ve Rockstar notu yok. Daha yeni bir güncelleme yok — 24 Kasım 2026 itibarıyla 01.002.003 yok.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-0"><details><summary aria-controls="faq-a-0"><h3 id="faq-q-0">GTA 6 çöktü mü?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-0" role="region" aria-labelledby="faq-q-0"><p class="faq-answer">Hayır, GTA 6'nın sunucusu yok, yani “çökemez”. 19 Kasım 2026'da çevrimiçi modu olmayan tek oyunculu bir oyun olarak çıktı. Oyun açılmıyorsa nedeni yukarıdaki üç hizmetten biridir: Rockstar Authentication, PlayStation Network veya Xbox ağı. Durumları el ile kontrol ediliyor ve her satır resmi sayfaya bağlanıyor.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-1"><details><summary aria-controls="faq-a-1"><h3 id="faq-q-1">GTA 6'nın çevrimiçi sunucuları var mı?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-1" role="region" aria-labelledby="faq-q-1"><p class="faq-answer">Hayır. GTA 6, çevrimiçi modu olmayan tek oyunculu bir deneyim olarak çıktı ve Rockstar bir mod duyurmadı. Rockstar'ın kendi durum sayfasında GTA VI satırı yok. Gösterilecek bir GTA 6 sunucu durumu yok, yalnızca oyunun bağlı olduğu hizmetlerin durumu var.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-2"><details><summary aria-controls="faq-a-2"><h3 id="faq-q-2">GTA 6 neden açılmıyor?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-2" role="region" aria-labelledby="faq-q-2"><p class="faq-answer">Genellikle bir lisans kontrolü ya da bir hizmet kesintisi, oyunun kendisi değil. Dijital kopya, açılırken lisansını PlayStation Network ya da Xbox ağıyla doğrular; o hizmet çökmüşse oyun açılmayabilir. Önce yukarıdaki üç durum satırına bakın, ardından konsolu yeniden başlatın ve lisansı kontrol edin. Kurulduktan sonra hikâye modunun kendisi çevrimdışı çalışır. Oyunun ilk açılışta Rockstar hesap girişi isteyip istemediği doğrulanmadı, Rockstar bu konuda bir şey söylemedi.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-3"><details><summary aria-controls="faq-a-3"><h3 id="faq-q-3">PSN kesintisi bir GTA 6 kesintisi mi?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-3" role="region" aria-labelledby="faq-q-3"><p class="faq-answer">Hayır. Yukarıdaki zaman çizelgesindeki üç kesinti de PlayStation Network kesintisiydi, Gaming and Social bozuldu, giriş ve Mağaza sorunları yaşandı, ve oyuncuların giriş yapmasını ya da GTA 6'nın dijital kopyasını başlatmasını engelledi. Çökecek bir GTA 6 sunucusu yok, bu yüzden hiçbir kesinti “GTA 6 kesintisi” olamaz.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-4"><details><summary aria-controls="faq-a-4"><h3 id="faq-q-4">Bu sayfa ne sıklıkla kontrol ediliyor?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-4" role="region" aria-labelledby="faq-q-4"><p class="faq-answer">El ile. Üç resmi durum sayfası en son 27 Kasım 2026, 07:30 UTC'de kontrol edildi, bu damga her satırda var. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale, see official page” gösterir; böylece eski bir kontrol asla güncelmiş gibi gösterilmez. Yeni olaylar, hizmet sahibi doğruladığında zaman çizelgesine el ile eklenir.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-5"><details><summary aria-controls="faq-a-5"><h3 id="faq-q-5">Xbox satırı neden “check unavailable” diyordu?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-5" role="region" aria-labelledby="faq-q-5"><p class="faq-answer">Microsoft'un Xbox durum sayfasını 22 ve 24 Kasım 2026'da ilk elden kontrol etmemiz yalnızca bir yükleme ekranı döndürdü, sayfa JavaScript ile oluşturuluyor ve hizmet verisi okunamadı; bu yüzden satır, yeşil göstermek yerine “check unavailable, see official page” diyordu: okuyamadığımız bir durumu sağlıklıymış gibi gösteremeyiz. 26 Kasım 2026'da sayfayı canlı tarayıcıda doğruladık: “All services up and running” yazıyor, 11 hizmetin tamamı normal.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-6"><details><summary aria-controls="faq-a-6"><h3 id="faq-q-6">GTA 6 için Downdetector raporlarına güvenebilir miyim?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-6" role="region" aria-labelledby="faq-q-6"><p class="faq-answer">Yalnızca kullanıcı raporu olarak, asla bir kesinti olarak değil. Downdetector'da bir Rockstar Games sayfası var, ama GTA 6 sayfası yok, GTA 6'nın raporlanacak sunucusu yok. Kullanıcı raporlarındaki bir artış, oyuncu endişesini ölçer, doğrulanan bir arızayı değil; Downdetector'ın şartları verisini yeniden yayımlamayı yasaklıyor, bu yüzden bu sayfa ona bağlanıyor ve verisini yeniden üretmiyor.</p></div></details></article></li>
+        <li><article aria-labelledby="faq-q-7"><details><summary aria-controls="faq-a-7"><h3 id="faq-q-7">En son GTA 6 yaması nedir?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="faq-a-7" role="region" aria-labelledby="faq-q-7"><p class="faq-answer">01.002.002, 23 Kasım 2026'da yayımlandı, ilk lansman sonrası yama; PS5'te 603,8 MB ve Xbox'ta 1,6 GB; Rockstar Support'tan çökmeler, otomatik kaydetme ve Aranma Seviyesi dahil yedi düzeltme içeriyor. Öncesinde: 01.002.000 (13 Kasım) ve 01.002.001 (16 Kasım), ikisi de bildirilen ve Rockstar notu yok. Daha yeni bir güncelleme yok, 24 Kasım 2026 itibarıyla 01.002.003 yok.</p></div></details></article></li>
       </ul>
     </section>
     <section aria-labelledby="sources">
@@ -442,7 +450,7 @@
         <a href="https://www.polygon.com/gta-6-update-today-ver-01002002-where-is-ps5-xbox-download-size-patch-notes/" target="_blank" rel="noopener noreferrer">GTA 6 güncellemesi bugün: sürüm 01.002.002</a>
         <span class="src-meta">Polygon · 23 Kas 2026 · 01.002.002 boyutları: PS5 603,8 MB, Xbox 1,6 GB.</span>
       </li><li>
-        <a href="https://downdetector.com/status/rockstar-games/" target="_blank" rel="noopener noreferrer">Rockstar Games — Downdetector</a>
+        <a href="https://downdetector.com/status/rockstar-games/" target="_blank" rel="noopener noreferrer">Rockstar Games: Downdetector</a>
         <span class="src-meta">Downdetector · Rockstar Games kullanıcı raporları, resmi durum değil; GTA 6 sayfası yok. Yalnızca bağlantı, asla yeniden yayımlama yok.</span>
       </li></ol>
     </section>
@@ -451,36 +459,54 @@
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-11-24">24 Kas 2026</time>
-        <p>İlk sürüm: dürüst el yapımı pano. GTA 6'nın sunucusu yok — sayfa, bağlı olduğu üç hizmeti gösteriyor (Rockstar Authentication, PlayStation Network, Xbox ağı); 24 Kasım 2026, 07:30 UTC'de el ile kontrol edildi; Xbox satırı, ilk elden kontrol yalnızca bir yükleme ekranı döndürdüğü için “check unavailable” olarak yer alıyor. Olay zaman çizelgesi, Sony tarafından doğrulanan üç PlayStation Network kesintisiyle başladı (18 Kas 18:58–19:43 GMT, 19 Kas 05:33–06:04 GMT, 19 Kas 17:41–17:57 GMT). En son yama 01.002.002 (23 Kas), yedi resmi düzeltmesiyle. GTA 6 sunucu durumu ışığı yok, kullanıcı raporu sayıları kesinti olarak yok, 2027 çevrimiçi tarihi yok.</p>
+        <p>İlk sürüm: dürüst el yapımı pano. GTA 6'nın sunucusu yok, sayfa, bağlı olduğu üç hizmeti gösteriyor (Rockstar Authentication, PlayStation Network, Xbox ağı); 24 Kasım 2026, 07:30 UTC'de el ile kontrol edildi; Xbox satırı, ilk elden kontrol yalnızca bir yükleme ekranı döndürdüğü için “check unavailable” olarak yer alıyor. Olay zaman çizelgesi, Sony tarafından doğrulanan üç PlayStation Network kesintisiyle başladı (18 Kas 18:58–19:43 GMT, 19 Kas 05:33–06:04 GMT, 19 Kas 17:41–17:57 GMT). En son yama 01.002.002 (23 Kas), yedi resmi düzeltmesiyle. GTA 6 sunucu durumu ışığı yok, kullanıcı raporu sayıları kesinti olarak yok, 2027 çevrimiçi tarihi yok.</p>
       </li></ul>
     </section>
     <aside class="disclaimer" role="note" aria-label="Durum uyarısı">
       <p class="eyebrow-muted">Durum uyarısı</p>
-      <p>Yukarıdaki her durum ifadesi, kaynağı belirtilerek 27 Kasım 2026, 07:30 UTC'de yapılan bir el kontrolünün sonucudur. Çökecek bir GTA 6 sunucusu yok ve bu sayfa GTA 6 açık/kapalı göstergesi göstermiyor. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale — see official page” gösterir. Güncel yanıt için her karttaki resmi sayfaya bakın. Son doğrulama 27 Kasım 2026, 07:30 UTC.</p>
+      <p>Yukarıdaki her durum ifadesi, kaynağı belirtilerek 27 Kasım 2026, 07:30 UTC'de yapılan bir el kontrolünün sonucudur. Çökecek bir GTA 6 sunucusu yok ve bu sayfa GTA 6 açık/kapalı göstergesi göstermiyor. 7 gündür yeniden kontrol edilmeyen bir durum, eski değeri yerine “check stale, see official page” gösterir. Güncel yanıt için her karttaki resmi sayfaya bakın. Son doğrulama 27 Kasım 2026, 07:30 UTC.</p>
     </aside>
-  </div>
 </article>
+  </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -519,10 +545,10 @@
               <li><a href="/tr/contact">İletişim</a></li>
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
-              <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
-              <li><a href="/tr/terms">Kullanım Şartları</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
-              <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -531,35 +557,30 @@
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
-          <a href="/tr/privacy">Gizlilik</a>
-          <a href="/tr/terms">Şartlar</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Çerez ayarları</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analitik izni">
-  <div class="consent-inner">
-    <p><strong>Analitik, yalnızca onayınızla.</strong> Hangi araçların kullanıldığını görmek için toplu Google Analytics kullanıyoruz. Araç girdileri cihazınızdan asla ayrılmaz, profil oluşturulmaz ve hiçbir şey satılmaz. Yüklenmesi için kabul edin veya reddedip onsuz gezinin. Fikrinizi altbilgideki Çerez ayarları bölümünden istediğiniz zaman değiştirebilirsiniz.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analitiği kabul et</button>
-      <button type="button" class="btn-outline" data-consent-decline>Reddet</button>
-      <a href="/tr/privacy">Gizlilik politikası</a>
-    </div>
+</div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
   </div>
 </div>
-</div>
-<script src="/assets/js/tr/launch.js" defer></script>
-<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/launch.js" defer></script>
 <script src="/assets/js/tr/theme.js" defer></script>
-<script src="/assets/js/consent.js" defer></script>
 <script src="/assets/js/tr/header.js" defer></script>
 <script src="/assets/js/tr/search.js" defer></script>
-<script src="/assets/js/faq.js" defer></script>
+<script src="/assets/js/tr/faq.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
 <script src="/assets/js/tr/newsletter.js" defer></script>
+<script src="/assets/js/tr/consent.js" defer></script>
 <script type="module" src="/assets/js/tr/server-status.js"></script>
+
 </body>
 </html>

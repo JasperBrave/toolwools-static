@@ -208,21 +208,21 @@ function render() {
   var roiB = B.roi40 === null ? "—" : pctFmt(B.roi40 * 100);
   var crossText;
   if (tStar === null) {
-    crossText = STR.never + " — iki giriş aynı efektif oranla kazanıyor ya da yüksek oranlı giriş zaten önde.";
+    crossText = STR.never + ", iki giriş aynı efektif oranla kazanıyor ya da yüksek oranlı giriş zaten önde.";
   } else {
     var leader = A.eff > B.eff ? state.biz : state.biz2;
     var trailer = A.eff > B.eff ? state.biz2 : state.biz;
-    crossText = hoursFmt(tStar) + " — " + leader + " " + STR.overtakes;
+    crossText = hoursFmt(tStar) + ": " + leader + " " + STR.overtakes;
   }
 
-  var work = STR.showYourWork + " — " + state.biz + ": günlük net = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
+  var work = STR.showYourWork + ": " + state.biz + ": günlük net = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
     + " = " + money(A.dailyNet) + "/gün; başabaş = " + money(state.price) + " ÷ " + money(A.dailyNet)
-    + (A.beDays === null ? " — günlük net sıfır veya negatif, yani " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
+    + (A.beDays === null ? ", günlük net sıfır veya negatif, yani " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
     + "; 40 sa net = " + money(state.rate) + " × 40 − " + money(state.upkeep) + " × (40 ÷ " + state.hours + ") − " + money(state.price)
     + " = " + money(A.net40) + "; 40 sa ROI = " + money(A.net40) + " ÷ " + money(state.price) + " = " + roiA
     + "; hedefe ulaşma süresi = " + money(state.goal) + " ÷ " + money(Math.round(A.eff)) + " = " + ttgA
     + ". " + STR.crossover + ": (" + money(state.price2) + " − " + money(state.price) + ") ÷ (" + money(Math.round(B.eff)) + " − " + money(Math.round(A.eff)) + ")"
-    + (tStar === null ? " — kesişim yok" : " = " + hoursFmt(tStar))
+    + (tStar === null ? ", kesişim yok" : " = " + hoursFmt(tStar))
     + ". Tüm girdiler sizin varsayımınızdır.";
 
   var tldr = state.biz + " " + (A.beDays === null ? "başabaşa asla ulaşmaz" : hoursFmt(A.beHours) + " oyun saatinde başabaşa ulaşır")
@@ -244,7 +244,7 @@ function render() {
       + "<div><dt>" + STR.crossover + " (" + escapeHtml(state.biz2) + " öne geçer)</dt><dd>" + crossText + "</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + escapeHtml(work) + "</p>"
-      + '<p class="verdict-desc">Tüm girdiler sizin varsayımınızdır — hiçbir GTA 6 fiyatı, ödemesi veya oranı kullanılmaz.</p>';
+      + '<p class="verdict-desc">Tüm girdiler sizin varsayımınızdır, hiçbir GTA 6 fiyatı, ödemesi veya oranı kullanılmaz.</p>';
   }
 
   var tldrCard = $("[data-tldr-card]");
@@ -259,8 +259,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Bu sonucu X\'te paylaş"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Bu sonucu Reddit\'te paylaş"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " " + (A.beDays === null ? "başabaşa asla ulaşmaz" : "yaklaşık " + hoursFmt(A.beHours) + " oyun saatinde başabaşa ulaşır")
     + " ve 40 saatte " + money(A.net40) + " net kazandırır (GTA 6 İşletme Takipçisi — sizin varsayımınız, GTA Online kıyas ölçütü varsayılanları).";
   var shareTitle = state.biz + " " + (A.beDays === null ? "başabaşa asla ulaşmaz" : "yaklaşık " + hoursFmt(A.beHours) + " oyun saatinde başabaşa ulaşır") + " (GTA 6 İşletme Takipçisi)";

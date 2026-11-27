@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 Depolama Planlayıcı">
     <meta name="twitter:description" content="GTA 6 için boş disk alanı planlayın, temel kurulum, çıkış yaması, DLC ve güvenli güncelleme payı tek dürüst sayıda. PC ve konsol hesaplaması yan yana, ayrıca planlanan PC tahmini.">
     <meta name="twitter:image" content="https://toolwools.com/og/storage-planner.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tr/tools/storage-planner">
 <link rel="alternate" href="https://toolwools.com/tools/storage-planner" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/storage-planner" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-storage-planner-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/storage-planner">İngilizce</a>
             <a href="/es/tools/storage-planner">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,7 +136,11 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/storage-planner" lang="en">EN</a><a href="/es/tools/storage-planner" lang="es">ES</a><a href="/pt/tools/storage-planner" lang="pt">PT</a><a href="/de/tools/storage-planner" lang="de">DE</a><a href="/fr/tools/storage-planner" lang="fr">FR</a><a href="/tr/tools/storage-planner" aria-current="true">TR</a><a href="/ar/tools/storage-planner" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -128,47 +149,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Sayfa yolu">
-        <a href="/tr/">Ana Sayfa</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tr/tools">Araçlar</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Depolama Planlayıcı</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>
-        <span>Planlayıcılar</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 Depolama Planlayıcı</h1>
-      <p class="page-subtitle">Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Alan hesabı</dd></div>
-        <div><dt>Çalışma süresi</dt><dd>Anında, tarayıcıda</dd></div>
-        <div><dt>Platformlar</dt><dd>PC (planlama) · PS5 · Xbox</dd></div>
-        <div><dt>Güncellendi</dt><dd><time datetime="2026-11-22">22 Kas 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>GTA 6, ilk gün yaması öncesi yaklaşık 212 GB ve onu ve ilk yıl DLC'sini ekleyince 244.8 GB ister. Bu planlayıcı payınızı ekler ve toplamı gösterir, sonra PS5 ve Xbox Series X/S'de kullanılabilir alanla karşılaştırır — PC sürümü henüz duyurulmadı, bu yüzden PC satırı yalnızca planlama içindir — böylece kurulumdan önce alan açmanız gerekip gerekmediğini bilirsiniz.</p>
-          </div>
-<section class="byline" aria-label="Bu sayfa hakkında">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, ToolWools&#x27;un kurucusu" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/tr/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Kurucu, ToolWools&nbsp;· Depolama ve ön yükleme analizi</p>
-        <p class="byline-note">Model: <a href="/tr/methodology">GTA 6 depolama hesabı</a></p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2025-11-01">1 Kas 2025</time>&nbsp;· Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Depolama Planlayıcı</span>
+        </div>
+        <div class="page-eyebrow"><span>Planlayıcılar</span></div>
+        <h1 id="page-title">GTA 6 Depolama Planlayıcı</h1>
+        <p class="page-subtitle">Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p>
+        <p class="hero-meta">
+          <span>Motor: Alan hesabı</span><span>Çalışma süresi: Anında, tarayıcıda</span><span>Platformlar: PC (planlama) · PS5 · Xbox</span><span>Güncellendi: <time datetime="2026-11-22">22 Kas 2026</time></span><span>Yazan <a href="/tr/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>Kurucu, ToolWools</span><span>Depolama ve ön yükleme analizi</span><span>Model: <a href="/tr/methodology">GTA 6 depolama hesabı</a></span><span>Yayınlanma <time datetime="2025-11-01">1 Kas 2025</time></span><span>Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Önerilen boş alan 293.8 gigabayt: 212 gigabayt kurulum, 2.8 gigabayt yama, 30 gigabayt DLC, 49 gigabayt pay.</div>
-<section class="tldr-card" data-tldr-card data-tone="borderline" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-borderline" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>293.8 GB boş bırakın · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>GTA 6 için PS5'te 293.8 GB boş bırakın: 212 GB kurulum + 2.8 GB yama + 30 GB DLC + 49 GB pay.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>293.8 GB önerilen boş alan</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Hesaplayıcı</h2>
       <div class="workspace-grid">
@@ -186,17 +182,17 @@
 <div>
             <label class="field-label" for="base-range">Temel kurulum: <span data-base-value>212 GB</span></label>
             <input class="range-input" type="range" id="base-range" data-base-range min="50" max="300" step="1" value="212" aria-label="Temel kurulum boyutu, şu anda 212 gigabayt">
-            
+
           </div>
 <div>
             <label class="field-label" for="patch-range">İlk gün yaması: <span data-patch-value>2.8 GB</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-valuetext="2.8 GB" aria-label="İlk gün yaması boyutu, şu anda 2.8 gigabayt">
-            
+
           </div>
 <div>
             <label class="field-label" for="dlc-range">DLC + mevsimsel içerik: <span data-dlc-value>30 GB</span></label>
             <input class="range-input" type="range" id="dlc-range" data-dlc-range min="0" max="200" step="5" value="30" aria-label="DLC ve mevsimsel içerik, şu anda 30 gigabayt">
-            
+
           </div>
 <div>
             <label class="field-label" for="buffer-range">Güvenlik payı: <span data-buffer-value>20%</span></label>
@@ -208,8 +204,8 @@
           <div class="output-panel-label eyebrow-muted">Karar</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-borderline" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg><div><p class="verdict-kicker tone-borderline">Önerilen boş alan</p><h3 class="verdict-title">293.8<span class="unit"> GB</span></h3><p class="verdict-desc">244.8 GB içerik + gelecek yamalar için 49 GB güvenli pay.</p><p class="verdict-desc">Sony'nin 825 GB SSD'si, sistem ayrımından sonra 667 GB kullanılabilir gösteriyor. GTA 6 sonrası diğer oyunlar için <strong>373.2 GB</strong> kalıyor.</p></div></div><div><div class="stack-bar" role="img" aria-label="Bileşim: Temel kurulum 212 GB, İlk gün yaması 2.8 GB, DLC ve mevsimsel içerik 30 GB, Güncelleme payı 49 GB"><span class="seg-purple" style="width:72.2%"></span><span class="seg-pink" style="width:1%"></span><span class="seg-blue" style="width:10.2%"></span><span class="seg-muted" style="width:16.7%"></span></div></div><dl class="stat-grid"><div><dt>Temel kurulum</dt><dd>212 GB</dd></div><div><dt>İlk gün yaması</dt><dd>2.8 GB</dd></div><div><dt>DLC + mevsimsel</dt><dd>30 GB</dd></div><div><dt>Güncelleme payı</dt><dd>49 GB</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">X'te paylaş</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">X'te paylaş</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -226,8 +222,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Bağlantıyı kopyala</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor.%20Alan%C4%B1n%C4%B1z%C4%B1%20ToolWools%27ta%20planlay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">X'te paylaş</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor.%20Alan%C4%B1n%C4%B1z%C4%B1%20ToolWools%27ta%20planlay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor.%20Alan%C4%B1n%C4%B1z%C4%B1%20ToolWools%27ta%20planlay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">X'te paylaş</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20yakla%C5%9F%C4%B1k%20293%2C8%20GB%20bo%C5%9F%20alan%20istiyor.%20Alan%C4%B1n%C4%B1z%C4%B1%20ToolWools%27ta%20planlay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fstorage-planner%3Fbase%3D212%26patch%3D2.8%26dlc%3D30%26buffer%3D20%26platform%3Dpc">Reddit</a>
       </div>
     </section>
 
@@ -238,23 +234,20 @@
         <table class="data-table">
           <caption class="sr-only">Kullanılabilir sürücü alanı ve GTA 6 sonrası kalan.</caption>
           <thead><tr><th scope="col">Platform</th><th scope="col">Sürücü</th><th scope="col">Sistem ayrımı</th><th scope="col">GTA 6 sonrası</th></tr></thead>
-          <tbody data-platform-table><tr><th scope="row" class="mono">PC (planlama)</th><td>NVMe / SATA SSD'niz</td><td>—</td><td class="mono">Sürücüye bağlı</td></tr><tr><th scope="row" class="mono">PS5 (825 GB)</th><td>Özel Sony SSD</td><td>158 GB sistem</td><td class="mono">373.2 GB boş</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 TB)</th><td>Özel Sony SSD</td><td>158 GB sistem</td><td class="mono">548.2 GB boş</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 TB)</th><td>NVMe genişletme kartı</td><td>198 GB sistem</td><td class="mono">508.2 GB boş</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 GB)</th><td>NVMe genişletme kartı</td><td>148 GB sistem</td><td class="mono">70.2 GB boş</td></tr></tbody>
+          <tbody data-platform-table><tr><th scope="row" class="mono">PC (planlama)</th><td>NVMe / SATA SSD'niz</td><td>n/a</td><td class="mono">Sürücüye bağlı</td></tr><tr><th scope="row" class="mono">PS5 (825 GB)</th><td>Özel Sony SSD</td><td>158 GB sistem</td><td class="mono">373.2 GB boş</td></tr><tr><th scope="row" class="mono">PS5 Slim (1 TB)</th><td>Özel Sony SSD</td><td>158 GB sistem</td><td class="mono">548.2 GB boş</td></tr><tr><th scope="row" class="mono">Xbox Series X (1 TB)</th><td>NVMe genişletme kartı</td><td>198 GB sistem</td><td class="mono">508.2 GB boş</td></tr><tr><th scope="row" class="mono">Xbox Series S (512 GB)</th><td>NVMe genişletme kartı</td><td>148 GB sistem</td><td class="mono">70.2 GB boş</td></tr></tbody>
         </table>
       </div>
       <p class="field-hint" data-platform-note>GTA 6'nın diğer oyunlar için size ne kadar yer bıraktığı, mevcut 293.8 GB planınızla.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">GTA 6 sisteminizi planlamaya devam edin</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>İndirmenin ne kadar sürdüğünü şununla görün: <a href="/tr/tools/download-time">GTA 6 indirme süresi hesaplayıcı</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla puanlayın: <a href="/tr/tools/readiness-score">GTA 6 hazırlık puanı</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla kontrol edin: <a href="/tr/tools/system-requirements">GTA 6 sistem gereksinimleri denetleyicisi</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>İndirmenin ne kadar sürdüğünü şununla görün: <a href="/tr/tools/download-time">GTA 6 indirme süresi hesaplayıcı</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla puanlayın: <a href="/tr/tools/readiness-score">GTA 6 hazırlık puanı</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla kontrol edin: <a href="/tr/tools/system-requirements">GTA 6 sistem gereksinimleri denetleyicisi</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Varsayımlar</strong> <span>Toplamlar 212 GB temel kurulum, 2.8 GB ilk gün yaması ve 30 GB ilk yıl DLC varsayımına dayanır. Konsol kullanılabilir alan rakamları Sony (PS5'te 825 GB'ın 667 GB'ı) ve Microsoft (Xbox Series X'te 1 TB'ın 802 GB'ı) destek sayfalarından gelir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
-      <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">GTA 6 Depolama Planlayıcı nasıl kullanılır</h2>
@@ -277,7 +270,7 @@
 <li>
         <span class="step-number">04</span>
         <h3 class="step-title">Platform seçin</h3>
-        <p class="step-text">Platformunuzu seçin (PC, PS5 veya Xbox Series X), çünkü kullanılabilir boş alan her birinde farklıdır. PC sürümü henüz duyurulmadı — PC seçeneği yalnızca planlama içindir.</p>
+        <p class="step-text">Platformunuzu seçin (PC, PS5 veya Xbox Series X), çünkü kullanılabilir boş alan her birinde farklıdır. PC sürümü henüz duyurulmadı, PC seçeneği yalnızca planlama içindir.</p>
       </li>
 <li>
         <span class="step-number">05</span>
@@ -296,17 +289,19 @@ headroom = subtotal × (bufferPct / 100)  // güvenlik payı
 total = subtotal + headroom  // önerilen toplam
 remaining = usableSpace − total  // kalan boş alan
 PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması.</li>
+          <ul class="list-disc list-outside"><li>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması.</li>
 <li>Kullanılabilir alan, işletim sistemi ve sistem ayrımları sonrası kalandır: PS5 825 GB'ın 667 GB'ı, PS5 Slim 1 TB'ın 842 GB'ı, Xbox Series X 1 TB'ın 802 GB'ı, Xbox Series S 512 GB'ın 364 GB'ı.</li>
 <li><span data-method-buffer-pct>%20</span> pay, yamaların açılması için pay bırakır ve SSD'lerin neredeyse dolu çalışmasını engeller.</li>
 <li>DLC boyutu ilk yıl için bir planlama tahminidir, Rockstar duyurusu değildir.</li></ul>
+    <div class="assumptions-block"><p><strong>Varsayımlar</strong> <span>Toplamlar 212 GB temel kurulum, 2.8 GB ilk gün yaması ve 30 GB ilk yıl DLC varsayımına dayanır. Konsol kullanılabilir alan rakamları Sony (PS5'te 825 GB'ın 667 GB'ı) ve Microsoft (Xbox Series X'te 1 TB'ın 802 GB'ı) destek sayfalarından gelir.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+      <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Sık sorulan sorular</h2>
+      <header>
+        <h2 id="faq">Sık sorulan sorular</h2>
         <p class="section-dek">GTA 6 depolaması hakkında insanların artık çıktıktan sonra gerçekten sorduğu sorulara dürüst cevaplar.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -386,10 +381,10 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
     <section aria-labelledby="related-content">
       <h2 id="related-content">İlgili araçlar</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/download-time" class="tool-card" data-accent="purple" aria-label="GTA 6 İndirme Süresi Hesaplayıcı: Bağlantınızda 212 GB&#x27;a oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="GTA 6 Hazırlık Puanı: Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi: Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı: GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/tr/tools/download-time" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA 6 İndirme Süresi Hesaplayıcı</h3><p>Bağlantınızda 212 GB oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
@@ -432,27 +427,45 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -492,6 +505,9 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -500,6 +516,7 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
@@ -508,11 +525,22 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
 </footer>
 
   </div>
-  <script src="/assets/js/tr/theme.js" defer></script>
-  <script src="/assets/js/tr/header.js" defer></script>
-  <script src="/assets/js/tr/search.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
   <script type="module" src="/assets/js/tr/storage-planner.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -558,7 +586,7 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
       },
       "datePublished": "2025-11-01",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",
@@ -586,7 +614,7 @@ PS5 667 GB · PS5 Slim 842 GB · Xbox Series X 802 GB · Xbox Series S 364 GB</p
           "@type": "HowToStep",
           "position": 4,
           "name": "Platform seçin",
-          "text": "Platformunuzu seçin (PC, PS5 veya Xbox Series X), çünkü kullanılabilir boş alan her birinde farklıdır. PC sürümü henüz duyurulmadı — PC seçeneği yalnızca planlama içindir."
+          "text": "Platformunuzu seçin (PC, PS5 veya Xbox Series X), çünkü kullanılabilir boş alan her birinde farklıdır. PC sürümü henüz duyurulmadı, PC seçeneği yalnızca planlama içindir."
         },
         {
           "@type": "HowToStep",

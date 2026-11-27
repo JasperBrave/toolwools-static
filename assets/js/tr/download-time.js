@@ -143,8 +143,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X\'te paylaş" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 indirme süresi: " + r.total.text + ", " + state.mbps + " Mbps hızında " + r.totalGb + " GB için") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit\'te paylaş" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 indirme süresi: " + r.total.text + ", " + state.mbps + " Mbps hızında " + r.totalGb + " GB için") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent("GTA 6 indirme süresi: " + r.total.text + ", " + state.mbps + " Mbps hızında " + r.totalGb + " GB için") + '&url=' + encodeURIComponent(shareUrl()) + '">X\'te paylaş</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("GTA 6 indirme süresi: " + r.total.text + ", " + state.mbps + " Mbps hızında " + r.totalGb + " GB için") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });

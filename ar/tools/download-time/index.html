@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="ar_SA">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="tr_TR">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="حاسبة وقت تنزيل GTA 6">
     <meta name="twitter:description" content="قدّر كم يستغرق تنزيل GTA 6 على اتصالك، التثبيت الأساسي مع تصحيح اليوم الأول، مع خسائر شبكة توصيل المحتوى الحقيقية.">
     <meta name="twitter:image" content="https://toolwools.com/og/download-time.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/ar/tools/download-time">
 <link rel="alternate" href="https://toolwools.com/tools/download-time" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/download-time" hreflang="es">
@@ -43,10 +41,28 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-download-time-ar.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +70,14 @@
 
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 <header class="site-header" aria-label="الموقع">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/ar/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
             </span>
           </span>
@@ -75,6 +89,7 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
       </div>
       <div class="site-header-actions">
@@ -86,7 +101,7 @@
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="اختر اللغة">AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>AR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/download-time">الإنجليزية</a>
             <a href="/es/tools/download-time">Español</a>
@@ -120,7 +135,11 @@
           <a href="/ar/generators">المولّدات</a>
           <a href="/ar/news">الأخبار</a>
           <a href="/ar/trailers">العروض الدعائية</a>
+          <a href="/ar/guides">الأدلة</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/download-time" lang="en">EN</a><a href="/es/tools/download-time" lang="es">ES</a><a href="/pt/tools/download-time" lang="pt">PT</a><a href="/de/tools/download-time" lang="de">DE</a><a href="/fr/tools/download-time" lang="fr">FR</a><a href="/tr/tools/download-time" lang="tr">TR</a><a href="/ar/tools/download-time" aria-current="true">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,47 +148,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="مسار التنقل">
-        <a href="/ar/">الرئيسية</a>
-        <span aria-hidden="true">/</span>
-        <a href="/ar/tools">الأدوات</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">وقت التنزيل</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-        <span>المخططات</span>
-      </div>
-      <h1 id="page-title" class="page-title">حاسبة وقت تنزيل GTA 6</h1>
-      <p class="page-subtitle">قدّر كم سيستغرق تثبيت اللعبة الذي يبلغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p>
-      <dl class="hero-badges">
-        <div><dt>المحرك</dt><dd>حساب الوقت</dd></div>
-        <div><dt>زمن التشغيل</dt><dd>فوري، داخل المتصفح</dd></div>
-        <div><dt>المنصات</dt><dd>PS5 · Xbox</dd></div>
-        <div><dt>تم التحديث</dt><dd><time datetime="2026-11-22">22 نوفمبر 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>تثبيت GTA 6 يبلغ 212 غيغابايت قبل تصحيح اليوم الأول، وسرعة مزود خدمة الإنترنت المعلنة ليست أبدا ما تحصل عليه فعلا. وتحول هذه الحاسبة اتصالك إلى وقت انتهاء حقيقي: التثبيت الأساسي مع التصحيح، بالسرعة التي تحافظ عليها فعلا، مع افتراض كفاءة 80% الذي ينمذج تقييد شبكة توصيل المحتوى وفقدان Wi-Fi وسرعة كتابة القرص.</p>
-          </div>
-<section class="byline" aria-label="حول هذه الصفحة">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="جاسبر برافو، مؤسس ToolWools" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">بقلم <span class="byline-seg"><a href="/ar/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> مؤسس ToolWools&nbsp;· تحليل النطاق العريض والتنزيل</p>
-        <p class="byline-note">النموذج: <a href="/ar/methodology">حساب وقت تنزيل GTA 6</a></p>
-      </div>
-      <p class="byline-dates">نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time>&nbsp;· آخر مراجعة <time datetime="2026-11-22">22 نوفمبر 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="مسار التنقل">
+          <a href="/ar/">الرئيسية</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/ar/tools">الأدوات</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">وقت التنزيل</span>
+        </div>
+        <div class="page-eyebrow"><span>المخططات</span></div>
+        <h1 id="page-title">حاسبة وقت تنزيل GTA 6</h1>
+        <p class="page-subtitle">قدّر كم سيستغرق تثبيت اللعبة الذي يبلغ 212 غيغابايت (بالإضافة إلى تصحيحات اليوم الأول بحجم 1.7–3.8 غيغابايت) على اتصالك.</p>
+        <p class="hero-meta">
+          <span>المحرك: حساب الوقت</span><span>زمن التشغيل: فوري، داخل المتصفح</span><span>المنصات: PS5 · Xbox</span><span>تم التحديث: <time datetime="2026-11-22">22 نوفمبر 2026</time></span><span>بقلم <a href="/ar/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>مؤسس ToolWools</span><span>تحليل النطاق العريض والتنزيل</span><span>النموذج: <a href="/ar/methodology">حساب وقت تنزيل GTA 6</a></span><span>نُشر <time datetime="2025-11-01">1 نوفمبر 2025</time></span><span>آخر مراجعة <time datetime="2026-11-22">22 نوفمبر 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">وقت التنزيل المقدر 4 ساعات و 35 دقيقة لـ214.8 غيغابايت بسرعة 100 ميغابت في الثانية، بكفاءة 80%.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>نحو 5 س 58 د · باختصار</span></p>
-        <p class="tldr-text"><span data-tldr-text>214.8 غيغابايت عند 100 ميغابت في الثانية (كفاءة 80%، و 80 ميغابت في الثانية فعالة) تنتهي في نحو 5 س 58 د. GTA 6 متوفرة الآن: نزّل اللعبة الكاملة اليوم.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>5 س 58 د لـ214.8 غيغابايت</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">الحاسبة</h2>
       <div class="workspace-grid">
@@ -179,17 +173,17 @@
 <div>
             <label class="field-label" for="gb-range">التثبيت الأساسي: <span data-gb-value>212 GB</span></label>
             <input class="range-input" type="range" id="gb-range" data-gb-range min="20" max="250" step="1" value="212" aria-label="حجم التثبيت الأساسي، حاليا 212 غيغابايت">
-            
+
           </div>
 <div>
             <label class="field-label" for="patch-range">تصحيح اليوم الأول: <span data-patch-value>2.8 GB</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-label="حجم تصحيح اليوم الأول، حاليا 2.8 غيغابايت">
-            
+
           </div>
 <div>
             <label class="field-label" for="mbps-range">الاتصال: <span data-mbps-value>100 Mbps</span></label>
             <input class="range-input" type="range" id="mbps-range" data-mbps-range min="5" max="1000" step="5" value="100" aria-label="سرعة التنزيل، حاليا 100 ميغابت في الثانية">
-            
+
           </div>
 <div>
             <span class="field-label" id="preset-label"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>إعدادات الاتصال المسبقة</span>
@@ -211,8 +205,8 @@
           <div class="output-panel-label eyebrow-muted">الحكم</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">وقت الانتهاء المقدر</p><h3 class="verdict-title">5<span class="unit"> h</span> 58<span class="unit"> د</span></h3><p class="verdict-desc">214.8 غيغابايت إجمالا بسرعة فعلية قدرها 80 ميغابت في الثانية.</p></div></div><dl class="stat-grid"><div><dt>التثبيت الأساسي</dt><dd>5 س 53 د</dd></div><div><dt>تصحيح اليوم الأول</dt><dd>5 د</dd></div><div><dt>الحجم الأساسي</dt><dd>212 GB</dd></div><div><dt>الكفاءة</dt><dd>80%</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=%D9%88%D9%82%D8%AA%20%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20GTA%206%3A%205%20%D8%B3%2058%D8%AF%20%D8%A8%D8%B3%D8%B1%D8%B9%D8%A9%20100%20%D9%85%D9%8A%D8%BA%D8%A7%D8%A8%D8%AA%2F%D8%AB%20%D9%85%D9%82%D8%A7%D8%A8%D9%84%20214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">مشاركة على X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=%D9%88%D9%82%D8%AA%20%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20GTA%206%3A%205%20%D8%B3%2058%D8%AF%20%D8%A8%D8%B3%D8%B1%D8%B9%D8%A9%20100%20%D9%85%D9%8A%D8%BA%D8%A7%D8%A8%D8%AA%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=%D9%88%D9%82%D8%AA%20%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20GTA%206%3A%205%20%D8%B3%2058%D8%AF%20%D8%A8%D8%B3%D8%B1%D8%B9%D8%A9%20100%20%D9%85%D9%8A%D8%BA%D8%A7%D8%A8%D8%AA%2F%D8%AB%20%D9%85%D9%82%D8%A7%D8%A8%D9%84%20214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">مشاركة على X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=%D9%88%D9%82%D8%AA%20%D8%AA%D9%86%D8%B2%D9%8A%D9%84%20GTA%206%3A%205%20%D8%B3%2058%D8%AF%20%D8%A8%D8%B3%D8%B1%D8%B9%D8%A9%20100%20%D9%85%D9%8A%D8%BA%D8%A7%D8%A8%D8%AA%2F%D8%AB&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -229,8 +223,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>نسخ الرابط</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على X" href="https://twitter.com/intent/tweet?text=214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D9%8A%20~5%20%D8%B3%2058%D8%AF%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D9%83.%20%D8%A7%D8%AD%D8%B3%D8%A8%20%D9%88%D9%82%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">مشاركة على X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك هذه النتيجة على Reddit" href="https://www.reddit.com/submit?title=214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D9%8A%20~5%20%D8%B3%2058%D8%AF%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D9%83.%20%D8%A7%D8%AD%D8%B3%D8%A8%20%D9%88%D9%82%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D9%8A%20~5%20%D8%B3%2058%D8%AF%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D9%83.%20%D8%A7%D8%AD%D8%B3%D8%A8%20%D9%88%D9%82%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">مشاركة على X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=214.8%20%D8%BA%D9%8A%D8%BA%D8%A7%D8%A8%D8%A7%D9%8A%D8%AA%20%D9%81%D9%8A%20~5%20%D8%B3%2058%D8%AF%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D9%83.%20%D8%A7%D8%AD%D8%B3%D8%A8%20%D9%88%D9%82%D8%AA%D9%83%20%D8%B9%D9%84%D9%89%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Far%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
       </div>
     </section>
 
@@ -247,18 +241,15 @@
       <p class="field-hint" data-speed-note>214.8 غيغابايت إجمالا (التثبيت + التصحيح) بكفاءة حقيقية قدرها 80%.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">واصل تخطيط جهاز GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>خصص مساحة القرص باستخدام <a href="/ar/tools/storage-planner">مخطط تخزين GTA 6</a> ، التثبيت الأساسي والتصحيح والمحتوى القابل للتنزيل والهامش.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من الجهاز كله باستخدام <a href="/ar/tools/system-requirements">مدقق متطلبات نظام GTA 6</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قِس خطك أولا باستخدام <a href="/ar/tools/internet-speed-check">فحص سرعة الإنترنت</a> ، ثم أعد الرقم إلى هنا.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>خصص مساحة القرص باستخدام <a href="/ar/tools/storage-planner">مخطط تخزين GTA 6</a> ، التثبيت الأساسي والتصحيح والمحتوى القابل للتنزيل والهامش.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قيّم الجهاز كله باستخدام <a href="/ar/tools/readiness-score">نتيجة جاهزية GTA 6</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>تحقق من الجهاز كله باستخدام <a href="/ar/tools/system-requirements">مدقق متطلبات نظام GTA 6</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>قِس خطك أولا باستخدام <a href="/ar/tools/internet-speed-check">فحص سرعة الإنترنت</a> ، ثم أعد الرقم إلى هنا.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="الافتراضات">
-      <p><strong>الافتراضات</strong> <span>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت. ويفترض الحساب تنزيلا ثابتا بالسرعة الفعلية للملف كله، وتختلف التنزيلات الحقيقية مع حمل شبكة توصيل المحتوى وازدحام Wi-Fi وسرعة كتابة القرص، وهو ما ينمذجه افتراض الكفاءة بنسبة 80%.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
-      <p class="updated-line">تم التحديث <time datetime="2026-11-22">22 نوفمبر 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">كيفية استخدام حاسبة وقت تنزيل GTA 6</h2>
@@ -295,17 +286,19 @@ effectiveMbps = mbps × (efficiency / 100)
 seconds = totalGB × 8 × 1000 / effectiveMbps
 finish = baseSeconds + patchSeconds
 1 Gbps = 1000 Mbps; 1 GB = 8 Gb</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت.</li>
+          <ul class="list-disc list-outside"><li>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت.</li>
 <li>يفترض الإعداد الافتراضي للكفاءة بنسبة 80% تقييد شبكة توصيل المحتوى وفقدان Wi-Fi وسرعة كتابة القرص.</li>
 <li>تقاس السرعات بالميغابت في الثانية (Mbps)، وتقاس أحجام الملفات بالغيغابايت (GB).</li>
 <li>بسرعة 100 ميغابت في الثانية وكفاءة 80%، يستغرق تنزيل 214.8 غيغابايت 5 ساعات و 58 دقيقة، وبسرعة 1 غيغابت في الثانية يستغرق نحو 36 دقيقة.</li></ul>
+    <div class="assumptions-block"><p><strong>الافتراضات</strong> <span>حجم التثبيت 212 غيغابايت (أساسي) بالإضافة إلى تصحيح اليوم الأول بحجم 1.7–3.8 غيغابايت. ويفترض الحساب تنزيلا ثابتا بالسرعة الفعلية للملف كله، وتختلف التنزيلات الحقيقية مع حمل شبكة توصيل المحتوى وازدحام Wi-Fi وسرعة كتابة القرص، وهو ما ينمذجه افتراض الكفاءة بنسبة 80%.</span> <a href="/ar/methodology">اقرأ المنهجية الكاملة</a></p>
+      <p class="updated-line">تم التحديث <time datetime="2026-11-22">22 نوفمبر 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">الأسئلة الشائعة</h2>
+      <header>
+        <h2 id="faq">الأسئلة الشائعة</h2>
         <p class="section-dek">إجابات صادقة على الأسئلة التي يطرحها الناس فعلا حول تنزيل GTA 6 الآن بعد إطلاقها.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -367,10 +360,10 @@ finish = baseSeconds + patchSeconds
     <section aria-labelledby="related-content">
       <h2 id="related-content">أدوات ذات صلة</h2>
       <h3 class="related-sub">أدوات ذات صلة</h3>
-      <ul class="related-tools-grid"><li><a href="/ar/tools/storage-planner" class="tool-card" data-accent="purple" aria-label="مخطط تخزين GTA 6: خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>مخطط تخزين GTA 6</h3><p>خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="نتيجة جاهزية GTA 6: نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="مدقق متطلبات نظام GTA 6: حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/ar/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3><p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/ar/tools/storage-planner" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>مخطط تخزين GTA 6</h3><p>خصص كل غيغابايت: التثبيت الأساسي وتصحيح اليوم الأول والمحتوى الموسمي القابل للتنزيل وهامش آمن للتحديثات.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>نتيجة جاهزية GTA 6</h3><p>نتيجة واحدة لجهازك كله: الأداء وذاكرة الفيديو والتخزين والشبكة.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/ar/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>مدقق متطلبات نظام GTA 6</h3><p>حكم فوري مقابل المستويات الدنيا والموصى بها والفائقة المقدرة من المجتمع. وحدة معالجة الرسومات ووحدة المعالجة المركزية والذاكرة والتخزين.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/ar/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات</h3><p>سجل التحميل المسبق للعبة GTA 6 وجدول التحديثات: التحميل المسبق للإطلاق (10–19 نوفمبر 2026)، وتحديثات 1.002.000 و 1.002.001 وأول تصحيح بعد الإطلاق 01.002.002 (23 نوفمبر، مع ملاحظات رسمية). لم يُعلن عن أي DLC. آخر تحقق 23 نوفمبر 2026.</p><span class="link-cta">فتح الأداة <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
@@ -419,28 +412,46 @@ finish = baseSeconds + patchSeconds
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>ابقَ على اطلاع</h2>
+          <p>احصل على أحدث أخبار GTA 6 والأدوات والأدلة في بريدك الوارد.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">عنوان البريد الإلكتروني</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">اشترك</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/ar/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 صدرت الآن — 19 نوفمبر 2026</span>
+        <span class="eyebrow-muted">GTA 6 صدرت الآن, 19 نوفمبر 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">تصفح الأدوات ←</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/ar/" aria-label="ToolWools - الرئيسية" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/ar/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">جميع أدوات GTA 6 في مكان واحد</span>
               </span>
             </span>
@@ -480,6 +491,9 @@ finish = baseSeconds + patchSeconds
               <li><a href="/ar/email-preferences">تفضيلات البريد الإلكتروني</a></li>
               <li><a href="/ar/sitemap">خريطة الموقع</a></li>
               <li><a href="/editorial-policy">سياسة التحرير</a></li>
+          <li><a href="/ar/privacy">سياسة الخصوصية</a></li>
+          <li><a href="/ar/terms">شروط الخدمة</a></li>
+          <li><a href="/ar/disclaimer">إخلاء المسؤولية</a></li>
             </ul>
           </div>
         </div>
@@ -488,6 +502,7 @@ finish = baseSeconds + patchSeconds
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - جميع الحقوق محفوظة. غير تابع لشركة Rockstar Games أو Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/ar/privacy">الخصوصية</a><a href="/ar/terms">الشروط</a><a href="/ar/disclaimer">إخلاء المسؤولية</a><button type="button" data-consent-open>إعدادات ملفات تعريف الارتباط</button></span>
           <span>صُنع بحب <span class="heart">♥</span> لمعجبي GTA 6</span>
         </div>
       </div>
@@ -496,11 +511,22 @@ finish = baseSeconds + patchSeconds
 </footer>
 
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="الموافقة على التحليلات" hidden>
+  <p>نستخدم تحليلات Google المجمعة لتحسين الموقع. لا ملفات تعريف، ولا يُباع أي شيء. اقبل أو ارفض؛ ويُحفظ اختيارك في هذا المتصفح.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>قبول التحليلات</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>رفض</button>
+  </div>
+</div>
   <script src="/assets/js/ar/theme.js" defer></script>
   <script src="/assets/js/ar/header.js" defer></script>
   <script src="/assets/js/ar/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/ar/newsletter.js" defer></script>
+  <script src="/assets/js/ar/consent.js" defer></script>
   <script type="module" src="/assets/js/ar/download-time.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -546,7 +572,7 @@ finish = baseSeconds + patchSeconds
       },
       "datePublished": "2025-11-01",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "ar"
     },
     {
       "@type": "HowTo",

@@ -109,7 +109,7 @@ function verdictHtml(result) {
     if (!e.available) desc += " No se vende en " + result.platformLabel + ".";
     else if (e.overBudget) desc += " Por encima del techo que fijaste.";
     desc += " Confianza: " + L(CONFIDENCE_LABEL[e.confidence]) + ".";
-    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + " \u2014 " + e.score + "/100</strong> \u2014 " + esc(desc) + "</li>";
+    return "<li><strong>" + (i + 1) + ". " + esc(e.edition.label) + ": " + e.score + "/100</strong>, " + esc(desc) + "</li>";
   }).join("");
   return '<div class="verdict-body"><div><p class="verdict-kicker tone-ready">Mejor valor \u00b7 ' + result.best.score + "/100</p>"
     + '<h3 class="verdict-title">' + esc(result.best.edition.label) + "</h3>"
@@ -122,14 +122,14 @@ function verdictHtml(result) {
     + "<div><dt>Tu tope</dt><dd>" + result.upliftTolerance + "%</dd></div></dl>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="' + xUrl(result) + '">Compartir en X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartir en X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function matrixHtml(result) {
   var items = result.best.bonuses.map(function (b) {
-    return "<li><strong>" + esc(b.label) + " \u2014 " + b.utility + " pts</strong> \u2014 " + esc(L(CATEGORY_LABEL[b.category])) + " \u00b7 " + esc(L(CONFIDENCE_LABEL[b.confidence])) + ". " + esc(b.detail) + "</li>";
+    return "<li><strong>" + esc(b.label) + ": " + b.utility + " pts</strong>, " + esc(L(CATEGORY_LABEL[b.category])) + " \u00b7 " + esc(L(CONFIDENCE_LABEL[b.confidence])) + ". " + esc(b.detail) + "</li>";
   }).join("");
   var added = result.best.addedOverPrevious.length
     ? '<p class="verdict-desc">Nuevo en este nivel: ' + esc(result.best.addedOverPrevious.map(function (b) { return b.label; }).join(", ")) + ".</p>"
@@ -138,20 +138,20 @@ function matrixHtml(result) {
     + '<div class="upgrade-box"><p class="eyebrow-muted">' + esc(result.best.edition.label) + " bonificaciones</p><ul>" + items + "</ul></div>" + added
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="' + xUrl(result) + '">Compartir en X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartir en X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
 function upgradeHtml(result) {
   var items = result.upgradeMath.map(function (m) {
-    return "<li><strong>" + esc(m.title) + "</strong> \u2014 " + esc(m.body) + "</li>";
+    return "<li><strong>" + esc(m.title) + "</strong>, " + esc(m.body) + "</li>";
   }).join("");
   return '<div class="upgrade-box"><p class="eyebrow-muted">Matemáticas de mejora</p><ul>' + items + "</ul></div>"
     + '<div class="share-row">'
     + '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="' + xUrl(result) + '">Compartir en X</a>'
-    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="' + redditUrl(result) + '">Reddit</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + xUrl(result) + '">Compartir en X</a>'
+    + '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="' + redditUrl(result) + '">Reddit</a>'
     + "</div>";
 }
 
@@ -179,7 +179,7 @@ function render() {
     var tIcon = $("[data-tldr-icon]", tldr);
     if (tLabel) tLabel.textContent = result.best.edition.label + " \u00b7 TL;DR";
     if (tText) tText.textContent = result.best.edition.label + " es la mejor opción para un " + buyerPhrase(result.profile) + " en " + result.platformLabel + " con un techo del " + result.upliftTolerance + "%: " + result.best.score + "/100, añadiendo " + result.best.utilityDelta + " puntos ponderados sobre Estándar por un " + result.best.edition.upliftPercent + "% de sobreprecio.";
-    if (tVerdict) tVerdict.textContent = result.best.edition.label + " \u2014 " + result.best.score + "/100 valor por sobreprecio";
+    if (tVerdict) tVerdict.textContent = result.best.edition.label + ": " + result.best.score + "/100 valor por sobreprecio";
     if (tIcon) tIcon.innerHTML = iconFor(tone);
   }
 

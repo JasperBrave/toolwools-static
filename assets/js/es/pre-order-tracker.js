@@ -153,12 +153,12 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>Todos los hitos completados.</strong> Las reservas abrieron el 25 de junio de 2026, las precargas se prepararon en los días previos al lanzamiento — unas 48 horas antes en PlayStation 5, unos 10 días antes en Xbox — y GTA 6 se lanzó el 19 de noviembre de 2026. No queda nada que esperar: comprar ahora significa descargar el juego completo, 212 GB más el parche del primer día, así que consulta primero la <a href="/es/tools/download-time">calculadora de tiempo de descarga</a>.</p>';
+      html += '<p class="verdict-desc"><strong>Todos los hitos completados.</strong> Las reservas abrieron el 25 de junio de 2026, las precargas se prepararon en los días previos al lanzamiento, unas 48 horas antes en PlayStation 5, unos 10 días antes en Xbox, y GTA 6 se lanzó el 19 de noviembre de 2026. No queda nada que esperar: comprar ahora significa descargar el juego completo, 212 GB más el parche del primer día, así que consulta primero la <a href="/es/tools/download-time">calculadora de tiempo de descarga</a>.</p>';
     }
     var shareText = "Mejor lugar para comprar GTA 6 en " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(shareText + " (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a></div>';
     out.innerHTML = html;
     var copyBtn = $("[data-copy-verdict]", out);

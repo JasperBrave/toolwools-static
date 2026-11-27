@@ -152,12 +152,12 @@ function render() {
           '<span class="field-hint">' + esc(e.detail) + '</span></span>' +
           '<span>' + when + ' \u00b7 ' + badge + '</span></div></li>';
       }).join("") + '</ol>';
-      html += '<p class="verdict-desc"><strong>اكتملت جميع المعالم.</strong> فُتح الطلب المسبق في 25 يونيو 2026، وجُهّزت التحميلات المسبقة في الأيام السابقة للإطلاق — قبل نحو 48 ساعة على PlayStation 5، وقبل نحو 10 أيام على Xbox — وصدرت GTA 6 في 19 نوفمبر 2026. لم يبق شيء لانتظاره: الشراء الآن يعني تنزيل اللعبة الكاملة، 212 غيغابايت إضافة إلى تصحيح اليوم الأول، لذا تحقق أولا من <a href="/ar/tools/download-time">حاسبة وقت التنزيل</a>.</p>';
+      html += '<p class="verdict-desc"><strong>اكتملت جميع المعالم.</strong> فُتح الطلب المسبق في 25 يونيو 2026، وجُهّزت التحميلات المسبقة في الأيام السابقة للإطلاق, قبل نحو 48 ساعة على PlayStation 5، وقبل نحو 10 أيام على Xbox, وصدرت GTA 6 في 19 نوفمبر 2026. لم يبق شيء لانتظاره: الشراء الآن يعني تنزيل اللعبة الكاملة، 212 غيغابايت إضافة إلى تصحيح اليوم الأول، لذا تحقق أولا من <a href="/ar/tools/download-time">حاسبة وقت التنزيل</a>.</p>';
     }
     var shareText = "أفضل مكان لشراء GTA 6 على " + result.platform.label + ": " + result.best.channel.short;
     html += '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>نسخ الحكم</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText + " (" + result.best.score + "/100)") + '&url=' + encodeURIComponent(shareUrl()) + '">مشاركة على X</a>' +
       '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="شارك الحكم على Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent(shareText + " (GTA 6)") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a></div>';
     out.innerHTML = html;
     var copyBtn = $("[data-copy-verdict]", out);

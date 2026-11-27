@@ -22,16 +22,18 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Lembrete de Data de Lançamento do GTA 6">
     <meta name="twitter:description" content="GTA 6 foi lançado em 19 nov 2026. Adicione a data de lançamento ao calendário do Google, Apple, Outlook ou Yahoo com um clique. Status do lançamento e horários locais de desbloqueio para 14 cidades.">
     <meta name="twitter:image" content="https://toolwools.com/og/add-to-calendar.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="canonical" href="https://toolwools.com/pt/tools/add-to-calendar">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+            <link rel="canonical" href="https://toolwools.com/pt/tools/add-to-calendar">
 <link rel="alternate" href="https://toolwools.com/tools/add-to-calendar" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/add-to-calendar" hreflang="es">
 <link rel="alternate" href="https://toolwools.com/pt/tools/add-to-calendar" hreflang="pt">
@@ -43,26 +45,43 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-add-to-calendar-pt.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
-    </script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+</script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+<!-- ================= §01, NAVIGATION ================= -->
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/pt/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
             </span>
           </span>
@@ -74,18 +93,19 @@
           <a href="/pt/generators">Geradores</a>
           <a href="/pt/news">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Selecionar idioma">PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/add-to-calendar">English</a>
             <a href="/es/tools/add-to-calendar">Español</a>
@@ -109,7 +129,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvel">
@@ -119,12 +139,16 @@
           <a href="/pt/generators">Geradores</a>
           <a href="/pt/news">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/add-to-calendar" lang="en">EN</a><a href="/es/tools/add-to-calendar" lang="es">ES</a><a href="/pt/tools/add-to-calendar" lang="pt" aria-current="true">PT</a><a href="/de/tools/add-to-calendar" lang="de">DE</a><a href="/fr/tools/add-to-calendar" lang="fr">FR</a><a href="/tr/tools/add-to-calendar" lang="tr">TR</a><a href="/ar/tools/add-to-calendar" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-    <main id="main" class="tool-main">
+    <main id="main" tabindex="-1" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
 <section class="page-hero" aria-labelledby="page-title">
@@ -135,30 +159,13 @@
         <span aria-hidden="true">/</span>
         <span aria-current="page">Lembrete de data de lançamento</span>
       </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-        <span>Lançamento</span>
-      </div>
+      <div class="page-eyebrow"><span>Lançamento</span></div>
       <h1 id="page-title" class="page-title">Lembrete de Data de Lançamento do GTA 6</h1>
-      <p class="page-subtitle">GTA 6 foi lançado em 19 nov 2026 — adicione a data a qualquer calendário com um clique. Status do lançamento no seu fuso horário, mais uma tabela de desbloqueio de 14 cidades mostrando quando o GTA 6 entrou no ar onde você está.</p>
-      <ul class="hero-badges" aria-label="Em resumo">
-        <li class="chip">Google · Apple · Outlook · Yahoo</li><li class="chip">Detecta seu fuso horário automaticamente</li><li class="chip">Tabela de desbloqueio de 14 cidades</li>
-      </ul>
-    </section><div class="tool-intro-callout"><p>A janela confirmada da Rockstar é 19 nov 2026. Esta ferramenta ancora o lançamento às 00:00 America/New_York (05:00 UTC), o padrão que a Rockstar usou para cada lançamento anterior de GTA e RDR, e gera um evento de calendário com lembretes de 24 horas e 1 hora. Escolha seu aplicativo de calendário ou baixe o .ics; o horário está ancorado no horário confirmado de desbloqueio.</p></div>
-<div class="byline" aria-label="Assinatura de autor e revisão">
-      <span class="byline-item">Por <a href="/pt/about#release-desk">Mesa de Lançamentos da ToolWools</a> <span aria-hidden="true">·</span> Ferramentas de calendário de janela de lançamento</span>
-      <span class="byline-item">Revisado por <a href="/pt/about#benchmark-reviewers">Arquivistas de histórico de lançamentos da Rockstar</a> <span aria-hidden="true">·</span> Referência histórica de horário de desbloqueio</span>
-      <span class="byline-item">Publicado <time datetime="2026-07-25">25 de jul de 2026</time> · Última revisão <time datetime="2026-11-17">17 de novembro de 2026</time></span>
-      <a class="method-link" href="/pt/methodology">Metodologia</a>
-    </div><div class="sr-only" data-live-region aria-live="polite">GTA 6 já está disponível. A janela de lançamento foi aberta.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Data de lançamento · Resumo</span></p>
-        <p class="tldr-text"><span data-tldr-text>O GTA 6 lançou na quinta-feira, 19 nov 2026 às 12:00 AM ET (05:00 UTC). Adicione-o ao seu calendário com um clique, com lembretes de 24 horas e 1 hora.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Lançado — 19 nov 2026</p>
-    </section><section aria-labelledby="tool-workspace">
+      <p class="page-subtitle">GTA 6 foi lançado em 19 nov 2026, adicione a data a qualquer calendário com um clique. Status do lançamento no seu fuso horário, mais uma tabela de desbloqueio de 14 cidades mostrando quando o GTA 6 entrou no ar onde você está.</p>
+      <p class="hero-meta"><span>Google · Apple · Outlook · Yahoo</span><span>Detecta seu fuso horário automaticamente</span><span>Tabela de desbloqueio de 14 cidades</span><span>Por <a href="/pt/about#release-desk">Mesa de Lançamentos da ToolWools</a></span><span>Revisado por <a href="/pt/about#benchmark-reviewers">Arquivistas de histórico de lançamentos da Rockstar</a></span><span>Publicado <time datetime="2026-07-25">25 de jul de 2026</time></span><span>Última revisão <time datetime="2026-11-17">17 de novembro de 2026</time></span><span><a href="/pt/methodology">Metodologia</a></span></p>
+    </section>
+<div class="sr-only" data-live-region aria-live="polite">GTA 6 já está disponível. A janela de lançamento foi aberta.</div>
+<section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calendar</h2>
       <div class="workspace-grid">
         <div class="input-panel" aria-label="Suas configurações de lançamento">
@@ -213,7 +220,7 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copiar link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no X" data-share-x href="https://twitter.com/intent/tweet?text=GTA%206%20foi%20lan%C3%A7ado%20em%2019%20de%20novembro%20de%202026.%20Adicione%20ao%20seu%20calend%C3%A1rio%20em%20um%20clique%20no%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fadd-to-calendar%3Ftz%3DAmerica%252FNew_York">Compartilhar no X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=GTA%206%20foi%20lan%C3%A7ado%20em%2019%20de%20novembro%20de%202026.%20Adicione%20ao%20seu%20calend%C3%A1rio%20em%20um%20clique%20no%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fadd-to-calendar%3Ftz%3DAmerica%252FNew_York">>Compartilhar no X</a>
         <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no Reddit" data-share-reddit href="https://www.reddit.com/submit?title=GTA%206%20foi%20lan%C3%A7ado%20em%2019%20de%20novembro%20de%202026%2C%20adicione%20ao%20seu%20calend%C3%A1rio%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fadd-to-calendar%3Ftz%3DAmerica%252FNew_York">Reddit</a>
       </div>
     </section><section aria-labelledby="region-table">
@@ -252,25 +259,25 @@
         <article class="usecase-card" aria-labelledby="use-case-1">
           <h3 id="use-case-1">Lembrete do dia de download</h3>
           <p>Você comprou na PSN ou no Xbox. Um lembrete do dia de download significa que o console começa a baixar a instalação de 212 GB enquanto você ainda está no trabalho: você joga no momento em que chega em casa.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-2">
           <h3 id="use-case-2">Festa de lançamento noturna</h3>
           <p>Coordenando com amigos em diferentes fusos horários. Compartilhe o .ics ou envie a todos o link do calendário.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-3">
           <h3 id="use-case-3">Pedido de folga</h3>
           <p>Reservando 19–20 nov de folga do trabalho. A entrada do calendário cai no seu Outlook de trabalho para que os gerentes vejam o bloqueio.</p>
-          
+
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="use-case-4">
           <h3 id="use-case-4">Agenda de streaming</h3>
           <p>Agendando uma stream de Twitch/YouTube no dia do lançamento. Combine o início com seu desbloqueio local das 00:00.</p>
-          
+
         </article>
       </li></ul>
     </section><section aria-labelledby="methodology">
@@ -286,8 +293,8 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
         </div>
       </details>
     </section><section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Perguntas do lembrete de data de lançamento do GTA 6</h2>
+      <header>
+        <h2 id="faq">Perguntas do lembrete de data de lançamento do GTA 6</h2>
         <p class="section-dek">Horários de lançamento, horas de desbloqueio e o evento de calendário.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -439,17 +446,17 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
     </section><section aria-labelledby="related-content">
       <h2 id="related-content">Mais ferramentas do dia de lançamento do GTA 6</h2>
       <h3 class="related-sub">Ferramentas relacionadas</h3>
-      <ul class="related-tools-grid"><li><a href="/pt/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="Pontuação de prontidão do GTA 6 — Uma pontuação de prontidão para o lançamento de 0–100 em desempenho, VRAM, armazenamento e internet. Nota de F a S com uma correção de elo mais fraco."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Pontuação de prontidão do GTA 6</h3><p>Uma pontuação de prontidão para o lançamento de 0–100 em desempenho, VRAM, armazenamento e internet. Nota de F a S com uma correção de elo mais fraco.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/download-time" class="tool-card" data-accent="blue" aria-label="Calculadora de tempo de download do GTA 6 — Estime quanto tempo a instalação do jogo de 212 GB (mais patches do primeiro dia de 1,7–3,8 GB) vai levar na sua conexão."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculadora de tempo de download do GTA 6</h3><p>Estime quanto tempo a instalação do jogo de 212 GB (mais patches do primeiro dia de 1,7–3,8 GB) vai levar na sua conexão.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="Planejador de armazenamento do GTA 6 — Orce cada gigabyte: instalação base, patch do primeiro dia, DLC sazonal e margem segura para atualizações."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Planejador de armazenamento do GTA 6</h3><p>Orce cada gigabyte: instalação base, patch do primeiro dia, DLC sazonal e margem segura para atualizações.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="Verificador de requisitos do sistema do GTA 6 — Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/pt/tools/readiness-score" class="tool-card" data-accent="purple">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Pontuação de prontidão do GTA 6</h3><p>Uma pontuação de prontidão para o lançamento de 0–100 em desempenho, VRAM, armazenamento e internet. Nota de F a S com uma correção de elo mais fraco.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/download-time" class="tool-card" data-accent="blue">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Calculadora de tempo de download do GTA 6</h3><p>Estime quanto tempo a instalação do jogo de 212 GB (mais patches do primeiro dia de 1,7–3,8 GB) vai levar na sua conexão.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/storage-planner" class="tool-card" data-accent="pink">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Planejador de armazenamento do GTA 6</h3><p>Orce cada gigabyte: instalação base, patch do primeiro dia, DLC sazonal e margem segura para atualizações.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/pt/tools/system-requirements" class="tool-card" data-accent="purple">><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section><section aria-labelledby="sources">
       <h2 id="sources">Fontes e referências de metodologia</h2>
       <ol class="sources-list"><li>
-        <a href="https://www.take2games.com/ir" target="_blank" rel="noopener noreferrer">Ganhos do Q4 FY26 da Take-Two Interactive — confirmação da data de lançamento de Grand Theft Auto VI</a>
+        <a href="https://www.take2games.com/ir" target="_blank" rel="noopener noreferrer">Ganhos do Q4 FY26 da Take-Two Interactive, confirmação da data de lançamento de Grand Theft Auto VI</a>
         <span class="src-meta">Take-Two Interactive · Publicado 15 mai 2026 · Acessado 25 jul 2026 · Fonte primária para a data de lançamento de 19 de novembro de 2026.</span>
       </li><li>
-        <a href="https://support.rockstargames.com" target="_blank" rel="noopener noreferrer">Cronograma de desbloqueio do dia de lançamento do GTA V (2013) — referência histórica</a>
+        <a href="https://support.rockstargames.com" target="_blank" rel="noopener noreferrer">Cronograma de desbloqueio do dia de lançamento do GTA V (2013), referência histórica</a>
         <span class="src-meta">Suporte da Rockstar · Publicado 17 set 2013 · Acessado 25 jul 2026 · Precedente para a âncora de desbloqueio 00:00 America/New_York.</span>
       </li><li>
-        <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank" rel="noopener noreferrer">RFC 5545 — Internet Calendaring and Scheduling Core Object Specification (iCalendar)</a>
+        <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank" rel="noopener noreferrer">RFC 5545, Internet Calendaring and Scheduling Core Object Specification (iCalendar)</a>
         <span class="src-meta">IETF · Publicado 1 de set de 2009 · Acessado 25 de jul de 2026 · Especificação seguida para o payload .ics (VEVENT, VALARM, DTSTAMP).</span>
       </li></ol>
       <h3 class="related-sub">Notas de calibração</h3><ul class="sources-list"><li><p>A âncora de lançamento em 2026-11-19 00:00 America/New_York (05:00 UTC) corresponde aos cronogramas de desbloqueio do dia de lançamento de GTA V (17 set 2013) e RDR2 (26 out 2018) da Rockstar.</p></li><li><p>A duração do evento de 60 minutos é arbitrária; os calendários tratam o DTSTART como o gatilho do alarme, o horário de término só é mostrado como um bloco na visualização de dia.</p></li><li><p>Dois lembretes VALARM (24h e 1h) são a cadência padrão da indústria, longa o suficiente para se preparar, curta o suficiente para agir.</p></li><li><p>Os deslocamentos de fuso horário são codificados para 19 nov 2026: o DST do hemisfério norte está desligado (EST, GMT, CET, JST inalterados); o DST do hemisfério sul está ligado (AEDT, NZDT).</p></li></ul>
@@ -469,27 +476,45 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       <p>O horário de lançamento está ancorado em 2026-11-19 00:00 America/New_York (05:00 UTC) com base no precedente de lançamento de GTA V e RDR2 da Rockstar. Esta ferramenta está ancorada no horário confirmado de desbloqueio.</p>
     </aside>        </article>
       </div>
-    </main>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/pt/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 já está disponível — 19 de novembro de 2026</span>
+        <span class="eyebrow-muted">GTA 6 já está disponível, 19 de novembro de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar ferramentas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/pt/" aria-label="ToolWools, página inicial" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/pt/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
               </span>
             </span>
@@ -528,9 +553,9 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
               <li><a href="/pt/contact">Contato</a></li>
               <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
               <li><a href="/pt/sitemap">Mapa do site</a></li>
+              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/pt/privacy">Política de privacidade</a></li>
               <li><a href="/pt/terms">Termos de serviço</a></li>
-              <li><a href="/editorial-policy">Política editorial</a></li>
               <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li>
             </ul>
           </div>
@@ -540,24 +565,18 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/pt/privacy">Privacidade</a>
-          <a href="/pt/terms">Termos</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Configurações de cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
           <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimento de analytics">
-  <div class="consent-inner">
-    <p><strong>Analytics, somente com a sua permissão.</strong> Usamos o Google Analytics agregado para ver quais ferramentas são usadas. Os dados que você insere nunca saem do seu dispositivo, nenhum perfil é criado e nada é vendido. Aceite para carregá-lo ou recuse e navegue sem ele. Você pode mudar de ideia quando quiser em Configurações de cookies no rodapé.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Aceitar analytics</button>
-      <button type="button" class="btn-outline" data-consent-decline>Recusar</button>
-      <a href="/pt/privacy">Política de privacidade</a>
-    </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
+  <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceitar analytics</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Recusar</button>
   </div>
 </div>
   </div>
@@ -567,6 +586,8 @@ VALARM  = TRIGGER -PT1H  (1h before)</pre>
   <script src="/assets/js/pt/header.js" defer></script>
   <script src="/assets/js/pt/search.js" defer></script>
   <script src="/assets/js/pt/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/pt/newsletter.js" defer></script>
   <script type="module" src="/assets/js/pt/add-to-calendar.js"></script>
   <script type="application/ld+json">
 {

@@ -11,7 +11,7 @@ export const DRIVE_META = {
   hdd: { label: "HDD (mechanical)", mult: 0.35 }
 };
 export const GRADE_THRESHOLDS = [
-  { grade: "S", min: 92, label: "Launch-day ready — comfortable 1080p High at around 60 fps" },
+  { grade: "S", min: 92, label: "Launch-day ready: comfortable 1080p High at around 60 fps" },
   { grade: "A", min: 82, label: "Ultra ready" },
   { grade: "B", min: 70, label: "Comfortably ready" },
   { grade: "C", min: 55, label: "Playable, plan tweaks" },
@@ -68,7 +68,7 @@ export function vramScore(input) {
   const ratio = cardVramGB / need.totalGB;
   const score = clamp((ratio - 0.5) / (1.15 - 0.5) * 100);
   const short = Math.max(0, +(need.totalGB - cardVramGB).toFixed(1));
-  const detail = short > 0 ? `${cardVramGB} GB card, needs ${need.totalGB} GB — short by ${short} GB.` : `${cardVramGB} GB card clears the ${need.totalGB} GB estimated need.`;
+  const detail = short > 0 ? `${cardVramGB} GB card, needs ${need.totalGB} GB, short by ${short} GB.` : `${cardVramGB} GB card clears the ${need.totalGB} GB estimated need.`;
   return { score, detail, metric: `${cardVramGB} / ${need.totalGB} GB` };
 }
 export function storageScore(input) {
@@ -76,7 +76,7 @@ export function storageScore(input) {
   const ratio = input.freeStorageGB / REFERENCE_INSTALL_GB;
   const raw = clamp(ratio * 100) * drive.mult;
   const score = clamp(raw);
-  const detail = input.driveType === "hdd" ? `${input.freeStorageGB} GB free on an HDD — modern open worlds stream from SSD; expect pop-in.` : `${input.freeStorageGB} GB free on ${drive.label}. Target: ${REFERENCE_INSTALL_GB} GB.`;
+  const detail = input.driveType === "hdd" ? `${input.freeStorageGB} GB free on an HDD, modern open worlds stream from SSD; expect pop-in.` : `${input.freeStorageGB} GB free on ${drive.label}. Target: ${REFERENCE_INSTALL_GB} GB.`;
   return { score, detail, metric: `${input.freeStorageGB} GB` };
 }
 export function networkScore(input) {
@@ -89,7 +89,7 @@ export function networkScore(input) {
   const hoursLabel = !isFinite(hours) || hours > 99 ? "very long" : hours >= 1 ? `${Number(hours.toFixed(1))} h` : `${Math.round(hours * 60)} min`;
   return {
     score,
-    detail: `${mbps} Mbps down — installs ${REFERENCE_INSTALL_GB} GB in ~${hoursLabel}.`,
+    detail: `${mbps} Mbps down, installs ${REFERENCE_INSTALL_GB} GB in ~${hoursLabel}.`,
     metric: `${mbps} Mbps`
   };
 }
@@ -116,8 +116,8 @@ export function estimateReadiness(input) {
   ];
   const weakest = pairs.reduce((a, b) => b[1] < a[1] ? b : a)[0];
   const verdictMap = {
-    S: "Top band — comfortable 1080p High at around 60 fps, with headroom to spare.",
-    A: "Ready today — you will only tweak one or two settings.",
+    S: "Top band: comfortable 1080p High at around 60 fps, with headroom to spare.",
+    A: "Ready today, you will only tweak one or two settings.",
     B: "Ready. One sub-score is behind but nothing blocks smooth play.",
     C: "Playable, but pick a resolution / preset ladder that matches your weakest link.",
     D: "Below the practical floor. Fix your weakest score before downloading.",

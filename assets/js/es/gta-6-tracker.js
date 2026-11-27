@@ -34,7 +34,7 @@ var tzSelect = $("[data-tz-select]");
 if (tzSelect) {
   var utcOpt = document.createElement("option");
   utcOpt.value = "UTC";
-  utcOpt.textContent = "UTC — Coordinated Universal Time";
+  utcOpt.textContent = "UTC, Coordinated Universal Time";
   tzSelect.appendChild(utcOpt);
   REGIONS.forEach(function (r) {
     var opt = document.createElement("option");
@@ -68,7 +68,7 @@ function renderLaunchLocal() {
   var local = tz === "UTC"
     ? "19 nov 2026, 05:00 UTC"
     : formatInTz(LAUNCH_UTC, tz);
-  el.textContent = "Launch: 19 nov 2026, 05:00 UTC — " + local + " in " + regionLabel(tz) + ".";
+  el.textContent = "Launch: 19 nov 2026, 05:00 UTC, " + local + " in " + regionLabel(tz) + ".";
 }
 
 var lastAnnouncedMinute = null;

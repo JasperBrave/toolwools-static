@@ -258,8 +258,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="Dieses Ergebnis auf X teilen"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="Dieses Ergebnis auf Reddit teilen"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " erreicht den Break-even in " + (A.beDays === null ? STR.never : hoursFmt(A.beHours))
     + " und erzielt netto " + money(A.net40) + " nach 40 Stunden (GTA-6-Business-Tracker: deine Annahme, GTA-Online-Vergleichsmaßstab-Standards).";
   var shareTitle = state.biz + " erreicht den Break-even in " + (A.beDays === null ? STR.never : hoursFmt(A.beHours)) + " (GTA-6-Business-Tracker)";

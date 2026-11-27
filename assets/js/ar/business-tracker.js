@@ -207,21 +207,21 @@ function render() {
   var roiB = B.roi40 === null ? "—" : pctFmt(B.roi40 * 100);
   var crossText;
   if (tStar === null) {
-    crossText = STR.never + " — المدخلان يكسبان بالمعدل الفعال نفسه، أو أن المدخل الأعلى معدلًا متقدم بالفعل.";
+    crossText = STR.never + ", المدخلان يكسبان بالمعدل الفعال نفسه، أو أن المدخل الأعلى معدلًا متقدم بالفعل.";
   } else {
     var leader = A.eff > B.eff ? state.biz : state.biz2;
     var trailer = A.eff > B.eff ? state.biz2 : state.biz;
-    crossText = hoursFmt(tStar) + " — " + leader + " " + STR.overtakes + " " + trailer;
+    crossText = hoursFmt(tStar) + ": " + leader + " " + STR.overtakes + " " + trailer;
   }
 
-  var work = STR.showYourWork + " — " + state.biz + ": الصافي اليومي = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
+  var work = STR.showYourWork + ": " + state.biz + ": الصافي اليومي = " + money(state.rate) + " × " + state.hours + " − " + money(state.upkeep)
     + " = " + money(A.dailyNet) + "/يوم؛ التعادل = " + money(state.price) + " ÷ " + money(A.dailyNet)
-    + (A.beDays === null ? " — الصافي اليومي صفر أو سالب، أي " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
+    + (A.beDays === null ? ", الصافي اليومي صفر أو سالب، أي " + STR.never : " = " + daysFmt(A.beDays) + " (" + hoursFmt(A.beHours) + ")")
     + "; الصافي عند 40 ساعة = " + money(state.rate) + " × 40 − " + money(state.upkeep) + " × (40 ÷ " + state.hours + ") − " + money(state.price)
     + " = " + money(A.net40) + "; عائد الاستثمار عند 40 ساعة = " + money(A.net40) + " ÷ " + money(state.price) + " = " + roiA
     + "; الوقت حتى الهدف = " + money(state.goal) + " ÷ " + money(Math.round(A.eff)) + " = " + ttgA
     + ". " + STR.crossover + ": (" + money(state.price2) + " − " + money(state.price) + ") ÷ (" + money(Math.round(B.eff)) + " − " + money(Math.round(A.eff)) + ")"
-    + (tStar === null ? " — لا يوجد تقاطع" : " = " + hoursFmt(tStar))
+    + (tStar === null ? ", لا يوجد تقاطع" : " = " + hoursFmt(tStar))
     + ". جميع المدخلات افتراضك.";
 
   var tldr = state.biz + " " + (A.beDays === null ? "لا يصل إلى التعادل أبدًا" : "يصل إلى التعادل في " + hoursFmt(A.beHours) + " ساعة لعب")
@@ -243,7 +243,7 @@ function render() {
       + "<div><dt>" + STR.crossover + " (" + escapeHtml(state.biz2) + " " + STR.overtakes + " " + escapeHtml(state.biz) + ")</dt><dd>" + crossText + "</dd></div>"
       + "</dl>"
       + '<p class="verdict-desc">' + escapeHtml(work) + "</p>"
-      + '<p class="verdict-desc">جميع المدخلات افتراضك — لا يُستخدم أي سعر أو عائد أو معدل من GTA 6.</p>';
+      + '<p class="verdict-desc">جميع المدخلات افتراضك, لا يُستخدم أي سعر أو عائد أو معدل من GTA 6.</p>';
   }
 
   var tldrCard = $("[data-tldr-card]");
@@ -258,8 +258,8 @@ function render() {
 
   var linkInput = $("[data-share-link-input]");
   if (linkInput) linkInput.value = shareUrl();
-  var xLink = document.querySelector('.share-panel a[aria-label="شارك هذه النتيجة على X"]');
-  var rLink = document.querySelector('.share-panel a[aria-label="شارك هذه النتيجة على Reddit"]');
+  var xLink = document.querySelector('.share-panel a[data-share-x]');
+  var rLink = document.querySelector('.share-panel a[data-share-reddit]');
   var shareText = state.biz + " " + (A.beDays === null ? "لا يصل إلى التعادل أبدًا" : "يصل إلى التعادل في نحو " + hoursFmt(A.beHours) + " ساعة لعب")
     + " ويحقق صافي " + money(A.net40) + " عند 40 ساعة (متتبع أعمال GTA 6 — افتراضك، إعدادات المعيار المرجعي الافتراضية من GTA Online).";
   var shareTitle = state.biz + " " + (A.beDays === null ? "لا يصل إلى التعادل أبدًا" : "يصل إلى التعادل في نحو " + hoursFmt(A.beHours) + " ساعة لعب") + " (متتبع أعمال GTA 6)";

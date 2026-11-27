@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
     <meta property="og:locale" content="tr_TR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
-  <meta property="og:locale:alternate" content="pt_PT">
+  <meta property="og:locale:alternate" content="pt_BR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="ar_SA">
@@ -27,10 +27,8 @@
     <meta name="twitter:title" content="GTA 6 İndirme Süresi Hesaplayıcı">
     <meta name="twitter:description" content="GTA 6&#x27;nın bağlantınızda indirilmesinin ne kadar süreceğini tahmin edin, temel kurulum ve ilk gün yaması, gerçek CDN kayıplarıyla.">
     <meta name="twitter:image" content="https://toolwools.com/og/download-time.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/tr/tools/download-time">
 <link rel="alternate" href="https://toolwools.com/tools/download-time" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/download-time" hreflang="es">
@@ -43,10 +41,30 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-latinext.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latinext.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-download-time-tr.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +72,14 @@
 
 <a class="skip-link" href="#main">İçeriğe atla</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/tr/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
             </span>
           </span>
@@ -75,18 +91,19 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Dil seç">TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>TR <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/download-time">İngilizce</a>
             <a href="/es/tools/download-time">Español</a>
@@ -110,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara" aria-label="Araç ara" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Araç ara..." aria-label="Araç ara..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -120,7 +137,11 @@
           <a href="/tr/generators">Oluşturucular</a>
           <a href="/tr/news">Haberler</a>
           <a href="/tr/trailers">Fragmanlar</a>
+          <a href="/tr/guides">Rehberler</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/download-time" lang="en">EN</a><a href="/es/tools/download-time" lang="es">ES</a><a href="/pt/tools/download-time" lang="pt">PT</a><a href="/de/tools/download-time" lang="de">DE</a><a href="/fr/tools/download-time" lang="fr">FR</a><a href="/tr/tools/download-time" aria-current="true">TR</a><a href="/ar/tools/download-time" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,47 +150,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Sayfa yolu">
-        <a href="/tr/">Ana Sayfa</a>
-        <span aria-hidden="true">/</span>
-        <a href="/tr/tools">Araçlar</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">İndirme Süresi</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-        <span>Planlayıcılar</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA 6 İndirme Süresi Hesaplayıcı</h1>
-      <p class="page-subtitle">Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Süre hesabı</dd></div>
-        <div><dt>Çalışma süresi</dt><dd>Anında, tarayıcıda</dd></div>
-        <div><dt>Platformlar</dt><dd>PS5 · Xbox</dd></div>
-        <div><dt>Güncellendi</dt><dd><time datetime="2026-11-22">22 Kas 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>GTA 6'nın kurulumu, ilk gün yaması öncesi 212 GB'dır ve ISS'nizin manşet hızı asla gerçekte aldığınız hız değildir. Bu hesaplayıcı bağlantınızı gerçek bir bitiş süresine çevirir: temel kurulum ve yama, gerçekten sürdürdüğünüz hızda, %80 verimlilik varsayımı CDN kısıtlaması, Wi-Fi kaybı ve disk yazma hızını modeller.</p>
-          </div>
-<section class="byline" aria-label="Bu sayfa hakkında">
-      <img src="/assets/images/avatars/jasper-bravo.jpg" alt="Jasper Bravo, ToolWools&#x27;un kurucusu" width="60" height="60" loading="lazy">
-      <div>
-        <p class="byline-meta">Yazan <span class="byline-seg"><a href="/tr/about">Jasper Bravo</a>&nbsp;·</span> <span class="byline-seg"><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a>&nbsp;·</span> Kurucu, ToolWools&nbsp;· Geniş bant ve indirme analizi</p>
-        <p class="byline-note">Model: <a href="/tr/methodology">GTA 6 indirme süresi hesabı</a></p>
-      </div>
-      <p class="byline-dates">Yayınlanma <time datetime="2025-11-01">1 Kas 2025</time>&nbsp;· Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Sayfa yolu">
+          <a href="/tr/">Ana Sayfa</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/tr/tools">Araçlar</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">İndirme Süresi</span>
+        </div>
+        <div class="page-eyebrow"><span>Planlayıcılar</span></div>
+        <h1 id="page-title">GTA 6 İndirme Süresi Hesaplayıcı</h1>
+        <p class="page-subtitle">Bağlantınızda 212 GB'lık oyun kurulumunun (artı 1,7–3,8 GB ilk gün yamaları) ne kadar süreceğini tahmin edin.</p>
+        <p class="hero-meta">
+          <span>Motor: Süre hesabı</span><span>Çalışma süresi: Anında, tarayıcıda</span><span>Platformlar: PS5 · Xbox</span><span>Güncellendi: <time datetime="2026-11-22">22 Kas 2026</time></span><span>Yazan <a href="/tr/about">Jasper Bravo</a></span><span><a href="https://x.com/web3believer" target="_blank" rel="noopener noreferrer">@web3believer</a></span><span>Kurucu, ToolWools</span><span>Geniş bant ve indirme analizi</span><span>Model: <a href="/tr/methodology">GTA 6 indirme süresi hesabı</a></span><span>Yayınlanma <time datetime="2025-11-01">1 Kas 2025</time></span><span>Son inceleme <time datetime="2026-11-22">22 Kasım 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">214.8 gigabayt için 100 megabit/saniye hızında, %80 verimlilikle tahmini indirme süresi 4 saat 35 dakika.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Yaklaşık 5 sa 58 dk · Özet</span></p>
-        <p class="tldr-text"><span data-tldr-text>100 Mbps'de 214.8 GB (%80 verimlilik, 80 Mbps etkili) yaklaşık 5 sa 58 dk'da biter. GTA 6 çıktı: tam oyunu bugün indirin.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>214.8 GB için 5 sa 58 dk</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Hesaplayıcı</h2>
       <div class="workspace-grid">
@@ -179,17 +175,17 @@
 <div>
             <label class="field-label" for="gb-range">Temel kurulum: <span data-gb-value>212 GB</span></label>
             <input class="range-input" type="range" id="gb-range" data-gb-range min="20" max="250" step="1" value="212" aria-label="Temel kurulum boyutu, şu anda 212 gigabayt">
-            
+
           </div>
 <div>
             <label class="field-label" for="patch-range">İlk gün yaması: <span data-patch-value>2.8 GB</span></label>
             <input class="range-input" type="range" id="patch-range" data-patch-range min="0" max="100" step="0.1" value="2.8" aria-label="İlk gün yaması boyutu, şu anda 2.8 gigabayt">
-            
+
           </div>
 <div>
             <label class="field-label" for="mbps-range">Bağlantı: <span data-mbps-value>100 Mbps</span></label>
             <input class="range-input" type="range" id="mbps-range" data-mbps-range min="5" max="1000" step="5" value="100" aria-label="İndirme hızı, şu anda saniyede 100 megabit">
-            
+
           </div>
 <div>
             <span class="field-label" id="preset-label"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Bağlantı hazır ayarları</span>
@@ -211,8 +207,8 @@
           <div class="output-panel-label eyebrow-muted">Karar</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Tahmini bitiş süresi</p><h3 class="verdict-title">5<span class="unit"> h</span> 58<span class="unit"> dk</span></h3><p class="verdict-desc">80 Mbps etkili hızda toplam 214.8 GB.</p></div></div><dl class="stat-grid"><div><dt>Temel kurulum</dt><dd>5 sa 53 dk</dd></div><div><dt>İlk gün yaması</dt><dd>5 dk</dd></div><div><dt>Temel boyut</dt><dd>212 GB</dd></div><div><dt>Verimlilik</dt><dd>80%</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Kararı kopyala</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=GTA%206%20indirme%20s%C3%BCresi%3A%205%20sa%2058dk%2C%20100%20Mbps%20h%C4%B1z%C4%B1nda%20214%2C8%20GB%20i%C3%A7in&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">X'te paylaş</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Kararı Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=GTA%206%20indirme%20s%C3%BCresi%3A%205%20sa%2058dk%2C%20100%20Mbps%20h%C4%B1z%C4%B1nda&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GTA%206%20indirme%20s%C3%BCresi%3A%205%20sa%2058dk%2C%20100%20Mbps%20h%C4%B1z%C4%B1nda%20214%2C8%20GB%20i%C3%A7in&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">X'te paylaş</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=GTA%206%20indirme%20s%C3%BCresi%3A%205%20sa%2058dk%2C%20100%20Mbps%20h%C4%B1z%C4%B1nda&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -229,8 +225,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Bağlantıyı kopyala</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu X&#x27;te paylaş" href="https://twitter.com/intent/tweet?text=214%2C8%20GB%2C%20ba%C4%9Flant%C4%B1n%C4%B1zda%20~5%20sa%2058dk.%20Kendinizinkini%20ToolWools%27ta%20hesaplay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">X'te paylaş</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Bu sonucu Reddit&#x27;te paylaş" href="https://www.reddit.com/submit?title=214%2C8%20GB%2C%20ba%C4%9Flant%C4%B1n%C4%B1zda%20~5%20sa%2058dk.%20Kendinizinkini%20ToolWools%27ta%20hesaplay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=214%2C8%20GB%2C%20ba%C4%9Flant%C4%B1n%C4%B1zda%20~5%20sa%2058dk.%20Kendinizinkini%20ToolWools%27ta%20hesaplay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">X'te paylaş</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=214%2C8%20GB%2C%20ba%C4%9Flant%C4%B1n%C4%B1zda%20~5%20sa%2058dk.%20Kendinizinkini%20ToolWools%27ta%20hesaplay%C4%B1n.&amp;url=https%3A%2F%2Ftoolwools.com%2Ftr%2Ftools%2Fdownload-time%3Fmbps%3D100%26gb%3D212%26patch%3D2.8%26eff%3D80">Reddit</a>
       </div>
     </section>
 
@@ -247,18 +243,15 @@
       <p class="field-hint" data-speed-note>Toplam 214.8 GB (kurulum + yama), %80 gerçek dünya verimliliğiyle.</p>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">GTA 6 sisteminizi planlamaya devam edin</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Sürücü alanını şununla bütçeleyin: <a href="/tr/tools/storage-planner">GTA 6 depolama planlayıcı</a> , temel kurulum, yama, DLC ve pay.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla puanlayın: <a href="/tr/tools/readiness-score">GTA 6 hazırlık puanı</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla kontrol edin: <a href="/tr/tools/system-requirements">GTA 6 sistem gereksinimleri denetleyicisi</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Önce hattınızı şununla ölçün: <a href="/tr/tools/internet-speed-check">internet hızı kontrolü</a> , sonra sayıyı buraya getirin.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Sürücü alanını şununla bütçeleyin: <a href="/tr/tools/storage-planner">GTA 6 depolama planlayıcı</a> , temel kurulum, yama, DLC ve pay.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla puanlayın: <a href="/tr/tools/readiness-score">GTA 6 hazırlık puanı</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Tüm sistemi şununla kontrol edin: <a href="/tr/tools/system-requirements">GTA 6 sistem gereksinimleri denetleyicisi</a>.</span></li>
+<li><svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Önce hattınızı şununla ölçün: <a href="/tr/tools/internet-speed-check">internet hızı kontrolü</a> , sonra sayıyı buraya getirin.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Varsayımlar">
-      <p><strong>Varsayımlar</strong> <span>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması. Hesap, tüm dosya boyunca etkili hızda sabit bir indirme varsayar; gerçek indirmeler CDN yükü, Wi-Fi tıkanıklığı ve disk yazma hızıyla değişir ve %80 verimlilik varsayımı bunu modeller.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
-      <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">GTA 6 İndirme Süresi Hesaplayıcı nasıl kullanılır</h2>
@@ -295,17 +288,19 @@ effectiveMbps = mbps × (efficiency / 100)
 seconds = totalGB × 8 × 1000 / effectiveMbps
 finish = baseSeconds + patchSeconds
 1 Gbps = 1000 Mbps; 1 GB = 8 Gb</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması.</li>
+          <ul class="list-disc list-outside"><li>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması.</li>
 <li>%80 verimlilik varsayımı CDN kısıtlaması, Wi-Fi kaybı ve disk yazma hızını modeller.</li>
 <li>Hızlar saniyede megabit (Mbps) ile ölçülür; dosya boyutları gigabayt (GB) ile.</li>
 <li>100 Mbps ve %80 verimlilikte 214.8 GB 5 saat 58 dakika sürer; 1 Gbps'de yaklaşık 36 dakika sürer.</li></ul>
+    <div class="assumptions-block"><p><strong>Varsayımlar</strong> <span>Kurulum boyutu 212 GB'dır (temel) artı 1.7–3.8 GB ilk gün yaması. Hesap, tüm dosya boyunca etkili hızda sabit bir indirme varsayar; gerçek indirmeler CDN yükü, Wi-Fi tıkanıklığı ve disk yazma hızıyla değişir ve %80 verimlilik varsayımı bunu modeller.</span> <a href="/tr/methodology">Tam metodolojiyi okuyun</a></p>
+      <p class="updated-line">Güncellendi <time datetime="2026-11-22">22 Kasım 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Sık sorulan sorular</h2>
+      <header>
+        <h2 id="faq">Sık sorulan sorular</h2>
         <p class="section-dek">GTA 6'yı artık çıktıktan sonra indirmek hakkında insanların gerçekten sorduğu sorulara dürüst cevaplar.</p>
       </header>
       <ul class="faq-list" role="list"><li class="faq-item">
@@ -367,10 +362,10 @@ finish = baseSeconds + patchSeconds
     <section aria-labelledby="related-content">
       <h2 id="related-content">İlgili araçlar</h2>
       <h3 class="related-sub">İlgili araçlar</h3>
-      <ul class="related-tools-grid"><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="purple" aria-label="GTA 6 Depolama Planlayıcı: Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="blue" aria-label="GTA 6 Hazırlık Puanı: Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="pink" aria-label="GTA 6 Sistem Gereksinimleri Denetleyicisi: Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink" aria-label="GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı: GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026."><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
-      
+      <ul class="related-tools-grid"><li><a href="/tr/tools/storage-planner" class="tool-card" data-accent="purple"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg><h3>GTA 6 Depolama Planlayıcı</h3><p>Her gigabaytı bütçeleyin: temel kurulum, ilk gün yaması, mevsimsel DLC ve güncellemeler için güvenli pay.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tr/tools/readiness-score" class="tool-card" data-accent="blue"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg><h3>GTA 6 Hazırlık Puanı</h3><p>Tüm sisteminiz için tek puan: performans, VRAM, depolama ve ağ.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/tr/tools/system-requirements" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Sistem Gereksinimleri Denetleyicisi</h3><p>Topluluk tahminli Minimum, Önerilen ve Ultra katmanlarına karşı anında karar. GPU, CPU, RAM ve depolama.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/tr/tools/preload-tracker" class="tool-card" data-accent="pink"><svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA 6 Ön Yükleme Geçmişi ve Güncelleme Programı</h3><p>GTA 6 ön yükleme geçmişi ve güncelleme programı: lansman ön yüklemesi (10–19 Kas 2026), başlık güncellemeleri 1.002.000, 1.002.001 ve ilk lansman sonrası yama 01.002.002 (23 Kas, resmî notlarla). DLC duyurulmadı. Son kontrol 23 Kas 2026.</p><span class="link-cta">Aracı aç <svg class="icon-sm" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+
     </section>
 
     <section aria-labelledby="sources">
@@ -419,28 +414,46 @@ finish = baseSeconds + patchSeconds
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Gündemde Kal</h2>
+          <p>En son GTA 6 haberleri, araçlar ve rehberler için gelen kutunuzu takip edin.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-posta adresi</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abone ol</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/tr/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 çıktı — 19 Kasım 2026</span>
+        <span class="eyebrow-muted">GTA 6 çıktı, 19 Kasım 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Araçlara göz at →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/tr/" aria-label="ToolWools - ana sayfa" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/tr/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Tüm GTA 6 Araçları Tek Yerde</span>
               </span>
             </span>
@@ -480,6 +493,9 @@ finish = baseSeconds + patchSeconds
               <li><a href="/tr/email-preferences">E-posta Tercihleri</a></li>
               <li><a href="/tr/sitemap">Site haritası</a></li>
               <li><a href="/editorial-policy">Yayın Politikası</a></li>
+          <li><a href="/tr/privacy">Gizlilik Politikası</a></li>
+          <li><a href="/tr/terms">Kullanım Şartları</a></li>
+          <li><a href="/tr/disclaimer">Yasal Uyarı</a></li>
             </ul>
           </div>
         </div>
@@ -488,6 +504,7 @@ finish = baseSeconds + patchSeconds
       <div class="footer-bottom">
         <p>© 2026 toolwools.com - Tüm hakları saklıdır. Rockstar Games veya Take-Two Interactive ile bağlantılı değildir.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/tr/privacy">Gizlilik</a><a href="/tr/terms">Şartlar</a><a href="/tr/disclaimer">Yasal Uyarı</a><button type="button" data-consent-open>Çerez ayarları</button></span>
           <span>Sevgiyle hazırlandı <span class="heart">♥</span> GTA 6 hayranları için</span>
         </div>
       </div>
@@ -496,11 +513,22 @@ finish = baseSeconds + patchSeconds
 </footer>
 
   </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analitik izni" hidden>
+  <p>Siteyi iyileştirmek için toplu Google Analytics kullanıyoruz. Profil oluşturulmaz, hiçbir şey satılmaz. Kabul edin veya reddedin; seçim bu tarayıcıda saklanır.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analitiği kabul et</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Reddet</button>
+  </div>
+</div>
   <script src="/assets/js/tr/theme.js" defer></script>
   <script src="/assets/js/tr/header.js" defer></script>
   <script src="/assets/js/tr/search.js" defer></script>
   <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/tr/newsletter.js" defer></script>
+  <script src="/assets/js/tr/consent.js" defer></script>
   <script type="module" src="/assets/js/tr/download-time.js"></script>
+
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -546,7 +574,7 @@ finish = baseSeconds + patchSeconds
       },
       "datePublished": "2025-11-01",
       "dateModified": "2026-11-22",
-      "inLanguage": "en"
+      "inLanguage": "tr"
     },
     {
       "@type": "HowTo",

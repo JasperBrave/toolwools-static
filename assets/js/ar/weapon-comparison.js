@@ -3215,16 +3215,16 @@ function ratingBar(label, a, b) {
     else if (Number(b) > Number(a)) pill = '<span class="winner-pill">B يفوز</span>';
     else pill = '<span class="winner-pill">تعادل</span>';
   }
-  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
+  return '<div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': A</span><span class="val">' + fmtStat(a) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + aw + '%"></div></div></div>' +
-    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ' — B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
+    '<div><div class="balance-bar-head"><span class="lbl">' + esc(label) + ': B</span><span class="val">' + fmtStat(b) + ' / 10</span></div>' +
     '<div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + bw + '%"></div></div></div>' +
     '<p class="field-hint">' + pill + '</p></div>';
 }
 
 function detailRow(label, a, b) {
-  return '<div><dt>' + esc(label) + ' — A</dt><dd>' + a + '</dd></div>' +
-    '<div><dt>' + esc(label) + ' — B</dt><dd>' + b + '</dd></div>';
+  return '<div><dt>' + esc(label) + ': A</dt><dd>' + a + '</dd></div>' +
+    '<div><dt>' + esc(label) + ': B</dt><dd>' + b + '</dd></div>';
 }
 
 function renderCompare() {
@@ -3238,7 +3238,7 @@ function renderCompare() {
   var bSale = b.salePrice != null ? ' <span class="field-hint">(مخفض ' + fmtPrice(b.salePrice) + ')</span>' : "";
   var html = '<div class="verdict-body"><div><p class="verdict-kicker">' + (CLASS_NAMES[a["class"]] || esc(a["class"])) + ' vs ' + (CLASS_NAMES[b["class"]] || esc(b["class"])) + '</p>' +
     '<h3 class="verdict-title">' + esc(a.name) + ' <span class="unit">vs</span> ' + esc(b.name) + '</h3>' +
-    '<p class="verdict-desc">الضرر والدقة وسرعة التحكم والمدى هي تقييمات اللعبة نفسها من 10 — وليست نقاط صحة. ' + esc(a.name) + ': ' + badge(a) + '. ' + esc(b.name) + ': ' + badge(b) + '.</p></div></div>' +
+    '<p class="verdict-desc">الضرر والدقة وسرعة التحكم والمدى هي تقييمات اللعبة نفسها من 10, وليست نقاط صحة. ' + esc(a.name) + ': ' + badge(a) + '. ' + esc(b.name) + ': ' + badge(b) + '.</p></div></div>' +
     ratingBar("الضرر", a.stats.damage, b.stats.damage) +
     ratingBar("الدقة", a.stats.accuracy, b.stats.accuracy) +
     ratingBar("سرعة التحكم", a.stats.handling, b.stats.handling) +

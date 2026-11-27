@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,25 +12,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://toolwools.com/de/tools/business-tracker">
     <meta property="og:image" content="https://toolwools.com/og-image.jpg">
-    <meta property="og:image:alt" content="ToolWools — GTA-6-Business-Tracker">
+    <meta property="og:image:alt" content="ToolWools, GTA-6-Business-Tracker">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="ToolWools">
     <meta property="og:locale" content="de_DE">
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:locale:alternate" content="es_ES">
-    <meta property="og:locale:alternate" content="pt_PT">
+    <meta property="og:locale:alternate" content="pt_BR">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="GTA-6-Business-Tracker">
     <meta name="twitter:description" content="Im Story-Modus von GTA 6 kann noch kein Business gekauft werden. Verfolge die 12 Leonida-Businesses, simuliere den Payback mit deinen eigenen Zahlen und vergleiche Story-Geldmethoden — jede Zahl mit Quellenangabe.">
     <meta name="twitter:image" content="https://toolwools.com/og-image.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/de/tools/business-tracker">
 <link rel="alternate" href="https://toolwools.com/tools/business-tracker" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/business-tracker" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-business-tracker-de.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/business-tracker">English</a>
             <a href="/es/tools/business-tracker">Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -119,61 +136,45 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/business-tracker" lang="en">EN</a><a href="/es/tools/business-tracker" lang="es">ES</a><a href="/pt/tools/business-tracker" lang="pt">PT</a><a href="/de/tools/business-tracker" aria-current="true">DE</a><a href="/fr/tools/business-tracker" lang="fr">FR</a><a href="/tr/tools/business-tracker" lang="tr">TR</a><a href="/ar/tools/business-tracker" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header><main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Breadcrumb">
-        <a href="/de/">Startseite</a>
-        <span aria-hidden="true">/</span>
-        <a href="/de/tools">Tools</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">GTA-6-Business-Tracker</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
-        <span>Business-Tracker</span>
-      </div>
-      <h1 id="page-title" class="page-title">GTA-6-Business-Tracker</h1>
-      <p class="page-subtitle">Im Story-Modus von GTA 6 kann zum 21. November 2026 kein Business gekauft werden; hier steht, was sich verfolgen lässt.</p>
-      <ul class="hero-badges" aria-label="Auf einen Blick">
-        <li class="chip">12 Leonida-Businesses — keines kaufbar</li><li class="chip">Simulator nutzt nur deine Zahlen</li><li class="chip">GTA-Online-Zahlen als GTA Online gekennzeichnet</li>
-      </ul>
-    </section>
-          <div class="intro-callout">
-            <p>Im Story-Modus von GTA 6 kann zum 21. November 2026 kein Business gekauft werden. Rockstar hat keine Businesses im Spielerbesitz, keine Business-Preise, keine Auszahlungen und keine Raten angekündigt, und das veröffentlichte Spiel hat keinen Online-Modus. Diese Seite ist ein Tracker, keine Ratentabelle: ein Verzeichnis der 12 benannten Leonida-Businesses mit ihrem Besitzstatus, ein Simulator, der Payback und Profit aus Zahlen berechnet, die <em>du</em> eingibst, die GTA-Online-Business-Tabelle, klar als Vergleichsmaßstab gekennzeichnet, und eine Story-Geldmethoden-Checkliste, bei der jede Auszahlungs-Spanne ihre Quelle, ihr Datum und ein „Gemeldet — nicht verifiziert“-Badge trägt. Diese Seite ist kein verifizierter GTA-6-Profit-Rechner — einen solchen Rechner kann es noch nicht geben, weil es keine verifizierten GTA-6-Business-Zahlen gibt, mit denen man rechnen könnte.</p>
-          </div>
-<section class="byline" aria-label="Über diese Seite">
-      <div>
-        <p class="byline-meta">Von <span class="byline-seg"><a href="/de/about#economy-desk">ToolWools Economy-Desk</a>&nbsp;·</span> GTA-6-Story-Wirtschafts-Tracking&nbsp;· Geprüft von <span class="byline-seg"><a href="/de/about#reviewers">Unabhängige GTA-6-Launch-Reviewer</a>&nbsp;·</span> Quelle und Datum bei jeder Zahl</p>
-        <p class="byline-note">Modell: <a href="/de/methodology">GTA-6-Business-Tracking-Modell</a></p>
-      </div>
-      <p class="byline-dates">Veröffentlicht <time datetime="2026-11-21">21. Nov. 2026</time>&nbsp;· Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/de/">Startseite</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/de/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA-6-Business-Tracker</span>
+        </div>
+        <div class="page-eyebrow"><span>Business-Tracker</span></div>
+        <h1 id="page-title">GTA-6-Business-Tracker</h1>
+        <p class="page-subtitle">Im Story-Modus von GTA 6 kann zum 21. November 2026 kein Business gekauft werden; hier steht, was sich verfolgen lässt.</p>
+        <p class="field-hint"><strong>Warnung zum Kapitel-1-Wipe:</strong> farme kein Geld in Kapitel 1, nur die Family-Savings-Einzahlung von 5.000 $ überlebt den Übergang. Der Simulator unten dient der Planung ab Kapitel 2.</p>
+        <p class="hero-meta">
+          <span>12 Leonida-Businesses, keines kaufbar</span><span>Simulator nutzt nur deine Zahlen</span><span>GTA-Online-Zahlen als GTA Online gekennzeichnet</span><span>Von <a href="/de/about#economy-desk">ToolWools Economy-Desk</a></span><span>GTA-6-Story-Wirtschafts-Tracking</span><span>Geprüft von <a href="/de/about#reviewers">Unabhängige GTA-6-Launch-Reviewer</a></span><span>Quelle und Datum bei jeder Zahl</span><span>Modell: <a href="/de/methodology">GTA-6-Business-Tracking-Modell</a></span><span>Veröffentlicht <time datetime="2026-11-21">21. Nov. 2026</time></span><span>Zuletzt geprüft <time datetime="2026-11-21">21. November 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Im Story-Modus von GTA 6 kann zum 21. November 2026 kein Business gekauft werden. Die Simulator-Standards nutzen die GTA-Online-Acid-Lab-Vergleichswerte als Beispiel: Break-even in etwa 13,4 Spielstunden, netto 1.490.000 $ nach 40 Stunden.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Business-Tracker · Kurzfassung</span></p>
-        <p class="tldr-text"><span data-tldr-text>Im Story-Modus von GTA 6 kann zum 21. November 2026 kein Business gekauft werden. Die 12 Leonida-Businesses sind NPC-eigen oder nur besuchbar, Garagen sind die einzige Immobilie, die man kaufen kann (8 für 160.000 $), und jede Story-Auszahlung auf dieser Seite ist eine gemeldete Spanne aus Guides, keine verifizierte Rate.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Keine kaufbaren Businesses · 12 verfolgt · 8 Garagen für 160.000 $</p>
-    </section>
 <section aria-labelledby="honesty-banner">
-      <h2 id="honesty-banner">Was diese Seite ist — und was nicht</h2>
+      <h2 id="honesty-banner">Was diese Seite ist: und was nicht</h2>
       <p class="section-dek">Ein Tracker, keine Ratentabelle. Jede Zahl auf dieser Seite gehört zu genau einer von drei Datenklassen, und die drei werden nie in einer Tabelle vermischt.</p>
       <ul class="usecases-grid"><li>
         <article class="usecase-card" aria-labelledby="class-verified">
           <h3 id="class-verified">Verifiziert</h3>
-          <p>Rockstar-Aussagen, die eigenen Checklisten-Konstanten des Spiels (22 Bankjobs, 8 Tresore, 50 Stick-ups, 34 Smash 'n' grabs, 39 Gang-Operationen) und der GTA-Online-Vergleichsmaßstab — immer gekennzeichnet als „GTA-Online-Zahlen — nicht GTA 6“.</p>
+          <p>Rockstar-Aussagen, die eigenen Checklisten-Konstanten des Spiels (22 Bankjobs, 8 Tresore, 50 Stick-ups, 34 Smash 'n' grabs, 39 Gang-Operationen) und der GTA-Online-Vergleichsmaßstab, immer gekennzeichnet als „GTA-Online-Zahlen, nicht GTA 6“.</p>
         </article>
       </li><li>
         <article class="usecase-card" aria-labelledby="class-reported">
-          <h3 id="class-reported">Gemeldet — nicht verifiziert</h3>
+          <h3 id="class-reported">Gemeldet: nicht verifiziert</h3>
           <p>Per-Job-Auszahlungs-Spannen aus Guides und der Community, jede mit Quelle, Datum und Badge. Wiederholung durch Aggregatoren ist keine unabhängige Bestätigung. Kein $/Std.-Wert wird aus einer davon abgeleitet.</p>
         </article>
       </li><li>
@@ -186,68 +187,68 @@
     </section>
 <section aria-labelledby="directory">
       <h2 id="directory">Die Leonida-Businesses: 12 benannt, 0 kaufbar, 0 Preise, 0 Einkommen</h2>
-      <p class="section-dek">Jedes Business, das Rockstar benannt oder gezeigt hat, mit Typ, Region und Besitzstatus. Für keines wird ein Preis oder Einkommen veröffentlicht — die Felder sind leer, weil die Daten nicht existieren, nicht weil sie weggelassen wurden. Die fünf „Special Destinations“ der Ultimate Edition sind in der Standard Edition geschlossen.</p>
+      <p class="section-dek">Jedes Business, das Rockstar benannt oder gezeigt hat, mit Typ, Region und Besitzstatus. Für keines wird ein Preis oder Einkommen veröffentlicht, die Felder sind leer, weil die Daten nicht existieren, nicht weil sie weggelassen wurden. Die fünf „Special Destinations“ der Ultimate Edition sind in der Standard Edition geschlossen.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Leonida-Business-Verzeichnis, scrollbare Tabelle">
       <table class="data-table" id="directory-table">
         <caption class="sr-only">Verzeichnis der 12 benannten Leonida-Businesses: Typ, Region, Besitzstatus und Editions-Zugang. Für keines werden Preise oder Einkommen veröffentlicht.</caption>
         <thead><tr><th scope="col">Business</th><th scope="col">Typ</th><th scope="col">Ort / Region</th><th scope="col">Besitzstatus</th><th scope="col">Hinweise</th></tr></thead>
         <tbody>
-        <tr><th scope="row">Jack of Hearts</th><td>Stripclub</td><td>Vice City</td><td>NPC-eigen — Boobie Ike</td><td class="muted">Story-Element; das Geld des Clubs bezahlt das Only-Raw-Records-Studio (Rockstar-Charakterseite, 6. Mai 2025).</td></tr>
-        <tr><th scope="row">NINE 1 NINE</th><td>Nachtclub</td><td>Vice City</td><td>Nicht kaufbar — nur besuchbar</td><td class="muted">Flugzeug-Banner in Trailer 1 (4. Dez. 2023); Schild und Terrasse in Trailer 2 (6. Mai 2025).</td></tr>
-        <tr><th scope="row">Effluvia</th><td>Bar</td><td>Vice City</td><td>Nicht kaufbar — nur besuchbar</td><td class="muted">Zu sehen im Extended Look (27. Aug. 2026).</td></tr>
-        <tr><th scope="row">Uncle Jack&#x27;s Liquor</th><td>Spirituosenladen</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>Nicht kaufbar — ausraubbarer Ort</td><td class="muted">Von Jason und Lucia in Trailer 1 ausgeraubt (etwa 1:16, 4. Dez. 2023).</td></tr>
-        <tr><th scope="row">The Rusty Anchor</th><td>Bar</td><td>Leonida Keys</td><td>Nicht kaufbar — nur besuchbar</td><td class="muted">Zu sehen in Trailer 2 (1:29, 6. Mai 2025).</td></tr>
-        <tr><th scope="row">Brian&#x27;s Boat Works &amp; Marina</th><td>Bootswerft / Marina</td><td>Leonida Keys</td><td>NPC-eigen — Brian</td><td class="muted">Auf Brians offizieller Charakterseite benannt (6. Mai 2025).</td></tr>
-        <tr><th scope="row">Stock 305</th><td>Streetwear</td><td>Stockyard</td><td>Nicht kaufbar — nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
-        <tr><th scope="row">Electric Fang Tattoo</th><td>Tattoo-Studio</td><td>Stockyard</td><td>Nicht kaufbar — nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Über 50 Tattoos vom FAILE-Kollektiv. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
-        <tr><th scope="row">Sara&#x27;s Unisex Salon</th><td>Salon</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>Nicht kaufbar — nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Frisuren, Bärte, Make-up, Nägel. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
-        <tr><th scope="row">Only Raw Records</th><td>Plattenlabel / Studio</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>NPC-eigen — Boobie Ike und Dre'Quan</td><td class="muted">Real Dimez' Label. Auf den offiziellen Charakterseiten benannt, 6. Mai 2025.</td></tr>
-        <tr><th scope="row">Rideout Customs</th><td>Tuning-Werkstatt</td><td>Vice City</td><td>Nicht kaufbar — nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Interieur, Felgen, „Donk“-Stil. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
-        <tr><th scope="row">One-Eyed Willie&#x27;s</th><td>Offroad-Tuning-Werkstatt</td><td>Lake Leonida</td><td>Nicht kaufbar — nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Offroad, handlackierte Jobs. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
+        <tr><th scope="row">Jack of Hearts</th><td>Stripclub</td><td>Vice City</td><td>NPC-eigen, Boobie Ike</td><td class="muted">Story-Element; das Geld des Clubs bezahlt das Only-Raw-Records-Studio (Rockstar-Charakterseite, 6. Mai 2025).</td></tr>
+        <tr><th scope="row">NINE 1 NINE</th><td>Nachtclub</td><td>Vice City</td><td>Nicht kaufbar, nur besuchbar</td><td class="muted">Flugzeug-Banner in Trailer 1 (4. Dez. 2023); Schild und Terrasse in Trailer 2 (6. Mai 2025).</td></tr>
+        <tr><th scope="row">Effluvia</th><td>Bar</td><td>Vice City</td><td>Nicht kaufbar, nur besuchbar</td><td class="muted">Zu sehen im Extended Look (27. Aug. 2026).</td></tr>
+        <tr><th scope="row">Uncle Jack&#x27;s Liquor</th><td>Spirituosenladen</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>Nicht kaufbar, ausraubbarer Ort</td><td class="muted">Von Jason und Lucia in Trailer 1 ausgeraubt (etwa 1:16, 4. Dez. 2023).</td></tr>
+        <tr><th scope="row">The Rusty Anchor</th><td>Bar</td><td>Leonida Keys</td><td>Nicht kaufbar, nur besuchbar</td><td class="muted">Zu sehen in Trailer 2 (1:29, 6. Mai 2025).</td></tr>
+        <tr><th scope="row">Brian&#x27;s Boat Works &amp; Marina</th><td>Bootswerft / Marina</td><td>Leonida Keys</td><td>NPC-eigen, Brian</td><td class="muted">Auf Brians offizieller Charakterseite benannt (6. Mai 2025).</td></tr>
+        <tr><th scope="row">Stock 305</th><td>Streetwear</td><td>Stockyard</td><td>Nicht kaufbar, nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
+        <tr><th scope="row">Electric Fang Tattoo</th><td>Tattoo-Studio</td><td>Stockyard</td><td>Nicht kaufbar, nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Über 50 Tattoos vom FAILE-Kollektiv. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
+        <tr><th scope="row">Sara&#x27;s Unisex Salon</th><td>Salon</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>Nicht kaufbar, nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Frisuren, Bärte, Make-up, Nägel. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
+        <tr><th scope="row">Only Raw Records</th><td>Plattenlabel / Studio</td><td class="muted">In den verwendeten Quellen nicht angegeben</td><td>NPC-eigen, Boobie Ike und Dre'Quan</td><td class="muted">Real Dimez' Label. Auf den offiziellen Charakterseiten benannt, 6. Mai 2025.</td></tr>
+        <tr><th scope="row">Rideout Customs</th><td>Tuning-Werkstatt</td><td>Vice City</td><td>Nicht kaufbar, nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Interieur, Felgen, „Donk“-Stil. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
+        <tr><th scope="row">One-Eyed Willie&#x27;s</th><td>Offroad-Tuning-Werkstatt</td><td>Lake Leonida</td><td>Nicht kaufbar, nur Ultimate Edition</td><td class="muted">In der Standard Edition geschlossen. Offroad, handlackierte Jobs. Rockstar-Editionstext, 24. Juni 2026.</td></tr>
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem">Verzeichnis-Quellen: LeonidaKit, „Businesses GTA 6“ (abgerufen 21. Nov. 2026), unter Berufung auf Rockstars offizielle GTA-VI-Seite und Editionstext (6. Mai 2025, 24. Juni 2026), Trailer 1–2 und den Extended Look sowie GTA Wiki (abgerufen 27. Sept. 2026). <strong>Hinweis zur Zählung — 11 vs. 12:</strong> LeonidaKits Seite sagt „the eleven pages above describe each business“, zählt aber zwölf Laden-Namen auf, und seine eigene GTA-Wiki-Quelle listet zwölf Namen, eine Seite pro Laden. Dieses Verzeichnis folgt der aufgezählten Liste (12), nicht der Zahl in der Überschrift (11). Der PTT-Youngin$-Store, im Editionstext als Missionsort in Southside erwähnt, ist keine der Business-Seiten und wird hier nicht hinzugefügt.</p>
+      <p class="field-hint" style="margin-top:0.75rem">Verzeichnis-Quellen: LeonidaKit, „Businesses GTA 6“ (abgerufen 21. Nov. 2026), unter Berufung auf Rockstars offizielle GTA-VI-Seite und Editionstext (6. Mai 2025, 24. Juni 2026), Trailer 1–2 und den Extended Look sowie GTA Wiki (abgerufen 27. Sept. 2026). <strong>Hinweis zur Zählung, 11 vs. 12:</strong> LeonidaKits Seite sagt „the eleven pages above describe each business“, zählt aber zwölf Laden-Namen auf, und seine eigene GTA-Wiki-Quelle listet zwölf Namen, eine Seite pro Laden. Dieses Verzeichnis folgt der aufgezählten Liste (12), nicht der Zahl in der Überschrift (11). Der PTT-Youngin$-Store, im Editionstext als Missionsort in Southside erwähnt, ist keine der Business-Seiten und wird hier nicht hinzugefügt.</p>
     </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Business-Simulator</h2>
-      <p class="field-hint"><strong>Warnung zum Kapitel-1-Wipe:</strong> farme kein Geld in Kapitel 1 — nur die Family-Savings-Einzahlung von 5.000 $ überlebt den Übergang. Der Simulator unten dient der Planung ab Kapitel 2.</p>
+      <p class="field-hint"><strong>Warnung zum Kapitel-1-Wipe:</strong> farme kein Geld in Kapitel 1, nur die Family-Savings-Einzahlung von 5.000 $ überlebt den Übergang. Der Simulator unten dient der Planung ab Kapitel 2.</p>
       <div class="workspace-grid">
         <form class="input-panel" aria-label="Business-Simulator" id="biztracker-form">
-          <div class="input-panel-head"><h3 class="eyebrow-muted">Gib deine eigenen Zahlen ein — das Tool rechnet, es erfindet nichts</h3></div>
+          <div class="input-panel-head"><h3 class="eyebrow-muted">Gib deine eigenen Zahlen ein: das Tool rechnet, es erfindet nichts</h3></div>
           <div class="input-notice" data-input-notice role="alert"></div>
 <div>
-            <label class="field-label" for="biz-name">Business A — Name</label>
+            <label class="field-label" for="biz-name">Business A, Name</label>
             <input class="input" type="text" id="biz-name" data-biz-input maxlength="60" value="Acid Lab (Beispiel)">
-            <p class="field-hint">Deine Annahme — ein Name für den Eintrag, den du modellierst.</p>
+            <p class="field-hint">Deine Annahme, ein Name für den Eintrag, den du modellierst.</p>
           </div>
 <div>
-            <label class="field-label" for="biz-price">Business A — Buy-in (GTA$)</label>
+            <label class="field-label" for="biz-price">Business A, Buy-in (GTA$)</label>
             <input class="input" type="number" id="biz-price" data-price-input min="0" step="1000" value="750000">
           </div>
 <div>
-            <label class="field-label" for="biz-rate">Business A — Netto-GTA$ pro Stunde</label>
+            <label class="field-label" for="biz-rate">Business A, Netto-GTA$ pro Stunde</label>
             <input class="input" type="number" id="biz-rate" data-rate-input min="0" step="1000" value="56000">
-            <p class="field-hint">Deine Annahme — gib eine Rate ein, die du selbst gemessen hast. Keine GTA-6-Rate ist irgendwo veröffentlicht.</p>
+            <p class="field-hint">Deine Annahme, gib eine Rate ein, die du selbst gemessen hast. Keine GTA-6-Rate ist irgendwo veröffentlicht.</p>
           </div>
 <div>
-            <label class="field-label" for="biz-upkeep">Business A — Unterhalt (GTA$ pro Tag)</label>
+            <label class="field-label" for="biz-upkeep">Business A, Unterhalt (GTA$ pro Tag)</label>
             <input class="input" type="number" id="biz-upkeep" data-upkeep-input min="0" step="100" value="0">
           </div>
 <div>
-            <label class="field-label" for="biz-name2">Business B — Name (für den Crossover)</label>
+            <label class="field-label" for="biz-name2">Business B, Name (für den Crossover)</label>
             <input class="input" type="text" id="biz-name2" data-biz2-input maxlength="60" value="Agency (Beispiel)">
           </div>
 <div>
-            <label class="field-label" for="biz-price2">Business B — Buy-in (GTA$)</label>
+            <label class="field-label" for="biz-price2">Business B, Buy-in (GTA$)</label>
             <input class="input" type="number" id="biz-price2" data-price2-input min="0" step="1000" value="2830000">
           </div>
 <div>
-            <label class="field-label" for="biz-rate2">Business B — Netto-GTA$ pro Stunde</label>
+            <label class="field-label" for="biz-rate2">Business B, Netto-GTA$ pro Stunde</label>
             <input class="input" type="number" id="biz-rate2" data-rate2-input min="0" step="1000" value="85000">
           </div>
 <div>
-            <label class="field-label" for="biz-upkeep2">Business B — Unterhalt (GTA$ pro Tag)</label>
+            <label class="field-label" for="biz-upkeep2">Business B, Unterhalt (GTA$ pro Tag)</label>
             <input class="input" type="number" id="biz-upkeep2" data-upkeep2-input min="0" step="100" value="0">
           </div>
 <div>
@@ -257,12 +258,12 @@
 <div>
             <label class="field-label" for="biz-goal">Sparziel (GTA$)</label>
             <input class="input" type="number" id="biz-goal" data-goal-input min="0" step="100000" value="2000000">
-            <p class="field-hint">Standard 2.000.000 $ ist das Family-Savings-Maximalziel, wie es nur von PowerPyx gemeldet wird — gekennzeichnet, nicht verifiziert.</p>
+            <p class="field-hint">Standard 2.000.000 $ ist das Family-Savings-Maximalziel, wie es nur von PowerPyx gemeldet wird, gekennzeichnet, nicht verifiziert.</p>
           </div>
-          <p class="field-hint">Die Standards nutzen die GTA-Online-Vergleichswerte von Acid Lab (750.000 $ Buy-in, 56.000 $/Std.) und Agency (2.830.000 $ Buy-in, 85.000 $/Std.) nur als Beispiel — ersetze sie durch deine eigenen Zahlen. Diese Standards sind GTA-Online-Zahlen, nicht GTA 6.</p>
+          <p class="field-hint">Die Standards nutzen die GTA-Online-Vergleichswerte von Acid Lab (750.000 $ Buy-in, 56.000 $/Std.) und Agency (2.830.000 $ Buy-in, 85.000 $/Std.) nur als Beispiel, ersetze sie durch deine eigenen Zahlen. Diese Standards sind GTA-Online-Zahlen, nicht GTA 6.</p>
         </form>
         <div class="output-panel" aria-live="polite">
-          <div class="output-panel-label eyebrow-muted">Simulator-Ergebnis — deine Annahme</div>
+          <div class="output-panel-label eyebrow-muted">Simulator-Ergebnis, deine Annahme</div>
           <div class="mt-8" data-output-panel><dl class="stat-grid">
             <div><dt>Business A – Break-even</dt><dd>6,7 Tage · 13,4 Spielstunden</dd></div>
             <div><dt>Business A – Netto nach 30 Std.</dt><dd>930.000 $</dd></div>
@@ -275,14 +276,14 @@
             <div><dt>Business B – ROI nach 40 Std.</dt><dd>20,1 %</dd></div>
             <div><dt>Crossover (B überholt A)</dt><dd>71,7 Stunden</dd></div>
           </dl>
-          <p class="verdict-desc">Rechenweg — Business A: Tagesnetto = 56.000 × 2 − 0 = 112.000 $/Tag; Break-even = 750.000 ÷ 112.000 = 6,7 Tage (13,4 Spielstunden); Netto nach 40 Std. = 56.000 × 40 − 750.000 − 0 = 1.490.000 $; ROI nach 40 Std. = 1.490.000 ÷ 750.000 = 198,7 %; Zeit bis zum Ziel = 2.000.000 ÷ 56.000 = 35,7 Std. Crossover: (2.830.000 − 750.000) ÷ (85.000 − 56.000) = 2.080.000 ÷ 29.000 = 71,7 Std. Alle Eingaben sind deine Annahme.</p></div>
+          <p class="verdict-desc">Rechenweg, Business A: Tagesnetto = 56.000 × 2 − 0 = 112.000 $/Tag; Break-even = 750.000 ÷ 112.000 = 6,7 Tage (13,4 Spielstunden); Netto nach 40 Std. = 56.000 × 40 − 750.000 − 0 = 1.490.000 $; ROI nach 40 Std. = 1.490.000 ÷ 750.000 = 198,7 %; Zeit bis zum Ziel = 2.000.000 ÷ 56.000 = 35,7 Std. Crossover: (2.830.000 − 750.000) ÷ (85.000 − 56.000) = 2.080.000 ÷ 29.000 = 71,7 Std. Alle Eingaben sind deine Annahme.</p></div>
         </div>
       </div>
     </section>
 <section class="share-panel" aria-labelledby="share-heading">
       <div>
         <h2 id="share-heading">Dieses Ergebnis teilen</h2>
-        <p class="sub">Sende deine genauen Simulator-Eingaben an einen Freund oder behalte den Link für später. Der Link trägt nur Simulator-Einstellungen — nie ein persönliches Log.</p>
+        <p class="sub">Sende deine genauen Simulator-Eingaben an einen Freund oder behalte den Link für später. Der Link trägt nur Simulator-Einstellungen, nie ein persönliches Log.</p>
       </div>
       <div class="share-link-row">
         <label class="sr-only" for="share-link">Teilbarer Link für dieses Ergebnis</label>
@@ -290,16 +291,16 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Link kopieren</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf X teilen" href="https://twitter.com/intent/tweet?text=Acid%20Lab%20%28Beispiel%29%20erreicht%20den%20Break-even%20in%20etwa%2013%2C4%20Spielstunden%20und%20erzielt%20netto%201.490.000%20%24%20nach%2040%20Stunden%20%28GTA-Online-Vergleichswerte%2C%20deine%20Annahme%29.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fbusiness-tracker%3Fbiz%3DAcid%2520Lab%2520%2528Beispiel%2529%26price%3D750000%26rate%3D56000%26hours%3D2%26upkeep%3D0%26goal%3D2000000%26biz2%3DAgency%2520%2528Beispiel%2529%26price2%3D2830000%26rate2%3D85000%26upkeep2%3D0">Auf X teilen</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Dieses Ergebnis auf Reddit teilen" href="https://www.reddit.com/submit?title=Acid%20Lab%20%28Beispiel%29%20erreicht%20den%20Break-even%20in%20etwa%2013%2C4%20Spielstunden%20%28GTA-6-Business-Tracker%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fbusiness-tracker%3Fbiz%3DAcid%2520Lab%2520%2528Beispiel%2529%26price%3D750000%26rate%3D56000%26hours%3D2%26upkeep%3D0%26goal%3D2000000%26biz2%3DAgency%2520%2528Beispiel%2529%26price2%3D2830000%26rate2%3D85000%26upkeep2%3D0">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-x href="https://twitter.com/intent/tweet?text=Acid%20Lab%20%28Beispiel%29%20erreicht%20den%20Break-even%20in%20etwa%2013%2C4%20Spielstunden%20und%20erzielt%20netto%201.490.000%20%24%20nach%2040%20Stunden%20%28GTA-Online-Vergleichswerte%2C%20deine%20Annahme%29.&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fbusiness-tracker%3Fbiz%3DAcid%2520Lab%2520%2528Beispiel%2529%26price%3D750000%26rate%3D56000%26hours%3D2%26upkeep%3D0%26goal%3D2000000%26biz2%3DAgency%2520%2528Beispiel%2529%26price2%3D2830000%26rate2%3D85000%26upkeep2%3D0">Auf X teilen</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" data-share-reddit href="https://www.reddit.com/submit?title=Acid%20Lab%20%28Beispiel%29%20erreicht%20den%20Break-even%20in%20etwa%2013%2C4%20Spielstunden%20%28GTA-6-Business-Tracker%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fde%2Ftools%2Fbusiness-tracker%3Fbiz%3DAcid%2520Lab%2520%2528Beispiel%2529%26price%3D750000%26rate%3D56000%26hours%3D2%26upkeep%3D0%26goal%3D2000000%26biz2%3DAgency%2520%2528Beispiel%2529%26price2%3D2830000%26rate2%3D85000%26upkeep2%3D0">Reddit</a>
       </div>
     </section>
 <section aria-labelledby="yardstick">
-      <h2 id="yardstick">GTA-Online-Vergleichsmaßstab — 8 Businesses, gerankt nach Netto nach 40 Stunden</h2>
-      <p class="section-dek"><strong>GTA-Online-Zahlen — nicht GTA 6.</strong> Das sind GTA-V-Online-Businesses, gezeigt als Vergleichsmaßstab dafür, wie Buy-in und Stundenrate zusammenspielen. Es sind keine GTA-6-Zahlen, und es gibt kein GTA-6-Business, das man ranken könnte. Gerankt nach Nettoprofit nach 40 Spielstunden.</p>
+      <h2 id="yardstick">GTA-Online-Vergleichsmaßstab: 8 Businesses, gerankt nach Netto nach 40 Stunden</h2>
+      <p class="section-dek"><strong>GTA-Online-Zahlen, nicht GTA 6.</strong> Das sind GTA-V-Online-Businesses, gezeigt als Vergleichsmaßstab dafür, wie Buy-in und Stundenrate zusammenspielen. Es sind keine GTA-6-Zahlen, und es gibt kein GTA-6-Business, das man ranken könnte. Gerankt nach Nettoprofit nach 40 Spielstunden.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="GTA-Online-Business-Vergleichsmaßstab, scrollbare Tabelle">
       <table class="data-table" id="yardstick-table">
-        <caption class="sr-only">GTA-Online-Zahlen — nicht GTA 6. Acht GTA-Online-Businesses mit Buy-in, Dollar pro Stunde, Payback-Stunden und Nettoprofit nach 40 Stunden, gerankt nach Netto nach 40 Stunden.</caption>
+        <caption class="sr-only">GTA-Online-Zahlen, nicht GTA 6. Acht GTA-Online-Businesses mit Buy-in, Dollar pro Stunde, Payback-Stunden und Nettoprofit nach 40 Stunden, gerankt nach Netto nach 40 Stunden.</caption>
         <thead><tr><th scope="col">Business (GTA Online)</th><th scope="col">Buy-in</th><th scope="col">$ / Std.</th><th scope="col">Payback</th><th scope="col">Netto nach 40 Std.</th></tr></thead>
         <tbody>
         <tr><th scope="row">Acid Lab</th><td class="mono">750.000 $</td><td class="mono">56.000 $</td><td class="muted">13,4 Std.</td><td class="mono">1.490.000 $</td></tr>
@@ -313,44 +314,44 @@
         </tbody>
       </table>
     </div>
-      <p class="field-hint" style="margin-top:0.75rem"><strong>GTA-Online-Zahlen — nicht GTA 6.</strong> Quelle: Competitor Forensics, 20. Nov. 2026, §3.3.4 (upblazed.com-Daten zum GTA-6-Business-Rechner, GTA-Online-Raten, „assumes fully-upgraded setups“). Payback = Buy-in ÷ $/Std. Netto nach 40 Std. = $/Std. × 40 − Buy-in.</p>
+      <p class="field-hint" style="margin-top:0.75rem"><strong>GTA-Online-Zahlen, nicht GTA 6.</strong> Quelle: Competitor Forensics, 20. Nov. 2026, §3.3.4 (upblazed.com-Daten zum GTA-6-Business-Rechner, GTA-Online-Raten, „assumes fully-upgraded setups“). Payback = Buy-in ÷ $/Std. Netto nach 40 Std. = $/Std. × 40 − Buy-in.</p>
       <h3>Crossover, durchgerechnet: Agency überholt Acid Lab nach 71,7 Stunden</h3>
-      <p>Das Ranking oben hängt vom Horizont ab. Acid Lab gewinnt nach 40 Stunden nur wegen seines niedrigen Buy-ins; die Agency verdient mehr pro Stunde, also überholt sie Acid Lab, sobald genug Stunden vergehen. Crossover t* = (C<sub>Agency</sub> − C<sub>Acid</sub>) ÷ (p<sub>Agency</sub> − p<sub>Acid</sub>) = (2.830.000 − 750.000) ÷ (85.000 − 56.000) = 2.080.000 ÷ 29.000 = <strong>71,7 Std.</strong>. Probe nach 40 Std.: Acid Lab 56.000 × 40 − 750.000 = <strong>1.490.000 $</strong>; Agency 85.000 × 40 − 2.830.000 = <strong>570.000 $</strong>. Nach 200 Std. gewinnt die Agency mit weitem Abstand. Das sind GTA-Online-Zahlen — nicht GTA 6.</p>
-      <h3>Shark Cards (GTA Online — keine GTA-6-Shark-Cards existieren)</h3>
-      <p>Für GTA VI wurden keine Shark Cards angekündigt. Das GTA-Online-Megalodon-Shark-Pack hat den besten Wert: 8.000.000 GTA$ für 99,99 $, oder 80.008 GTA$ pro 1 $. Exakte Kosten für 100.000.000 GTA$ = 100.000.000 ÷ 80.008 = <strong>1.249,88 $</strong>. Kosten in ganzen Karten = 13 × 99,99 $ = <strong>1.299,87 $</strong> (13 Megalodon-Karten decken 104.000.000 GTA$ ab). Quelle: Competitor Forensics, 20. Nov. 2026, §3.3.2 / §5. GTA-Online-Zahlen — nicht GTA 6.</p>
+      <p>Das Ranking oben hängt vom Horizont ab. Acid Lab gewinnt nach 40 Stunden nur wegen seines niedrigen Buy-ins; die Agency verdient mehr pro Stunde, also überholt sie Acid Lab, sobald genug Stunden vergehen. Crossover t* = (C<sub>Agency</sub> − C<sub>Acid</sub>) ÷ (p<sub>Agency</sub> − p<sub>Acid</sub>) = (2.830.000 − 750.000) ÷ (85.000 − 56.000) = 2.080.000 ÷ 29.000 = <strong>71,7 Std.</strong>. Probe nach 40 Std.: Acid Lab 56.000 × 40 − 750.000 = <strong>1.490.000 $</strong>; Agency 85.000 × 40 − 2.830.000 = <strong>570.000 $</strong>. Nach 200 Std. gewinnt die Agency mit weitem Abstand. Das sind GTA-Online-Zahlen, nicht GTA 6.</p>
+      <h3>Shark Cards (GTA Online: keine GTA-6-Shark-Cards existieren)</h3>
+      <p>Für GTA VI wurden keine Shark Cards angekündigt. Das GTA-Online-Megalodon-Shark-Pack hat den besten Wert: 8.000.000 GTA$ für 99,99 $, oder 80.008 GTA$ pro 1 $. Exakte Kosten für 100.000.000 GTA$ = 100.000.000 ÷ 80.008 = <strong>1.249,88 $</strong>. Kosten in ganzen Karten = 13 × 99,99 $ = <strong>1.299,87 $</strong> (13 Megalodon-Karten decken 104.000.000 GTA$ ab). Quelle: Competitor Forensics, 20. Nov. 2026, §3.3.2 / §5. GTA-Online-Zahlen, nicht GTA 6.</p>
     </section>
 <section aria-labelledby="story-methods">
-      <h2 id="story-methods">Story-Geldmethoden-Checkliste — Per-Job-Spannen, gemeldet, nicht verifiziert</h2>
-      <p class="section-dek">Jede Spanne unten ist aus Guides gemeldet, nicht von Rockstar bestätigt. Jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet — nicht verifiziert“-Badge. <strong>Kein $/Std.-Wert wird aus einer davon abgeleitet</strong> — für keine GTA-6-Methode wurde bisher ein getimter Run veröffentlicht, also gibt es keine Zykluszeit, durch die man teilen könnte. Der 250.000-$-Geld-Cheat steht unten, weil er <strong>keine</strong> Geldmethode ist.</p>
+      <h2 id="story-methods">Story-Geldmethoden-Checkliste: Per-Job-Spannen, gemeldet, nicht verifiziert</h2>
+      <p class="section-dek">Jede Spanne unten ist aus Guides gemeldet, nicht von Rockstar bestätigt. Jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet, nicht verifiziert“-Badge. <strong>Kein $/Std.-Wert wird aus einer davon abgeleitet</strong>, für keine GTA-6-Methode wurde bisher ein getimter Run veröffentlicht, also gibt es keine Zykluszeit, durch die man teilen könnte. Der 250.000-$-Geld-Cheat steht unten, weil er <strong>keine</strong> Geldmethode ist.</p>
       <p class="field-hint"><strong>Warnung zum Kapitel-1-Wipe:</strong> farme nicht in Kapitel 1; nur die Family-Savings-Einzahlung von 5.000 $ überlebt. Zahle vor dem Übergang in die Family Savings ein.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Story-Modus-Geldmethoden-Checkliste, scrollbare Tabelle">
       <table class="data-table" id="story-table">
         <caption class="sr-only">Gemeldete Story-Geldmethoden: Auszahlungs-Spanne pro Job, Quelle und Datum sowie Vertrauens-Hinweise. Alle Zahlen sind gemeldet, nicht verifiziert; kein Stundensatz wird aus einer davon abgeleitet.</caption>
         <thead><tr><th scope="col">Methode</th><th scope="col">Gemeldete Auszahlung</th><th scope="col">Quelle + Datum</th><th scope="col">Hinweise</th></tr></thead>
         <tbody>
-        <tr><th scope="row">Großer Banktresor-Raub <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">Bis zu 205.000 $ / Job, ~5 Min. (Spanne 65.000–205.000 $)</td><td class="muted">PowerPyx, 18. Nov. 2026; Dexerto sagt 200.000 $</td><td class="muted">Ende von Kapitel 4; 4 Sterne Fahndung beim Verlassen. Obergrenze mit geringer Sicherheit — Dexerto 200.000 $ vs. PowerPyx 205.000 $. Noch keine Tresor-Auszahlung irgendwo auf dem Bildschirm.</td></tr>
-        <tr><th scope="row">Juwelier-Raub <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">10.000–25.000 $ / Store</td><td class="muted">PowerPyx; Dexerto, 19. Nov. 2026; Polygon, 19. Nov. 2026</td><td class="muted">Frühes Kapitel 3, Yasmani-Jobs. Polygon ~20.000 $ pro Store. Eigene Pfand-Zahlen (~890–1.350 $) liegen weit unter der Schlagzeile — die Schlagzeile deckt wohl bestimmte Yasmani-Jobs / Hinterzimmer-Tresore ab.</td></tr>
-        <tr><th scope="row">Randy's Wish List (hochwertige gestohlene Autos) <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">30.000 $+ / Auto</td><td class="muted">PowerPyx; Dexerto; GameSpot, 18. Nov. 2026</td><td class="muted">Mitte Kapitel 3. Listengröße umstritten: 18 vs. 22 Autos. Kein Bildschirm-Beleg für einen Randy-Verkauf wurde gefunden.</td></tr>
-        <tr><th scope="row">Gestohlene Autos an Moses verkaufen (ohne Termin) <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">1.000–3.000 $ / Auto (eigener Run 350–5.245 $ je nach Fahrzeug)</td><td class="muted">PowerPyx; Dexerto; GameSpot; eigene Runs von gta6heists, Nov. 2026</td><td class="muted">Kapitel 2, nach „Moses“; nur Autos ohne Tracker; ~2 Min. Cooldown. Dexerto 1.000–4.000 $. GameSpots „oft über 10.000 $“ sind wohl Vertrags-Lieferungen, eine andere Mechanik — separat gehalten.</td></tr>
-        <tr><th scope="row">Pay-'n'-Spray-Autoverkäufe <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">~7.000 $ für ein gutes Auto</td><td class="muted">Polygon, Nov. 2026 (einzelnes durchgerechnetes Beispiel)</td><td class="muted">Ocean Beach, ~30 Sekunden Arbeit im Beispiel. Kein Bildschirm-Beleg für einen Pay-'n'-Spray-Verkauf wurde gefunden.</td></tr>
-        <tr><th scope="row">Kleine Banken / Zahltag-Kredite <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">Kleine Banken 5.000–45.000 $; Zahltag-Kredite 2.000–25.000 $</td><td class="muted">PowerPyx via Aggregator-Zusammenfassungen, Nov. 2026</td><td class="muted">Kapitel 3, „Credit Check“; Dye-Pack-Jammer nötig. Geringe Sicherheit — aus zweiter Hand; PowerPyx' eigene Geld-Guide-Seite zeigte diese Spannen im abgerufenen sichtbaren Text nicht.</td></tr>
-        <tr><th scope="row">Versunkener Schatz für Kenton <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">200–2.600 $ / Fund</td><td class="muted">Dexerto, Nov. 2026; GameSpot; gta.guide</td><td class="muted">Kapitel 1, nach „Island Dreams“. Konflikt markiert: gta.guide sagt 2.000–4.000 $ pro Tauchgang — möglicherweise andere Stellen, oder gesamt vs. pro Stück.</td></tr>
-        <tr><th scope="row">Jagd für Killtelligence / Bret <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">Bis zu ein paar tausend Dollar pro makellosem Fell</td><td class="muted">Polygon, Nov. 2026 (einzige Quelle)</td><td class="muted">Nur größte Tiere, makellose Felle. Vage, einzige Quelle, kein Preis pro Tier.</td></tr>
-        <tr><th scope="row">Apollo-Aggregates-Lager — erster Durchlauf <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">~11.000–14.400 $ erster Durchlauf, käuferabhängig</td><td class="muted">GTA BOOM eigener getesteter Run + 2 unabhängige Videos, 19.–20. Nov. 2026</td><td class="muted">Früher Loot-Run. Donnie 14.400 $ (8.400 $ Drogen + 6.000 $ markierte Scheine); Brian 12.720 $ für denselben Fund; Leroy-Rook-Karte 6.000 $ bei Hamlet Pawn (6.500 $ in einem Video — 6.500 $ nicht fest verdrahten).</td></tr>
-        <tr><th scope="row">Apollo-Lager — wiederholte Runs <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">Wiederholte Auszahlung umstritten — siehe Hinweise</td><td class="muted">GTA BOOM (getestet); Polygon, 20. Nov. 2026; KeenGamer</td><td class="muted">Der meiste Loot respawnt; 3 Quellen kehren nicht zurück (Geldtasche auf dem Tisch, Kokain-Taschen im ersten Büro, Geldzählmaschinen-Bargeld); die Karte ist einmalig, also zahlen Wiederholungen weniger. Wiederholte Auszahlung umstritten: 4.000 $ vs. 8.640 $ vs. 40.000 $+ vs. 56.000 $+ pro Zyklus — keine Zahl wird hier gewählt. Patch-Status ungeklärt.</td></tr>
-        <tr><th scope="row">Ladenüberfälle (Kassen) <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">260–435 $ pro Kasse; Hinterzimmer des Friseursalons ~1.700 $</td><td class="muted">gta6heists-Launch-Footage, Nov. 2026</td><td class="muted">Einzige Quelle, eigenes Footage.</td></tr>
-        <tr><th scope="row">Abschleppbare Geldautomaten <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">7.200 $ in markierten Scheinen, ein Run</td><td class="muted">eigener Run von gta6heists, Nov. 2026</td><td class="muted">Einzige Quelle, ein Run — plausibel, keine Rate. Das Farbpack färbt die Scheine pink.</td></tr>
-        <tr><th scope="row">Story-Auszahlungen — Ende von Kapitel 3 <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">120.000 $ automatisch am Ende von Kapitel 3</td><td class="muted">PowerPyx; gta.guide, Nov. 2026</td><td class="muted">Cartel Heist umstritten: 150.000 $ (gta6heists) vs. ~120.000 $ (HappyGamer, PowerPyx) — möglicherweise dieselbe Auszahlung, anders gezählt.</td></tr>
-        <tr><th scope="row">VCIA-Takedown-Heist (Kapitel 4) <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">250.000 $ — „größte Einzelauszahlung der Story“</td><td class="muted">nur gta6heists + BoostBaseGG, Nov. 2026</td><td class="muted">Unverifiziert — zwei Guides, wahrscheinlich gleiche Herkunft, kein Auszahlungs-Screenshot gefunden.</td></tr>
-        <tr><th scope="row">Pilot-Pete-Lieferungen <span class="proj-badge">Gemeldet — nicht verifiziert</span></th><td class="mono">20.000 $ pro Liefermission</td><td class="muted">PowerPyx via Aggregatoren, Nov. 2026</td><td class="muted">Kapitel 4, nur Jason, 7 Pakete gegen die Uhr. Einzige Quelle, kein unabhängiger Run gefunden.</td></tr>
-        <tr><th scope="row">250.000-$-Geld-Cheat — KEINE Geldmethode</th><td class="mono">250.000 $, nur nach der Story</td><td class="muted">GameSpot; Polygon; Insider Gaming; KeenGamer; Dexerto, Nov. 2026 (61-Cheat-Liste, PowerPyx zugeschrieben)</td><td class="muted">Existiert, nur nach der Story, und deaktiviert Speichern und Trophäen für die Session — als behaltbares Einkommen unbrauchbar. Freischaltbedingung ungeklärt („Story beenden“ vs. „250.000 $ aus Hehlerware machen“). Zähle ihn nicht als Einkommen.</td></tr>
+        <tr><th scope="row">Großer Banktresor-Raub <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">Bis zu 205.000 $ / Job, ~5 Min. (Spanne 65.000–205.000 $)</td><td class="muted">PowerPyx, 18. Nov. 2026; Dexerto sagt 200.000 $</td><td class="muted">Ende von Kapitel 4; 4 Sterne Fahndung beim Verlassen. Obergrenze mit geringer Sicherheit, Dexerto 200.000 $ vs. PowerPyx 205.000 $. Noch keine Tresor-Auszahlung irgendwo auf dem Bildschirm.</td></tr>
+        <tr><th scope="row">Juwelier-Raub <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">10.000–25.000 $ / Store</td><td class="muted">PowerPyx; Dexerto, 19. Nov. 2026; Polygon, 19. Nov. 2026</td><td class="muted">Frühes Kapitel 3, Yasmani-Jobs. Polygon ~20.000 $ pro Store. Eigene Pfand-Zahlen (~890–1.350 $) liegen weit unter der Schlagzeile, die Schlagzeile deckt wohl bestimmte Yasmani-Jobs / Hinterzimmer-Tresore ab.</td></tr>
+        <tr><th scope="row">Randy's Wish List (hochwertige gestohlene Autos) <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">30.000 $+ / Auto</td><td class="muted">PowerPyx; Dexerto; GameSpot, 18. Nov. 2026</td><td class="muted">Mitte Kapitel 3. Listengröße umstritten: 18 vs. 22 Autos. Kein Bildschirm-Beleg für einen Randy-Verkauf wurde gefunden.</td></tr>
+        <tr><th scope="row">Gestohlene Autos an Moses verkaufen (ohne Termin) <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">1.000–3.000 $ / Auto (eigener Run 350–5.245 $ je nach Fahrzeug)</td><td class="muted">PowerPyx; Dexerto; GameSpot; eigene Runs von gta6heists, Nov. 2026</td><td class="muted">Kapitel 2, nach „Moses“; nur Autos ohne Tracker; ~2 Min. Cooldown. Dexerto 1.000–4.000 $. GameSpots „oft über 10.000 $“ sind wohl Vertrags-Lieferungen, eine andere Mechanik, separat gehalten.</td></tr>
+        <tr><th scope="row">Pay-'n'-Spray-Autoverkäufe <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">~7.000 $ für ein gutes Auto</td><td class="muted">Polygon, Nov. 2026 (einzelnes durchgerechnetes Beispiel)</td><td class="muted">Ocean Beach, ~30 Sekunden Arbeit im Beispiel. Kein Bildschirm-Beleg für einen Pay-'n'-Spray-Verkauf wurde gefunden.</td></tr>
+        <tr><th scope="row">Kleine Banken / Zahltag-Kredite <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">Kleine Banken 5.000–45.000 $; Zahltag-Kredite 2.000–25.000 $</td><td class="muted">PowerPyx via Aggregator-Zusammenfassungen, Nov. 2026</td><td class="muted">Kapitel 3, „Credit Check“; Dye-Pack-Jammer nötig. Geringe Sicherheit, aus zweiter Hand; PowerPyx' eigene Geld-Guide-Seite zeigte diese Spannen im abgerufenen sichtbaren Text nicht.</td></tr>
+        <tr><th scope="row">Versunkener Schatz für Kenton <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">200–2.600 $ / Fund</td><td class="muted">Dexerto, Nov. 2026; GameSpot; gta.guide</td><td class="muted">Kapitel 1, nach „Island Dreams“. Konflikt markiert: gta.guide sagt 2.000–4.000 $ pro Tauchgang, möglicherweise andere Stellen, oder gesamt vs. pro Stück.</td></tr>
+        <tr><th scope="row">Jagd für Killtelligence / Bret <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">Bis zu ein paar tausend Dollar pro makellosem Fell</td><td class="muted">Polygon, Nov. 2026 (einzige Quelle)</td><td class="muted">Nur größte Tiere, makellose Felle. Vage, einzige Quelle, kein Preis pro Tier.</td></tr>
+        <tr><th scope="row">Apollo-Aggregates-Lager, erster Durchlauf <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">~11.000–14.400 $ erster Durchlauf, käuferabhängig</td><td class="muted">GTA BOOM eigener getesteter Run + 2 unabhängige Videos, 19.–20. Nov. 2026</td><td class="muted">Früher Loot-Run. Donnie 14.400 $ (8.400 $ Drogen + 6.000 $ markierte Scheine); Brian 12.720 $ für denselben Fund; Leroy-Rook-Karte 6.000 $ bei Hamlet Pawn (6.500 $ in einem Video, 6.500 $ nicht fest verdrahten).</td></tr>
+        <tr><th scope="row">Apollo-Lager, wiederholte Runs <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">Wiederholte Auszahlung umstritten, siehe Hinweise</td><td class="muted">GTA BOOM (getestet); Polygon, 20. Nov. 2026; KeenGamer</td><td class="muted">Der meiste Loot respawnt; 3 Quellen kehren nicht zurück (Geldtasche auf dem Tisch, Kokain-Taschen im ersten Büro, Geldzählmaschinen-Bargeld); die Karte ist einmalig, also zahlen Wiederholungen weniger. Wiederholte Auszahlung umstritten: 4.000 $ vs. 8.640 $ vs. 40.000 $+ vs. 56.000 $+ pro Zyklus, keine Zahl wird hier gewählt. Patch-Status ungeklärt.</td></tr>
+        <tr><th scope="row">Ladenüberfälle (Kassen) <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">260–435 $ pro Kasse; Hinterzimmer des Friseursalons ~1.700 $</td><td class="muted">gta6heists-Launch-Footage, Nov. 2026</td><td class="muted">Einzige Quelle, eigenes Footage.</td></tr>
+        <tr><th scope="row">Abschleppbare Geldautomaten <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">7.200 $ in markierten Scheinen, ein Run</td><td class="muted">eigener Run von gta6heists, Nov. 2026</td><td class="muted">Einzige Quelle, ein Run, plausibel, keine Rate. Das Farbpack färbt die Scheine pink.</td></tr>
+        <tr><th scope="row">Story-Auszahlungen, Ende von Kapitel 3 <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">120.000 $ automatisch am Ende von Kapitel 3</td><td class="muted">PowerPyx; gta.guide, Nov. 2026</td><td class="muted">Cartel Heist umstritten: 150.000 $ (gta6heists) vs. ~120.000 $ (HappyGamer, PowerPyx), möglicherweise dieselbe Auszahlung, anders gezählt.</td></tr>
+        <tr><th scope="row">VCIA-Takedown-Heist (Kapitel 4) <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">250.000 $, „größte Einzelauszahlung der Story“</td><td class="muted">nur gta6heists + BoostBaseGG, Nov. 2026</td><td class="muted">Unverifiziert, zwei Guides, wahrscheinlich gleiche Herkunft, kein Auszahlungs-Screenshot gefunden.</td></tr>
+        <tr><th scope="row">Pilot-Pete-Lieferungen <span class="proj-badge">Gemeldet, nicht verifiziert</span></th><td class="mono">20.000 $ pro Liefermission</td><td class="muted">PowerPyx via Aggregatoren, Nov. 2026</td><td class="muted">Kapitel 4, nur Jason, 7 Pakete gegen die Uhr. Einzige Quelle, kein unabhängiger Run gefunden.</td></tr>
+        <tr><th scope="row">250.000-$-Geld-Cheat, KEINE Geldmethode</th><td class="mono">250.000 $, nur nach der Story</td><td class="muted">GameSpot; Polygon; Insider Gaming; KeenGamer; Dexerto, Nov. 2026 (61-Cheat-Liste, PowerPyx zugeschrieben)</td><td class="muted">Existiert, nur nach der Story, und deaktiviert Speichern und Trophäen für die Session, als behaltbares Einkommen unbrauchbar. Freischaltbedingung ungeklärt („Story beenden“ vs. „250.000 $ aus Hehlerware machen“). Zähle ihn nicht als Einkommen.</td></tr>
         </tbody>
       </table>
     </div>
     </section>
 <section aria-labelledby="garages">
-      <h2 id="garages">Garagen-Checkliste — die einzige Immobilie, die man kaufen kann</h2>
-      <p class="section-dek">Garagen sind die einzige kaufbare Immobilie in GTA 6 zum Launch. Acht Garagen zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $. <strong>Garagen verdienen kein Geld</strong> — sie lagern Fahrzeuge. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Kaufe sie über die Vice-City-Real-Estate-App nach Kapitel 2, „Daily Driver“.</p>
+      <h2 id="garages">Garagen-Checkliste: die einzige Immobilie, die man kaufen kann</h2>
+      <p class="section-dek">Garagen sind die einzige kaufbare Immobilie in GTA 6 zum Launch. Acht Garagen zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $. <strong>Garagen verdienen kein Geld</strong>, sie lagern Fahrzeuge. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Kaufe sie über die Vice-City-Real-Estate-App nach Kapitel 2, „Daily Driver“.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Garagen-Checkliste, scrollbare Tabelle">
       <table class="data-table" id="garage-table">
         <caption class="sr-only">Garagen-Checkliste: acht Garagen zu verkaufen, 160.000 GTA-Dollar gesamt. Zwei Einzelpreise sind umstritten und werden markiert, nicht aufgelöst.</caption>
@@ -358,16 +359,16 @@
         <tbody>
         <tr><th scope="row">Mitchell Auto Center</th><td class="mono">4.000 $</td><td class="muted">Günstigste Garage (Spannen-Endpunkt). Quellen: GameSpot; Beebom; GTABase; GTA6Info, Nov. 2026.</td></tr>
         <tr><th scope="row">Atlantic Court Garage</th><td class="mono">40.000 $</td><td class="muted">Teuerste Garage (Spannen-Endpunkt). Quellen: GameSpot; Beebom; GTABase; GTA6Info, Nov. 2026.</td></tr>
-        <tr><th scope="row">Persistence Road garage</th><td class="mono">7.600 $ vs. 9.500 $ — umstritten</td><td class="muted"><span class="proj-badge">Gemeldet — nicht verifiziert</span> GameSpot listet die höhere Zahl; Beebom / GTABase / Notebook die niedrigere. Markiert, nicht aufgelöst.</td></tr>
-        <tr><th scope="row">Vela Rota garage</th><td class="mono">24.000 $ vs. 30.000 $ — umstritten</td><td class="muted"><span class="proj-badge">Gemeldet — nicht verifiziert</span> GameSpot listet die höhere Zahl; Beebom / GTABase / Notebook die niedrigere. Markiert, nicht aufgelöst.</td></tr>
-        <tr><th scope="row">Übrige 4 Garagen</th><td class="mono">Teil der 160.000 $ gesamt</td><td class="muted">Gesamt 160.000 $ über alle Quellen einig; Einzelpreise für die übrigen vier sind hier nicht gelistet, weil keine zweitbelegte Zahl im Recherche-Set war — nicht geraten.</td></tr>
+        <tr><th scope="row">Persistence Road garage</th><td class="mono">7.600 $ vs. 9.500 $, umstritten</td><td class="muted"><span class="proj-badge">Gemeldet, nicht verifiziert</span> GameSpot listet die höhere Zahl; Beebom / GTABase / Notebook die niedrigere. Markiert, nicht aufgelöst.</td></tr>
+        <tr><th scope="row">Vela Rota garage</th><td class="mono">24.000 $ vs. 30.000 $, umstritten</td><td class="muted"><span class="proj-badge">Gemeldet, nicht verifiziert</span> GameSpot listet die höhere Zahl; Beebom / GTABase / Notebook die niedrigere. Markiert, nicht aufgelöst.</td></tr>
+        <tr><th scope="row">Übrige 4 Garagen</th><td class="mono">Teil der 160.000 $ gesamt</td><td class="muted">Gesamt 160.000 $ über alle Quellen einig; Einzelpreise für die übrigen vier sind hier nicht gelistet, weil keine zweitbelegte Zahl im Recherche-Set war, nicht geraten.</td></tr>
         </tbody>
       </table>
     </div>
       <p class="field-hint" style="margin-top:0.75rem"><strong>Warnung zum Kapitel-1-Wipe:</strong> Garagen werden ab Kapitel 2 gekauft. Farme nicht in Kapitel 1; nur die Family-Savings-Einzahlung von 5.000 $ überlebt.</p>
     </section>
 <section aria-labelledby="checklist-constants">
-      <h2 id="checklist-constants">Spiel-Checklisten-Konstanten — Tracker-Ziele ohne Auszahlungs-Schätzung</h2>
+      <h2 id="checklist-constants">Spiel-Checklisten-Konstanten: Tracker-Ziele ohne Auszahlungs-Schätzung</h2>
       <p class="section-dek">Zahlen und Summen, die das Spiel selbst für 100 % Abschluss verfolgt. Nutze sie als Ziele; sie tragen keine Auszahlung, keinen Preis und keine Rate.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Spiel-Checklisten-Konstanten, scrollbare Tabelle">
       <table class="data-table" id="constants-table">
@@ -379,23 +380,23 @@
         <tr><th scope="row">Stick-ups</th><td class="mono">50</td><td class="muted">PowerPyx-100%-Checkliste; gta6heists-Statistikbildschirm</td></tr>
         <tr><th scope="row">Smash &#x27;n&#x27; grabs</th><td class="mono">34</td><td class="muted">PowerPyx-100%-Checkliste; gta6heists-Statistikbildschirm</td></tr>
         <tr><th scope="row">Gang-Operationen</th><td class="mono">39</td><td class="muted">PowerPyx-100%-Checkliste; gta6heists-Statistikbildschirm</td></tr>
-        <tr><th scope="row">Hehler-Summe — Drogen</th><td class="mono">100.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
-        <tr><th scope="row">Hehler-Summe — Schmuck</th><td class="mono">100.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
-        <tr><th scope="row">Hehler-Summe — markierte Scheine</th><td class="mono">250.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
-        <tr><th scope="row">Hehler-Summe — Fahrzeuge</th><td class="mono">200.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
+        <tr><th scope="row">Hehler-Summe, Drogen</th><td class="mono">100.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
+        <tr><th scope="row">Hehler-Summe, Schmuck</th><td class="mono">100.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
+        <tr><th scope="row">Hehler-Summe, markierte Scheine</th><td class="mono">250.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
+        <tr><th scope="row">Hehler-Summe, Fahrzeuge</th><td class="mono">200.000 $</td><td class="muted">PowerPyx-100%-Checkliste</td></tr>
         <tr><th scope="row">Bargeld-Obergrenze</th><td class="mono">20.000 $ pro Charakter</td><td class="muted">Polygon; GameSpot; gta.guide, Nov. 2026. Bargeld geht bei Tod/Festnahme verloren; einzahlen über BuckMe-Geldautomaten.</td></tr>
-        <tr><th scope="row">Family-Savings-Maximalziel</th><td class="mono">2.000.000 $ <span class="proj-badge">Gemeldet — nicht verifiziert</span></td><td class="muted">Nur PowerPyx — gekennzeichnet, nicht verifiziert. Erstes Ziel 5.000 $; die 5.000-$-Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt.</td></tr>
+        <tr><th scope="row">Family-Savings-Maximalziel</th><td class="mono">2.000.000 $ <span class="proj-badge">Gemeldet, nicht verifiziert</span></td><td class="muted">Nur PowerPyx, gekennzeichnet, nicht verifiziert. Erstes Ziel 5.000 $; die 5.000-$-Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt.</td></tr>
         </tbody>
       </table>
     </div>
-      <h3>Hehler — sie existieren, ihre Raten nicht</h3>
-      <p>Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. <strong>Für keinen Hehler wurden Preise pro Stück, Anteile oder Cooldowns veröffentlicht</strong> — „zahlt gut / zahlt wenig“ ist alles, was irgendeine Quelle sagt, also erscheint keine Hehler-Rate auf dieser Seite. Quellen: gta6fieldguide (Twitch-VOD-Zeitstempel zitiert); PowerPyx; gta6heists, Nov. 2026.</p>
+      <h3>Hehler: sie existieren, ihre Raten nicht</h3>
+      <p>Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. <strong>Für keinen Hehler wurden Preise pro Stück, Anteile oder Cooldowns veröffentlicht</strong>, „zahlt gut / zahlt wenig“ ist alles, was irgendeine Quelle sagt, also erscheint keine Hehler-Rate auf dieser Seite. Quellen: gta6fieldguide (Twitch-VOD-Zeitstempel zitiert); PowerPyx; gta6heists, Nov. 2026.</p>
     </section>
 <section aria-labelledby="methodology">
       <details class="methodology-details" open>
-        <summary><h2 id="methodology">Wie der Tracker ehrlich bleibt — Formeln und Datenklassen</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <summary><h2 id="methodology">Wie der Tracker ehrlich bleibt: Formeln und Datenklassen</h2><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div class="methodology-body">
-          <p>Der Simulator rechnet nur aus Zahlen, die du eingibst. Effektives Netto pro Spielstunde ist dein Netto-$/Std. minus Unterhalt, verteilt auf die Stunden, die du pro Tag spielst. Break-even, Profit, ROI, Crossover und Zeit bis zum Ziel folgen alle aus diesen Eingaben, und jede Ergebniskarte zeigt ihre Eingaben und Formel auf derselben Karte — die „Rechenweg zeigen“-Regel. Break-even zeigt „nie“, wenn das Tagesnetto null oder negativ ist (p × h ≤ u), weil der Buy-in dann nie zurückgezahlt wird.</p>
+          <p>Der Simulator rechnet nur aus Zahlen, die du eingibst. Effektives Netto pro Spielstunde ist dein Netto-$/Std. minus Unterhalt, verteilt auf die Stunden, die du pro Tag spielst. Break-even, Profit, ROI, Crossover und Zeit bis zum Ziel folgen alle aus diesen Eingaben, und jede Ergebniskarte zeigt ihre Eingaben und Formel auf derselben Karte, die „Rechenweg zeigen“-Regel. Break-even zeigt „nie“, wenn das Tagesnetto null oder negativ ist (p × h ≤ u), weil der Buy-in dann nie zurückgezahlt wird.</p>
           <pre class="methodology-formula">effPerHour   = p − u ÷ h                    (GTA$/Std.; p = Netto-$/Std., u = Unterhalt GTA$/Tag, h = Std./Tag)
 dailyNet     = p × h − u                    (GTA$/Tag)
 breakEvenDays = C ÷ dailyNet                 (Tage; nur wenn dailyNet &gt; 0, sonst „nie“)
@@ -404,42 +405,42 @@ profit(H)    = p × H − u × (H ÷ h) − C       (GTA$ nach H Spielstunden)
 roi(H)       = profit(H) ÷ C                (angezeigt als %)
 crossover t* = (C_A − C_B) ÷ (eff_A − eff_B) (Std.; A vs. B, eff = effektiver Netto-$/Std.)
 timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0, sonst „nie“)</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Drei Datenklassen, nie in einer Tabelle vermischt: Verifiziert (Rockstar / Spiel-Checkliste / GTA-Online-gekennzeichneter Vergleichsmaßstab) · Gemeldet (Guide/Community, Quelle + Datum + Badge) · Deine Zahlen (vom Nutzer eingegeben / simuliert, gekennzeichnet als „deine Annahme“).</li><li>Kein $/Std.-Wert wird aus einer gemeldeten Per-Job-Spanne abgeleitet — es gibt keinen getimten Run, durch den man teilen könnte. Der Simulator lässt dich deine eigene Zykluszeit eingeben und sehen, was der $/Std.-Wert <em>wäre</em> gekennzeichnet als „deine Annahme, keine gemessene Rate“.</li><li>Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen — nicht GTA 6“ gekennzeichnet, auch in den Simulator-Standards. GTA-6-Shark-Cards existieren nicht; die Shark-Card-Zahlen sind GTA Online.</li><li>Jede Projektion trägt ihre Quelle, ihr Datum und eine „Zuletzt geprüft“-Zeile; das Changelog protokolliert jede Neubasierung. Kein Datamine- oder Leak-Sourcing. Keine erfundenen Business-Namen, Preise, Auszahlungen oder Mechaniken — ein Fakt wird lieber weggelassen als geraten.</li><li>Share-URLs tragen nur Simulator-Einstellungen (?biz=&amp;price=&amp;rate=&amp;hours=&amp;upkeep=&amp;goal=, plus die Business-B-Entsprechungen) — nie ein persönliches Log.</li></ul>
+          <ul class="list-disc list-outside"><li>Drei Datenklassen, nie in einer Tabelle vermischt: Verifiziert (Rockstar / Spiel-Checkliste / GTA-Online-gekennzeichneter Vergleichsmaßstab) · Gemeldet (Guide/Community, Quelle + Datum + Badge) · Deine Zahlen (vom Nutzer eingegeben / simuliert, gekennzeichnet als „deine Annahme“).</li><li>Kein $/Std.-Wert wird aus einer gemeldeten Per-Job-Spanne abgeleitet, es gibt keinen getimten Run, durch den man teilen könnte. Der Simulator lässt dich deine eigene Zykluszeit eingeben und sehen, was der $/Std.-Wert <em>wäre</em> gekennzeichnet als „deine Annahme, keine gemessene Rate“.</li><li>Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen, nicht GTA 6“ gekennzeichnet, auch in den Simulator-Standards. GTA-6-Shark-Cards existieren nicht; die Shark-Card-Zahlen sind GTA Online.</li><li>Jede Projektion trägt ihre Quelle, ihr Datum und eine „Zuletzt geprüft“-Zeile; das Changelog protokolliert jede Neubasierung. Kein Datamine- oder Leak-Sourcing. Keine erfundenen Business-Namen, Preise, Auszahlungen oder Mechaniken, ein Fakt wird lieber weggelassen als geraten.</li><li>Share-URLs tragen nur Simulator-Einstellungen (?biz=&amp;price=&amp;rate=&amp;hours=&amp;upkeep=&amp;goal=, plus die Business-B-Entsprechungen), nie ein persönliches Log.</li></ul>
         </div>
       </details>
     </section>
 <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">GTA-6-Business-Tracker-Fragen</h2>
+      <header>
+        <h2 id="faq">GTA-6-Business-Tracker-Fragen</h2>
         <p class="section-dek">Kaufbare Businesses, Auszahlungs-Badges, der fehlende $/Std.-Wert und wie der Simulator funktioniert.</p>
       </header>
       <ul class="faq-list" role="list"><li><details class="faq-item" id="faq-q-1">
         <summary aria-controls="faq-a-1"><h3>Gibt es kaufbare Businesses in GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-1" class="faq-answer" role="region"><p>Nein. Rockstar hat keine Businesses im Spielerbesitz angekündigt, und im veröffentlichten Spiel kann kein Business gekauft werden — die 12 benannten Leonida-Businesses sind NPC-eigen oder nur besuchbar, und die einzige Immobilie, die man kaufen kann, ist eine Garage (8 zu verkaufen, 160.000 $ gesamt). Das kann sich mit einem Patch, DLC oder einem künftigen Online-Modus ändern, von denen keiner angekündigt wurde.</p></div>
+        <div id="faq-a-1" class="faq-answer" role="region"><p>Nein. Rockstar hat keine Businesses im Spielerbesitz angekündigt, und im veröffentlichten Spiel kann kein Business gekauft werden, die 12 benannten Leonida-Businesses sind NPC-eigen oder nur besuchbar, und die einzige Immobilie, die man kaufen kann, ist eine Garage (8 zu verkaufen, 160.000 $ gesamt). Das kann sich mit einem Patch, DLC oder einem künftigen Online-Modus ändern, von denen keiner angekündigt wurde.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-2">
         <summary aria-controls="faq-a-2"><h3>Sind diese Auszahlungen verifiziert?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-2" class="faq-answer" role="region"><p>Nur die strukturellen Fakten sind verifiziert: der Launch, die 12 benannten Businesses, die Garagen-Summe, die Bargeld-Obergrenze und die Checklisten-Zahlen des Spiels. Jede Auszahlungs-Spanne auf dieser Seite ist aus Guides gemeldet, nicht verifiziert — jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet — nicht verifiziert“-Badge. Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen — nicht GTA 6“ gekennzeichnet, und die Zahlen des Simulators sind deine eigenen Annahmen, keine gemessenen Raten.</p></div>
+        <div id="faq-a-2" class="faq-answer" role="region"><p>Nur die strukturellen Fakten sind verifiziert: der Launch, die 12 benannten Businesses, die Garagen-Summe, die Bargeld-Obergrenze und die Checklisten-Zahlen des Spiels. Jede Auszahlungs-Spanne auf dieser Seite ist aus Guides gemeldet, nicht verifiziert, jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet, nicht verifiziert“-Badge. Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen, nicht GTA 6“ gekennzeichnet, und die Zahlen des Simulators sind deine eigenen Annahmen, keine gemessenen Raten.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-3">
         <summary aria-controls="faq-a-3"><h3>Warum gibt es keinen $/Std.-Wert für irgendeine GTA-6-Methode?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-3" class="faq-answer" role="region"><p>Weil für keine GTA-6-Methode ein getimter Run veröffentlicht wurde. Ein $/Std.-Wert braucht eine Auszahlung geteilt durch eine gemessene Zykluszeit, und noch keine Quelle hat einen getimten Run veröffentlicht — PowerPyx' „~5 Minuten“ für Banktresore ist eine Schätzung, kein getimter Run. Sobald zwei unabhängige getimte Runs für eine Methode existieren, kann ihr $/Std.-Wert mit seinen Quellen ergänzt werden.</p></div>
+        <div id="faq-a-3" class="faq-answer" role="region"><p>Weil für keine GTA-6-Methode ein getimter Run veröffentlicht wurde. Ein $/Std.-Wert braucht eine Auszahlung geteilt durch eine gemessene Zykluszeit, und noch keine Quelle hat einen getimten Run veröffentlicht, PowerPyx' „~5 Minuten“ für Banktresore ist eine Schätzung, kein getimter Run. Sobald zwei unabhängige getimte Runs für eine Methode existieren, kann ihr $/Std.-Wert mit seinen Quellen ergänzt werden.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-4">
         <summary aria-controls="faq-a-4"><h3>Was ist der Crossover-Punkt, und warum ist er wichtig?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div id="faq-a-4" class="faq-answer" role="region"><p>Der Crossover ist der Spielstunden-Punkt, an dem ein Business mit höherem Buy-in, aber höherer Stundenrate ein billigeres, langsameres überholt. Auf dem GTA-Online-Vergleichsmaßstab überholt die Agency (2.830.000 $, 85.000 $/Std.) das Acid Lab (750.000 $, 56.000 $/Std.) nach 71,7 Stunden: (2.830.000 − 750.000) ÷ (85.000 − 56.000) = 71,7 Std. Unter 71,7 Stunden liegt das Acid Lab vorn (1.490.000 $ vs. 570.000 $ netto nach 40 Std.); darüber zieht die Agency davon. Der Simulator berechnet den Crossover für zwei beliebige Einträge, die du eingibst.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-5">
         <summary aria-controls="faq-a-5"><h3>Lohnen sich Shark Cards in GTA 6?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-5" class="faq-answer" role="region"><p>Es gibt keine Shark Cards für GTA VI — keine wurden angekündigt, und Rockstar hat gesagt, dass es keine Monetarisierung innerhalb der Singleplayer-Kampagne gibt. Die Shark-Card-Zahlen auf dieser Seite sind GTA Online: Das Megalodon-Pack (8.000.000 GTA$ für 99,99 $, 80.008 GTA$ pro 1 $) hat den besten Wert, wobei exakte 100.000.000 GTA$ 1.249,88 $ kosten, oder 1.299,87 $ in ganzen Karten (13 × 99,99 $).</p></div>
+        <div id="faq-a-5" class="faq-answer" role="region"><p>Es gibt keine Shark Cards für GTA VI, keine wurden angekündigt, und Rockstar hat gesagt, dass es keine Monetarisierung innerhalb der Singleplayer-Kampagne gibt. Die Shark-Card-Zahlen auf dieser Seite sind GTA Online: Das Megalodon-Pack (8.000.000 GTA$ für 99,99 $, 80.008 GTA$ pro 1 $) hat den besten Wert, wobei exakte 100.000.000 GTA$ 1.249,88 $ kosten, oder 1.299,87 $ in ganzen Karten (13 × 99,99 $).</p></div>
       </details></li><li><details class="faq-item" id="faq-q-6">
         <summary aria-controls="faq-a-6"><h3>Können Garagen in GTA 6 Geld verdienen?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-6" class="faq-answer" role="region"><p>Nein. Garagen sind die einzige Immobilie, die man kaufen kann — 8 zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $ — aber sie lagern Fahrzeuge; sie verdienen kein Geld. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Zwei Einzelpreise sind umstritten (Persistence Road 7.600 $ vs. 9.500 $; Vela Rota 24.000 $ vs. 30.000 $) und werden auf dieser Seite markiert, nicht aufgelöst.</p></div>
+        <div id="faq-a-6" class="faq-answer" role="region"><p>Nein. Garagen sind die einzige Immobilie, die man kaufen kann, 8 zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $, aber sie lagern Fahrzeuge; sie verdienen kein Geld. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Zwei Einzelpreise sind umstritten (Persistence Road 7.600 $ vs. 9.500 $; Vela Rota 24.000 $ vs. 30.000 $) und werden auf dieser Seite markiert, nicht aufgelöst.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-7">
         <summary aria-controls="faq-a-7"><h3>Was passiert mit meinem Geld am Ende von Kapitel 1?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-7" class="faq-answer" role="region"><p>Es wird gelöscht. Bargeld, Girokonto und Versteck gehen beim Übergang von Kapitel 1 verloren; nur die Family-Savings-Einzahlung von 5.000 $ überlebt. Farme kein Geld in Kapitel 1 — zahle zuerst die Family-Savings-Einzahlung von 5.000 $ ein und beginne das Tracking ab Kapitel 2.</p></div>
+        <div id="faq-a-7" class="faq-answer" role="region"><p>Es wird gelöscht. Bargeld, Girokonto und Versteck gehen beim Übergang von Kapitel 1 verloren; nur die Family-Savings-Einzahlung von 5.000 $ überlebt. Farme kein Geld in Kapitel 1, zahle zuerst die Family-Savings-Einzahlung von 5.000 $ ein und beginne das Tracking ab Kapitel 2.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-8">
         <summary aria-controls="faq-a-8"><h3>Wer sind die Hehler, und was zahlen sie?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-8" class="faq-answer" role="region"><p>Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. Was sie pro Stück zahlen, ist unveröffentlicht — kein Preis pro Stück, Anteil oder Cooldown wurde für irgendeinen Hehler gemessen, also erscheint keine Hehler-Rate auf dieser Seite.</p></div>
+        <div id="faq-a-8" class="faq-answer" role="region"><p>Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. Was sie pro Stück zahlen, ist unveröffentlicht, kein Preis pro Stück, Anteil oder Cooldown wurde für irgendeinen Hehler gemessen, also erscheint keine Hehler-Rate auf dieser Seite.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-9">
         <summary aria-controls="faq-a-9"><h3>Was ist das Family-Savings-Ziel?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div id="faq-a-9" class="faq-answer" role="region"><p>Family Savings ist das Ingame-Sparziel. Das erste Ziel ist 5.000 $ — und diese Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt. Das gemeldete Maximalziel ist 2.000.000 $, nur von PowerPyx, also ist es auf dieser Seite als „Gemeldet — nicht verifiziert“ gekennzeichnet und wird als Standardziel des Simulators verwendet.</p></div>
+        <div id="faq-a-9" class="faq-answer" role="region"><p>Family Savings ist das Ingame-Sparziel. Das erste Ziel ist 5.000 $, und diese Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt. Das gemeldete Maximalziel ist 2.000.000 $, nur von PowerPyx, also ist es auf dieser Seite als „Gemeldet, nicht verifiziert“ gekennzeichnet und wird als Standardziel des Simulators verwendet.</p></div>
       </details></li><li><details class="faq-item" id="faq-q-10">
         <summary aria-controls="faq-a-10"><h3>Wie oft werden diese Zahlen neu geprüft?</h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <div id="faq-a-10" class="faq-answer" role="region"><p>Wöchentlich, bis die Verifizierungs-Hürde genommen ist: zwei unabhängige Quellen, die eine Per-Job-Auszahlung auf dem Bildschirm bestätigen, plus mindestens ein getimter $/Std.-Run pro Methode. Auslöser für eine Neuprüfung sind jeder Rockstar-Newswire-Post oder jede Take-Two-Mitteilung, die einen GTA-VI-Online-Modus, Businesses oder Shark Cards nennt, eine Banktresor-Auszahlung auf dem Bildschirm, ein Randy-Verkauf auf dem Bildschirm oder eine zweite Quelle für eine derzeit nur einfach belegte Zahl. Jede Neubasierung wird unten im Changelog protokolliert, mit aktualisiertem „Zuletzt geprüft“-Datum.</p></div>
@@ -457,11 +458,11 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
         <dt>Payback-Stunden</dt>
         <dd>Wie viele Spielstunden ein Business braucht, um seinen Kaufpreis bei seiner eigenen Netto-Rate zurückzuzahlen. Unter zwanzig Stunden ist ein schneller Payback, über vierzig ein Status-Kauf.</dd>
       </div><div id="term-reported">
-        <dt>Gemeldet — nicht verifiziert</dt>
+        <dt>Gemeldet, nicht verifiziert</dt>
         <dd>Eine Zahl, die von einer Guide- oder Community-Quelle mit Quelle und Datum veröffentlicht, aber nicht von Rockstar oder einem zweiten unabhängigen On-Screen-Run bestätigt wurde.</dd>
       </div><div id="term-yardstick">
         <dt>Vergleichsmaßstab</dt>
-        <dd>Die GTA-Online-Business-Tabelle, klar als GTA-Online-Zahlen — nicht GTA 6 — gekennzeichnet, damit die Form von Buy-in vs. Stundenrate studiert werden kann, ohne so zu tun, als wären die Zahlen GTA 6.</dd>
+        <dd>Die GTA-Online-Business-Tabelle, klar als GTA-Online-Zahlen, nicht GTA 6, gekennzeichnet, damit die Form von Buy-in vs. Stundenrate studiert werden kann, ohne so zu tun, als wären die Zahlen GTA 6.</dd>
       </div><div id="term-fence">
         <dt>Fence (Hehler)</dt>
         <dd>Ein Käufer von Diebesgut in GTA 6. Fünf sind benannt; keiner hat einen veröffentlichten Preis pro Stück, Anteil oder Cooldown.</dd>
@@ -470,7 +471,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
 <section aria-labelledby="related-content">
       <h2 id="related-content">Mehr Tools für deine erste Woche in GTA 6</h2>
       <h3 class="related-sub">Verwandte Tools</h3>
-      <ul class="related-tools-grid"><li><a href="/de/tools/economy-calculator" class="tool-card" data-accent="purple" aria-label="GTA-6-Geld- und Business-ROI-Rechner · Ranke GTA-6-Geldmethoden nach $/Stunde, berechne die Zeit bis zu jedem Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind, den sie ersetzen."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Geld- und Business-ROI-Rechner</h3><p>Ranke GTA-6-Geldmethoden nach $/Stunde, berechne die Zeit bis zu jedem Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind, den sie ersetzen.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/interactive-map" class="tool-card" data-accent="blue" aria-label="GTA-6-Interaktive-Karte · Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Interaktive-Karte</h3><p>Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="blue" aria-label="GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis · Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Waffenvergleich — Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite — den vier Ingame-Werten von 10 — plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="blue" aria-label="GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert · Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Fahrzeugvergleich — Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10 — Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke — plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="blue" aria-label="GTA-6-Server-Status: Sind die Server down? · GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten — es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/de/tools/economy-calculator" class="tool-card" data-accent="purple"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Geld- und Business-ROI-Rechner</h3><p>Ranke GTA-6-Geldmethoden nach $/Stunde, berechne die Zeit bis zu jedem Sparziel, vergleiche Business-Payback-Stunden und bepreise Shark Cards gegen den Grind, den sie ersetzen.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/interactive-map" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Interaktive-Karte</h3><p>Jede benannte Leonida-Region auf einem Schema, markiert nach Evidenz-Stufe, plus ein Größenvergleich mit GTA V und RDR2.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/weapon-comparison" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Waffenvergleich: Werte, Magazin &amp; Preis</h3><p>Vergleiche die 53 Basis-Waffen von GTA 6 nach Schaden, Genauigkeit, Handling und Reichweite, den vier Ingame-Werten von 10, plus Magazingröße, Feuermodus und Preis. Eine Feuerrate gibt es im Spiel nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/vehicle-comparison" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Fahrzeugvergleich: Werte, Registrierungskosten &amp; Verkaufswert</h3><p>Vergleiche GTA-6-Fahrzeuge direkt auf Basis der fünf Ingame-Werte von 10, Tempo, Beschleunigung, Fahrverhalten auf Asphalt, Fahrverhalten im Gelände, Stärke, plus Registrierungskosten und Verkaufswert. Eine gemessene Höchstgeschwindigkeit gibt es noch nicht; dieses Tool zeigt die Zahlen, die das Spiel zeigt. Zuletzt geprüft 24. Nov. 2026.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/de/tools/server-status" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>GTA-6-Server-Status: Sind die Server down?</h3><p>GTA 6 hat keine Server, die ausfallen könnten, es erschien am 19. Nov. 2026 als Singleplayer-Spiel ohne Online-Modus. Prüfe die drei Dienste, von denen es abhängt: Rockstar Authentication, PlayStation Network und Xbox network, von Hand geprüft am 24. Nov. 2026, mit Links zu den offiziellen Seiten.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 <section aria-labelledby="sources">
       <h2 id="sources">Quellen und Methodik-Referenzen</h2>
@@ -487,7 +488,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
         <a href="https://www.gtabase.com" target="_blank" rel="noopener noreferrer">GTABase: GTA-6-Immobilien</a>
         <span class="src-meta">GTABase · Veröffentlicht 19. Nov. 2026 · Die acht zu kaufenden Garagen, ihre Lage, Stellplätze und Preise; kein Haus oder Business zu kaufen.</span>
       </li><li>
-        <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_VI" target="_blank" rel="noopener noreferrer">GTA Wiki — Grand-Theft-Auto-VI-Businesses</a>
+        <a href="https://gta.fandom.com/wiki/Grand_Theft_Auto_VI" target="_blank" rel="noopener noreferrer">GTA Wiki: Grand-Theft-Auto-VI-Businesses</a>
         <span class="src-meta">GTA Wiki · Abgerufen 27. Sept. 2026 · Eine Seite pro Laden für die 12 benannten Businesses; Zeitstempel aus Trailer-Aufnahmen.</span>
       </li><li>
         <a href="https://www.powerpyx.com" target="_blank" rel="noopener noreferrer">PowerPyx-GTA-6-Geld-Guide und 100%-Checkliste</a>
@@ -502,10 +503,10 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
         <a href="https://www.gamespot.com" target="_blank" rel="noopener noreferrer">GameSpot-GTA-6-Berichterstattung</a>
         <span class="src-meta">GameSpot · 18. Nov. 2026 · Randy's Wish List; Moses ohne Termin; Garagenpreise (höhere Zahlen in den beiden umstrittenen Paaren); 250.000-$-Geld-Cheat.</span>
       </li><li>
-        <a href="https://gta-boom.com" target="_blank" rel="noopener noreferrer">GTA BOOM — Apollo-Aggregates-Lagerhaus-Run</a>
+        <a href="https://gta-boom.com" target="_blank" rel="noopener noreferrer">GTA BOOM: Apollo-Aggregates-Lagerhaus-Run</a>
         <span class="src-meta">GTA BOOM · 19.–20. Nov. 2026 · Eigener getesteter Erster-Durchlauf-Run (~11.000–14.400 $, käuferabhängig) plus 2 unabhängige Videos mit Ingame-Footage.</span>
       </li><li>
-        <a href="https://www.ign.com" target="_blank" rel="noopener noreferrer">IGN — Rob-Nelson-Interview</a>
+        <a href="https://www.ign.com" target="_blank" rel="noopener noreferrer">IGN: Rob-Nelson-Interview</a>
         <span class="src-meta">IGN · 7. Okt. 2026 · Rob Nelson (Co-Studioleiter Rockstar North): Geld ist in der Story wichtiger; Raubüberfälle („pretty much anything“) und Autos stehlen/verkaufen an Hehler sind die Kern-Loops.</span>
       </li></ol>
     </section>
@@ -514,36 +515,54 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       <ul class="changelog-list"><li>
         <p class="changelog-version">v1.0</p>
         <time datetime="2026-11-21">21. Nov. 2026</time>
-        <p>Erstes Release: 12-Business-Leonida-Verzeichnis (0 Preise, 0 Einkommen), Simulator mit Nutzereingaben mit Break-even, Netto nach 30/40 Std., ROI, Crossover und Zeit bis zum Ziel, gekennzeichneter GTA-Online-8-Business-Vergleichsmaßstab mit durchgerechnetem 71,7-Std.-Crossover, gemeldete Story-Methoden-Checkliste, Garagen-Checkliste, Spiel-Checklisten-Konstanten, FAQ mit 10 Fragen, SoftwareApplication- + FAQPage- + HowTo-Schema. Ehrlichkeits-Basis: Es existiert keine verifizierte GTA-6-Business-Wirtschaft — Rockstar hat 0 Businesses, 0 Auszahlungen, 0 Preise und 0 Raten bestätigt; jede Auszahlungs-Spanne trägt Quelle + Datum + „Gemeldet — nicht verifiziert“; kein $/Std.-Wert wird aus einer gemeldeten Spanne abgeleitet. LeonidaKit-11-vs.-12-Zählung aus der eigenen aufgezählten Liste aufgelöst (siehe Verzeichnis-Hinweis).</p>
+        <p>Erstes Release: 12-Business-Leonida-Verzeichnis (0 Preise, 0 Einkommen), Simulator mit Nutzereingaben mit Break-even, Netto nach 30/40 Std., ROI, Crossover und Zeit bis zum Ziel, gekennzeichneter GTA-Online-8-Business-Vergleichsmaßstab mit durchgerechnetem 71,7-Std.-Crossover, gemeldete Story-Methoden-Checkliste, Garagen-Checkliste, Spiel-Checklisten-Konstanten, FAQ mit 10 Fragen, SoftwareApplication- + FAQPage- + HowTo-Schema. Ehrlichkeits-Basis: Es existiert keine verifizierte GTA-6-Business-Wirtschaft, Rockstar hat 0 Businesses, 0 Auszahlungen, 0 Preise und 0 Raten bestätigt; jede Auszahlungs-Spanne trägt Quelle + Datum + „Gemeldet, nicht verifiziert“; kein $/Std.-Wert wird aus einer gemeldeten Spanne abgeleitet. LeonidaKit-11-vs.-12-Zählung aus der eigenen aufgezählten Liste aufgelöst (siehe Verzeichnis-Hinweis).</p>
       </li></ul>
     </section>
 <aside class="disclaimer" role="note" aria-label="Schätzungs-Haftungsausschluss">
       <p class="eyebrow-muted">Schätzungs-Haftungsausschluss</p>
-      <p>Alle GTA-6-Story-Auszahlungen auf dieser Seite sind gemeldete Spannen aus Guides, keine verifizierten Zahlen. GTA-Online-Zahlen sind als GTA Online gekennzeichnet, nicht GTA 6. Simulator-Ergebnisse werden aus Zahlen berechnet, die du eingibst — deine Annahme, keine gemessene Rate. Zuletzt geprüft 21. November 2026.</p>
+      <p>Alle GTA-6-Story-Auszahlungen auf dieser Seite sind gemeldete Spannen aus Guides, keine verifizierten Zahlen. GTA-Online-Zahlen sind als GTA Online gekennzeichnet, nicht GTA 6. Simulator-Ergebnisse werden aus Zahlen berechnet, die du eingibst, deine Annahme, keine gemessene Rate. Zuletzt geprüft 21. November 2026.</p>
     </aside>
         </article>
       </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -582,9 +601,9 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
-              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
-              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -593,30 +612,28 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
   </div>
-</div>  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
+  </div>
+</div>
   <script src="/assets/js/de/theme.js" defer></script>
   <script src="/assets/js/de/header.js" defer></script>
   <script src="/assets/js/de/search.js" defer></script>
   <script src="/assets/js/de/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/de/newsletter.js" defer></script>
+  <script src="/assets/js/de/consent.js" defer></script>
   <script type="module" src="/assets/js/de/business-tracker.js"></script>
   <script type="application/ld+json">
 {
@@ -664,7 +681,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       },
       "datePublished": "2026-11-21",
       "dateModified": "2026-11-21",
-      "inLanguage": "en"
+      "inLanguage": "de"
     },
     {
       "@type": "HowTo",
@@ -680,7 +697,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
           "@type": "HowToStep",
           "position": 2,
           "name": "Arbeite die Story-Methoden-Checkliste durch",
-          "text": "Nutze ab Kapitel 2 die Per-Job-Spannen auf dieser Seite als Checkliste, nicht als Ratentabelle. Jede Spanne trägt ihre Quelle, ihr Datum und ein Gemeldet — nicht verifiziert-Badge."
+          "text": "Nutze ab Kapitel 2 die Per-Job-Spannen auf dieser Seite als Checkliste, nicht als Ratentabelle. Jede Spanne trägt ihre Quelle, ihr Datum und ein Gemeldet, nicht verifiziert-Badge."
         },
         {
           "@type": "HowToStep",
@@ -715,7 +732,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Gibt es kaufbare Businesses in GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nein. Rockstar hat keine Businesses im Spielerbesitz angekündigt, und im veröffentlichten Spiel kann kein Business gekauft werden — die 12 benannten Leonida-Businesses sind NPC-eigen oder nur besuchbar, und die einzige Immobilie, die man kaufen kann, ist eine Garage (8 zu verkaufen, 160.000 $ gesamt). Das kann sich mit einem Patch, DLC oder einem künftigen Online-Modus ändern, von denen keiner angekündigt wurde."
+        "text": "Nein. Rockstar hat keine Businesses im Spielerbesitz angekündigt, und im veröffentlichten Spiel kann kein Business gekauft werden, die 12 benannten Leonida-Businesses sind NPC-eigen oder nur besuchbar, und die einzige Immobilie, die man kaufen kann, ist eine Garage (8 zu verkaufen, 160.000 $ gesamt). Das kann sich mit einem Patch, DLC oder einem künftigen Online-Modus ändern, von denen keiner angekündigt wurde."
       }
     },
     {
@@ -723,7 +740,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Sind diese Auszahlungen verifiziert?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nur die strukturellen Fakten sind verifiziert: der Launch, die 12 benannten Businesses, die Garagen-Summe, die Bargeld-Obergrenze und die Checklisten-Zahlen des Spiels. Jede Auszahlungs-Spanne auf dieser Seite ist aus Guides gemeldet, nicht verifiziert — jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet — nicht verifiziert“-Badge. Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen — nicht GTA 6“ gekennzeichnet, und die Zahlen des Simulators sind deine eigenen Annahmen, keine gemessenen Raten."
+        "text": "Nur die strukturellen Fakten sind verifiziert: der Launch, die 12 benannten Businesses, die Garagen-Summe, die Bargeld-Obergrenze und die Checklisten-Zahlen des Spiels. Jede Auszahlungs-Spanne auf dieser Seite ist aus Guides gemeldet, nicht verifiziert, jede Zeile trägt ihre Quelle, ihr Datum und ein „Gemeldet, nicht verifiziert“-Badge. Der GTA-Online-Vergleichsmaßstab ist überall, wo er erscheint, als „GTA-Online-Zahlen, nicht GTA 6“ gekennzeichnet, und die Zahlen des Simulators sind deine eigenen Annahmen, keine gemessenen Raten."
       }
     },
     {
@@ -731,7 +748,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Warum gibt es keinen $/Std.-Wert für irgendeine GTA-6-Methode?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Weil für keine GTA-6-Methode ein getimter Run veröffentlicht wurde. Ein $/Std.-Wert braucht eine Auszahlung geteilt durch eine gemessene Zykluszeit, und noch keine Quelle hat einen getimten Run veröffentlicht — PowerPyx' „~5 Minuten“ für Banktresore ist eine Schätzung, kein getimter Run. Sobald zwei unabhängige getimte Runs für eine Methode existieren, kann ihr $/Std.-Wert mit seinen Quellen ergänzt werden."
+        "text": "Weil für keine GTA-6-Methode ein getimter Run veröffentlicht wurde. Ein $/Std.-Wert braucht eine Auszahlung geteilt durch eine gemessene Zykluszeit, und noch keine Quelle hat einen getimten Run veröffentlicht, PowerPyx' „~5 Minuten“ für Banktresore ist eine Schätzung, kein getimter Run. Sobald zwei unabhängige getimte Runs für eine Methode existieren, kann ihr $/Std.-Wert mit seinen Quellen ergänzt werden."
       }
     },
     {
@@ -747,7 +764,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Lohnen sich Shark Cards in GTA 6?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Es gibt keine Shark Cards für GTA VI — keine wurden angekündigt, und Rockstar hat gesagt, dass es keine Monetarisierung innerhalb der Singleplayer-Kampagne gibt. Die Shark-Card-Zahlen auf dieser Seite sind GTA Online: Das Megalodon-Pack (8.000.000 GTA$ für 99,99 $, 80.008 GTA$ pro 1 $) hat den besten Wert, wobei exakte 100.000.000 GTA$ 1.249,88 $ kosten, oder 1.299,87 $ in ganzen Karten (13 × 99,99 $)."
+        "text": "Es gibt keine Shark Cards für GTA VI, keine wurden angekündigt, und Rockstar hat gesagt, dass es keine Monetarisierung innerhalb der Singleplayer-Kampagne gibt. Die Shark-Card-Zahlen auf dieser Seite sind GTA Online: Das Megalodon-Pack (8.000.000 GTA$ für 99,99 $, 80.008 GTA$ pro 1 $) hat den besten Wert, wobei exakte 100.000.000 GTA$ 1.249,88 $ kosten, oder 1.299,87 $ in ganzen Karten (13 × 99,99 $)."
       }
     },
     {
@@ -755,7 +772,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Können Garagen in GTA 6 Geld verdienen?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nein. Garagen sind die einzige Immobilie, die man kaufen kann — 8 zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $ — aber sie lagern Fahrzeuge; sie verdienen kein Geld. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Zwei Einzelpreise sind umstritten (Persistence Road 7.600 $ vs. 9.500 $; Vela Rota 24.000 $ vs. 30.000 $) und werden auf dieser Seite markiert, nicht aufgelöst."
+        "text": "Nein. Garagen sind die einzige Immobilie, die man kaufen kann, 8 zu verkaufen, 160.000 $ gesamt, je 4.000–40.000 $, aber sie lagern Fahrzeuge; sie verdienen kein Geld. Alle 8 zu besitzen bringt die „Little Boxes“-Trophäe. Zwei Einzelpreise sind umstritten (Persistence Road 7.600 $ vs. 9.500 $; Vela Rota 24.000 $ vs. 30.000 $) und werden auf dieser Seite markiert, nicht aufgelöst."
       }
     },
     {
@@ -763,7 +780,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Was passiert mit meinem Geld am Ende von Kapitel 1?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Es wird gelöscht. Bargeld, Girokonto und Versteck gehen beim Übergang von Kapitel 1 verloren; nur die Family-Savings-Einzahlung von 5.000 $ überlebt. Farme kein Geld in Kapitel 1 — zahle zuerst die Family-Savings-Einzahlung von 5.000 $ ein und beginne das Tracking ab Kapitel 2."
+        "text": "Es wird gelöscht. Bargeld, Girokonto und Versteck gehen beim Übergang von Kapitel 1 verloren; nur die Family-Savings-Einzahlung von 5.000 $ überlebt. Farme kein Geld in Kapitel 1, zahle zuerst die Family-Savings-Einzahlung von 5.000 $ ein und beginne das Tracking ab Kapitel 2."
       }
     },
     {
@@ -771,7 +788,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Wer sind die Hehler, und was zahlen sie?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. Was sie pro Stück zahlen, ist unveröffentlicht — kein Preis pro Stück, Anteil oder Cooldown wurde für irgendeinen Hehler gemessen, also erscheint keine Hehler-Rate auf dieser Seite."
+        "text": "Fünf Hehler werden in den Guides genannt: Brian (Lockup, Key Lento), Donnie (Trailer, Key Lento), Dunk (Trailer, Port Gellhorn), Tyrone (La Perle, Vice City) und Yasmani (Little Cuba, Vice City). Brian und Donnie zahlen später per Postfach; Tyrone und Yasmani zahlen sofort. Was sie pro Stück zahlen, ist unveröffentlicht, kein Preis pro Stück, Anteil oder Cooldown wurde für irgendeinen Hehler gemessen, also erscheint keine Hehler-Rate auf dieser Seite."
       }
     },
     {
@@ -779,7 +796,7 @@ timeToGoal   = goal ÷ effPerHour             (Std.; nur wenn effPerHour &gt; 0,
       "name": "Was ist das Family-Savings-Ziel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Family Savings ist das Ingame-Sparziel. Das erste Ziel ist 5.000 $ — und diese Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt. Das gemeldete Maximalziel ist 2.000.000 $, nur von PowerPyx, also ist es auf dieser Seite als „Gemeldet — nicht verifiziert“ gekennzeichnet und wird als Standardziel des Simulators verwendet."
+        "text": "Family Savings ist das Ingame-Sparziel. Das erste Ziel ist 5.000 $, und diese Einzahlung ist das einzige Geld, das den Kapitel-1-Wipe überlebt. Das gemeldete Maximalziel ist 2.000.000 $, nur von PowerPyx, also ist es auf dieser Seite als „Gemeldet, nicht verifiziert“ gekennzeichnet und wird als Standardziel des Simulators verwendet."
       }
     },
     {

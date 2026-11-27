@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,10 +15,10 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="pt_BR">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta property="og:locale:alternate" content="tr_TR">
-<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ar_SA">
 <meta property="og:image" content="https://toolwools.com/og/internet-speed-check.jpg">
 <meta property="og:image:alt" content="GTA-6-Internet-Geschwindigkeits-Berater, Latenz-, Jitter- und Paketverlust-Ziele nach Region auf ToolWools">
 <meta property="og:image:width" content="1200">
@@ -27,8 +27,8 @@
 <meta name="twitter:title" content="GTA-6-Internet-Geschwindigkeits-Berater">
 <meta name="twitter:description" content="Wie viel MBit/s und wie niedrig ein Ping GTA 6 braucht, bewertet pro Region und Gerät. Miss deine Leitung auf die richtige Weise und behebe dann die Achse, die versagt.">
 <meta name="twitter:image" content="https://toolwools.com/og/internet-speed-check.jpg">
-<meta name="theme-color" content="#0b0616" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://toolwools.com/de/tools/internet-speed-check">
 <link rel="alternate" href="https://toolwools.com/tools/internet-speed-check" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/internet-speed-check" hreflang="es">
@@ -42,11 +42,31 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.json">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/space-grotesk-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/tool-internet-speed-check-de.css">
 <link rel="stylesheet" href="/assets/css/print.css" media="print">
-<script>try{var t=localStorage.getItem('tw-theme')||'light';document.documentElement.classList.toggle('dark',t==='dark');}catch(e){}</script>
+    <script>
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
+    </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -89,7 +109,8 @@
         "priceCurrency": "USD"
       },
       "datePublished": "2026-08-02",
-      "dateModified": "2026-11-17"
+      "dateModified": "2026-11-17",
+      "inLanguage": "de"
     },
     {
       "@type": "HowTo",
@@ -255,16 +276,14 @@
 <div class="site-shell">
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
 <header class="site-header" aria-label="Website">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/de/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
             </span>
           </span>
@@ -276,18 +295,19 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Sprache wählen">DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>DE <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/internet-speed-check">English</a>
             <a href="/es/tools/internet-speed-check">Español</a>
@@ -311,7 +331,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen" aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Tools suchen..." aria-label="Tools suchen" autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Mobil">
@@ -321,65 +341,43 @@
           <a href="/de/generators">Generatoren</a>
           <a href="/de/news">News</a>
           <a href="/de/trailers">Trailer</a>
+          <a href="/de/guides">Guides</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/internet-speed-check" lang="en">EN</a><a href="/es/tools/internet-speed-check" lang="es">ES</a><a href="/pt/tools/internet-speed-check" lang="pt">PT</a><a href="/de/tools/internet-speed-check" aria-current="true">DE</a><a href="/fr/tools/internet-speed-check" lang="fr">FR</a><a href="/tr/tools/internet-speed-check" lang="tr">TR</a><a href="/ar/tools/internet-speed-check" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header>
-<main id="main">
-<article aria-labelledby="tool-hero-heading">
-  <header class="page-hero">
-    <div class="page-hero-glow" aria-hidden="true"></div>
-    <div class="page-hero-fade" aria-hidden="true"></div>
-    <div class="container page-hero-inner">
-      <nav aria-label="Brotkrumen" class="breadcrumbs">
-        <a href="/de/">Startseite</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <a href="/de/tools">Tools</a>
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        <span aria-current="page">GTA-6-Internet-Geschwindigkeits-Berater</span>
-      </nav>
-      <span class="page-hero-eyebrow eyebrow-muted">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
-        Planer
-      </span>
-      <h1 id="tool-hero-heading">GTA-6-Internet-Geschwindigkeits-Berater</h1>
-      <p class="page-hero-sub">Bandbreite ist selten der Grund, warum sich GTA Online schlecht anfühlt, Latenz, Jitter und Paketverlust sind es. Miss die fünf Zahlen, die auf deinem eigenen Gerät zählen, bewerte sie gegen ein realistisches Ziel für deine Region und erhalte eine rangierte Fix-Liste statt generischer Ratschläge.</p>
-    </div>
-  </header>
+<main id="main" class="tool-main">
+<div class="tool-body">
+<article aria-labelledby="page-title">
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Brotkrumen">
+          <a href="/de/">Startseite</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/de/tools">Tools</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">GTA-6-Internet-Geschwindigkeits-Berater</span>
+        </div>
+        <div class="page-eyebrow"><span>Planer</span></div>
+        <h1 id="page-title">GTA-6-Internet-Geschwindigkeits-Berater</h1>
+        <p class="page-subtitle">Bandbreite ist selten der Grund, warum sich GTA Online schlecht anfühlt, Latenz, Jitter und Paketverlust sind es. Miss die fünf Zahlen, die auf deinem eigenen Gerät zählen, bewerte sie gegen ein realistisches Ziel für deine Region und erhalte eine rangierte Fix-Liste statt generischer Ratschläge.</p>
+        <p class="hero-meta">
+          <span>Von <a href="/de/about#hardware-desk">ToolWools Hardware-Desk</a></span><span>Netzwerk- und Verbindungsanalyse</span><span>Geprüft von <a href="/de/about#benchmark-reviewers">Unabhängige GTA-Benchmark-Reviewer</a></span><span>Zuletzt geprüft <time datetime="2026-11-17">17. November 2026</time></span><span><a href="/de/methodology">Methodik</a></span>
+        </p>
+      </section>
 
-  <div class="container tool-body">
-    <div class="intro-callout">
-      <p>Fast jede Antwort online auf „ist mein Internet schnell genug für GTA 6“ zitiert eine einzelne Download-Zahl, die am wenigsten nützliche Zahl im Set. Eine 900-Mbps-Leitung mit 30 ms WLAN-Jitter spielt schlechter als eine 40-Mbps-Kabel-Leitung bei 3 ms. Diese Seite bewertet fünf Achsen, Latenz zum nächstgelegenen regionalen Edge, Jitter, Paketverlust, Download und Upload, gegen Ziele, die sich danach ändern, wo du lebst und welche Art von Leitung du hast, und sagt dir dann, welcher einzelne Fix am meisten bewegt. Sie misst nichts für dich: Sie sagt dir genau, wie du auf PC, PS5, Xbox oder einem Streaming-Handheld misst, denn ein schlecht durchgeführter Test ist das, was die meisten schlechten Ratschläge überhaupt erst erzeugt.</p>
-    </div>
 
-    <div class="byline" aria-label="Autoren- und Prüfungs-Byline">
-      <span class="byline-item">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span>Von <a href="/de/about#hardware-desk">ToolWools Hardware-Desk</a> <span aria-hidden="true">·</span> Netzwerk- und Verbindungsanalyse</span>
-      </span>
-      <span class="byline-item">Geprüft von <a href="/de/about#benchmark-reviewers">Unabhängige GTA-Benchmark-Reviewer</a></span>
-      <span class="byline-item">Zuletzt geprüft <time datetime="2026-11-17">17. November 2026</time></span>
-      <a class="method-link" href="/de/methodology"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg> Methodik</a>
-    </div>
 
     <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-live-region>Note B, 87 von 100. Gut genug, mit einer schwachen Achse. Überall spielbar, mit Latenz zum Regions-Edge knapp außerhalb des komfortablen Bands.</div>
 
-    <section class="tldr-card" id="tldr" data-speakable="tldr" data-tldr-card data-tone="borderline" aria-labelledby="tldr-heading">
-      <div class="tldr-inner">
-        <span data-tldr-icon><svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-        <div>
-          <h2 class="tldr-label" id="tldr-heading" data-tldr-label>Gut genug, mit einer schwachen Achse · Kurzfassung</h2>
-          <p class="tldr-text" data-tldr-text>Note B (87/100) in Europa · West mit einer kabelgebundenen Glasfaser-bis-ins-Haus-Leitung (FTTP): Ping 24 ms gegen ein 18-ms-Ziel, mit Jitter, Verlust, Download und Upload alle bestanden. Überall spielbar, mit Latenz zum Regions-Edge knapp außerhalb des komfortablen Bands.</p>
-          <p class="tldr-verdict">Verbindungs-Note: <strong data-tldr-verdict>Note B (87/100)</strong></p>
-        </div>
-      </div>
-    </section>
 
-    <div id="speed-answer" data-speakable class="tier-read" style="margin-top:0">
-      <h2 class="eyebrow-muted">Die kurze Antwort</h2>
+    <section id="speed-answer" data-speakable class="tier-read" aria-labelledby="short-answer-heading">
+      <h2 id="short-answer-heading">Die kurze Antwort</h2>
       <p data-short-answer>GTA-6-Online-Spiel braucht etwa <strong>25 Mbps Download und 5 Mbps Upload</strong> , um komfortabel zu sein, und es läuft mit <strong>10 Mbps Download</strong>. Was wirklich entscheidet, ob es sich gut anfühlt, ist Latenz: in <strong>Europa · West</strong> einer kabelgebundenen <strong>Glasfaser-bis-ins-Haus (FTTP)</strong> Leitung sollte etwa erreichen <strong>18 ms</strong> bis <strong>Amsterdam / Paris</strong>, mit Jitter unter <strong>10 ms</strong> und Paketverlust unter <strong>0.5%</strong>. Bewerte deine eigenen fünf Zahlen unten.</p>
-    </div>
+    </section>
 
     <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Rechner</h2>
@@ -617,9 +615,9 @@
       </div>
       <div class="tier-read">
         <h2>Verwandte Latenz-Lektüre</h2>
-        <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed">
-          <li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Wie lange die Installation dauert: <a href="/de/tools/download-time">GTA-6-Download-Zeit-Rechner</a> Bandbreite beantwortet Stunden-bis-Download; diese Seite beantwortet, ob es gut spielt.</span></li>
-          <li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Wie diese Ziele gesetzt wurden: <a href="/de/methodology" aria-label="Methodik: wie diese Ziele gesetzt wurden">Methodik</a> Das Genauigkeits-Band für dieses Modell und was wir uns weigern zu behaupten.</span></li>
+        <ul class="inline-links">
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Wie lange die Installation dauert: <a href="/de/tools/download-time">GTA-6-Download-Zeit-Rechner</a> Bandbreite beantwortet Stunden-bis-Download; diese Seite beantwortet, ob es gut spielt.</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Wie diese Ziele gesetzt wurden: <a href="/de/methodology" aria-label="Methodik: wie diese Ziele gesetzt wurden">Methodik</a> Das Genauigkeits-Band für dieses Modell und was wir uns weigern zu behaupten.</span></li>
         </ul>
       </div>
     </section>
@@ -662,9 +660,9 @@
       </div>
       <div class="tier-read">
         <h2>Andere Launch-Tags-Prüfungen</h2>
-        <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed">
-          <li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Bewerte das ganze Rig: <a href="/de/tools/readiness-score">GTA-6-Readiness-Score</a> Netzwerk ist eine Achse; der Readiness-Score bewertet GPU, CPU, RAM und Speicher zusammen.</span></li>
-          <li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Budgetiere das Laufwerk: <a href="/de/tools/storage-planner">GTA-6-Speicher-Planer</a> Die andere Launch-Tags-Einschränkung, die Leute vergessen, bis der Download fertig ist.</span></li>
+        <ul class="inline-links">
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Bewerte das ganze Rig: <a href="/de/tools/readiness-score">GTA-6-Readiness-Score</a> Netzwerk ist eine Achse; der Readiness-Score bewertet GPU, CPU, RAM und Speicher zusammen.</span></li>
+          <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Budgetiere das Laufwerk: <a href="/de/tools/storage-planner">GTA-6-Speicher-Planer</a> Die andere Launch-Tags-Einschränkung, die Leute vergessen, bis der Download fertig ist.</span></li>
         </ul>
       </div>
     </section>
@@ -677,10 +675,7 @@
       <p><a href="/de/tools">Durchsuche jedes GTA-6-Tool</a></p>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Annahmen">
-      <p><strong>Annahmen</strong> <span>Rockstar hat keine GTA-6-Online-Anforderungen veröffentlicht. Ziele hier sind abgeleitet aus Rockstars veröffentlichten GTA-Online-Anleitungen, den Netzwerkanforderungen vergleichbarer sessionbasierter Open-World-Titel und Standard-Wettbewerbs-Netzwerk-Praxis: unter 60 ms zum regionalen Edge, unter 10 ms Jitter, unter 0,5 % Verlust, 25 Mbps Download und 5 Mbps Upload für Komfort. Regionale Latenz-Böden sind typische kabelgebundene Best-Case-Round-Trips zum nächstgelegenen großen Edge, Ashburn, Amsterdam, Mumbai, Singapur und so weiter, keine Garantien, und Matchmaking in eine ferne Lobby überschreibt sie alle. Nichts auf dieser Seite wird in deinem Browser gemessen; jede Zahl ist eine, die du lieferst.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
-      <p class="updated-line">Aktualisiert <time datetime="2026-11-17">17. November 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Wie du deine Internetgeschwindigkeit für GTA 6 auf PC, PS5 und Xbox testest</h2>
@@ -770,13 +765,15 @@ weights: ping 30 · jitter 20 · loss 20 · down 20 · up 10
 
 grade = A ≥ 90 · B ≥ 78 · C ≥ 62 · D ≥ 45 · else F
 any failing axis → grade capped at C</pre>
+    <div class="assumptions-block"><p><strong>Annahmen</strong> <span>Rockstar hat keine GTA-6-Online-Anforderungen veröffentlicht. Ziele hier sind abgeleitet aus Rockstars veröffentlichten GTA-Online-Anleitungen, den Netzwerkanforderungen vergleichbarer sessionbasierter Open-World-Titel und Standard-Wettbewerbs-Netzwerk-Praxis: unter 60 ms zum regionalen Edge, unter 10 ms Jitter, unter 0,5 % Verlust, 25 Mbps Download und 5 Mbps Upload für Komfort. Regionale Latenz-Böden sind typische kabelgebundene Best-Case-Round-Trips zum nächstgelegenen großen Edge, Ashburn, Amsterdam, Mumbai, Singapur und so weiter, keine Garantien, und Matchmaking in eine ferne Lobby überschreibt sie alle. Nichts auf dieser Seite wird in deinem Browser gemessen; jede Zahl ist eine, die du lieferst.</span> <a href="/de/methodology">Lies die vollständige Methodik</a></p>
+      <p class="updated-line">Aktualisiert <time datetime="2026-11-17">17. November 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Wie viel MBit/s und welchen Ping braucht GTA 6?</h2>
+      <header>
+        <h2 id="faq">Wie viel MBit/s und welchen Ping braucht GTA 6?</h2>
         <p class="section-dek">Direkte Antworten zu Geschwindigkeit, Ping, WLAN, NAT-Typ und Streaming.</p>
       </header>
       <ul class="faq-list" role="list">
@@ -812,10 +809,10 @@ any failing axis → grade capped at C</pre>
       <h2 id="related-content">Plane den Rest deines Setups</h2>
       <h3 class="related-sub">Verwandte Tools</h3>
       <ul class="related-tools-grid">
-        <li><a href="/de/tools/download-time" class="tool-card" data-accent="blue" aria-label="GTA-6-Download-Zeit-Rechner: Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA-6-Download-Zeit-Rechner</h3><p>Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-        <li><a href="/de/tools/storage-planner" class="tool-card" data-accent="pink" aria-label="GTA-6-Speicher-Planer: Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-        <li><a href="/de/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="GTA-6-Readiness-Score: Ein 0–100-Launch-Readiness-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit einem Weakest-Link-Fix."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><h3>GTA-6-Readiness-Score</h3><p>Ein 0–100-Launch-Readiness-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit einem Weakest-Link-Fix.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-        <li><a href="/de/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="GTA-6-Systemanforderungs-Checker: Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA-6-Systemanforderungs-Checker</h3><p>Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+        <li><a href="/de/tools/download-time" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><h3>GTA-6-Download-Zeit-Rechner</h3><p>Schätze, wie lange die 212 GB große Spielinstallation (plus 1,7–3,8 GB Day-One-Patches) bei deiner Verbindung dauert.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+        <li><a href="/de/tools/storage-planner" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg><h3>GTA-6-Speicher-Planer</h3><p>Budgetiere jedes Gigabyte: Basis-Installation, Day-One-Patch, saisonale DLCs und sichere Reserve für Updates.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+        <li><a href="/de/tools/readiness-score" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><h3>GTA-6-Readiness-Score</h3><p>Ein 0–100-Launch-Readiness-Score über Leistung, VRAM, Speicher und Internet. Note F bis S mit einem Weakest-Link-Fix.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+        <li><a href="/de/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><h3>GTA-6-Systemanforderungs-Checker</h3><p>Sofort-Urteil gegen Community-geschätzte Minimum-, Empfohlen- und Ultra-Stufen. GPU, CPU, RAM und Speicher.</p><span class="link-cta">Tool öffnen <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
       </ul>
     </section>
 
@@ -840,7 +837,7 @@ any failing axis → grade capped at C</pre>
         </li>
       </ol>
       <h3 class="related-sub">Kalibrierungs-Hinweise</h3>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed">
+      <ul class="sources-list">
         <li>Regionale Latenz-Böden sind typische kabelgebundene Best-Case-Round-Trips zum nächstgelegenen großen Edge, gegengeprüft mit öffentlichen Looking-Glass- und CDN-Latenz-Berichten statt einem einzelnen Geschwindigkeitstest-Server.</li>
         <li>Zugangsmedium-Strafen (Glasfaser +2 ms bis Satellit +55 ms) sind Medium-Level-Durchschnitte. Ein gut versorgter DOCSIS-Knoten kann die Kabel-Zahl schlagen, und ein überlasteter wird sie verfehlen.</li>
         <li>Achsen-Schwellenwerte sind fest und auf der Seite veröffentlicht, sodass ein Ergebnis von Hand reproduziert werden kann. Wir wären lieber überprüfbar als präzise aussehend.</li>
@@ -868,29 +865,47 @@ any failing axis → grade capped at C</pre>
       <p class="eyebrow-muted">Schätzungs-Haftungsausschluss</p>
       <p>Rockstar hat keine GTA-6-Online-Anforderungen veröffentlicht. Die Ziele auf dieser Seite sind aus GTA-Online-Anleitungen und allgemeiner Netzwerk-Praxis abgeleitet, und jede Zahl ist eine, die du lieferst, nichts wird in deinem Browser gemessen. Noten sind Schätzungen, keine Garantie dafür, wie sich eine Session anfühlen wird.</p>
     </aside>
-  </div>
 </article>
+  </div>
+    <section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Bleib auf dem Laufenden</h2>
+          <p>Hol dir die neuesten News, Tools und Guides zu GTA 6 in deinen Posteingang.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">E-Mail-Adresse</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Abonnieren</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/de/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen — 19. November 2026</span>
+        <span class="eyebrow-muted">GTA 6 ist jetzt erschienen, 19. November 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Tools entdecken →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/de/" aria-label="ToolWools | Startseite" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/de/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Alle GTA-6-Tools an einem Ort</span>
               </span>
             </span>
@@ -929,10 +944,10 @@ any failing axis → grade capped at C</pre>
               <li><a href="/de/contact">Kontakt</a></li>
               <li><a href="/de/email-preferences">E-Mail-Einstellungen</a></li>
               <li><a href="/de/sitemap">Sitemap</a></li>
-              <li><a href="/de/privacy">Datenschutzerklärung</a></li>
-              <li><a href="/de/terms">Nutzungsbedingungen</a></li>
               <li><a href="/editorial-policy">Redaktionelle Richtlinie</a></li>
-              <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
+          <li><a href="/de/privacy">Datenschutzerklärung</a></li>
+          <li><a href="/de/terms">Nutzungsbedingungen</a></li>
+          <li><a href="/de/disclaimer">Haftungsausschluss</a></li>
             </ul>
           </div>
         </div>
@@ -941,32 +956,30 @@ any failing axis → grade capped at C</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com, Alle Rechte vorbehalten. Nicht mit Rockstar Games oder Take-Two Interactive verbunden.</p>
         <div class="footer-bottom-links">
-          <a href="/de/privacy">Datenschutz</a>
-          <a href="/de/terms">Bedingungen</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Cookie-Einstellungen</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/de/privacy">Datenschutz</a><a href="/de/terms">Bedingungen</a><a href="/de/disclaimer">Haftungsausschluss</a><button type="button" data-consent-open>Cookie-Einstellungen</button></span>
           <span>Gemacht mit <span class="heart">♥</span> für GTA-6-Fans</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Analytics-Einwilligung">
-  <div class="consent-inner">
-    <p><strong>Analytics, nur mit deinem OK.</strong> Wir nutzen aggregiertes Google Analytics, um zu sehen, welche Tools genutzt werden. Tool-Eingaben verlassen dein Gerät nie, es wird kein Profil erstellt und nichts verkauft. Akzeptiere, um es zu laden, oder lehne ab und surfe ohne es. Du kannst deine Meinung jederzeit über Cookie-Einstellungen in der Fußzeile ändern.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Analytics akzeptieren</button>
-      <button type="button" class="btn-outline" data-consent-decline>Ablehnen</button>
-      <a href="/de/privacy">Datenschutzerklärung</a>
-    </div>
-  </div>
 </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Analytics-Einwilligung" hidden>
+  <p>Wir nutzen aggregiertes Google Analytics, um die Seite zu verbessern. Kein Profiling, nichts wird verkauft. Akzeptieren oder ablehnen; die Wahl wird in diesem Browser gespeichert.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Analytics akzeptieren</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Ablehnen</button>
+  </div>
 </div>
 <script src="/assets/js/de/theme.js" defer></script>
 <script src="/assets/js/de/header.js" defer></script>
 <script src="/assets/js/de/search.js" defer></script>
 <script src="/assets/js/de/faq.js" defer></script>
+<script src="/assets/js/supabase.js" defer></script>
+<script src="/assets/js/de/newsletter.js" defer></script>
+<script src="/assets/js/de/consent.js" defer></script>
 <script type="module" src="/assets/js/de/internet-speed-check.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

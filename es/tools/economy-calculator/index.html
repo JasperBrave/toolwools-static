@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de dinero y ROI de negocios de GTA 6</title>
-    <meta name="description" content="Clasifica los métodos de dinero de GTA 6 por $/hora, calcula el tiempo de cualquier meta de ahorro, compara las horas de retorno de negocios y valora las Shark Cards frente al farmeo que reemplazan.">
+    <title>Calculadora de dinero GTA 6: mejor método por $/hora y ROI</title>
+    <meta name="description" content="Clasifica los métodos de dinero de GTA 6 por GTA$ netos por hora, calcula cuánto tarda una meta de ahorro, compara el ROI de negocios y valora las Shark Cards. Proyectado desde GTA Online.">
     <meta name="keywords" content="guía de dinero gta 6, calculadora de dinero por hora gta 6, mejor negocio para comprar gta 6, pago de atraco gta 6, vale la pena la tarjeta tiburón gta 6, roi de negocio gta 6, cómo ganar dinero en gta 6, métodos para ganar dinero gta 6, calculadora de farmeo gta 6">
     <meta name="author" content="ToolWools">
-    <meta property="og:title" content="Calculadora de dinero y ROI de negocios de GTA 6">
-    <meta property="og:description" content="Clasifica los métodos de dinero de GTA 6 por $/hora, calcula el tiempo de cualquier meta de ahorro, compara las horas de retorno de negocios y valora las Shark Cards frente al farmeo que reemplazan.">
+    <meta property="og:title" content="Calculadora de dinero GTA 6: mejor método por $/hora y ROI">
+    <meta property="og:description" content="Clasifica los métodos de dinero de GTA 6 por GTA$ netos por hora, calcula cuánto tarda una meta de ahorro, compara el ROI de negocios y valora las Shark Cards. Proyectado desde GTA Online.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://toolwools.com/es/tools/economy-calculator">
     <meta property="og:image" content="https://toolwools.com/og/economy-calculator.jpg">
-    <meta property="og:image:alt" content="Calculadora de ROI de dinero y negocios de GTA 6, rankings de dinero por hora y matemáticas de retorno">
+    <meta property="og:image:alt" content="Calculadora de dinero GTA 6: mejor método por $/hora y ROI, rankings de dinero por hora y matemáticas de retorno">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="ToolWools">
@@ -22,15 +22,13 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Calculadora de dinero y ROI de negocios de GTA 6">
-    <meta name="twitter:description" content="Clasifica los métodos de dinero de GTA 6 por $/hora, calcula el tiempo de cualquier meta de ahorro, compara las horas de retorno de negocios y valora las Shark Cards frente al farmeo que reemplazan.">
+    <meta name="twitter:title" content="Calculadora de dinero GTA 6: mejor método por $/hora y ROI">
+    <meta name="twitter:description" content="Clasifica los métodos de dinero de GTA 6 por GTA$ netos por hora, calcula cuánto tarda una meta de ahorro, compara el ROI de negocios y valora las Shark Cards. Proyectado desde GTA Online.">
     <meta name="twitter:image" content="https://toolwools.com/og/economy-calculator.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
-    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/es/tools/economy-calculator">
 <link rel="alternate" href="https://toolwools.com/tools/economy-calculator" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/economy-calculator" hreflang="es">
@@ -43,26 +41,44 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-economy-calculator-es.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
   <div class="site-shell">
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header" aria-label="Sitio">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/es/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
             </span>
           </span>
@@ -74,18 +90,19 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Seleccionar idioma">ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>ES <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/economy-calculator">English</a>
             <a href="/es/tools/economy-calculator" aria-current="true"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Español</a>
@@ -109,7 +126,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas" aria-label="Buscar herramientas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar herramientas..." aria-label="Buscar herramientas..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvil">
@@ -119,50 +136,33 @@
           <a href="/es/generators">Generadores</a>
           <a href="/es/news">Noticias</a>
           <a href="/es/trailers">Tráilers</a>
+          <a href="/es/guides">Guías</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/economy-calculator" lang="en">EN</a><a href="/es/tools/economy-calculator" aria-current="true">ES</a><a href="/pt/tools/economy-calculator" lang="pt">PT</a><a href="/de/tools/economy-calculator" lang="de">DE</a><a href="/fr/tools/economy-calculator" lang="fr">FR</a><a href="/tr/tools/economy-calculator" lang="tr">TR</a><a href="/ar/tools/economy-calculator" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
 </header><main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Migas de pan">
-        <a href="/es/">Inicio</a>
-        <span aria-hidden="true">/</span>
-        <a href="/es/tools">Herramientas</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Calculadora de dinero y ROI de negocios de GTA 6</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
-        <span>Economía</span>
-      </div>
-      <h1 id="page-title" class="page-title">Calculadora de dinero y ROI de negocios de GTA 6</h1>
-      <p class="page-subtitle">Tres modelos de dinero en una página: clasifica cada método de ganancia por GTA$ netos por hora, calcula cuánto tarda realmente una meta de ahorro, y mira si un negocio, o una Shark Card, se paga solo más rápido que farmear.</p>
-      <ul class="hero-badges" aria-label="De un vistazo">
-        <li class="chip">Neto de costes de preparación y suministros</li><li class="chip">Retorno medido en horas de juego</li><li class="chip">Proyectado desde GTA Online</li>
-      </ul>
-    </section>
-          <div class="intro-callout">
-            <p>La mayoría de guías de dinero de GTA citan pagos brutos e ignoran la entrada, la cadena de preparación y el tiempo de viaje, y así es como un «atraco de 2,4 M$» se convierte en una tarifa por hora mediocre. Esta calculadora trabaja en GTA$ netos por hora: pago menos coste, dividido por los minutos reales que toma un ciclo completo. Define una meta de ahorro y te dice cuántos ciclos, horas y sesiones necesitas. Cambia al <a href="/es/tools/business-tracker">modo negocio</a> y convierte un precio de compra en horas de retorno. Cambia a Shark Cards y valora el dinero real contra el farmeo que reemplaza. GTA 6 se lanzó el 19 de noviembre de 2026 y todavía no hay pagos verificados de GTA 6: los nueve métodos de esta página son análogos de GTA Online, no valores medidos en el juego.</p>
-          </div>
-<section class="byline" aria-label="Acerca de esta página">
-      <div>
-        <p class="byline-meta">Por <span class="byline-seg"><a href="/es/about#economy-desk">Mesa de economía de ToolWools</a>&nbsp;·</span> Modelado de economía de GTA Online&nbsp;· Revisado por <span class="byline-seg"><a href="/es/about#reviewers">Revisores independientes de farmeo de GTA Online</a>&nbsp;·</span> Verificación de pagos y tiempos de ciclo</p>
-        <p class="byline-note">Modelo: <a href="/es/methodology">Modelo de dinero por hora de GTA 6</a></p>
-      </div>
-      <p class="byline-dates">Publicado <time datetime="2026-07-31">31 jul 2026</time>&nbsp;· Última revisión <time datetime="2026-11-22">22 de noviembre de 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Migas de pan">
+          <a href="/es/">Inicio</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/es/tools">Herramientas</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Calculadora de dinero y ROI de negocios de GTA 6</span>
+        </div>
+        <div class="page-eyebrow"><span>Economía</span></div>
+        <h1 id="page-title">Calculadora de dinero y ROI de negocios de GTA 6</h1>
+        <p class="page-subtitle">Tres modelos de dinero en una página: clasifica cada método de ganancia por GTA$ netos por hora, calcula cuánto tarda realmente una meta de ahorro, y mira si un negocio, o una Shark Card, se paga solo más rápido que farmear.</p>
+        <p class="hero-meta">
+          <span>Neto de costes de preparación y suministros</span><span>Retorno medido en horas de juego</span><span>Proyectado desde GTA Online</span><span>Por <a href="/es/about#economy-desk">Mesa de economía de ToolWools</a></span><span>Modelado de economía de GTA Online</span><span>Revisado por <a href="/es/about#reviewers">Revisores independientes de farmeo de GTA Online</a></span><span>Verificación de pagos y tiempos de ciclo</span><span>Modelo: <a href="/es/methodology">Modelo de dinero por hora de GTA 6</a></span><span>Publicado <time datetime="2026-07-31">31 jul 2026</time></span><span>Última revisión <time datetime="2026-11-22">22 de noviembre de 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">La cadena de misiones de contrato rinde 362.500 $ netos por hora. Llegar a 5,00 M$ desde 0 $ toma 35 ciclos, unas 13,8 horas, o 7 sesiones de 2 h.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Plan de dinero · Resumen</span></p>
-        <p class="tldr-text"><span data-tldr-text>La cadena de misiones de contrato rinde 362.500 $ netos por hora. Llegar a 5,00 M$ desde 0 $ toma 35 ciclos, unas 13,8 horas, o 7 sesiones de 2 h.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Cadena de misiones de contrato · 362.500 $ por hora</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Calculadora</h2>
       <div class="workspace-grid">
@@ -221,8 +221,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copiar enlace</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Comparte este resultado en X" href="https://twitter.com/intent/tweet?text=La%20cadena%20de%20misiones%20de%20contrato%20genera%20%24362.500%2Fhora%20en%20GTA%206.%2035%20ciclos%20hasta%20%245M%2C%20unas%2013%2C8%20horas.%20Plan%20de%20dinero%20de%20GTA%206%20en%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Feconomy-calculator%3Fmode%3Dgrind%26method%3Dcontract-mission%26goal%3D5000000%26balance%3D0%26session%3D2%26horizon%3D60">Compartir en X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Comparte este resultado en Reddit" href="https://www.reddit.com/submit?title=La%20cadena%20de%20misiones%20de%20contrato%20genera%20%24362.500%2Fhora%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Feconomy-calculator%3Fmode%3Dgrind%26method%3Dcontract-mission%26goal%3D5000000%26balance%3D0%26session%3D2%26horizon%3D60">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=La%20cadena%20de%20misiones%20de%20contrato%20genera%20%24362.500%2Fhora%20en%20GTA%206.%2035%20ciclos%20hasta%20%245M%2C%20unas%2013%2C8%20horas.%20Plan%20de%20dinero%20de%20GTA%206%20en%20ToolWools.&amp;url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Feconomy-calculator%3Fmode%3Dgrind%26method%3Dcontract-mission%26goal%3D5000000%26balance%3D0%26session%3D2%26horizon%3D60">Compartir en X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=La%20cadena%20de%20misiones%20de%20contrato%20genera%20%24362.500%2Fhora%20%28GTA%206%29&amp;url=https%3A%2F%2Ftoolwools.com%2Fes%2Ftools%2Feconomy-calculator%3Fmode%3Dgrind%26method%3Dcontract-mission%26goal%3D5000000%26balance%3D0%26session%3D2%26horizon%3D60">Reddit</a>
       </div>
     </section>
 <div data-table-slot>
@@ -239,14 +239,11 @@
       <p class="field-hint" style="margin-top:0.75rem"><span class="proj-badge">Proyectado, no extraído de datos</span> Los pagos son proyecciones, no valores extraídos de datos. El neto por hora es pago menos entrada, dividido por los minutos que toma un ciclo completo.</p>
     </section>
     </div>
-<section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+<section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Más herramientas de GTA 6 para explorar</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/readiness-score">Puntuación de preparación de GTA 6</a> · Una puntuación de preparación para el lanzamiento de 0–100 en rendimiento, VRAM, almacenamiento e internet. Nota de F a S con una solución de eslabón más débil.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/add-to-calendar">Recordatorio de fecha de lanzamiento de GTA 6</a> · Añade recordatorios de GTA 6 a Google, Apple u Outlook con un clic. GTA 6 ya está disponible: recordatorios de parches, DLC y eventos.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/interactive-map">Mapa interactivo de GTA 6</a> · Cada región nombrada de Leonida en un esquema, etiquetada por nivel de evidencia, más una comparación de tamaño contra GTA V y RDR2.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/system-requirements">Comprobador de requisitos del sistema de GTA 6</a> · Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</span></li><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/business-tracker">Seguimiento de negocios de GTA 6</a> · Sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia. Aún no se puede comprar ningún negocio — cada cifra con su fuente.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/readiness-score">Puntuación de preparación de GTA 6</a> · Una puntuación de preparación para el lanzamiento de 0–100 en rendimiento, VRAM, almacenamiento e internet. Nota de F a S con una solución de eslabón más débil.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/add-to-calendar">Recordatorio de fecha de lanzamiento de GTA 6</a> · Añade recordatorios de GTA 6 a Google, Apple u Outlook con un clic. GTA 6 ya está disponible: recordatorios de parches, DLC y eventos.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/interactive-map">Mapa interactivo de GTA 6</a> · Cada región nombrada de Leonida en un esquema, etiquetada por nivel de evidencia, más una comparación de tamaño contra GTA V y RDR2.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/system-requirements">Comprobador de requisitos del sistema de GTA 6</a> · Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</span></li><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span><a href="/es/tools/business-tracker">Seguimiento de negocios de GTA 6</a> · Sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia. Aún no se puede comprar ningún negocio, cada cifra con su fuente.</span></li></ul>
     </section>
-<aside class="assumptions-strip" aria-label="Suposiciones">
-      <p><strong>Suposiciones</strong> <span>Las cifras de pagos y precios son proyecciones para la economía de lanzamiento de GTA 6, extrapoladas de la curva de pagos de GTA Online 2013–2025 y la intención declarada de Rockstar de restablecer las tasas de ganancia más cerca de los valores de la era del lanzamiento. Los tiempos de ciclo asumen un jugador solo o en dúo que conoce la ruta, con conexión estable, sin saltos de sesión. Cada número es de grado de planificación, basado en métodos de GTA Online. Aún no existen datos de pagos específicos de GTA 6.</span> <a href="/es/methodology">Lee la metodología completa</a></p>
-      <p class="updated-line">Actualizado <time datetime="2026-11-22">22 de noviembre de 2026</time></p>
-    </aside>
+
 <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Cómo funcionan las matemáticas de dinero por hora de GTA 6</h2>
       <p class="section-dek">Pago menos entrada, dividido por los minutos que realmente toma un ciclo completo.</p>
@@ -317,13 +314,15 @@ profit(H)     = bizNetPerHour × H − price
 cardPerUsd    = gtaDollars ÷ usd
 hoursSaved    = gtaDollars ÷ grindPerHour
 impliedWage   = usd ÷ hoursSaved</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Los tiempos de ciclo se miden de principio a fin, preparación, viaje, final y venta, no desde el temporizador de la misión.</li><li>Las tasas de producción de negocios asumen mejoras completas, ya que las tasas sin mejorar cambian el orden del ranking.</li><li>Los precios de Shark Card siguen la tienda vigente de EE. UU.; el precio regional cambia el salario implícito pero no el orden.</li><li>Las proyecciones de pagos se basan en métodos de GTA Online. Aún no hay métodos específicos de GTA 6 ni valores en vivo en esta página.</li></ul>
+          <ul class="list-disc list-outside"><li>Los tiempos de ciclo se miden de principio a fin, preparación, viaje, final y venta, no desde el temporizador de la misión.</li><li>Las tasas de producción de negocios asumen mejoras completas, ya que las tasas sin mejorar cambian el orden del ranking.</li><li>Los precios de Shark Card siguen la tienda vigente de EE. UU.; el precio regional cambia el salario implícito pero no el orden.</li><li>Las proyecciones de pagos se basan en métodos de GTA Online. Aún no hay métodos específicos de GTA 6 ni valores en vivo en esta página.</li></ul>
+    <div class="assumptions-block"><p><strong>Suposiciones</strong> <span>Las cifras de pagos y precios son proyecciones para la economía de lanzamiento de GTA 6, extrapoladas de la curva de pagos de GTA Online 2013–2025 y la intención declarada de Rockstar de restablecer las tasas de ganancia más cerca de los valores de la era del lanzamiento. Los tiempos de ciclo asumen un jugador solo o en dúo que conoce la ruta, con conexión estable, sin saltos de sesión. Cada número es de grado de planificación, basado en métodos de GTA Online. Aún no existen datos de pagos específicos de GTA 6.</span> <a href="/es/methodology">Lee la metodología completa</a></p>
+      <p class="updated-line">Actualizado <time datetime="2026-11-22">22 de noviembre de 2026</time></p></div>
         </div>
       </details>
     </section>
 <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Preguntas de dinero, negocios y Shark Card de GTA 6</h2>
+      <header>
+        <h2 id="faq">Preguntas de dinero, negocios y Shark Card de GTA 6</h2>
         <p class="section-dek">Mejor método, retorno más rápido, y si comprar dinero es alguna vez racional.</p>
       </header>
       <ul class="faq-list" role="list"><li><details class="faq-item" id="faq-q-1">
@@ -383,7 +382,7 @@ impliedWage   = usd ÷ hoursSaved</pre>
 <section aria-labelledby="related-content">
       <h2 id="related-content">Más herramientas para tu primera semana en GTA 6</h2>
       <h3 class="related-sub">Herramientas relacionadas</h3>
-      <ul class="related-tools-grid"><li><a href="/es/tools/readiness-score" class="tool-card" data-accent="purple" aria-label="Puntuación de preparación de GTA 6 · Una puntuación de preparación para el lanzamiento de 0–100 en rendimiento, VRAM, almacenamiento e internet. Nota de F a S con una solución de eslabón más débil."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Puntuación de preparación de GTA 6</h3><p>Una puntuación de preparación para el lanzamiento de 0–100 en rendimiento, VRAM, almacenamiento e internet. Nota de F a S con una solución de eslabón más débil.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/add-to-calendar" class="tool-card" data-accent="blue" aria-label="Recordatorio de fecha de lanzamiento de GTA 6 · Añade recordatorios de GTA 6 a Google, Apple u Outlook con un clic. GTA 6 ya está disponible: recordatorios de parches, DLC y eventos."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Recordatorio de fecha de lanzamiento de GTA 6</h3><p>Añade recordatorios de GTA 6 a Google, Apple u Outlook con un clic. GTA 6 ya está disponible: recordatorios de parches, DLC y eventos.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/interactive-map" class="tool-card" data-accent="purple" aria-label="Mapa interactivo de GTA 6 · Cada región nombrada de Leonida en un esquema, etiquetada por nivel de evidencia, más una comparación de tamaño contra GTA V y RDR2."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Mapa interactivo de GTA 6</h3><p>Cada región nombrada de Leonida en un esquema, etiquetada por nivel de evidencia, más una comparación de tamaño contra GTA V y RDR2.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/system-requirements" class="tool-card" data-accent="purple" aria-label="Comprobador de requisitos del sistema de GTA 6 · Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Comprobador de requisitos del sistema de GTA 6</h3><p>Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/business-tracker" class="tool-card" data-accent="blue" aria-label="Seguimiento de negocios de GTA 6 · Sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia. Aún no se puede comprar ningún negocio — cada cifra con su fuente."><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Seguimiento de negocios de GTA 6</h3><p>Sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia. Aún no se puede comprar ningún negocio — cada cifra con su fuente.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
+      <ul class="related-tools-grid"><li><a href="/es/tools/readiness-score" class="tool-card" data-accent="purple"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Puntuación de preparación de GTA 6</h3><p>Una puntuación de preparación para el lanzamiento de 0–100 en rendimiento, VRAM, almacenamiento e internet. Nota de F a S con una solución de eslabón más débil.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/add-to-calendar" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Recordatorio de fecha de lanzamiento de GTA 6</h3><p>Añade recordatorios de GTA 6 a Google, Apple u Outlook con un clic. GTA 6 ya está disponible: recordatorios de parches, DLC y eventos.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/interactive-map" class="tool-card" data-accent="purple"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Mapa interactivo de GTA 6</h3><p>Cada región nombrada de Leonida en un esquema, etiquetada por nivel de evidencia, más una comparación de tamaño contra GTA V y RDR2.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/system-requirements" class="tool-card" data-accent="purple"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Comprobador de requisitos del sistema de GTA 6</h3><p>Veredicto instantáneo frente a los niveles Mínimo, Recomendado y Ultra estimados por la comunidad. GPU, CPU, RAM y almacenamiento.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li><li><a href="/es/tools/business-tracker" class="tool-card" data-accent="blue"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Seguimiento de negocios de GTA 6</h3><p>Sigue los 12 negocios de Leonida, simula el retorno con tus propios números y compara los métodos de dinero del modo historia. Aún no se puede comprar ningún negocio, cada cifra con su fuente.</p><span class="link-cta">Abrir herramienta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li></ul>
     </section>
 <section aria-labelledby="sources">
       <h2 id="sources">Fuentes y referencias de metodología</h2>
@@ -420,27 +419,45 @@ impliedWage   = usd ÷ hoursSaved</pre>
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Mantente al tanto</h2>
+          <p>Consigue las últimas noticias, herramientas y guías de GTA 6.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Dirección de correo</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Suscribirse</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/es/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 ya está disponible — 19 de noviembre de 2026</span>
+        <span class="eyebrow-muted">GTA 6 ya está disponible, 19 de noviembre de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar herramientas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/es/" aria-label="ToolWools, inicio" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/es/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas las herramientas de GTA 6 en un lugar</span>
               </span>
             </span>
@@ -479,10 +496,10 @@ impliedWage   = usd ÷ hoursSaved</pre>
               <li><a href="/es/contact">Contacto</a></li>
               <li><a href="/es/email-preferences">Preferencias de correo</a></li>
               <li><a href="/es/sitemap">Mapa del sitio</a></li>
-              <li><a href="/es/privacy">Política de privacidad</a></li>
-              <li><a href="/es/terms">Términos de servicio</a></li>
               <li><a href="/editorial-policy">Política editorial</a></li>
-              <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
+          <li><a href="/es/privacy">Política de privacidad</a></li>
+          <li><a href="/es/terms">Términos de servicio</a></li>
+          <li><a href="/es/disclaimer">Descargo de responsabilidad</a></li>
             </ul>
           </div>
         </div>
@@ -491,31 +508,30 @@ impliedWage   = usd ÷ hoursSaved</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos los derechos reservados. No afiliado a Rockstar Games ni a Take-Two Interactive.</p>
         <div class="footer-bottom-links">
-          <a href="/es/privacy">Privacidad</a>
-          <a href="/es/terms">Términos</a>
-          <button type="button" class="footer-link-btn" data-consent-open>Configuración de cookies</button>
-          <span class="sep" aria-hidden="true"></span>
+          <span class="footer-legal"><a href="/es/privacy">Privacidad</a><a href="/es/terms">Términos</a><a href="/es/disclaimer">Descargo de responsabilidad</a><button type="button" data-consent-open>Configuración de cookies</button></span>
           <span>Hecho con <span class="heart">♥</span> para fans de GTA 6</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<div class="consent-banner" data-consent-banner hidden role="region" aria-label="Consentimiento de analítica">
-  <div class="consent-inner">
-    <p><strong>Analítica, solo con tu permiso.</strong> Usamos Google Analytics agregado para ver qué herramientas se usan. Los datos que introduces nunca salen de tu dispositivo, no se crea ningún perfil y no se vende nada. Acepta para cargarlo o recházalo y navega sin él. Puedes cambiar de opinión cuando quieras desde Configuración de cookies en el pie de página.</p>
-    <div class="consent-actions">
-      <button type="button" class="btn-ultra" data-consent-accept>Aceptar analítica</button>
-      <button type="button" class="btn-outline" data-consent-decline>Rechazar</button>
-      <a href="/es/privacy">Política de privacidad</a>
-    </div>
   </div>
-</div>  </div>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimiento de analítica" hidden>
+  <p>Usamos Google Analytics agregado para mejorar el sitio. Sin perfiles, nada se vende. Acepta o rechaza; la elección se guarda en este navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceptar analítica</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Rechazar</button>
+  </div>
+</div>
   <script src="/assets/js/es/theme.js" defer></script>
   <script src="/assets/js/es/header.js" defer></script>
   <script src="/assets/js/es/search.js" defer></script>
   <script src="/assets/js/es/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/es/newsletter.js" defer></script>
+  <script src="/assets/js/es/consent.js" defer></script>
   <script type="module" src="/assets/js/es/economy-calculator.js"></script>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -549,7 +565,7 @@ impliedWage   = usd ÷ hoursSaved</pre>
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Web browser",
       "url": "https://toolwools.com/es/tools/economy-calculator",
-      "description": "Clasifica los métodos de dinero de GTA 6 por $/hora, calcula el tiempo de cualquier meta de ahorro, compara las horas de retorno de negocios y valora las Shark Cards frente al farmeo que reemplazan.",
+      "description": "Clasifica los métodos de dinero de GTA 6 por GTA$ netos por hora, calcula cuánto tarda una meta de ahorro, compara el ROI de negocios y valora las Shark Cards. Proyectado desde GTA Online.",
       "offers": {
         "@type": "Offer",
         "price": "0",

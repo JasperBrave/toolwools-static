@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,13 +22,13 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="tr_TR">
-    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="og:locale:alternate" content="ar_SA">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Otimizador de Configurações do GTA 6">
     <meta name="twitter:description" content="Ajuste as melhores configurações gráficas de GTA 6, quais opções custam mais FPS, quais são quase gratuitas, e por onde começar em 1080p, 1440p e 4K.">
     <meta name="twitter:image" content="https://toolwools.com/og/settings-optimizer.jpg">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151719" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://toolwools.com/pt/tools/settings-optimizer">
 <link rel="alternate" href="https://toolwools.com/tools/settings-optimizer" hreflang="en">
 <link rel="alternate" href="https://toolwools.com/es/tools/settings-optimizer" hreflang="es">
@@ -41,12 +41,30 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/manrope-latinext.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="preload" href="/assets/fonts/inter-latinext.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/tool-settings-optimizer-pt.css">
     <link rel="stylesheet" href="/assets/css/print.css" media="print">
     <script>
-      (function(){try{var t=localStorage.getItem("toolwools-theme");if(t)t==="dark"?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark");}catch(e){}})();
+/* No-flash theme guard (Phase 3). Light-first: TW_THEME_DEFAULT='light'.
+   Reads localStorage 'tw-theme' ('light' | 'dark'); no stored choice renders
+   LIGHT (task decision — see NOTES; token doc §5 preferred the system
+   preference, COMPONENT-SYSTEM §3 preferred light-first; the two conflict
+   and this build follows the Phase 3 task brief). Sets data-theme AND the
+   legacy 'dark' class in sync, before first paint. Must stay inline in
+   <head>, before any stylesheet. <html> ships with data-theme="light". */
+var TW_THEME_DEFAULT = 'light';
+try {
+  var twStored = localStorage.getItem('tw-theme');
+  var twTheme = (twStored === 'dark' || twStored === 'light') ? twStored : TW_THEME_DEFAULT;
+  document.documentElement.dataset.theme = twTheme;
+  document.documentElement.classList.toggle('dark', twTheme === 'dark');
+} catch (e) {
+  document.documentElement.dataset.theme = TW_THEME_DEFAULT;
+}
     </script>
   </head>
 <body>
@@ -54,16 +72,14 @@
 
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
 <header class="site-header" aria-label="Site">
-  <div class="site-header-glow" aria-hidden="true"></div>
   <div class="site-header-bar" data-header-bar>
     <div class="container site-header-inner">
       <div class="site-header-left">
-        <a href="/pt/" aria-label="ToolWools, início" class="logo-link">
-          <span class="logo-bar" aria-hidden="true"></span>
+        <a href="/pt/" class="logo-link">
           <span class="logo">
             <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
             <span class="logo-word">
-              <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+              <span class="logo-name">TOOLWOOLS</span>
               <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
             </span>
           </span>
@@ -75,18 +91,19 @@
           <a href="/pt/generators">Geradores</a>
           <a href="/pt/news">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
       </div>
       <div class="site-header-actions">
         <div class="header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="BUSCAR" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="header-search-results">
           <kbd class="header-search-kbd" aria-hidden="true">⌘K</kbd>
           <div class="search-results" id="header-search-results" data-search-results role="listbox" hidden></div>
         </div>
         <div class="header-divider" aria-hidden="true"></div>
         <details class="lang-menu">
-          <summary aria-label="Selecionar idioma">PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <summary>PT <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
           <div class="lang-menu-list">
             <a href="/tools/settings-optimizer">English</a>
             <a href="/es/tools/settings-optimizer">Español</a>
@@ -110,7 +127,7 @@
       <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
         <div class="mobile-nav-search header-search">
           <svg class="icon header-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas" aria-label="Buscar ferramentas" autocomplete="off" role="combobox" aria-expanded="false">
+          <input type="search" class="header-search-input" data-header-search-input placeholder="Buscar ferramentas..." aria-label="Buscar ferramentas..." autocomplete="off" role="combobox" aria-expanded="false">
           <div class="search-results" data-search-results role="listbox" hidden></div>
         </div>
         <nav class="mobile-nav-links" aria-label="Móvel">
@@ -120,7 +137,11 @@
           <a href="/pt/generators">Geradores</a>
           <a href="/pt/news">Notícias</a>
           <a href="/pt/trailers">Trailers</a>
+          <a href="/pt/guides">Guias</a>
         </nav>
+        <div class="mobile-lang">
+          <a href="/tools/settings-optimizer" lang="en">EN</a><a href="/es/tools/settings-optimizer" lang="es">ES</a><a href="/pt/tools/settings-optimizer" aria-current="true">PT</a><a href="/de/tools/settings-optimizer" lang="de">DE</a><a href="/fr/tools/settings-optimizer" lang="fr">FR</a><a href="/tr/tools/settings-optimizer" lang="tr">TR</a><a href="/ar/tools/settings-optimizer" lang="ar">AR</a>
+        </div>
       </div>
     </div>
   </div>
@@ -129,46 +150,22 @@
     <main id="main" class="tool-main">
       <div class="tool-body">
         <article aria-labelledby="page-title">
-<section class="page-hero" aria-labelledby="page-title">
-      <div class="page-breadcrumbs" aria-label="Trilha de navegação">
-        <a href="/pt/">Início</a>
-        <span aria-hidden="true">/</span>
-        <a href="/pt/tools">Ferramentas</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Otimizador de configurações</span>
-      </div>
-      <div class="page-eyebrow">
-        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-        <span>Desempenho</span>
-      </div>
-      <h1 id="page-title" class="page-title">Otimizador de Configurações do GTA 6</h1>
-      <p class="page-subtitle">Escolha sua GPU, CPU e FPS alvo. Obtenha uma predefinição por configuração que maximiza o visual sem perder quadros.</p>
-      <dl class="hero-badges">
-        <div><dt>Motor</dt><dd>Modelo FPS</dd></div>
-        <div><dt>Execução</dt><dd>Instantâneo, no navegador</dd></div>
-        <div><dt>Plataformas</dt><dd>PC</dd></div>
-        <div><dt>Atualizado</dt><dd><time datetime="2026-07-31">31 de jul de 2026</time></dd></div>
-      </dl>
-    </section>
-          <div class="tool-intro-callout">
-            <p>Classificado por custo medido de taxa de quadros de um só passo para baixo, modelado em RDR2 e GTA V PC, as mesmas opções do motor RAGE com que GTA 6 chega. O otimizador abaixo roda o modelo FPS compartilhado ao vivo: escolhe a predefinição mais alta que atinge seu FPS alvo, depois recorre a DLSS Qualidade, depois a geração de quadros.</p>
-          </div>
-<section class="byline" aria-label="Sobre esta página">
-      <div>
-        <p class="byline-meta">Por <span class="byline-seg"><a href="/pt/about#hardware-desk">Mesa de hardware da ToolWools</a>&nbsp;·</span> Configurações gráficas e análise de tempo de quadro</p>
-        <p class="byline-note">Revisado por <span class="byline-seg"><a href="/pt/about#benchmark-reviewers">Revisores independentes de testes do GTA</a>&nbsp;·</span> Verificado contra o escalonamento de RDR2 e GTA V PC</p>
-      </div>
-      <p class="byline-dates">Publicado <time datetime="2026-02-10">10 de fev de 2026</time>&nbsp;· Última revisão <time datetime="2026-07-31">31 de julho de 2026</time></p>
-    </section>
+      <section class="page-hero">
+        <div class="page-breadcrumbs" aria-label="Trilha de navegação">
+          <a href="/pt/">Início</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <a href="/pt/tools">Ferramentas</a>
+          <span class="sep" aria-hidden="true">/</span>
+          <span class="current" aria-current="page">Otimizador de configurações</span>
+        </div>
+        <div class="page-eyebrow"><span>Desempenho</span></div>
+        <h1 id="page-title">Otimizador de Configurações do GTA 6</h1>
+        <p class="page-subtitle">Escolha sua GPU, CPU e FPS alvo. Obtenha uma predefinição por configuração que maximiza o visual sem perder quadros.</p>
+        <p class="hero-meta">
+          <span>Motor: Modelo FPS</span><span>Execução: Instantâneo, no navegador</span><span>Plataformas: PC</span><span>Atualizado: <time datetime="2026-07-31">31 de jul de 2026</time></span><span>Por <a href="/pt/about#hardware-desk">Mesa de hardware da ToolWools</a></span><span>Configurações gráficas e análise de tempo de quadro</span><span>Revisado por <a href="/pt/about#benchmark-reviewers">Revisores independentes de testes do GTA</a></span><span>Verificado contra o escalonamento de RDR2 e GTA V PC</span><span>Publicado <time datetime="2026-02-10">10 de fev de 2026</time></span><span>Última revisão <time datetime="2026-07-31">31 de julho de 2026</time></span>
+        </p>
+      </section>
 <div class="sr-only" data-live-region aria-live="polite">Atinge 60 fps. Estimados 71 quadros por segundo de média, 51 de 1 por cento mínimo, em 1440p Alto.</div>
-<section class="tldr-card" data-tldr-card data-tone="ready" data-speakable="tldr" aria-labelledby="tldr-label">
-      <div class="tldr-icon" data-tldr-icon><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div>
-        <p id="tldr-label" class="tldr-label"><span data-tldr-label>Atinge 60 fps · Resumo</span></p>
-        <p class="tldr-text"><span data-tldr-text>Sim, GeForce RTX 4070 + Ryzen 5 7600X atinge 60 fps em 1440p no Alto: cerca de 71 fps de média, 51 fps de 1% mínimo. Ultra nativo chega a 49 fps; Ultra com DLSS Qualidade chega a 63 fps.</span></p>
-      </div>
-      <p class="tldr-verdict" data-tldr-verdict>Atinge 60 fps, 71 fps médios</p>
-    </section>
 <section aria-labelledby="tool-workspace">
       <h2 id="tool-workspace" class="sr-only">Otimizador</h2>
       <div class="workspace-grid">
@@ -216,8 +213,8 @@
           <div class="output-panel-label eyebrow-muted">Configurações recomendadas</div>
           <div class="mt-8" data-output-panel><div class="verdict-body"><svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><div><p class="verdict-kicker tone-ready">Atinge 60 fps</p><h3 class="verdict-title">71<span class="unit"> fps médios</span></h3><p class="verdict-desc">Faixa de 61–82 fps (±15%), 51 fps de 1% mínimo. Predefinição Alto, nativo, em 1440p.</p></div></div><div class="balance-bars"><div><div class="balance-bar-head"><span class="lbl">FPS médios</span><span class="val">71</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:49%"></div></div></div><div><div class="balance-bar-head"><span class="lbl">FPS de 1% mínimo</span><span class="val">51</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:35%"></div></div></div></div><div class="upgrade-box"><p class="eyebrow-muted">Configurações recomendadas</p><ul><li><strong>Predefinição: Alto (nativo)</strong>, a predefinição mais alta que atinge 60 fps nesta máquina.</li><li><strong>Reflexos com ray tracing: desligados</strong>, 18–30%, a opção individual mais cara.</li><li><strong>Volumétricos: Médio, Sombras: Alto</strong>, os próximos dois cortes, 8–14% e 7–12%.</li><li><strong>Texturas: Máx, AF 16x, AO ativado</strong>, quase gratuito. 7,8 GB necessários, sua placa tem 12 GB.</li></ul></div><dl class="stat-grid"><div><dt>Ultra nativo</dt><dd>49 fps</dd></div><div><dt>Recomendado</dt><dd>71 fps</dd></div><div><dt>VRAM necessária</dt><dd>7,8 GB</dd></div><div><dt>Diferença da meta</dt><dd>+11 fps</dd></div></dl><div class="share-row">
       <button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredito</span></button>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS%3A%20predefini%C3%A7%C3%A3o%20Alta%2C%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Otimizador%20de%20configura%C3%A7%C3%B5es%20do%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Compartilhar no X</a>
-      <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar veredicto no Reddit" href="https://www.reddit.com/submit?title=Configura%C3%A7%C3%B5es%20do%20GTA%206%20para%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS%3A%20predefini%C3%A7%C3%A3o%20Alta%2C%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Otimizador%20de%20configura%C3%A7%C3%B5es%20do%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Compartilhar no X</a>
+      <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=Configura%C3%A7%C3%B5es%20do%20GTA%206%20para%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
     </div></div>
         </div>
       </div>
@@ -234,8 +231,8 @@
         <button class="btn btn-secondary" type="button" data-copy-link><span data-copy-link-label>Copiar link</span></button>
       </div>
       <div class="share-row">
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no X" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS%3A%20predefini%C3%A7%C3%A3o%20Alta%2C%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Otimizador%20de%20configura%C3%A7%C3%B5es%20do%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Compartilhar no X</a>
-        <a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartilhe este resultado no Reddit" href="https://www.reddit.com/submit?title=Configura%C3%A7%C3%B5es%20do%20GTA%206%20para%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=GeForce%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS%3A%20predefini%C3%A7%C3%A3o%20Alta%2C%2071%20FPS%20m%C3%A9dios%20%2851%20de%20m%C3%ADnimo%20de%201%25%29.%20Otimizador%20de%20configura%C3%A7%C3%B5es%20do%20GTA%206&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Compartilhar no X</a>
+        <a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=Configura%C3%A7%C3%B5es%20do%20GTA%206%20para%20RTX%204070%20%2B%20Ryzen%205%207600X%20em%201440p%2C%20meta%20de%2060%20FPS&amp;url=https%3A%2F%2Ftoolwools.com%2Fpt%2Ftools%2Fsettings-optimizer%3Fgpu%3Drtx-4070%26cpu%3Dr5-7600x%26ram%3D16%26res%3D1440p%26target%3D60">Reddit</a>
       </div>
     </section>
 
@@ -265,31 +262,28 @@
         <caption class="sr-only">Configurações gráficas de GTA 6 classificadas por custo estimado de FPS, com uma recomendação para cada</caption>
         <thead><tr><th scope="col">Configuração</th><th scope="col">Custo de FPS</th><th scope="col">Veredito</th></tr></thead>
         <tbody>
-<tr class="align-top"><th scope="row">Reflexos com ray tracing<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">A opção individual mais cara em títulos RAGE. Os reflexos de espaço de tela parecem próximos em movimento e custam quase nada.</span></th><td class="mono">18–30%</td><td>Corte primeiro</td></tr>
-<tr class="align-top"><th scope="row">Névoa volumétrica / nuvens<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">A névoa de umidade de Vice City é pesada em volumétricos. Médio mantém o visual e devolve a maioria dos quadros.</span></th><td class="mono">8–14%</td><td>Baixe para Médio</td></tr>
-<tr class="align-top"><th scope="row">Qualidade de sombras<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">As sombras Ultra majoritariamente estendem a distância de cascata. Em 1080p você não vai ver a diferença enquanto dirige.</span></th><td class="mono">7–12%</td><td>Alto, não Ultra</td></tr>
-<tr class="align-top"><th scope="row">Simulação de água / oceano<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">Só pesa perto da costa e dos Everglades, que é a maior parte do mapa, então trate como um custo real.</span></th><td class="mono">5–9%</td><td>Depende da cena</td></tr>
-<tr class="align-top"><th scope="row">MSAA de reflexos<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">Uma configuração herdada de GTA V que punia placas intermediárias por um ganho quase invisível. Espere o mesmo aqui.</span></th><td class="mono">5–8%</td><td>Desativado</td></tr>
-<tr class="align-top"><th scope="row">Qualidade de texturas<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">Quadros gratuitos até você exceder seu orçamento de VRAM, momento em que os 1% mínimos colapsam em engasgo.</span></th><td class="mono">0–3% (até a VRAM acabar)</td><td>No máximo, se a VRAM permitir</td></tr>
-<tr class="align-top"><th scope="row">Filtragem anisotrópica<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">Efetivamente gratuito em qualquer GPU da última década. Nunca baixe.</span></th><td class="mono">1–2%</td><td>16x sempre</td></tr>
-<tr class="align-top"><th scope="row">Oclusão de ambiente<span class="mt-1 block text-xs font-normal leading-relaxed text-muted-foreground">Base barata para uma cidade cheia de objetos. Só vale a pena cortar em GPUs abaixo do nível recomendado.</span></th><td class="mono">3–5%</td><td>Mantenha ativado</td></tr>
+<tr class="align-top"><th scope="row">Reflexos com ray tracing<span class="cell-note">A opção individual mais cara em títulos RAGE. Os reflexos de espaço de tela parecem próximos em movimento e custam quase nada.</span></th><td class="mono">18–30%</td><td>Corte primeiro</td></tr>
+<tr class="align-top"><th scope="row">Névoa volumétrica / nuvens<span class="cell-note">A névoa de umidade de Vice City é pesada em volumétricos. Médio mantém o visual e devolve a maioria dos quadros.</span></th><td class="mono">8–14%</td><td>Baixe para Médio</td></tr>
+<tr class="align-top"><th scope="row">Qualidade de sombras<span class="cell-note">As sombras Ultra majoritariamente estendem a distância de cascata. Em 1080p você não vai ver a diferença enquanto dirige.</span></th><td class="mono">7–12%</td><td>Alto, não Ultra</td></tr>
+<tr class="align-top"><th scope="row">Simulação de água / oceano<span class="cell-note">Só pesa perto da costa e dos Everglades, que é a maior parte do mapa, então trate como um custo real.</span></th><td class="mono">5–9%</td><td>Depende da cena</td></tr>
+<tr class="align-top"><th scope="row">MSAA de reflexos<span class="cell-note">Uma configuração herdada de GTA V que punia placas intermediárias por um ganho quase invisível. Espere o mesmo aqui.</span></th><td class="mono">5–8%</td><td>Desativado</td></tr>
+<tr class="align-top"><th scope="row">Qualidade de texturas<span class="cell-note">Quadros gratuitos até você exceder seu orçamento de VRAM, momento em que os 1% mínimos colapsam em engasgo.</span></th><td class="mono">0–3% (até a VRAM acabar)</td><td>No máximo, se a VRAM permitir</td></tr>
+<tr class="align-top"><th scope="row">Filtragem anisotrópica<span class="cell-note">Efetivamente gratuito em qualquer GPU da última década. Nunca baixe.</span></th><td class="mono">1–2%</td><td>16x sempre</td></tr>
+<tr class="align-top"><th scope="row">Oclusão de ambiente<span class="cell-note">Base barata para uma cidade cheia de objetos. Só vale a pena cortar em GPUs abaixo do nível recomendado.</span></th><td class="mono">3–5%</td><td>Mantenha ativado</td></tr>
         </tbody>
       </table>
     </div>
     </section>
 
-    <section class="tier-read" style="margin-top:0" aria-labelledby="related-tools-inline">
+    <section class="tier-read" aria-labelledby="related-tools-inline">
       <h2 id="related-tools-inline">Continue planejando seu PC para GTA 6</h2>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed"><li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Projete sua taxa de quadros antes de começar a cortar configurações com a <a href="/pt/tools/fps-calculator">calculadora de FPS</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Encontre o nível de texturas que sua placa pode segurar sem engasgo na <a href="/pt/tools/vram-calculator">calculadora de VRAM</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Compare duas GPUs ou CPUs frente a frente na <a href="/pt/tools/hardware-comparison">comparação de hardware</a>.</span></li>
-<li class="flex gap-2"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique sua máquina contra os níveis mínimo, recomendado e Ultra no <a href="/pt/tools/system-requirements">verificador de requisitos de sistema</a>.</span></li></ul>
+      <ul class="inline-links"><li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Projete sua taxa de quadros antes de começar a cortar configurações com a <a href="/pt/tools/fps-calculator">calculadora de FPS</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Encontre o nível de texturas que sua placa pode segurar sem engasgo na <a href="/pt/tools/vram-calculator">calculadora de VRAM</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Compare duas GPUs ou CPUs frente a frente na <a href="/pt/tools/hardware-comparison">comparação de hardware</a>.</span></li>
+<li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span>Verifique sua máquina contra os níveis mínimo, recomendado e Ultra no <a href="/pt/tools/system-requirements">verificador de requisitos de sistema</a>.</span></li></ul>
     </section>
 
-    <aside class="assumptions-strip" aria-label="Suposições">
-      <p><strong>Suposições</strong> <span>Os custos de FPS por configuração são o delta medido de taxa média de quadros ao baixar um passo (Ultra para Alto), modelado em RDR2 e GTA V PC onde existem as mesmas opções do motor RAGE. Os custos não são taxas absolutas de quadros. O otimizador roda o modelo FPS compartilhado ao vivo. Até que a Rockstar lance a versão de PC e seu menu gráfico, cada número é modelado; medimos novamente e republicamos dentro de 48 horas do lançamento de PC.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
-      <p class="updated-line">Atualizado <time datetime="2026-07-31">31 de julho de 2026</time></p>
-    </aside>
+
 
     <section aria-labelledby="how-it-works">
       <h2 id="how-it-works">Ajuste manualmente em cinco passadas</h2>
@@ -326,17 +320,19 @@ recommended = highest preset where avg &gt;= target, native first
 se nenhum: tenta novamente com DLSS Quality (x1.30), depois frame gen (só média x1.70)
 low         = avg x 0.72 (0.62 when Limitado pela CPU)
 band        = [avg x 0.85, avg x 1.15]</pre>
-          <ul class="list-disc list-outside space-y-1.5"><li>Multiplicadores de predefinição: Baixo x1,55, Médio x1,25, Alto 1,00, Muito alto x0,82, Ultra x0,68. BASE_FPS no Alto: 1080p 132, 1440p 102, ultrawide 1440p 84, 4K 62.</li>
+          <ul class="list-disc list-outside"><li>Multiplicadores de predefinição: Baixo x1,55, Médio x1,25, Alto 1,00, Muito alto x0,82, Ultra x0,68. BASE_FPS no Alto: 1080p 132, 1440p 102, ultrawide 1440p 84, 4K 62.</li>
 <li>A ordem de custos por configuração vem da tabela acima: reflexos com ray tracing 18-30%, volumétricos 8-14%, sombras 7-12%. Todo o resto são dígitos únicos até a VRAM acabar.</li>
 <li>A falta de VRAM dispara uma penalidade de 25% no FPS médio e de 50% no 1% mínimo, o comportamento de transbordo do driver medido em Cyberpunk 2077 em configurações de VRAM acima do orçamento. As texturas ficam no máximo só enquanto a placa passa do pool.</li>
 <li>A geração de quadros multiplica a média por 1,7x (DLSS 3) ou 1,6x (FSR 3); os 1% mínimos ficam inalterados porque os quadros interpolados não reduzem a variância real de tempo de quadro.</li></ul>
+    <div class="assumptions-block"><p><strong>Suposições</strong> <span>Os custos de FPS por configuração são o delta medido de taxa média de quadros ao baixar um passo (Ultra para Alto), modelado em RDR2 e GTA V PC onde existem as mesmas opções do motor RAGE. Os custos não são taxas absolutas de quadros. O otimizador roda o modelo FPS compartilhado ao vivo. Até que a Rockstar lance a versão de PC e seu menu gráfico, cada número é modelado; medimos novamente e republicamos dentro de 48 horas do lançamento de PC.</span> <a href="/pt/methodology">Leia a metodologia completa</a></p>
+      <p class="updated-line">Atualizado <time datetime="2026-07-31">31 de julho de 2026</time></p></div>
         </div>
       </details>
     </section>
 
     <section aria-labelledby="faq">
-      <header class="text-center">
-        <h2 id="faq" class="h2-lg">Perguntas de configurações de GTA 6, respondidas</h2>
+      <header>
+        <h2 id="faq">Perguntas de configurações de GTA 6, respondidas</h2>
         <p class="section-dek">As perguntas de ajuste que as pessoas realmente buscam agora que o jogo já foi lançado.</p>
       </header>
 <ul class="faq-list" role="list">
@@ -381,10 +377,10 @@ band        = [avg x 0.85, avg x 1.15]</pre>
       <h2 id="related-content">Ferramentas que combinam com estas configurações</h2>
       <h3 class="related-sub">Ferramentas relacionadas</h3>
 <ul class="related-tools-grid">
-<li><a href="/pt/tools/hardware-comparison" class="tool-card" data-accent="purple" aria-label="Comparação de Hardware do GTA 6, Compare GPUs e CPUs frente a frente para GTA 6, taxas de quadros projetadas em 1440p, margem de VRAM, consumo de energia e custo por quadro em cada nível atual."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Comparação de Hardware do GTA 6</h3><p>Compare GPUs e CPUs frente a frente para GTA 6, taxas de quadros projetadas em 1440p, margem de VRAM, consumo de energia e custo por quadro em cada nível atual.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/tools/system-requirements" class="tool-card" data-accent="blue" aria-label="Verificador de requisitos do sistema do GTA 6, Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/tools/fps-calculator" class="tool-card" data-accent="pink" aria-label="Calculadora de FPS do GTA 6, Estime a taxa de quadros para sua GPU em 1080p, 1440p e 4K em Baixo, Médio, Alto e Ultra."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Calculadora de FPS do GTA 6</h3><p>Estime a taxa de quadros para sua GPU em 1080p, 1440p e 4K em Baixo, Médio, Alto e Ultra.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
-<li><a href="/pt/tools/vram-calculator" class="tool-card" data-accent="purple" aria-label="Verificador de requisitos de VRAM do GTA 6, Escolha resolução e predefinição de qualidade. A ferramenta mostra a VRAM mínima necessária e se sua GPU passa."><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Verificador de requisitos de VRAM do GTA 6</h3><p>Escolha resolução e predefinição de qualidade. A ferramenta mostra a VRAM mínima necessária e se sua GPU passa.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/hardware-comparison" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Comparação de Hardware do GTA 6</h3><p>Compare GPUs e CPUs frente a frente para GTA 6, taxas de quadros projetadas em 1440p, margem de VRAM, consumo de energia e custo por quadro em cada nível atual.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/system-requirements" class="tool-card" data-accent="blue"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Verificador de requisitos do sistema do GTA 6</h3><p>Veredito instantâneo em relação aos níveis Mínimo, Recomendado e Ultra estimados pela comunidade. GPU, CPU, RAM e armazenamento.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/fps-calculator" class="tool-card" data-accent="pink"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Calculadora de FPS do GTA 6</h3><p>Estime a taxa de quadros para sua GPU em 1080p, 1440p e 4K em Baixo, Médio, Alto e Ultra.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
+<li><a href="/pt/tools/vram-calculator" class="tool-card" data-accent="purple"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><h3>Verificador de requisitos de VRAM do GTA 6</h3><p>Escolha resolução e predefinição de qualidade. A ferramenta mostra a VRAM mínima necessária e se sua GPU passa.</p><span class="link-cta">Abrir ferramenta <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a></li>
 </ul>
     </section>
 
@@ -420,29 +416,47 @@ band        = [avg x 0.85, avg x 1.15]</pre>
     </aside>
         </article>
       </div>
+<section class="section" id="sec-newsletter" aria-labelledby="nl-h2">
+  <div class="wrap">
+    <div class="newsletter-band">
+      <div class="nl-art" aria-hidden="true"><img src="/assets/img/crops/skyline-strip.jpg" alt="" width="1024" height="90" loading="lazy"></div>
+      <div class="nl-inner">
+        <div>
+          <h2 id="nl-h2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6L22 7"/></svg>Fique por dentro</h2>
+          <p>Obtenha as últimas notícias de GTA 6 na sua caixa de entrada.</p>
+        </div>
+        <div class="nl-side">
+          <form class="nl-form" id="nl-form" data-newsletter-form novalidate>
+            <label for="nl-email" class="visually-hidden">Endereço de e-mail</label>
+            <input type="email" id="nl-email" name="email" placeholder="Enter your email address" autocomplete="email" spellcheck="false" required>
+            <button class="btn btn-primary btn-block" type="submit" id="nl-submit">Assinar</button>
+          </form>
+          <p class="nl-feedback error" id="nl-error" data-newsletter-feedback role="alert" hidden></p>
+          <div class="nl-feedback success" id="nl-success" data-newsletter-success role="status" tabindex="-1" hidden><span data-newsletter-success-msg></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
 
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-card surface-card">
-      <div class="footer-glow footer-glow-a" aria-hidden="true"></div>
-      <div class="footer-glow footer-glow-b" aria-hidden="true"></div>
-      <div class="footer-glow-line" aria-hidden="true"></div>
       <a href="/pt/tools" class="footer-strip">
         <span class="live-dot-wrap" aria-hidden="true"><span class="ping"></span><span class="dot"></span></span>
-        <span class="eyebrow-muted">GTA 6 já está disponível — 19 de novembro de 2026</span>
+        <span class="eyebrow-muted">GTA 6 já está disponível, 19 de novembro de 2026</span>
         <span class="sep" aria-hidden="true"></span>
         <span class="cta">Explorar ferramentas →</span>
       </a>
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="/pt/" aria-label="ToolWools, início" class="logo-link">
-            <span class="logo-bar" aria-hidden="true"></span>
+          <a href="/pt/" class="logo-link">
             <span class="logo">
               <span class="logo-mark" aria-hidden="true"><img src="/assets/img/logo-mark.png" alt="" width="36" height="36"></span>
               <span class="logo-word">
-                <span class="logo-name">TOOL<span class="gradient-text">WOOLS</span></span>
+                <span class="logo-name">TOOLWOOLS</span>
                 <span class="logo-tag">Todas as ferramentas de GTA 6 em um só lugar</span>
               </span>
             </span>
@@ -482,6 +496,9 @@ band        = [avg x 0.85, avg x 1.15]</pre>
               <li><a href="/pt/email-preferences">Preferências de e-mail</a></li>
               <li><a href="/pt/sitemap">Mapa do site</a></li>
               <li><a href="/editorial-policy">Política editorial</a></li>
+          <li><a href="/pt/privacy">Política de privacidade</a></li>
+          <li><a href="/pt/terms">Termos de serviço</a></li>
+          <li><a href="/pt/disclaimer">Isenção de responsabilidade</a></li>
             </ul>
           </div>
         </div>
@@ -490,6 +507,7 @@ band        = [avg x 0.85, avg x 1.15]</pre>
       <div class="footer-bottom">
         <p>© 2026 toolwools.com. Todos os direitos reservados. Não afiliado à Rockstar Games nem à Take-Two Interactive.</p>
         <div class="footer-bottom-links">
+          <span class="footer-legal"><a href="/pt/privacy">Privacidade</a><a href="/pt/terms">Termos</a><a href="/pt/disclaimer">Isenção de responsabilidade</a><button type="button" data-consent-open>Configurações de cookies</button></span>
           <span>Feito com <span class="heart">♥</span> para fãs de GTA 6</span>
         </div>
       </div>
@@ -497,11 +515,22 @@ band        = [avg x 0.85, avg x 1.15]</pre>
   </div>
 </footer>
   </div>
-  <script src="/assets/js/pt/theme.js" defer></script>
-  <script src="/assets/js/pt/header.js" defer></script>
-  <script src="/assets/js/pt/search.js" defer></script>
-  <script src="/assets/js/pt/faq.js" defer></script>
+<div class="consent-banner" id="consent-banner" data-consent-banner role="region" aria-label="Consentimento de analytics" hidden>
+  <p>Usamos o Google Analytics agregado para melhorar o site. Sem perfis, nada vendido. Aceite ou recuse; a escolha fica salva neste navegador.</p>
+  <div class="consent-actions">
+    <button class="btn btn-primary" type="button" data-consent-accept>Aceitar analytics</button>
+    <button class="btn btn-secondary" type="button" data-consent-decline>Recusar</button>
+  </div>
+</div>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/header.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/faq.js" defer></script>
+  <script src="/assets/js/supabase.js" defer></script>
+  <script src="/assets/js/pt/newsletter.js" defer></script>
+  <script src="/assets/js/pt/consent.js" defer></script>
   <script type="module" src="/assets/js/pt/settings-optimizer.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

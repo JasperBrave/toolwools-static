@@ -21,7 +21,7 @@
     { slug: "edition-comparison", title: "GTA 6 Edition Picker", desc: "Every GTA 6 edition compared: bonuses, price and what each unlocks." },
     { slug: "internet-speed-check", title: "GTA 6 Internet Speed Advisor", desc: "Check whether your connection is fast enough for GTA 6 downloads and Online." },
     { slug: "price-by-country", title: "GTA 6 Price by Country", desc: "GTA 6 price by country in local currency." },
-    { slug: "economy-calculator", title: "GTA 6 Money and Business ROI Calculator", desc: "Work out the fastest way to earn GTA$ and which businesses pay back first." },
+    { slug: "economy-calculator", title: "GTA 6 Money Calculator: Best Method by $/Hour & Business ROI", desc: "Work out the fastest way to earn GTA$ and which businesses pay back first." },
     { slug: "gta-6-tracker", title: "GTA 6 Launch Milestones", desc: "Launch milestones and completed preload windows for GTA 6." },
     { slug: "settings-optimizer", title: "Graphics Settings Optimizer", desc: "Dial in graphics settings for your target FPS and rig." },
     { slug: "hardware-comparison", title: "Hardware Comparison", desc: "Compare two GPUs or CPUs head to head for GTA 6." },

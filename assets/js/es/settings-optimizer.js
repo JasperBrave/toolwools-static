@@ -196,8 +196,8 @@ function render() {
       '</dl>' +
       '<div class="share-row">' +
       '<button type="button" class="btn-chip" data-copy-verdict><span data-copy-verdict-label>Copiar veredicto</span></button>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en X" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " fps de media (" + result.lowFps + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
-      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" aria-label="Compartir veredicto en Reddit" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Ajustes de GTA 6 para " + gpu.label + " + " + cpu.label + " at " + L(RES_META[state.res].short) + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(gpu.label + " + " + cpu.label + " @ " + L(RES_META[state.res].short) + ", target " + state.target + " fps: " + presetLabel + " · " + result.avgFps + " fps de media (" + result.lowFps + " de 1% mínimo)") + '&url=' + encodeURIComponent(shareUrl()) + '">Compartir en X</a>' +
+      '<a class="btn-chip" target="_blank" rel="noopener noreferrer" href="https://www.reddit.com/submit?title=' + encodeURIComponent("Ajustes de GTA 6 para " + gpu.label + " + " + cpu.label + " at " + L(RES_META[state.res].short) + ", " + state.target + " fps target") + '&url=' + encodeURIComponent(shareUrl()) + '">Reddit</a>' +
       '</div>';
     var copyBtn = $("[data-copy-verdict]", out);
     if (copyBtn) copyBtn.addEventListener("click", function () { copyText(shareText(), copyBtn, "[data-copy-verdict-label]"); });
