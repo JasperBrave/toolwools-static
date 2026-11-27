@@ -685,7 +685,7 @@ ul, ol { margin: 0; }
    (only whitespace normalised). Shell / hero / section rules are NOT ported:
    the FPS template base above already owns them. */
 
-/* main.css:18 :root colour variables (--font-*/--radius* excluded: tokens.css owns them) */
+/* main.css:18 :root colour variables (--font-* / --radius-* excluded: tokens.css owns them) */
 :root {
   --background: oklch(0.99 0.002 240);
   --foreground: oklch(0.12 0.01 240);
@@ -732,7 +732,7 @@ ul, ol { margin: 0; }
   color-scheme: light;
 }
 
-/* main.css:78 .dark colour variables (--font-*/--radius* excluded: tokens.css owns them) */
+/* main.css:78 .dark colour variables (--font-* / --radius-* excluded: tokens.css owns them) */
 .dark {
   --background: oklch(0.08 0.005 240);
   --foreground: oklch(0.98 0.005 240);
@@ -2129,3 +2129,531 @@ main#main>footer.site-footer { content-visibility:auto;
 /* Straggler pass (FPS pattern): rebalance orphan last words in verbatim copy. */
 .faq-list .faq-answer, .methodology-body li, .map-detail-panel p,
 .context-links li span { text-wrap: pretty; }
+
+/* ==========================================================================
+   DESIGN-QUALITY PHASE 3 — Interactive map (DQ-11, M1–M6, X1–X6)
+   Appended 2026-11-28. One block, same content in all 7 tool-map-<loc>.css.
+   Companion fix (in transform.py, NOT this block): the two broken comments
+   at "main.css:18 :root" / "main.css:78 .dark" — the parenthetical there
+   ends with a star-slash sequence that closes the comment early, so the
+   whole :root block (and the .dark block) was swallowed as one invalid
+   selector and every map-port variable
+   (--background / --foreground / --surface / --accent-purple /
+   --accent-pink / --accent-blue / --neon-* / --border / ...) resolved to
+   EMPTY in all 7 locales.
+   That one comment is the root cause of the audit's M1 (pins render as
+   black-grey discs: fill="var(--accent-blue)" fell back to black),
+   M2 (tab/chip active states invisible: color-mix with a dead var is
+   invalid, so active === inactive), and M6 (dark map washout: the .dark
+   block was dead too). Fixing the comments restores the designed palette;
+   the rules below build the Vice City treatment on top of it.
+   Specificity notes: base h2 is (0,0,1), so h2 rules use
+   .tool-body article h2 (0,1,2). Toolbar rules use .tool-body .map-wrap
+   (0,3,0) to beat map-panzoom.css (loaded AFTER this file, (0,1,0)).
+   Dark rules carry BOTH [data-theme="dark"] and html.dark because the
+   locale files differ in which form their base dark rules use.
+   Palette (measured from the static image on this page,
+   assets/img/map-vicecity.jpg): teal water #054d5e / #02485a, navy
+   #022952, pink pins ~#d03080. The interactive map adopts the teal water
+   + pink pin identity; evidence colours (blue=confirmed, purple=implied,
+   pink=community) are kept, now actually rendering.
+   ========================================================================== */
+
+/* --- Hierarchy: one H2 size per breakpoint (X1) --------------------------- */
+.tool-body article h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  .tool-body article h2 {
+    font-size: 24px;
+  }
+}
+/* Utility/admin H2s: Share, Changelog, Sources, Glossary. */
+.tool-body article h2#share-heading,
+.tool-body article h2#changelog,
+.tool-body article h2#sources,
+.tool-body article h2#glossary {
+  font-size: 24px;
+}
+@media (max-width: 767px) {
+  .tool-body article h2#share-heading,
+  .tool-body article h2#changelog,
+  .tool-body article h2#sources,
+  .tool-body article h2#glossary {
+    font-size: 20px;
+  }
+}
+/* Newsletter H2: ID rule (1,0,0) — same sizes as the utility H2s. */
+#nl-h2 {
+  font-size: 28px;
+}
+@media (max-width: 767px) {
+  #nl-h2 {
+    font-size: 24px;
+  }
+}
+
+/* --- H3: three levels (M5) — panel 24 / card 20 / in-list 18 -------------
+   Detail-panel h3 stays 24px via its .text-2xl class (JS re-renders it).
+   Steps (.step-title) and use-case heads are already 18px; related-tool
+   card h3s are already 20px; .related-sub is already 18px. Only the
+   outliers move: context-link heads 16 -> 20, compare-card heads 14 -> 20,
+   FAQ questions 16 -> 18, and the "To-scale comparison" kicker-h3 becomes
+   a 15px sentence-case label. Footer h3s are out of scope and untouched. */
+.tool-body .context-links h3 {
+  font-size: 20px;
+}
+.tool-body .map-compare-card h3 {
+  font-size: 20px;
+}
+.tool-body .faq-list summary h3 {
+  font-size: 18px;
+}
+.tool-body h3.text-xs {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* --- Hero meta: 4 fragments, spacing not "·" separators (M3) -------------
+   Inline flow (NOT flex): flex items keep max-content width and wrap as
+   whole fragments (Phase 2 lesson: DE 6->9 lines @375 under flex).
+   Kept fragments (HTML, all locales): Coverage / By / Published /
+   Last reviewed. Updated is dropped: it carries the same date as
+   Last reviewed in every locale. Assets / Size / tracking / Reviewed-by /
+   cross-check already live in the methodology section (size band +
+   "Nothing on this page is reproduced from leaked assets"). */
+.tool-body .hero-meta {
+  margin-top: 12px;
+}
+.tool-body .hero-meta span {
+  margin-inline-end: 24px;
+}
+.tool-body .hero-meta span:last-child {
+  margin-inline-end: 0;
+}
+.tool-body .hero-meta span + span::before {
+  content: none;
+  margin: 0;
+}
+
+/* --- Eyebrow retired to the hero only (X4) --------------------------------
+   Panel/field labels become sentence-case, no tracking. Size stays 12px
+   (the plan-sanctioned eyebrow floor); the hero .page-eyebrow is untouched. */
+.tool-body .eyebrow-muted {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* --- Gaps by job (X2) ------------------------------------------------------
+   Base 48px @>=1280 / 32px @1024-1279 / 24px @<=1023 (was a flat 96/64/48).
+   Major acts (+48/+32/+24 = 96/64/48): the setting explainer, the size
+   explainer, the district comparison, the collectibles forecast.
+   Utility bands (+16/+16/+8 = 64/48/32): share, glossary, sources,
+   changelog. Newsletter margin is zeroed — it is a flex item of the
+   article, so the article gap is its spacing (the old 96px margin stacked
+   on top of the gap). */
+.tool-body > article {
+  gap: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article {
+    gap: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article {
+    gap: 24px;
+  }
+}
+.tool-body > article > section[aria-labelledby="where"],
+.tool-body > article > section[aria-labelledby="size"],
+.tool-body > article > section[aria-labelledby="district-comparison"],
+.tool-body > article > section[aria-labelledby="collectibles"] {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="where"],
+  .tool-body > article > section[aria-labelledby="size"],
+  .tool-body > article > section[aria-labelledby="district-comparison"],
+  .tool-body > article > section[aria-labelledby="collectibles"] {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="where"],
+  .tool-body > article > section[aria-labelledby="size"],
+  .tool-body > article > section[aria-labelledby="district-comparison"],
+  .tool-body > article > section[aria-labelledby="collectibles"] {
+    margin-top: 24px;
+  }
+}
+.tool-body > article > section[aria-labelledby="share-heading"],
+.tool-body > article > section.share-panel,
+.tool-body > article > section[aria-labelledby="glossary"],
+.tool-body > article > section[aria-labelledby="sources"],
+.tool-body > article > section[aria-labelledby="changelog"] {
+  margin-top: 16px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="share-heading"],
+  .tool-body > article > section.share-panel,
+  .tool-body > article > section[aria-labelledby="glossary"],
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="changelog"] {
+    margin-top: 16px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="share-heading"],
+  .tool-body > article > section.share-panel,
+  .tool-body > article > section[aria-labelledby="glossary"],
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="changelog"] {
+    margin-top: 8px;
+  }
+}
+#sec-newsletter {
+  margin-top: 0;
+}
+/* 24px inside the workspace (X2). */
+.tool-body .map-explorer-grid {
+  gap: 24px;
+}
+.tool-body .map-side-col {
+  gap: 24px;
+}
+
+/* --- Tabs / filters: one orange active per single-select group (M2) -------
+   Tabs, evidence filter and region chips are single-select: the active one
+   is orange-filled with dark text (no white on orange). Layer buttons are
+   toggles, all on by default: their on-state is a neutral fill, so orange
+   always means "the selection", never "enabled". Hover drops the purple
+   border for a neutral strong border. */
+.tool-body .map-tabs [role="tab"].active,
+.tool-body .map-tabs [role="tab"][aria-selected="true"] {
+  background: var(--dq-accent);
+  border-color: transparent;
+  color: var(--color-on-accent);
+  font-weight: 700;
+}
+.tool-body .map-tabs [role="tab"]:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.tool-body .map-chip[data-conf-button].active,
+.tool-body .map-chip[data-conf-button][aria-pressed="true"],
+.tool-body .map-chip[data-chip-id].active,
+.tool-body .map-chip[data-chip-id][aria-pressed="true"] {
+  background: var(--dq-accent);
+  border-color: transparent;
+  color: var(--color-on-accent);
+  font-weight: 700;
+}
+.tool-body .map-chip[data-layer-button].active,
+.tool-body .map-chip[data-layer-button][aria-pressed="true"] {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+  font-weight: 700;
+}
+.tool-body .map-chip:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+/* --- Zoom toolbar: docked top-corner, never over a label (M2) --------------
+   (0,3,0) beats map-panzoom.css (0,1,0), which loads after this file.
+   Top-right in LTR, top-left in RTL. At <=480px the toolbar compacts so it
+   fits the 287px viewport (was 290px wide, wider than the map itself). */
+.tool-body .map-wrap .map-pz-toolbar {
+  top: 12px;
+  bottom: auto;
+  right: 12px;
+}
+[dir="rtl"] .tool-body .map-wrap .map-pz-toolbar {
+  right: auto;
+  left: 12px;
+}
+@media (max-width: 480px) {
+  .tool-body .map-wrap .map-pz-toolbar {
+    top: 8px;
+    right: 8px;
+    gap: 4px;
+    padding: 3px;
+  }
+  [dir="rtl"] .tool-body .map-wrap .map-pz-toolbar {
+    right: auto;
+    left: 8px;
+  }
+  .tool-body .map-wrap .map-pz-btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0 8px;
+  }
+  .tool-body .map-wrap .map-pz-btn.map-pz-reset {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  .tool-body .map-wrap .map-pz-zoom {
+    min-width: 52px;
+    font-size: 12px;
+  }
+}
+
+/* --- Pins as real markers + Vice City palette (M1) -------------------------
+   The disc (first circle) recedes to a faint region halo; the centre dot
+   (second circle) becomes the marker: 13 units unselected / 18 selected,
+   evidence-coloured fill (restored --accent-* vars) with a white ring.
+   CSS geometry (r) and paint (fill-opacity/stroke-*) override the SVG
+   presentation attributes the JS sets on selection, so both states are
+   keyed off [aria-pressed], which the JS already maintains. The inline
+   opacity the JS sets (1 / 0.88) is left alone. */
+.tool-body .map-pin circle:nth-of-type(1) {
+  fill-opacity: 0.05;
+  stroke-opacity: 0.4;
+  stroke-width: 1.5px;
+}
+.tool-body .map-pin[aria-pressed="true"] circle:nth-of-type(1) {
+  fill-opacity: 0.16;
+  stroke-opacity: 0.9;
+  stroke-width: 3px;
+}
+.tool-body .map-pin circle:nth-of-type(2) {
+  r: 13px;
+  stroke: #ffffff;
+  stroke-width: 2.5px;
+}
+.tool-body .map-pin[aria-pressed="true"] circle:nth-of-type(2) {
+  r: 18px;
+  stroke-width: 3px;
+}
+
+/* --- Map labels: larger, two-line labels kept smaller (M1) -----------------
+   Single-line labels 24 -> 28 units (~16px at 1280, ~11px at 375);
+   two-line labels 20 -> 22 units so their dy=24/30 line gap still clears.
+   Label order/coordinates are identical in all 7 locales (verified by
+   extraction), so nth-child targeting is safe across locales.
+   Two-line labels: regions #6 Mount Kalaga, #7 Offshore reef;
+   districts #4-#12 (all but Ocean Drive / Vice Beach / Downtown). */
+.tool-body .map-svg text {
+  font-size: 28px;
+  font-family: var(--font-sans);
+}
+#panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(6),
+#panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(7),
+#panel-districts .map-svg > g[pointer-events="none"] > text:nth-child(n+4) {
+  font-size: 22px;
+}
+/* Regions #8 "Vice Beach strip" overflows the 1000-unit viewBox by 4 units
+   (right edge 1004), so its final letter is clipped by the viewport edge
+   at every width — measured by getBBox, districts all fit. A 16-unit nudge
+   puts its right edge at 988. It is hidden below 640px, so the nudge only
+   applies at desktop widths. */
+#panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(8) {
+  transform: translateX(-16px);
+}
+/* Below 640px the audit-named colliders hide (the chip list under the map
+   still names every region/district, so nothing is lost): regions
+   #3 Port Gellhorn (clipped at the left edge), #6 Mount Kalaga (wraps over
+   itself), #7 Offshore reef (half off), #8 Vice Beach strip (cut right);
+   districts #4-#12 (all two-line labels). Kept labels grow to 30 / 24. */
+@media (max-width: 640px) {
+  .tool-body .map-svg text {
+    font-size: 30px;
+  }
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(6),
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(7),
+  #panel-districts .map-svg > g[pointer-events="none"] > text:nth-child(n+4) {
+    font-size: 24px;
+  }
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(3),
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(6),
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(7),
+  #panel-regions .map-svg > g[pointer-events="none"] > text:nth-child(8),
+  #panel-districts .map-svg > g[pointer-events="none"] > text:nth-child(n+4) {
+    display: none;
+  }
+}
+
+/* --- Map surface: Vice City teal + pink (M1/M6) -----------------------------
+   Light: teal-tinted water, teal land silhouette, teal grid, teal glow.
+   The teal lives on the viewport itself: the wrap is de-carded (no border
+   or radius — it sits inside the canvas card, and a bordered box inside a
+   bordered card is the nested-cards finding), so the canvas card frames
+   the teal viewport with a 12px white margin.
+   Dark: a real dark map palette (deep teal surface, brighter teal land,
+   white grid at 10%), not an inversion — the map must read as a map. */
+.tool-body .map-wrap {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.tool-body .map-pz-viewport {
+  background: color-mix(in oklab, oklch(0.45 0.08 200) 9%, var(--color-surface));
+}
+.tool-body .map-svg > path {
+  fill: rgba(5, 77, 94, 0.12);
+  stroke: rgba(5, 77, 94, 0.45);
+}
+.tool-body .map-svg > g[stroke] {
+  stroke: rgba(5, 77, 94, 0.14);
+}
+.tool-body .map-svg #lm-glow stop:first-child,
+.tool-body .map-svg #lm-glow-d stop:first-child {
+  stop-color: #0a6b7a;
+  stop-opacity: 0.22;
+}
+[data-theme="dark"] .tool-body .map-pz-viewport,
+html.dark .tool-body .map-pz-viewport {
+  background: #142528;
+}
+[data-theme="dark"] .tool-body .map-svg > path,
+html.dark .tool-body .map-svg > path {
+  fill: rgba(110, 205, 220, 0.16);
+  stroke: rgba(110, 205, 220, 0.55);
+}
+[data-theme="dark"] .tool-body .map-svg > g[stroke],
+html.dark .tool-body .map-svg > g[stroke] {
+  stroke: rgba(246, 245, 242, 0.1);
+}
+[data-theme="dark"] .tool-body .map-svg #lm-glow stop:first-child,
+[data-theme="dark"] .tool-body .map-svg #lm-glow-d stop:first-child,
+html.dark .tool-body .map-svg #lm-glow stop:first-child,
+html.dark .tool-body .map-svg #lm-glow-d stop:first-child {
+  stop-color: #2a9db0;
+  stop-opacity: 0.3;
+}
+
+/* --- Detail panel: its own surface, not another white card (M4) ------------
+   Teal-tinted surface + primary radius + shadow-md, and a pink dot marking
+   the panel's eyebrow (the selected place). The JS re-renders the panel's
+   innerHTML on every selection, but these rules target the container and
+   its classes, so they survive re-render. Dark: deep teal surface.
+   NOTE: a 4px pink leading-edge rule was tried first and Impeccable flags
+   it as a new "side-tab" type — the same lesson as Phase 2 fix 9 (inset
+   stripe -> dot). The dot is the same marker without the stripe. */
+.tool-body .map-detail-panel {
+  background: color-mix(in oklab, oklch(0.45 0.08 200) 7%, var(--color-surface));
+  border: 1px solid var(--color-border);
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+}
+.tool-body .map-detail-panel .eyebrow-muted::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  margin-inline-end: 8px;
+  vertical-align: 1px;
+}
+.tool-body .map-detail-panel .eyebrow-muted {
+  font-size: 13px;
+}
+[data-theme="dark"] .tool-body .map-detail-panel,
+html.dark .tool-body .map-detail-panel {
+  background: #1d2b2f;
+  border-color: #353a3e;
+}
+/* The detail panel's inner 2-cell list (Region type / Evidence level) was
+   a bordered rounded box inside the bordered panel — the nested-cards
+   finding. De-card it: no border/radius, cells transparent, so the two
+   fields read as plain columns on the panel tint. The JS re-renders this
+   dl on every selection; the rules target its classes. */
+.tool-body .map-detail-panel dl.grid {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.tool-body .map-detail-panel dl.grid > div {
+  background: transparent;
+}
+/* The three "biggest gap" boxes were bordered mini-cards inside the
+   compare card — the nested-cards finding. They become a ruled list:
+   no border/radius, dividers between them (JS-rendered, so CSS only). */
+.tool-body [data-vs-biggest] > div {
+  border: 0;
+  border-radius: 0;
+  padding-inline: 0;
+}
+.tool-body [data-vs-biggest] > div + div {
+  border-top: 1px solid var(--color-border);
+}
+
+/* --- Card registers (X3) ----------------------------------------------------
+   Primary (workspace canvas): 20px + shadow-md. Secondary (explore /
+   glance / side / compare cards, context-links): 12px + shadow-sm.
+   Share: flat utility row, no card chrome. Methodology: bare, like the
+   other explanation sections. Disclaimer: tertiary (8px, no shadow,
+   tint kept). */
+.tool-body .map-canvas-card {
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+}
+.tool-body .map-explore-card,
+.tool-body .map-glance-card,
+.tool-body .map-side-card,
+.tool-body .map-compare-card,
+.tool-body .context-links {
+  border-radius: var(--dq-radius-secondary);
+  box-shadow: var(--shadow-sm);
+}
+.tool-body .share-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.tool-body .methodology-details {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.tool-body > article > aside.disclaimer {
+  border: 0;
+  border-radius: var(--dq-radius-tertiary);
+}
+
+/* --- Tells census (X4) ------------------------------------------------------
+   Table figures: Inter tabular-nums (no .mono cells exist on this page;
+   this keeps any figure tabular). src-meta " · " joins become commas in
+   the HTML (transform.py); the footer strip's single "→" is out of scope
+   (footer not rebuilt in this phase) and is recorded, not silently fixed. */
+.tool-body .data-table td,
+.tool-body .data-table th {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Dark mode: three distinct elevations + themed newsletter input (X6) --- */
+[data-theme="dark"] .tool-body .map-canvas-card,
+html.dark .tool-body .map-canvas-card {
+  background: var(--dq-surface-raised);
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .tool-body .map-explore-card,
+[data-theme="dark"] .tool-body .map-glance-card,
+[data-theme="dark"] .tool-body .map-side-card,
+[data-theme="dark"] .tool-body .map-compare-card,
+html.dark .tool-body .map-explore-card,
+html.dark .tool-body .map-glance-card,
+html.dark .tool-body .map-side-card,
+html.dark .tool-body .map-compare-card {
+  background: #202427;
+}
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}
