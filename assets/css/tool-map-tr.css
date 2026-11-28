@@ -532,13 +532,10 @@ ul, ol { margin: 0; }
 }
 .link-cta svg { width: 16px; height: 16px; }
 
-/* ---------- Sources / changelog / disclaimer ---------- */
+/* ---------- Sources / disclaimer ---------- */
 .sources-list { padding-left: 20px; display: flex; flex-direction: column; gap: var(--space-4); }
 .src-meta { display: block; font-size: 0.8125rem; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.55; }
-.changelog-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 20px; }
-.changelog-version { font-family: var(--font-display); font-weight: 800; font-size: 1rem; }
-.changelog-list time { font-size: 0.8125rem; color: var(--color-text-secondary); }
-.changelog-list li > p:last-child { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.6; margin-top: 4px; max-width: 60ch; } /* 60ch, not the 68ch prose measure: 68ch renders ~88 chars/line here; Impeccable charges >80. */
+/* 60ch, not the 68ch prose measure: 68ch renders ~88 chars/line here; Impeccable charges >80. */
 .tool-body > article > aside.disclaimer {
   gap: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
   background: var(--color-bg-secondary); padding: 20px;
@@ -1931,14 +1928,12 @@ footer.site-footer .wordmark .wmark { width: 54px; height: 31px; font-size: 20px
 }
 /* Utility/admin H2s: Share, Changelog, Sources, Glossary. */
 .tool-body article h2#share-heading,
-.tool-body article h2#changelog,
 .tool-body article h2#sources,
 .tool-body article h2#glossary {
   font-size: 24px;
 }
 @media (max-width: 767px) {
   .tool-body article h2#share-heading,
-  .tool-body article h2#changelog,
   .tool-body article h2#sources,
   .tool-body article h2#glossary {
     font-size: 20px;
@@ -2054,16 +2049,14 @@ footer.site-footer .wordmark .wmark { width: 54px; height: 31px; font-size: 20px
 .tool-body > article > section[aria-labelledby="share-heading"],
 .tool-body > article > section.share-panel,
 .tool-body > article > section[aria-labelledby="glossary"],
-.tool-body > article > section[aria-labelledby="sources"],
-.tool-body > article > section[aria-labelledby="changelog"] {
+.tool-body > article > section[aria-labelledby="sources"]{
   margin-top: 16px;
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
   .tool-body > article > section[aria-labelledby="share-heading"],
   .tool-body > article > section.share-panel,
   .tool-body > article > section[aria-labelledby="glossary"],
-  .tool-body > article > section[aria-labelledby="sources"],
-  .tool-body > article > section[aria-labelledby="changelog"] {
+  .tool-body > article > section[aria-labelledby="sources"]{
     margin-top: 16px;
   }
 }
@@ -2071,8 +2064,7 @@ footer.site-footer .wordmark .wmark { width: 54px; height: 31px; font-size: 20px
   .tool-body > article > section[aria-labelledby="share-heading"],
   .tool-body > article > section.share-panel,
   .tool-body > article > section[aria-labelledby="glossary"],
-  .tool-body > article > section[aria-labelledby="sources"],
-  .tool-body > article > section[aria-labelledby="changelog"] {
+  .tool-body > article > section[aria-labelledby="sources"]{
     margin-top: 8px;
   }
 }
@@ -2417,4 +2409,127 @@ html.dark .nl-form input[type="email"] {
 [data-theme="dark"] .nl-form input[type="email"]::placeholder,
 html.dark .nl-form input[type="email"]::placeholder {
   color: #b7babd;
+}
+
+
+/* --- DQ Phase 10: canonical footer (Fix 4 + Fix 12, from tool-fps-tr.css) ---------- */
+/* --- Fix 12: "New" footer badge 11px -> 12px ------------------------------ */
+.site-footer .footer-col-badge {
+  font-size: 0.75rem;
+}
+
+/* --- Fix 4 (footer): de-carded, canonical home footer --------------------- */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the FPS brand paragraph is verbatim copy
+     (~145 chars) and at 1.4fr it wraps to 4 lines ending with "bloat."
+     alone — Impeccable flags that straggler. At 1.6fr it sits on 3 lines
+     with a full last line. Nav columns lose ~10px each; geometry otherwise
+     identical to home. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}
+
+/* --- DQ Phase 10: collectibles kind tag on its own line ------------------ */
+/* The kind tag uses Tailwind classes (block, text-[10px]) the static port
+   never defined; the site's own .block is a centered container, not
+   display:block, so the tag rendered inline, jammed against the name
+   ("Stunt jumpsCOLLECTIBLE"). display:block puts it on its own line; the
+   font-size is deliberately NOT set to the template's 10px: 10px is below
+   Impeccable's 11px functional-text floor (8 new findings), and the tag
+   inherits 13px, which clears it. Scoped to the collectibles table only. */
+section[aria-labelledby="collectibles"] .data-table th span {
+  display: block;
 }
