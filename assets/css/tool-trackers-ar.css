@@ -1317,3 +1317,161 @@ html.dark footer.site-footer {
 .site-footer .footer-legal button:hover {
   color: var(--color-accent-text);
 }
+
+/* ==========================================================================
+   DQ Phase 7 — Tracker detail pages (Design-Quality Audit §4 + audit C,
+   fixes M1-M6 except chapter-head demotion, TR1-TR2, H1-H3, C1-C4).
+   Appended unminified source, never minified, never clean-css -O1.
+   Tokens: --dq-* from tokens.css. Chapter/band/group heads were already
+   demoted to 24px in Phase 6 (§8); that part of M6/H2/C-heads is NOT
+   redone here. Counts (91/55/35/8), checklist behaviour, localStorage
+   keys and all copy are untouched; only layout/presentation changes.
+   NOTES / decisions (see design-quality-phase-7.md):
+   - M1 quiet pill: confidence keeps its colour coding (green/blue/amber
+     tints) but drops the shout — sentence case, weight 600, no tracking,
+     smaller padding. Row numbers get a distinct Manrope 800 muted style
+     (.item-num, added by the transform; missions only, 91 rows).
+   - M2 checked state: row tint (bg-secondary) + name in secondary colour
+     with a line-through. Secondary on the tint is 4.76:1 light / 8.22:1
+     dark — above axe's 4.5:1 floor in both themes (computed, not assumed).
+   - M3 one empty-state sentence: the #empty-note paragraph is deleted in
+     the HTML; the JS-filled #storage-note (full sentence) is the only one
+     left. trackers.js null-guards #empty-note, so no JS change is needed.
+   - M4 + C2 one pre-tool order (all four pages): hero -> progress panel
+     -> legend -> explanatory content (.note / "How the 91 is counted") ->
+     list. The legend and .note are moved in the HTML (same words).
+   - M5 hero dek: .page-subtitle widened 68ch (~680px) -> 900px, so the
+     missions dek drops 6 lines -> ~4 at 1280. "How the 91 is counted"
+     stays where C2 puts it: after the legend, before Chapter 1.
+   - TR1: the trophies trust .note moves after the progress panel; it
+     keeps the Phase 6 callout treatment (accent-soft tint + 4px rule).
+   - TR2 tiers own form: square 4px radius, sentence case, no tracking —
+     distinct from the confidence pill (999px) while keeping the tier
+     tints (platinum blue / gold amber / silver / bronze).
+   - H1 (100%): the definition card's first sentence moves to the hero as
+     the .page-subtitle (existing words only); the .note keeps the rest.
+   - H3 (100%): each item meta "Required: ... · In the game: ..." is
+     split into two stacked .item-desc lines (transform; 35 x 7 locales).
+     The progress line keeps its "·" (Phase 6 decision: a 2-part count,
+     not a meta join).
+   - C1 counter as primary control: 140x56px, Manrope 800 20px numerals,
+     accent-soft tint. Band range appears once only — in the JS-rendered
+     chapter-count ("0 found, band 50-70"); it is dropped from the band
+     meta line and from the input hint in the HTML (transform).
+   - C3 band-note types: precedent + signal pair as a 2-column compact
+     block (>=1024px); post-launch check as a tinted box; likely regions
+     as a ruled footer line. Four forms, no copy change.
+   - C4 counter vs checkbox bands: counter bands carry the chapter-count
+     as a tinted pill (the band datum); checkbox bands keep the plain
+     muted count ("Not spotted yet"). No invented labels.
+   - Dark accent stays #ff792f (template-wide token decision, Phases 2-6).
+   ========================================================================== */
+
+/* --- M1: quiet confidence pill (colour coding kept, shout dropped) ------- */
+.conf-pill {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 3px 8px;
+}
+/* Legend definition sentence: plain weight, not the 600 label weight. ---- */
+.conf-legend span.legend-label:last-child {
+  font-weight: 400;
+}
+/* --- M1: distinct row numbering (missions; .item-num added by transform) - */
+.item-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  margin-inline-end: 2px;
+}
+
+/* --- M2: designed checked state — tint + muted struck-through name ------ */
+.check-item:has(> input[type="checkbox"]:checked) {
+  background: var(--color-bg-secondary);
+  border-radius: var(--dq-radius-tertiary);
+  margin-inline: -12px;
+  padding-inline: 12px;
+}
+.check-item:has(> input[type="checkbox"]:checked) .item-name {
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+}
+
+/* --- M5: hero dek measure (68ch -> 900px) -------------------------------- */
+.page-hero .page-subtitle {
+  max-width: 900px;
+}
+
+/* --- TR2: tiers in their own form (square, sentence case) ---------------- */
+.tier-pill {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* --- C1: collectibles counter as the primary control ---------------------- */
+.counter-row {
+  gap: 16px;
+}
+.counter-row input[type="number"] {
+  width: 140px;
+  min-height: 56px;
+  height: 56px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  background: var(--color-accent-soft);
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--dq-radius-secondary);
+}
+
+/* --- C3: band-note types — pair / tinted box / ruled line ---------------- */
+.band-notes-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+}
+@media (max-width: 1023px) {
+  .band-notes-pair {
+    grid-template-columns: 1fr;
+  }
+}
+.band-note,
+.band-notes-pair .band-note {
+  margin: 0;
+  /* .dek caps at 68ch; a band note is a full-column element, so the
+     post-launch box and the regions rule must span the column, not stop
+     at 68ch (Rev A: the box rendered half-width). */
+  max-width: none;
+}
+.band-note-precedent,
+.band-note-signal {
+  font-size: 14px;
+}
+.band-note-postlaunch {
+  background: var(--color-bg-secondary);
+  border-radius: var(--dq-radius-tertiary);
+  padding: 12px 16px;
+}
+.band-note-regions {
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+/* --- C4: signal counter vs checkbox bands in the head ---------------------
+   Counter bands carry the chapter-count as a tinted pill (the band datum);
+   checkbox bands keep the plain muted count. */
+[data-collectible-type]:has(.counter-row) .chapter-count {
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  color: var(--color-text);
+}
