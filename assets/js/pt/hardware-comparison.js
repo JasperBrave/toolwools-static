@@ -79,7 +79,7 @@ function iconFor(tone) {
   return tone === "ready"
     ? '<svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>'
     : tone === "upgrade"
-      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
+      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
       : '<svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>';
 }
 function toneOf(result) {
@@ -138,9 +138,9 @@ function render() {
       '<h3 class="verdict-title">' + ra.avgFps + '<span class="unit"> fps médios</span></h3>' +
       '<p class="verdict-desc">Faixa de ' + ra.fpsLow + '–' + ra.fpsHigh + ' fps em ' + state.res + ' em ' + workload + '. ' + gpuA.label + ' + ' + cpuA.label + '.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">Margem de GPU</span><span class="val">' + Math.round(ra.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(ra.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">Margem de CPU</span><span class="val">' + Math.round(ra.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(ra.headCpu * 100)) + '%"></div></div></div>' +
-      '</div>' + upgradeHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">Margem de GPU</span><span class="val">' + Math.round(ra.headGpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-gpu" style="width:' + Math.min(100, Math.round(ra.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">Margem de CPU</span><span class="val">' + Math.round(ra.headCpu * 100) + '%</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-cpu" style="width:' + Math.min(100, Math.round(ra.headCpu * 100)) + '%"></div></div></div>' +
+      '</div>' + '<div class="balance-legend" aria-hidden="true"><span><span class="swatch gpu"></span>Margem de GPU</span><span><span class="swatch cpu"></span>Margem de CPU</span></div>' + upgradeHtml +
       '<dl class="stat-grid">' +
       '<div><dt>FPS médios da máquina A</dt><dd>' + ra.avgFps + '</dd></div>' +
       '<div><dt>FPS médios da máquina B</dt><dd>' + rb.avgFps + '</dd></div>' +

@@ -144,20 +144,19 @@ function render() {
   // Output panel.
   var out = $("[data-output-panel]");
   if (out) {
-    var kicker = result.verdict === "balanced" ? "Ausgewogen ±7 %" : result.verdict === "cpu" ? "CPU-limitiert" : "GPU-limitiert";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
       ? '<div class="upgrade-box"><p class="eyebrow-muted">Kleinster Fix</p><p>Tausche deine ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' gegen <strong>' + upgrade.part.label + '</strong>, senkt den Bottleneck von <span class="mono">' + upgrade.fromPct + '%</span> auf <span class="mono">' + upgrade.toPct + '%</span>.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
-      '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
+      '<div>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">Geschätzt <strong>' + result.fpsLow + '–' + result.fpsHigh + ' fps</strong> bei ' + state.res + ' auf ' + modeLabel(state.mode) + '. Frame-Band nimmt High-Preset ohne Raytracing an.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">GPU-Headroom</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">CPU-Headroom</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
-      '</div>' + upgradeHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">GPU-Headroom</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-gpu" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">CPU-Headroom</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-cpu" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '</div>' + '<div class="balance-legend" aria-hidden="true"><span><span class="swatch gpu"></span>GPU-Headroom</span><span><span class="swatch cpu"></span>CPU-Headroom</span></div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>GPU-Tier</dt><dd>' + gpu.score + '/100</dd></div>' +
       '<div><dt>CPU-Tier</dt><dd>' + cpu.score + '/100</dd></div>' +

@@ -144,20 +144,19 @@ function render() {
   // Output panel.
   var out = $("[data-output-panel]");
   if (out) {
-    var kicker = result.verdict === "balanced" ? "Équilibré ±7 %" : result.verdict === "cpu" ? "Limité par le CPU" : "Limité par le GPU";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
       ? '<div class="upgrade-box"><p class="eyebrow-muted">Plus petite correction</p><p>Remplacez votre ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' par <strong>' + upgrade.part.label + '</strong>, ce qui réduit le goulot de <span class="mono">' + upgrade.fromPct + ' %</span> à <span class="mono">' + upgrade.toPct + ' %</span>.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
-      '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
+      '<div>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">Estimé <strong>' + result.fpsLow + '–' + result.fpsHigh + ' FPS</strong> en ' + state.res + ' en ' + modeLabel(state.mode) + '. La plage d\'images suppose le préréglage Élevé sans ray tracing.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
-      '</div>' + upgradeHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">Marge GPU</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-gpu" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">Marge CPU</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-cpu" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '</div>' + '<div class="balance-legend" aria-hidden="true"><span><span class="swatch gpu"></span>Marge GPU</span><span><span class="swatch cpu"></span>Marge CPU</span></div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>Niveau GPU</dt><dd>' + gpu.score + '/100</dd></div>' +
       '<div><dt>Niveau CPU</dt><dd>' + cpu.score + '/100</dd></div>' +

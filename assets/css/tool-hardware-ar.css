@@ -933,3 +933,534 @@ ul.sources-list { list-style: none; }
 
 /* FIX-2 C-P2-6 (2026-11-27): RTL override — compare summary aligns start (was left). */
 [dir="rtl"] .compare-summary { text-align: start; }
+
+/* ==========================================================================
+   Phase 5 design-quality block — hardware cluster
+   (hardware-comparison, gpu-tier-list, bottleneck-calculator x 7 locales)
+   Appended to tool-hardware-{en,es,pt,de,fr,tr,ar}.css. All rules are
+   overrides: they sit after the base rules and win on specificity or order.
+   No values, copy, URLs or behaviour change here — presentation only.
+   ========================================================================== */
+
+/* --- X1/X5 type: H1 40px, content H2 28px, utility H2 24px --------------- */
+.tool-body #page-title { font-size: 2.5rem; line-height: 1.08; }
+@media (max-width: 1023px) { .tool-body #page-title { font-size: 2rem; } }
+.tool-body h2 { font-size: 1.75rem; }
+.tool-body .share-panel h2,
+.tool-body section[aria-labelledby="sources"] h2,
+.tool-body section[aria-labelledby="changelog"] h2,
+.tool-body section[aria-labelledby="glossary"] h2 { font-size: 1.5rem; }
+/* Newsletter sits outside .tool-body (sibling in MAIN), so it needs its own
+   unscoped rule — the scoped form matches nothing (Phase 2 lesson). */
+#sec-newsletter h2 { font-size: 1.75rem; }
+@media (max-width: 1023px) {
+  .tool-body h2 { font-size: 1.5rem; }
+  .tool-body .share-panel h2,
+  .tool-body section[aria-labelledby="sources"] h2,
+  .tool-body section[aria-labelledby="changelog"] h2,
+  .tool-body section[aria-labelledby="glossary"] h2 { font-size: 1.25rem; }
+  #sec-newsletter h2 { font-size: 1.5rem; }
+}
+/* H3 scale: card/panel titles 20px, in-list (FAQ summary) 18px.
+   Panel heads (18px/800) and the 40px verdict title are unchanged. */
+.tool-body .tier-table-card h3,
+.tool-body .tier-read h3,
+.tool-body .compare-card h3 { font-size: 1.25rem; }
+.tool-body .faq-item details > summary h3 { font-size: 1.125rem; }
+
+/* --- X2 gaps by job: base 48/32/24; major acts +48/+32/+24 (96/64/48);
+   utility/share +16/+16/+8 (64/48/32); newsletter 64/48/32 ------------ */
+.tool-body > article { gap: 3rem; }
+.tool-body > article > section[data-compare-section],
+.tool-body > article > section[aria-labelledby="gpu-table"],
+.tool-body > article > section[aria-labelledby="cpu-table"],
+.tool-body > article > section[aria-labelledby="tier-reference"],
+.tool-body > article > section#anchor-table,
+.tool-body > article > section[aria-labelledby="how-it-works"],
+.tool-body > article > section[aria-labelledby="use-cases"] { margin-top: 3rem; }
+.tool-body .share-panel,
+.tool-body > article > section[aria-labelledby="sources"],
+.tool-body > article > section[aria-labelledby="changelog"],
+.tool-body > article > section[aria-labelledby="glossary"] { margin-top: 1rem; }
+#sec-newsletter { margin-top: 4rem; }
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article { gap: 2rem; }
+  .tool-body > article > section[data-compare-section],
+  .tool-body > article > section[aria-labelledby="gpu-table"],
+  .tool-body > article > section[aria-labelledby="cpu-table"],
+  .tool-body > article > section[aria-labelledby="tier-reference"],
+  .tool-body > article > section#anchor-table,
+  .tool-body > article > section[aria-labelledby="how-it-works"],
+  .tool-body > article > section[aria-labelledby="use-cases"] { margin-top: 2rem; }
+  .tool-body .share-panel,
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="changelog"],
+  .tool-body > article > section[aria-labelledby="glossary"] { margin-top: 1rem; }
+  #sec-newsletter { margin-top: 3rem; }
+}
+@media (max-width: 1023px) {
+  .tool-body > article { gap: 1.5rem; }
+  .tool-body > article > section[data-compare-section],
+  .tool-body > article > section[aria-labelledby="gpu-table"],
+  .tool-body > article > section[aria-labelledby="cpu-table"],
+  .tool-body > article > section[aria-labelledby="tier-reference"],
+  .tool-body > article > section#anchor-table,
+  .tool-body > article > section[aria-labelledby="how-it-works"],
+  .tool-body > article > section[aria-labelledby="use-cases"] { margin-top: 1.5rem; }
+  .tool-body .share-panel,
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="changelog"],
+  .tool-body > article > section[aria-labelledby="glossary"] { margin-top: 0.5rem; }
+  #sec-newsletter { margin-top: 2rem; }
+}
+
+/* --- X3 card registers ----------------------------------------------------
+   Workspace panels: 20px + shadow-md (Phase 2 pattern, same tokens).
+   Content cards: 12px + shadow-sm. Methodology bare, disclaimer tertiary,
+   share flat (item 9). */
+.tool-body .input-panel,
+.tool-body .output-panel {
+  background: var(--dq-surface-raised);
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+}
+.tool-body .usecase-card,
+.tool-body .tool-card,
+.tool-body .guide-card,
+.tool-body .pairing-card,
+.tool-body .compare-card,
+.tool-body .tier-table-card,
+.tool-body .steps-grid li {
+  border-radius: var(--dq-radius-secondary);
+  box-shadow: var(--shadow-sm);
+}
+.tool-body .methodology-details {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.tool-body > article > aside.disclaimer { border: 0; border-radius: 8px; }
+.tool-body .share-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+/* Tier-read is a link/definition list, not a card: bare + ruled rows. */
+.tool-body .tier-read {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.tool-body .tier-read ul li + li {
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+/* --- X3 steps: 5-across (hardware, 5 steps) and 4-across (tier list,
+   4 steps) at 1280+, with the Phase 2 connecting rule behind the step
+   numbers. The 6-step bottleneck grid stays 3+3. Counted with :has()
+   because all three grids share the class .steps-grid.cols-3. */
+.tool-body .steps-grid { position: relative; }
+@media (min-width: 1280px) {
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child)::before,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child)::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: var(--color-border);
+    z-index: 1;
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) li,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) li {
+    position: relative;
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) .step-number,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) .step-number {
+    position: relative;
+    z-index: 2;
+    background: var(--color-surface);
+    padding: 0 6px;
+    margin-left: -6px;
+  }
+}
+
+/* --- X4 hero-meta: no dot separators, 24px inline spacing ---------------
+   (inline flow, NOT flex — the Phase 2 flex lesson). */
+.tool-body .hero-meta span + span::before { content: none; }
+.tool-body .hero-meta span { margin-inline-end: 24px; }
+
+/* --- X4 panel labels de-tracked: sentence-case 15px/600 ------------------
+   Tier filter group labels, the upgrade-box label and the disclaimer label.
+   Panel heads (18px/800) are NOT touched. */
+.tool-body .filters-collapse > div > .eyebrow-muted,
+.tool-body .upgrade-box > .eyebrow-muted,
+.tool-body .disclaimer > .eyebrow-muted {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* --- Item 2: verdict kicker as a status treatment -----------------------
+   16px/700 sentence-case + a leading 8px dot in the tone colour
+   (currentColor: the .tone-* class on the kicker sets the colour). */
+.tool-body .verdict-kicker {
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tool-body .verdict-kicker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+/* Item 2: bar legend under the balance bars (words reused from the
+   bar-head labels; aria-hidden in the markup — the bar-heads already
+   announce label + value). */
+.tool-body .balance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.tool-body .balance-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tool-body .balance-legend .swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+.tool-body .balance-legend .swatch.gpu { background: var(--color-accent); }
+.tool-body .balance-legend .swatch.cpu { background: var(--color-success-fill); }
+/* Item 2: meaning-named fills. The legacy .purple/.blue rules stay in the
+   base CSS as a fallback for any missed template occurrence. */
+.tool-body .balance-bar-fill.fill-gpu { background: var(--color-accent); }
+.tool-body .balance-bar-fill.fill-cpu { background: var(--color-success-fill); }
+
+/* --- Item 3: table figures Inter tabular-nums, no wrapping --------------
+   (mono stays only in <pre>/code and kbd). */
+.tool-body .data-table td.mono {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tool-body .upgrade-box .mono {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+.tool-body .share-link-input { font-family: var(--font-sans); }
+
+/* --- Item 3: scroll cue — the Phase 2 4-layer gradient, all locales,
+   light + dark, RTL-symmetric. Replaces the inset box-shadow on
+   .table-scroll and the box-shadow:none override on tier tables. */
+.tool-body .table-scroll {
+  box-shadow: none;
+  background-image:
+    linear-gradient(to right, var(--color-surface), var(--color-surface)),
+    linear-gradient(to left, var(--color-surface), var(--color-surface)),
+    linear-gradient(to right, rgba(21, 23, 25, 0.22), rgba(21, 23, 25, 0)),
+    linear-gradient(to left, rgba(21, 23, 25, 0.22), rgba(21, 23, 25, 0));
+  background-position: left center, right center, left center, right center;
+  background-repeat: no-repeat;
+  background-size: 32px 100%, 32px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+[data-theme="dark"] .tool-body .table-scroll,
+html.dark .tool-body .table-scroll {
+  background-image:
+    linear-gradient(to right, var(--color-surface), var(--color-surface)),
+    linear-gradient(to left, var(--color-surface), var(--color-surface)),
+    linear-gradient(to right, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)),
+    linear-gradient(to left, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}
+
+/* --- Item 4: drop the arrow-SVG prefixes in the inline-link and
+   tier-read lists (presentation-only; the tool-card/guide-card arrow
+   SVGs are card icons and stay). */
+.tool-body .inline-links li svg,
+.tool-body .tier-read li svg { display: none; }
+
+/* --- Item 5: filled tier chips, S dominant ------------------------------
+   Manrope 800, 14px; A–F tinted bg + coloured bold text; S solid fill
+   (success-text bg + surface text: ~7:1 light, ~7.5:1 dark). */
+.tool-body .tier-pill {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.875rem;
+  min-width: 1.75rem;
+  padding: 3px 8px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+.tool-body .tier-pill[data-tier="S"] {
+  background: var(--color-success-text);
+  color: var(--color-surface);
+  border-color: var(--color-success-text);
+}
+.tool-body .tier-pill[data-tier="A"] {
+  background: var(--color-info-bg);
+  color: var(--color-info-text);
+  border-color: var(--color-info-text);
+}
+.tool-body .tier-pill[data-tier="B"] {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+  border-color: var(--color-accent-text);
+}
+.tool-body .tier-pill[data-tier="C"] {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-text);
+}
+.tool-body .tier-pill[data-tier="D"] {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+}
+.tool-body .tier-pill[data-tier="F"] {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
+  border-color: var(--color-error-text);
+}
+
+/* --- Item 6: the GPU name is the link (tier list) -----------------------
+   The anchor itself is un-underlined; only the name underlines, so the
+   vendor/generation sub-line stays plain metadata. */
+.tool-body .data-table a.gpu-link { text-decoration: none; }
+.tool-body .data-table a.gpu-link .gpu-name {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- Item 7: tier-count summary strip + tier band-breaks ---------------- */
+.tool-body .tier-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.tool-body .tier-summary[hidden] { display: none; }
+.tool-body .tier-summary .tier-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+/* Band-break: a 2px top border on the first row of each new tier.
+   Scoped to the main table only (the anchor table has one row per tier). */
+.tool-body .workspace-tier .output-panel .data-table tbody tr:has(.tier-pill[data-tier="S"]) + tr:has(.tier-pill[data-tier="A"]) td,
+.tool-body .workspace-tier .output-panel .data-table tbody tr:has(.tier-pill[data-tier="A"]) + tr:has(.tier-pill[data-tier="B"]) td,
+.tool-body .workspace-tier .output-panel .data-table tbody tr:has(.tier-pill[data-tier="B"]) + tr:has(.tier-pill[data-tier="C"]) td,
+.tool-body .workspace-tier .output-panel .data-table tbody tr:has(.tier-pill[data-tier="C"]) + tr:has(.tier-pill[data-tier="D"]) td,
+.tool-body .workspace-tier .output-panel .data-table tbody tr:has(.tier-pill[data-tier="D"]) + tr:has(.tier-pill[data-tier="F"]) td {
+  border-top: 2px solid var(--color-border-strong);
+}
+
+/* --- Item 7: sticky filters (>=1024px) ----------------------------------
+   Header is 64px (--nav-height); top 80px leaves a 16px gap. The
+   workspace grid is align-items:start, so the form sticks within the
+   full row height. */
+@media (min-width: 1024px) {
+  .tool-body .workspace-tier > .input-panel {
+    position: sticky;
+    top: 80px;
+  }
+}
+
+/* --- Item 8: segmented controls as one shared track ----------------------
+   Track: secondary bg + 12px radius + 4px padding/gap, NO border: a
+   1px border made the track read as a card nested in the panel card
+   (Impeccable nested-cards, new finding type vs the baseline), so the
+   edge is defined by the tint alone. Buttons: borderless, transparent.
+   Active: orange fill + dark text (--color-on-accent is #151719 in both
+   themes). Hover lifts to surface. */
+.tool-body .segmented {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  gap: 4px;
+}
+.tool-body .segmented button {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.tool-body .segmented button:not([aria-pressed="true"]):hover {
+  background: var(--color-surface);
+}
+.tool-body .segmented button[aria-pressed="true"] {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: transparent;
+}
+
+/* --- Item 8: collapsed filters at 375 ------------------------------------
+   The <details> wrapper exists at all widths; at >=768px the summary is
+   a static 18px/800 panel-head label (chevron hidden, not clickable).
+   At <=767px it is a disclosure: chevron points right when closed,
+   down when open. JS closes it on load at <=767px only. */
+.tool-body .filters-collapse { margin: 0; border: 0; padding: 0; }
+.tool-body .filters-collapse > * + * { margin-top: 20px; }
+.tool-body .filters-collapse > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+}
+.tool-body .filters-collapse > summary::-webkit-details-marker { display: none; }
+.tool-body .filters-collapse > summary .eyebrow-muted {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text);
+}
+.tool-body .filters-collapse > summary svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--ease-out);
+  transform: rotate(-90deg);
+}
+.tool-body .filters-collapse[open] > summary svg { transform: rotate(0deg); }
+@media (min-width: 768px) {
+  .tool-body .filters-collapse > summary {
+    cursor: default;
+    pointer-events: none;
+    min-height: 0;
+  }
+  .tool-body .filters-collapse > summary svg { display: none; }
+}
+
+/* --- Item 11: workload as its own pattern --------------------------------
+   Same shared track as the segmented controls, but the buttons are
+   2-line (bold label on top, hint below) at every width and the dash
+   separator is gone. Active: accent-soft tint, no orange border.
+   (Track is borderless for the same Impeccable nested-cards reason as
+   the segmented track — the tint defines the edge.) */
+.tool-body .workload-grid {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  gap: 4px;
+}
+.tool-body .workload-btn {
+  display: block;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.tool-body .workload-btn:not([aria-pressed="true"]):hover {
+  background: var(--color-surface);
+}
+.tool-body .workload-btn[aria-pressed="true"] {
+  background: var(--color-accent-soft);
+  border-color: transparent;
+  color: var(--color-text);
+}
+.tool-body .workload-btn .w-dash { display: none; }
+
+/* --- Item 12: pairing cards — only the pair name is a link ---------------
+   The anchor-level none (0,2,2) beats .tool-body article a (0,1,2), which
+   is what underlined the whole card. The title re-underlines itself.
+   The verdict gets a non-colour shape before the word: circle (ready),
+   diamond (borderline), triangle (upgrade), in the tone colour. */
+.tool-body article a.pairing-card { text-decoration: none; }
+.tool-body .pairing-card-title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.tool-body .pairing-card .pairing-tone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tool-body .pairing-card .pairing-tone::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: none;
+  background: currentColor;
+}
+.tool-body .pairing-card .pairing-tone[data-tone="ready"]::before {
+  border-radius: 50%;
+}
+.tool-body .pairing-card .pairing-tone[data-tone="borderline"]::before {
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+.tool-body .pairing-card .pairing-tone[data-tone="upgrade"]::before {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+/* Same mechanism, same omission: guide cards are <a> cards too, and their
+   whole text was underlined by .tool-body article a. Only the title links. */
+.tool-body article a.guide-card { text-decoration: none; }
+.tool-body .guide-card h3 {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- Item 13: differentiate the two tier tables --------------------------
+   Primary table thead gets the accent-soft tint; the reference table
+   keeps the beige thead. Bottleneck: GPU table is the first card in
+   .tier-grid. Tier list: the main table is inside .workspace-tier. */
+.tool-body .tier-grid > .tier-table-card:first-child .data-table thead th {
+  background: var(--color-accent-soft);
+}
+.tool-body .workspace-tier .output-panel .data-table thead th {
+  background: var(--color-accent-soft);
+}
+
+/* --- X6 dark: distinct elevations + themed newsletter input --------------
+   (Phase 2 pattern, copied verbatim.) */
+[data-theme="dark"] .tool-body .input-panel,
+[data-theme="dark"] .tool-body .output-panel,
+html.dark .tool-body .input-panel,
+html.dark .tool-body .output-panel {
+  background: var(--dq-surface-raised);
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}

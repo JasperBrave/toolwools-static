@@ -140,20 +140,19 @@ function render() {
   // Output panel.
   var out = $("[data-output-panel]");
   if (out) {
-    var kicker = result.verdict === "balanced" ? "متوازن ±7%" : result.verdict === "cpu" ? "محدود بوحدة المعالجة المركزية" : "محدود بوحدة معالجة الرسومات";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
       ? '<div class="upgrade-box"><p class="eyebrow-muted">أصغر إصلاح</p><p>استبدل ' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + ' بـ <strong>' + upgrade.part.label + '</strong>، فهذا يخفض الاختناق من <span class="mono">%' + upgrade.fromPct + '</span> إلى <span class="mono">%' + upgrade.toPct + '</span>.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
-      '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
+      '<div>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">تقديريًا <strong>' + result.fpsLow + '–' + result.fpsHigh + ' إطار/ث</strong> عند ' + state.res + ' في ' + WORKLOAD_META[state.mode].label + '. يفترض نطاق الإطارات الإعداد المرتفع دون تتبع الأشعة.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة معالجة الرسومات</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة المعالجة المركزية</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
-      '</div>' + upgradeHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة معالجة الرسومات</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-gpu" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">هامش وحدة المعالجة المركزية</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-cpu" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '</div>' + '<div class="balance-legend" aria-hidden="true"><span><span class="swatch gpu"></span>هامش وحدة معالجة الرسومات</span><span><span class="swatch cpu"></span>هامش وحدة المعالجة المركزية</span></div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>مستوى GPU</dt><dd>' + gpu.score + '/100</dd></div>' +
       '<div><dt>مستوى CPU</dt><dd>' + cpu.score + '/100</dd></div>' +

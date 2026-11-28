@@ -86,19 +86,31 @@ function render() {
   var count = $("[data-output-count]");
   if (count) count.textContent = ranked.length + " GPUs";
 
+  var summary = $("[data-tier-summary]");
+  if (summary) {
+    if (!ranked.length) { summary.hidden = true; summary.innerHTML = ""; }
+    else {
+      var counts = {};
+      ranked.forEach(function (r) { counts[r.tier] = (counts[r.tier] || 0) + 1; });
+      summary.hidden = false;
+      summary.innerHTML = TIER_ORDER.map(function (t) {
+        return counts[t] ? '<span class="tier-count"><span class="tier-pill" data-tier="' + t + '">' + t + '</span>' + counts[t] + '</span>' : "";
+      }).join("");
+    }
+  }
+
   var tbody = $("[data-tier-tbody]");
   if (tbody) {
     if (!ranked.length) {
-      tbody.innerHTML = '<tr><td colspan="6" class="text-center muted">No GPUs match those filters. Loosen VRAM or budget.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="5" class="text-center muted">No GPUs match those filters. Loosen VRAM or budget.</td></tr>';
     } else {
       tbody.innerHTML = ranked.map(function (r) {
         return '<tr><td><span class="tier-pill" data-tier="' + r.tier + '">' + r.tier + '</span></td>' +
-          '<td><div class="gpu-name">' + esc(r.short) + '</div>' +
-          '<div class="gpu-sub">' + esc(r.vendor) + ' \u00b7 ' + esc(r.generation) + '</div></td>' +
+          '<td><a class="gpu-link" href="/tools/fps-calculator?gpu=' + encodeURIComponent(r.id) + '" aria-label="Open FPS calculator with ' + esc(r.label) + ' pre-selected"><div class="gpu-name">' + esc(r.short) + '</div></a>' +
+          '<div class="gpu-sub">' + esc(r.vendor) + ', ' + esc(r.generation) + '</div></td>' +
           '<td class="num">' + r.vramGB + ' GB</td>' +
           '<td class="num muted">$' + r.msrpUsd + '</td>' +
-          '<td class="num"><strong>' + fpsForRes(r, state.res) + ' fps</strong></td>' +
-          '<td class="num"><a href="/tools/fps-calculator?gpu=' + encodeURIComponent(r.id) + '" aria-label="Open FPS calculator with ' + esc(r.label) + ' pre-selected">FPS \u2192</a></td></tr>';
+          '<td class="num"><strong>' + fpsForRes(r, state.res) + ' fps</strong></td></tr>';
       }).join("");
     }
   }
@@ -150,5 +162,9 @@ $all("[data-vendor-button]").forEach(function (b) { b.addEventListener("click", 
 $all("[data-vram-button]").forEach(function (b) { b.addEventListener("click", function () { state.minVram = Number(b.dataset.vramButton); render(); }); });
 $all("[data-budget-button]").forEach(function (b) { b.addEventListener("click", function () { state.budget = Number(b.dataset.budgetButton); render(); }); });
 $all("[data-res-button]").forEach(function (b) { b.addEventListener("click", function () { state.res = b.dataset.resButton; render(); }); });
+
+
+var filtersDetails = $("[data-filters-details]");
+if (filtersDetails && window.matchMedia("(max-width: 767px)").matches) { filtersDetails.removeAttribute("open"); }
 
 render();

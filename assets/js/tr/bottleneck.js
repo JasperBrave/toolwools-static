@@ -140,20 +140,19 @@ function render() {
   // Output panel.
   var out = $("[data-output-panel]");
   if (out) {
-    var kicker = result.verdict === "balanced" ? "Dengeli ±%7" : result.verdict === "cpu" ? "CPU sınırlı" : "GPU sınırlı";
     var upgrade = !state.compare ? suggestUpgrade(gpu, cpu, state.res, state.mode) : null;
     var upgradeHtml = upgrade
       ? '<div class="upgrade-box"><p class="eyebrow-muted">En küçük düzeltme</p><p>' + (upgrade.kind === "cpu" ? "CPU" : "GPU") + '\'nuzu <strong>' + upgrade.part.label + '</strong> ile değiştirin: darboğazı <span class="mono">%' + upgrade.fromPct + '</span>\'den <span class="mono">%' + upgrade.toPct + '</span>\'ye düşürür.</p></div>'
       : "";
     out.innerHTML =
       '<div class="verdict-body">' + iconFor(tone) +
-      '<div><p class="verdict-kicker tone-' + tone + '">' + kicker + '</p>' +
+      '<div>' +
       '<h3 class="verdict-title">' + verdictLabel + '</h3>' +
       '<p class="verdict-desc">Tahmini <strong>' + result.fpsLow + '–' + result.fpsHigh + ' fps</strong>, ' + state.res + '\'de ' + WORKLOAD_META[state.mode].label + '\'da. Kare bandı, ışın izleme olmadan Yüksek hazır ayarı varsayar.</p></div></div>' +
       '<div class="balance-bars">' +
-      '<div><div class="balance-bar-head"><span class="lbl">GPU payı</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill purple" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
-      '<div><div class="balance-bar-head"><span class="lbl">CPU payı</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill blue" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
-      '</div>' + upgradeHtml +
+      '<div><div class="balance-bar-head"><span class="lbl">GPU payı</span><span class="val">' + result.headGpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-gpu" style="width:' + Math.min(100, Math.round(result.headGpu * 100)) + '%"></div></div></div>' +
+      '<div><div class="balance-bar-head"><span class="lbl">CPU payı</span><span class="val">' + result.headCpu.toFixed(2) + '×</span></div><div class="balance-bar-track"><div class="balance-bar-fill fill-cpu" style="width:' + Math.min(100, Math.round(result.headCpu * 100)) + '%"></div></div></div>' +
+      '</div>' + '<div class="balance-legend" aria-hidden="true"><span><span class="swatch gpu"></span>GPU payı</span><span><span class="swatch cpu"></span>CPU payı</span></div>' + upgradeHtml +
       '<dl class="verdict-stats">' +
       '<div><dt>GPU kademesi</dt><dd>' + gpu.score + '/100</dd></div>' +
       '<div><dt>CPU kademesi</dt><dd>' + cpu.score + '/100</dd></div>' +
