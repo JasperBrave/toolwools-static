@@ -238,7 +238,7 @@
         n = Array.isArray(arr) ? arr.length : 0;
       }
       var pct = total > 0 ? Math.round(n / total * 100) : 0;
-      if (out) out.textContent = n === 0 ? "لم يتم تحديد أي شيء بعد" : (n + " / " + total + " " + label + " \u00b7 " + pct + "%");
+      if (out) out.textContent = n + " / " + total + " " + label + " \u00b7 " + pct + "%";
       if (fill) fill.style.width = pct + "%";
       if (bar) {
         bar.setAttribute("aria-valuenow", String(n));

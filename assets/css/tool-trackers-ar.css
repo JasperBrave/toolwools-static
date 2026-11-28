@@ -1047,3 +1047,273 @@ li { overflow-wrap: anywhere; }
 [dir="rtl"] .faq-question { text-align: start; }
 [dir="rtl"] .tier-read, [dir="rtl"] .hub-note { text-align: start; }
 [dir="rtl"] .methodology-body ul.list-disc, [dir="rtl"] .sources-list { padding-left: 0; }
+
+/* ==========================================================================
+   DQ Phase 6 — Trackers hub + sub-trackers (Design-Quality Audit §4 +
+   audit C, fixes R1–R5, G1–G7 as they apply). Appended unminified source,
+   never minified, never clean-css -O1. Tokens: --dq-* from tokens.css.
+   NOTES / decisions (see design-quality-phase-6.md):
+   - H2 scale on these pages: the only 28px H2 left is the newsletter
+     (Phases 2-5 convention). Tracker-card titles are 20px (card scale);
+     chapter/band/group heads, .note heads and explainer heads
+     (#how-counted, #optional, #sources, #notcovered, #nonhidden) are
+     24px in-list heads; the two hub meta sections (#what-changed,
+     #how-saved) are demoted to 20px (R4). Tags stay <h2> (no heading-
+     order change; axe stays 0). This demotes the chapter/band/group heads
+     under G1/X1 here, so Phase 7's M6/H2/C-head items are already done.
+   - Phase 7 scope is NOT done here: checked-state design (M2), pill
+     quieting (M1), tier form (TR2), legend move (M4), empty-state
+     de-duplication (M3), 100% hero orientation (H1), counter design (C1),
+     band-note differentiation (C3), counter-vs-checkbox signalling (C4),
+     pre-tool order (C2). Only the cross-cutting X1-X6 + footer land here.
+   - The hub progress text now always shows the count (trackers.js hub
+     branch: "0 / 91 missions · 0%" at zero, not "Nothing checked yet");
+     the friendly sentence survives on the sub-tracker empty-note.
+   - Dark accent stays #ff792f (template-wide token decision, Phases 2-5).
+   ========================================================================== */
+
+/* --- X1 type scale -------------------------------------------------------- */
+h2 { font-size: 28px; }
+@media (max-width: 1023px) { h2 { font-size: 24px; } }
+/* Newsletter H2: Phases 2-5 convention (28px @1280/1024, 24px @375). */
+#nl-h2 { font-size: 28px; }
+@media (max-width: 1279px) { #nl-h2 { font-size: 28px; } }
+@media (max-width: 767px) { #nl-h2 { font-size: 24px; } }
+/* Card titles at the card scale (R1, 20px — same as the tools-hub h3). */
+.tracker-card h2 { font-size: 20px; line-height: 1.25; }
+/* In-list heads: chapters, bands, groups, .note heads, explainer heads. */
+.tracker-groups h2,
+.chapter-head h2,
+.note h2,
+#how-counted,
+#optional,
+#sources,
+#notcovered,
+#nonhidden {
+  font-size: 24px;
+}
+@media (max-width: 1023px) {
+  .tracker-groups h2,
+  .chapter-head h2,
+  .note h2,
+  #how-counted,
+  #optional,
+  #sources,
+  #notcovered,
+  #nonhidden {
+    font-size: 20px;
+  }
+}
+/* Demoted hub meta sections (R4): changelog + saved-explanation at 20px. */
+#what-changed,
+#how-saved {
+  font-size: 20px;
+}
+@media (max-width: 1023px) {
+  #what-changed,
+  #how-saved {
+    font-size: 18px;
+  }
+}
+
+/* --- X2 gaps by job: 48px base (was 96px); sources is utility (+16 = 64) - */
+.tool-body > article { gap: 48px; }
+@media (min-width: 1024px) and (max-width: 1279px) { .tool-body > article { gap: 32px; } }
+@media (max-width: 1023px) { .tool-body > article { gap: 24px; } }
+[data-tracker-kind] { gap: 48px; }
+@media (min-width: 1024px) and (max-width: 1279px) { [data-tracker-kind] { gap: 32px; } }
+@media (max-width: 1023px) { [data-tracker-kind] { gap: 24px; } }
+section[aria-labelledby="sources"] { margin-top: 16px; }
+@media (min-width: 1024px) and (max-width: 1279px) { section[aria-labelledby="sources"] { margin-top: 16px; } }
+@media (max-width: 1023px) { section[aria-labelledby="sources"] { margin-top: 8px; } }
+#sec-newsletter { margin-top: 64px; }
+@media (min-width: 1024px) and (max-width: 1279px) { #sec-newsletter { margin-top: 48px; } }
+@media (max-width: 1023px) { #sec-newsletter { margin-top: 32px; } }
+
+/* --- X3 card registers (G3): tracker cards + progress panel are surfaces,
+   not cards — tinted background, no border, no shadow. --------------------- */
+.tracker-card {
+  background: var(--color-bg-secondary);
+  border: 0;
+  border-radius: var(--dq-radius-secondary);
+  padding: 20px;
+  box-shadow: none;
+}
+.progress-block {
+  background: var(--color-bg-secondary);
+  border: 0;
+  border-radius: var(--dq-radius-secondary);
+  box-shadow: none;
+}
+/* Fix 9 (R2): the empty track is visible — a surface track with a border on
+   the tinted panel, light and dark, instead of a bare tint on white. ------- */
+.progress-track {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+/* --- Fix 10 (R3): one icon system with the tools hub — the tiled 40px
+   icon (accent-soft tile, 8px padding, 12px radius). ----------------------- */
+.tracker-card .card-icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+/* --- Fix 12 (R5): one CTA link style — the tools-hub .link-cta treatment:
+   bold orange, arrow SVG, no underline. The literal "→" is dropped in the
+   HTML; the arrow SVG is added there. In RTL the arrow flips, like the
+   tools-hub CTA (hub CSS RTL appendix, [dir="rtl"] .tool-card .link-cta). - */
+.tracker-card .card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  /* Light: the tinted card drops --color-accent-text (#c2410c) to 4.47:1
+     (axe floor 4.5), so the link takes a half-step darker orange (4.88:1
+     on the tint). Dark keeps the token accent-text, which passes on the
+     raised surface. */
+  color: #b93c0a;
+  text-decoration: none;
+}
+.tracker-card .card-link svg { width: 16px; height: 16px; }
+[data-theme="dark"] .tracker-card .card-link,
+html.dark .tracker-card .card-link { color: var(--color-accent-text); }
+[dir="rtl"] .tracker-card .card-link svg { transform: scaleX(-1); }
+
+/* --- G3, callouts: the definition/totals/trust .note is a tinted surface
+   with the orange left rule (no border, no shadow) — distinct from cards. -- */
+.note {
+  background: var(--color-accent-soft);
+  border: 0;
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--dq-radius-tertiary);
+}
+
+/* --- X6 dark depth: surfaces step up to the raised tone; the track stays
+   visible (surface + border). Newsletter input themed in dark. ------------- */
+[data-theme="dark"] .tracker-card,
+html.dark .tracker-card,
+[data-theme="dark"] .progress-block,
+html.dark .progress-block {
+  background: var(--dq-surface-raised);
+}
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}
+
+/* --- Fix 13: canonical footer (DQ-D3, Phase 2 mapping). The footer HTML is
+   rewritten to the home geometry; the old .footer-card/.footer-strip/
+   .footer-cols rules below in the base CSS match nothing afterwards. ------ */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the hub brand paragraph is verbatim copy
+     and at 1.4fr it wraps to 4 lines ending with "bloat." alone —
+     Impeccable flags that straggler (Phase 2, same paragraph). At 1.6fr it
+     sits on 3 lines with a full last line. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}

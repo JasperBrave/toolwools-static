@@ -742,3 +742,277 @@ ul, ol { margin: 0; }
 
 /* FIX-2 C-P2-3 (2026-11-27): flip the 24 card "Open" arrows in RTL to match the homepage arrow CTAs. */
 [dir="rtl"] .tool-card .link-cta svg { transform: scaleX(-1); }
+
+/* ==========================================================================
+   DQ Phase 6 — Tools hub (Design-Quality Audit §4 + audit C, fixes T1–T6,
+   G1–G7 as they apply to /tools/). Appended unminified source, never
+   minified, never clean-css -O1. Tokens: --dq-* from tokens.css (Phase 1).
+   NOTES / decisions (see design-quality-phase-6.md):
+   - data-accent: tokens carry only the blue (info) tint system; purple and
+     pink have no token, so their tints are defined here, scoped to the hub
+     cards (100/800/500 steps of the standard scale, light + dark).
+   - The "All tools" H2 is deleted in the HTML (tools.js headingEl is
+     null-guarded); the count line is the grid head row. tools.js itself is
+     untouched — its count text and filter behaviour are unchanged.
+   - The LIVE badge row is deleted in the HTML (24x); the .badge rule below
+     in the base CSS is now unmatched and is left in place (Phase 2
+     precedent for dead rules with zero computed effect).
+   - Dark accent stays #ff792f (template-wide token decision, Phases 2-5).
+   ========================================================================== */
+
+/* --- X1 type scale: H2 28px content / 24px @375; newsletter 28px ------- */
+h2 { font-size: 28px; }
+@media (max-width: 1023px) { h2 { font-size: 24px; } }
+/* Newsletter H2: Phases 2-5 convention (28px @1280/1024, 24px @375). */
+#nl-h2 { font-size: 28px; }
+@media (max-width: 1279px) { #nl-h2 { font-size: 28px; } }
+@media (max-width: 767px) { #nl-h2 { font-size: 24px; } }
+
+/* --- X2 gaps by job: 48px base (was 96px); hero -> filter ~48px (T1) ---- */
+.tool-body > article { gap: 48px; }
+@media (min-width: 1024px) and (max-width: 1279px) { .tool-body > article { gap: 32px; } }
+@media (max-width: 1023px) { .tool-body > article { gap: 24px; } }
+#sec-newsletter { margin-top: 64px; }
+@media (min-width: 1024px) and (max-width: 1279px) { #sec-newsletter { margin-top: 48px; } }
+@media (max-width: 1023px) { #sec-newsletter { margin-top: 32px; } }
+
+/* --- Fix 1: wire data-accent (G7) — icon tile tint + 3px top rule ------- */
+.tool-card[data-accent="blue"] {
+  --dq-accent-tile-bg: var(--color-info-bg);
+  --dq-accent-tile-text: var(--color-info-text);
+  --dq-accent-rule: var(--color-info-fill);
+}
+.tool-card[data-accent="purple"] {
+  --dq-accent-tile-bg: #f3e8ff;
+  --dq-accent-tile-text: #6b21a8;
+  --dq-accent-rule: #9333ea;
+}
+.tool-card[data-accent="pink"] {
+  --dq-accent-tile-bg: #fce7f3;
+  --dq-accent-tile-text: #9d174d;
+  --dq-accent-rule: #ec4899;
+}
+[data-theme="dark"] .tool-card[data-accent="purple"],
+html.dark .tool-card[data-accent="purple"] {
+  --dq-accent-tile-bg: #3b0764;
+  --dq-accent-tile-text: #d8b4fe;
+  --dq-accent-rule: #c084fc;
+}
+[data-theme="dark"] .tool-card[data-accent="pink"],
+html.dark .tool-card[data-accent="pink"] {
+  --dq-accent-tile-bg: #500724;
+  --dq-accent-tile-text: #f9a8d4;
+  --dq-accent-rule: #f472b6;
+}
+.tool-card[data-accent] { border-top: 3px solid var(--dq-accent-rule); }
+.tool-card[data-accent]:hover { border-top-color: var(--dq-accent-rule); }
+.tool-card[data-accent] > svg {
+  background: var(--dq-accent-tile-bg);
+  color: var(--dq-accent-tile-text);
+}
+
+/* --- Fix 2: compact filter block (T1) + Fix 6: one label set, two chip
+   forms (T5). Search 48px on a tinted field with an icon inside; the search
+   and category labels go sr-only in the HTML (a11y hooks kept); only the
+   status label stays visible, sentence-case. Category chips stay pills;
+   status chips become a segmented track with one solid-orange active. ----- */
+.search-big {
+  height: 48px;
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-strong);
+}
+.search-field { position: relative; }
+.search-field > svg {
+  position: absolute;
+  inset-inline-start: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+.search-field .search-big { padding-inline-start: 42px; }
+/* The tinted field drops the default placeholder (#757575) to 4.0:1
+   (Impeccable, new in Phase 6); --color-text-secondary restores 4.76:1
+   in light and 7.66:1 in dark. Same convention as the header search
+   input, which sets exactly this placeholder colour. */
+.search-big::placeholder { color: var(--color-text-secondary); }
+.filter-group { margin-top: 0; }
+.filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.chip-row:has([data-status-filter]) {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+}
+.chip-row:has([data-status-filter]) .chip { border: 0; background: transparent; }
+.chip-row:has([data-status-filter]) .chip[aria-pressed="true"] {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* --- Fix 3+7: the grid head row is the count line only (H2 deleted).
+   Count in Inter tabular-nums, not mono (X4); verified-line time likewise. */
+.tools-results-head { justify-content: flex-start; }
+.tool-count {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.verified-line time {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Fix 4: clamp title/desc lines for even rows (T3). Full text stays in
+   the DOM (and on the linked tool page); the clamp is visual only. -------- */
+.tool-card h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 50px;
+}
+.tool-card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 72px;
+}
+
+/* --- X3 card register: the directory card stays the bordered white card
+   (12px + shadow-sm); the accent top rule is the differentiator (Fix 1).
+   Card titles already sit at the 20px card scale (h3). -------------------- */
+
+/* --- X6 dark depth: filter controls sit on the raised surface; cards stay
+   on the card surface. Newsletter input themed in dark (Phases 2-5). ------ */
+[data-theme="dark"] .search-big,
+html.dark .search-big,
+[data-theme="dark"] .chip-row:has([data-status-filter]),
+html.dark .chip-row:has([data-status-filter]) {
+  background: var(--dq-surface-raised);
+}
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--dq-surface-raised);
+  color: #f6f5f2;
+  border-color: var(--dq-border-strong);
+}
+[data-theme="dark"] .nl-form input[type="email"]::placeholder,
+html.dark .nl-form input[type="email"]::placeholder {
+  color: #b7babd;
+}
+
+/* --- Fix 13: canonical footer (DQ-D3, Phase 2 mapping). The footer HTML is
+   rewritten to the home geometry; the old .footer-card/.footer-strip/
+   .footer-cols rules below in the base CSS match nothing afterwards. ------ */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the hub brand paragraph is verbatim copy
+     and at 1.4fr it wraps to 4 lines ending with "bloat." alone —
+     Impeccable flags that straggler (Phase 2, same paragraph). At 1.6fr it
+     sits on 3 lines with a full last line. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}
