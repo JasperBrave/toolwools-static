@@ -8,7 +8,7 @@
 // durumu "Check unavailable — see official page" gösterir, asla yeşil değil.
 
 var DATA = {
-  "checkedAt": "2026-11-27T07:30:00Z",
+  "checkedAt": "2026-11-28T07:30:00Z",
   "checkedBy": "ToolWools",
   "services": [
     {
@@ -29,7 +29,7 @@ var DATA = {
       "id": "xbox",
       "name": "Xbox network",
       "status": "operational",
-      "note": "All services up and running on Microsoft's Xbox status page (verified in a live browser on 27 Nov 2026 07:30 UTC; all 11 services normal).",
+      "note": "All services up and running on Microsoft's Xbox status page (verified in a live browser on 28 Nov 2026 07:30 UTC; all 11 services normal).",
       "source": "https://support.xbox.com/en-US/xbox-live-status"
     }
   ],
