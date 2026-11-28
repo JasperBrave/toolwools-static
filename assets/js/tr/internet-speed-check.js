@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "GTA 6 çevrimiçi oyunu rahat oynamak için yaklaşık <strong>25 Mbps indirme ve 5 Mbps yükleme</strong> ister ve <strong>10 Mbps indirme</strong> ile çalışır. Asıl belirleyici gecikmedir: <strong>" + esc(result.region.label) + "</strong> bölgesinde kablolu bir <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> hattın <strong>" + esc(result.region.edge) + "</strong> noktasına yaklaşık <strong>" + result.pingTarget + " ms</strong> ile ulaşması gerekir; jitter <strong>10 ms</strong> altında ve paket kaybı <strong>%0,5</strong> altında olmalı. Kendi beş değerinizi aşağıda notlandırın.";
+    shortAnswer.innerHTML = "GTA 6 çevrimiçi oyunu rahat oynamak için yaklaşık <strong>25 Mbps indirme ve 5 Mbps yükleme</strong> ister ve <strong>10 Mbps indirme</strong> ile çalışır.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

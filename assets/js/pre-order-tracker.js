@@ -107,7 +107,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6 launched <time datetime=\"2026-11-19\">19 November 2026</time> on PlayStation 5 and Xbox Series X|S. Every channel charges for the same game, so buy on terms: the best fit for your inputs is <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "Every channel charges for the same game, so buy on terms: the best fit for your inputs is <strong>" + esc(result.headline) + "</strong>.";
   }
 
   var outLabel = $("[data-output-label]");

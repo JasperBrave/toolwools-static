@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "O jogo online do GTA 6 precisa de cerca de <strong>25 Mbps de download e 5 Mbps de upload</strong> para ser confortável, e rodará com <strong>10 Mbps de download</strong>. O que realmente decide se parece bom é a latência: em <strong>" + esc(result.region.label) + "</strong> uma linha com fio de <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> deve alcançar cerca de <strong>" + result.pingTarget + " ms</strong> até <strong>" + esc(result.region.edge) + "</strong>, com jitter abaixo de <strong>10 ms</strong> e perda de pacotes abaixo de <strong>0,5%</strong>. Classifique seus próprios cinco números abaixo.";
+    shortAnswer.innerHTML = "O jogo online do GTA 6 precisa de cerca de <strong>25 Mbps de download e 5 Mbps de upload</strong> para ser confortável, e rodará com <strong>10 Mbps de download</strong>.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

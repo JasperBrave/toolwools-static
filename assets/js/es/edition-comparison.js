@@ -89,7 +89,7 @@ function iconFor(tone) {
   return tone === "ready"
     ? '<svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>'
     : tone === "upgrade"
-      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
+      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
       : '<svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>';
 }
 function toneOf(result) {
@@ -185,7 +185,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Cada edición de GTA 6 incluye la campaña completa y el modo online completo, el juego se lanzó el 19 de noviembre de 2026 a las 05:00 UTC y ningún nivel vende historia extra. En " + esc(result.platformLabel) + ", para un " + esc(buyerPhrase(result.profile)) + " con un " + result.upliftTolerance + "% de techo sobre Estándar, la mejor opción es <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Cada edición de GTA 6 incluye la campaña completa y el modo online completo y ningún nivel vende historia extra. En " + esc(result.platformLabel) + ", para un " + esc(buyerPhrase(result.profile)) + " con un " + result.upliftTolerance + "% de techo sobre Estándar, la mejor opción es <strong>" + esc(result.best.edition.label) + "</strong>.";
   }
 
   var out = $("[data-output-panel]");

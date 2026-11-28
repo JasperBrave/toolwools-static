@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "El juego en línea de GTA 6 necesita aproximadamente <strong>25 Mbps de bajada y 5 Mbps de subida</strong> para ser cómodo, y funcionará con <strong>10 Mbps de bajada</strong>. Lo que realmente decide si se siente bien es la latencia: en <strong>" + esc(result.region.label) + "</strong> una línea cableada de <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> debería alcanzar aproximadamente <strong>" + result.pingTarget + " ms</strong> hasta <strong>" + esc(result.region.edge) + "</strong>, con jitter por debajo de <strong>10 ms</strong> y pérdida de paquetes por debajo de <strong>0,5%</strong>. Califica tus propios cinco números abajo.";
+    shortAnswer.innerHTML = "El juego en línea de GTA 6 necesita aproximadamente <strong>25 Mbps de bajada y 5 Mbps de subida</strong> para ser cómodo, y funcionará con <strong>10 Mbps de bajada</strong>.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

@@ -977,3 +977,763 @@ ul.sources-list { list-style: none; }
 
 /* FIX-2 C-P2-6 (2026-11-27): RTL override — compare summary aligns start (was left). */
 [dir="rtl"] .compare-summary { text-align: start; }
+
+/* DQ-PHASE-8-MASTER */
+/* ==========================================================================
+   DQ Phase 8 — design-quality overrides for the remaining 18 tool pages
+   (readiness-score, settings-optimizer, economy-calculator, download-time,
+   price-by-country, storage-planner, system-requirements, edition-comparison,
+   business-tracker, weapon-comparison, vehicle-comparison, vram-calculator,
+   internet-speed-check, pre-order-tracker, preload-tracker, add-to-calendar,
+   server-status, gta-6-tracker — all 7 locales).
+
+   Sources: audit design-direction tokens (tokens.css --dq-*), the Phase 2
+   and Phase 5 DQ blocks (same register/gap/hero-meta systems, copied with
+   attribution in each section comment). Appended after the base rules in
+   each page CSS file, so equal specificity wins by source order.
+   No numbers, copy, URLs or SEO heads are changed by this file.
+   ========================================================================== */
+
+/* --- X1 type hierarchy: H1 40, H2 28 content / 24 utility, H3 20 --------- */
+/* The H1 carries id="page-title" and no class on most pages, so the base
+   .page-title 2.5rem rule never applies (measured 32px). Target the id. */
+.tool-body h1#page-title {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  /* Rev A: the 40px H1 wraps the vehicle title to 2 lines with a 10%
+     last line (Impeccable unbalanced-heading). Balance evens the lines;
+     it never adds a line to a 1-line H1. */
+  text-wrap: balance;
+}
+@media (max-width: 1023px) {
+  .tool-body h1#page-title {
+    font-size: 2rem;
+    line-height: 1.15;
+  }
+}
+/* Content H2s 28px (base clamp gives 33px at 1280). */
+.tool-body h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+}
+@media (max-width: 1023px) {
+  .tool-body h2 {
+    font-size: 1.5rem;
+  }
+}
+/* Utility H2s 24px: share, sources, glossary. (Changelog removed, new scope.) */
+.tool-body section[aria-labelledby="share-heading"] h2,
+.tool-body section[aria-labelledby="sources"] h2,
+.tool-body section[aria-labelledby="glossary"] h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+@media (max-width: 1023px) {
+  .tool-body section[aria-labelledby="share-heading"] h2,
+  .tool-body section[aria-labelledby="sources"] h2,
+  .tool-body section[aria-labelledby="glossary"] h2 {
+    font-size: 1.25rem;
+  }
+}
+/* Newsletter H2 28px (base gives 33px at 1280). UNSCOPED: the newsletter
+   section is a sibling of .tool-body, not inside it — a .tool-body
+   ancestor here never matches (Phase 2 lesson). */
+#nl-h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+}
+@media (max-width: 1023px) {
+  #nl-h2 {
+    font-size: 1.5rem;
+  }
+}
+/* H3 scale: compare cards, tier-read headings and section H3s 20px.
+   Panel heads stay 18px/800 (base .input-panel-head h3 is canonical). */
+.tool-body .compare-card h3,
+.tool-body .tier-read h3,
+.tool-body .hub-note h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+/* --- Eyebrow retirement: the tracked-caps eyebrow is hero-only. -----------
+   On these pages it only ever appears on body panel labels (input/output
+   upgrade-box, disclaimer) plus one real H2 on pre-order-tracker. The
+   labels become sentence-case 15px/600; the pre-order H2 gets its own
+   28px rule in the pre-order appendix. */
+.tool-body .eyebrow-muted {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.4;
+}
+/* Tool-card guide tags lose their tracking (Phase 2 pattern). */
+.tool-body .guide-tag {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* --- X4 hero-meta: no dot separators, 24px inline spacing -----------------
+   Inline flow, NOT flex: the Phase 2 flex lesson (flex made DE lines
+   worse, 6 to 9 at 375). The literal dot separators were removed from the
+   HTML by the transform; this kills any CSS-generated separator too. */
+.tool-body .hero-meta span + span::before {
+  content: none;
+}
+.tool-body .hero-meta span {
+  margin-inline-end: 24px;
+}
+
+/* --- X2 gaps by job: base 48/32/24; major acts +48/+32/+24 (96/64/48);
+   utility +16/+16/+8 (64/48/32); newsletter 64/48/32 ----------------------
+   Mechanism (Phase 2/5): flex gap on the article + margin-top on the
+   section that needs more (or less) room. The margin adds to the gap. */
+main.tool-main {
+  gap: 0;
+}
+.tool-body > article {
+  gap: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article {
+    gap: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article {
+    gap: 24px;
+  }
+}
+/* Major acts: how-it-works, methodology, use-cases, and the per-page
+   evidence/reference table sections. */
+.tool-body > article > section[aria-labelledby="how-it-works"],
+.tool-body > article > section[aria-labelledby="methodology"],
+.tool-body > article > section[aria-labelledby="use-cases"],
+.tool-body > article > section[aria-labelledby="grade-ladder"],
+.tool-body > article > section[aria-labelledby="preset-ladder"],
+.tool-body > article > section[aria-labelledby="setting-costs"],
+.tool-body > article > section[aria-labelledby="method-table"],
+.tool-body > article > section[aria-labelledby="speed-table-heading"],
+.tool-body > article > section[aria-labelledby="price-table"],
+.tool-body > article > section[aria-labelledby="edition-ladder"],
+.tool-body > article > section[aria-labelledby="platform-table-heading"],
+.tool-body > article > section[aria-labelledby="tiers-heading"],
+.tool-body > article > section[aria-labelledby="bonus-matrix"],
+.tool-body > article > section[aria-labelledby="tier-structure"],
+.tool-body > article > section[aria-labelledby="yardstick"],
+.tool-body > article > section[aria-labelledby="story-methods"],
+.tool-body > article > section[aria-labelledby="garages"],
+.tool-body > article > section[aria-labelledby="checklist-constants"],
+.tool-body > article > section[aria-labelledby="directory"],
+.tool-body > article > section[aria-labelledby="compare"],
+.tool-body > article > section[aria-labelledby="browse-all"],
+.tool-body > article > section[aria-labelledby="vram-breakdown"],
+.tool-body > article > section[aria-labelledby="vram-matrix"],
+.tool-body > article > section[aria-labelledby="gb-guide"],
+.tool-body > article > section[aria-labelledby="region-targets"],
+.tool-body > article > section[aria-labelledby="device-tests"],
+.tool-body > article > section[aria-labelledby="line-types"],
+.tool-body > article > section[aria-labelledby="channel-terms"],
+.tool-body > article > section[aria-labelledby="preload-history"],
+.tool-body > article > section[aria-labelledby="title-updates"],
+.tool-body > article > section[aria-labelledby="schedule-heading"],
+.tool-body > article > section[aria-labelledby="plan-download"],
+.tool-body > article > section[aria-labelledby="region-table"],
+.tool-body > article > section[aria-labelledby="timeline-heading"],
+.tool-body > article > section[aria-labelledby="what-breaks"],
+.tool-body > article > section[aria-labelledby="troubleshooting"],
+.tool-body > article > section[aria-labelledby="regions"],
+.tool-body > article > section[aria-labelledby="latest-patch"],
+.tool-body > article > section[aria-labelledby="user-reports"],
+.tool-body > article > section[aria-labelledby="preload-windows"] {
+  margin-top: 48px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body > article > section[aria-labelledby="how-it-works"],
+  .tool-body > article > section[aria-labelledby="methodology"],
+  .tool-body > article > section[aria-labelledby="use-cases"],
+  .tool-body > article > section[aria-labelledby="grade-ladder"],
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="setting-costs"],
+  .tool-body > article > section[aria-labelledby="method-table"],
+  .tool-body > article > section[aria-labelledby="speed-table-heading"],
+  .tool-body > article > section[aria-labelledby="price-table"],
+  .tool-body > article > section[aria-labelledby="edition-ladder"],
+  .tool-body > article > section[aria-labelledby="platform-table-heading"],
+  .tool-body > article > section[aria-labelledby="tiers-heading"],
+  .tool-body > article > section[aria-labelledby="bonus-matrix"],
+  .tool-body > article > section[aria-labelledby="tier-structure"],
+  .tool-body > article > section[aria-labelledby="yardstick"],
+  .tool-body > article > section[aria-labelledby="story-methods"],
+  .tool-body > article > section[aria-labelledby="garages"],
+  .tool-body > article > section[aria-labelledby="checklist-constants"],
+  .tool-body > article > section[aria-labelledby="directory"],
+  .tool-body > article > section[aria-labelledby="compare"],
+  .tool-body > article > section[aria-labelledby="browse-all"],
+  .tool-body > article > section[aria-labelledby="vram-breakdown"],
+  .tool-body > article > section[aria-labelledby="vram-matrix"],
+  .tool-body > article > section[aria-labelledby="gb-guide"],
+  .tool-body > article > section[aria-labelledby="region-targets"],
+  .tool-body > article > section[aria-labelledby="device-tests"],
+  .tool-body > article > section[aria-labelledby="line-types"],
+  .tool-body > article > section[aria-labelledby="channel-terms"],
+  .tool-body > article > section[aria-labelledby="preload-history"],
+  .tool-body > article > section[aria-labelledby="title-updates"],
+  .tool-body > article > section[aria-labelledby="schedule-heading"],
+  .tool-body > article > section[aria-labelledby="plan-download"],
+  .tool-body > article > section[aria-labelledby="region-table"],
+  .tool-body > article > section[aria-labelledby="timeline-heading"],
+  .tool-body > article > section[aria-labelledby="what-breaks"],
+  .tool-body > article > section[aria-labelledby="troubleshooting"],
+  .tool-body > article > section[aria-labelledby="regions"],
+  .tool-body > article > section[aria-labelledby="latest-patch"],
+  .tool-body > article > section[aria-labelledby="user-reports"],
+  .tool-body > article > section[aria-labelledby="preload-windows"] {
+    margin-top: 32px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body > article > section[aria-labelledby="how-it-works"],
+  .tool-body > article > section[aria-labelledby="methodology"],
+  .tool-body > article > section[aria-labelledby="use-cases"],
+  .tool-body > article > section[aria-labelledby="grade-ladder"],
+  .tool-body > article > section[aria-labelledby="preset-ladder"],
+  .tool-body > article > section[aria-labelledby="setting-costs"],
+  .tool-body > article > section[aria-labelledby="method-table"],
+  .tool-body > article > section[aria-labelledby="speed-table-heading"],
+  .tool-body > article > section[aria-labelledby="price-table"],
+  .tool-body > article > section[aria-labelledby="edition-ladder"],
+  .tool-body > article > section[aria-labelledby="platform-table-heading"],
+  .tool-body > article > section[aria-labelledby="tiers-heading"],
+  .tool-body > article > section[aria-labelledby="bonus-matrix"],
+  .tool-body > article > section[aria-labelledby="tier-structure"],
+  .tool-body > article > section[aria-labelledby="yardstick"],
+  .tool-body > article > section[aria-labelledby="story-methods"],
+  .tool-body > article > section[aria-labelledby="garages"],
+  .tool-body > article > section[aria-labelledby="checklist-constants"],
+  .tool-body > article > section[aria-labelledby="directory"],
+  .tool-body > article > section[aria-labelledby="compare"],
+  .tool-body > article > section[aria-labelledby="browse-all"],
+  .tool-body > article > section[aria-labelledby="vram-breakdown"],
+  .tool-body > article > section[aria-labelledby="vram-matrix"],
+  .tool-body > article > section[aria-labelledby="gb-guide"],
+  .tool-body > article > section[aria-labelledby="region-targets"],
+  .tool-body > article > section[aria-labelledby="device-tests"],
+  .tool-body > article > section[aria-labelledby="line-types"],
+  .tool-body > article > section[aria-labelledby="channel-terms"],
+  .tool-body > article > section[aria-labelledby="preload-history"],
+  .tool-body > article > section[aria-labelledby="title-updates"],
+  .tool-body > article > section[aria-labelledby="schedule-heading"],
+  .tool-body > article > section[aria-labelledby="plan-download"],
+  .tool-body > article > section[aria-labelledby="region-table"],
+  .tool-body > article > section[aria-labelledby="timeline-heading"],
+  .tool-body > article > section[aria-labelledby="what-breaks"],
+  .tool-body > article > section[aria-labelledby="troubleshooting"],
+  .tool-body > article > section[aria-labelledby="regions"],
+  .tool-body > article > section[aria-labelledby="latest-patch"],
+  .tool-body > article > section[aria-labelledby="user-reports"],
+  .tool-body > article > section[aria-labelledby="preload-windows"] {
+    margin-top: 24px;
+  }
+}
+/* Utility: share, sources, glossary, and the tier-read link
+   lists (secondary link lists, not content acts). (Changelog removed.) */
+.tool-body .share-panel,
+.tool-body > article > section[aria-labelledby="sources"],
+.tool-body > article > section[aria-labelledby="glossary"],
+.tool-body > article > section[aria-labelledby="related-tools-inline"],
+.tool-body > article > section[aria-labelledby="context-links"] {
+  margin-top: 16px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tool-body .share-panel,
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="glossary"],
+  .tool-body > article > section[aria-labelledby="related-tools-inline"],
+  .tool-body > article > section[aria-labelledby="context-links"] {
+    margin-top: 16px;
+  }
+}
+@media (max-width: 1023px) {
+  .tool-body .share-panel,
+  .tool-body > article > section[aria-labelledby="sources"],
+  .tool-body > article > section[aria-labelledby="glossary"],
+  .tool-body > article > section[aria-labelledby="related-tools-inline"],
+  .tool-body > article > section[aria-labelledby="context-links"] {
+    margin-top: 8px;
+  }
+}
+/* Newsletter band: a distinct band, 64px above it at 1280. */
+#sec-newsletter {
+  margin-top: 64px;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #sec-newsletter {
+    margin-top: 48px;
+  }
+}
+@media (max-width: 1023px) {
+  #sec-newsletter {
+    margin-top: 32px;
+  }
+}
+
+/* --- Card registers (Phase 2/5 system) ------------------------------------
+   Primary: input/output panels — 20px radius, medium shadow.
+   Secondary: tool/use-case/guide/step/rank/compare/service cards —
+   12px radius, small shadow. Tertiary: disclaimer — 8px, no border.
+   Bare: methodology details, tier-read LINK lists, share panel. */
+.tool-body .input-panel,
+.tool-body .output-panel {
+  border-radius: var(--dq-radius-primary);
+  box-shadow: var(--dq-shadow-md);
+}
+.tool-body .usecase-card,
+.tool-body .tool-card,
+.tool-body .guide-card,
+.tool-body .rank-item,
+.tool-body .compare-card,
+.tool-body .service-card,
+.tool-body .status-card,
+.tool-body .steps-grid li {
+  border-radius: var(--dq-radius-secondary);
+  box-shadow: var(--shadow-sm);
+}
+.tool-body .methodology-details {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+.tool-body > article > aside.disclaimer {
+  border: 0;
+  border-radius: 8px;
+}
+.tool-body .share-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+/* Tier-read LINK lists are lists, not cards: bare + ruled rows. Scoped with
+   :has() so the short-answer tier-read (internet-speed-check) keeps its
+   card — it has no list inside. */
+.tool-body .tier-read:has(.inline-links),
+.tool-body .tier-read:has(ul.mt-3) {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.tool-body .tier-read:has(.inline-links) ul li + li,
+.tool-body .tier-read:has(ul.mt-3) ul li + li {
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+}
+
+/* --- Short answer — ONE format (new scope) ---------------------------------
+   The three short answers (edition, speed, pre-order) share a single card.
+   Canonical = the tier-read card: surface, border, 16px radius, 20px
+   padding, small shadow, full width. The pre-order answer-card's info
+   tint + 48rem cap are overridden; the edition div (no base card) gains
+   the card. The label is an eyebrow in every format (edition uses a <p>,
+   pre-order an <h2 class="eyebrow-muted">, speed a real <h2>); the speed
+   H2 is styled down to the eyebrow treatment so all three read the same.
+   The answer text is targeted by its data hook, never by bare > p, so the
+   edition label <p> keeps the eyebrow rule. */
+.tool-body .short-answer {
+  margin-inline: 0;
+  max-width: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  text-align: left;
+}
+.tool-body .short-answer > h2 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.tool-body .short-answer > p[data-short-answer-text],
+.tool-body .short-answer > p[data-short-answer],
+.tool-body .short-answer > p[data-preorder-answer] {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.tool-body .short-answer > p[data-short-answer-text] strong,
+.tool-body .short-answer > p[data-short-answer] strong,
+.tool-body .short-answer > p[data-preorder-answer] strong {
+  color: var(--color-text);
+}
+
+/* --- Verdict kicker: 16px/700 with a status dot (Phase 5) ------------------
+   The verdict SIZE (68px numeric / 40px phrase) lives in the per-page
+   appendices; the kicker treatment is shared. */
+.tool-body .verdict-kicker {
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tool-body .verdict-kicker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.tool-body .verdict-title .unit {
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+/* --- Hub-note unification ---------------------------------------------------
+   One treatment on the four pages that carry one (vehicle, weapon,
+   preload, server-status): the vehicle/weapon info tint + 16px radius,
+   full column width, left aligned.
+   Rev A: the link colour IS set here after all. The vehicle base fixed
+   its own hub-note link to --color-text (post-gate fix 27 Nov), but
+   preload's link was still accent-text (#c2410c) — on the unified tint
+   it reads 4.3:1 (axe + Impeccable low-contrast). Setting the link to
+   --color-text on all four pages (the vehicle precedent) makes the
+   unification real instead of tint-only. */
+.tool-body .hub-note {
+  margin-inline: 0;
+  max-width: none;
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, var(--color-info-fill) 35%, transparent);
+  background: color-mix(in oklab, var(--color-info-fill) 8%, transparent);
+  padding: 1rem 1.25rem;
+  text-align: left;
+}
+.tool-body .hub-note a {
+  color: var(--color-text);
+}
+.tool-body .hub-note-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* --- Best-strip: compact 2-column ruled list (vehicle/weapon) --------------
+   Replaces the 9/16-card usecases-grid strip. The class name stays on the
+   list item (the H3 id anchors are preserved by the transform). */
+.tool-body .best-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tool-body .best-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.tool-body .best-list .best-class {
+  font-weight: 700;
+}
+.tool-body .best-list .best-pick {
+  color: var(--color-text-secondary);
+  text-align: end;
+}
+@media (max-width: 767px) {
+  .tool-body .best-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Table register ----------------------------------------------------------
+   Sticky thead (audit prescription; the .table-scroll wrapper is the
+   scroll container, so this is expected to stay static on page scroll —
+   verified by the scroll test, see the Phase 8 report), zebra rows
+   (excluding .hl-row), tabular figures, and the 4-layer scroll cue. */
+.tool-body .data-table thead th {
+  position: sticky;
+  top: 64px;
+  z-index: 2;
+}
+.tool-body .data-table tbody tr:nth-child(even):not(.hl-row) {
+  background: var(--color-bg-secondary);
+}
+/* Zebra contrast fix: the even-row tint dropped the edition "confirmed"
+   confidence pill (transparent pill, oklch 0.5 teal text) from 4.87:1 on
+   white to 4.20:1 on the tint — axe color-contrast. Half-step darker
+   (Phase 6 Rev A pattern): 0.47 reads 5.51:1 on white and 4.75:1 on the
+   tint. Scoped to light mode so the base dark rule (oklch 0.75) is
+   untouched. The implied/community pills already pass on the tint
+   (5.79 / 5.28). */
+html[data-theme="light"] .tool-body .conf-pill[data-conf="confirmed"] {
+  color: oklch(0.47 0.18 200);
+  border-color: color-mix(in oklab, oklch(0.47 0.18 200) 50%, transparent);
+}
+/* Zebra contrast fix 2: accent-text links in tables. #c2410c reads 5.18:1
+   on white but 4.47:1 on the zebra tint (server-status source links,
+   axe + Impeccable). Half-step darker #b93c0a (Phase 6 Rev A value):
+   5.65:1 on white, 4.88:1 on the tint. Scoped to light mode — dark
+   uses the lighter dark-theme accent-text and is clean. */
+html[data-theme="light"] .tool-body .data-table a {
+  color: #b93c0a;
+}
+/* Rev A: field hints are multi-line paragraphs whose last line can
+   strand a short fragment (weapon's share-URL hint: the (?a=..&b=..)
+   span alone on line 4, Impeccable straggler). Balance evens the
+   lines; measured on weapon it takes the last line from 36% to 91%
+   of the measure. 1-line hints are unaffected. */
+.tool-body .field-hint {
+  text-wrap: balance;
+}
+.tool-body .data-table td,
+.tool-body .data-table th {
+  font-variant-numeric: tabular-nums;
+}
+/* Mono only in pre/code: table figures and share URLs become Inter
+   tabular-nums. code.mono (genuine code) is untouched. */
+.tool-body .data-table th.mono,
+.tool-body .data-table td.mono,
+.tool-body span.mono,
+.tool-body p.mono,
+.tool-body .share-link-input {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+.tool-body .data-table td.mono {
+  white-space: nowrap;
+}
+/* Inline-links and tier-read list arrow icons are dropped (Phase 5):
+   the link text alone carries the affordance. */
+.tool-body .inline-links li svg,
+.tool-body .tier-read ul li svg {
+  display: none;
+}
+
+/* --- Guide-card: title-only underline (Phase 5) ------------------------------
+   The base .tool-body article a rule underlines the whole card; the
+   title alone is underlined, the card body and CTA are not. */
+.tool-body article a.guide-card {
+  text-decoration: none;
+}
+.tool-body .guide-card h3 {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- Steps: orphan-free counts at 1280+ (Phase 5 :has() pattern) ------------
+   5 steps -> 5-across, 4 -> 4-across, 7 -> 4+3, 2 -> 2-across. The 6-step
+   grid stays 3+3. Connecting rule behind the step numbers (Phase 2). */
+.tool-body .steps-grid {
+  position: relative;
+}
+@media (min-width: 1280px) {
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(7):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child)::before,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child)::before,
+  .tool-body .steps-grid:has(> li:nth-child(7):last-child)::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: var(--color-border);
+    z-index: 1;
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) li,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) li,
+  .tool-body .steps-grid:has(> li:nth-child(7):last-child) li {
+    position: relative;
+  }
+  .tool-body .steps-grid:has(> li:nth-child(5):last-child) .step-number,
+  .tool-body .steps-grid:has(> li:nth-child(4):last-child) .step-number,
+  .tool-body .steps-grid:has(> li:nth-child(7):last-child) .step-number {
+    position: relative;
+    z-index: 2;
+    background: var(--color-surface);
+    padding: 0 6px;
+    margin-left: -6px;
+  }
+}
+
+/* --- Dark depth: 3 elevations + themed newsletter input (Phase 2) ---------- */
+[data-theme="dark"] .tool-body .input-panel,
+[data-theme="dark"] .tool-body .output-panel,
+html.dark .tool-body .input-panel,
+html.dark .tool-body .output-panel {
+  background: var(--dq-surface-raised);
+}
+[data-theme="dark"] .tool-body .usecase-card,
+[data-theme="dark"] .tool-body .tool-card,
+[data-theme="dark"] .tool-body .guide-card,
+[data-theme="dark"] .tool-body .rank-item,
+[data-theme="dark"] .tool-body .compare-card,
+[data-theme="dark"] .tool-body .service-card,
+[data-theme="dark"] .tool-body .status-card,
+[data-theme="dark"] .tool-body .steps-grid li,
+html.dark .tool-body .usecase-card,
+html.dark .tool-body .tool-card,
+html.dark .tool-body .guide-card,
+html.dark .tool-body .rank-item,
+html.dark .tool-body .compare-card,
+html.dark .tool-body .service-card,
+html.dark .tool-body .status-card,
+html.dark .tool-body .steps-grid li {
+  background: var(--dq-surface-raised);
+}
+[data-theme="dark"] #nl-email,
+html.dark #nl-email {
+  background: var(--dq-surface-raised);
+  color: var(--color-text);
+  border-color: var(--dq-border-strong);
+}
+
+/* --- Footer: de-carded, canonical home footer (Phase 2, verbatim) ---------- */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the brand paragraph is verbatim copy
+     (~145 chars) and at 1.4fr it wraps to 4 lines ending with "bloat."
+     alone — Impeccable flags that straggler. At 1.6fr it sits on 3 lines
+     with a full last line. Nav columns lose ~10px each; geometry otherwise
+     identical to home. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-col-badge {
+  font-size: 12px;
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}
+
+/* --- 375px nits (Phase 2) ----------------------------------------------------
+   Grid items default to min-width:auto (min-content); the panels' content
+   (longest select option / share URL) forced all three grid children to
+   366px in ES at 375 (7px overflow). min-width:0 lets them shrink. */
+.tool-body .workspace-grid > * {
+  min-width: 0;
+}
+@media (max-width: 639px) {
+  .tool-body .share-panel .share-link-row {
+    flex-direction: column;
+  }
+  .tool-body .share-row .btn-chip {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "GTA 6 online play needs about <strong>25 Mbps down and 5 Mbps up</strong> to be comfortable, and it will run on <strong>10 Mbps down</strong>. What actually decides whether it feels good is latency: in <strong>" + esc(result.region.label) + "</strong> a wired <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> line should reach about <strong>" + result.pingTarget + " ms</strong> to <strong>" + esc(result.region.edge) + "</strong>, with jitter under <strong>10 ms</strong> and packet loss under <strong>0.5%</strong>. Grade your own five numbers below.";
+    shortAnswer.innerHTML = "GTA 6 online play needs about <strong>25 Mbps down and 5 Mbps up</strong> to be comfortable, and it will run on <strong>10 Mbps down</strong>.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

@@ -107,7 +107,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "صدرت GTA 6 في <time datetime=\"2026-11-19\">19 نوفمبر 2026</time> على PlayStation 5 و Xbox Series X|S. كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "كل قناة تتقاضى ثمن اللعبة نفسها، لذا اشترِ وفق الشروط: الأنسب لمدخلاتك هو <strong>" + esc(result.headline) + "</strong>.";
   }
 
   var outLabel = $("[data-output-label]");

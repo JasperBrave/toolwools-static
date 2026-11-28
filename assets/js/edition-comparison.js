@@ -83,7 +83,7 @@ function iconFor(tone) {
   return tone === "ready"
     ? '<svg class="verdict-icon tone-ready" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>'
     : tone === "upgrade"
-      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
+      ? '<svg class="verdict-icon tone-upgrade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>'
       : '<svg class="verdict-icon tone-borderline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>';
 }
 function toneOf(result) {
@@ -179,7 +179,7 @@ function render() {
 
   var shortEl = $("[data-short-answer-text]");
   if (shortEl) {
-    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode, the game launched 19 November 2026 at 05:00 UTC and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>. " + esc(result.reason);
+    shortEl.innerHTML = "Every GTA 6 edition includes the full story campaign and the full online mode and no tier sells extra story. On " + esc(result.platformLabel) + ", for a " + esc(buyerPhrase(result.profile)) + " with a " + result.upliftTolerance + "% ceiling over Standard, the best value is <strong>" + esc(result.best.edition.label) + "</strong>.";
   }
 
   var out = $("[data-output-panel]");

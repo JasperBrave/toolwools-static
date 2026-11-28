@@ -128,7 +128,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6 est sorti le <time datetime=\"2026-11-19\">19 novembre 2026</time> sur PlayStation 5 et Xbox Series X|S. Chaque canal facture le même jeu, donc achetez selon les conditions : le meilleur choix pour vos entrées est <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "Chaque canal facture le même jeu, donc achetez selon les conditions : le meilleur choix pour vos entrées est <strong>" + esc(result.headline) + "</strong>.";
   }
 
   var outLabel = $("[data-output-label]");

@@ -226,7 +226,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "GTA-6-Online-Play braucht etwa <strong>25 Mbps Down und 5 Mbps Up</strong>, um komfortabel zu sein, und es läuft mit <strong>10 Mbps Down</strong>. Was wirklich entscheidet, ob es sich gut anfühlt, ist die Latenz: in <strong>" + esc(result.region.label) + "</strong> sollte eine Wired-<strong>" + esc(connLower(result.connection)) + "</strong>-Leitung etwa <strong>" + result.pingTarget + " ms</strong> bis <strong>" + esc(result.region.edge) + "</strong> erreichen, mit Jitter unter <strong>10 ms</strong> und Paketverlust unter <strong>0,5 %</strong>. Bewerte unten deine eigenen fünf Zahlen.";
+    shortAnswer.innerHTML = "GTA-6-Online-Play braucht etwa <strong>25 Mbps Down und 5 Mbps Up</strong>, um komfortabel zu sein, und es läuft mit <strong>10 Mbps Down</strong>.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");

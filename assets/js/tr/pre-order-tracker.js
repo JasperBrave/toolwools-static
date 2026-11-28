@@ -107,7 +107,7 @@ function render() {
 
   var answer = $("[data-preorder-answer]");
   if (answer) {
-    answer.innerHTML = "GTA 6, <time datetime=\"2026-11-19\">19 Kasım 2026</time> tarihinde PlayStation 5 ve Xbox Series X|S için çıktı. Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan <strong>" + esc(result.headline) + "</strong>. " + esc(result.reason);
+    answer.innerHTML = "Her kanal aynı oyun için ücret alır, bu yüzden koşullara göre alın: girdileriniz için en uygun olan <strong>" + esc(result.headline) + "</strong>.";
   }
 
   var outLabel = $("[data-output-label]");

@@ -173,7 +173,7 @@ function render() {
 
   var shortAnswer = $("[data-short-answer]");
   if (shortAnswer) {
-    shortAnswer.innerHTML = "يحتاج اللعب الأونلاين في GTA 6 إلى نحو <strong>25 ميغابت/ث تنزيل و5 ميغابت/ث رفع</strong> ليكون مريحًا، ويعمل على <strong>10 ميغابت/ث تنزيل</strong>. ما يحدد فعلًا ما إذا كان الشعور جيدًا هو زمن الاستجابة: في <strong>" + esc(result.region.label) + "</strong> يجب أن يصل خط <strong>" + esc(result.connection.label.toLowerCase()) + "</strong> السلكي إلى نحو <strong>" + result.pingTarget + " م.ث</strong> إلى <strong>" + esc(result.region.edge) + "</strong>، مع اهتزاز أقل من <strong>10 م.ث</strong> وفقدان حزم أقل من <strong>0.5%</strong>. قيّم أرقامك الخمسة أدناه.";
+    shortAnswer.innerHTML = "يحتاج اللعب الأونلاين في GTA 6 إلى نحو <strong>25 ميغابت/ث تنزيل و5 ميغابت/ث رفع</strong> ليكون مريحًا، ويعمل على <strong>10 ميغابت/ث تنزيل</strong>.";
   }
 
   var checkPanel = $("[data-tab-panel=\"check\"]");
