@@ -607,3 +607,312 @@ button.btn-primary:hover { background: var(--color-accent-hover); }
 [dir="rtl"] .data-table th, [dir="rtl"] .data-table td { text-align: start; }
 [dir="rtl"] .faq-list details summary h3 { text-align: start; }
 [dir="rtl"] .hub-note { text-align: start; }
+
+/* === DQ PHASE 9 (design-quality-phase-9) — appended by sync-css.py === */
+/* ==========================================================================
+   DESIGN QUALITY — PHASE 9 (guides / legal / utility)
+   Appended to tool-guides-{loc}.css, tool-legal-{loc}.css and
+   tool-utility-{loc}.css by sync-css.py (marker-guarded, exactly once).
+   One master serves all 21 files; page-family differences are scoped by the
+   dq-content / dq-article / dq-utility class on <main> (added by
+   transform.py) and by :has() where a family class cannot reach.
+   Tokens only — no new typefaces, no new accent colours (DQ-D6).
+   ========================================================================== */
+
+/* --- 1. Gaps by job: 48px base, 32px @1024, 24px @375 (was 96/64/48).
+   No 96px "major acts" on these pages: no workspace/evidence acts. --- */
+.tool-body > article { gap: 3rem; }
+@media (min-width: 1024px) and (max-width: 1279px) { .tool-body > article { gap: 2rem; } }
+@media (max-width: 1023px) { .tool-body > article { gap: 1.5rem; } }
+#sec-newsletter { margin-top: 4rem; }
+@media (min-width: 1024px) and (max-width: 1279px) { #sec-newsletter { margin-top: 3rem; } }
+@media (max-width: 1023px) { #sec-newsletter { margin-top: 2rem; } }
+
+/* --- 2. Type scale: H1 40px (already); content H2 28px, utility/article
+   H2 24px; 24px @375 everywhere; #nl-h2 28px, 24px @375. --- */
+.tool-main.dq-content h2 { font-size: 28px; line-height: 1.25; }
+.tool-main.dq-utility h2,
+.tool-main.dq-article h2 { font-size: 24px; line-height: 1.3; }
+@media (max-width: 1023px) {
+  .tool-main.dq-content h2 { font-size: 24px; }
+}
+#nl-h2 { font-size: 28px; }
+@media (max-width: 767px) { #nl-h2 { font-size: 24px; } }
+/* H3 / card titles 20px. FAQ summary h3s stay 16px (questions, not cards). */
+.surface-card h3,
+.person-card h3,
+.news-card h3,
+.result-card h3 { font-size: 20px; }
+/* Hub-note titles are card titles, not eyebrows (fixes 12px guides-hub
+   h2.eyebrow-muted and 14px about .hub-note h2). Scoped to .tool-main so
+   it beats the .dq-content/.dq-utility h2 rules above (same specificity,
+   later in the file). */
+.tool-main .hub-note h2,
+.tool-main .hub-note .hub-note-title { font-size: 20px; font-weight: 800; line-height: 1.3; }
+/* .eyebrow-muted is sentence-case 15px/600 wherever it is not a heading;
+   the hero eyebrow (.page-eyebrow) is untouched. */
+.eyebrow-muted { font-size: 15px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+
+/* --- 3. Hero meta: separators are spacing, not copy (Phase 2/8 pattern). --- */
+.hero-meta span + span::before { content: none; margin: 0; }
+.hero-meta span { margin-inline-end: 24px; }
+.hero-meta span:last-child { margin-inline-end: 0; }
+
+/* --- 4. Article prose ~62ch (lede, body, steps, lists). FAQ answers keep
+   68ch so short answers stay short; legal prose keeps 68ch by design. --- */
+article:has(.article-lede) .article-lede p,
+article:has(.article-lede) .block p,
+article:has(.article-lede) .steps-list li,
+article:has(.article-lede) .article-list li { max-width: 62ch; }
+
+/* --- 5. Card registers: secondary 12px + shadow-sm; hub-note tertiary
+   8px, no shadow, tinted by job. --- */
+.news-card,
+.result-card { border-radius: var(--dq-radius-secondary); box-shadow: var(--shadow-sm); }
+.hub-note { border-radius: var(--dq-radius-tertiary); box-shadow: none; }
+/* About hub-notes, differentiated by job (classes added by transform.py). */
+.hub-note--info { border-inline-start: 4px solid var(--color-info-fill); }
+.hub-note--warn { border-color: var(--color-warning-border); background: var(--color-warning-bg); }
+.hub-note--ok { border-color: var(--color-success-border); background: var(--color-success-bg); }
+/* De-boxed ruled link row (about methodology-link). */
+.hub-note--plain {
+  border: 0; border-top: 1px solid var(--color-border); border-radius: 0;
+  background: transparent; padding: 16px 0; max-width: none;
+}
+/* About shipped lists, unboxed: grouped link lists on the page background. */
+.shipped-groups { display: flex; flex-direction: column; gap: 24px; margin-top: 24px; }
+.shipped-groups article h3 { font-size: 20px; font-weight: 800; }
+.shipped-groups article > p { margin-top: 4px; font-size: 13px; color: var(--color-text-secondary); }
+.shipped-groups article ul {
+  margin-top: 16px; display: flex; flex-direction: column; list-style: none; padding: 0;
+}
+.shipped-groups article ul li { border-top: 1px solid var(--color-border); padding: 12px 0; }
+.shipped-groups article ul li:last-child { border-bottom: 1px solid var(--color-border); }
+.shipped-groups article ul li a { font-size: 16px; font-weight: 600; }
+.shipped-groups article ul li p { margin-top: 4px; font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+/* --- 6. De-underline cards and pills (beats .tool-body article a, 0,1,2). --- */
+.tool-body article a.result-card,
+.tool-body article a.guide-card,
+.tool-body article .chip-row a { text-decoration: none; }
+/* Card CTA arrows are SVG, not literal text. */
+.open-link .icon-sm { flex: none; }
+[dir="rtl"] .open-link svg { transform: scaleX(-1); }
+
+/* --- 7. Tables: one register — sticky thead, zebra, tabular-nums.
+   (Sticky does not engage inside the .table-scroll overflow container;
+   recorded Phase 8 limitation, rule kept for consistency.) --- */
+.data-table thead th { position: sticky; top: 64px; z-index: 1; }
+.data-table tbody tr:nth-child(even) td,
+.data-table tbody tr:nth-child(even) th { background: var(--color-bg-secondary); }
+.data-table td,
+.data-table th { font-variant-numeric: tabular-nums; }
+.data-table td.mono { font-family: var(--font-sans); }
+
+/* --- 8. Search: sentence-case labels; empty state hides Results H2 +
+   counts while browsing (class toggled by search-page.js render()). --- */
+.filter-label,
+.search-group-title { font-size: 15px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+section.is-browsing #results-heading,
+section.is-browsing [data-search-counts] { display: none; }
+
+/* --- 9. News markers: badge base (variants already exist); trending rank
+   badge recoloured accent-orange (was purple). --- */
+.badge {
+  display: inline-block; font-size: 13px; font-weight: 700;
+  border-width: 1px; border-style: solid; border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+.rank-badge {
+  background: color-mix(in oklab, var(--color-accent) 12%, transparent);
+  color: var(--color-accent-text);
+}
+[data-theme="dark"] .rank-badge,
+html.dark .rank-badge {
+  background: color-mix(in oklab, var(--color-accent) 16%, transparent);
+  color: var(--color-accent-text);
+}
+
+/* --- 10. Pairing verdict chips (classes + data-verdict by transform.py). --- */
+.verdict-chip {
+  display: inline-block; font-size: 13px; font-weight: 700; white-space: nowrap;
+  border: 1px solid transparent; border-radius: var(--radius-pill); padding: 2px 10px;
+}
+.verdict-chip[data-verdict="balanced"] {
+  background: var(--color-success-bg); color: var(--color-success-text);
+  border-color: var(--color-success-border);
+}
+.verdict-chip[data-verdict="cpu-bound"] {
+  background: var(--color-accent-soft); color: var(--color-accent-text);
+  border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+}
+.verdict-chip[data-verdict="gpu-starved"] {
+  background: var(--color-info-bg); color: var(--color-info-text);
+  border-color: var(--color-info-border);
+}
+
+/* --- 11. FPS six-step model as a step figure: numbered discs + rule. --- */
+.steps-list { list-style: none; padding-inline-start: 0; counter-reset: dq-step; }
+.steps-list li {
+  counter-increment: dq-step; position: relative;
+  padding-inline-start: 56px; min-height: 40px;
+}
+.steps-list li::before {
+  content: counter(dq-step);
+  position: absolute; inset-inline-start: 0; top: 0;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--color-accent); color: var(--color-on-accent);
+  display: grid; place-items: center; font-weight: 800; font-size: 16px;
+}
+.steps-list li:not(:last-child)::after {
+  content: ""; position: absolute; inset-inline-start: 19px; top: 44px; bottom: -12px;
+  width: 2px; background: var(--color-border-strong);
+}
+
+/* --- 12. Legal summary definition list (replaces the Summary paragraph). --- */
+.summary-list { display: grid; margin: 0; padding: 0; border-top: 1px solid var(--color-border); }
+.summary-list > div {
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--color-border);
+}
+.summary-list dt { font-weight: 700; font-size: 15px; line-height: 1.5; }
+.summary-list dd { margin: 0; font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; }
+@media (max-width: 767px) {
+  .summary-list > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* --- 13. Sitemap two-column link lists (class added by transform.py). --- */
+@media (min-width: 1024px) {
+  .prose ul.link-cols-2 {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px;
+  }
+}
+
+/* --- 14. 404: compact newsletter (class added by transform.py). --- */
+#sec-newsletter.newsletter-compact { margin-top: 3rem; }
+#sec-newsletter.newsletter-compact .nl-art { display: none; }
+#sec-newsletter.newsletter-compact .newsletter-band .nl-inner { padding: 20px 24px; gap: 16px; }
+.not-found-search { margin-top: 24px; max-width: 62ch; }
+
+/* --- 15. Dark: raised panels + themed newsletter input (UNSCOPED — the
+   newsletter sits outside .tool-body, so scoped selectors match nothing). --- */
+[data-theme="dark"] .guide-card,
+[data-theme="dark"] .news-card,
+[data-theme="dark"] .result-card,
+[data-theme="dark"] .surface-card,
+[data-theme="dark"] .person-card,
+html.dark .guide-card,
+html.dark .news-card,
+html.dark .result-card,
+html.dark .surface-card,
+html.dark .person-card { background: var(--dq-surface-raised); }
+[data-theme="dark"] .nl-form input[type="email"],
+html.dark .nl-form input[type="email"] {
+  background: var(--color-bg); color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* --- 16. Canonical home footer (Phase 2, verbatim) ----------------------- */
+footer.site-footer {
+  background: #151719;
+  color: #f6f5f2;
+  margin-top: 0;
+  border-top: 10px solid var(--color-accent);
+  padding: 0;
+}
+[data-theme="dark"] footer.site-footer,
+html.dark footer.site-footer {
+  background: var(--color-bg-secondary);
+  border-top: 10px solid var(--color-accent);
+}
+.site-footer .footer-grid {
+  display: grid;
+  gap: 32px;
+  /* 1.6fr (not the home 1.4fr): the brand paragraph is verbatim copy
+     (~145 chars) and at 1.4fr it wraps to 4 lines ending with "bloat."
+     alone — Impeccable flags that straggler. At 1.6fr it sits on 3 lines
+     with a full last line. Nav columns lose ~10px each; geometry otherwise
+     identical to home. */
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+@media (max-width: 1023px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-brand p {
+  color: #b7babd;
+  font-size: 0.9375rem;
+  margin-top: 12px;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.site-footer .logo-name {
+  color: #f6f5f2;
+}
+.site-footer .logo-tag {
+  color: #b7babd;
+}
+.site-footer .footer-col h3 {
+  font-size: 18px;
+  color: #f6f5f2;
+  margin-bottom: 12px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.site-footer .footer-col a {
+  color: #b7babd;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 24px;
+}
+.site-footer .footer-col a:hover {
+  color: var(--color-accent-text);
+}
+.site-footer .footer-bottom {
+  border-top: 1px solid #353a3e;
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b7babd;
+}
+.site-footer .footer-bottom .copyright {
+  color: #b7babd;
+}
+.site-footer .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .footer-legal a,
+.site-footer .footer-legal button {
+  color: #b7babd;
+  min-height: 44px;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+}
+.site-footer .footer-legal a:hover,
+.site-footer .footer-legal button:hover {
+  color: var(--color-accent-text);
+}
+/* === END DQ PHASE 9 === */

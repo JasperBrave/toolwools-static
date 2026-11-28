@@ -8,7 +8,7 @@
   var input = document.querySelector("[data-search-input]");
   var listbox = document.querySelector("[data-search-listbox]");
   var status = document.querySelector("[data-search-status]");
-  var resultsEl = document.querySelector("[data-search-results]");
+  var resultsEl = document.querySelector('section[aria-labelledby="results-heading"] [data-search-results]');
   var summaryEl = document.querySelector("[data-search-summary]");
   var countsEl = document.querySelector("[data-search-counts]");
   if (!input || !resultsEl) return;
@@ -46,6 +46,7 @@
   }
   function render(q) {
     var trimmed = q.trim();
+    if (resultsEl) { var sec = resultsEl.closest("section"); if (sec) sec.classList.toggle("is-browsing", !trimmed); }
     var toks = tokens(trimmed);
     var scored = INDEX.map(function (item) { return { item: item, s: score(item, toks) }; })
       .filter(function (r) { return !toks.length || r.s > 0; })
@@ -105,7 +106,7 @@
         a.href = item.href;
         var tag = '<span class="badge badge-muted">' + esc(item.tag) + "</span>";
         var soon = item.status === "coming-soon" ? ' <span class="badge badge-muted">قريبًا</span>' : "";
-        a.innerHTML = tag + soon + "<h3>" + highlight(item.title, toks) + "</h3><p>" + highlight(item.desc, toks) + "</p><span class=\"open-link\">فتح ←</span>";
+        a.innerHTML = tag + soon + "<h3>" + highlight(item.title, toks) + "</h3><p>" + highlight(item.desc, toks) + "</p><span class=\"open-link\">فتح <svg class=\"icon-sm\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></span>";
         li.appendChild(a);
         ul.appendChild(li);
       });
@@ -161,5 +162,4 @@
     if (listbox && !e.target.closest("[data-search-form]")) { listbox.hidden = true; input.setAttribute("aria-expanded", "false"); }
   });
   applyFromUrl(false);
-  input.focus();
 })();
